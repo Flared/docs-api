@@ -1,5 +1,4 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
   "name": "Flare",
   "logo": {
     "dark": "/logo/dark.svg",
@@ -23,6 +22,7 @@
       "url": "https://github.com/Flared"
     }
   ],
+  "openapi": "/swagger.json",
   "tabs": [
     {
       "name": "API Reference",
