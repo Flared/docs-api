@@ -17,14 +17,10 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:support@flare.io"
+      "name": "Back to Flare",
+      "url": "https://app.flare.io/"
     }
   ],
-  "topbarCtaButton": {
-    "name": "Back to Flare",
-    "url": "https://app.flare.io/"
-  },
   "tabs": [
     {
       "name": "API Reference",
