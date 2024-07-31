@@ -66,6 +66,21 @@
       ]
     },
     {
+      "group": "Configure Flare",
+      "pages": [
+        "configure-flare/tenants",
+        {
+          "group": "Team",
+          "pages": [
+            "configure-flare/team/quickstart",
+            "configure-flare/team/sso-and-authentication"
+          ]
+        },
+        "configure-flare/profile",
+        "configure-flare/policies"
+      ]
+    },
+    {
       "group": "API Documentation",
       "pages": [
         "api-reference/introduction"
