@@ -22,8 +22,8 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Back to Flare",
+    "url": "https://app.flare.io/"
   },
   "tabs": [
     {
