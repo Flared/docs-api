@@ -27,22 +27,27 @@
   },
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Guides",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
+        "guides/get-started",
+        "guides/dashboard"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Core Features",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        {
+          "group": "Events",
+          "pages": [
+            "core-features/events/quickstart",
+            "core-features/events/search-in-existing-data",
+            "core-features/events/advanced-search",
+            "core-features/events/respond-to-leaked-credentials-events",
+            "core-features/events/respond-to-look-alike-domains-events",
+            "core-features/events/respond-to-illicit-networks-events",
+            "core-features/events/open-ports"
+          ]
+        }
       ]
     },
     {
