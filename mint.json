@@ -19,6 +19,10 @@
     {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "Research Center",
+      "url": "research-center"
     }
   ],
   "topbarCtaButton": {
@@ -113,6 +117,12 @@
       "group": "API",
       "pages": [
         "api-reference/introduction"
+      ]
+    },
+    {
+      "group": "Research Center",
+      "pages": [
+        "research-center/access"
       ]
     }
   ],
