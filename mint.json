@@ -15,12 +15,6 @@
       "to": "#07C983"
     }
   },
-  "topbarLinks": [
-    {
-      "name": "Back to Flare",
-      "url": "https://app.flare.io/"
-    }
-  ],
   "tabs": [
     {
       "name": "API Reference",
