@@ -27,6 +27,10 @@
       "url": "api-reference"
     }
   ],
+  "topbarCtaButton": {
+    "name": "Back to Flare",
+    "url": "https://app.flare.io/"
+  },
   "navigation": [
     {
       "group": "Get Started",
