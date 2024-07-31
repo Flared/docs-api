@@ -47,7 +47,22 @@
             "core-features/events/respond-to-illicit-networks-events",
             "core-features/events/open-ports"
           ]
-        }
+        },
+        {
+          "group": "Identifiers",
+          "pages": [
+            "core-features/identifiers/quickstart",
+            "core-features/identifiers/configure-identifiers",
+            "core-features/identifiers/configure-identifiers-advanced",
+            "core-features/identifiers/email-alerts"
+          ]
+        },
+        "core-features/collection",
+        "core-features/reports",
+        "core-features/threat-flow",
+        "core-features/supply-chain-ransomware-exposure-monitoring",
+        "core-features/credentials-browser",
+        "core-features/takedown-services"
       ]
     },
     {
