@@ -15,6 +15,14 @@
       "to": "#07C983"
     }
   },
+  "anchors": [
+    {
+      "iconType": "brands",
+      "icon": "github",
+      "name": "GitHub",
+      "url": "https://github.com/Flared"
+    }
+  ],
   "tabs": [
     {
       "name": "API Reference",
