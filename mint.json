@@ -146,7 +146,9 @@
     {
       "group": "Flare v4 API",
       "pages": [
-        "api-reference/v4/endpoints"
+        "api-reference/v4/get-plants",
+        "api-reference/v4/post-plants",
+        "api-reference/v4/delete-plants"
       ]
     },
     {
