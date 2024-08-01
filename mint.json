@@ -15,10 +15,22 @@
       "to": "#8594ea"
     }
   },
+  "api": {
+    "baseUrl": [
+      "http://api.flare.io/"
+    ],
+    "auth": {
+      "method": "bearer"
+    },
+    "playground": {
+      "mode": "show"
+    }
+  },
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-reference"
+      "url": "api-reference",
+      "openapi": "/api-reference/original-openapi.json"
     },
     {
       "name": "Research Center",
