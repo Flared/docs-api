@@ -114,9 +114,27 @@
       ]
     },
     {
-      "group": "API",
+      "group": "Guides",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/guides/getting-started"
+      ]
+    },
+    {
+      "group": "Flare v2 API",
+      "pages": [
+        "api-reference/v2/endpoints"
+      ]
+    },
+    {
+      "group": "Flare v3 API",
+      "pages": [
+        "api-reference/v3/endpoints"
+      ]
+    },
+    {
+      "group": "Flare v4 API",
+      "pages": [
+        "api-reference/v4/endpoints"
       ]
     },
     {
