@@ -26,11 +26,11 @@
       "mode": "show"
     }
   },
+  "openapi": "/api-reference/openapi-example.json",
   "tabs": [
     {
-      "name": "API Reference",
-      "url": "api-reference",
-      "openapi": "/api-reference/original-openapi.json"
+      "name": "API Documentation",
+      "url": "api-reference"
     },
     {
       "name": "Research Center",
