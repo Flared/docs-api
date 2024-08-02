@@ -133,23 +133,36 @@
     {
       "group": "Flare v2 API",
       "pages": [
-        "api-reference/v2/endpoints",
-        "api-reference/v2/endpoints/search/get-search",
-        "api-reference/v2/endpoints/identifiers/get-assets"
+        {
+          "group": "Identifiers",
+          "pages": [
+            "api-reference/v2/endpoints/identifiers/get-assets"
+          ]
+        },
+        {
+          "group": "Search",
+          "pages": [
+            "api-reference/v2/endpoints/search/get-search"
+          ]
+        }
       ]
     },
     {
       "group": "Flare v3 API",
       "pages": [
-        "api-reference/v3/endpoints",
-        "api-reference/v3/endpoints/identifiers/get-identifiers-1"
+        {
+          "group": "Identifiers",
+          "pages": [
+            "api-reference/v3/endpoints/identifiers/get-identifiers-1"
+          ]
+        }
       ]
     },
     {
       "group": "Flare v4 API",
       "pages": [
         {
-          "group": "Endpoints",
+          "group": "Plants",
           "pages": [
             "api-reference/v4/endpoints/get-plants",
             "api-reference/v4/endpoints/post-plants",
