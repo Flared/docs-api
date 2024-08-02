@@ -26,7 +26,10 @@
       "mode": "show"
     }
   },
-  "openapi": "/api-reference/openapi-example.json",
+  "openapi": [
+    "/api-reference/v4/openapi-example.json",
+    "/api-reference/v3/openapi.json"
+  ],
   "tabs": [
     {
       "name": "API Documentation",
@@ -146,9 +149,14 @@
     {
       "group": "Flare v4 API",
       "pages": [
-        "api-reference/v4/get-plants",
-        "api-reference/v4/post-plants",
-        "api-reference/v4/delete-plants"
+        {
+          "group": "Endpoints",
+          "pages": [
+            "api-reference/v4/endpoints/get-plants",
+            "api-reference/v4/endpoints/post-plants",
+            "api-reference/v4/endpoints/delete-plants"
+          ]
+        }
       ]
     },
     {
