@@ -1,0 +1,2179 @@
+{
+  "basePath": "/firework/v3",
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "Asset": {
+      "properties": {
+        "asset_type": {
+          "enum": [
+            "github_repository",
+            "username",
+            "domain",
+            "brand",
+            "name",
+            "keyword",
+            "search_query",
+            "dork_query",
+            "bin",
+            "ip",
+            "email",
+            "account",
+            "secret",
+            "credentials",
+            "favicon",
+            "screenshot",
+            "azure_tenant"
+          ],
+          "example": "github_repository",
+          "type": "string"
+        },
+        "cursor": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/AssetData"
+        },
+        "enrichments": {
+          "type": "object"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_type"
+      ],
+      "type": "object"
+    },
+    "AssetData": {
+      "properties": {
+        "asset_url": {
+          "type": "string"
+        },
+        "bin": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "fqdn": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "profile_url": {
+          "type": "string"
+        },
+        "repo_name": {
+          "type": "string"
+        },
+        "repo_owner": {
+          "type": "string"
+        },
+        "search_query": {
+          "type": "string"
+        },
+        "site": {
+          "type": "string"
+        },
+        "tenant_id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AssetRelation": {
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/AssetRelationMetadata"
+        },
+        "params": {
+          "$ref": "#/definitions/AssetRelationParams"
+        },
+        "source_data": {
+          "$ref": "#/definitions/AssetData"
+        },
+        "source_type": {
+          "type": "string"
+        },
+        "source_uuid": {
+          "type": "string"
+        },
+        "target_data": {
+          "$ref": "#/definitions/AssetData"
+        },
+        "target_type": {
+          "type": "string"
+        },
+        "target_uuid": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "subdomain_of",
+            "mentioned_in",
+            "contributed_to",
+            "commits_with",
+            "found_from",
+            "resolves_to",
+            "has_account_on",
+            "has_favicon",
+            "has_screenshot",
+            "looks_like",
+            "links_to_azure_tenant"
+          ],
+          "example": "subdomain_of",
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    },
+    "AssetRelationMetadata": {
+      "properties": {
+        "first_seen_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "last_seen_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AssetRelationParams": {
+      "properties": {
+        "number_of_commits": {
+          "type": "integer"
+        },
+        "number_of_domain_commits": {
+          "type": "integer"
+        },
+        "number_of_domain_emails": {
+          "type": "integer"
+        },
+        "number_of_email_commits": {
+          "type": "integer"
+        },
+        "number_of_github_projects": {
+          "type": "integer"
+        },
+        "number_of_leaked_secrets": {
+          "type": "integer"
+        },
+        "number_of_mentions": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "AssetRelations": {
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/definitions/AssetRelation"
+          },
+          "type": "array"
+        },
+        "next": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BulkAction": {
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string"
+        },
+        "target_types": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BulkActionFilters": {
+      "properties": {
+        "recommendation_state": {
+          "enum": [
+            "recommended",
+            "accepted",
+            "rejected"
+          ],
+          "example": "recommended",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CollectionUpdate": {
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "HttpError": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Identifier": {
+      "properties": {
+        "asset_uuid": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "data": {
+          "type": "object"
+        },
+        "data_updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "enrichments": {
+          "type": "object"
+        },
+        "experimental_search_types": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "feed_id": {
+          "type": "integer"
+        },
+        "fetching_progress": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "identifier_group_id": {
+          "example": "nullable integer",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "is_disabled": {
+          "type": "boolean"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "risks": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "search_types": {
+          "items": {
+            "enum": [
+              "attachment",
+              "listing",
+              "ransomleak",
+              "forum_post",
+              "forum_topic",
+              "forum_profile",
+              "blog_post",
+              "seller",
+              "paste",
+              "leak",
+              "chat_message",
+              "chat_message/telegram",
+              "domain",
+              "bot",
+              "stealer_log",
+              "infected_devices",
+              "driller",
+              "driller_forum_topic",
+              "driller_forum_post",
+              "driller_profile",
+              "cc",
+              "ccbin",
+              "financial_data",
+              "leaked_data",
+              "leaked_file",
+              "document",
+              "account",
+              "actor",
+              "forum_content",
+              "blog_content",
+              "profile",
+              "illicit_networks",
+              "open_web",
+              "domains",
+              "leaks",
+              "social_media_account",
+              "social_media_profile",
+              "social_media_post",
+              "social_media",
+              "source_code",
+              "source_code_secrets",
+              "source_code_files",
+              "stack_exchange",
+              "google",
+              "service",
+              "driller_host",
+              "buckets",
+              "bucket",
+              "bucket_object",
+              "whois",
+              "ad",
+              "ads",
+              "experimental"
+            ],
+            "example": "attachment",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "source": {
+          "enum": [
+            "USER",
+            "SYSTEM_RELATION",
+            "DEMO",
+            "SELF_ONBOARDING"
+          ],
+          "example": "USER",
+          "type": "string"
+        },
+        "tenant_id": {
+          "type": "integer"
+        },
+        "type": {
+          "enum": [
+            "domain",
+            "brand",
+            "name",
+            "keyword",
+            "github_repository",
+            "username",
+            "email",
+            "search_query",
+            "dork_query",
+            "bin",
+            "ip",
+            "secret",
+            "azure_tenant"
+          ],
+          "example": "domain",
+          "type": "string"
+        },
+        "urn": {
+          "description": "The uniform resource name of the identifier.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_uuid",
+        "data",
+        "data_updated_at",
+        "name",
+        "search_types",
+        "source",
+        "type"
+      ],
+      "type": "object"
+    },
+    "IdentifierChild": {
+      "properties": {
+        "child_identifier": {
+          "$ref": "#/definitions/Identifier"
+        },
+        "metadata": {
+          "$ref": "#/definitions/AssetRelationMetadata"
+        }
+      },
+      "type": "object"
+    },
+    "IdentifierChildren": {
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/definitions/IdentifierChild"
+          },
+          "type": "array"
+        },
+        "next": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IdentifierGroup": {
+      "properties": {
+        "feed_id": {
+          "type": "integer"
+        },
+        "group_type": {
+          "enum": [
+            null,
+            "person"
+          ],
+          "example": "nullable string",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent_group_id": {
+          "example": "nullable integer",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "tenant_id": {
+          "type": "integer"
+        },
+        "urn": {
+          "description": "The uniform resource name of the identifier group.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IdentifierGroupWithCounts": {
+      "properties": {
+        "group": {
+          "$ref": "#/definitions/IdentifierGroup"
+        },
+        "identifier_count": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "IdentifierRecommendation": {
+      "properties": {
+        "asset": {
+          "$ref": "#/definitions/Asset"
+        },
+        "asset_id": {
+          "type": "integer"
+        },
+        "asset_name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "reasons": {
+          "items": {
+            "$ref": "#/definitions/Reason"
+          },
+          "type": "array"
+        },
+        "state": {
+          "enum": [
+            "recommended",
+            "accepted",
+            "rejected"
+          ],
+          "example": "recommended",
+          "type": "string"
+        },
+        "tenant_id": {
+          "type": "integer"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IdentifierRecommendationBulkActionResult": {
+      "properties": {
+        "nb_identifier_recommendations_accepted": {
+          "type": "integer"
+        },
+        "nb_identifier_recommendations_rejected": {
+          "type": "integer"
+        },
+        "nb_identifiers_created": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "LeakActivityCredential": {
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "identity_name": {
+          "type": "string"
+        },
+        "ignored_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "imported_at": {
+          "type": "string"
+        },
+        "remediated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/source"
+        },
+        "source_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "identity_name",
+        "imported_at",
+        "source_id"
+      ],
+      "type": "object"
+    },
+    "PaginatedCredentials": {
+      "properties": {
+        "cursors": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "items": {
+          "$ref": "#/definitions/LeakActivityCredential"
+        },
+        "next": {
+          "type": "string"
+        },
+        "total_count": {
+          "example": "nullable integer",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedIdentifierGroupsWithCounts": {
+      "properties": {
+        "cursors": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "items": {
+          "$ref": "#/definitions/IdentifierGroupWithCounts"
+        },
+        "next": {
+          "type": "string"
+        },
+        "total_count": {
+          "example": "nullable integer",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedIdentifierRelations": {
+      "properties": {
+        "cursors": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "items": {
+          "$ref": "#/definitions/Identifier"
+        },
+        "next": {
+          "type": "string"
+        },
+        "total_count": {
+          "example": "nullable integer",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedIdentifiers": {
+      "properties": {
+        "cursors": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "items": {
+          "$ref": "#/definitions/Identifier"
+        },
+        "next": {
+          "type": "string"
+        },
+        "total_count": {
+          "example": "nullable integer",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "Reason": {
+      "properties": {
+        "from_asset_name": {
+          "type": "string"
+        },
+        "from_identifier_id": {
+          "type": "integer"
+        },
+        "recommendation_pipeline_id": {
+          "enum": [
+            "email_from_domain",
+            "username_from_email",
+            "email_from_username",
+            "activity_discovery",
+            "subdomain_from_domain",
+            "azure_tenant_from_domain",
+            "domain_from_azure_tenant"
+          ],
+          "example": "email_from_domain",
+          "type": "string"
+        },
+        "seen_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Search": {
+      "properties": {
+        "items": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "links": {
+          "$ref": "#/definitions/SearchLinks"
+        },
+        "nb_hits": {
+          "type": "integer"
+        },
+        "search_after": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SearchLinks": {
+      "properties": {
+        "next": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "source": {
+      "properties": {
+        "breached_at": {
+          "type": "string"
+        },
+        "description_en": {
+          "type": "string"
+        },
+        "description_fr": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "leaked_at": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    }
+  },
+  "host": "api.flare.io",
+  "info": {
+    "description": "\nManage and access Firework resources.\n\n### Steps to use the Api\n\n1. `Send` a POST request to `https://api.flare.systems/tokens/generate` with your **Firework** credentials using [Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication) to get a authentication token.\n---\n2. On the current page, click on the **Authorize** button and insert the token using the following format: `Bearer {token}`\n\n   Example value: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.Et9HFtf9R3GEMA0IICOfFMVXY7kkTX1wr4qCyhIf58U`\n---\n3. You should now be able to use SwaggerUI's built-in tools to query the documented endpoints.\n",
+    "title": "Firework API",
+    "version": "v3"
+  },
+  "paths": {
+    "/activities/{index}/{source}/{id}": {
+      "get": {
+        "operationId": "get_activity_endpoint_/activities/<string:index>/<string:source>/<path:id>",
+        "responses": {
+          "200": {
+            "description": "Returns the activity"
+          },
+          "404": {
+            "description": "Activity not found",
+            "schema": {
+              "$ref": "#/definitions/HttpError"
+            }
+          }
+        },
+        "tags": [
+          "activities"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "index",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "source",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/activities/{index}/{source}/{id}/credentials": {
+      "get": {
+        "operationId": "get_activity_credentials_endpoint_/activities/<string:index>/<string:source>/<path:id>/credentials",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedCredentials"
+            }
+          }
+        },
+        "tags": [
+          "activities"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "index",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "source",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/activities/{index}/{source}/{id}/icon": {
+      "get": {
+        "operationId": "get_activity_icon_endpoint_/activities/<string:index>/<string:source>/<path:id>/icon",
+        "responses": {
+          "200": {
+            "description": "Returns the activity"
+          },
+          "404": {
+            "description": "Activity not found",
+            "schema": {
+              "$ref": "#/definitions/HttpError"
+            }
+          }
+        },
+        "tags": [
+          "activities"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "index",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "source",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/assets/_by_data": {
+      "post": {
+        "operationId": "post_asset_by_data_api_/assets/_by_data",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "properties": {
+                "asset": {
+                  "$ref": "#/definitions/Asset"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "assets"
+        ]
+      }
+    },
+    "/assets/_relations": {
+      "get": {
+        "operationId": "get_assets_relations_api_/assets/_relations",
+        "parameters": [
+          {
+            "description": "The `target_uuid` parameter is used to get source assets related to this asset uuid  \n\n",
+            "in": "query",
+            "name": "target_uuid",
+            "type": "string"
+          },
+          {
+            "description": "The `source_uuid` parameter is used to get target assets related to this asset uuid  \n\n",
+            "in": "query",
+            "name": "source_uuid",
+            "type": "string"
+          },
+          {
+            "description": "The `type` parameter is used to filter which type of relation we want to list  \n\n",
+            "enum": [
+              "subdomain_of",
+              "mentioned_in",
+              "contributed_to",
+              "commits_with",
+              "found_from",
+              "resolves_to",
+              "has_account_on",
+              "has_favicon",
+              "has_screenshot",
+              "looks_like",
+              "links_to_azure_tenant"
+            ],
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "description": "The `target_type` parameter is used to filter which type of target assets related we want to list  \n\nUsed only with `source_uuid` \n\n",
+            "enum": [
+              "github_repository",
+              "username",
+              "domain",
+              "brand",
+              "name",
+              "keyword",
+              "search_query",
+              "dork_query",
+              "bin",
+              "ip",
+              "email",
+              "account",
+              "secret",
+              "credentials",
+              "favicon",
+              "screenshot",
+              "azure_tenant"
+            ],
+            "in": "query",
+            "name": "target_type",
+            "type": "string"
+          },
+          {
+            "description": "The `source_type` parameter is used to filter which type of source assets related we want to list  \n\nUsed only with `target_uuid` \n\n",
+            "enum": [
+              "github_repository",
+              "username",
+              "domain",
+              "brand",
+              "name",
+              "keyword",
+              "search_query",
+              "dork_query",
+              "bin",
+              "ip",
+              "email",
+              "account",
+              "secret",
+              "credentials",
+              "favicon",
+              "screenshot",
+              "azure_tenant"
+            ],
+            "in": "query",
+            "name": "source_type",
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "The `size` parameter is the maximum results returned \n\n",
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "default": "desc",
+            "description": "The `order` parameter is used to define the order of the results.  \n\nResults are ordered by the time the relation was first found. By default the results are ordered from the most recent to the oldest (desc)",
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, use the latest response's `next` attribute for the next `from` value to use to get the next page of results.",
+            "in": "query",
+            "name": "from",
+            "type": "string"
+          },
+          {
+            "default": true,
+            "description": "The `include_data` parameter is to include asset data in the response \n\n",
+            "in": "query",
+            "name": "include_data",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AssetRelations"
+            }
+          }
+        },
+        "tags": [
+          "assets"
+        ]
+      }
+    },
+    "/assets/{asset_uuid}": {
+      "get": {
+        "operationId": "get_asset_api_/assets/<uuid:asset_uuid>",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "properties": {
+                "asset": {
+                  "$ref": "#/definitions/Asset"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "assets"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "asset_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/assets/{asset_uuid}/feed": {
+      "get": {
+        "operationId": "get_asset_feeds_api_/assets/<uuid:asset_uuid>/feed",
+        "parameters": [
+          {
+            "collectionFormat": "multi",
+            "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "fields[]",
+            "type": "array"
+          },
+          {
+            "description": "  The `time` parameter is used to limit results to those found in the provided time span.  \n\n  *Expected format* : from@to  \n\n  *Example value* : 2019-09-03T04:00:00.000Z@2019-09-14T04:00:00.000Z",
+            "in": "query",
+            "name": "time",
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "The `size` parameter is used to limit the number of results returned for the search query.",
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "description": "The `search_after` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `search_after` parameter in your next request with the latest response's `search_after` value to get the next page of results.",
+            "in": "query",
+            "name": "search_after",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "User defined tags used to filter search results",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "tags[]",
+            "type": "array"
+          },
+          {
+            "description": "User defined operator to apply to tags filter",
+            "in": "query",
+            "name": "tags_query_operator",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, stealer_log, bot, financial_data, forum_profile, blog_post, forum_post, chat_message, ransomleak, seller\n- open_web: service, bucket, google, social_media, source_code_secrets, stack_exchange, paste, bucket_object, source_code_files\n- leaks: leak\n- domains: domain\n",
+            "enum": [
+              "attachment",
+              "listing",
+              "ransomleak",
+              "forum_post",
+              "forum_topic",
+              "forum_profile",
+              "blog_post",
+              "seller",
+              "paste",
+              "leak",
+              "chat_message",
+              "chat_message/telegram",
+              "domain",
+              "bot",
+              "stealer_log",
+              "infected_devices",
+              "driller",
+              "driller_forum_topic",
+              "driller_forum_post",
+              "driller_profile",
+              "cc",
+              "ccbin",
+              "financial_data",
+              "leaked_data",
+              "leaked_file",
+              "document",
+              "account",
+              "actor",
+              "forum_content",
+              "blog_content",
+              "profile",
+              "illicit_networks",
+              "open_web",
+              "domains",
+              "leaks",
+              "social_media_account",
+              "social_media_profile",
+              "social_media_post",
+              "social_media",
+              "source_code",
+              "source_code_secrets",
+              "source_code_files",
+              "stack_exchange",
+              "google",
+              "service",
+              "driller_host",
+              "buckets",
+              "bucket",
+              "bucket_object",
+              "whois",
+              "ad",
+              "ads",
+              "experimental"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "types[]",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Type of experimental activities to search through.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "experimental_types[]",
+            "type": "array"
+          },
+          {
+            "enum": [
+              "default",
+              "ignored",
+              "remediated",
+              "risk_score_edited",
+              "exclude_ignored",
+              "ignored_or_remediated"
+            ],
+            "in": "query",
+            "name": "event_action",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "enum": [
+              "default",
+              "ignored",
+              "remediated",
+              "risk_score_edited",
+              "exclude_ignored",
+              "ignored_or_remediated"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "event_actions[]",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "in": "query",
+            "items": {
+              "type": "integer"
+            },
+            "name": "risks[]",
+            "type": "array"
+          },
+          {
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "default": "created",
+            "enum": [
+              "created",
+              "indexed",
+              "updated",
+              "alertable-materialized",
+              "materialized",
+              "searchable"
+            ],
+            "in": "query",
+            "name": "sort_by",
+            "type": "string"
+          },
+          {
+            "default": true,
+            "in": "query",
+            "name": "use_global_policies",
+            "type": "boolean"
+          },
+          {
+            "description": "The time zone used to compute the statistics.",
+            "in": "query",
+            "name": "time_zone",
+            "type": "string"
+          },
+          {
+            "description": "Query used to filter results. Search query uses the [Lucene query](https://www.elastic.co/guide/en/elasticsearch/reference/6.x/query-dsl-query-string-query.html#query-string-syntax) syntax.",
+            "in": "query",
+            "name": "query",
+            "type": "string"
+          },
+          {
+            "default": false,
+            "in": "query",
+            "name": "has_modified_risk_score",
+            "type": "boolean"
+          },
+          {
+            "default": false,
+            "in": "query",
+            "name": "has_notes",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the search result(s).",
+            "schema": {
+              "$ref": "#/definitions/Search"
+            }
+          },
+          "400": {
+            "description": "Query is invalid.",
+            "schema": {
+              "$ref": "#/definitions/HttpError"
+            }
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/HttpError"
+            }
+          }
+        },
+        "tags": [
+          "assets"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "asset_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "post_asset_feeds_api_/assets/<uuid:asset_uuid>/feed",
+        "parameters": [
+          {
+            "collectionFormat": "multi",
+            "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "fields[]",
+            "type": "array"
+          },
+          {
+            "description": "  The `time` parameter is used to limit results to those found in the provided time span.  \n\n  *Expected format* : from@to  \n\n  *Example value* : 2019-09-03T04:00:00.000Z@2019-09-14T04:00:00.000Z",
+            "in": "query",
+            "name": "time",
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "The `size` parameter is used to limit the number of results returned for the search query.",
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "description": "The `search_after` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `search_after` parameter in your next request with the latest response's `search_after` value to get the next page of results.",
+            "in": "query",
+            "name": "search_after",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "User defined tags used to filter search results",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "tags[]",
+            "type": "array"
+          },
+          {
+            "description": "User defined operator to apply to tags filter",
+            "in": "query",
+            "name": "tags_query_operator",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, stealer_log, bot, financial_data, forum_profile, blog_post, forum_post, chat_message, ransomleak, seller\n- open_web: service, bucket, google, social_media, source_code_secrets, stack_exchange, paste, bucket_object, source_code_files\n- leaks: leak\n- domains: domain\n",
+            "enum": [
+              "attachment",
+              "listing",
+              "ransomleak",
+              "forum_post",
+              "forum_topic",
+              "forum_profile",
+              "blog_post",
+              "seller",
+              "paste",
+              "leak",
+              "chat_message",
+              "chat_message/telegram",
+              "domain",
+              "bot",
+              "stealer_log",
+              "infected_devices",
+              "driller",
+              "driller_forum_topic",
+              "driller_forum_post",
+              "driller_profile",
+              "cc",
+              "ccbin",
+              "financial_data",
+              "leaked_data",
+              "leaked_file",
+              "document",
+              "account",
+              "actor",
+              "forum_content",
+              "blog_content",
+              "profile",
+              "illicit_networks",
+              "open_web",
+              "domains",
+              "leaks",
+              "social_media_account",
+              "social_media_profile",
+              "social_media_post",
+              "social_media",
+              "source_code",
+              "source_code_secrets",
+              "source_code_files",
+              "stack_exchange",
+              "google",
+              "service",
+              "driller_host",
+              "buckets",
+              "bucket",
+              "bucket_object",
+              "whois",
+              "ad",
+              "ads",
+              "experimental"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "types[]",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Type of experimental activities to search through.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "experimental_types[]",
+            "type": "array"
+          },
+          {
+            "enum": [
+              "default",
+              "ignored",
+              "remediated",
+              "risk_score_edited",
+              "exclude_ignored",
+              "ignored_or_remediated"
+            ],
+            "in": "query",
+            "name": "event_action",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "enum": [
+              "default",
+              "ignored",
+              "remediated",
+              "risk_score_edited",
+              "exclude_ignored",
+              "ignored_or_remediated"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "event_actions[]",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "in": "query",
+            "items": {
+              "type": "integer"
+            },
+            "name": "risks[]",
+            "type": "array"
+          },
+          {
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "default": "created",
+            "enum": [
+              "created",
+              "indexed",
+              "updated",
+              "alertable-materialized",
+              "materialized",
+              "searchable"
+            ],
+            "in": "query",
+            "name": "sort_by",
+            "type": "string"
+          },
+          {
+            "default": true,
+            "in": "query",
+            "name": "use_global_policies",
+            "type": "boolean"
+          },
+          {
+            "description": "The time zone used to compute the statistics.",
+            "in": "query",
+            "name": "time_zone",
+            "type": "string"
+          },
+          {
+            "description": "Query used to filter results. Search query uses the [Lucene query](https://www.elastic.co/guide/en/elasticsearch/reference/6.x/query-dsl-query-string-query.html#query-string-syntax) syntax.",
+            "in": "query",
+            "name": "query",
+            "type": "string"
+          },
+          {
+            "default": false,
+            "in": "query",
+            "name": "has_modified_risk_score",
+            "type": "boolean"
+          },
+          {
+            "default": false,
+            "in": "query",
+            "name": "has_notes",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the search result(s).",
+            "schema": {
+              "$ref": "#/definitions/Search"
+            }
+          },
+          "400": {
+            "description": "Query is invalid.",
+            "schema": {
+              "$ref": "#/definitions/HttpError"
+            }
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/HttpError"
+            }
+          }
+        },
+        "tags": [
+          "assets"
+        ]
+      }
+    },
+    "/assets/{asset_uuid}/relations": {
+      "get": {
+        "operationId": "get_asset_relations_api_/assets/<uuid:asset_uuid>/relations",
+        "parameters": [
+          {
+            "description": "The `type` parameter is used to filter which type of relation we want to list  \n\n",
+            "enum": [
+              "subdomain_of",
+              "mentioned_in",
+              "contributed_to",
+              "commits_with",
+              "found_from",
+              "resolves_to",
+              "has_account_on",
+              "has_favicon",
+              "has_screenshot",
+              "looks_like",
+              "links_to_azure_tenant"
+            ],
+            "in": "query",
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "description": "The `related_type` parameter is used to filter which type of assets related we want to list  \n\n",
+            "enum": [
+              "github_repository",
+              "username",
+              "domain",
+              "brand",
+              "name",
+              "keyword",
+              "search_query",
+              "dork_query",
+              "bin",
+              "ip",
+              "email",
+              "account",
+              "secret",
+              "credentials",
+              "favicon",
+              "screenshot",
+              "azure_tenant"
+            ],
+            "in": "query",
+            "name": "related_type",
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "The `size` parameter is the maximum results returned \n\n",
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "default": "desc",
+            "description": "The `order` parameter is used to define the order of the results.  \n\nResults are ordered by the time the relation was first found. By default the results are ordered from the most recent to the oldest (desc)",
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, use the latest response's `next` attribute for the next `from` value to use to get the next page of results.",
+            "in": "query",
+            "name": "from",
+            "type": "string"
+          },
+          {
+            "default": true,
+            "description": "The `include_data` parameter is to include asset data in the response \n\n",
+            "in": "query",
+            "name": "include_data",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AssetRelations"
+            }
+          }
+        },
+        "tags": [
+          "assets"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "asset_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/batch/chat_message/telegram/{conversation_id}/{batch_id}": {
+      "get": {
+        "operationId": "get_chat_message_batch_endpoint_/batch/chat_message/telegram/<string:conversation_id>/<string:batch_id>",
+        "responses": {
+          "200": {
+            "description": "Returns a list of messages matching a conversation id and batch id"
+          }
+        },
+        "tags": [
+          "batch"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "conversation_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "batch_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/identifiers/": {
+      "get": {
+        "operationId": "get_identifiers_endpoint_/identifiers/",
+        "parameters": [
+          {
+            "default": "id",
+            "enum": [
+              "id",
+              "name"
+            ],
+            "in": "query",
+            "name": "order_by",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "default": [],
+            "enum": [
+              "recent",
+              "interest",
+              "resolves",
+              "reachable"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "properties[]",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "default": [],
+            "enum": [
+              "domain",
+              "brand",
+              "name",
+              "keyword",
+              "github_repository",
+              "username",
+              "email",
+              "search_query",
+              "dork_query",
+              "bin",
+              "ip",
+              "secret",
+              "azure_tenant"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "types[]",
+            "type": "array"
+          },
+          {
+            "default": false,
+            "in": "query",
+            "name": "is_disabled",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "parent_group_id",
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "search_after",
+            "type": "string"
+          },
+          {
+            "default": "ALL",
+            "enum": [
+              "ALL",
+              "USER",
+              "SYSTEM"
+            ],
+            "in": "query",
+            "name": "source_group",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedIdentifiers"
+            }
+          }
+        },
+        "tags": [
+          "identifiers"
+        ]
+      }
+    },
+    "/identifiers/by_asset_data": {
+      "get": {
+        "operationId": "get_identifiers_by_asset_data_endpoint_/identifiers/by_asset_data",
+        "parameters": [
+          {
+            "collectionFormat": "multi",
+            "default": [],
+            "enum": [
+              "domain",
+              "brand",
+              "name",
+              "keyword",
+              "github_repository",
+              "username",
+              "email",
+              "search_query",
+              "dork_query",
+              "bin",
+              "ip",
+              "secret",
+              "azure_tenant"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "types[]",
+            "type": "array"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "search_after",
+            "type": "string"
+          },
+          {
+            "default": false,
+            "in": "query",
+            "name": "exact_match",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedIdentifiers"
+            }
+          }
+        },
+        "tags": [
+          "identifiers"
+        ]
+      }
+    },
+    "/identifiers/groups": {
+      "get": {
+        "operationId": "get_identifier_groups_endpoint_/identifiers/groups",
+        "parameters": [
+          {
+            "default": "id",
+            "enum": [
+              "id",
+              "name"
+            ],
+            "in": "query",
+            "name": "order_by",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "default": [],
+            "enum": [
+              "domain",
+              "brand",
+              "name",
+              "keyword",
+              "github_repository",
+              "username",
+              "email",
+              "search_query",
+              "dork_query",
+              "bin",
+              "ip",
+              "secret",
+              "azure_tenant"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "types[]",
+            "type": "array"
+          },
+          {
+            "default": false,
+            "in": "query",
+            "name": "is_disabled",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "parent_group_id",
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "search_after",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedIdentifierGroupsWithCounts"
+            }
+          }
+        },
+        "tags": [
+          "identifiers"
+        ]
+      }
+    },
+    "/identifiers/{identifier_id}": {
+      "get": {
+        "operationId": "get_identifier_endpoint_/identifiers/<int:identifier_id>",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "properties": {
+                "identifier": {
+                  "$ref": "#/definitions/Identifier"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "identifiers"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "identifier_id",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/identifiers/{identifier_id}/children": {
+      "get": {
+        "operationId": "get_identifier_children_api_/identifiers/<int:identifier_id>/children",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IdentifierChildren"
+            }
+          }
+        },
+        "tags": [
+          "identifiers"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "identifier_id",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/identifiers/{identifier_id}/relations": {
+      "get": {
+        "operationId": "get_identifier_relations_endpoint_/identifiers/<int:identifier_id>/relations",
+        "parameters": [
+          {
+            "collectionFormat": "multi",
+            "default": [],
+            "enum": [
+              "recent",
+              "interest",
+              "resolves",
+              "reachable"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "properties[]",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "default": [],
+            "enum": [
+              "domain",
+              "brand",
+              "name",
+              "keyword",
+              "github_repository",
+              "username",
+              "email",
+              "search_query",
+              "dork_query",
+              "bin",
+              "ip",
+              "secret",
+              "azure_tenant"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "types[]",
+            "type": "array"
+          },
+          {
+            "default": false,
+            "in": "query",
+            "name": "is_disabled",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "How many children to fetch",
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "description": "The reversed fqdn to start searching from",
+            "in": "query",
+            "name": "from",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedIdentifierRelations"
+            }
+          }
+        },
+        "tags": [
+          "identifiers"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "identifier_id",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "responses": {
+    "HTTPException": {
+      "description": ""
+    },
+    "MaskError": {
+      "description": "When any error occurs on mask"
+    },
+    "ParseError": {
+      "description": "When a mask can't be parsed"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "Bearer Auth": []
+    }
+  ],
+  "securityDefinitions": {
+    "Bearer Auth": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Perform actions on activities.",
+      "name": "activities"
+    },
+    {
+      "description": "Get batches of activities.",
+      "name": "batch"
+    },
+    {
+      "description": "Manage and query assets.",
+      "name": "assets"
+    },
+    {
+      "description": "Manage identifier.",
+      "name": "identifiers"
+    }
+  ]
+}

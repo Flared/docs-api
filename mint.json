@@ -26,10 +26,6 @@
       "mode": "show"
     }
   },
-  "openapi": [
-    "/api-reference/v4/openapi-example.json",
-    "/api-reference/v3/openapi.json"
-  ],
   "tabs": [
     {
       "name": "API Documentation",
@@ -137,13 +133,16 @@
     {
       "group": "Flare v2 API",
       "pages": [
-        "api-reference/v2/endpoints"
+        "api-reference/v2/endpoints",
+        "api-reference/v2/endpoints/search/get-search",
+        "api-reference/v2/endpoints/identifiers/get-assets"
       ]
     },
     {
       "group": "Flare v3 API",
       "pages": [
-        "api-reference/v3/endpoints"
+        "api-reference/v3/endpoints",
+        "api-reference/v3/endpoints/identifiers/get-identifiers-1"
       ]
     },
     {

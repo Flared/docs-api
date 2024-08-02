@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+shopt -s inherit_errexit
+
+ROOT=$(
+    cd "$(dirname "${BASH_SOURCE[0]}")"/../
+    pwd -P
+)
+SPEC_DIR="${ROOT}/api-reference/spec"
+
+rm ${SPEC_DIR}/firework-v2-*
+curl --location https://api.flare.io/firework/docs/firework/v2/swagger.json | jq > ${SPEC_DIR}/firework-v2-swagger.json
+openapi-generator generate -g openapi -i ${SPEC_DIR}/firework-v2-swagger.json -o ${SPEC_DIR}
+mv ${SPEC_DIR}/openapi.json ${SPEC_DIR}/firework-v2-openapi.json
+
+rm ${SPEC_DIR}/firework-v3-*
+curl --location https://api.flare.io/firework/docs/firework/v3/swagger.json |jq > ${SPEC_DIR}/firework-v3-swagger.json
+openapi-generator generate -g openapi -i ${SPEC_DIR}/firework-v3-swagger.json -o ${SPEC_DIR}
+mv ${SPEC_DIR}/openapi.json ${SPEC_DIR}/firework-v3-openapi.json
