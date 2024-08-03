@@ -133,7 +133,19 @@
     {
       "group": "Guides",
       "pages": [
-        "api-reference/guides/getting-started"
+        "api-reference/guides/getting-started",
+        "api-reference/guides/authentication"
+      ]
+    },
+    {
+      "group": "Leaked Credentials API",
+      "pages": [
+        {
+          "group": "Endpoints",
+          "pages": [
+            "api-reference/leaksdb/endpoints/by-keyword"
+          ]
+        }
       ]
     },
     {
