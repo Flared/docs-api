@@ -26,16 +26,6 @@
       "mode": "show"
     }
   },
-  "tabs": [
-    {
-      "name": "API Documentation",
-      "url": "api-reference"
-    },
-    {
-      "name": "Research Center",
-      "url": "research-center"
-    }
-  ],
   "topbarCtaButton": {
     "name": "Back to Flare",
     "url": "https://app.flare.io/"
@@ -46,90 +36,23 @@
       "url": "https://status.flare.io"
     }
   ],
+  "topAnchor": {
+      "name": "API Documentation",
+      "icon": "code"
+  },
+  "anchors": [
+    {
+      "name": "Product Documentation",
+      "icon": "book-open-cover",
+      "url": "https://docs.flare.io/"
+    },
+    {
+      "name": "Research Center",
+      "icon": "flask",
+      "url": "https://research.flare.io/"
+    }
+  ],
   "navigation": [
-    {
-      "group": "Guides",
-      "pages": [
-        "guides/get-started",
-        "guides/dashboard"
-      ]
-    },
-    {
-      "group": "Core Features",
-      "pages": [
-        {
-          "group": "Events",
-          "pages": [
-            "core-features/events/quickstart",
-            "core-features/events/search-in-existing-data",
-            "core-features/events/advanced-search",
-            "core-features/events/respond-to-leaked-credentials-events",
-            "core-features/events/respond-to-look-alike-domains-events",
-            "core-features/events/respond-to-illicit-networks-events",
-            "core-features/events/open-ports"
-          ]
-        },
-        {
-          "group": "Identifiers",
-          "pages": [
-            "core-features/identifiers/quickstart",
-            "core-features/identifiers/configure-identifiers",
-            "core-features/identifiers/configure-identifiers-advanced",
-            "core-features/identifiers/email-alerts"
-          ]
-        },
-        "core-features/collection",
-        "core-features/reports",
-        "core-features/threat-flow",
-        "core-features/supply-chain-ransomware-exposure-monitoring",
-        "core-features/credentials-browser",
-        "core-features/takedown-services"
-      ]
-    },
-    {
-      "group": "Configure Flare",
-      "pages": [
-        "configure-flare/tenants",
-        {
-          "group": "Team",
-          "pages": [
-            "configure-flare/team/quickstart",
-            "configure-flare/team/sso-and-authentication"
-          ]
-        },
-        "configure-flare/profile",
-        "configure-flare/policies"
-      ]
-    },
-    {
-      "group": "Integrations",
-      "pages": [
-        "integrations/azure-sentinel-integration",
-        "integrations/jira-integration",
-        "integrations/service-now-integration",
-        "integrations/slack-integration",
-        "integrations/splunk-integration",
-        "integrations/webhook-integration"
-      ]
-    },
-    {
-      "group": "Data Sources",
-      "pages": [
-        "data-sources/illicit-networks",
-        "data-sources/open-web",
-        "data-sources/leaked-credentials",
-        "data-sources/look-alike-domains"
-      ]
-    },
-    {
-      "group": "References",
-      "pages": [
-        "references/product-specifications",
-        "references/fraudster-jargon",
-        "references/data-fields",
-        "references/asset-relations"
-      ]
-    },
     {
       "group": "Introduction",
       "pages": [
@@ -194,12 +117,6 @@
             "api-reference/v4/endpoints/delete-plants"
           ]
         }
-      ]
-    },
-    {
-      "group": "Research Center",
-      "pages": [
-        "research-center/access"
       ]
     }
   ],
