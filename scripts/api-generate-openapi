@@ -9,12 +9,38 @@ ROOT=$(
 )
 SPEC_DIR="${ROOT}/api-reference/spec"
 
+OPENAPI_POST_PROCESS_SCRIPT="${ROOT}/scripts/openapi-post-process.py"
+
+#################
+## FIREWORK V2 ##
+#################
+
 rm ${SPEC_DIR}/firework-v2-*
+
 curl --location https://api.flare.io/firework/docs/firework/v2/swagger.json | jq > ${SPEC_DIR}/firework-v2-swagger.json
-openapi-generator generate -g openapi -i ${SPEC_DIR}/firework-v2-swagger.json -o ${SPEC_DIR}
+
+openapi-generator \
+    generate \
+        -g openapi \
+        -i ${SPEC_DIR}/firework-v2-swagger.json \
+        -o ${SPEC_DIR}
+
 mv ${SPEC_DIR}/openapi.json ${SPEC_DIR}/firework-v2-openapi.json
+${OPENAPI_POST_PROCESS_SCRIPT} ${SPEC_DIR}/firework-v2-openapi.json
+
+#################
+## FIREWORK V3 ##
+#################
 
 rm ${SPEC_DIR}/firework-v3-*
-curl --location https://api.flare.io/firework/docs/firework/v3/swagger.json |jq > ${SPEC_DIR}/firework-v3-swagger.json
-openapi-generator generate -g openapi -i ${SPEC_DIR}/firework-v3-swagger.json -o ${SPEC_DIR}
+
+curl --location https://api.flare.io/firework/docs/firework/v3/swagger.json | jq > ${SPEC_DIR}/firework-v3-swagger.json
+
+openapi-generator \
+    generate \
+        -g openapi \
+        -i ${SPEC_DIR}/firework-v3-swagger.json \
+        -o ${SPEC_DIR}
+
 mv ${SPEC_DIR}/openapi.json ${SPEC_DIR}/firework-v3-openapi.json
+${OPENAPI_POST_PROCESS_SCRIPT} ${SPEC_DIR}/firework-v3-openapi.json
