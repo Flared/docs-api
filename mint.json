@@ -131,10 +131,17 @@
       ]
     },
     {
+      "group": "Introduction",
+      "pages": [
+        "api-reference/introduction/getting-started",
+        "api-reference/introduction/authentication"
+      ]
+    },
+    {
       "group": "Guides",
       "pages": [
-        "api-reference/guides/getting-started",
-        "api-reference/guides/authentication"
+        "api-reference/guides/credentials-export-domain",
+        "api-reference/guides/search"
       ]
     },
     {
