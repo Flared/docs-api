@@ -56,15 +56,15 @@
     {
       "group": "Introduction",
       "pages": [
-        "api-reference/introduction/getting-started",
-        "api-reference/introduction/authentication"
+        "introduction/getting-started",
+        "introduction/authentication"
       ]
     },
     {
       "group": "Guides",
       "pages": [
-        "api-reference/guides/credentials-export-domain",
-        "api-reference/guides/search"
+        "guides/credentials-export-domain",
+        "guides/search"
       ]
     },
     {
