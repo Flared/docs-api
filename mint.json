@@ -77,7 +77,8 @@
       "group": "Guides",
       "pages": [
         "guides/credentials-export-domain",
-        "guides/search"
+        "guides/tenant-events",
+        "guides/global-search"
       ]
     },
     {
