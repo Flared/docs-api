@@ -10,3 +10,7 @@ api-generate-pages:
 api-generate-all:
 	./scripts/api-generate-openapi
 	./scripts/api-generate-pages
+
+.PHONY: boken-links
+broken-links:
+	mintlify broken-links
