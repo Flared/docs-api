@@ -52,6 +52,18 @@
       "url": "https://research.flare.io/"
     }
   ],
+  "primaryTab": {
+    "name": "Guides"
+  },
+  "tabs": [
+    {
+      "name": "Endpoints",
+      "url": "api-reference"
+    }
+  ],
+  "search": {
+    "location": "side"
+  },
   "navigation": [
     {
       "group": "Introduction",
