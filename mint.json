@@ -58,7 +58,7 @@
       "pages": [
         "introduction/getting-started",
         "introduction/authentication",
-        "introduction/rate-limiting"
+        "introduction/rate-limits"
       ]
     },
     {
