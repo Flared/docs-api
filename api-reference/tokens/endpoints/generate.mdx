@@ -1,10 +1,34 @@
 ---
-title: 'Generate a token'
+title: 'Generate an API Token'
 api: 'POST https://api.flare.io/tokens/generate'
 authMethod: 'basic'
 ---
 
 
-<ParamField query="tenant_id" type="number">
-  Hello
-</ParamField>
+Tokens are used to interact with the Flare API.
+They can be generated using an API key.
+
+API tokens expire after 1 hour.
+
+API tokens are associated with a tenant.
+You may use the `tenant_id` parameter of the endpoint to configure which tenant you want to authenticate to.
+
+For more information about authentication, see the [API Authentication Guide](/introduction/authentication/).
+
+<ResponseExample>
+
+```json Response Schema
+{
+  "refresh_token_exp": <number (unix timestamp)>,
+  "token": "api-token"
+}
+```
+
+```json Response Example
+{
+  "refresh_token_exp": 1723673997,
+  "token": "i-am-an-example-api-token"
+}
+```
+
+</ResponseExample>

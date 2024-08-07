@@ -3,9 +3,46 @@ title: 'Authentication'
 ---
 
 Flare's API is available at `https://api.flare.io`.
-Requests are authenticated with JSON Web Tokens which can be obtained using an API key.
+Requests are authenticated with **API tokens** which can be obtained using an **API key**.
 
-## Obtaining an API key
+## Authentication Objects and Purpose
+
+<CardGroup cols={1}>
+
+<Card title="API Key" icon="key">
+    Used to generate API tokens. Does not expire.
+</Card>
+
+<Card title="API Token" icon="file-shield">
+    Used to access API endpoints. Expire after 1 hour.
+</Card>
+
+<Card title="Refresh Token" icon="arrows-rotate">
+    Used to obtain new API tokens without the API key.
+</Card>
+
+</CardGroup>
+
+## Authentication Steps
+
+<CardGroup cols={3}>
+
+<Card title="Obtain an API Key" icon="square-1">
+    From the profile page.
+</Card>
+
+<Card title="Generate a temporary API Token" icon="square-2">
+    Using the API key.
+</Card>
+
+<Card title="Access API endpoints" icon="square-3">
+    Using the API token.
+</Card>
+
+</CardGroup>
+
+
+### 1 - Obtaining an API key
 
 Users can generate API keys by visiting the [Profile page](https://app.flare.io/#/profile) under the "API Keys" section.
 
@@ -21,5 +58,19 @@ API keys are associated to a user and will have the same permissions as the user
 - If you are an organization administrator, the API key will have organization administrator access.
 
 
-## Obtaining an API token
+### 2 - Obtaining an API token
 
+API tokens are obtained using Flare API keys. They can be generated using the [tokens/generate](/api-reference/tokens/endpoints/generate) endpoint.
+
+### 3 - Access an API endpoint
+
+API tokens may then be used using by specifying the `Authentication Bearer <api-token>` header.
+
+You may test API tokens using the [tokens/test](/api-reference/tokens/endpoints/test) endpoint.
+
+Example:
+```bash
+curl --request GET \
+  --url https://api.flare.io/tokens/test \
+  --header 'Bearer: <api-token>'
+```

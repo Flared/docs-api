@@ -1,0 +1,38 @@
+---
+title: 'Test an API Token'
+api: 'GET https://api.flare.io/tokens/test'
+---
+
+This endpoint can be used to test the validity of an API token.
+
+For more information about authentication, see the [API Authentication Guide](/introduction/authentication/).
+
+<ResponseExample>
+
+```json Response Example
+{
+  "api_key_id": 123,
+  "organization_id": 456,
+  "scopes": [
+    "authenticated",
+    "apikey",
+    "firework",
+    "leaksdb",
+  ],
+  "tenant_id": 789,
+  "user_email": "user@example.com",
+  "user_id": 42
+}
+```
+
+</ResponseExample>
+
+## Response Fields
+
+<ResponseField name="tenant_id" type="number" required>
+  The currently authenticated tenant id.
+</ResponseField>
+
+<ResponseField name="api_key_id" type="number" required>
+  The ID of the API Key that was used to generate this tenant.
+</ResponseField>

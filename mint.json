@@ -84,7 +84,8 @@
     {
       "group": "Authentication API",
       "pages": [
-            "api-reference/tokens/endpoints/generate"
+            "api-reference/tokens/endpoints/generate",
+            "api-reference/tokens/endpoints/test"
       ]
     },
     {
