@@ -81,8 +81,8 @@ curl --request GET \
 
 ## Refreshing an API Token
 
-API tokens expire after one hour. After this delay, you must do one of the following:
-- 1. Generate a new token using the `tokens/generate` endpoint: **This works for most use cases** if your program still has access to the Flare API key.
-- 2. Generate a new tokens using the `tokens/refresh` endpoint: This is useful for programs that don't keep the API key.
+API tokens expire after one hour. After this delay, you must generate a new one using one of the following:
+- 1. The `tokens/generate` endpoint: **This works for most use cases** if your program still has access to the Flare API key.
+- 2. The `tokens/refresh` endpoint: This is useful for programs that don't keep the API key.
 
 See the documentation for the [tokens/refresh](/api-reference/tokens/endpoints/refresh) endpoint.
