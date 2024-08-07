@@ -6,12 +6,9 @@ authMethod: 'basic'
 
 
 Tokens are used to interact with the Flare API.
-They can be generated using an API key.
+They can be generated using an API key provided via HTTP basic auth.
 
 API tokens expire after 1 hour.
-
-API tokens are associated with a tenant.
-You may use the `tenant_id` parameter of the endpoint to configure which tenant you want to authenticate to.
 
 For more information about authentication, see the [API Authentication Guide](/introduction/authentication/).
 
@@ -32,3 +29,29 @@ For more information about authentication, see the [API Authentication Guide](/i
 ```
 
 </ResponseExample>
+
+## Basic Auth
+
+The `/generate` endpoint uses HTTP basic auth with the `Authorization` header.
+- The user must be empty.
+- The password must be your API key.
+
+## Parameters
+
+<ParamField body="tenant_id" type="number">
+  The tenant you want to authenticate to.
+  
+  When unspecified, the API token will be generated for your default tenant.
+</ParamField>
+
+## Response Fields
+
+<ResponseField name="token" type="string">
+  The generated API token.
+</ResponseField>
+
+<ResponseField name="refresh_token_exp" type="number">
+  Unix timestamp of the expiration of the refresh token.
+  
+  (The refresh token is returned in cookies).
+</ResponseField>

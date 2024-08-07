@@ -58,7 +58,7 @@ API keys are associated to a user and will have the same permissions as the user
 - If you are an organization administrator, the API key will have organization administrator access.
 
 
-### 2 - Obtaining an API token
+### 2 - Obtaining an API Token
 
 API tokens are obtained using Flare API keys. They can be generated using the [tokens/generate](/api-reference/tokens/endpoints/generate) endpoint.
 
@@ -66,11 +66,23 @@ API tokens are obtained using Flare API keys. They can be generated using the [t
 
 API tokens may then be used using by specifying the `Authentication Bearer <api-token>` header.
 
-You may test API tokens using the [tokens/test](/api-reference/tokens/endpoints/test) endpoint.
+API tokens can be tested using the [tokens/test](/api-reference/tokens/endpoints/test) endpoint.
 
-Example:
-```bash
+<CodeGroup>
+
+```bash cURL example
 curl --request GET \
   --url https://api.flare.io/tokens/test \
   --header 'Bearer: <api-token>'
 ```
+
+</CodeGroup>
+
+
+## Refreshing an API Token
+
+API tokens expire after one hour. After this delay, you must do one of the following:
+- 1. Generate a new token using the `tokens/generate` endpoint: **This works for most use cases** if your program still has access to the Flare API key.
+- 2. Generate a new tokens using the `tokens/refresh` endpoint: This is useful for programs that don't keep the API key.
+
+See the documentation for the [tokens/refresh](/api-reference/tokens/endpoints/refresh) endpoint.
