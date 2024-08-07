@@ -82,6 +82,12 @@
       ]
     },
     {
+      "group": "Authentication API",
+      "pages": [
+            "api-reference/tokens/endpoints/generate"
+      ]
+    },
+    {
       "group": "Leaked Credentials API",
       "pages": [
         {

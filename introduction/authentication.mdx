@@ -2,7 +2,24 @@
 title: 'Authentication'
 ---
 
+Flare's API is available at `https://api.flare.io`.
+Requests are authenticated with JSON Web Tokens which can be obtained using an API key.
 
-## API Keys
+## Obtaining an API key
 
-todo...
+Users can generate API keys by visiting the [Profile page](https://app.flare.io/#/profile) under the "API Keys" section.
+
+<Frame
+  caption="Sidebar -> Configure -> Profile -> API Keys (bottom)"
+  className="flex justify-center"
+>
+  <img width="70%" src="/images/introduction/authentication/api-key-create.png" />
+</Frame>
+
+API keys are associated to a user and will have the same permissions as the user that generated them:
+- If you can access a tenant, the API key will have access to that tenant.
+- If you are an organization administrator, the API key will have organization administrator access.
+
+
+## Obtaining an API token
+
