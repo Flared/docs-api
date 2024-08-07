@@ -3,10 +3,30 @@ title: 'Rate Limiting'
 ---
 
 
-# 
+# Currently Enforced Rate Limits
+
+API usage exceeding 1 request per second is subject to Flare's API rate limit.
+Rate Limits are enforced **per organization**.
+
+Enforced limits receive a `RATELIMIT_REACHED` error message with the status code 429.
+
+<ResponseExample>
+
+```json Example Rate Limit Response
+{
+  "error": {
+    "code": "RATELIMIT_REACHED"
+    "message": "ratelimit reached"
+}
+```
+
+</ResponseExample>
 
 
 # Page Sizes
 
 There are multiple Flare API endpoints that don't obey to large page size requests.
 Flare APIs can return large documents and this allows ensuring consistent performance.
+
+
+If you request a page size that is not supported by a given API endpoint, this endpoint will instead return the max authorized size.
