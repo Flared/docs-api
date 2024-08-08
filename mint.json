@@ -85,9 +85,14 @@
     {
       "group": "Authentication API",
       "pages": [
-          "api-reference/tokens/endpoints/generate",
-          "api-reference/tokens/endpoints/test",
-          "api-reference/tokens/endpoints/refresh"
+        {
+          "group": "Tokens",
+          "pages": [
+            "api-reference/tokens/endpoints/generate",
+            "api-reference/tokens/endpoints/test",
+            "api-reference/tokens/endpoints/refresh"
+          ]
+        }
       ]
     },
     {
@@ -102,42 +107,107 @@
       ]
     },
     {
-      "group": "Flare v2 API",
+      "group": "Main API",
       "pages": [
         {
           "group": "Identifiers",
           "pages": [
-            "api-reference/v2/endpoints/identifiers/get-assets"
+            "api-reference/v3/endpoints/identifiers/get-identifiers",
+            "api-reference/v2/endpoints/identifiers/post-assets",
+            "api-reference/v2/endpoints/identifiers/put-assets",
+            "api-reference/v3/endpoints/identifiers/get-identifiers-1",
+            "api-reference/v2/endpoints/identifiers/delete-assets",
+
+            "api-reference/v2/endpoints/identifiers/post-assets-toggle"
+          ]
+        },
+        {
+          "group": "Identifier Groups",
+          "pages": [
+            "api-reference/v2/endpoints/identifiers/get-assetsgroups",
+            "api-reference/v2/endpoints/identifiers/post-assetsgroups",
+            "api-reference/v2/endpoints/identifiers/get-assetsgroups-1",
+            "api-reference/v2/endpoints/identifiers/delete-assetsgroups"
+          ]
+        },
+        {
+          "group": "Event Feeds",
+          "pages": [
+            "api-reference/v2/endpoints/me/get-mefeed",
+            "api-reference/v2/endpoints/me/get-mefeedcredentials",
+            "api-reference/v2/endpoints/identifiers/get-assets-feed",
+            "api-reference/v2/endpoints/identifiers/get-assetsgroups-feed"
+          ]
+        },
+        {
+          "group": "Alerts",
+          "pages": [
+            "api-reference/v2/endpoints/identifiers/get-assets-alerts",
+            "api-reference/v2/endpoints/identifiers/post-assets-alerts",
+            "api-reference/v2/endpoints/identifiers/put-assets-alerts",
+            "api-reference/v2/endpoints/identifiers/delete-assets-alerts",
+
+            "api-reference/v2/endpoints/identifiers/get-assetsgroups-alerts",
+            "api-reference/v2/endpoints/identifiers/post-assetsgroups-alerts",
+            "api-reference/v2/endpoints/identifiers/put-assetsgroups-alerts",
+            "api-reference/v2/endpoints/identifiers/delete-assetsgroups-alerts"
+          ]
+        },
+        {
+          "group": "Current User",
+          "pages": [
+            "api-reference/v2/endpoints/me/get-meprofile",
+            "api-reference/v2/endpoints/me/get-metenants",
+            "api-reference/v2/endpoints/me/put-meprofile"
+          ]
+        },
+        {
+          "group": "Organization Members",
+          "pages": [
+            "api-reference/v2/endpoints/organizations/get-organizations-members",
+            "api-reference/v2/endpoints/organizations/post-organizations-members",
+            "api-reference/v2/endpoints/organizations/get-organizations-members-1",
+            "api-reference/v2/endpoints/organizations/put-organizations-members",
+
+            "api-reference/v2/endpoints/organizations/post-organizations-members-enable",
+            "api-reference/v2/endpoints/organizations/post-organizations-members-disable",
+
+            "api-reference/v2/endpoints/organizations/get-organizations-members-tenants",
+
+            "api-reference/v2/endpoints/organizations/post-organizations-members-permissions"
+          ]
+        },
+        {
+          "group": "Reporting",
+          "pages": [
+            "api-reference/v2/endpoints/reporting/get-reportingreports",
+            "api-reference/v2/endpoints/reporting/post-reportingreports",
+            "api-reference/v2/endpoints/reporting/get-reportingreports-1",
+            "api-reference/v2/endpoints/reporting/patch-reportingreports",
+            "api-reference/v2/endpoints/reporting/delete-reportingreports",
+            "api-reference/v2/endpoints/reporting/post-reportingreports-archive",
+            "api-reference/v2/endpoints/reporting/get-reportingreports-download"
           ]
         },
         {
           "group": "Search",
           "pages": [
-            "api-reference/v2/endpoints/search/get-search"
+            "api-reference/v2/endpoints/search/get-search",
+            "api-reference/v2/endpoints/search/post-search"
           ]
-        }
-      ]
-    },
-    {
-      "group": "Flare v3 API",
-      "pages": [
+        },
         {
-          "group": "Identifiers",
+          "group": "Tenants",
           "pages": [
-            "api-reference/v3/endpoints/identifiers/get-identifiers-1"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "Flare v4 API",
-      "pages": [
-        {
-          "group": "Plants",
-          "pages": [
-            "api-reference/v4/endpoints/get-plants",
-            "api-reference/v4/endpoints/post-plants",
-            "api-reference/v4/endpoints/delete-plants"
+            "api-reference/v2/endpoints/organizations/get-organizations-tenants",
+            "api-reference/v2/endpoints/organizations/post-organizations-tenants",
+            "api-reference/v2/endpoints/tenants/get-tenants",
+            "api-reference/v2/endpoints/tenants/put-tenants",
+            "api-reference/v2/endpoints/tenants/post-tenants-archive",
+
+            "api-reference/v2/endpoints/tenants/get-tenants-users",
+            "api-reference/v2/endpoints/tenants/post-tenants-users",
+            "api-reference/v2/endpoints/tenants/delete-tenants-users"
           ]
         }
       ]
