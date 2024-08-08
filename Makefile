@@ -14,3 +14,7 @@ api-generate-all:
 .PHONY: boken-links
 broken-links:
 	mintlify broken-links
+
+.PHONY: lint
+lint: broken-links
+	./scripts/lintlify.py
