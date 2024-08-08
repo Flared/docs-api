@@ -17,6 +17,22 @@ It returns a payload that is identical to the [tokens/generate](/api-reference/t
 
 <CodeGroup>
 
+```bash cURL
+# Fetch initial token and save refresh
+# token to my-cookies.jar
+curl \
+    --request POST \
+    --user ":<api-key>" \
+    --cookie-jar "my-cookies.jar" \
+    https://api.flare.io/tokens/generate
+
+# Refresh using the cookie jar.
+curl \
+    --request POST \
+    --cookie "my-cookies.jar" \
+    https://api.flare.io/tokens/refresh
+```
+
 ```python Python
 import requests
 from requests.auth import HTTPBasicAuth
