@@ -1,0 +1,37 @@
+---
+title: 'Errors'
+---
+
+Flare APIs return a common error format for HTTP 4XX error codes.
+
+<ResponseExample>
+
+```json Example Rate Limit Response
+{
+  "error": {
+    "code": "RATELIMIT_REACHED"
+    "message": "ratelimit reached"
+}
+```
+
+</ResponseExample>
+
+## Error Fields
+
+<ResponseField name="code" type="string">
+  The code of the errors.
+  
+  These are stable and could be used programatically to detect and handle the error type.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Friendly message for the error.
+  
+  This is meant to be displayed to users.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Extra information about the error.
+  
+  This field may be absent and changes for each API endpoint and error code.
+</ResponseField>
