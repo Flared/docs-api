@@ -16,5 +16,15 @@ broken-links:
 	mintlify broken-links
 
 .PHONY: lint
-lint: broken-links
-	./scripts/lintlify.py
+lint: broken-links venv
+	venv/bin/python scripts/lintlify.py
+
+venv: requirements.txt
+	rm -rf venv
+	python3 -m venv venv
+	venv/bin/pip install -r requirements.txt
+
+
+.PHONY: clean
+clean:
+	rm -rf venv
