@@ -3,6 +3,7 @@
 import json
 import sys
 
+
 def main() -> None:
     if len(sys.argv) != 2:
         raise Exception("Please pass only one path as the argument")
@@ -24,6 +25,7 @@ def main() -> None:
                 indent=4,
             )
         )
+
 
 if __name__ == "__main__":
     main()
