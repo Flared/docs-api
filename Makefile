@@ -17,7 +17,7 @@ api-generate-all:
 
 .PHONY: boken-links
 broken-links:
-	mintlify broken-links
+	cd docs && mintlify broken-links
 
 .PHONY: lint
 lint: broken-links venv mypy
