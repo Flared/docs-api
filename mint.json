@@ -89,8 +89,7 @@
           "group": "Tokens",
           "pages": [
             "api-reference/tokens/endpoints/generate",
-            "api-reference/tokens/endpoints/test",
-            "api-reference/tokens/endpoints/refresh"
+            "api-reference/tokens/endpoints/test"
           ]
         }
       ]

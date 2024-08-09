@@ -17,10 +17,6 @@ Requests are authenticated with **API tokens** which can be obtained using an **
     Used to access API endpoints. Expire after 1 hour.
 </Card>
 
-<Card title="Refresh Token" icon="arrows-rotate">
-    Used to obtain new API tokens without the API key.
-</Card>
-
 </CardGroup>
 
 ## Authentication Steps
@@ -81,12 +77,3 @@ curl --request GET \
 ```
 
 </CodeGroup>
-
-
-## Refreshing an API Token
-
-API tokens expire after one hour. After this delay, you must generate a new one using one of the following:
-- 1. The `tokens/generate` endpoint: **This works for most use cases** if your program still has access to the Flare API key.
-- 2. The `tokens/refresh` endpoint: This is useful for programs that don't keep the API key.
-
-See the documentation for the [tokens/refresh](/api-reference/tokens/endpoints/refresh) endpoint.
