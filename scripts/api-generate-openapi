@@ -7,7 +7,7 @@ ROOT=$(
     cd "$(dirname "${BASH_SOURCE[0]}")"/../
     pwd -P
 )
-SPEC_DIR="${ROOT}/api-reference/spec"
+SPEC_DIR="${ROOT}/docs/api-reference/spec"
 
 OPENAPI_POST_PROCESS_SCRIPT="${ROOT}/scripts/openapi-post-process.py"
 

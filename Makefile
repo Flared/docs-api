@@ -1,3 +1,7 @@
+.PHONY: run
+run:
+	cd docs && mintlify dev
+
 .PHONY: api-generate-openapi
 api-generate-openapi:
 	./scripts/api-generate-openapi

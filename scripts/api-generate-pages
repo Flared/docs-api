@@ -7,7 +7,7 @@ ROOT=$(
     cd "$(dirname "${BASH_SOURCE[0]}")"/../
     pwd -P
 )
-SPEC_DIR="${ROOT}/api-reference/spec"
+SPEC_DIR="${ROOT}/docs/api-reference/spec"
 
 npx @mintlify/scraping@latest openapi-file --outDir ${ROOT}/api-reference/v2/endpoints ${SPEC_DIR}/firework-v2-openapi.json
 npx @mintlify/scraping@latest openapi-file --outDir ${ROOT}/api-reference/v3/endpoints ${SPEC_DIR}/firework-v3-openapi.json
