@@ -19,9 +19,12 @@ api-generate-all:
 broken-links:
 	cd docs && mintlify broken-links
 
+.PHONY: lintlify
+lintlify: venv
+	venv/bin/python -m lintlify.main
+
 .PHONY: lint
-lint: broken-links venv mypy
-	venv/bin/python scripts/lintlify.py
+lint: broken-links venv mypy lintlify
 
 .PHONY: format
 format: venv
@@ -30,6 +33,7 @@ format: venv
 .PHONY: mypy
 mypy:
 	venv/bin/mypy --strict scripts/*.py
+	venv/bin/mypy --strict --ignore-missing-imports -p lintlify
 
 venv: requirements.txt
 	rm -rf venv
