@@ -63,31 +63,45 @@ class FrontmatterOpenapi:
             )
         raise Exception(f"Unknown api frontmatter format: {api_raw}")
 
+    def to_str(self) -> str:
+        return " ".join(
+            [
+                self.file or "",
+                self.method,
+                self.path,
+            ]
+        ).strip()
+
 
 def lint_frontmatter_file_openapi(
     *,
     lint_context: LintContext,
     mdx_file: mdx.MdxFile,
 ) -> None:
-    openapi_property = FrontmatterOpenapi.from_raw(
+    property = FrontmatterOpenapi.from_raw(
         mdx_file.post.metadata["openapi"],
     )
 
-    for openapi_file in lint_context.openapi_files:
-        if (
-            openapi_property.file
-            and openapi_property.file != openapi_file.frontmatter_name
-        ):
+    for reference_file in lint_context.openapi_files:
+        if property.file and property.file != reference_file.frontmatter_name:
             continue
 
-        if openapi_property.path in openapi_file.paths:
-            if not openapi_property.file:
-                # TODO: add the file...
-                pass
+        if property.path in reference_file.paths:
+            if not property.file:
+                mdx_file.set_property(
+                    name="openapi",
+                    value=FrontmatterOpenapi(
+                        file=reference_file.frontmatter_name,
+                        method=property.method,
+                        path=property.path,
+                    ).to_str(),
+                )
+                mdx_file.save()
+
             break
     else:
         raise Exception(
-            f"Error in file={mdx_file.fullpath}, could not find OpenAPI path {openapi_property.path}",
+            f"Error in file={mdx_file.fullpath}, could not find OpenAPI path {property.path}",
         )
 
 

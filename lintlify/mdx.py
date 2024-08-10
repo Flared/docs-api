@@ -19,5 +19,18 @@ class MdxFile:
             post=post,
         )
 
+    def set_property(
+        self,
+        *,
+        name: str,
+        value: str,
+    ) -> None:
+        self.post.metadata[name] = value
+
     def save(self) -> None:
-        raise NotImplementedError("oh no")
+        with open(self.fullpath, "w", encoding="utf-8") as f:
+            f.write(
+                frontmatter.dumps(
+                    post=self.post,
+                )
+            )
