@@ -28,7 +28,8 @@ lint: broken-links venv mypy lintlify
 
 .PHONY: format
 format: venv
-	venv/bin/black .
+	venv/bin/ruff check --select I --fix
+	venv/bin/ruff format
 
 .PHONY: mypy
 mypy:

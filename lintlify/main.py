@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
-import typing as t
-import os.path
-import glob
-import frontmatter
-from lintlify import openapi
 import dataclasses
+import glob
+import os.path
+import typing as t
+
+import frontmatter
+
+from lintlify import openapi
+from lintlify.context import LintContext
 
 
 def get_repo_dir() -> str:
@@ -37,11 +40,6 @@ def get_all_mdx_filenames(
         recursive=True,
     ):
         yield filename
-
-
-@dataclasses.dataclass
-class LintContext:
-    openapi_files: list[openapi.OpenApiFile]
 
 
 @dataclasses.dataclass

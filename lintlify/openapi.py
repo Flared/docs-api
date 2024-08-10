@@ -1,10 +1,8 @@
-import typing as t
-
-import os
-import json
-
-import glob
 import dataclasses
+import glob
+import json
+import os
+import typing as t
 
 
 def _get_all_openapi_filenames(*, docs_dir: str) -> t.Iterator[str]:
