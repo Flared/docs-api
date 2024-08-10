@@ -5,9 +5,7 @@ import glob
 import os.path
 import typing as t
 
-import frontmatter
-
-from lintlify import openapi
+from lintlify import mdx, openapi
 from lintlify.context import LintContext
 
 
@@ -66,26 +64,45 @@ class FrontmatterOpenapi:
         raise Exception(f"Unknown api frontmatter format: {api_raw}")
 
 
+def lint_frontmatter_file_openapi(
+    *,
+    lint_context: LintContext,
+    mdx_file: mdx.MdxFile,
+) -> None:
+    openapi_property = FrontmatterOpenapi.from_raw(
+        mdx_file.post.metadata["openapi"],
+    )
+
+    for openapi_file in lint_context.openapi_files:
+        if (
+            openapi_property.file
+            and openapi_property.file != openapi_file.frontmatter_name
+        ):
+            continue
+
+        if openapi_property.path in openapi_file.paths:
+            if not openapi_property.file:
+                # TODO: add the file...
+                pass
+            break
+    else:
+        raise Exception(
+            f"Error in file={mdx_file.fullpath}, could not find OpenAPI path {openapi_property.path}",
+        )
+
+
 def lint_frontmatter_file(
     *,
     lint_context: LintContext,
     filename: str,
 ) -> None:
-    with open(filename, "r", encoding="utf-8") as f:
-        post: frontmatter.Post = frontmatter.loads(f.read())
+    mdx_file = mdx.MdxFile.from_filepath(filename)
 
-        if "openapi" in post.metadata:
-            openapi_property = FrontmatterOpenapi.from_raw(post.metadata["openapi"])
-
-            for openapi_file in lint_context.openapi_files:
-                if openapi_property.path in openapi_file.paths:
-                    break
-            else:
-                raise Exception(
-                    f"Error in file={filename}, could not find OpenAPI path {openapi_property.path}",
-                )
-
-    pass
+    if "openapi" in mdx_file.post.metadata:
+        lint_frontmatter_file_openapi(
+            lint_context=lint_context,
+            mdx_file=mdx_file,
+        )
 
 
 def lint_all_frontmatter(
