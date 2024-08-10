@@ -9,6 +9,6 @@ ROOT=$(
 )
 SPEC_DIR="${ROOT}/docs/api-reference/spec"
 
-npx @mintlify/scraping@latest openapi-file --outDir ${ROOT}/api-reference/v2/endpoints ${SPEC_DIR}/firework-v2-openapi.json
-npx @mintlify/scraping@latest openapi-file --outDir ${ROOT}/api-reference/v3/endpoints ${SPEC_DIR}/firework-v3-openapi.json
-npx @mintlify/scraping@latest openapi-file --outDir ${ROOT}/api-reference/v4/endpoints ${SPEC_DIR}/example-openapi.json
+npx @mintlify/scraping@latest openapi-file --outDir ${ROOT}/docs/api-reference/v2/endpoints ${SPEC_DIR}/firework-v2-openapi.json
+npx @mintlify/scraping@latest openapi-file --outDir ${ROOT}/docs/api-reference/v3/endpoints ${SPEC_DIR}/firework-v3-openapi.json
+npx @mintlify/scraping@latest openapi-file --outDir ${ROOT}/docs/api-reference/v4/endpoints ${SPEC_DIR}/example-openapi.json

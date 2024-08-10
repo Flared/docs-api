@@ -71,7 +71,6 @@ def lint_frontmatter_file(
     lint_context: LintContext,
     filename: str,
 ) -> None:
-    print(f"Linting {filename}...")
     with open(filename, "r", encoding="utf-8") as f:
         post: frontmatter.Post = frontmatter.loads(f.read())
 
