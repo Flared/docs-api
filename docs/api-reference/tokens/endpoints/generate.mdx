@@ -1,7 +1,7 @@
 ---
 title: 'Generate an API Token'
 api: 'POST https://api.flare.io/tokens/generate'
-authMethod: 'basic'
+authMethod: 'none'
 ---
 
 
@@ -30,11 +30,11 @@ For more information about authentication, see the [API Authentication Guide](/i
 
 </ResponseExample>
 
-## Basic Auth
+## Auth Headers
 
-The `/generate` endpoint uses HTTP basic auth with the `Authorization` header.
-- The user must be empty.
-- The password must be your API key.
+<ParamField header="Authorization" type="string" required>
+  Your Flare API key.
+</ParamField>
 
 ## Parameters
 

@@ -98,9 +98,15 @@
       "group": "Leaked Credentials API",
       "pages": [
         {
-          "group": "Endpoints",
+          "group": "Credentials Feed",
           "pages": [
-            "api-reference/leaksdb/endpoints/by-keyword"
+            "api-reference/leaksdb/endpoints/get-credentials"
+          ]
+        },
+        {
+          "group": "Identities",
+          "pages": [
+            "api-reference/leaksdb/endpoints/get-by-keyword"
           ]
         }
       ]
