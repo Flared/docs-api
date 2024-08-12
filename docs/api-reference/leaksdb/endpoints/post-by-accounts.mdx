@@ -4,7 +4,7 @@ api: "POST https://api.flare.io/leaksdb/identities/by_accounts"
 ---
 
 Returns a list of identities with leaked passwords given a list of accounts.
-This endpoint only match exact account match and doesn’t allow wildcard or domain searches.
+This endpoint only matches exact accounts and doesn’t allow wildcard or domain searches.
 This is API is useful when doing batch processing.
 
 The list of account is provided through a JSON payload.
@@ -14,6 +14,112 @@ The accounts list must contain up to 100 values.
 The response is an object with requested account as keys and an identity object as values.
 The identity object contains a list of passwords that might be empty if not passwords were found for this account.
 
+<ResponseExample>
+
+```json Response Example
+{
+    "hello": {
+        "links": {},
+        "name": "hello",
+        "passwords": [
+            {
+                "credential_hash": "43804850e72d054f3648660557330630",
+                "domain": null,
+                "extra": {},
+                "hash": "hello@bosslist.ru",
+                "hash_type": "unknown",
+                "id": 4987562,
+                "imported_at": "2019-06-03T14:20:25.132662+00:00",
+                "source": {
+                    "breached_at": "2019-01-07T21:59:00+00:00",
+                    "description": "In January 2019, a large collection of credential stuffing lists (combinations of email addresses and passwords used to hijack accounts on other services) was discovered being distributed on a popular hacking forum. The data contained almost 2.7 billion records including 773 million unique email addresses alongside passwords those addresses had used on other breached services.",
+                    "description_fr": "En janvier 2019, une grande collection de listes de bourrage d'identifiants (combinaisons d'adresses \u00e9lectroniques et de mots de passe utilis\u00e9s pour prendre contr\u00f4le de comptes sur d'autres services) a \u00e9t\u00e9 diffus\u00e9e sur un forum de piratage populaire. Les donn\u00e9es contenaient pr\u00e8s de 2,7 milliards d'enregistrements, dont 773 millions d'adresses \u00e9lectroniques uniques aux c\u00f4t\u00e9s de mots de passe que ces adresses avaient utilis\u00e9s sur d'autres services ayant subi des br\u00e8ches de donn\u00e9es.",
+                    "hash_description": "plaintext",
+                    "hash_type": "Plaintext",
+                    "id": "collection-1",
+                    "is_alerts_enabled": false,
+                    "leaked_at": "2019-01-07T21:59:00+00:00",
+                    "name": "Collection-1",
+                    "related_urls": [
+                        "https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/"
+                    ],
+                    "url": null
+                },
+                "source_id": "collection-1",
+                "source_params": null
+            }
+        ]
+    },
+    "test@example.com": {
+        "links": {},
+        "name": "test@example.com",
+        "passwords": [
+            {
+                "credential_hash": "360dc75e310b62efc8e19061a6a58ea1",
+                "domain": "example.com",
+                "extra": {},
+                "hash": "shfkfk!",
+                "hash_type": "unknown",
+                "id": 1108602,
+                "imported_at": "2019-06-03T14:20:25.132662+00:00",
+                "source": {
+                    "breached_at": "2019-01-07T21:59:00+00:00",
+                    "description": "In January 2019, a large collection of credential stuffing lists (combinations of email addresses and passwords used to hijack accounts on other services) was discovered being distributed on a popular hacking forum. The data contained almost 2.7 billion records including 773 million unique email addresses alongside passwords those addresses had used on other breached services.",
+                    "description_fr": "En janvier 2019, une grande collection de listes de bourrage d'identifiants (combinaisons d'adresses \u00e9lectroniques et de mots de passe utilis\u00e9s pour prendre contr\u00f4le de comptes sur d'autres services) a \u00e9t\u00e9 diffus\u00e9e sur un forum de piratage populaire. Les donn\u00e9es contenaient pr\u00e8s de 2,7 milliards d'enregistrements, dont 773 millions d'adresses \u00e9lectroniques uniques aux c\u00f4t\u00e9s de mots de passe que ces adresses avaient utilis\u00e9s sur d'autres services ayant subi des br\u00e8ches de donn\u00e9es.",
+                    "hash_description": "plaintext",
+                    "hash_type": "Plaintext",
+                    "id": "collection-1",
+                    "is_alerts_enabled": false,
+                    "leaked_at": "2019-01-07T21:59:00+00:00",
+                    "name": "Collection-1",
+                    "related_urls": [
+                        "https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/"
+                    ],
+                    "url": null
+                },
+                "source_id": "collection-1",
+                "source_params": null
+            },
+            {
+                "credential_hash": "cc3f2d0fd6986abfc77797e2143f3dcf",
+                "domain": "example.com",
+                "extra": {},
+                "hash": "test",
+                "hash_type": "unknown",
+                "id": 1473618,
+                "imported_at": "2019-06-03T14:20:25.132662+00:00",
+                "source": {
+                    "breached_at": "2019-01-07T21:59:00+00:00",
+                    "description": "In January 2019, a large collection of credential stuffing lists (combinations of email addresses and passwords used to hijack accounts on other services) was discovered being distributed on a popular hacking forum. The data contained almost 2.7 billion records including 773 million unique email addresses alongside passwords those addresses had used on other breached services.",
+                    "description_fr": "En janvier 2019, une grande collection de listes de bourrage d'identifiants (combinaisons d'adresses \u00e9lectroniques et de mots de passe utilis\u00e9s pour prendre contr\u00f4le de comptes sur d'autres services) a \u00e9t\u00e9 diffus\u00e9e sur un forum de piratage populaire. Les donn\u00e9es contenaient pr\u00e8s de 2,7 milliards d'enregistrements, dont 773 millions d'adresses \u00e9lectroniques uniques aux c\u00f4t\u00e9s de mots de passe que ces adresses avaient utilis\u00e9s sur d'autres services ayant subi des br\u00e8ches de donn\u00e9es.",
+                    "hash_description": "plaintext",
+                    "hash_type": "Plaintext",
+                    "id": "collection-1",
+                    "is_alerts_enabled": false,
+                    "leaked_at": "2019-01-07T21:59:00+00:00",
+                    "name": "Collection-1",
+                    "related_urls": [
+                        "https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/"
+                    ],
+                    "url": null
+                },
+                "source_id": "collection-1",
+                "source_params": null
+            }
+        ]
+    }
+}
+```
+
+```json Response Schema
+{
+    "<account_1>": [<credentials>],
+    "<account_n>": [<credentials>]
+}
+```
+
+</ResponseExample>
+
 
 ## Paging
 
@@ -22,3 +128,11 @@ Up to 100 passwords are included in each identity object.
 A links attribute is included in each object and may contain a next attribute with an URL that can be followed with a valid Authorization token to get additional results for this specific identity.
 
 ## Body Parameters
+
+<ParamField body="accounts" type="string[]">
+  The list of accounts you want to lookup.
+</ParamField>
+
+## Response Format
+
+The response is an object where the keys is the name of the account, and the value is the first 100 credentials that match.

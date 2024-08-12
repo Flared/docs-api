@@ -113,8 +113,10 @@
         {
           "group": "Identities",
           "pages": [
+            "api-reference/leaksdb/endpoints/get-by-domain",
             "api-reference/leaksdb/endpoints/get-by-keyword",
-            "api-reference/leaksdb/endpoints/post-by-accounts"
+            "api-reference/leaksdb/endpoints/post-by-accounts",
+            "api-reference/leaksdb/endpoints/get-by-password"
           ]
         }
       ]
