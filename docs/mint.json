@@ -104,9 +104,17 @@
           ]
         },
         {
+          "group": "Sources",
+          "pages": [
+            "api-reference/leaksdb/endpoints/get-sources",
+            "api-reference/leaksdb/endpoints/get-source"
+          ]
+        },
+        {
           "group": "Identities",
           "pages": [
-            "api-reference/leaksdb/endpoints/get-by-keyword"
+            "api-reference/leaksdb/endpoints/get-by-keyword",
+            "api-reference/leaksdb/endpoints/post-by-accounts"
           ]
         }
       ]

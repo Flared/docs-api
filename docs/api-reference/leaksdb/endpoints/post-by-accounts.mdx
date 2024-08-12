@@ -1,0 +1,24 @@
+---
+title: "List by Bulk Accounts"
+api: "POST https://api.flare.io/leaksdb/identities/by_accounts"
+---
+
+Returns a list of identities with leaked passwords given a list of accounts.
+This endpoint only match exact account match and doesn’t allow wildcard or domain searches.
+This is API is useful when doing batch processing.
+
+The list of account is provided through a JSON payload.
+An object with an accounts key must contains the list of account names.
+The accounts list must contain up to 100 values.
+
+The response is an object with requested account as keys and an identity object as values.
+The identity object contains a list of passwords that might be empty if not passwords were found for this account.
+
+
+## Paging
+
+Passwords are listed in the order that they were inserted into the database.
+Up to 100 passwords are included in each identity object.
+A links attribute is included in each object and may contain a next attribute with an URL that can be followed with a valid Authorization token to get additional results for this specific identity.
+
+## Body Parameters

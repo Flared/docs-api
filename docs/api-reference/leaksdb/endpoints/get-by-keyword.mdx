@@ -1,0 +1,79 @@
+---
+title: "List by Keyword"
+api: "GET https://api.flare.io/leaksdb/identities/by_keyword/{keyword}"
+---
+
+Returns a list of identities with a matching keyword.
+
+Results are returned in ascending order by id.
+
+<ResponseExample>
+
+```json Response Example
+[
+    {
+        "links": {},
+        "name": "johndoe@john.com",
+        "passwords": [
+            {
+                "credential_hash": "e83ce345e87b6ab1c325b1046a031808",
+                "domain": "john.com",
+                "extra": {},
+                "hash": "johndoe",
+                "hash_type": "unknown",
+                "id": 262028,
+                "imported_at": "2019-06-03T14:20:25.132662+00:00",
+                "source": {
+                    "breached_at": "2019-01-07T21:59:00+00:00",
+                    "description": "In January 2019, a large collection of credential stuffing lists (combinations of email addresses and passwords used to hijack accounts on other services) was discovered being distributed on a popular hacking forum. The data contained almost 2.7 billion records including 773 million unique email addresses alongside passwords those addresses had used on other breached services.",
+                    "description_fr": "En janvier 2019, une grande collection de listes de bourrage d'identifiants (combinaisons d'adresses \u00e9lectroniques et de mots de passe utilis\u00e9s pour prendre contr\u00f4le de comptes sur d'autres services) a \u00e9t\u00e9 diffus\u00e9e sur un forum de piratage populaire. Les donn\u00e9es contenaient pr\u00e8s de 2,7 milliards d'enregistrements, dont 773 millions d'adresses \u00e9lectroniques uniques aux c\u00f4t\u00e9s de mots de passe que ces adresses avaient utilis\u00e9s sur d'autres services ayant subi des br\u00e8ches de donn\u00e9es.",
+                    "hash_description": "plaintext",
+                    "hash_type": "Plaintext",
+                    "id": "collection-1",
+                    "is_alerts_enabled": false,
+                    "leaked_at": "2019-01-07T21:59:00+00:00",
+                    "name": "Collection-1",
+                    "related_urls": [
+                        "https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/"
+                    ],
+                    "url": null
+                },
+                "source_id": "collection-1",
+                "source_params": null
+            }
+        ]
+    }
+]
+```
+
+</ResponseExample>
+
+## Paging
+
+By using the id of the last item from a request as the value for the query parameter `from` of the following request, you will be able to scroll through results.
+When the result contains an empty list, you know that you received all results.
+
+## Wildcards
+
+The keyword may contain a wildcard.
+Wildcards should either be at the start or at the end of your query.
+
+Example keywords:
+- `johndoe*` will match an identity with the name johndoe and any string that follows(e.g. `johndoe@test.com`).
+- `*acme.com` will match any identity that finishes with acme.com (e.g. `myuser@acme.com`).
+- `johndoe` will match either johndoe or JOHNdoe.
+
+## Path Parameters
+
+<ParamField path="keyword" type="string">
+  The keyword to search for.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="size" type="number">
+  Maximum size of the JSON object that will be returned (maximum 10 000).
+</ParamField>
+
+<ParamField query="from" type="number">
+</ParamField>
