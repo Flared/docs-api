@@ -60,6 +60,15 @@ API tokens are obtained using Flare API keys. They can be generated using the
 [tokens/generate <Icon icon="code" size={16} />](/api-reference/tokens/endpoints/generate)
 endpoint.
 
+<CodeGroup>
+```bash cURL example
+curl --request POST \
+  --url https://api.flare.io/tokens/generate \
+  --header 'Authorization: <api-key>'
+```
+
+</CodeGroup>
+
 ### 3 - Access an API endpoint
 
 API tokens may then be used using by specifying the `Authentication Bearer <api-token>` header.
@@ -77,3 +86,38 @@ curl --request GET \
 ```
 
 </CodeGroup>
+
+
+## End-to-End Examples
+
+These are end-to-end examples in various programming languages.
+
+<AccordionGroup>
+
+<Accordion title="Python Example">
+```python
+import requests
+import os
+
+api_key = os.environ.get("FLARE_API_KEY")
+if not api_key:
+    raise Exception("Please provide an API key")
+
+# Use request.Session so that we remember cookies.
+session = requests.Session()
+
+# Generate the API token.
+session.post(
+    "https://api.flare.io/tokens/generate",
+    headers={
+        f"Authorization": api_key,
+    },
+)
+
+# Now we can use our cookies to access the testing endpoint.
+resp = session.get("https://api.flare.io/tokens/test")
+print(resp.json())
+```
+</Accordion>
+
+</AccordionGroup>

@@ -6,11 +6,14 @@ authMethod: 'none'
 
 
 Tokens are used to interact with the Flare API.
-They can be generated using an API key provided via HTTP basic auth.
+They can be generated using an API key provided via the Authorization header.
 
 API tokens expire after 1 hour.
 
-For more information about authentication, see the [API Authentication Guide](/introduction/authentication/).
+The endpoint returns an API token via the response body, but also via cookies which can then be used in future HTTP requests.
+
+For more information about authentication, see the
+[API Authentication Guide <Icon icon="book" size={16} />](/introduction/authentication/).
 
 <ResponseExample>
 
