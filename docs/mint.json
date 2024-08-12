@@ -15,6 +15,9 @@
       "to": "#8594ea"
     }
   },
+  "background": {
+    "style": "gradient"
+  },
   "api": {
     "baseUrl": [
       "http://api.flare.io/"
