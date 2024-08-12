@@ -75,11 +75,9 @@
       ]
     },
     {
-      "group": "Guides",
+      "group": "Guides (more coming soon)",
       "pages": [
-        "guides/credentials-export-domain",
-        "guides/tenant-events",
-        "guides/global-search"
+        "guides/credentials-export-domain"
       ]
     },
     {
