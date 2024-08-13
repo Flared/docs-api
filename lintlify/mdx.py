@@ -1,7 +1,7 @@
 import dataclasses
-import typing as t
-
 import frontmatter
+
+import typing as t
 
 
 @dataclasses.dataclass
