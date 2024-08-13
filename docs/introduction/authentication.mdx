@@ -116,7 +116,7 @@ if not api_key:
     raise Exception("Please provide an API key")
 
 # Generate the API token.
-token = requests.post(
+token: str = requests.post(
     "https://api.flare.io/tokens/generate",
     headers={
         f"Authorization": api_key,
