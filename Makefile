@@ -41,6 +41,10 @@ venv: requirements.txt
 	python3 -m venv venv
 	venv/bin/pip install -r requirements.txt
 
+.PHONY: test
+test: venv
+	PYTHONPATH=. venv/bin/pytest lintlify -vv
+
 .PHONY: clean
 clean:
 	rm -rf venv

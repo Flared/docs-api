@@ -2,6 +2,7 @@ import dataclasses
 
 from lintlify import mdx
 from lintlify.context import LintContext
+from lintlify.error import LintError
 
 import typing as t
 
@@ -43,7 +44,7 @@ def _lint_frontmatter_file_openapi(
     *,
     lint_context: LintContext,
     mdx_file: mdx.MdxFile,
-) -> None:
+) -> t.Iterator[LintError]:
     property = _FrontmatterOpenapi.from_raw(
         mdx_file.post.metadata["openapi"],
     )
@@ -66,8 +67,9 @@ def _lint_frontmatter_file_openapi(
 
             break
     else:
-        raise Exception(
-            f"Error in file={mdx_file.fullpath}, could not find OpenAPI path {property.path}",
+        yield LintError(
+            filename=mdx_file.fullpath,
+            message=f"Could not find OpenAPI path {property.path}",
         )
 
 
@@ -75,11 +77,11 @@ def _lint_frontmatter_file(
     *,
     lint_context: LintContext,
     filename: str,
-) -> None:
+) -> t.Iterator[LintError]:
     mdx_file = mdx.MdxFile.from_filepath(filename)
 
     if "openapi" in mdx_file.post.metadata:
-        _lint_frontmatter_file_openapi(
+        yield from _lint_frontmatter_file_openapi(
             lint_context=lint_context,
             mdx_file=mdx_file,
         )
@@ -88,9 +90,10 @@ def _lint_frontmatter_file(
 def lint_all_frontmatter(
     *,
     lint_context: LintContext,
-) -> None:
+) -> t.Iterator[LintError]:
+    print("Linting frontmatter...")
     for mdx_filename in lint_context.mdx_files:
-        _lint_frontmatter_file(
+        yield from _lint_frontmatter_file(
             filename=mdx_filename,
             lint_context=lint_context,
         )

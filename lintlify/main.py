@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 
 import glob
+import itertools
 import os.path
+import sys
 
 from lintlify import openapi
 from lintlify.context import LintContext
+from lintlify.error import LintError
 from lintlify.linters.code_blocks import lint_all_code_blocks
 from lintlify.linters.frontmatter import lint_all_frontmatter
 
@@ -39,11 +42,20 @@ def get_all_mdx_filenames(
     )
 
 
+def print_error(error: LintError) -> None:
+    print("==============")
+    print(f"ERROR: {error.filename}")
+    print(error.message)
+
+
 def main() -> None:
     docs_dir: str = get_docs_dir()
 
+    has_error: bool = False
+
     # Create the linting context
     lint_context: LintContext = LintContext(
+        repository_root=get_repo_dir(),
         openapi_files=openapi.get_all_openapi_files(
             docs_dir=docs_dir,
         ),
@@ -52,15 +64,19 @@ def main() -> None:
         ),
     )
 
-    print("Linting frontmatter...")
-    lint_all_frontmatter(
-        lint_context=lint_context,
-    )
+    for error in itertools.chain(
+        lint_all_frontmatter(
+            lint_context=lint_context,
+        ),
+        lint_all_code_blocks(
+            lint_context=lint_context,
+        ),
+    ):
+        has_error = True
+        print_error(error)
 
-    print("Linting code blocks...")
-    lint_all_code_blocks(
-        lint_context=lint_context,
-    )
+    if has_error:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
