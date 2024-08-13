@@ -103,19 +103,21 @@ api_key = os.environ.get("FLARE_API_KEY")
 if not api_key:
     raise Exception("Please provide an API key")
 
-# Use request.Session so that we remember cookies.
-session = requests.Session()
-
 # Generate the API token.
-session.post(
+token = requests.post(
     "https://api.flare.io/tokens/generate",
     headers={
         f"Authorization": api_key,
     },
-)
+).json()["token"]
 
-# Now we can use our cookies to access the testing endpoint.
-resp = session.get("https://api.flare.io/tokens/test")
+# Now we can use our token to access the testing endpoint.
+resp = requests.get(
+  "https://api.flare.io/tokens/test",
+  headers={
+    "Authorization": f"Bearer {token}",
+  }
+)
 print(resp.json())
 ```
 </Accordion>
