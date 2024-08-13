@@ -51,9 +51,6 @@ def print_error(error: LintError) -> None:
 def main() -> None:
     docs_dir: str = get_docs_dir()
 
-    has_error: bool = False
-
-    # Create the linting context
     lint_context: LintContext = LintContext(
         repository_root=get_repo_dir(),
         openapi_files=openapi.get_all_openapi_files(
@@ -63,6 +60,8 @@ def main() -> None:
             docs_dir=docs_dir,
         ),
     )
+
+    has_error: bool = False
 
     for error in itertools.chain(
         lint_all_frontmatter(
