@@ -23,7 +23,8 @@
     "style": "gradient"
   },
   "feedback": {
-    "thumbsRating": true
+    "thumbsRating": true,
+    "suggestEdit": true
   },
   "api": {
     "baseUrl": [
