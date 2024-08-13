@@ -22,6 +22,9 @@
   "background": {
     "style": "gradient"
   },
+  "feedback": {
+    "thumbsRating": true
+  },
   "api": {
     "baseUrl": [
       "http://api.flare.io/"
