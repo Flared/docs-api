@@ -234,6 +234,7 @@
     }
   ],
   "footerSocials": {
-    "linkedin": "https://www.linkedin.com/company/flare-io"
+    "linkedin": "https://www.linkedin.com/company/flare-io",
+    "github": "https://github.com/flared"
   }
 }
