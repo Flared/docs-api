@@ -83,7 +83,8 @@
         "introduction/getting-started",
         "introduction/authentication",
         "introduction/rate-limits",
-        "introduction/errors"
+        "introduction/errors",
+        "introduction/paging"
       ]
     },
     {
