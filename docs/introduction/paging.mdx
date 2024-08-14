@@ -1,0 +1,113 @@
+---
+title: 'Paging'
+---
+
+Some Flare APIs use a common pattern for paging results.
+This pattern pairs the `from` request parameter to the `next` response field.
+
+## Using `from` and `next` paging
+
+<Steps>
+
+<Step title="Frist Request">
+    Perform the first request without specifying `from`.
+    This indicates that you want the first page of results.
+</Step>
+
+<Step title="Subsequent Requests">
+    Use the `next` response field from your last response as the
+    value for your next request's `from` parameter.
+    This indicates that you want the next page of results.
+
+    If `next` is missing from the last response (or is `null`), this means that you viewed all pages.
+
+    <Note>
+      Empty pages (no results) does not mean you viewed all pages.
+      Some filters (like ignored events) will cause empty pages.
+      This means that you should still request the next page even after receiving an empty page.
+    </Note>
+
+</Step>
+
+</Steps>
+
+
+## The `from` Request Parameter
+
+<ParamField query="next" type="string">
+    Used to indicate where to resume paging.
+
+    Should be empty on the first request.
+</ParamField>
+
+## The `next` Response field
+
+<ResponseField name="next" type="string">
+    The value that should be included in the next request's `from` parameter.
+
+    Most of the time, this is an opaque string.
+    
+    The value of the `next` response field can be saved for long periods of time,
+    for example if you want to export all results for a given search and then resume
+    to fetch new results the next day.
+</ResponseField>
+
+## End-to-End Examples
+
+
+<AccordionGroup>
+
+<Accordion title="Python Example">
+```python
+import requests
+import os
+import time
+
+api_key = os.environ.get("FLARE_API_KEY")
+if not api_key:
+    raise Exception("Please provide an API key")
+
+# Generate the API token.
+token = requests.post(
+    "https://api.flare.io/tokens/generate",
+    headers={
+        f"Authorization": api_key,
+    },
+).json()["token"]
+
+from_: str | None = None
+fetched_pages: int = 0
+
+while True:
+    # Rate limiting.
+    time.sleep(1)
+    
+    params: dict = {}
+    if from_:
+        params["from"] = from_
+
+    # Fetch the next page
+    resp = requests.get(
+        f"https://api.flare.io/leaksdb/v2/sources",
+        headers={
+            "Authorization": f"Bearer {token}",
+        },
+        params=params,
+    )
+    resp.raise_for_status()
+
+    fetched_pages += 1
+    print(f"Fetched {fetched_pages} pages...")
+
+    next_page = resp.json().get("next")
+    if not next_page:
+        print("The last value for 'next' was", from_)
+        break
+    else:
+        print(f"Next page will be from {next_page}")
+        from_ = next_page
+```
+</Accordion>
+
+
+</AccordionGroup>
