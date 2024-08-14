@@ -16,11 +16,15 @@ This guide details a typical search use case and provides an example for how to 
 
 ## Parameters
 
+To achieve the desired results, the following parameters will be used:
+
 | Parameter | Value | Justification |
 | --------- | ----- | ------------- |
+| query | fraud | The keyword we are looking for. |
 | lite | true | Quickly browse results, but not necessarily export the full content. |
 | types[] | chat_message | Retrieve only the chat_message events. |
 | order | asc | Retrieve results in ascending order so that we can resume fetching in the future. |
+| sort_by | searchable | Sort results in the order that they have been added to Flare's database. |
 
 
 ## Paging
@@ -29,12 +33,12 @@ The search endpoint uses parameters that are very similar to but do not exactly 
 [Flares standard paging pattern <Icon icon="book" size={16} />](/introduction/paging).
 
 Differences:
+- The `next` response field is instead named `search_after`.
 - The `from` request parameter is instead named `search_after`.
-- The `next` response field is instead named `cursor`.
 
 Other than the naming difference, the function is the same:
-- Use the last response's `cursor` response field as the value of the next request's `search_after` request parameter.
-- Stop when `search_after` is empty.
+- Use the last response's `search_after` field as the value for the following request's `search_after` parameter.
+- Stop when the returned `search_after` is empty.
 
 ## End-to-End Examples
 
