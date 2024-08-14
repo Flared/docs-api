@@ -34,8 +34,8 @@ The search endpoint uses parameters that are very similar to but do not exactly 
 [Flares standard paging pattern <Icon icon="book" size={16} />](/introduction/paging).
 
 Differences:
-- The `next` response field is instead named `search_after`.
-- The `from` request parameter is instead named `search_after`.
+- The `next` *response field* is instead named `search_after`.
+- The `from` *request parameter* is instead named `search_after`.
 
 Other than the naming difference, the function is the same:
 - Use the last response's `search_after` field as the value for the following request's `search_after` parameter.
