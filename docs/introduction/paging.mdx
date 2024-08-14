@@ -99,6 +99,7 @@ while True:
     fetched_pages += 1
     print(f"Fetched {fetched_pages} pages...")
 
+    # Stop if there is no "next" value.
     next_page = resp.json().get("next")
     if not next_page:
         print("The last value for 'next' was", from_)
