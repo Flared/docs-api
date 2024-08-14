@@ -90,6 +90,7 @@
     {
       "group": "Guides (more coming soon)",
       "pages": [
+        "guides/global-search",
         "guides/credentials-export-domain"
       ]
     },
