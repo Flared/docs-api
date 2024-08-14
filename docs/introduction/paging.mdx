@@ -19,6 +19,8 @@ This pattern pairs the `from` request parameter to the `next` response field.
     value for your next request's `from` parameter.
     This indicates that you want the next page of results.
 
+    All parameters other than `from` must remain the same as the original request.
+
     If `next` is missing from the last response (or is `null`), this means that you viewed all pages.
 
     <Note>
