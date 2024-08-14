@@ -21,7 +21,7 @@ To achieve the desired results, the following parameters will be used:
 | Parameter | Value | Justification |
 | --------- | ----- | ------------- |
 | query | fraud | The keyword we are looking for. |
-| lite | true | Quickly browse results, but not necessarily export the full content. |
+| lite | true | Quickly browse results, but don't ask for the full content. |
 | types[] | chat_message | Retrieve only the chat_message events. |
 | order | asc | Retrieve results in ascending order so that we can resume fetching in the future. |
 | times | `<from_date>@` | Replace `<from_date>` with a timestamp that corresponds to 6 hours ago and don't set anything after the `@` so that we can fetch all results until the current time. |
@@ -31,7 +31,7 @@ To achieve the desired results, the following parameters will be used:
 ## Paging
 
 The search endpoint uses parameters that are very similar to but do not exactly match the
-[Flares standard paging pattern <Icon icon="book" size={16} />](/introduction/paging).
+[Flare standard paging pattern <Icon icon="book" size={16} />](/introduction/paging).
 
 Differences:
 - The `next` *response field* is instead named `search_after`.
