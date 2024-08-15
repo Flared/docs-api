@@ -32,7 +32,10 @@ api_key = os.environ.get("FLARE_API_KEY")
 if not api_key:
     raise Exception("Please provide an API key")
 
-client = FlareApiClient(api_key=api_key)
+client = FlareApiClient(
+    api_key=api_key,
+    tenant_id=None,  # Use my default tenant.
+)
 
 # We don't need to generate an API token manually.
 # We can already call this endpoing and the library
