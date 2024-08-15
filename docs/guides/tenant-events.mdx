@@ -38,24 +38,19 @@ However, it is important that future requests use the same parameters for everyt
 
 <AccordionGroup>
 
-<Accordion title="Python Example">
+<Accordion title="Python SDK Example">
 ```python
 import os
-import requests
 import time
+
+from flareio import FlareApiClient
 
 
 api_key: str | None = os.environ.get("FLARE_API_KEY")
 if not api_key:
     raise Exception("Please provide an API key")
 
-# Generate the API token.
-token: str = requests.post(
-    "https://api.flare.io/tokens/generate",
-    headers={
-        "Authorization": api_key,
-    },
-).json()["token"]
+api_client = FlareApiClient(api_key=api_key)
 
 search_after: str | None = None
 fetched_pages: int = 0
@@ -73,11 +68,8 @@ while True:
         params["search_after"] = search_after
 
     # Fetch the next page
-    resp = requests.get(
+    resp = api_client.get(
         "https://api.flare.io/firework/v2/me/feed",
-        headers={
-            "Authorization": f"Bearer {token}",
-        },
         params=params,
     )
     resp.raise_for_status()
