@@ -19,6 +19,4 @@ force-wrap-aliases = true
 combine-as-imports = true
 forced-separate = [
     "typing",
-    "firework",
-    "pyro",
 ]
