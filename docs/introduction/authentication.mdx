@@ -134,4 +134,24 @@ print(resp.json())
 ```
 </Accordion>
 
+<Accordion title="Python SDK">
+```python Python SDK
+import os
+from flareio import FlareApiClient
+
+api_key = os.environ.get("FLARE_API_KEY")
+if not api_key:
+    raise Exception("Please provide an API key")
+
+client = FlareApiClient(api_key=api_key)
+
+# Generate the API token.
+token: str = client.generate_token()
+
+# Now we can use our token to access the testing endpoint.
+resp = client.get("https://api.flare.io/tokens/test")
+print(resp.json())
+```
+</Accordion>
+
 </AccordionGroup>
