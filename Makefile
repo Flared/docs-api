@@ -24,12 +24,16 @@ lintlify: venv
 	venv/bin/python -m lintlify.main
 
 .PHONY: lint
-lint: broken-links venv mypy lintlify
+lint: broken-links venv mypy lintlify format-check
 
 .PHONY: format
 format: venv
 	venv/bin/ruff check --fix
 	venv/bin/ruff format
+
+.PHONY: format-check
+format-check: venv
+	venv/bin/ruff format --check
 
 .PHONY: mypy
 mypy:
