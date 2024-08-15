@@ -1,3 +1,43 @@
 ---
 title: "Python SDK"
 ---
+
+Flare has a Python SDK available on PyPI.
+
+## Links
+
+- [Github Repository](https://github.com/Flared/python-flareio)
+- [PyPI Page](https://pypi.org/project/flareio/)
+
+## Installing
+
+```bash
+pip install flareio
+```
+
+## Basic Usage
+
+The `flareio` package provides the `FlareApiClient` class, which is a simple wrapper around
+[requests](https://pypi.org/project/requests/)
+that automatically manages API authentication and exposes exposes
+`get`, `post`, `put`, and `delete` methods.
+
+
+```python Example
+import os
+
+from flareio import FlareApiClient
+
+
+api_key = os.environ.get("FLARE_API_KEY")
+if not api_key:
+    raise Exception("Please provide an API key")
+
+client = FlareApiClient(api_key=api_key)
+
+# We don't need to generate an API token manually.
+# We can already call this endpoing and the library
+# will automatically authenticate the request for us.
+resp = client.get("https://api.flare.io/tokens/test")
+print(resp.json())
+```

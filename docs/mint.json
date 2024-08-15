@@ -86,6 +86,7 @@
     {
       "group": "Concepts",
       "pages": [
+        "concepts/sdk",
         "concepts/authentication",
         "concepts/rate-limits",
         "concepts/errors",
