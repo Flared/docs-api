@@ -2,7 +2,9 @@
 title: "Python SDK"
 ---
 
-Flare has a Python SDK available on PyPI.
+Flare has a Python SDK available on PyPI. It  is a simple wrapper around
+[requests](https://pypi.org/project/requests/)
+that automatically manages API authentication.
 
 ## Links
 
@@ -17,11 +19,8 @@ pip install flareio
 
 ## Basic Usage
 
-The `flareio` package provides the `FlareApiClient` class, which is a simple wrapper around
-[requests](https://pypi.org/project/requests/)
-that automatically manages API authentication and exposes exposes
-`get`, `post`, `put`, and `delete` methods.
-
+The `flareio` package provides the `FlareApiClient` class, which automatically manages
+authentication and exposes `get`, `post`, `put`, and `delete` methods.
 
 ```python Example
 import os
