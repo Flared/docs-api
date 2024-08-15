@@ -80,11 +80,16 @@
     {
       "group": "Introduction",
       "pages": [
-        "introduction/getting-started",
-        "introduction/authentication",
-        "introduction/rate-limits",
-        "introduction/errors",
-        "introduction/paging"
+        "introduction/getting-started"
+      ]
+    },
+    {
+      "group": "Concepts",
+      "pages": [
+        "concepts/authentication",
+        "concepts/rate-limits",
+        "concepts/errors",
+        "concepts/paging"
       ]
     },
     {
