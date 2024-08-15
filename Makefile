@@ -1,6 +1,6 @@
 .PHONY: run
 run:
-	cd docs && mintlify dev
+	cd docs && npx mintlify dev
 
 .PHONY: api-generate-openapi
 api-generate-openapi:
@@ -17,7 +17,7 @@ api-generate-all:
 
 .PHONY: boken-links
 broken-links:
-	cd docs && mintlify broken-links
+	cd docs && npx mintlify broken-links
 
 .PHONY: lintlify
 lintlify: venv
