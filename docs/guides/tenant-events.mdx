@@ -1,3 +1,104 @@
 ---
 title: 'List Events Within a Tenant'
 ---
+
+Browsing events within a tenant is exposed through the
+[/me/feed <Icon icon="code" size={16} />](/api-reference/v2/endpoints/me/get-mefeed)
+API.
+
+This guide explains how to use the tenant feed API perform a full export
+of all results.
+
+## Parameters
+
+| Parameter | Value | Justification |
+| --------- | ----- | ------------- |
+| lite | false | Retrieve all event fields. This will result in larger response payloads. |
+| types[] | chat_message | Retrieve only the chat_message events. |
+| order | asc | Retrieve results in ascending order so that we can resume fetching in the future. |
+| sort_by | searchable | Sort results in the order that they have been added to Flare's database. |
+
+## Paging
+
+The tenant feed endpoint uses parameters that are very similar to but do not exactly match the
+[Flare standard paging pattern <Icon icon="book" size={16} />](/introduction/paging).
+
+Differences:
+- The `next` *response field* is instead named `search_after`.
+- The `from` *request parameter* is instead named `search_after`.
+
+Other than the naming difference, the function is the same:
+- Use the last response's `search_after` field as the value for the following request's `search_after` parameter.
+- Stop when the returned `search_after` is empty.
+
+## Fetching new results in future executions
+
+It is possible to save the `search_after` in a database and use it to resume fetching new results in the future.
+However, it is important that future requests use the same parameters for everything else but `search_after`. Even the time filter.
+
+
+<AccordionGroup>
+
+<Accordion title="Python Example">
+```python
+import os
+import requests
+import time
+
+
+api_key: str | None = os.environ.get("FLARE_API_KEY")
+if not api_key:
+    raise Exception("Please provide an API key")
+
+# Generate the API token.
+token: str = requests.post(
+    "https://api.flare.io/tokens/generate",
+    headers={
+        "Authorization": api_key,
+    },
+).json()["token"]
+
+search_after: str | None = None
+fetched_pages: int = 0
+
+while True:
+    # Rate limiting.
+    time.sleep(1)
+
+    params: dict = {
+        "lite": "false",
+        "order": "asc",
+        "sort_by": "searchable",
+    }
+    if search_after:
+        params["search_after"] = search_after
+
+    # Fetch the next page
+    resp = requests.get(
+        "https://api.flare.io/firework/v2/me/feed",
+        headers={
+            "Authorization": f"Bearer {token}",
+        },
+        params=params,
+    )
+    resp.raise_for_status()
+    resp_data: dict = resp.json()
+
+    fetched_pages += 1
+    num_results: int = len(resp_data["items"])
+    print(f"Fetched page {fetched_pages} with {num_results} results...")
+
+    # Stop if there is no "search_after" value.
+    next_page: str | None = resp_data.get("search_after")
+    if not next_page:
+        print(
+            f"The last 'next' value was was {search_after}, it can be saved for future reference."
+        )
+        break
+    else:
+        search_after = next_page
+        print(f"Next page resuming from {search_after=}")
+```
+</Accordion>
+
+</AccordionGroup>

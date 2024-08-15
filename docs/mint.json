@@ -91,6 +91,7 @@
       "group": "Guides (more coming soon)",
       "pages": [
         "guides/global-search",
+        "guides/tenant-events",
         "guides/credentials-export-domain"
       ]
     },
