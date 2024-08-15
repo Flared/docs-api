@@ -18,3 +18,12 @@ class LintContext:
             "bin",
             "mypy",
         )
+
+    @property
+    def ruff_path(self) -> str:
+        return os.path.join(
+            self.repository_root,
+            "venv",
+            "bin",
+            "ruff",
+        )

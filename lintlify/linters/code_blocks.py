@@ -64,13 +64,30 @@ def _lint_mdx_file_code_blocks(
         language="python",
     )
 
-    # Run mypy
     for python_block in python_blocks:
+        # Run mypy
         try:
             subprocess.check_output(
                 args=[
                     lint_context.mypy_path,
                     "/dev/stdin",
+                ],
+                input=python_block.body.encode("utf-8"),
+            )
+        except subprocess.CalledProcessError as ex:
+            yield LintError(
+                filename=filename,
+                message=ex.stdout.decode(),
+            )
+
+        # Run ruff
+        try:
+            subprocess.check_output(
+                args=[
+                    lint_context.ruff_path,
+                    "check",
+                    "--stdin-filename",
+                    filename,
                 ],
                 input=python_block.body.encode("utf-8"),
             )

@@ -108,8 +108,9 @@ These are end-to-end examples in various programming languages.
 
 <Accordion title="Python Example">
 ```python
-import requests
 import os
+import requests
+
 
 api_key = os.environ.get("FLARE_API_KEY")
 if not api_key:
@@ -119,16 +120,16 @@ if not api_key:
 token: str = requests.post(
     "https://api.flare.io/tokens/generate",
     headers={
-        f"Authorization": api_key,
+        "Authorization": api_key,
     },
 ).json()["token"]
 
 # Now we can use our token to access the testing endpoint.
 resp = requests.get(
-  "https://api.flare.io/tokens/test",
-  headers={
-    "Authorization": f"Bearer {token}",
-  }
+    "https://api.flare.io/tokens/test",
+    headers={
+        "Authorization": f"Bearer {token}",
+    },
 )
 print(resp.json())
 ```
@@ -137,7 +138,9 @@ print(resp.json())
 <Accordion title="Python SDK">
 ```python Python SDK
 import os
+
 from flareio import FlareApiClient
+
 
 api_key = os.environ.get("FLARE_API_KEY")
 if not api_key:
