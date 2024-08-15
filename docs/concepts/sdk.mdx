@@ -38,7 +38,7 @@ client = FlareApiClient(
 )
 
 # We don't need to generate an API token manually.
-# We can already call this endpoiny and the library
+# We can already call this endpoint and the library
 # will automatically authenticate the request for us.
 resp = client.get("https://api.flare.io/tokens/test")
 print(resp.json())
