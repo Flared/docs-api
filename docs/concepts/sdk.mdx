@@ -22,7 +22,7 @@ pip install flareio
 The `flareio` package provides the `FlareApiClient` class, which automatically manages
 authentication and exposes `get`, `post`, `put`, and `delete` methods.
 
-```python Example
+```python Basic Usage Example
 import os
 
 from flareio import FlareApiClient
@@ -42,4 +42,48 @@ client = FlareApiClient(
 # will automatically authenticate the request for us.
 resp = client.get("/tokens/test")
 print(resp.json())
+```
+
+## Paging Util
+
+The `FlareApiClient` has a `scroll` method that can be used with endpoints that support the
+[Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
+
+```python Automated Paging Example
+import os
+import time
+
+from flareio import FlareApiClient
+
+
+api_key = os.environ.get("FLARE_API_KEY")
+if not api_key:
+    raise Exception("Please provide an API key")
+
+api_client = FlareApiClient(api_key=api_key)
+
+last_from: str | None = None
+fetched_pages: int = 0
+
+for resp in api_client.scroll(
+    method="GET",
+    url="/leaksdb/v2/sources",
+    params={
+        "from": None,
+    },
+):
+    # Rate limiting.
+    time.sleep(1)
+
+    # Get results from the response
+    resp_data = resp.json()
+    items = resp_data.get("items")
+
+    fetched_pages += 1
+    print(f"Fetched page {fetched_pages} ({last_from=}) with {len(items)} items...")
+
+    # Save the last "next" value.
+    last_from = resp_data.get("next") or last_from
+
+print("The last value for 'next' was", last_from)
 ```
