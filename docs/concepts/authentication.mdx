@@ -152,7 +152,7 @@ client = FlareApiClient(api_key=api_key)
 token: str = client.generate_token()
 
 # Now we can use our token to access the testing endpoint.
-resp = client.get("https://api.flare.io/tokens/test")
+resp = client.get("/tokens/test")
 print(resp.json())
 ```
 </Accordion>

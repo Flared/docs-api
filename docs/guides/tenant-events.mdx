@@ -69,7 +69,7 @@ while True:
 
     # Fetch the next page
     resp = api_client.get(
-        "https://api.flare.io/firework/v2/me/feed",
+        "/firework/v2/me/feed",
         params=params,
     )
     resp.raise_for_status()
