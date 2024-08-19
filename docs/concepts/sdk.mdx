@@ -49,7 +49,7 @@ print(resp.json())
 The `FlareApiClient` has a `scroll` method that can be used with endpoints that support the
 [Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
 
-```python Automated Paging Example
+```python Paging Util Example
 import os
 import time
 
@@ -86,4 +86,39 @@ for resp in api_client.scroll(
     last_from = resp_data.get("next") or last_from
 
 print("The last value for 'next' was", last_from)
+```
+
+## Custom Session
+
+The `FlareApiClient` can be initiated with a custom `requests.Session`. This allows, for example,
+to inject custom retry configuration.
+
+
+```python Custom Session
+import requests
+
+from flareio import FlareApiClient
+from requests.adapters import HTTPAdapter
+from urllib3.util import Retry
+
+
+session = requests.Session()
+retries = Retry(
+    total=5,
+    backoff_factor=2,
+    status_forcelist=[429, 502, 503, 504],
+    allowed_methods={"GET", "POST"},
+    backoff_max=15,
+)
+session.mount(
+    "https://",
+    HTTPAdapter(
+        max_retries=retries,
+    ),
+)
+
+api_client = FlareApiClient(
+    api_key="fw_...",
+    session=session,
+)
 ```
