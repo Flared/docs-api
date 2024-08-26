@@ -1,0 +1,29 @@
+---
+title: "Event Source Filters"
+---
+
+The Flare event feeds allow for searching and filtering using a `types` parameter that defines which
+events types should be included in the response.
+
+Flare API endpoints accept either **Base Types** or **Categories** as values.
+
+| Filter | Description |
+| ------ | ----------- |
+| Base Type | Enables a single event type. |
+| Category | Enables a group of base types. |
+
+## Categories
+
+Base Types are divided into categories that correspond to the categories in the Flare platform.
+
+| Category | Contained Types |
+| -------- | --------------- |
+| illicit_networks | forum_content <br /> blog_content <br /> profile <br /> chat_message <br /> ransomleak <br /> infected_devices <br /> financial_data |
+| open_web | paste <br /> social_media <br /> source_code <br /> google <br /> service <br /> buckets |
+| buckets | bucket <br /> bucket_object <br />
+| source_code | stack_exchange <br /> source_code_files <br /> source_code_secret |
+| leaks | leak |
+| domains | domain |
+| forum_content | forum_post <br /> forum_topic |
+| profile | forum_profile <br /> seller |
+| infected_devices | bot <br /> stealer_log |
