@@ -84,7 +84,7 @@
       ]
     },
     {
-      "group": "Concepts",
+      "group": "Base Concepts",
       "pages": [
         "concepts/sdk",
         "concepts/authentication",
