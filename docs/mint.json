@@ -94,6 +94,12 @@
       ]
     },
     {
+      "group": "Advanced",
+      "pages": [
+        "advanced/event-source-filters"
+      ]
+    },
+    {
       "group": "Guides (more coming soon)",
       "pages": [
         "guides/global-search",
