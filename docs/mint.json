@@ -171,6 +171,12 @@
           ]
         },
         {
+          "group": "Events",
+          "pages": [
+            "api-reference/v2/endpoints/activities/get-activities--ai_assistance"
+          ]
+        },
+        {
           "group": "Event Feeds",
           "pages": [
             "api-reference/v2/endpoints/me/get-mefeed",
