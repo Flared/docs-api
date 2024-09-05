@@ -1,7 +1,12 @@
 ---
-title: "List by Domain"
+title: "List by Domain (deprecated)"
 api: "GET https://api.flare.io/leaksdb/identities/by_domain/{domain}"
 ---
+
+<Warning>
+**DEPRECATED:** This endpoint should be replaced by
+[/credentials/by_domain <Icon icon="code" size={16} />](/api-reference/leaksdb/endpoints/get-credentials-by-domain).
+</Warning>
 
 Returns a list of accounts matching the domain provided.
 The format of the domain should include everything after the `@`.
@@ -57,7 +62,7 @@ When the result contains an empty list, you know that you received all results
 ## Path Parameters
 
 <ParamField path="domain" type="string" required>
-  The domain you want to lookup.
+  The domain to look up.
 </ParamField>
 
 ## Query Parameters
