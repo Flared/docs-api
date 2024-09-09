@@ -33,9 +33,6 @@ To achieve the desired results, the following parameters will be used:
 The search endpoint uses parameters that match the
 [Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
 
-- Use the last response's `next` field as the value for the following request's `next` parameter.
-- Stop when the returned `next` is empty.
-
 
 ## Fetching new results in future executions
 
@@ -89,7 +86,7 @@ for resp in api_client.scroll(
     resp_data: dict = resp.json()
 
     fetched_pages += 1
-    num_results: int = len(resp_data.get("items") or [])
+    num_results: int = len(resp_data.get("items"))
     print(f"Fetched page {fetched_pages} with {num_results} results...")
 
     # Save the last "next" value.
