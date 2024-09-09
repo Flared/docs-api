@@ -63,7 +63,7 @@ for resp in api_client.scroll(
     resp_data: dict = resp.json()
 
     fetched_pages += 1
-    num_results: int = len(resp_data["items"])
+    num_results: int = len(resp_data.get("items", []))
     print(f"Fetched page {fetched_pages} with {num_results} results...")
 
     # Save the last "next" value.
