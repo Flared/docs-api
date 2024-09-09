@@ -30,22 +30,14 @@ To achieve the desired results, the following parameters will be used:
 
 ## Paging
 
-The search endpoint uses parameters that are very similar to but do not exactly match the
+The search endpoint uses parameters that match the
 [Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
-
-Differences:
-- The `next` *response field* is instead named `search_after`.
-- The `from` *request parameter* is instead named `search_after`.
-
-Other than the naming difference, the function is the same:
-- Use the last response's `search_after` field as the value for the following request's `search_after` parameter.
-- Stop when the returned `search_after` is empty.
 
 
 ## Fetching new results in future executions
 
-It is possible to save the `search_after` in a database and use it to resume fetching new results in the future.
-However, it is important that future requests use the same parameters for everything else but `search_after`. Even the time filter.
+It is possible to save the `next` in a database and use it to resume fetching new results in the future.
+However, it is important that future requests use the same parameters for everything else but `next`. Even the time filter.
 
 ## End-to-End Examples
 
@@ -72,46 +64,33 @@ from_timestamp: str = (
     datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(hours=1)
 ).isoformat()
 
-search_after: str | None = None
+last_from: str | None = None
 fetched_pages: int = 0
 
-while True:
-    # Rate limiting.
-    time.sleep(1)
-
-    params: dict = {
+for resp in api_client.scroll(
+    method="GET",
+    url="/firework/v2/search/",
+    params={
         "query": "fraud",
         "lite": "true",
         "order": "asc",
         "sort_by": "searchable",
         "types[]": "chat_message",
         "time": f"{from_timestamp}@",
-    }
-    if search_after:
-        params["search_after"] = search_after
+        "from": None,
+    },
+):
+    # Rate limiting.
+    time.sleep(1)
 
-    # Fetch the next page
-    resp = api_client.get(
-        "/firework/v2/search/",
-        params=params,
-    )
-    resp.raise_for_status()
     resp_data: dict = resp.json()
 
     fetched_pages += 1
-    num_results: int = len(resp_data["items"])
+    num_results: int = len(resp_data.get("items"))
     print(f"Fetched page {fetched_pages} with {num_results} results...")
 
-    # Stop if there is no "search_after" value.
-    next_page: str | None = resp_data.get("search_after")
-    if not next_page:
-        print(
-            f"The last 'next' value was was {search_after}, it can be saved for future reference."
-        )
-        break
-    else:
-        search_after = next_page
-        print(f"Next page resuming from {search_after=}")
+    # Save the last "next" value.
+    last_from = resp_data.get("next") or last_from
 ```
 </Accordion>
 
