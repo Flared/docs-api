@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://api.flare.io/firework/v3"
+            "url": "https://firework-api:5000/firework/v3"
         }
     ],
     "security": [
@@ -440,9 +440,9 @@
                         }
                     },
                     {
-                        "description": "The `next` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `next` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
                         "in": "query",
-                        "name": "next",
+                        "name": "from",
                         "schema": {
                             "type": "string"
                         }
@@ -469,7 +469,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, listing, ransomleak, stealer_log, forum_topic, financial_data, chat_message, blog_post, seller, bot, forum_post\n- open_web: bucket_object, social_media, service, source_code_secrets, google, source_code_files, paste, stack_exchange, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, stealer_log, bot, financial_data, forum_post, listing, forum_topic, blog_post, seller, ransomleak, chat_message\n- open_web: google, bucket, social_media, source_code_secrets, bucket_object, service, source_code_files, stack_exchange, paste\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types[]",
@@ -759,9 +759,9 @@
                         }
                     },
                     {
-                        "description": "The `next` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `next` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
                         "in": "query",
-                        "name": "next",
+                        "name": "from",
                         "schema": {
                             "type": "string"
                         }
@@ -788,7 +788,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, listing, ransomleak, stealer_log, forum_topic, financial_data, chat_message, blog_post, seller, bot, forum_post\n- open_web: bucket_object, social_media, service, source_code_secrets, google, source_code_files, paste, stack_exchange, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, stealer_log, bot, financial_data, forum_post, listing, forum_topic, blog_post, seller, ransomleak, chat_message\n- open_web: google, bucket, social_media, source_code_secrets, bucket_object, service, source_code_files, stack_exchange, paste\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types[]",
