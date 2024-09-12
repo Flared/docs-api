@@ -1683,7 +1683,7 @@
                         "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
                         "explode": true,
                         "in": "query",
-                        "name": "fields[]",
+                        "name": "fields",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -1718,9 +1718,9 @@
                         }
                     },
                     {
-                        "description": "The `next` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `next` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
                         "in": "query",
-                        "name": "next",
+                        "name": "from",
                         "schema": {
                             "type": "string"
                         }
@@ -1729,7 +1729,7 @@
                         "description": "User defined tags used to filter search results",
                         "explode": true,
                         "in": "query",
-                        "name": "tags[]",
+                        "name": "tags",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -1747,10 +1747,10 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, listing, ransomleak, stealer_log, forum_topic, financial_data, chat_message, blog_post, seller, bot, forum_post\n- open_web: bucket_object, social_media, service, source_code_secrets, google, source_code_files, paste, stack_exchange, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
-                        "name": "types[]",
+                        "name": "types",
                         "schema": {
                             "enum": [
                                 "attachment",
@@ -1818,7 +1818,7 @@
                         "description": "Type of experimental activities to search through.",
                         "explode": true,
                         "in": "query",
-                        "name": "experimental_types[]",
+                        "name": "experimental_types",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -1845,7 +1845,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "event_actions[]",
+                        "name": "event_actions",
                         "schema": {
                             "enum": [
                                 "default",
@@ -1865,7 +1865,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "risks[]",
+                        "name": "risks",
                         "schema": {
                             "enum": [
                                 "0",
@@ -2002,7 +2002,7 @@
                         "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
                         "explode": true,
                         "in": "query",
-                        "name": "fields[]",
+                        "name": "fields",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -2037,9 +2037,9 @@
                         }
                     },
                     {
-                        "description": "The `next` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `next` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
                         "in": "query",
-                        "name": "next",
+                        "name": "from",
                         "schema": {
                             "type": "string"
                         }
@@ -2048,7 +2048,7 @@
                         "description": "User defined tags used to filter search results",
                         "explode": true,
                         "in": "query",
-                        "name": "tags[]",
+                        "name": "tags",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -2066,10 +2066,10 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, listing, ransomleak, stealer_log, forum_topic, financial_data, chat_message, blog_post, seller, bot, forum_post\n- open_web: bucket_object, social_media, service, source_code_secrets, google, source_code_files, paste, stack_exchange, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
-                        "name": "types[]",
+                        "name": "types",
                         "schema": {
                             "enum": [
                                 "attachment",
@@ -2137,7 +2137,7 @@
                         "description": "Type of experimental activities to search through.",
                         "explode": true,
                         "in": "query",
-                        "name": "experimental_types[]",
+                        "name": "experimental_types",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -2164,7 +2164,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "event_actions[]",
+                        "name": "event_actions",
                         "schema": {
                             "enum": [
                                 "default",
@@ -2184,7 +2184,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "risks[]",
+                        "name": "risks",
                         "schema": {
                             "enum": [
                                 "0",
@@ -2572,7 +2572,7 @@
                         "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
                         "explode": true,
                         "in": "query",
-                        "name": "fields[]",
+                        "name": "fields",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -2607,9 +2607,9 @@
                         }
                     },
                     {
-                        "description": "The `next` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `next` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
                         "in": "query",
-                        "name": "next",
+                        "name": "from",
                         "schema": {
                             "type": "string"
                         }
@@ -2618,7 +2618,7 @@
                         "description": "User defined tags used to filter search results",
                         "explode": true,
                         "in": "query",
-                        "name": "tags[]",
+                        "name": "tags",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -2636,10 +2636,10 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, listing, ransomleak, stealer_log, forum_topic, financial_data, chat_message, blog_post, seller, bot, forum_post\n- open_web: bucket_object, social_media, service, source_code_secrets, google, source_code_files, paste, stack_exchange, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
-                        "name": "types[]",
+                        "name": "types",
                         "schema": {
                             "enum": [
                                 "attachment",
@@ -2707,7 +2707,7 @@
                         "description": "Type of experimental activities to search through.",
                         "explode": true,
                         "in": "query",
-                        "name": "experimental_types[]",
+                        "name": "experimental_types",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -2734,7 +2734,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "event_actions[]",
+                        "name": "event_actions",
                         "schema": {
                             "enum": [
                                 "default",
@@ -2754,7 +2754,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "risks[]",
+                        "name": "risks",
                         "schema": {
                             "enum": [
                                 "0",
@@ -2891,7 +2891,7 @@
                         "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
                         "explode": true,
                         "in": "query",
-                        "name": "fields[]",
+                        "name": "fields",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -2926,9 +2926,9 @@
                         }
                     },
                     {
-                        "description": "The `next` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `next` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
                         "in": "query",
-                        "name": "next",
+                        "name": "from",
                         "schema": {
                             "type": "string"
                         }
@@ -2937,7 +2937,7 @@
                         "description": "User defined tags used to filter search results",
                         "explode": true,
                         "in": "query",
-                        "name": "tags[]",
+                        "name": "tags",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -2955,10 +2955,10 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, listing, ransomleak, stealer_log, forum_topic, financial_data, chat_message, blog_post, seller, bot, forum_post\n- open_web: bucket_object, social_media, service, source_code_secrets, google, source_code_files, paste, stack_exchange, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
-                        "name": "types[]",
+                        "name": "types",
                         "schema": {
                             "enum": [
                                 "attachment",
@@ -3026,7 +3026,7 @@
                         "description": "Type of experimental activities to search through.",
                         "explode": true,
                         "in": "query",
-                        "name": "experimental_types[]",
+                        "name": "experimental_types",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -3053,7 +3053,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "event_actions[]",
+                        "name": "event_actions",
                         "schema": {
                             "enum": [
                                 "default",
@@ -3073,7 +3073,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "risks[]",
+                        "name": "risks",
                         "schema": {
                             "enum": [
                                 "0",
@@ -3288,7 +3288,7 @@
                         "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
                         "explode": true,
                         "in": "query",
-                        "name": "fields[]",
+                        "name": "fields",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -3323,9 +3323,9 @@
                         }
                     },
                     {
-                        "description": "The `next` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `next` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
                         "in": "query",
-                        "name": "next",
+                        "name": "from",
                         "schema": {
                             "type": "string"
                         }
@@ -3334,7 +3334,7 @@
                         "description": "User defined tags used to filter search results",
                         "explode": true,
                         "in": "query",
-                        "name": "tags[]",
+                        "name": "tags",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -3352,10 +3352,10 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, listing, ransomleak, stealer_log, forum_topic, financial_data, chat_message, blog_post, seller, bot, forum_post\n- open_web: bucket_object, social_media, service, source_code_secrets, google, source_code_files, paste, stack_exchange, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
-                        "name": "types[]",
+                        "name": "types",
                         "schema": {
                             "enum": [
                                 "attachment",
@@ -3423,7 +3423,7 @@
                         "description": "Type of experimental activities to search through.",
                         "explode": true,
                         "in": "query",
-                        "name": "experimental_types[]",
+                        "name": "experimental_types",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -3450,7 +3450,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "event_actions[]",
+                        "name": "event_actions",
                         "schema": {
                             "enum": [
                                 "default",
@@ -3470,7 +3470,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "risks[]",
+                        "name": "risks",
                         "schema": {
                             "enum": [
                                 "0",
@@ -3637,6 +3637,266 @@
         "/me/feed": {
             "get": {
                 "operationId": "get_current_user_home_feed_/me/feed",
+                "parameters": [
+                    {
+                        "description": "  The `time` parameter is used to limit results to those found in the provided time span.  \n\n  *Expected format* : from@to  \n\n  *Example value* : 2019-09-03T04:00:00.000Z@2019-09-14T04:00:00.000Z",
+                        "in": "query",
+                        "name": "time",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The `size` parameter is used to limit the number of results returned for the search query.",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 10,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "The `search_after` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `search_after` parameter in your next request with the latest response's `search_after` value to get the next page of results.",
+                        "in": "query",
+                        "name": "search_after",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "in": "query",
+                        "name": "from",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "User defined tags used to filter search results",
+                        "explode": true,
+                        "in": "query",
+                        "name": "tags",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "User defined operator to apply to tags filter",
+                        "in": "query",
+                        "name": "tags_query_operator",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+                        "explode": true,
+                        "in": "query",
+                        "name": "types",
+                        "schema": {
+                            "enum": [
+                                "attachment",
+                                "listing",
+                                "ransomleak",
+                                "forum_post",
+                                "forum_topic",
+                                "forum_profile",
+                                "blog_post",
+                                "seller",
+                                "paste",
+                                "leak",
+                                "chat_message",
+                                "chat_message/telegram",
+                                "domain",
+                                "bot",
+                                "stealer_log",
+                                "infected_devices",
+                                "driller",
+                                "driller_forum_topic",
+                                "driller_forum_post",
+                                "driller_profile",
+                                "cc",
+                                "ccbin",
+                                "financial_data",
+                                "leaked_data",
+                                "leaked_file",
+                                "document",
+                                "account",
+                                "actor",
+                                "forum_content",
+                                "blog_content",
+                                "profile",
+                                "illicit_networks",
+                                "open_web",
+                                "domains",
+                                "leaks",
+                                "social_media_account",
+                                "social_media_profile",
+                                "social_media_post",
+                                "social_media",
+                                "source_code",
+                                "source_code_secrets",
+                                "source_code_files",
+                                "stack_exchange",
+                                "google",
+                                "service",
+                                "driller_host",
+                                "buckets",
+                                "bucket",
+                                "bucket_object",
+                                "whois",
+                                "ad",
+                                "ads",
+                                "experimental"
+                            ],
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "Type of experimental activities to search through.",
+                        "explode": true,
+                        "in": "query",
+                        "name": "experimental_types",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "event_action",
+                        "schema": {
+                            "enum": [
+                                "default",
+                                "ignored",
+                                "remediated",
+                                "risk_score_edited",
+                                "exclude_ignored",
+                                "ignored_or_remediated"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "explode": true,
+                        "in": "query",
+                        "name": "event_actions",
+                        "schema": {
+                            "enum": [
+                                "default",
+                                "ignored",
+                                "remediated",
+                                "risk_score_edited",
+                                "exclude_ignored",
+                                "ignored_or_remediated"
+                            ],
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "explode": true,
+                        "in": "query",
+                        "name": "risks",
+                        "schema": {
+                            "enum": [
+                                "0",
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5"
+                            ],
+                            "items": {
+                                "type": "integer"
+                            },
+                            "type": "array"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "schema": {
+                            "default": "desc",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "sort_by",
+                        "schema": {
+                            "default": "created",
+                            "enum": [
+                                "created",
+                                "indexed",
+                                "updated",
+                                "alertable-materialized",
+                                "materialized",
+                                "searchable"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "use_global_policies",
+                        "schema": {
+                            "default": true,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "The time zone used to compute the statistics.",
+                        "in": "query",
+                        "name": "time_zone",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Query used to filter results. Search query uses the [Lucene query](https://www.elastic.co/guide/en/elasticsearch/reference/6.x/query-dsl-query-string-query.html#query-string-syntax) syntax.",
+                        "in": "query",
+                        "name": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "has_modified_risk_score",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "has_notes",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -3655,6 +3915,266 @@
             },
             "post": {
                 "operationId": "post_current_user_home_feed_/me/feed",
+                "parameters": [
+                    {
+                        "description": "  The `time` parameter is used to limit results to those found in the provided time span.  \n\n  *Expected format* : from@to  \n\n  *Example value* : 2019-09-03T04:00:00.000Z@2019-09-14T04:00:00.000Z",
+                        "in": "query",
+                        "name": "time",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The `size` parameter is used to limit the number of results returned for the search query.",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 10,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "The `search_after` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `search_after` parameter in your next request with the latest response's `search_after` value to get the next page of results.",
+                        "in": "query",
+                        "name": "search_after",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "in": "query",
+                        "name": "from",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "User defined tags used to filter search results",
+                        "explode": true,
+                        "in": "query",
+                        "name": "tags",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "User defined operator to apply to tags filter",
+                        "in": "query",
+                        "name": "tags_query_operator",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+                        "explode": true,
+                        "in": "query",
+                        "name": "types",
+                        "schema": {
+                            "enum": [
+                                "attachment",
+                                "listing",
+                                "ransomleak",
+                                "forum_post",
+                                "forum_topic",
+                                "forum_profile",
+                                "blog_post",
+                                "seller",
+                                "paste",
+                                "leak",
+                                "chat_message",
+                                "chat_message/telegram",
+                                "domain",
+                                "bot",
+                                "stealer_log",
+                                "infected_devices",
+                                "driller",
+                                "driller_forum_topic",
+                                "driller_forum_post",
+                                "driller_profile",
+                                "cc",
+                                "ccbin",
+                                "financial_data",
+                                "leaked_data",
+                                "leaked_file",
+                                "document",
+                                "account",
+                                "actor",
+                                "forum_content",
+                                "blog_content",
+                                "profile",
+                                "illicit_networks",
+                                "open_web",
+                                "domains",
+                                "leaks",
+                                "social_media_account",
+                                "social_media_profile",
+                                "social_media_post",
+                                "social_media",
+                                "source_code",
+                                "source_code_secrets",
+                                "source_code_files",
+                                "stack_exchange",
+                                "google",
+                                "service",
+                                "driller_host",
+                                "buckets",
+                                "bucket",
+                                "bucket_object",
+                                "whois",
+                                "ad",
+                                "ads",
+                                "experimental"
+                            ],
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "description": "Type of experimental activities to search through.",
+                        "explode": true,
+                        "in": "query",
+                        "name": "experimental_types",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "event_action",
+                        "schema": {
+                            "enum": [
+                                "default",
+                                "ignored",
+                                "remediated",
+                                "risk_score_edited",
+                                "exclude_ignored",
+                                "ignored_or_remediated"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "explode": true,
+                        "in": "query",
+                        "name": "event_actions",
+                        "schema": {
+                            "enum": [
+                                "default",
+                                "ignored",
+                                "remediated",
+                                "risk_score_edited",
+                                "exclude_ignored",
+                                "ignored_or_remediated"
+                            ],
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "explode": true,
+                        "in": "query",
+                        "name": "risks",
+                        "schema": {
+                            "enum": [
+                                "0",
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5"
+                            ],
+                            "items": {
+                                "type": "integer"
+                            },
+                            "type": "array"
+                        },
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "schema": {
+                            "default": "desc",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "sort_by",
+                        "schema": {
+                            "default": "created",
+                            "enum": [
+                                "created",
+                                "indexed",
+                                "updated",
+                                "alertable-materialized",
+                                "materialized",
+                                "searchable"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "use_global_policies",
+                        "schema": {
+                            "default": true,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "The time zone used to compute the statistics.",
+                        "in": "query",
+                        "name": "time_zone",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Query used to filter results. Search query uses the [Lucene query](https://www.elastic.co/guide/en/elasticsearch/reference/6.x/query-dsl-query-string-query.html#query-string-syntax) syntax.",
+                        "in": "query",
+                        "name": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "has_modified_risk_score",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "has_notes",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -4400,7 +4920,7 @@
                         "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
                         "explode": true,
                         "in": "query",
-                        "name": "fields[]",
+                        "name": "fields",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -4435,9 +4955,9 @@
                         }
                     },
                     {
-                        "description": "The `next` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `next` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
                         "in": "query",
-                        "name": "next",
+                        "name": "from",
                         "schema": {
                             "type": "string"
                         }
@@ -4446,7 +4966,7 @@
                         "description": "User defined tags used to filter search results",
                         "explode": true,
                         "in": "query",
-                        "name": "tags[]",
+                        "name": "tags",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -4464,10 +4984,10 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, listing, ransomleak, stealer_log, forum_topic, financial_data, chat_message, blog_post, seller, bot, forum_post\n- open_web: bucket_object, social_media, service, source_code_secrets, google, source_code_files, paste, stack_exchange, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
-                        "name": "types[]",
+                        "name": "types",
                         "schema": {
                             "enum": [
                                 "attachment",
@@ -4535,7 +5055,7 @@
                         "description": "Type of experimental activities to search through.",
                         "explode": true,
                         "in": "query",
-                        "name": "experimental_types[]",
+                        "name": "experimental_types",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -4562,7 +5082,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "event_actions[]",
+                        "name": "event_actions",
                         "schema": {
                             "enum": [
                                 "default",
@@ -4582,7 +5102,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "risks[]",
+                        "name": "risks",
                         "schema": {
                             "enum": [
                                 "0",
@@ -4701,7 +5221,7 @@
                         "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
                         "explode": true,
                         "in": "query",
-                        "name": "fields[]",
+                        "name": "fields",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -4736,9 +5256,9 @@
                         }
                     },
                     {
-                        "description": "The `next` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `next` parameter in your next request with the latest response's `next` value to get the next page of results.",
+                        "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results.",
                         "in": "query",
-                        "name": "next",
+                        "name": "from",
                         "schema": {
                             "type": "string"
                         }
@@ -4747,7 +5267,7 @@
                         "description": "User defined tags used to filter search results",
                         "explode": true,
                         "in": "query",
-                        "name": "tags[]",
+                        "name": "tags",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -4765,10 +5285,10 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, listing, ransomleak, stealer_log, forum_topic, financial_data, chat_message, blog_post, seller, bot, forum_post\n- open_web: bucket_object, social_media, service, source_code_secrets, google, source_code_files, paste, stack_exchange, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
-                        "name": "types[]",
+                        "name": "types",
                         "schema": {
                             "enum": [
                                 "attachment",
@@ -4836,7 +5356,7 @@
                         "description": "Type of experimental activities to search through.",
                         "explode": true,
                         "in": "query",
-                        "name": "experimental_types[]",
+                        "name": "experimental_types",
                         "schema": {
                             "items": {
                                 "type": "string"
@@ -4863,7 +5383,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "event_actions[]",
+                        "name": "event_actions",
                         "schema": {
                             "enum": [
                                 "default",
@@ -4883,7 +5403,7 @@
                     {
                         "explode": true,
                         "in": "query",
-                        "name": "risks[]",
+                        "name": "risks",
                         "schema": {
                             "enum": [
                                 "0",
@@ -5916,41 +6436,41 @@
                                 "profile",
                                 "ads",
                                 "infected_devices",
-                                "forum_profile",
+                                "seller",
                                 "listing",
+                                "bot",
                                 "ransomleak",
-                                "stealer_log",
+                                "forum_profile",
+                                "forum_post",
                                 "forum_topic",
                                 "financial_data",
-                                "chat_message",
                                 "blog_post",
-                                "seller",
-                                "bot",
-                                "forum_post",
-                                "bucket_object",
-                                "social_media",
-                                "service",
-                                "source_code_secrets",
-                                "google",
-                                "source_code_files",
+                                "chat_message",
+                                "stealer_log",
                                 "paste",
-                                "stack_exchange",
                                 "bucket",
+                                "google",
+                                "bucket_object",
+                                "source_code_files",
+                                "social_media",
+                                "stack_exchange",
+                                "source_code_secrets",
+                                "service",
                                 "bucket",
                                 "bucket_object",
-                                "source_code_secrets",
-                                "stack_exchange",
                                 "source_code_files",
+                                "stack_exchange",
+                                "source_code_secrets",
                                 "leak",
                                 "domain",
-                                "forum_topic",
                                 "forum_post",
+                                "forum_topic",
                                 "blog_post",
                                 "seller",
                                 "forum_profile",
                                 "ad",
-                                "stealer_log",
-                                "bot"
+                                "bot",
+                                "stealer_log"
                             ],
                             "example": "illicit_networks",
                             "type": "string"
@@ -7512,6 +8032,46 @@
             "V3_Refs": {
                 "properties": {
                     "asset_uuid": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "count_by_risk_score": {
+                "properties": {
+                    "risk_score": {
+                        "type": "integer"
+                    },
+                    "values": {
+                        "items": {
+                            "$ref": "#/components/schemas/date_count"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "count_by_search_type_and_risk_score": {
+                "properties": {
+                    "search_type": {
+                        "type": "string"
+                    },
+                    "values": {
+                        "items": {
+                            "$ref": "#/components/schemas/count_by_risk_score"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "date_count": {
+                "properties": {
+                    "count": {
+                        "type": "integer"
+                    },
+                    "date": {
+                        "format": "date-time",
                         "type": "string"
                     }
                 },
