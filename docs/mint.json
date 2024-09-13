@@ -94,6 +94,12 @@
       ]
     },
     {
+      "group": "SDK",
+      "pages": [
+        "sdk/python"
+      ]
+    },
+    {
       "group": "Advanced",
       "pages": [
         "advanced/event-source-filters"
