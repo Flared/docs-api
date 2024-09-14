@@ -72,6 +72,8 @@ client := flareio.NewApiClient(
 The `ApiClient` has an `IterGet` method that returns an iterator that implements the
 [Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
 
+The paging utils leverage Go iterators which require Go version >= 1.23.
+
 ```go Paging Util Example
 package main
 
