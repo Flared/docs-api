@@ -54,3 +54,15 @@ func main() {
 	}
 }
 ```
+
+## Specifying a Tenant Id
+
+The Api Client can be configured to use a specific tenant id using the `WithTenantId` option.
+
+```go
+client := flareio.NewApiClient(
+    os.Getenv("FLARE_API_KEY"),
+    flareio.WithTenantId(42),
+)
+// ...
+```
