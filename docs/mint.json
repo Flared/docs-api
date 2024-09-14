@@ -86,7 +86,6 @@
     {
       "group": "Base Concepts",
       "pages": [
-        "concepts/sdk",
         "concepts/authentication",
         "concepts/rate-limits",
         "concepts/errors",
@@ -96,7 +95,8 @@
     {
       "group": "SDK",
       "pages": [
-        "sdk/python"
+        "sdk/python",
+        "sdk/go"
       ]
     },
     {
