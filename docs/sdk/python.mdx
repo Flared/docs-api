@@ -28,19 +28,13 @@ import os
 from flareio import FlareApiClient
 
 
-api_key = os.environ.get("FLARE_API_KEY")
-if not api_key:
-    raise Exception("Please provide an API key")
-
 client = FlareApiClient(
-    api_key=api_key,
+    api_key=os.environ.get("FLARE_API_KEY", ""),
     tenant_id=None,  # Use my default tenant.
 )
 
-# We don't need to generate an API token manually.
-# We can already call this endpoint and the library
-# will automatically authenticate the request for us.
 resp = client.get("/tokens/test")
+
 print(resp.json())
 ```
 
