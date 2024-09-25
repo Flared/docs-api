@@ -3,17 +3,26 @@ run:
 	cd docs && npx mintlify dev
 
 .PHONY: api-generate-openapi
-api-generate-openapi:
-	./scripts/api-generate-openapi
+api-generate-openapi: venv
+	bash -c '\
+		source venv/bin/activate \
+		&& ./scripts/api-generate-openapi \
+	'
 
 .PHONY: api-generate-pages
-api-generate-pages:
-	./scripts/api-generate-pages
+api-generate-pages: venv
+	bash -c '\
+		source venv/bin/activate \
+		&& ./scripts/api-generate-pages \
+	'
 
 .PHONY: api-generate-all
-api-generate-all:
-	./scripts/api-generate-openapi
-	./scripts/api-generate-pages
+api-generate-all: venv
+	bash -c '\
+		source venv/bin/activate \
+		&& ./scripts/api-generate-openapi \
+		&& ./scripts/api-generate-pages \
+	'
 
 .PHONY: boken-links
 broken-links:
