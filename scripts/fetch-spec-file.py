@@ -42,7 +42,11 @@ def main() -> None:
 
     url: str = get_apispec_url(version)
 
-    print(FlareApiClient(api_key=os.environ["FLARE_API_KEY"]).get(url).text)
+    api_client: FlareApiClient = FlareApiClient(
+        api_key=os.environ["FLARE_API_KEY"],
+    )
+
+    print(api_client.get(url).text)
 
 
 if __name__ == "__main__":
