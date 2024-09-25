@@ -10,6 +10,7 @@ ROOT=$(
 SPEC_DIR="${ROOT}/docs/api-reference/spec"
 
 OPENAPI_POST_PROCESS_SCRIPT="${ROOT}/scripts/openapi-post-process.py"
+FETCH_SPEC_FILE_SCRIPT="${ROOT}/scripts/fetch-spec-file.py"
 
 #################
 ## FIREWORK V2 ##
@@ -17,7 +18,7 @@ OPENAPI_POST_PROCESS_SCRIPT="${ROOT}/scripts/openapi-post-process.py"
 
 rm ${SPEC_DIR}/firework-v2-*
 
-curl --location https://api.flare.io/firework/docs/firework/v2/swagger.json | jq > ${SPEC_DIR}/firework-v2-swagger.json
+${FETCH_SPEC_FILE_SCRIPT} v2 | jq > ${SPEC_DIR}/firework-v2-swagger.json
 
 openapi-generator \
     generate \
@@ -34,7 +35,7 @@ ${OPENAPI_POST_PROCESS_SCRIPT} ${SPEC_DIR}/firework-v2-openapi.json
 
 rm ${SPEC_DIR}/firework-v3-*
 
-curl --location https://api.flare.io/firework/docs/firework/v3/swagger.json | jq > ${SPEC_DIR}/firework-v3-swagger.json
+${FETCH_SPEC_FILE_SCRIPT} v3 | jq > ${SPEC_DIR}/firework-v3-swagger.json
 
 openapi-generator \
     generate \
