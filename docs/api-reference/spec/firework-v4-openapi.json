@@ -1,0 +1,1271 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Firework API",
+    "version": "v4"
+  },
+  "servers": [
+    {
+      "url": "https://api.flare.io/firework/v4/"
+    }
+  ],
+  "paths": {
+    "/healthz/": {
+      "get": {
+        "summary": "Is Api Up And Running",
+        "operationId": "is_api_up_and_running_healthz__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "title": "Response Is Api Up And Running Healthz  Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/tenant/_search": {
+      "post": {
+        "summary": "Current Tenant Feed",
+        "operationId": "current_tenant_feed_events_tenant__search_post",
+        "parameters": [
+          {
+            "name": "X-Auth-Request-User",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-User-Id"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Scopes",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User-Scopes"
+            }
+          },
+          {
+            "name": "X-Auth-Request-Tenant-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-Tenant-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResults_FeedItem_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/global/_search": {
+      "post": {
+        "summary": "Global Search",
+        "operationId": "global_search_events_global__search_post",
+        "parameters": [
+          {
+            "name": "X-Auth-Request-User",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-User-Id"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Scopes",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User-Scopes"
+            }
+          },
+          {
+            "name": "X-Auth-Request-Tenant-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-Tenant-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlobalSearchRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResults_FeedItem_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/identifiers/{identifier_id}/_search": {
+      "post": {
+        "summary": "Identifier Feed",
+        "operationId": "identifier_feed_events_identifiers__identifier_id___search_post",
+        "parameters": [
+          {
+            "name": "identifier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Identifier Id"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-User-Id"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Scopes",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User-Scopes"
+            }
+          },
+          {
+            "name": "X-Auth-Request-Tenant-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-Tenant-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResults_FeedItem_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/identifier_groups/{identifier_group_id}/_search": {
+      "post": {
+        "summary": "Identifier Group Feed",
+        "operationId": "identifier_group_feed_events_identifier_groups__identifier_group_id___search_post",
+        "parameters": [
+          {
+            "name": "identifier_group_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Identifier Group Id"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-User-Id"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Scopes",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User-Scopes"
+            }
+          },
+          {
+            "name": "X-Auth-Request-Tenant-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-Tenant-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResults_FeedItem_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActivityModelName": {
+        "type": "string",
+        "enum": [
+          "account",
+          "actor",
+          "ad",
+          "attachment",
+          "blog_post",
+          "bot",
+          "bucket",
+          "bucket_object",
+          "cc",
+          "cc_bases",
+          "chat_message",
+          "document",
+          "domain",
+          "driller",
+          "driller_forum_post",
+          "driller_forum_topic",
+          "driller_google",
+          "driller_profile",
+          "driller_source_code",
+          "event",
+          "experimental",
+          "forum_category",
+          "forum_post",
+          "forum_profile",
+          "forum_topic",
+          "host",
+          "leak",
+          "leaked_data",
+          "leaked_file",
+          "listing",
+          "lookalike",
+          "paste",
+          "ransomleak",
+          "ransomleak_file_listing",
+          "score_event",
+          "seller",
+          "service",
+          "social_media_account",
+          "social_media_post",
+          "social_media_profile",
+          "stealer_log",
+          "attachment/telegram",
+          "chat_message/telegram",
+          "threat_flow_summary",
+          "whois"
+        ],
+        "title": "ActivityModelName"
+      },
+      "AzureTenantQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_tenant"
+            ],
+            "const": "azure_tenant",
+            "title": "Type"
+          },
+          "tenant_id": {
+            "type": "string",
+            "title": "Tenant Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "tenant_id"
+        ],
+        "title": "AzureTenantQuery"
+      },
+      "BinQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "bin"
+            ],
+            "const": "bin",
+            "title": "Type"
+          },
+          "bin": {
+            "type": "string",
+            "title": "Bin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "bin"
+        ],
+        "title": "BinQuery"
+      },
+      "BrandQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "brand"
+            ],
+            "const": "brand",
+            "title": "Type"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "title": "BrandQuery"
+      },
+      "CredentialsQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "credentials"
+            ],
+            "const": "credentials",
+            "title": "Type"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "username",
+          "password"
+        ],
+        "title": "CredentialsQuery"
+      },
+      "DomainQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "domain"
+            ],
+            "const": "domain",
+            "title": "Type"
+          },
+          "fqdn": {
+            "type": "string",
+            "title": "Fqdn"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "fqdn"
+        ],
+        "title": "DomainQuery"
+      },
+      "EmailQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "email"
+            ],
+            "const": "email",
+            "title": "Type"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "email"
+        ],
+        "title": "EmailQuery"
+      },
+      "FeedDateFilter": {
+        "properties": {
+          "gt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gt"
+          },
+          "gte": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gte"
+          },
+          "lt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lt"
+          },
+          "lte": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lte"
+          }
+        },
+        "type": "object",
+        "title": "FeedDateFilter"
+      },
+      "FeedFilters": {
+        "properties": {
+          "severity": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Severity"
+              },
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Severity"
+                },
+                "type": "array"
+              }
+            ],
+            "title": "Severity"
+          },
+          "type": {
+            "items": {
+              "$ref": "#/components/schemas/SearchType"
+            },
+            "type": "array",
+            "title": "Type"
+          },
+          "estimated_created_at": {
+            "$ref": "#/components/schemas/FeedDateFilter"
+          }
+        },
+        "type": "object",
+        "title": "FeedFilters"
+      },
+      "FeedItem": {
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/FeedItemMetadata"
+          },
+          "tenant_metadata": {
+            "$ref": "#/components/schemas/FeedItemTenantMetadata"
+          },
+          "identifiers": {
+            "items": {
+              "$ref": "#/components/schemas/FeedItemIdentifier"
+            },
+            "type": "array",
+            "title": "Identifiers"
+          },
+          "highlights": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Highlights"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata"
+        ],
+        "title": "FeedItem"
+      },
+      "FeedItemIdentifier": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "FeedItemIdentifier"
+      },
+      "FeedItemMetadata": {
+        "properties": {
+          "uid": {
+            "type": "string",
+            "title": "Uid"
+          },
+          "estimated_created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Estimated Created At"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ActivityModelName"
+          },
+          "severity": {
+            "$ref": "#/components/schemas/Severity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "uid",
+          "estimated_created_at",
+          "type",
+          "severity"
+        ],
+        "title": "FeedItemMetadata"
+      },
+      "FeedItemTenantMetadata": {
+        "properties": {
+          "severity": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FeedItemTenantMetadataSeverity"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags"
+          }
+        },
+        "type": "object",
+        "title": "FeedItemTenantMetadata"
+      },
+      "FeedItemTenantMetadataSeverity": {
+        "properties": {
+          "original": {
+            "$ref": "#/components/schemas/Severity"
+          },
+          "override": {
+            "$ref": "#/components/schemas/Severity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "original",
+          "override"
+        ],
+        "title": "FeedItemTenantMetadataSeverity"
+      },
+      "FeedOrder": {
+        "type": "string",
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "title": "FeedOrder"
+      },
+      "FeedRequestBody": {
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/GithubRepositoryQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UsernameQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DomainQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/BrandQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/NameQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/KeywordQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/QueryStringQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/BinQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/IpQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/EmailQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SecretQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CredentialsQuery"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AzureTenantQuery"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "type",
+                  "mapping": {
+                    "azure_tenant": "#/components/schemas/AzureTenantQuery",
+                    "bin": "#/components/schemas/BinQuery",
+                    "brand": "#/components/schemas/BrandQuery",
+                    "credentials": "#/components/schemas/CredentialsQuery",
+                    "domain": "#/components/schemas/DomainQuery",
+                    "email": "#/components/schemas/EmailQuery",
+                    "github_repository": "#/components/schemas/GithubRepositoryQuery",
+                    "ip": "#/components/schemas/IpQuery",
+                    "keyword": "#/components/schemas/KeywordQuery",
+                    "name": "#/components/schemas/NameQuery",
+                    "query_string": "#/components/schemas/QueryStringQuery",
+                    "secret": "#/components/schemas/SecretQuery",
+                    "username": "#/components/schemas/UsernameQuery"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Query"
+          },
+          "filters": {
+            "$ref": "#/components/schemas/FeedFilters"
+          },
+          "order": {
+            "$ref": "#/components/schemas/FeedOrder",
+            "default": "desc"
+          },
+          "from": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "From"
+          },
+          "size": {
+            "type": "integer",
+            "title": "Size",
+            "default": 10
+          }
+        },
+        "type": "object",
+        "title": "FeedRequestBody"
+      },
+      "GithubRepositoryQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "github_repository"
+            ],
+            "const": "github_repository",
+            "title": "Type"
+          },
+          "repo_owner": {
+            "type": "string",
+            "title": "Repo Owner"
+          },
+          "repo_name": {
+            "type": "string",
+            "title": "Repo Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "repo_owner",
+          "repo_name"
+        ],
+        "title": "GithubRepositoryQuery"
+      },
+      "GlobalSearchRequestBody": {
+        "properties": {
+          "query": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/GithubRepositoryQuery"
+              },
+              {
+                "$ref": "#/components/schemas/UsernameQuery"
+              },
+              {
+                "$ref": "#/components/schemas/DomainQuery"
+              },
+              {
+                "$ref": "#/components/schemas/BrandQuery"
+              },
+              {
+                "$ref": "#/components/schemas/NameQuery"
+              },
+              {
+                "$ref": "#/components/schemas/KeywordQuery"
+              },
+              {
+                "$ref": "#/components/schemas/QueryStringQuery"
+              },
+              {
+                "$ref": "#/components/schemas/BinQuery"
+              },
+              {
+                "$ref": "#/components/schemas/IpQuery"
+              },
+              {
+                "$ref": "#/components/schemas/EmailQuery"
+              },
+              {
+                "$ref": "#/components/schemas/SecretQuery"
+              },
+              {
+                "$ref": "#/components/schemas/CredentialsQuery"
+              },
+              {
+                "$ref": "#/components/schemas/AzureTenantQuery"
+              }
+            ],
+            "title": "Query",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "azure_tenant": "#/components/schemas/AzureTenantQuery",
+                "bin": "#/components/schemas/BinQuery",
+                "brand": "#/components/schemas/BrandQuery",
+                "credentials": "#/components/schemas/CredentialsQuery",
+                "domain": "#/components/schemas/DomainQuery",
+                "email": "#/components/schemas/EmailQuery",
+                "github_repository": "#/components/schemas/GithubRepositoryQuery",
+                "ip": "#/components/schemas/IpQuery",
+                "keyword": "#/components/schemas/KeywordQuery",
+                "name": "#/components/schemas/NameQuery",
+                "query_string": "#/components/schemas/QueryStringQuery",
+                "secret": "#/components/schemas/SecretQuery",
+                "username": "#/components/schemas/UsernameQuery"
+              }
+            }
+          },
+          "filters": {
+            "$ref": "#/components/schemas/FeedFilters"
+          },
+          "order": {
+            "$ref": "#/components/schemas/FeedOrder",
+            "default": "desc"
+          },
+          "from": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "From"
+          },
+          "size": {
+            "type": "integer",
+            "title": "Size",
+            "default": 10
+          }
+        },
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "title": "GlobalSearchRequestBody"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "IpQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ip"
+            ],
+            "const": "ip",
+            "title": "Type"
+          },
+          "ip": {
+            "type": "string",
+            "title": "Ip"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "ip"
+        ],
+        "title": "IpQuery"
+      },
+      "KeywordQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "keyword"
+            ],
+            "const": "keyword",
+            "title": "Type"
+          },
+          "keyword": {
+            "type": "string",
+            "title": "Keyword"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "keyword"
+        ],
+        "title": "KeywordQuery"
+      },
+      "NameQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "name"
+            ],
+            "const": "name",
+            "title": "Type"
+          },
+          "first_name": {
+            "type": "string",
+            "title": "First Name"
+          },
+          "last_name": {
+            "type": "string",
+            "title": "Last Name"
+          },
+          "is_strict": {
+            "type": "boolean",
+            "title": "Is Strict"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "first_name",
+          "last_name",
+          "is_strict"
+        ],
+        "title": "NameQuery"
+      },
+      "PaginatedResults_FeedItem_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/FeedItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next"
+        ],
+        "title": "PaginatedResults[FeedItem]"
+      },
+      "QueryStringQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "query_string"
+            ],
+            "const": "query_string",
+            "title": "Type"
+          },
+          "query_string": {
+            "type": "string",
+            "title": "Query String"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "query_string"
+        ],
+        "title": "QueryStringQuery"
+      },
+      "SearchType": {
+        "type": "string",
+        "enum": [
+          "attachment",
+          "listing",
+          "ransomleak",
+          "forum_post",
+          "forum_topic",
+          "forum_profile",
+          "blog_post",
+          "seller",
+          "paste",
+          "leak",
+          "chat_message",
+          "chat_message/telegram",
+          "domain",
+          "bot",
+          "stealer_log",
+          "infected_devices",
+          "driller",
+          "driller_forum_topic",
+          "driller_forum_post",
+          "driller_profile",
+          "cc",
+          "ccbin",
+          "financial_data",
+          "leaked_data",
+          "leaked_file",
+          "document",
+          "account",
+          "actor",
+          "forum_content",
+          "blog_content",
+          "profile",
+          "illicit_networks",
+          "open_web",
+          "domains",
+          "leaks",
+          "social_media_account",
+          "social_media_profile",
+          "social_media_post",
+          "social_media",
+          "source_code",
+          "source_code_secrets",
+          "source_code_files",
+          "stack_exchange",
+          "google",
+          "service",
+          "driller_host",
+          "buckets",
+          "bucket",
+          "bucket_object",
+          "whois",
+          "ad",
+          "ads",
+          "experimental"
+        ],
+        "title": "SearchType"
+      },
+      "SecretQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "secret"
+            ],
+            "const": "secret",
+            "title": "Type"
+          },
+          "secret": {
+            "type": "string",
+            "title": "Secret"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "secret"
+        ],
+        "title": "SecretQuery"
+      },
+      "Severity": {
+        "type": "string",
+        "enum": [
+          "info",
+          "low",
+          "medium",
+          "high",
+          "critical"
+        ],
+        "title": "Severity"
+      },
+      "UsernameQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "username"
+            ],
+            "const": "username",
+            "title": "Type"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "username"
+        ],
+        "title": "UsernameQuery"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

@@ -22,7 +22,7 @@ def get_apispec_url(version: FireworkApiVersion) -> str:
         case FireworkApiVersion.V3:
             return "https://api.flare.io/firework/docs/firework/v3/swagger.json"
         case FireworkApiVersion.V4:
-            return "https://api.flare.io/firework/firework/v4/docs/openapi.json"
+            return "https://api.flare.io/firework/v4/openapi.json"
         case never:
             return assert_never(never)
 

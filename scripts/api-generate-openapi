@@ -16,7 +16,7 @@ FETCH_SPEC_FILE_SCRIPT="${ROOT}/scripts/fetch-spec-file.py"
 ## FIREWORK V2 ##
 #################
 
-rm ${SPEC_DIR}/firework-v2-*
+rm -f ${SPEC_DIR}/firework-v2-*
 
 ${FETCH_SPEC_FILE_SCRIPT} v2 | jq > ${SPEC_DIR}/firework-v2-swagger.json
 
@@ -33,7 +33,7 @@ ${OPENAPI_POST_PROCESS_SCRIPT} ${SPEC_DIR}/firework-v2-openapi.json
 ## FIREWORK V3 ##
 #################
 
-rm ${SPEC_DIR}/firework-v3-*
+rm -f ${SPEC_DIR}/firework-v3-*
 
 ${FETCH_SPEC_FILE_SCRIPT} v3 | jq > ${SPEC_DIR}/firework-v3-swagger.json
 
@@ -45,3 +45,11 @@ openapi-generator \
 
 mv ${SPEC_DIR}/openapi.json ${SPEC_DIR}/firework-v3-openapi.json
 ${OPENAPI_POST_PROCESS_SCRIPT} ${SPEC_DIR}/firework-v3-openapi.json
+
+#################
+## FIREWORK V4 ##
+#################
+
+rm -f ${SPEC_DIR}/firework-v4-*
+
+${FETCH_SPEC_FILE_SCRIPT} v4 | jq > ${SPEC_DIR}/firework-v4-openapi.json
