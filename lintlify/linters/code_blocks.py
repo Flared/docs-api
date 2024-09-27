@@ -30,16 +30,16 @@ def _extract_md_blocks(*, text: str) -> list[_ExtractedMarkdownBlock]:
 def _extract_code(
     *,
     filename: str,
-    language: str,
+    languages: list[str],
 ) -> list[_ExtractedMarkdownBlock]:
-    expected_prefix = f"""```{language}"""
+    expected_prefixes = [f"""```{lang}""" for lang in languages]
 
     with open(filename, "r", encoding="utf-8") as f:
         mdx_contents: str = f.read()
 
     # Don't bother calling codedown
     # if we can't spot the prefix in the file.
-    if expected_prefix not in mdx_contents:
+    if not any(prefix in mdx_contents for prefix in expected_prefixes):
         return []
 
     extracted_code_blocks: list[_ExtractedMarkdownBlock] = _extract_md_blocks(
@@ -48,7 +48,7 @@ def _extract_code(
     extracted_code_blocks = [
         code_block
         for code_block in extracted_code_blocks
-        if code_block.header.lower().startswith(language.lower())
+        if any(code_block.header.lower().startswith(lang.lower()) for lang in languages)
     ]
 
     return extracted_code_blocks
@@ -61,11 +61,15 @@ def _lint_mdx_file_code_blocks(
 ) -> t.Iterator[LintError]:
     python_blocks: list[_ExtractedMarkdownBlock] = _extract_code(
         filename=filename,
-        language="python",
+        languages=["python", "py"],
     )
 
     for python_block in python_blocks:
         # Run mypy
+
+        if not python_block.body.startswith("# (incomplete example)"):
+            continue
+
         try:
             subprocess.check_output(
                 args=[

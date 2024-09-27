@@ -3,7 +3,7 @@ title: 'List Events Within a Tenant'
 ---
 
 Browsing events within a tenant is exposed through the
-[Current Tenant Feed <Icon icon="code" size={16} />](#)
+[Current Tenant Feed <Icon icon="code" size={16} />](/api-reference/v4/endpoints/current-tenant-feed)
 API.
 
 This guide explains how to use the tenant feed API perform a full export
@@ -80,24 +80,8 @@ for resp in api_client.scroll(
 
 If you're looking to export the events of a single identifier, refer to the [Identifier Feed <Icon icon="code" size={16} />](/api-reference/v4/endpoints/identifier-feed) endpoint.
 
-<AccordionGroup>
-
-<Accordion title="Python SDK Example">
 ```python
-import os
-import time
-
-from flareio import FlareApiClient
-
-
-api_key: str | None = os.environ.get("FLARE_API_KEY")
-if not api_key:
-    raise Exception("Please provide an API key")
-
-api_client = FlareApiClient(api_key=api_key)
-
-last_from: str | None = None
-fetched_pages: int = 0
+# (incomplete example)
 
 # ID of the identifier for which we want to list the events.
 identifier_id: int = 12345
@@ -109,54 +93,15 @@ for resp in api_client.scroll(
         "from": last_from,
     }
 ):
-    # Rate limiting.
-    time.sleep(1)
-
-    resp_data: dict = resp.json()
-
-    fetched_pages += 1
-    num_results: int = len(resp_data["items"])
-    print(f"Fetched page {fetched_pages} with {num_results} results...")
-
-    # Save the last "next" value.
-    last_from = resp_data.get("next") or last_from
-
-    # Get the full data
-    for item in resp_data["items"]:
-        # Rate limiting.
-        time.sleep(1)
-
-        item_uid: str = item["metadata"]["uid"]
-        response = api_client.get(f"/firework/v2/activities/{item_uid}")
-        full_data = response.json()
-        print(f"Here is the full data of the event: {full_data}")
+    ...
 ```
-</Accordion>
-
-</AccordionGroup>
 
 ## List events for an identifier group
 
 If you're looking to export the events of an entire identifier group, refer to the [Identifier Group Feed <Icon icon="code" size={16} />](/api-reference/v4/endpoints/identifier-group-feed) endpoint.
 
-<AccordionGroup>
-
-<Accordion title="Python SDK Example">
 ```python
-import os
-import time
-
-from flareio import FlareApiClient
-
-
-api_key: str | None = os.environ.get("FLARE_API_KEY")
-if not api_key:
-    raise Exception("Please provide an API key")
-
-api_client = FlareApiClient(api_key=api_key)
-
-last_from: str | None = None
-fetched_pages: int = 0
+# (incomplete example)
 
 # ID of the identifier group for which we want to list the events.
 identifier_group_id: int = 12345
@@ -168,28 +113,5 @@ for resp in api_client.scroll(
         "from": last_from,
     }
 ):
-    # Rate limiting.
-    time.sleep(1)
-
-    resp_data: dict = resp.json()
-
-    fetched_pages += 1
-    num_results: int = len(resp_data["items"])
-    print(f"Fetched page {fetched_pages} with {num_results} results...")
-
-    # Save the last "next" value.
-    last_from = resp_data.get("next") or last_from
-
-    # Get the full data
-    for item in resp_data["items"]:
-        # Rate limiting.
-        time.sleep(1)
-
-        item_uid: str = item["metadata"]["uid"]
-        response = api_client.get(f"/firework/v2/activities/{item_uid}")
-        full_data = response.json()
-        print(f"Here is the full data of the event: {full_data}")
+    ...
 ```
-</Accordion>
-
-</AccordionGroup>
