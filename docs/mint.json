@@ -186,10 +186,10 @@
         {
           "group": "Event Feeds",
           "pages": [
-            "api-reference/v2/endpoints/me/get-mefeed",
+            "api-reference/v4/endpoints/current-tenant-feed",
             "api-reference/v2/endpoints/me/get-mefeedcredentials",
-            "api-reference/v2/endpoints/identifiers/get-assets-feed",
-            "api-reference/v2/endpoints/identifiers/get-assetsgroups-feed"
+            "api-reference/v4/endpoints/identifier-feed",
+            "api-reference/v4/endpoints/identifier-group-feed"
           ]
         },
         {
