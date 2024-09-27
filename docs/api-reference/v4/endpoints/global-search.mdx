@@ -1,0 +1,257 @@
+---
+title: "Global Search"
+api: "POST https://api.flare.io/firework/v4/events/global/_search"
+---
+
+<ResponseExample>
+
+```json Response Example
+{
+    "items": [
+        {
+            "metadata": {
+                "estimated_created_at": "2019-09-20T16:30:37.589388Z",
+                "type": "listing",
+                "uid": "listing/apollon_market/9861",
+                "severity": "critical"
+            },
+            "tenant_metadata": {
+                "severity": {
+                    "original": "low",
+                    "override": "critical"
+                },
+                "tags": [
+                    "important",
+                ],
+                "notes": "This reason why this is tagged as 'important' is: ..."
+            },
+            "identifiers": [
+                {
+                    "id": 1,
+                    "name": "An identifier"
+                }
+            ],
+            "highlights": {
+                "description": [
+                    "Bank Statement PSD <mark>Template</mark>\r\n\r\nWe promise:\r\n- Your order will be delivered instantly."
+                ],
+                "title": [
+                    "Bank Statement PSD <mark>Template</mark>"
+                ]
+            }
+        }
+    ],
+    "next": "WzE1Njg5OTcwMzc1ODksICJsaXN0aW5nL2Fwb2xsb25fbWFya2V0Lzk4NjEiXQ%3D%3D"
+}
+```
+
+</ResponseExample>
+
+## Paging
+
+This endpoint supports the 
+[Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
+
+## Guides
+
+See the guide for using this endpoint:
+[Search in All of Flare's Events <Icon icon="book" size={16} />](/guides/global-search).
+
+## Body Parameters
+
+<ParamField body="query" type="object">
+  One of the supported queries.
+  <CodeGroup>
+  ```json Domain
+  {
+    "type": "domain",
+    "fqdn": "<string>"
+  }
+  ```
+  ```json Email
+  {
+    "type": "email",
+    "email": "<string>"
+  }
+  ```
+  ```json Keyword
+  {
+    "type": "keyword",
+    "keyword": "<string>"
+  }
+  ```
+  ```json Query String
+  {
+    "type": "query_string",
+    "query_string": "<string>"
+  }
+  ```
+  ```json Username
+  {
+    "type": "username",
+    "username": "<string>"
+  }
+  ```
+  ```json GitHub Repository
+  {
+    "type": "github_repository",
+    "repo_owner": "<string>"
+    "repo_name": "<string>"
+  }
+  ```
+  ```json Brand
+  {
+    "type": "brand",
+    "name": "<string>"
+  }
+  ```
+  ```json Name
+  {
+    "type": "name",
+    "first_name": "<string>"
+    "last_name": "<string>"
+    "is_strict": "<boolean>"
+  }
+  ```
+  ```json CC Bin
+  {
+    "type": "bin",
+    "bin": "<string>"
+  }
+  ```
+  ```json IP
+  {
+    "type": "ip",
+    "ip": "<string>"
+  }
+  ```
+  ```json Credentials
+  {
+    "type": "credentials",
+    "username": "<string>"
+    "password": "<string>"
+  }
+  ```
+  ```json Secret
+  {
+    "type": "secret",
+    "secret": "<string>"
+  }
+  ```
+  ```json Azure Tenant
+  {
+    "type": "azure_tenant",
+    "tenant_id": "<string>"
+  }
+  ```
+  </CodeGroup>
+</ParamField>
+
+<ParamField body="size" type="number" initialValue="1">
+  Limit number of events that will be returned.
+</ParamField>
+
+<ParamField body="from" type="number">
+  The `next` value from the last response.
+</ParamField>
+
+<ParamField body="order" type="string" default="desc">
+  The order in which the results will be returned.
+
+  <Expandable title="valid order values">
+    `asc`
+    `desc`
+  </Expandable>
+</ParamField>
+
+<ParamField body="filters" type="object">
+  <Expandable defaultOpen>
+    <ParamField body="severity" type="string[]">
+      If a string value is specified, results will contain events that have a greater than or equal severity. Otherwise, if an array of severities is specified, results will only contain events that exactly match one of them.
+
+      <Expandable title="valid severity values">
+        `info`
+        `low`
+        `medium`
+        `high`
+        `critical`
+      </Expandable>
+    </ParamField>
+
+    <ParamField body="type" type="string[]">
+      <Expandable title="valid type values">
+        `illicit_networks`
+        `open_web`
+        `leak`
+        `domain`
+        `listing`
+        `forum_content`
+        `blog_content`
+        `blog_post`
+        `profile`
+        `chat_message`
+        `ransomleak`
+        `infected_devices`
+        `financial_data`
+        `bot`
+        `stealer_log`
+        `paste`
+        `social_media`
+        `source_code`
+        `source_code_files`
+        `stack_exchange`
+        `google`
+        `service`
+        `buckets`
+        `bucket`
+        `bucket_object`
+      </Expandable>
+
+      Learn more about [Event Source Filters <Icon icon="book" size={16} />](/advanced/event-source-filters).
+    </ParamField>
+
+    <ParamField body="estimated_created_at" type="object">
+      <Expandable>
+        <ParamField
+          body="gt"
+          type="string"
+          placeholder="Example: 2024-01-01T00:00:00+00:00"
+        >
+          Matches values greater than the specified timestamp.
+
+          Format: ISO-8601
+        </ParamField>
+
+        <ParamField
+          body="gte"
+          type="string"
+          placeholder="Example: 2024-01-01T00:00:00+00:00"
+        >
+          Matches values greater than or equal to the specified timestamp.
+
+          Format: ISO-8601
+        </ParamField>
+
+        <ParamField
+          body="lt"
+          type="string"
+          placeholder="Example: 2024-01-01T00:00:00+00:00"
+        >
+          Matches values lesser than the specified timestamp.
+
+          Format: ISO-8601
+        </ParamField>
+
+        <ParamField
+          body="lte"
+          type="string"
+          placeholder="Example: 2024-01-01T00:00:00+00:00"
+        >
+          Matches values lesser than or equal to the specified timestamp.
+
+          Format: ISO-8601
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
