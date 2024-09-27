@@ -106,7 +106,7 @@
       ]
     },
     {
-      "group": "Guides (more coming soon)",
+      "group": "Guides",
       "pages": [
         "guides/global-search",
         "guides/tenant-events",
