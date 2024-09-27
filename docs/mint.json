@@ -145,7 +145,6 @@
         {
           "group": "Identities",
           "pages": [
-            "api-reference/leaksdb/endpoints/get-by-domain",
             "api-reference/leaksdb/endpoints/get-by-keyword",
             "api-reference/leaksdb/endpoints/post-by-accounts",
             "api-reference/leaksdb/endpoints/get-by-password"
@@ -256,6 +255,25 @@
             "api-reference/v2/endpoints/tenants/get-tenants-users",
             "api-reference/v2/endpoints/tenants/post-tenants-users",
             "api-reference/v2/endpoints/tenants/delete-tenants-users"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Deprecated APIs",
+      "pages": [
+        {
+          "group": "Identities",
+          "pages": [
+            "api-reference/leaksdb/endpoints/get-by-domain"
+          ]
+        },
+        {
+          "group": "Event Feeds",
+          "pages": [
+            "api-reference/v2/endpoints/me/get-mefeed",
+            "api-reference/v2/endpoints/identifiers/get-assets-feed",
+            "api-reference/v2/endpoints/identifiers/get-assetsgroups-feed"
           ]
         }
       ]
