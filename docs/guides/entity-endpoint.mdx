@@ -1,0 +1,52 @@
+---
+title: 'Dynamically Manage Identifier Lifecycle and List Events'
+---
+
+The entity events endpoint allows for automatically creating an identifier and immediately
+listing events related to it.
+
+The newly created identifier will automatically be deleted
+afer 30 days, allowing for simple identifier lifecycle management.
+
+## How it works
+
+<Steps>
+  <Step title="Initial request">
+    On the initial request, the entity endpoint will:
+    - Create an identifier matching the query
+    - Immediately return available results with a `next` token.
+
+    For example, the query ```{ "type": "domain", "domain": "scatterholt.com" }```
+    will automatically create a `domain` identifier monitoring `scatterholt.com`.
+
+    If no subsequent requests are made, the newly created identifier will automatically
+    be deleted after 30 days.
+  </Step>
+
+  <Step title="Subsequent requests">
+    Subsequent requests matching the same query will:
+    - Push the existing identifier's expiry 30 additional days
+    - Return any newly found results.
+
+    Unlike global searches which can only match the data that Flare already has
+    in its shared database, these subsequent requests will benefit from targeted
+    monitoring because Flare will have been actively looking for new results matching
+    the identifier.
+  </Step>
+
+  <Step title="Expiry">
+    If no requests are made for 30 days, the identifier will automatically be generated.
+  </Step>
+</Steps>
+
+## Why it simplifies identifier lifecycle
+
+The entity endpoint removes the need for creating, managing and deleting identifiers from the Flare platform.
+
+Instead of managing identifiers, integrators may:
+- Loop over all entities that they wish to monitor.
+- Call the entity endpoint, which will either create identifiers or push forward the expiry of existing ones.
+- Extract results.
+
+Identifier deletion is unnecessary. If an entity is not requested for 30 days,
+its related identifiers will automatically be deleted.
