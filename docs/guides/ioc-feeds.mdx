@@ -1,0 +1,69 @@
+---
+title: "Intelligence Feeds"
+---
+
+Flare exposes Intelligence Feeds delivered via
+[TAXII 2](https://oasis-open.github.io/cti-documentation/taxii/intro.html)
+at `https://api.flare.io/taxii2/`.
+
+## Authentication
+
+The intelligence feeds use HTTP Basic Auth, which most TAXII clients support:
+- The username should be set to `api-key`.
+- The password should be your Flare API Key.
+
+Obtaining an API key is documented in the
+[Authentication Guide <Icon icon="book" size={16} />](/concepts/authentication).
+
+## Code Examples
+
+Code examples for connecting to the feeds can be found in this Github repository:
+- https://github.com/Flared/ioc-feeds-example
+
+## Python Example
+
+The following example uses `taxii2-client`, which is
+[avaialble on PyPI](https://pypi.org/project/taxii2-client/).
+
+```python
+import datetime
+import os
+
+from taxii2client.v21 import Server
+from taxii2client.v21 import as_pages
+
+
+def main() -> None:
+    server = Server(
+        "https://api.flare.io/taxii2/",
+        user="api-key",
+        password=os.environ["FLARE_API_KEY"],
+    )
+
+    print(server.title)
+
+    api_root = server.api_roots[0]
+
+    start_date: datetime.datetime = datetime.datetime.now() - datetime.timedelta(
+        hours=2
+    )
+
+    # Iterate through the available collections and print new items
+    for collection in api_root.collections:
+        print(collection.title)
+
+        # No pagination request
+        print(collection.get_objects(added_after=start_date))
+
+        # Pagination request.
+        for envelope in as_pages(
+            collection.get_objects,
+            per_request=50,
+            added_after=start_date,
+        ):
+            print(envelope)
+
+
+if __name__ == "__main__":
+    main()
+```

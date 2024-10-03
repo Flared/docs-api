@@ -67,13 +67,14 @@ def _lint_mdx_file_code_blocks(
     for python_block in python_blocks:
         # Run mypy
 
-        if not python_block.body.startswith("# (incomplete example)"):
+        if python_block.body.startswith("\n# (incomplete example)"):
             continue
 
         try:
             subprocess.check_output(
                 args=[
                     lint_context.mypy_path,
+                    "--ignore-missing-imports",
                     "/dev/stdin",
                 ],
                 input=python_block.body.encode("utf-8"),
