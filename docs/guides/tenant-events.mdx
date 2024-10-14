@@ -24,6 +24,50 @@ However, it is important that future requests use **exactly** the same parameter
 For performance reasons, feed results only contain the bear minimum.
 To get the full data, an API call must be made per result to the [Retrieve Event <Icon icon="code" size={16} />](/api-reference/v2/endpoints/activities/get-activities) endpoint.
 
+## List events for a single identifier
+
+If you're looking to export the events of a single identifier, refer to the [List Identifier Events <Icon icon="code" size={16} />](/api-reference/v4/endpoints/identifier-feed) endpoint.
+
+```python
+# (incomplete example)
+
+# ID of the identifier for which we want to list the events.
+identifier_id: int = 12345
+
+for resp in api_client.scroll(
+    method="POST",
+    url=f"/firework/v4/events/identifiers/{identifier_id}/_search",
+    json={
+        "from": last_from,
+    }
+):
+    ...
+```
+
+## List events for an identifier group
+
+If you're looking to export the events of an entire identifier group, refer to the [List Identifier Group's Events <Icon icon="code" size={16} />](/api-reference/v4/endpoints/identifier-group-feed) endpoint.
+
+```python
+# (incomplete example)
+
+# ID of the identifier group for which we want to list the events.
+identifier_group_id: int = 12345
+
+for resp in api_client.scroll(
+    method="POST",
+    url=f"/firework/v4/events/identifier_groups/{identifier_group_id}/_search",
+    json={
+        "from": last_from,
+    }
+):
+    ...
+```
+
+## End-to-End Examples
+
+These are end-to-end examples in various programming languages.
+
 <AccordionGroup>
 
 <Accordion title="Python SDK Example">
@@ -76,42 +120,3 @@ for resp in api_client.scroll(
 
 </AccordionGroup>
 
-## List events for a single identifier
-
-If you're looking to export the events of a single identifier, refer to the [List Identifier Events <Icon icon="code" size={16} />](/api-reference/v4/endpoints/identifier-feed) endpoint.
-
-```python
-# (incomplete example)
-
-# ID of the identifier for which we want to list the events.
-identifier_id: int = 12345
-
-for resp in api_client.scroll(
-    method="POST",
-    url=f"/firework/v4/events/identifiers/{identifier_id}/_search",
-    json={
-        "from": last_from,
-    }
-):
-    ...
-```
-
-## List events for an identifier group
-
-If you're looking to export the events of an entire identifier group, refer to the [List Identifier Group's Events <Icon icon="code" size={16} />](/api-reference/v4/endpoints/identifier-group-feed) endpoint.
-
-```python
-# (incomplete example)
-
-# ID of the identifier group for which we want to list the events.
-identifier_group_id: int = 12345
-
-for resp in api_client.scroll(
-    method="POST",
-    url=f"/firework/v4/events/identifier_groups/{identifier_group_id}/_search",
-    json={
-        "from": last_from,
-    }
-):
-    ...
-```
