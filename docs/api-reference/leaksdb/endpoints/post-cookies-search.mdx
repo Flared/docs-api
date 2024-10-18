@@ -1,0 +1,51 @@
+---
+title: "Search Cookies"
+api: "POST https://api.flare.io/leaksdb/v2/cookies/_search"
+---
+
+Returns a list of credentials matching the query provided.
+
+<ResponseExample>
+
+```json Response Example
+{
+        "items": [
+            {
+                "domain": "flare.io",
+                "expires_at": None,
+                "name": None,
+                "path": None,
+                "stealer_log_id": "1",
+                "value": None,
+            },
+        ],
+        "next": "WzFd",
+    }
+}
+```
+
+</ResponseExample>
+
+## Paging
+
+This endpoint supports the 
+[Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
+
+## Guides
+
+See the guide for using this endpoint:
+[Monitor Leaked Cookies for your Domain <Icon icon="book" size={16} />](/guides/cookie-monitoring).
+
+## Body Parameters
+
+<ParamField body="domain" type="string">
+  The exact domain for which you want to search cookies. Subdomains will not be included.
+</ParamField>
+
+<ParamField body="size" type="number">
+  The number of results to fetch. (max: 10)
+</ParamField>
+
+<ParamField body="from" type="string">
+  The `next` value from the last response.
+</ParamField>

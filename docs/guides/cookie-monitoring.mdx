@@ -1,0 +1,51 @@
+---
+title: "Monitor Leaked Cookies for your Domain"
+---
+
+Flare's
+[Leaked Cookies API <Icon icon="code" size={16} />](/api-reference/leaksdb/endpoints/post-cookies-search)
+allows for searching in cookies matching your domains found in stealer logs.
+Integrators may use this API to identify and invalidate sessions before they are taken over.
+
+This will guide will explain how to use the Leaked Cookies API to monitor for newly found cookies and invalidate
+their session.
+
+## Prequisites
+
+- Cookie monitoring must be enabled for your tenant. This feature must be activated by Flare Support.
+- Access to a mechanism by which you may verify a cookie's validity.
+- Access to a mechanism by which you may invalidate a cookie.
+
+## Steps
+
+<Steps>
+
+  <Step title="Fetch one page of results">
+    Use the `cookies/_search` endpoint to fetch one page of results.
+
+    If the returned page of results is empty, this means that all cookies were viewed.
+  </Step>
+
+  <Step title="Verify and Invalidate">
+    Loop over the response's items to verify the cookie's validity and invalidate the cookie.
+  </Step>
+
+  <Step title="Ratelimit and go to step 1">
+      Wait one second to avoid going over the API rate limit. Then, go back to step 1 to fetch the next page.
+  </Step>
+
+</Steps>
+
+## End-to-End Examples
+
+These are end-to-end examples in various programming languages.
+
+<AccordionGroup>
+
+<Accordion title="Python SDK Example">
+```python
+# TODO
+```
+</Accordion>
+
+</AccordionGroup>
