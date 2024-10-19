@@ -64,9 +64,6 @@ def main() -> None:
     for collection in api_root.collections:
         print(collection.title)
 
-        # No pagination request
-        print(collection.get_objects(added_after=start_date))
-
         # Pagination request.
         for envelope in as_pages(
             collection.get_objects,
