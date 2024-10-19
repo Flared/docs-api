@@ -48,7 +48,7 @@ from taxii2client.v21 import as_pages
 def main() -> None:
     server = Server(
         "https://api.flare.io/taxii2/",
-        user="api-key",
+        user="api-key",  # Do not change this line.
         password=os.environ["FLARE_API_KEY"],
     )
 
