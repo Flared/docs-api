@@ -6468,7 +6468,6 @@
                                 "blog_post",
                                 "seller",
                                 "forum_profile",
-                                "ad",
                                 "bot",
                                 "stealer_log"
                             ],
@@ -7651,8 +7650,6 @@
                                 "bucket",
                                 "bucket_object",
                                 "whois",
-                                "ad",
-                                "ads",
                                 "experimental"
                             ],
                             "example": "attachment",
