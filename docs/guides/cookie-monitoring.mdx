@@ -78,10 +78,10 @@ for resp in api_client.scroll(
     last_from = resp_data.get("next") or last_from
 
     # Iterate on cookies in the current page
-    for item in resp_data["items"]:
-      if item["name"] == "session-token":
+    for cookie in resp_data["items"]:
+      if cookie["name"] == "session-token":
         # Invalidate the cookie here
-        print(f"{item['value']}")
+        print(f"{cookie['value']}")
 ```
 </Accordion>
 
