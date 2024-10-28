@@ -71,6 +71,10 @@
     {
       "name": "Endpoints",
       "url": "api-reference"
+    },
+    {
+      "name": "Changelog",
+      "url": "changelog"
     }
   ],
   "search": {
@@ -282,6 +286,12 @@
             "api-reference/v2/endpoints/identifiers/get-assetsgroups-feed"
           ]
         }
+      ]
+    },
+    {
+      "group": "Changelog",
+      "pages": [
+        "changelog/overview"
       ]
     }
   ],
