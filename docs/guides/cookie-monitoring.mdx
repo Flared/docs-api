@@ -70,8 +70,10 @@ for resp in api_client.scroll(
         "from": last_from,
         "domain": "scatterholt.com",
         "paths": ["/", "/login"],
-        "expires_after": datetime.now(timezone.utc).isoformat(),  # Search for cookies not yet expired
-    }
+        "expires_after": datetime.now(
+            timezone.utc
+        ).isoformat(),  # Search for cookies not yet expired
+    },
 ):
     # Rate limiting.
     time.sleep(1)
@@ -87,9 +89,9 @@ for resp in api_client.scroll(
 
     # Iterate on cookies in the current page
     for cookie in resp_data["items"]:
-      if cookie["name"] == "session-token":
-        # Invalidate the cookie here
-        print(f"{cookie['value']}")
+        if cookie["name"] == "session-token":
+            # Invalidate the cookie here
+            print(f"{cookie['value']}")
 ```
 </Accordion>
 
