@@ -114,7 +114,8 @@
       "pages": [
         "guides/global-search",
         "guides/tenant-events",
-        "guides/credentials-export-domain"
+        "guides/credentials-export-domain",
+        "guides/cookie-monitoring"
       ]
     },
     {
@@ -150,6 +151,12 @@
           "group": "Identities",
           "pages": [
             "api-reference/leaksdb/endpoints/post-by-accounts"
+          ]
+        },
+        {
+          "group": "Cookies",
+          "pages": [
+            "api-reference/leaksdb/endpoints/post-cookies-search"
           ]
         }
       ]
