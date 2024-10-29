@@ -3,12 +3,30 @@ title: "Flare API Updates"
 description: "New updates and improvements"
 ---
 
+{/*
+NOTE: See `overview_unpublished.mdx` for changes that are not yet published.
+*/}
+
 <Note>
 This page lists changes to Flare's API.
 Release notes for the Flare Platform can be found on the [product documentation website](https://docs.flare.io/releases).
 </Note>
 
-<Update label="2024-09" description="September 2024">
+<Update label="2024-10-22" description="Python SDK - v0.1.25">
+  Released version 0.1.25 of the
+  [Python SDK](/sdk/python).
+
+  This release fixes an issue with packaging that caused the Python SDK to
+  declare too many Python dependencies, conflicting with libraries installed
+  in the environments of some users.
+
+  The following command can be used to upgrade:
+  ```shell
+  pip install flareio>=0.1.25
+  ```
+</Update>
+
+<Update label="2024-09" description="API - September 2024">
   The API documentation has been revamped for better clarity and structure.
 
   We’ve added new [use-case guides](/introduction/getting-started)
