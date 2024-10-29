@@ -52,6 +52,7 @@ import os
 import time
 
 from datetime import datetime
+from datetime import timezone
 from flareio import FlareApiClient
 
 
@@ -69,7 +70,7 @@ for resp in api_client.scroll(
         "from": last_from,
         "domain": "scatterholt.com",
         "paths": ["/", "/login"],
-        "expires_after": datetime.now().isoformat(),  # Search for cookies not yet expired
+        "expires_after": datetime.now(timezone.utc).isoformat(),  # Search for cookies not yet expired
     }
 ):
     # Rate limiting.
