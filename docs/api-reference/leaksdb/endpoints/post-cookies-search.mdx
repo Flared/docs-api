@@ -11,7 +11,7 @@ Returns a list of credentials matching the query provided.
 {
         "items": [
             {
-                "domain": "flare.io",
+                "domain": "scatterholt.com",
                 "expires_at": "2024-10-18T00:00:00+00:00",
                 "name": "session",
                 "path": "/",
@@ -48,4 +48,12 @@ See the guide for using this endpoint:
 
 <ParamField body="from" type="string">
   The `next` value from the last response.
+</ParamField>
+
+<ParamField body="paths" type="string[]">
+  A list of paths to filter for specific cookies, for example `['/', '/login']`. (max: 50)
+</ParamField>
+
+<ParamField body="expires_after" type="string">
+  The ISO-formatted datetime string to filter for cookie expiration, for example `2024-10-29T17:50:44.237148+00:00`.
 </ParamField>
