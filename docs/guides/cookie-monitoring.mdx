@@ -91,7 +91,7 @@ for resp in api_client.scroll(
     # Iterate on cookies in the current page
     for cookie in resp_data["items"]:
         # Invalidate the cookie here
-        print(f"{cookie['value']}")
+        print(f"Cookie Value: {cookie['value']}")
 ```
 </Accordion>
 
