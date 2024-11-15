@@ -54,8 +54,12 @@ See the guide for using this endpoint:
   The `next` value from the last response.
 </ParamField>
 
+<ParamField body="names" type="string[]">
+  A list of names to filter for specific cookies, for example `['session', 'PHPSESSID']`. (max: 10)
+</ParamField>
+
 <ParamField body="paths" type="string[]">
-  A list of paths to filter for specific cookies, for example `['/', '/login']`. (max: 50)
+  A list of paths to filter for specific cookies, for example `['/', '/login']`. (max: 10)
 </ParamField>
 
 <ParamField body="expires_after" type="string">
