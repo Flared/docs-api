@@ -91,7 +91,7 @@
       "group": "Base Concepts",
       "pages": [
         "concepts/authentication",
-        "concepts/rate-limits",
+        "concepts/rate-limits-and-quotas",
         "concepts/errors",
         "concepts/paging"
       ]
