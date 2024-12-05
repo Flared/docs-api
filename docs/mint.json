@@ -19,6 +19,7 @@
     }
   },
   "theme": "venus",
+  "layout": "topnav",
   "background": {
     "style": "gradient"
   },
