@@ -18,6 +18,7 @@ Returns a list of credentials matching the query provided.
                 "uuid": "44672461-aca4-4b3b-b192-6bd5429c4c6d",
                 "domain": "scatterholt.com",
                 "expires_at": "2024-10-18T00:00:00+00:00",
+                "imported_at": "2024-01-01T00:00:00+00:00",
                 "name": "session",
                 "path": "/",
                 "stealer_log_id": "stealer_log/stealer_logs_live/12345",
@@ -63,6 +64,10 @@ See the guide for using this endpoint:
   A list of paths to filter for specific cookies, for example `['/', '/login']`. (max: 10)
 </ParamField>
 
+<ParamField body="imported_after" type="string">
+  ISO-formatted datetime string to filter for cookies added to Flare's database after a given date, for example `2024-10-29T17:50:44.237148+00:00`.
+</ParamField>
+
 <ParamField body="expires_after" type="string">
-  The ISO-formatted datetime string to filter for cookie expiration, for example `2024-10-29T17:50:44.237148+00:00`.
+  ISO-formatted datetime string to filter for cookie expiration, for example `2024-10-29T17:50:44.237148+00:00`.
 </ParamField>

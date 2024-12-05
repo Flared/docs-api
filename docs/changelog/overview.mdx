@@ -15,6 +15,11 @@ Release notes for the Flare Platform can be found on the [product documentation 
 <Update label="2024-12" description="API - December 2024">
   The [cookies search endpoint](/api-reference/leaksdb/endpoints/post-cookies-search) now
   returns an `uuid` that can be used to uniquely identify cookies.
+
+  The [cookies search endpoint](/api-reference/leaksdb/endpoints/post-cookies-search) now
+  returns an `imported_at` timestamp that indicates when the cookie was imported to Flare's
+  database. It also has a new `imported_after` filter that allows for retrieving cookies
+  that were imported after a given timestamp.
 </Update>
 
 <Update label="2024-10-22" description="Python SDK - v0.1.25">
