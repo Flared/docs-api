@@ -59,6 +59,7 @@ import os
 import time
 
 from datetime import datetime
+from datetime import timedelta
 from datetime import timezone
 from flareio import FlareApiClient
 
@@ -79,8 +80,11 @@ for resp in api_client.scroll(
         "paths": ["/", "/login"],
         "names": ["session"],
         "expires_after": datetime.now(
-            timezone.utc
+            tz=timezone.utc,
         ).isoformat(),  # Search for cookies not yet expired
+        "imported_after": (
+            datetime.now(tz=timezone.utc) - timedelta(days=90)
+        ).isoformat(),
     },
 ):
     # Rate limiting.
