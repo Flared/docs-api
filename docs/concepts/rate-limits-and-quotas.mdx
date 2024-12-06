@@ -4,8 +4,16 @@ title: 'Rate Limits and Quotas'
 
 ## Rate Limits
 
-API usage exceeding 1 request per second is subject to Flare's API rate limit.
+API usage is subject to Flare's API rate limit.
 Rate Limits are enforced **per organization**.
+
+Calls to certain resources have differing independant limits as follows:
+- Basic: 2 requests per second
+- Search: 1 request per second
+
+For example, a user may perform a total of 3 requests per second, two basic requests and one search request.
+
+Any endpoint that is not subject to basic limit will be identified as such.
 
 Enforced limits receive a `RATELIMIT_REACHED` error message with the status code 429.
 
@@ -28,7 +36,7 @@ If you receive 429 errors, Flare's recommended course of action is to wait 10 se
 ## Quotas
 API users are responsible for monitoring their Global Search API usage and ensuring it remains within their allocated monthly quota.
 
-Users with account administration rights can also view their Global Search API monthly calls by logging into the platform and navigating to [the tenants page](https://app.flare.io/#/tenants).  
+Users with account administration rights can also view their Global Search API monthly calls by logging into the platform and navigating to [the tenants page](https://app.flare.io/#/tenants).
 
 Moreover, each global search response includes `X-Flare-Global-Searches-Remaining`, indicating the number of API calls remaining in your monthly allocation.
 
