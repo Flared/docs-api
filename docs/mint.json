@@ -169,7 +169,8 @@
           "group": "Events",
           "pages": [
             "api-reference/v2/endpoints/activities/get-activities",
-            "api-reference/v2/endpoints/activities/get-activities--ai_assistance"
+            "api-reference/v2/endpoints/activities/get-activities--ai_assistance",
+            "api-reference/v4/endpoints/event-actions"
           ]
         },
         {
@@ -183,7 +184,7 @@
         },
         {
           "group": "Global Search",
-          "pages": [ 
+          "pages": [
             "api-reference/v4/endpoints/global-search",
             "api-reference/v2/endpoints/search/get-search",
             "api-reference/v2/endpoints/search/post-search"

@@ -1,0 +1,30 @@
+---
+title: "Event actions (ignore, remediate, etc.)"
+api: "POST https://api.flare.io/firework/v4/events/actions/{action}"
+---
+
+Apply an action to a list of events(ignore, remediate, etc...).
+
+## Path parameters
+
+<ParamField body="action" type="object" required>
+  The action applied to events.
+  <Expandable defaultOpen>
+    <ParamField body="type" type="string">
+      <Expandable title="valid actions">
+        `ignore`
+        `remediate`
+        `unignore`
+        `unremediate`
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="targets" type="object[]" required>
+  List of targets where the action will be applied. Maximum of 10 targets per call.
+  <Expandable defaultOpen>
+    <ParamField body="uid" type="string">
+    </ParamField>
+  </Expandable>
+</ParamField>
