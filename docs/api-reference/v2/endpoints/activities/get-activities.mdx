@@ -2,3 +2,9 @@
 openapi: firework-v2-openapi get /activities/{index}/{source}/{id}
 title: Retrieve Event
 ---
+
+The Retrieve Event endpoint can be used to fetch the full payload of an event.
+The `index`, `source` and `id` path parameters refer to the event's `uid`, which is returned in event feeds and global search results.
+
+For a full example usage of this endpoint, see
+[List Events Within a Tenant <Icon icon="book" size={16} />](/guides/tenant-events)
