@@ -3,7 +3,7 @@ title: "Search in All of Flare's Events"
 ---
 
 Global searches in Flare is exposed through the
-[/search <Icon icon="code" size={16} />](/api-reference/v2/endpoints/search/get-search)
+[global/_search <Icon icon="code" size={16} />](/api-reference/v4/endpoints/global-search)
 endpoint.
 
 This guide details a typical search use case and provides an example for how to impement it.
@@ -20,12 +20,10 @@ To achieve the desired results, the following parameters will be used:
 
 | Parameter | Value | Justification |
 | --------- | ----- | ------------- |
-| query | fraud | The keyword we are looking for. |
-| lite | true | Quickly browse results, but don't ask for the full content. |
-| types[] | chat_message | Retrieve only the chat_message events. |
+| query.query_string | fraud | The keyword we are looking for. |
+| filter.types | chat_message | Retrieve only the chat_message events. |
 | order | asc | Retrieve results in ascending order so that we can resume fetching in the future. |
-| times | `<from_date>@` | Replace `<from_date>` with a timestamp that corresponds to 6 hours ago and don't set anything after the `@` so that we can fetch all results until the current time. |
-| sort_by | searchable | Sort results in the order that they have been added to Flare's database. |
+| filter.estimated_created_at.gte | `<from_date>` | Replace `<from_date>` with a timestamp that corresponds to 6 hours that we can fetch all results until the current time.
 
 
 ## Paging
@@ -50,6 +48,7 @@ These are end-to-end examples in various programming languages.
 import datetime
 import os
 import time
+import urllib.parse
 
 from flareio import FlareApiClient
 
@@ -68,29 +67,51 @@ last_from: str | None = None
 fetched_pages: int = 0
 
 for resp in api_client.scroll(
-    method="GET",
-    url="/firework/v2/search/",
-    params={
-        "query": "fraud",
-        "lite": "true",
+    method="POST",
+    url="/firework/v4/events/global/_search",
+    json={
+        "size": 10,
         "order": "asc",
-        "sort_by": "searchable",
-        "types[]": "chat_message",
-        "time": f"{from_timestamp}@",
         "from": None,
+        "filters": {
+            "type": ["chat_message"],
+            "estimated_created_at": {"gte": from_timestamp},
+        },
+        "query": {
+            "type": "query_string",
+            "query_string": "hello",
+        },
     },
 ):
     # Rate limiting.
     time.sleep(1)
 
     resp_data: dict = resp.json()
+    items: list[dict] = resp_data["items"]
 
     fetched_pages += 1
-    num_results: int = len(resp_data["items"])
-    print(f"Fetched page {fetched_pages} with {num_results} results...")
+    print(f"Fetched page {fetched_pages} with {len(items)} results...")
 
     # Save the last "next" value.
     last_from = resp_data.get("next") or last_from
+
+    # (Optional): Get the full data
+    for item in items:
+        # Rate limiting.
+        time.sleep(1)
+
+        # This will contain 3 parts: 'index', 'source', and 'id'
+        parsed_uid: list[str] = item["metadata"]["uid"].split("/", maxsplit=2)
+
+        event_response = api_client.get(
+            "/firework/v2/activities/"
+            + "/".join(
+                urllib.parse.quote_plus(uid_component) for uid_component in parsed_uid
+            )
+        )
+
+        full_data = event_response.json()
+        print(f"Here is the full data of the event: {full_data}")
 ```
 </Accordion>
 
