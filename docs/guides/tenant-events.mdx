@@ -42,7 +42,7 @@ for resp in api_client.scroll(
     url="/firework/v4/events/tenant/_search",
     json={
         "from": last_from,
-    }
+    },
 ):
     ...
 ```
@@ -64,7 +64,7 @@ for resp in api_client.scroll(
     url=f"/firework/v4/events/identifiers/{identifier_id}/_search",
     json={
         "from": last_from,
-    }
+    },
 ):
     ...
 ```
@@ -84,7 +84,7 @@ for resp in api_client.scroll(
     url=f"/firework/v4/events/identifier_groups/{identifier_group_id}/_search",
     json={
         "from": last_from,
-    }
+    },
 ):
     ...
 ```

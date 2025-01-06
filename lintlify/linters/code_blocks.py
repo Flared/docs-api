@@ -21,7 +21,7 @@ def _extract_md_blocks(*, text: str) -> list[_ExtractedMarkdownBlock]:
         matches.append(
             _ExtractedMarkdownBlock(
                 header=match.group("header"),
-                body=match.group("body"),
+                body=match.group("body").lstrip(),
             )
         )
     return matches
@@ -67,7 +67,7 @@ def _lint_mdx_file_code_blocks(
     for python_block in python_blocks:
         # Run mypy
 
-        if python_block.body.startswith("\n# (incomplete example)"):
+        if python_block.body.startswith("# (incomplete example)"):
             continue
 
         try:
@@ -85,12 +85,14 @@ def _lint_mdx_file_code_blocks(
                 message=ex.stdout.decode(),
             )
 
-        # Run ruff
+        # Run ruff check
         try:
             subprocess.check_output(
                 args=[
                     lint_context.ruff_path,
-                    "check",
+                    "format",
+                    "--check",
+                    "--diff",
                     "--stdin-filename",
                     filename,
                 ],
