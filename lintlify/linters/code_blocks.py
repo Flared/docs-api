@@ -65,25 +65,26 @@ def _lint_mdx_file_code_blocks(
     )
 
     for python_block in python_blocks:
+        is_incomplete_example: bool = python_block.body.startswith(
+            "# (incomplete example)"
+        )
+
         # Run mypy
-
-        if python_block.body.startswith("# (incomplete example)"):
-            continue
-
-        try:
-            subprocess.check_output(
-                args=[
-                    lint_context.mypy_path,
-                    "--ignore-missing-imports",
-                    "/dev/stdin",
-                ],
-                input=python_block.body.encode("utf-8"),
-            )
-        except subprocess.CalledProcessError as ex:
-            yield LintError(
-                filename=filename,
-                message=ex.stdout.decode(),
-            )
+        if not is_incomplete_example:
+            try:
+                subprocess.check_output(
+                    args=[
+                        lint_context.mypy_path,
+                        "--ignore-missing-imports",
+                        "/dev/stdin",
+                    ],
+                    input=python_block.body.encode("utf-8"),
+                )
+            except subprocess.CalledProcessError as ex:
+                yield LintError(
+                    filename=filename,
+                    message=ex.stdout.decode(),
+                )
 
         # Run ruff check
         try:
