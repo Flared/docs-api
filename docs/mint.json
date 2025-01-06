@@ -185,10 +185,8 @@
         {
           "group": "Global Search",
           "pages": [
-            "api-reference/v4/endpoints/global-search",
-            "api-reference/v2/endpoints/search/get-search",
-            "api-reference/v2/endpoints/search/post-search"
-          ]
+            "api-reference/v4/endpoints/global-search"
+         ]
         }
       ]
     },
@@ -279,6 +277,13 @@
     {
       "group": "Deprecated APIs",
       "pages": [
+        {
+          "group": "Global Search",
+          "pages": [
+            "api-reference/v2/endpoints/search/get-search",
+            "api-reference/v2/endpoints/search/post-search"
+          ]
+        },
         {
           "group": "Identities",
           "pages": [
