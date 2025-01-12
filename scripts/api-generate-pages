@@ -3,10 +3,7 @@
 set -eo pipefail
 shopt -s inherit_errexit
 
-ROOT=$(
-    cd "$(dirname "${BASH_SOURCE[0]}")"/../
-    pwd -P
-)
+ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")"/../ && pwd -P)
 SPEC_DIR="${ROOT}/docs/api-reference/spec"
 
 npx @mintlify/scraping@latest openapi-file --outDir ${ROOT}/docs/api-reference/v2/endpoints ${SPEC_DIR}/firework-v2-openapi.json
