@@ -3,10 +3,7 @@
 set -eo pipefail
 shopt -s inherit_errexit
 
-ROOT=$(
-    cd "$(dirname "${BASH_SOURCE[0]}")"/../
-    pwd -P
-)
+ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")"/../ && pwd -P)
 SPEC_DIR="${ROOT}/docs/api-reference/spec"
 
 OPENAPI_POST_PROCESS_SCRIPT="${ROOT}/scripts/openapi-post-process.py"
