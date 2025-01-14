@@ -3,6 +3,26 @@
 import json
 import sys
 
+from typing import Any
+
+
+def filter_search_after_from_me_feed_credentials(
+    openapi_schema: dict[str, Any],
+) -> dict[str, Any]:
+    parameters: list[dict[str, Any]] | None = (
+        openapi_schema.get("paths", {})
+        .get("/me/feed/credentials", {})
+        .get("get", {})
+        .get("parameters")
+    )
+
+    if parameters:
+        openapi_schema["paths"]["/me/feed/credentials"]["get"]["parameters"] = [
+            param for param in parameters if param["name"] != "search_after"
+        ]
+
+    return openapi_schema
+
 
 def main() -> None:
     if len(sys.argv) != 2:
@@ -17,6 +37,8 @@ def main() -> None:
         "type": "http",
         "scheme": "bearer",
     }
+
+    openapi_schema = filter_search_after_from_me_feed_credentials(openapi_schema)
 
     with open(path, "w", encoding="utf-8") as f:
         f.write(
