@@ -250,6 +250,39 @@
       },
       "type": "object"
     },
+    "AuditEvent": {
+      "properties": {
+        "actor_data": {
+          "type": "object"
+        },
+        "affected_entities": {
+          "type": "object"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "organization_id": {
+          "type": "integer"
+        },
+        "original_data": {
+          "type": "object"
+        },
+        "user_id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "type": "object"
+    },
     "CredentialUrl": {
       "properties": {
         "credential_hash": {
@@ -308,26 +341,17 @@
       ],
       "type": "object"
     },
-    "ExposureBreakdownItem": {
-      "properties": {
-        "count": {
-          "type": "integer"
-        },
-        "key": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "count",
-        "key"
-      ],
-      "type": "object"
-    },
     "FeedAlert": {
       "properties": {
         "created_at": {
           "format": "date-time",
           "type": "string"
+        },
+        "experimental_search_types": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "feed_target_id": {
           "type": "integer"
@@ -366,11 +390,80 @@
             "null"
           ]
         },
+        "name": {
+          "type": "string"
+        },
         "organization_id": {
           "type": "integer"
         },
         "params": {
           "type": "object"
+        },
+        "risks": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "search_types": {
+          "items": {
+            "enum": [
+              "attachment",
+              "listing",
+              "ransomleak",
+              "forum_post",
+              "forum_topic",
+              "forum_profile",
+              "blog_post",
+              "seller",
+              "paste",
+              "leak",
+              "chat_message",
+              "chat_message/telegram",
+              "domain",
+              "bot",
+              "stealer_log",
+              "infected_devices",
+              "driller",
+              "driller_forum_topic",
+              "driller_forum_post",
+              "driller_profile",
+              "cc",
+              "ccbin",
+              "financial_data",
+              "leaked_data",
+              "leaked_file",
+              "document",
+              "account",
+              "actor",
+              "forum_content",
+              "blog_content",
+              "profile",
+              "illicit_networks",
+              "open_web",
+              "domains",
+              "leaks",
+              "social_media_account",
+              "social_media",
+              "source_code",
+              "source_code_secrets",
+              "source_code_files",
+              "stack_exchange",
+              "google",
+              "service",
+              "driller_host",
+              "buckets",
+              "bucket",
+              "bucket_object",
+              "whois",
+              "ad",
+              "ads",
+              "experimental"
+            ],
+            "example": "attachment",
+            "type": "string"
+          },
+          "type": "array"
         },
         "start_at": {
           "format": "date-time",
@@ -385,6 +478,7 @@
             "channel",
             "azure_sentinel",
             "slack",
+            "discord",
             "splunk",
             "cgcd",
             "jira",
@@ -400,118 +494,6 @@
         "frequency",
         "params",
         "start_at",
-        "type"
-      ],
-      "type": "object"
-    },
-    "FootprintEvent": {
-      "properties": {
-        "action": {
-          "$ref": "#/definitions/FootprintEventActionData"
-        },
-        "date": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "target": {
-          "$ref": "#/definitions/FootprintEventTargetData"
-        }
-      },
-      "required": [
-        "action",
-        "target"
-      ],
-      "type": "object"
-    },
-    "FootprintEventActionData": {
-      "properties": {
-        "data": {
-          "type": "object"
-        },
-        "type": {
-          "enum": [
-            "DELTA",
-            "COUNT"
-          ],
-          "example": "DELTA",
-          "type": "string"
-        }
-      },
-      "required": [
-        "data",
-        "type"
-      ],
-      "type": "object"
-    },
-    "FootprintEventTargetData": {
-      "properties": {
-        "data": {
-          "type": "object"
-        },
-        "type": {
-          "enum": [
-            "IDENTIFIER",
-            "RECOMMENDATION",
-            "TENANT",
-            "MODULE"
-          ],
-          "example": "IDENTIFIER",
-          "type": "string"
-        }
-      },
-      "required": [
-        "data",
-        "type"
-      ],
-      "type": "object"
-    },
-    "FootprintScore": {
-      "properties": {
-        "date": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "score": {
-          "description": "Latest computed score based on existing data and exposure",
-          "type": "number"
-        },
-        "score_breakdown": {
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ScoreBreakdownItem"
-              }
-            ],
-            "description": "Score and exposure breakdown"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "date",
-        "score"
-      ],
-      "type": "object"
-    },
-    "FootprintTopIdentifier": {
-      "properties": {
-        "exposure": {
-          "type": "number"
-        },
-        "id": {
-          "type": "integer"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "exposure",
-        "id",
-        "name",
         "type"
       ],
       "type": "object"
@@ -606,6 +588,9 @@
         "key": {
           "type": "string"
         },
+        "organization_settings": {
+          "$ref": "#/definitions/OrganizationSettings"
+        },
         "params": {
           "type": "object"
         },
@@ -616,6 +601,7 @@
       "required": [
         "alerts",
         "key",
+        "organization_settings",
         "params",
         "type"
       ],
@@ -713,28 +699,27 @@
               "forum_content",
               "blog_content",
               "profile",
-              "ads",
               "infected_devices",
+              "financial_data",
+              "chat_message",
               "seller",
               "listing",
-              "bot",
-              "ransomleak",
               "forum_profile",
-              "forum_post",
               "forum_topic",
-              "financial_data",
-              "blog_post",
-              "chat_message",
+              "ransomleak",
+              "forum_post",
               "stealer_log",
-              "paste",
+              "bot",
+              "blog_post",
               "bucket",
-              "google",
-              "bucket_object",
-              "source_code_files",
               "social_media",
+              "paste",
+              "service",
+              "bucket_object",
               "stack_exchange",
               "source_code_secrets",
-              "service",
+              "google",
+              "source_code_files",
               "bucket",
               "bucket_object",
               "source_code_files",
@@ -745,11 +730,10 @@
               "forum_post",
               "forum_topic",
               "blog_post",
-              "seller",
               "forum_profile",
-              "ad",
-              "bot",
-              "stealer_log"
+              "seller",
+              "stealer_log",
+              "bot"
             ],
             "example": "illicit_networks",
             "type": "string"
@@ -980,6 +964,9 @@
     },
     "LeakActivityCredential": {
       "properties": {
+        "credential_hash": {
+          "type": "string"
+        },
         "domain": {
           "type": "string"
         },
@@ -998,6 +985,9 @@
         },
         "imported_at": {
           "type": "string"
+        },
+        "known_password_id": {
+          "type": "integer"
         },
         "remediated_at": {
           "format": "date-time",
@@ -1164,6 +1154,9 @@
             "null"
           ]
         },
+        "file_analysis_enabled": {
+          "type": "boolean"
+        },
         "hubspot_company_id": {
           "example": "nullable integer",
           "type": [
@@ -1207,17 +1200,6 @@
       "required": [
         "name"
       ],
-      "type": "object"
-    },
-    "OrganizationIdentifierUsage": {
-      "properties": {
-        "identifier_count": {
-          "type": "integer"
-        },
-        "timestamp": {
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "OrganizationMember": {
@@ -1312,6 +1294,20 @@
         },
         "user": {
           "$ref": "#/definitions/OrganizationMember"
+        }
+      },
+      "type": "object"
+    },
+    "OrganizationMonthlyUsage": {
+      "properties": {
+        "global_search_calls_count": {
+          "type": "integer"
+        },
+        "identifier_count": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -1487,6 +1483,12 @@
           "format": "date-time",
           "type": "string"
         },
+        "identifiers": {
+          "items": {
+            "$ref": "#/definitions/RansomLeakIdentifierData"
+          },
+          "type": "array"
+        },
         "industry": {
           "description": "Industry of the victim",
           "type": "string"
@@ -1514,11 +1516,26 @@
       "required": [
         "breached_at",
         "event_created_at",
+        "identifiers",
         "publisher",
         "risk_score",
         "uid",
         "victim"
       ],
+      "type": "object"
+    },
+    "RansomLeakIdentifierData": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "identifier_type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "ReportElementUpdate": {
@@ -1565,44 +1582,6 @@
       },
       "type": "object"
     },
-    "ScoreBreakdownItem": {
-      "properties": {
-        "bins": {
-          "description": "Information about the score distribution",
-          "type": "object"
-        },
-        "category": {
-          "description": "Name of the breakdown",
-          "type": "string"
-        },
-        "exposure": {
-          "description": "Surface of exposure for the category",
-          "type": "integer"
-        },
-        "exposure_breakdown": {
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ExposureBreakdownItem"
-              }
-            ],
-            "description": "Information about the category"
-          },
-          "type": "array"
-        },
-        "score": {
-          "description": "Score for the category",
-          "type": "number"
-        }
-      },
-      "required": [
-        "bins",
-        "category",
-        "exposure",
-        "score"
-      ],
-      "type": "object"
-    },
     "Search": {
       "properties": {
         "items": {
@@ -1631,106 +1610,6 @@
       },
       "type": "object"
     },
-    "ServiceRequest": {
-      "properties": {
-        "activity_uid": {
-          "type": "string"
-        },
-        "cost": {
-          "type": "integer"
-        },
-        "created_at": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "organization_id": {
-          "type": "integer"
-        },
-        "organization_name": {
-          "example": "nullable string",
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "params": {
-          "type": "object"
-        },
-        "status": {
-          "$ref": "#/definitions/ServiceRequestStatus"
-        },
-        "tenant_id": {
-          "type": "integer"
-        },
-        "type": {
-          "enum": [
-            "takedown"
-          ],
-          "example": "takedown",
-          "type": "string"
-        },
-        "user_email": {
-          "example": "nullable string",
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "uuid": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ServiceRequestRemaining": {
-      "properties": {
-        "remaining": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "remaining"
-      ],
-      "type": "object"
-    },
-    "ServiceRequestStatus": {
-      "properties": {
-        "comment": {
-          "example": "nullable string",
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "created_at": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "service_request_uuid": {
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "requested",
-            "requested_from_hubspot",
-            "mail_sent",
-            "blocked",
-            "success",
-            "aborted"
-          ],
-          "example": "requested",
-          "type": "string"
-        },
-        "type": {
-          "enum": [
-            "takedown"
-          ],
-          "example": "takedown",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "Subdomains": {
       "properties": {
         "subdomain": {
@@ -1744,20 +1623,20 @@
     },
     "SubscriptionPlan": {
       "properties": {
-        "credits_price": {
-          "description": "Price of the credits plan",
+        "global_search_calls_limit": {
+          "description": "Number of calls allowed via API for global search on the plan",
           "type": "integer"
         },
         "id": {
           "description": "Unique id for the Subscription plan",
           "type": "integer"
         },
-        "identifiers_price": {
-          "description": "Price of the identifiers plan",
+        "identifier_rotation_limit": {
+          "description": "Maximum monthly allowed identifier rotations",
           "type": "integer"
         },
-        "max_credits": {
-          "description": "Number of credits allowed for that plan",
+        "identifiers_price": {
+          "description": "Price of the identifiers plan",
           "type": "integer"
         },
         "max_identifiers": {
@@ -1766,10 +1645,6 @@
         },
         "organization_id": {
           "description": "Organization id associated with the plan",
-          "type": "integer"
-        },
-        "plan_credits_template_id": {
-          "description": "Reference to the plan template for credits",
           "type": "integer"
         },
         "plan_identifiers_template_id": {
@@ -1823,10 +1698,6 @@
           "description": "Indicates if the tenant is archived",
           "type": "boolean"
         },
-        "is_demo": {
-          "description": "Indicates if the tenant is a demo tenant",
-          "type": "boolean"
-        },
         "name": {
           "description": "Tenant name",
           "type": "string"
@@ -1862,8 +1733,24 @@
           "description": "The Tenant's purpose / description",
           "type": "string"
         },
+        "global_search_calls_limit": {
+          "description": "The number of global search api calls allowed for the tenant",
+          "example": "nullable integer",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
         "identifier_limit": {
           "description": "The number of identifiers allowed for the tenant",
+          "example": "nullable integer",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "identifier_rotation_limit": {
+          "description": "The number of identifiers rotations permitted per month",
           "example": "nullable integer",
           "type": [
             "integer",
@@ -2021,8 +1908,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -2109,6 +1994,20 @@
     },
     "TenantWithCounts": {
       "properties": {
+        "global_search_calls_count": {
+          "example": "nullable integer",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "global_search_calls_limit": {
+          "example": "nullable integer",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
         "identifier_count": {
           "type": "integer"
         },
@@ -2234,13 +2133,7 @@
         "is_admin": {
           "type": "boolean"
         },
-        "is_advanced_tab_enabled": {
-          "type": "boolean"
-        },
         "is_disabled": {
-          "type": "boolean"
-        },
-        "is_tooltips_enabled": {
           "type": "boolean"
         },
         "language": {
@@ -2277,8 +2170,6 @@
       "required": [
         "color_scheme",
         "email",
-        "is_advanced_tab_enabled",
-        "is_tooltips_enabled",
         "language",
         "name"
       ],
@@ -2463,6 +2354,34 @@
       },
       "type": "object"
     },
+    "average_by_risk_score": {
+      "properties": {
+        "risk_score": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/date_count"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "average_by_search_type": {
+      "properties": {
+        "search_type": {
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/date_count"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "count_by_risk_score": {
       "properties": {
         "risk_score": {
@@ -2477,14 +2396,14 @@
       },
       "type": "object"
     },
-    "count_by_search_type_and_risk_score": {
+    "count_by_search_type": {
       "properties": {
         "search_type": {
           "type": "string"
         },
         "values": {
           "items": {
-            "$ref": "#/definitions/count_by_risk_score"
+            "$ref": "#/definitions/date_count"
           },
           "type": "array"
         }
@@ -3352,7 +3271,7 @@
             "items": {
               "type": "integer"
             },
-            "name": "identifier_ids[]",
+            "name": "identifier_ids",
             "type": "array"
           }
         ],
@@ -3793,7 +3712,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, chat_message, seller, listing, forum_profile, forum_topic, ransomleak, forum_post, stealer_log, bot, blog_post\n- open_web: bucket, social_media, paste, service, bucket_object, stack_exchange, source_code_secrets, google, source_code_files\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -3831,8 +3750,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -4056,7 +3973,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, chat_message, seller, listing, forum_profile, forum_topic, ransomleak, forum_post, stealer_log, bot, blog_post\n- open_web: bucket, social_media, paste, service, bucket_object, stack_exchange, source_code_secrets, google, source_code_files\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -4094,8 +4011,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -4489,7 +4404,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, chat_message, seller, listing, forum_profile, forum_topic, ransomleak, forum_post, stealer_log, bot, blog_post\n- open_web: bucket, social_media, paste, service, bucket_object, stack_exchange, source_code_secrets, google, source_code_files\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -4527,8 +4442,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -4752,7 +4665,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, chat_message, seller, listing, forum_profile, forum_topic, ransomleak, forum_post, stealer_log, bot, blog_post\n- open_web: bucket, social_media, paste, service, bucket_object, stack_exchange, source_code_secrets, google, source_code_files\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -4790,8 +4703,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -5060,7 +4971,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, chat_message, seller, listing, forum_profile, forum_topic, ransomleak, forum_post, stealer_log, bot, blog_post\n- open_web: bucket, social_media, paste, service, bucket_object, stack_exchange, source_code_secrets, google, source_code_files\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -5098,8 +5009,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -5359,7 +5268,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, chat_message, seller, listing, forum_profile, forum_topic, ransomleak, forum_post, stealer_log, bot, blog_post\n- open_web: bucket, social_media, paste, service, bucket_object, stack_exchange, source_code_secrets, google, source_code_files\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -5397,8 +5306,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -5592,7 +5499,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, chat_message, seller, listing, forum_profile, forum_topic, ransomleak, forum_post, stealer_log, bot, blog_post\n- open_web: bucket, social_media, paste, service, bucket_object, stack_exchange, source_code_secrets, google, source_code_files\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -5630,8 +5537,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -5783,6 +5688,24 @@
     "/me/feed/credentials": {
       "get": {
         "operationId": "get_leaked_credentials_feed_endpoint_/me/feed/credentials",
+        "parameters": [
+          {
+            "default": 20,
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "search_after",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -5797,6 +5720,16 @@
       },
       "post": {
         "operationId": "post_leaked_credentials_feed_endpoint_/me/feed/credentials",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserUpdate"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -6143,30 +6076,6 @@
         }
       ]
     },
-    "/organizations/{organization_id}/service_requests/remaining": {
-      "get": {
-        "operationId": "get_organization_service_requests_remaining_/organizations/<int:organization_id>/service_requests/remaining",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ServiceRequestRemaining"
-            }
-          }
-        },
-        "tags": [
-          "organizations"
-        ]
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "organization_id",
-          "required": true,
-          "type": "integer"
-        }
-      ]
-    },
     "/organizations/{organization_id}/tenants": {
       "get": {
         "operationId": "get_organization_tenants_api_/organizations/<int:organization_id>/tenants",
@@ -6401,7 +6310,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, chat_message, seller, listing, forum_profile, forum_topic, ransomleak, forum_post, stealer_log, bot, blog_post\n- open_web: bucket, social_media, paste, service, bucket_object, stack_exchange, source_code_secrets, google, source_code_files\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -6439,8 +6348,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -6453,8 +6360,6 @@
               "bucket",
               "bucket_object",
               "whois",
-              "ad",
-              "ads",
               "experimental"
             ],
             "in": "query",
@@ -6650,7 +6555,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, chat_message, seller, listing, forum_profile, forum_topic, ransomleak, forum_post, stealer_log, bot, blog_post\n- open_web: bucket, social_media, paste, service, bucket_object, stack_exchange, source_code_secrets, google, source_code_files\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -6688,8 +6593,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -6702,8 +6605,6 @@
               "bucket",
               "bucket_object",
               "whois",
-              "ad",
-              "ads",
               "experimental"
             ],
             "in": "query",

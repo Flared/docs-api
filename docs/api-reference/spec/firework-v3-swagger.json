@@ -233,6 +233,9 @@
     },
     "BulkActionFilters": {
       "properties": {
+        "q": {
+          "type": "string"
+        },
         "recommendation_state": {
           "enum": [
             "recommended",
@@ -240,6 +243,25 @@
             "rejected"
           ],
           "example": "recommended",
+          "type": "string"
+        },
+        "types": {
+          "enum": [
+            "domain",
+            "brand",
+            "name",
+            "keyword",
+            "github_repository",
+            "username",
+            "email",
+            "search_query",
+            "dork_query",
+            "bin",
+            "ip",
+            "secret",
+            "azure_tenant"
+          ],
+          "example": "domain",
           "type": "string"
         }
       },
@@ -287,6 +309,9 @@
         },
         "enrichments": {
           "type": "object"
+        },
+        "event_count": {
+          "type": "integer"
         },
         "experimental_search_types": {
           "items": {
@@ -362,8 +387,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -376,8 +399,6 @@
               "bucket",
               "bucket_object",
               "whois",
-              "ad",
-              "ads",
               "experimental"
             ],
             "example": "attachment",
@@ -499,10 +520,16 @@
     },
     "IdentifierGroupWithCounts": {
       "properties": {
+        "event_count": {
+          "type": "integer"
+        },
         "group": {
           "$ref": "#/definitions/IdentifierGroup"
         },
         "identifier_count": {
+          "type": "integer"
+        },
+        "total_identifier_count": {
           "type": "integer"
         }
       },
@@ -547,20 +574,6 @@
       },
       "type": "object"
     },
-    "IdentifierRecommendationBulkActionResult": {
-      "properties": {
-        "nb_identifier_recommendations_accepted": {
-          "type": "integer"
-        },
-        "nb_identifier_recommendations_rejected": {
-          "type": "integer"
-        },
-        "nb_identifiers_created": {
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
     "LeakActivityCredential": {
       "properties": {
         "domain": {
@@ -582,6 +595,9 @@
         "imported_at": {
           "type": "string"
         },
+        "known_password_id": {
+          "type": "integer"
+        },
         "remediated_at": {
           "format": "date-time",
           "type": "string"
@@ -599,6 +615,36 @@
         "imported_at",
         "source_id"
       ],
+      "type": "object"
+    },
+    "MonitoredChannel": {
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "last_crawled_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "message_count": {
+          "type": "integer"
+        },
+        "source": {
+          "type": "string"
+        },
+        "subcategory": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "PaginatedCredentials": {
@@ -1142,7 +1188,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, chat_message, listing, financial_data, stealer_log, bot, forum_topic, ransomleak, forum_post, forum_profile, seller\n- open_web: bucket_object, bucket, google, service, stack_exchange, source_code_files, social_media, source_code_secrets, paste\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -1180,8 +1226,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -1405,7 +1449,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media_profile, social_media_post, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, ad, ads, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, listing, bot, ransomleak, forum_profile, forum_post, forum_topic, financial_data, blog_post, chat_message, stealer_log\n- open_web: paste, bucket, google, bucket_object, source_code_files, social_media, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, chat_message, listing, financial_data, stealer_log, bot, forum_topic, ransomleak, forum_post, forum_profile, seller\n- open_web: bucket_object, bucket, google, service, stack_exchange, source_code_files, social_media, source_code_secrets, paste\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -1443,8 +1487,6 @@
               "domains",
               "leaks",
               "social_media_account",
-              "social_media_profile",
-              "social_media_post",
               "social_media",
               "source_code",
               "source_code_secrets",
@@ -1734,6 +1776,17 @@
         "operationId": "get_identifiers_endpoint_/identifiers/",
         "parameters": [
           {
+            "default": "ALL",
+            "enum": [
+              "ALL",
+              "USER",
+              "SYSTEM"
+            ],
+            "in": "query",
+            "name": "source_group",
+            "type": "string"
+          },
+          {
             "default": "id",
             "enum": [
               "id",
@@ -1758,7 +1811,7 @@
             "items": {
               "type": "string"
             },
-            "name": "properties[]",
+            "name": "properties",
             "type": "array"
           },
           {
@@ -1783,7 +1836,7 @@
             "items": {
               "type": "string"
             },
-            "name": "types[]",
+            "name": "types",
             "type": "array"
           },
           {
@@ -1817,87 +1870,6 @@
             "in": "query",
             "name": "search_after",
             "type": "string"
-          },
-          {
-            "default": "ALL",
-            "enum": [
-              "ALL",
-              "USER",
-              "SYSTEM"
-            ],
-            "in": "query",
-            "name": "source_group",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PaginatedIdentifiers"
-            }
-          }
-        },
-        "tags": [
-          "identifiers"
-        ]
-      }
-    },
-    "/identifiers/by_asset_data": {
-      "get": {
-        "operationId": "get_identifiers_by_asset_data_endpoint_/identifiers/by_asset_data",
-        "parameters": [
-          {
-            "collectionFormat": "multi",
-            "default": [],
-            "enum": [
-              "domain",
-              "brand",
-              "name",
-              "keyword",
-              "github_repository",
-              "username",
-              "email",
-              "search_query",
-              "dork_query",
-              "bin",
-              "ip",
-              "secret",
-              "azure_tenant"
-            ],
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "types[]",
-            "type": "array"
-          },
-          {
-            "in": "query",
-            "name": "q",
-            "type": "string"
-          },
-          {
-            "default": 20,
-            "in": "query",
-            "name": "size",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "from",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "search_after",
-            "type": "string"
-          },
-          {
-            "default": false,
-            "in": "query",
-            "name": "exact_match",
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -1918,6 +1890,17 @@
         "operationId": "get_identifier_groups_endpoint_/identifiers/groups",
         "parameters": [
           {
+            "default": "ALL",
+            "enum": [
+              "ALL",
+              "USER",
+              "SYSTEM"
+            ],
+            "in": "query",
+            "name": "source_group",
+            "type": "string"
+          },
+          {
             "default": "id",
             "enum": [
               "id",
@@ -1926,6 +1909,24 @@
             "in": "query",
             "name": "order_by",
             "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "default": [],
+            "enum": [
+              "recent",
+              "interest",
+              "resolves",
+              "reachable",
+              "unresolvable",
+              "unreachable"
+            ],
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "properties",
+            "type": "array"
           },
           {
             "collectionFormat": "multi",
@@ -1949,7 +1950,7 @@
             "items": {
               "type": "string"
             },
-            "name": "types[]",
+            "name": "types",
             "type": "array"
           },
           {
@@ -2050,6 +2051,62 @@
         }
       ]
     },
+    "/identifiers/{identifier_id}/feed/credentials": {
+      "get": {
+        "operationId": "get_leaked_credentials_feed_endpoint_/identifiers/<int:identifier_id>/feed/credentials",
+        "parameters": [
+          {
+            "default": 20,
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "search_after",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedCredentials"
+            }
+          }
+        },
+        "tags": [
+          "identifiers"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "identifier_id",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "post": {
+        "operationId": "post_leaked_credentials_feed_endpoint_/identifiers/<int:identifier_id>/feed/credentials",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedCredentials"
+            }
+          }
+        },
+        "tags": [
+          "identifiers"
+        ]
+      }
+    },
     "/identifiers/{identifier_id}/relations": {
       "get": {
         "operationId": "get_identifier_relations_endpoint_/identifiers/<int:identifier_id>/relations",
@@ -2069,7 +2126,7 @@
             "items": {
               "type": "string"
             },
-            "name": "properties[]",
+            "name": "properties",
             "type": "array"
           },
           {
@@ -2094,7 +2151,7 @@
             "items": {
               "type": "string"
             },
-            "name": "types[]",
+            "name": "types",
             "type": "array"
           },
           {
@@ -2176,6 +2233,10 @@
   "swagger": "2.0",
   "tags": [
     {
+      "description": "Read and manage a tenant's identifiers",
+      "name": "identifiers"
+    },
+    {
       "description": "Perform actions on activities.",
       "name": "activities"
     },
@@ -2186,10 +2247,6 @@
     {
       "description": "Manage and query assets.",
       "name": "assets"
-    },
-    {
-      "description": "Manage identifier.",
-      "name": "identifiers"
     }
   ]
 }
