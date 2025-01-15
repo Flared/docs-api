@@ -138,7 +138,8 @@
           "group": "Credentials",
           "pages": [
             "api-reference/leaksdb/endpoints/get-credentials",
-            "api-reference/leaksdb/endpoints/post-credentials-search"
+            "api-reference/leaksdb/endpoints/post-credentials-search",
+            "api-reference/v3/endpoints/identifiers/get-identifier-feed-credentials"
           ]
         },
         {
