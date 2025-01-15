@@ -178,6 +178,7 @@
           "pages": [
             "api-reference/v4/endpoints/current-tenant-feed",
             "api-reference/v2/endpoints/me/get-mefeedcredentials",
+            "api-reference/v3/endpoints/identifiers/get-identifiers-feedcredentials",
             "api-reference/v4/endpoints/identifier-feed",
             "api-reference/v4/endpoints/identifier-group-feed"
           ]
@@ -296,6 +297,7 @@
           "group": "Event Feeds",
           "pages": [
             "api-reference/v2/endpoints/me/get-mefeed",
+            "api-reference/v3/endpoints/identifiers/get-identifiers-feedcredentials",
             "api-reference/v2/endpoints/identifiers/get-assets-feed",
             "api-reference/v2/endpoints/identifiers/get-assetsgroups-feed"
           ]
