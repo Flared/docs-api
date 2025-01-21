@@ -52,11 +52,9 @@ import time
 from flareio import FlareApiClient
 
 
-api_key: str | None = os.environ.get("FLARE_API_KEY")
-if not api_key:
-    raise Exception("Please provide an API key")
-
-api_client = FlareApiClient(api_key=api_key)
+api_client = FlareApiClient(
+    api_key=os.environ["FLARE_API_KEY"],
+)
 
 from_timestamp: str = (
     datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(hours=1)
