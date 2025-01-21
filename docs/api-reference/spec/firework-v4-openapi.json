@@ -827,8 +827,8 @@
     },
     "/alerts/channels": {
       "get": {
-        "summary": "Current Alert Channels",
-        "operationId": "current_alert_channels_alerts_channels_get",
+        "summary": "Tenant Alert Channels",
+        "operationId": "tenant_alert_channels_alerts_channels_get",
         "parameters": [
           {
             "name": "from_",
@@ -962,7 +962,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedResults_AlertChannel_"
+                  "$ref": "#/components/schemas/PaginatedResults_PartialAlertChannel_"
                 }
               }
             }
@@ -1207,6 +1207,256 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update Alert Channel",
+        "operationId": "update_alert_channel_alerts_channels__alert_channel_id__put",
+        "parameters": [
+          {
+            "name": "alert_channel_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Alert Channel Id"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-User-Id"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Scopes",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User-Scopes"
+            }
+          },
+          {
+            "name": "X-Auth-Request-Tenant-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-Tenant-Id"
+            }
+          },
+          {
+            "name": "x-real-ip",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Real-Ip"
+            }
+          },
+          {
+            "name": "x-flare-referer",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Flare-Referer"
+            }
+          },
+          {
+            "name": "user-agent",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User-Agent"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAlertChannel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get Alert Channel",
+        "operationId": "get_alert_channel_alerts_channels__alert_channel_id__get",
+        "parameters": [
+          {
+            "name": "alert_channel_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Alert Channel Id"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-User-Id"
+            }
+          },
+          {
+            "name": "X-Auth-Request-User-Scopes",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Auth-Request-User-Scopes"
+            }
+          },
+          {
+            "name": "X-Auth-Request-Tenant-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "X-Auth-Request-Tenant-Id"
+            }
+          },
+          {
+            "name": "x-real-ip",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Real-Ip"
+            }
+          },
+          {
+            "name": "x-flare-referer",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Flare-Referer"
+            }
+          },
+          {
+            "name": "user-agent",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User-Agent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlertChannel"
+                }
               }
             }
           },
@@ -3271,8 +3521,8 @@
           "type": {
             "$ref": "#/components/schemas/AlertType"
           },
-          "status": {
-            "$ref": "#/components/schemas/AlertChannelStatus"
+          "state": {
+            "$ref": "#/components/schemas/AlertChannelState"
           },
           "params": {
             "oneOf": [
@@ -3334,7 +3584,7 @@
           "id",
           "name",
           "type",
-          "status",
+          "state",
           "params"
         ],
         "title": "AlertChannel"
@@ -3441,11 +3691,13 @@
           },
           "json_attachment": {
             "type": "boolean",
-            "title": "Json Attachment"
+            "title": "Json Attachment",
+            "default": false
           },
           "csv_attachment": {
             "type": "boolean",
-            "title": "Csv Attachment"
+            "title": "Csv Attachment",
+            "default": false
           },
           "subject_tag": {
             "anyOf": [
@@ -3459,17 +3711,14 @@
             "title": "Subject Tag"
           },
           "language": {
-            "$ref": "#/components/schemas/Language"
+            "$ref": "#/components/schemas/Language",
+            "default": "en"
           }
         },
         "type": "object",
         "required": [
           "type",
-          "email",
-          "json_attachment",
-          "csv_attachment",
-          "subject_tag",
-          "language"
+          "email"
         ],
         "title": "AlertChannelEmailParams"
       },
@@ -3501,7 +3750,8 @@
               "type": "string"
             },
             "type": "array",
-            "title": "Labels"
+            "title": "Labels",
+            "default": []
           },
           "issue_type": {
             "type": "string",
@@ -3515,7 +3765,6 @@
           "email",
           "api_token",
           "project_key",
-          "labels",
           "issue_type"
         ],
         "title": "AlertChannelJiraParams"
@@ -3621,7 +3870,8 @@
               "type": "string"
             },
             "type": "array",
-            "title": "Labels"
+            "title": "Labels",
+            "default": []
           }
         },
         "type": "object",
@@ -3629,10 +3879,33 @@
           "type",
           "api_token",
           "netloc",
-          "index",
-          "labels"
+          "index"
         ],
         "title": "AlertChannelSplunkParams"
+      },
+      "AlertChannelState": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/AlertChannelStatus"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "message"
+        ],
+        "title": "AlertChannelState"
       },
       "AlertChannelStatus": {
         "type": "string",
@@ -3904,6 +4177,16 @@
                 "webhook": "#/components/schemas/AlertChannelWebhookParams"
               }
             }
+          },
+          "state": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AlertChannelState"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -4738,34 +5021,6 @@
         ],
         "title": "PagedCookieConfigurations"
       },
-      "PaginatedResults_AlertChannel_": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/AlertChannel"
-            },
-            "type": "array",
-            "title": "Items"
-          },
-          "next": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Next"
-          }
-        },
-        "type": "object",
-        "required": [
-          "items",
-          "next"
-        ],
-        "title": "PaginatedResults[AlertChannel]"
-      },
       "PaginatedResults_Alert_": {
         "properties": {
           "items": {
@@ -4821,6 +5076,34 @@
           "next"
         ],
         "title": "PaginatedResults[FeedItem]"
+      },
+      "PaginatedResults_PartialAlertChannel_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PartialAlertChannel"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next"
+        ],
+        "title": "PaginatedResults[PartialAlertChannel]"
       },
       "PaginatedResults_Report_": {
         "properties": {
@@ -4953,6 +5236,32 @@
         "type": "object",
         "title": "PartialAlert"
       },
+      "PartialAlertChannel": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertType"
+          },
+          "state": {
+            "$ref": "#/components/schemas/AlertChannelState"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "state"
+        ],
+        "title": "PartialAlertChannel"
+      },
       "QueryStringQuery": {
         "properties": {
           "type": {
@@ -4977,6 +5286,10 @@
           "id": {
             "type": "integer",
             "title": "Id"
+          },
+          "format_type": {
+            "$ref": "#/components/schemas/ThreatFlowReportFormatType",
+            "default": "simple_summary"
           },
           "title": {
             "type": "string",
@@ -5278,6 +5591,14 @@
         ],
         "title": "ThreatFlowReportDownloadFormat"
       },
+      "ThreatFlowReportFormatType": {
+        "type": "string",
+        "enum": [
+          "simple_summary",
+          "expanded_summary"
+        ],
+        "title": "ThreatFlowReportFormatType"
+      },
       "ThreatFlowTenantConfigPayload": {
         "properties": {
           "ignored_tags": {
@@ -5306,6 +5627,78 @@
           "emails"
         ],
         "title": "ThreatFlowTenantConfigPayload"
+      },
+      "UpdateAlertChannel": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "params": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AlertChannelEmailParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelSlackParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelDiscordParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelSplunkParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelChannelParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelSentinelParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelCgcdParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelTeamsParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelJiraParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelServicenowParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelWebhookParams"
+              }
+            ],
+            "title": "Params",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "azure_sentinel": "#/components/schemas/AlertChannelSentinelParams",
+                "cgcd": "#/components/schemas/AlertChannelCgcdParams",
+                "channel": "#/components/schemas/AlertChannelChannelParams",
+                "discord": "#/components/schemas/AlertChannelDiscordParams",
+                "email": "#/components/schemas/AlertChannelEmailParams",
+                "jira": "#/components/schemas/AlertChannelJiraParams",
+                "servicenow": "#/components/schemas/AlertChannelServicenowParams",
+                "slack": "#/components/schemas/AlertChannelSlackParams",
+                "splunk": "#/components/schemas/AlertChannelSplunkParams",
+                "teams": "#/components/schemas/AlertChannelTeamsParams",
+                "webhook": "#/components/schemas/AlertChannelWebhookParams"
+              }
+            }
+          },
+          "state": {
+            "$ref": "#/components/schemas/AlertChannelState"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "params",
+          "state"
+        ],
+        "title": "UpdateAlertChannel"
       },
       "UsernameQuery": {
         "properties": {

@@ -48,7 +48,6 @@ These are end-to-end examples in various programming languages.
 import datetime
 import os
 import time
-import urllib.parse
 
 from flareio import FlareApiClient
 
@@ -100,14 +99,11 @@ for resp in api_client.scroll(
         # Rate limiting.
         time.sleep(1)
 
-        # This will contain 3 parts: 'index', 'source', and 'id'
-        parsed_uid: list[str] = item["metadata"]["uid"].split("/", maxsplit=2)
-
         event_response = api_client.get(
-            "/firework/v2/activities/"
-            + "/".join(
-                urllib.parse.quote_plus(uid_component) for uid_component in parsed_uid
-            )
+            url="/firework/v2/activities/",
+            params={
+                "uid": item["metadata"]["uid"],
+            },
         )
 
         full_data = event_response.json()

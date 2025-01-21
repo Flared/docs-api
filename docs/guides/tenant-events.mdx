@@ -23,7 +23,7 @@ However, it is important that future requests use **exactly** the same parameter
 
 For performance reasons, feed results only contain the bare minimum.
 To get the full data, an API call must be made per result to the
-[Retrieve Event <Icon icon="code" size={16} />](/api-reference/v2/endpoints/activities/get-activities)
+[Retrieve Event <Icon icon="code" size={16} />](/api-reference/v2/endpoints/activities/get-activities-)
 endpoint.
 
 ## Available Endpoints
@@ -99,7 +99,6 @@ These are end-to-end examples in various programming languages.
 ```python
 import os
 import time
-import urllib.parse
 
 from flareio import FlareApiClient
 
@@ -137,14 +136,11 @@ for resp in api_client.scroll(
         # Rate limiting.
         time.sleep(1)
 
-        # This will contain 3 parts: 'index', 'source', and 'id'
-        parsed_uid: list[str] = item["metadata"]["uid"].split("/", maxsplit=2)
-
         event_response = api_client.get(
-            "/firework/v2/activities/"
-            + "/".join(
-                urllib.parse.quote_plus(uid_component) for uid_component in parsed_uid
-            )
+            url="/firework/v2/activities/",
+            params={
+                "uid": item["metadata"]["uid"],
+            },
         )
 
         full_data = event_response.json()

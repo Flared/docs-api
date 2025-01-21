@@ -168,7 +168,7 @@
         {
           "group": "Events",
           "pages": [
-            "api-reference/v2/endpoints/activities/get-activities",
+            "api-reference/v2/endpoints/activities/get-activities-",
             "api-reference/v2/endpoints/activities/get-activities--ai_assistance",
             "api-reference/v4/endpoints/event-actions"
           ]
