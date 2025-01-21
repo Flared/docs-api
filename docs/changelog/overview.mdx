@@ -12,6 +12,14 @@ This page lists changes to Flare's API.
 Release notes for the Flare Platform can be found on the [product documentation website](https://docs.flare.io/releases).
 </Note>
 
+<Update label="2025-01" description="API - January 2025">
+  Modified the get-activities endpoint to accept the UID as a query parameter instead of as path parameters. This avoids confusion that some users had when using uids that have multiple slashes. The old endpoint with path parameters was kept for backwards compatibility.
+
+  Updated
+  [basic rate limiting <Icon icon="book" size={16} />](/concepts/rate-limits-and-quotas)
+  from 2 requests per second to 4 requests per second.
+</Update>
+
 <Update label="2024-12" description="API - December 2024">
   The
   [cookies search endpoint <Icon icon="code" size={16} />](/api-reference/leaksdb/endpoints/post-cookies-search)
