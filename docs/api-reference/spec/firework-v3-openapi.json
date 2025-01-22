@@ -469,7 +469,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_post, seller, forum_topic, chat_message, ransomleak, forum_profile, listing, bot, financial_data, stealer_log, blog_post\n- open_web: bucket_object, service, source_code_secrets, source_code_files, stack_exchange, paste, google, bucket, social_media\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_topic, listing, ransomleak, stealer_log, financial_data, chat_message, forum_post, seller, blog_post, forum_profile, bot\n- open_web: bucket, social_media, stack_exchange, paste, source_code_files, google, source_code_secrets, service, bucket_object\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -786,7 +786,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_post, seller, forum_topic, chat_message, ransomleak, forum_profile, listing, bot, financial_data, stealer_log, blog_post\n- open_web: bucket_object, service, source_code_secrets, source_code_files, stack_exchange, paste, google, bucket, social_media\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_topic, listing, ransomleak, stealer_log, financial_data, chat_message, forum_post, seller, blog_post, forum_profile, bot\n- open_web: bucket, social_media, stack_exchange, paste, source_code_files, google, source_code_secrets, service, bucket_object\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -2248,16 +2248,43 @@
                 },
                 "type": "object"
             },
-            "IdentifierRecommendationGroupWithCounts": {
+            "IdentifierRecommendationGroup": {
                 "properties": {
                     "asset_id": {
                         "type": "integer"
+                    },
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "tenant_id": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "IdentifierRecommendationGroupWithEnrichments": {
+                "properties": {
+                    "asset_id": {
+                        "type": "integer"
+                    },
+                    "asset_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
                     },
                     "filtered_recommendations_count": {
                         "type": "integer"
                     },
                     "id": {
                         "type": "integer"
+                    },
+                    "last_updated_at": {
+                        "format": "date-time",
+                        "type": "string"
                     },
                     "name": {
                         "type": "string"
