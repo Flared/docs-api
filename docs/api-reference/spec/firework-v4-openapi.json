@@ -3648,7 +3648,14 @@
             "title": "Type"
           },
           "alert_channel_id": {
-            "type": "integer",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Alert Channel Id"
           }
         },
@@ -3902,8 +3909,7 @@
         },
         "type": "object",
         "required": [
-          "status",
-          "message"
+          "status"
         ],
         "title": "AlertChannelState"
       },
