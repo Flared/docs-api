@@ -1,0 +1,325 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Flare",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "modeToggle": {
+    "default": "dark"
+  },
+  "favicon": "/logo/favicon.svg",
+  "colors": {
+    "primary": "#485fe0",
+    "light": "#8594ea",
+    "dark": "#485fe0",
+    "anchors": {
+      "from": "#485fe0",
+      "to": "#8594ea"
+    }
+  },
+  "theme": "venus",
+  "layout": "topnav",
+  "background": {
+    "style": "gradient"
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true,
+    "raiseIssue": true
+  },
+  "api": {
+    "baseUrl": [
+      "http://api.flare.io/"
+    ],
+    "auth": {
+      "method": "bearer"
+    },
+    "playground": {
+      "mode": "show"
+    }
+  },
+  "topbarCtaButton": {
+    "name": "Back to Flare",
+    "url": "https://app.flare.io/"
+  },
+  "topbarLinks": [
+    {
+      "name": "Platform Status",
+      "url": "https://status.flare.io"
+    }
+  ],
+  "topAnchor": {
+    "name": "API Documentation",
+    "icon": "code"
+  },
+  "anchors": [
+    {
+      "name": "Product Documentation",
+      "icon": "book-open-cover",
+      "url": "https://docs.flare.io/"
+    },
+    {
+      "name": "Research Center",
+      "icon": "flask",
+      "url": "https://research.flare.io/"
+    }
+  ],
+  "primaryTab": {
+    "name": "Guides"
+  },
+  "tabs": [
+    {
+      "name": "Endpoints",
+      "url": "api-reference"
+    },
+    {
+      "name": "Changelog",
+      "url": "changelog"
+    }
+  ],
+  "search": {
+    "location": "side"
+  },
+  "navigation": [
+    {
+      "group": "Introduction",
+      "pages": [
+        "introduction/getting-started",
+        "snippets/snippet-intro"
+      ]
+    },
+    {
+      "group": "Base Concepts",
+      "pages": [
+        "concepts/authentication",
+        "concepts/rate-limits-and-quotas",
+        "concepts/errors",
+        "concepts/paging",
+        "concepts/authentication",
+        "concepts/paging"
+      ]
+    },
+    {
+      "group": "SDK",
+      "pages": [
+        "sdk/python",
+        "sdk/go"
+      ]
+    },
+    {
+      "group": "Advanced",
+      "pages": [
+        "advanced/event-source-filters"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/global-search",
+        "guides/tenant-events",
+        "guides/credentials-export-domain",
+        "guides/cookie-monitoring",
+        "guides/entity-endpoint",
+        "guides/cookie-monitoring"
+      ]
+    },
+    {
+      "group": "Authentication API",
+      "pages": [
+        {
+          "group": "Tokens",
+          "pages": [
+            "api-reference/tokens/endpoints/generate",
+            "api-reference/tokens/endpoints/test"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Leaked Credentials API",
+      "pages": [
+        {
+          "group": "Credentials",
+          "pages": [
+            "api-reference/leaksdb/endpoints/get-credentials",
+            "api-reference/leaksdb/endpoints/post-credentials-search"
+          ]
+        },
+        {
+          "group": "Sources",
+          "pages": [
+            "api-reference/leaksdb/endpoints/get-sources",
+            "api-reference/leaksdb/endpoints/get-source"
+          ]
+        },
+        {
+          "group": "Identities",
+          "pages": [
+            "api-reference/leaksdb/endpoints/post-by-accounts"
+          ]
+        },
+        {
+          "group": "Cookies",
+          "pages": [
+            "api-reference/leaksdb/endpoints/post-cookies-search"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Events API",
+      "pages": [
+        {
+          "group": "Events",
+          "pages": [
+            "api-reference/v2/endpoints/activities/get-activities-",
+            "api-reference/v2/endpoints/activities/get-activities--ai_assistance",
+            "api-reference/v4/endpoints/event-actions"
+          ]
+        },
+        {
+          "group": "Event Feeds",
+          "pages": [
+            "api-reference/v4/endpoints/current-tenant-feed",
+            "api-reference/v2/endpoints/me/get-mefeedcredentials",
+            "api-reference/v3/endpoints/identifiers/get-identifiers-feedcredentials",
+            "api-reference/v4/endpoints/identifier-feed",
+            "api-reference/v4/endpoints/identifier-group-feed"
+          ]
+        },
+        {
+          "group": "Global Search",
+          "pages": [
+            "api-reference/v4/endpoints/global-search"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Management API",
+      "pages": [
+        {
+          "group": "Identifiers",
+          "pages": [
+            "api-reference/v3/endpoints/identifiers/get-identifiers",
+            "api-reference/v2/endpoints/identifiers/post-assets",
+            "api-reference/v2/endpoints/identifiers/put-assets",
+            "api-reference/v3/endpoints/identifiers/get-identifiers-1",
+            "api-reference/v2/endpoints/identifiers/delete-assets",
+            "api-reference/v2/endpoints/identifiers/post-assets-toggle"
+          ]
+        },
+        {
+          "group": "Identifier Groups",
+          "pages": [
+            "api-reference/v2/endpoints/identifiers/get-assetsgroups",
+            "api-reference/v2/endpoints/identifiers/post-assetsgroups",
+            "api-reference/v2/endpoints/identifiers/get-assetsgroups-1",
+            "api-reference/v2/endpoints/identifiers/delete-assetsgroups"
+          ]
+        },
+        {
+          "group": "Alerts",
+          "pages": [
+            "api-reference/v2/endpoints/identifiers/get-assets-alerts",
+            "api-reference/v2/endpoints/identifiers/post-assets-alerts",
+            "api-reference/v2/endpoints/identifiers/put-assets-alerts",
+            "api-reference/v2/endpoints/identifiers/delete-assets-alerts",
+            "api-reference/v2/endpoints/identifiers/get-assetsgroups-alerts",
+            "api-reference/v2/endpoints/identifiers/post-assetsgroups-alerts",
+            "api-reference/v2/endpoints/identifiers/put-assetsgroups-alerts",
+            "api-reference/v2/endpoints/identifiers/delete-assetsgroups-alerts"
+          ]
+        },
+        {
+          "group": "Current User",
+          "pages": [
+            "api-reference/v2/endpoints/me/get-meprofile",
+            "api-reference/v2/endpoints/me/get-metenants",
+            "api-reference/v2/endpoints/me/put-meprofile"
+          ]
+        },
+        {
+          "group": "Organization Members",
+          "pages": [
+            "api-reference/v2/endpoints/organizations/get-organizations-members",
+            "api-reference/v2/endpoints/organizations/post-organizations-members",
+            "api-reference/v2/endpoints/organizations/get-organizations-members-1",
+            "api-reference/v2/endpoints/organizations/put-organizations-members",
+            "api-reference/v2/endpoints/organizations/post-organizations-members-enable",
+            "api-reference/v2/endpoints/organizations/post-organizations-members-disable",
+            "api-reference/v2/endpoints/organizations/get-organizations-members-tenants",
+            "api-reference/v2/endpoints/organizations/post-organizations-members-permissions"
+          ]
+        },
+        {
+          "group": "Reporting",
+          "pages": [
+            "api-reference/v2/endpoints/reporting/get-reportingreports",
+            "api-reference/v2/endpoints/reporting/post-reportingreports",
+            "api-reference/v2/endpoints/reporting/get-reportingreports-1",
+            "api-reference/v2/endpoints/reporting/patch-reportingreports",
+            "api-reference/v2/endpoints/reporting/delete-reportingreports",
+            "api-reference/v2/endpoints/reporting/post-reportingreports-archive",
+            "api-reference/v2/endpoints/reporting/get-reportingreports-download"
+          ]
+        },
+        {
+          "group": "Tenants",
+          "pages": [
+            "api-reference/v2/endpoints/organizations/get-organizations-tenants",
+            "api-reference/v2/endpoints/organizations/post-organizations-tenants",
+            "api-reference/v2/endpoints/tenants/get-tenants",
+            "api-reference/v2/endpoints/tenants/put-tenants",
+            "api-reference/v2/endpoints/tenants/post-tenants-archive",
+            "api-reference/v2/endpoints/tenants/get-tenants-users",
+            "api-reference/v2/endpoints/tenants/post-tenants-users",
+            "api-reference/v2/endpoints/tenants/delete-tenants-users"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Deprecated APIs",
+      "pages": [
+        {
+          "group": "Global Search",
+          "pages": [
+            "api-reference/v2/endpoints/search/get-search",
+            "api-reference/v2/endpoints/search/post-search"
+          ]
+        },
+        {
+          "group": "Identities",
+          "pages": [
+            "api-reference/leaksdb/endpoints/get-by-domain",
+            "api-reference/leaksdb/endpoints/get-by-keyword",
+            "api-reference/leaksdb/endpoints/get-by-password"
+          ]
+        },
+        {
+          "group": "Event Feeds",
+          "pages": [
+            "api-reference/v2/endpoints/me/get-mefeed",
+            "api-reference/v3/endpoints/identifiers/get-identifiers-feedcredentials",
+            "api-reference/v2/endpoints/identifiers/get-assets-feed",
+            "api-reference/v2/endpoints/identifiers/get-assetsgroups-feed"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Changelog",
+      "pages": [
+        "changelog/overview"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "website": "https://flare.io/",
+    "linkedin": "https://www.linkedin.com/company/flare-io",
+    "github": "https://github.com/flared",
+    "youtube": "https://www.youtube.com/@flarecybersecurity"
+  }
+}

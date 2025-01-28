@@ -1,0 +1,170 @@
+---
+title: 'Authentication'
+---
+
+Flare's API is available at `https://api.flare.io`.
+Authentication is handled through two components: **API tokens** for accessing endpoints and **API keys** for generating those tokens.
+
+## Authentication Objects and Purpose
+
+<CardGroup cols={1}>
+
+<Card title="API Key" icon="key">
+    A permanent credential used to generate API tokens. Does not expire.
+</Card>
+
+<Card title="API Token" icon="file-shield">
+    A temporary credential used to access API endpoints. Expires after 1 hour.
+</Card>
+
+</CardGroup>
+
+## Authentication Steps
+
+<CardGroup cols={3}>
+
+<Card
+  title="Obtain an API Key"
+  icon="square-1"
+  href="#1-obtaining-an-api-key"
+>
+    Generate from the profile page
+</Card>
+
+<Card
+  title="Generate an API Token"
+  icon="square-2"
+  href="#2-obtaining-an-api-token"
+>
+    Use your API key to obtain a token
+</Card>
+
+<Card
+  title="Access API Endpoints"
+  icon="square-3"
+  href="#3-access-an-api-endpoint"
+>
+    Make requests with your API token
+</Card>
+
+</CardGroup>
+
+
+### 1 - Obtaining an API Key
+
+Visit the [Profile page](https://app.flare.io/#/profile) and navigate to the "API Keys" section to generate an API key.
+
+<Frame
+  caption="Sidebar -> Configure -> Profile -> API Keys (bottom)"
+  className="flex justify-center"
+>
+  <img src="/images/introduction/authentication/api-key-create.png" />
+</Frame>
+
+Your API key inherits the permissions of your user account:
+- Access to tenants you can access
+- Organization administrator privileges if you are an organization administrator
+
+
+### 2 - Obtaining an API Token
+
+Generate API tokens using your API key through the 
+[tokens/generate <Icon icon="code" size={16} />](/api-reference/tokens/endpoints/generate)
+endpoint.
+
+<CodeGroup>
+```bash cURL example
+curl --request POST \
+  --url https://api.flare.io/tokens/generate \
+  --header 'Authorization: <api-key>'
+```
+
+</CodeGroup>
+
+### 3 - Access an API Endpoint
+
+Include your API token in requests by setting the `Authorization: Bearer <api-token>` header.
+
+You can verify your API token using the
+[tokens/test <Icon icon="code" size={16} />](/api-reference/tokens/endpoints/test)
+endpoint.
+
+<CodeGroup>
+
+```bash cURL example
+curl --request GET \
+  --url https://api.flare.io/tokens/test \
+  --header 'Authorization: Bearer <api-token>'
+```
+
+</CodeGroup>
+
+## Finding Tenant IDs
+
+Access your tenant IDs by visiting the [Profile page](https://app.flare.io/#/profile) and navigating to the "Tenants" section.
+
+<Frame
+  caption="Sidebar -> Configure -> Profile -> Tenants"
+  className="flex justify-center"
+>
+  <img src="/images/introduction/authentication/profile-tenants.png" />
+</Frame>
+
+## End-to-End Examples
+
+Here are complete authentication examples in different programming languages:
+
+<AccordionGroup>
+
+<Accordion title="Python Example">
+```python
+import os
+import requests
+
+
+api_key = os.environ.get("FLARE_API_KEY")
+if not api_key:
+    raise Exception("Please provide an API key")
+
+# Generate the API token
+token: str = requests.post(
+    "https://api.flare.io/tokens/generate",
+    headers={
+        "Authorization": api_key,
+    },
+).json()["token"]
+
+# Use the token to access the testing endpoint
+resp = requests.get(
+    "https://api.flare.io/tokens/test",
+    headers={
+        "Authorization": f"Bearer {token}",
+    },
+)
+print(resp.json())
+```
+</Accordion>
+
+<Accordion title="Python SDK Example">
+```python Python SDK
+import os
+
+from flareio import FlareApiClient
+
+
+api_key = os.environ.get("FLARE_API_KEY")
+if not api_key:
+    raise Exception("Please provide an API key")
+
+client = FlareApiClient(api_key=api_key)
+
+# Generate the API token
+token: str = client.generate_token()
+
+# Use the token to access the testing endpoint
+resp = client.get("/tokens/test")
+print(resp.json())
+```
+</Accordion>
+
+</AccordionGroup>

@@ -1,0 +1,109 @@
+---
+title: "Monitor Leaked Cookies for Your Domain (beta)"
+---
+
+import GatedAccessFeature from '/snippets/gated-access-feature.mdx';
+
+<GatedAccessFeature />
+
+Flare's
+[Leaked Cookies API <Icon icon="code" size={16} />](/api-reference/leaksdb/endpoints/post-cookies-search)
+allows you to search for cookies matching your domains found in stealer logs.
+Integrators can use this API to identify and invalidate sessions before they are taken over.
+
+This guide will explain how to use the Leaked Cookies API to monitor for newly found cookies and invalidate
+their sessions.
+
+## Prerequisites
+
+- Cookie monitoring must be enabled for your tenant. This feature must be activated by Flare Support.
+- Access to a mechanism for verifying cookie validity.
+- Access to a mechanism for invalidating cookies.
+
+## Steps
+
+<Steps>
+
+  <Step title="Fetch one page of results">
+    Use the `cookies/_search` endpoint to fetch one page of results.
+
+    An empty page of results indicates that you have viewed all cookies.
+  </Step>
+
+  <Step title="Verify and Invalidate">
+    Loop through the response's items to verify each cookie's validity and invalidate it if necessary.
+  </Step>
+
+  <Step title="Rate Limit and Repeat">
+      Wait one second to avoid exceeding the API rate limit. Then, return to step 1 to fetch the next page.
+  </Step>
+
+</Steps>
+
+## Full Project Template
+
+Flare maintains a complete project example on GitHub:
+- https://github.com/Flared/cookie-monitoring
+
+This template can serve as a starting point for implementing automated session revocation in your organization. 
+
+## End-to-End API Example
+
+This end-to-end example demonstrates implementation in Python.
+
+<AccordionGroup>
+
+<Accordion title="Python SDK Example">
+```python
+import os
+import time
+
+from datetime import datetime
+from datetime import timedelta
+from datetime import timezone
+from flareio import FlareApiClient
+
+
+api_client = FlareApiClient(
+    api_key=os.environ["FLARE_API_KEY"],
+)
+
+last_from: str | None = None
+fetched_pages: int = 0
+
+for resp in api_client.scroll(
+    method="POST",
+    url="/leaksdb/v2/cookies/_search",
+    json={
+        "from": last_from,
+        "domain": "scatterholt.com",
+        "paths": ["/", "/login"],
+        "names": ["session"],
+        "expires_after": datetime.now(
+            tz=timezone.utc,
+        ).isoformat(),  # Search for cookies not yet expired
+        "imported_after": (
+            datetime.now(tz=timezone.utc) - timedelta(days=90)
+        ).isoformat(),
+    },
+):
+    # Rate limiting.
+    time.sleep(1)
+
+    resp_data: dict = resp.json()
+
+    fetched_pages += 1
+    num_results: int = len(resp_data["items"])
+    print(f"Fetched page {fetched_pages} with {num_results} results...")
+
+    # Save the last "next" value.
+    last_from = resp_data.get("next") or last_from
+
+    # Iterate through cookies in the current page
+    for cookie in resp_data["items"]:
+        # Invalidate the cookie here
+        print(f"Cookie Value: {cookie['value']}")
+```
+</Accordion>
+
+</AccordionGroup>
