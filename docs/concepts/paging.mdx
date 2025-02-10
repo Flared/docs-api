@@ -54,6 +54,11 @@ This pattern pairs the `from` request parameter to the `next` response field.
     to fetch new results the next day.
 </ResponseField>
 
+## Page size vs number of returned items
+
+Flare APIs can return less results than the requested page size.
+This is normal and you should assume that there are still results until you reach an empty page.
+
 ## End-to-End Examples
 
 These are end-to-end examples in various programming languages.
