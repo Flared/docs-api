@@ -57,7 +57,7 @@ This pattern pairs the `from` request parameter to the `next` response field.
 ## Page size vs number of returned items
 
 Flare APIs can return less results than the requested page size.
-This is normal and you should assume that there are still results until you reach an empty page.
+This is normal and you should assume that there are still results until you reach a page where next is null.
 
 ## End-to-End Examples
 
