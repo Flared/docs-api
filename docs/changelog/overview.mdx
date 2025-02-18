@@ -12,6 +12,29 @@ This page lists changes to Flare's API.
 Release notes for the Flare Platform can be found on the [product documentation website](https://docs.flare.io/releases).
 </Note>
 
+<Update label="2024-10-22" description="Python SDK - v0.2.0">
+  Released version 0.2.0 of the
+  [Python SDK <Icon icon="book" size={16} />](/sdk/python).
+
+  This release adds a `from_env` method to `FlareApiClient`.
+
+  This allows the creation of a client from the following environment variables:
+  - `FLARE_API_KEY="<key>"`
+  - `FLARE_TENANT_ID="<tenant_id>"`
+
+  Then, the client can be created using:
+  ```python
+  from flareio import FlareApiClient
+
+  client = FlareApiClient.from_env()
+  ```
+
+  The following command can be used to upgrade:
+  ```shell
+  pip install flareio>=0.2.0
+  ```
+</Update>
+
 <Update label="2025-01" description="API - January 2025">
   Modified the
   [retrieve event <Icon icon="code" size={16} />](/api-reference/v2/endpoints/activities/get-activities-)
