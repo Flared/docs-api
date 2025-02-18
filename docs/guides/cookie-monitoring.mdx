@@ -55,6 +55,7 @@ This is an end-to-end example in Python.
 
 <Accordion title="Python SDK Example">
 ```python
+import json
 import os
 import time
 
@@ -70,6 +71,7 @@ api_client = FlareApiClient(
 
 last_from: str | None = None
 fetched_pages: int = 0
+fetch_full_event: bool = False
 
 for resp in api_client.scroll(
     method="POST",
@@ -88,7 +90,7 @@ for resp in api_client.scroll(
     },
 ):
     # Rate limiting.
-    time.sleep(1)
+    time.sleep(0.2)
 
     resp_data: dict = resp.json()
 
@@ -101,8 +103,20 @@ for resp in api_client.scroll(
 
     # Iterate on cookies in the current page
     for cookie in resp_data["items"]:
-        # Invalidate the cookie here
+        # Invalidate the cookie here...
         print(f"Cookie Value: {cookie['value']}")
+
+        # Optionally fetch more information about how it was leaked...
+        if fetch_full_event:
+            time.sleep(0.2)
+            full_event = api_client.get(
+                url="/firework/v2/activities/",
+                params={
+                    "uid": cookie["stealer_log_id"],
+                },
+            ).json()["activity"]
+            user_infomation = full_event["data"]["user_information"]
+            print(f"User Info: {json.dumps(user_infomation)}")
 ```
 </Accordion>
 
