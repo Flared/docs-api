@@ -115,8 +115,11 @@ for resp in api_client.scroll(
                     "uid": cookie["event_uid"],
                 },
             ).json()["activity"]
+            malware_information = full_event["data"]["malware_information"]
+            print(f"Malware Info: {json.dumps(malware_information)}")
             user_infomation = full_event["data"]["user_information"]
             print(f"User Info: {json.dumps(user_infomation)}")
+            print("--")
 ```
 </Accordion>
 
