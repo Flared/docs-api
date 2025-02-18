@@ -38,6 +38,26 @@ resp = client.get("/tokens/test")
 print(resp.json())
 ```
 
+## Creating a client from environment variables
+
+The Flare SDK automatically recognizes the `FLARE_API_KEY` and `FLARE_TENANT_ID` environment variables.
+
+For example, you may expose the variables, and then create an API client from them:
+```shell
+export FLARE_API_KEY="<api-key>"
+export FLARE_TENANT_ID="<tenant-id>"
+```
+
+```python
+from flareio import FlareApiClient
+
+client = FlareApiClient.from_env()
+
+resp = client.get("/tokens/test")
+
+print(resp.json())
+```
+
 ## Paging Util
 
 The `FlareApiClient` has a `scroll` method that can be used with endpoints that support the
