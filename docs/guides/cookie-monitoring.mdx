@@ -112,7 +112,7 @@ for resp in api_client.scroll(
             full_event = api_client.get(
                 url="/firework/v2/activities/",
                 params={
-                    "uid": cookie["stealer_log_id"],
+                    "uid": cookie["evend_uid"],
                 },
             ).json()["activity"]
             user_infomation = full_event["data"]["user_information"]
