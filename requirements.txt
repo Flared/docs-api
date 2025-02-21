@@ -5,4 +5,4 @@ python-frontmatter==1.1.0
 requests==2.32.3
 pytest==8.3.2
 types-requests==2.32.0.20240712
-flareio>=0.2.1
+flareio>=0.2.3
