@@ -46,15 +46,12 @@ These are end-to-end examples in various programming languages.
 <Accordion title="Python SDK Example">
 ```python
 import datetime
-import os
 import time
 
 from flareio import FlareApiClient
 
 
-api_client = FlareApiClient(
-    api_key=os.environ["FLARE_API_KEY"],
-)
+api_client = FlareApiClient.from_env()
 
 from_timestamp: str = (
     datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(hours=1)
@@ -106,6 +103,8 @@ for resp in api_client.scroll(
 
         full_data = event_response.json()
         print(f"Here is the full data of the event: {full_data}")
+
+print(f"The next execution could resume using {last_from=}.")
 ```
 </Accordion>
 
