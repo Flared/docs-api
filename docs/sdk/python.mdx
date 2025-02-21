@@ -86,8 +86,8 @@ for resp in api_client.scroll(
         "from": None,
     },
 ):
-    # Rate limiting.
-    time.sleep(1)
+    # Rate limiting (default).
+    time.sleep(0.25)
 
     # Get results from the response
     resp_data = resp.json()

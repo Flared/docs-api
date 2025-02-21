@@ -89,8 +89,8 @@ for resp in api_client.scroll(
         ).isoformat(),
     },
 ):
-    # Rate limiting.
-    time.sleep(0.2)
+    # Rate limiting (default).
+    time.sleep(0.25)
 
     resp_data: dict = resp.json()
 
