@@ -56,7 +56,6 @@ This is an end-to-end example in Python.
 <Accordion title="Python SDK Example">
 ```python
 import json
-import os
 import time
 
 from datetime import datetime
@@ -65,9 +64,7 @@ from datetime import timezone
 from flareio import FlareApiClient
 
 
-api_client = FlareApiClient(
-    api_key=os.environ["FLARE_API_KEY"],
-)
+api_client = FlareApiClient.from_env()
 
 last_from: str | None = None
 fetched_pages: int = 0
@@ -120,6 +117,8 @@ for resp in api_client.scroll(
             user_infomation = full_event["data"]["user_information"]
             print(f"User Info: {json.dumps(user_infomation)}")
             print("--")
+
+print(f"The next execution could resume using {last_from=}.")
 ```
 </Accordion>
 
