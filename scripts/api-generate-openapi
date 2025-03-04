@@ -17,7 +17,13 @@ rm -f ${SPEC_DIR}/firework-v2-*
 
 ${FETCH_SPEC_FILE_SCRIPT} v2 | jq > ${SPEC_DIR}/firework-v2-swagger.json
 
-openapi-generator \
+if which openapi-generator; then
+    OPENAPI_GENERATOR_BIN="openapi-generator"
+else
+    OPENAPI_GENERATOR_BIN="openapi-generator-cli"
+fi
+
+$OPENAPI_GENERATOR_BIN \
     generate \
         -g openapi \
         -i ${SPEC_DIR}/firework-v2-swagger.json \
@@ -34,7 +40,7 @@ rm -f ${SPEC_DIR}/firework-v3-*
 
 ${FETCH_SPEC_FILE_SCRIPT} v3 | jq > ${SPEC_DIR}/firework-v3-swagger.json
 
-openapi-generator \
+$OPENAPI_GENERATOR_BIN \
     generate \
         -g openapi \
         -i ${SPEC_DIR}/firework-v3-swagger.json \
