@@ -1,6 +1,28 @@
 ---
-title: "Generate Threat Flow Report"
+title: "Generate a Threat Flow Report"
 ---
+
+<Steps>
+
+  <Step title="Create a report request">
+    Use the `threat_flow/reports/request` create a new report request.
+
+    This endpoint returns an id that can be used to fetch the report when it is ready.
+  </Step>
+
+  <Step title="Verify for the report's status">
+    Use the `threat_flow/reports/requests/{request_id}` to verify the status.
+
+    If the report is ready, this endpoint will return an object with the `status` property set to `completed.
+
+    If the report is not yet completed, wait 5 seconds and call this endpoint again.
+  </Step>
+
+  <Step title="Access the report">
+    On success, access the `report` property of the previous response to view the report.
+  </Step>
+
+</Steps>
 
 ## End-to-End API Example
 
@@ -10,59 +32,54 @@ This is an end-to-end example in Python.
 
 <Accordion title="Python SDK Example">
 ```python
-#!/usr/bin/env python3
 import json
 import time
-from datetime import datetime
 
-import click
+from datetime import datetime
+from datetime import timedelta
 from flareio import FlareApiClient
 
 
-@click.command()
-def main() -> None:
-    client = FlareApiClient.from_env()
+api_client = FlareApiClient.from_env()
 
-    resp = client.post(
-        "/firework/v4/threat_flow/reports/requests",
-        json={
-            "report_title": f"XSS report - {datetime.now().isoformat()}",
-            "question": "xss vulnerability in banks",
-            "time_range_type": "last_7d",
-            "included_keywords": ["xss"],
-            "excluded_keywords": ["canada"],
-        },
+# Create a report request
+report_request_resp = api_client.post(
+    "/firework/v4/threat_flow/reports/requests",
+    json={
+        "report_title": f"XSS report - {datetime.now().isoformat()}",
+        "question": "xss vulnerability in banks",
+        "time_range_type": "last_1m",
+        "included_keywords": ["xss"],
+        "excluded_keywords": ["canada"],
+    },
+)
+report_request_resp.raise_for_status()
+request_id: str = report_request_resp.json()["request_id"]
+print(f"Created report request: {request_id=}")
+
+# Wait for the report to be completed
+timeout = datetime.now() + timedelta(minutes=5)
+while datetime.now() < timeout:
+    report_resp = api_client.get(
+        f"/firework/v4/threat_flow/reports/requests/{request_id}",
     )
-    resp.raise_for_status()
+    report_resp.raise_for_status()
+    report_status = report_resp.json()["status"]
 
-    request_id = resp.json()["request_id"]
-    click.echo(f"Successfully created request with id : {request_id}")
+    if report_status == "completed":
+        break
+    elif report_status != "processing":
+        raise Exception(f"Unexpected report status: {report_status=}")
 
-    timeout = time.time() + 60 * 5  # 5 minutes from now
-    while time.time() < timeout:
-        time.sleep(5)
-        get_resp = client.get(
-            f"/firework/v4/threat_flow/reports/requests/{request_id}",
-        )
-        resp.raise_for_status()
+    print("Waiting for report to be completed...")
+    time.sleep(5)
+else:
+    raise Exception("Failed to create report within 5 minutes")
 
-        if get_resp.json()["status"] == "completed":
-            break
-
-        click.echo(f"Get report response : {get_resp.text}")
-    else:
-        return click.echo(
-            f"Finished with errors:\nTime out, couldn't find a report associated with the request_id : {request_id}"
-        )
-
-    report = get_resp.json()["report"]
-    return click.echo(
-        f"Completed with success:\nReport :\n{json.dumps(report, indent=4)}"
-    )
-
-
-if __name__ == "__main__":
-    main()
+# Display the report
+report: dict = report_resp.json()["report"]
+print("Report:")
+print(json.dumps(report, indent=4))
 ```
 </Accordion>
 
