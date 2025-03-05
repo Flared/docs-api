@@ -24,7 +24,8 @@
             "credentials",
             "favicon",
             "screenshot",
-            "azure_tenant"
+            "azure_tenant",
+            "actor"
           ],
           "example": "github_repository",
           "type": "string"
@@ -208,29 +209,6 @@
       },
       "type": "object"
     },
-    "BulkAction": {
-      "properties": {
-        "error": {
-          "type": "string"
-        },
-        "id": {
-          "type": "integer"
-        },
-        "status": {
-          "type": "string"
-        },
-        "target_types": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "type": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "BulkActionFilters": {
       "properties": {
         "q": {
@@ -320,6 +298,9 @@
           "type": "array"
         },
         "feed_id": {
+          "type": "integer"
+        },
+        "feed_owner_id": {
           "type": "integer"
         },
         "fetching_progress": {
@@ -482,6 +463,9 @@
     "IdentifierGroup": {
       "properties": {
         "feed_id": {
+          "type": "integer"
+        },
+        "feed_owner_id": {
           "type": "integer"
         },
         "group_type": {
@@ -681,12 +665,18 @@
         "conversation_id": {
           "type": "integer"
         },
+        "conversation_uid": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
         "last_crawled_at": {
           "format": "date-time",
           "type": "string"
+        },
+        "member_count": {
+          "type": "integer"
         },
         "message_count": {
           "type": "integer"
@@ -1087,7 +1077,8 @@
               "credentials",
               "favicon",
               "screenshot",
-              "azure_tenant"
+              "azure_tenant",
+              "actor"
             ],
             "in": "query",
             "name": "target_type",
@@ -1112,7 +1103,8 @@
               "credentials",
               "favicon",
               "screenshot",
-              "azure_tenant"
+              "azure_tenant",
+              "actor"
             ],
             "in": "query",
             "name": "source_type",
@@ -1244,7 +1236,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, forum_topic, ransomleak, forum_post, chat_message, listing, bot, stealer_log, financial_data, forum_profile, blog_post\n- open_web: stack_exchange, source_code_files, bucket_object, google, service, paste, bucket, social_media, source_code_secrets\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, chat_message, forum_topic, forum_post, ransomleak, seller, blog_post, forum_profile, stealer_log, financial_data, bot\n- open_web: source_code_secrets, bucket_object, paste, bucket, service, stack_exchange, source_code_files, social_media, google\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -1505,7 +1497,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: seller, forum_topic, ransomleak, forum_post, chat_message, listing, bot, stealer_log, financial_data, forum_profile, blog_post\n- open_web: stack_exchange, source_code_files, bucket_object, google, service, paste, bucket, social_media, source_code_secrets\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, chat_message, forum_topic, forum_post, ransomleak, seller, blog_post, forum_profile, stealer_log, financial_data, bot\n- open_web: source_code_secrets, bucket_object, paste, bucket, service, stack_exchange, source_code_files, social_media, google\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -1745,7 +1737,8 @@
               "credentials",
               "favicon",
               "screenshot",
-              "azure_tenant"
+              "azure_tenant",
+              "actor"
             ],
             "in": "query",
             "name": "related_type",
@@ -1907,6 +1900,12 @@
             "type": "string"
           },
           {
+            "default": false,
+            "in": "query",
+            "name": "exact_matches_only",
+            "type": "boolean"
+          },
+          {
             "in": "query",
             "name": "parent_group_id",
             "type": "string"
@@ -2007,6 +2006,12 @@
           {
             "default": false,
             "in": "query",
+            "name": "ignore_empty_groups",
+            "type": "boolean"
+          },
+          {
+            "default": false,
+            "in": "query",
             "name": "is_disabled",
             "type": "boolean"
           },
@@ -2014,6 +2019,12 @@
             "in": "query",
             "name": "q",
             "type": "string"
+          },
+          {
+            "default": false,
+            "in": "query",
+            "name": "exact_matches_only",
+            "type": "boolean"
           },
           {
             "in": "query",
@@ -2205,6 +2216,12 @@
             "in": "query",
             "name": "q",
             "type": "string"
+          },
+          {
+            "default": false,
+            "in": "query",
+            "name": "exact_matches_only",
+            "type": "boolean"
           },
           {
             "default": 10,
