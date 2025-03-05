@@ -47,7 +47,8 @@
               "guides/global-search",
               "guides/tenant-events",
               "guides/credentials-export-domain",
-              "guides/cookie-monitoring"
+              "guides/cookie-monitoring",
+              "guides/threat-flow-report"
             ]
           }
         ]
@@ -207,6 +208,18 @@
                   "api-reference/v2/endpoints/tenants/get-tenants-users",
                   "api-reference/v2/endpoints/tenants/post-tenants-users",
                   "api-reference/v2/endpoints/tenants/delete-tenants-users"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Threat-Flow API",
+            "pages": [
+              {
+                "group": "Reports",
+                "pages": [
+                  "api-reference/v4/endpoints/create-report-request",
+                  "api-reference/v4/endpoints/get-report-request"
                 ]
               }
             ]

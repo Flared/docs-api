@@ -1,0 +1,69 @@
+---
+title: "Generate Threat Flow Report"
+---
+
+## End-to-End API Example
+
+This is an end-to-end example in Python.
+
+<AccordionGroup>
+
+<Accordion title="Python SDK Example">
+```python
+#!/usr/bin/env python3
+import json
+import time
+from datetime import datetime
+
+import click
+from flareio import FlareApiClient
+
+
+@click.command()
+def main() -> None:
+    client = FlareApiClient.from_env()
+
+    resp = client.post(
+        "/firework/v4/threat_flow/reports/requests",
+        json={
+            "report_title": f"XSS report - {datetime.now().isoformat()}",
+            "question": "xss vulnerability in banks",
+            "time_range_type": "last_7d",
+            "included_keywords": ["xss"],
+            "excluded_keywords": ["canada"],
+        },
+    )
+    resp.raise_for_status()
+
+    request_id = resp.json()["request_id"]
+    click.echo(f"Successfully created request with id : {request_id}")
+
+    timeout = time.time() + 60 * 5  # 5 minutes from now
+    while time.time() < timeout:
+        time.sleep(5)
+        get_resp = client.get(
+            f"/firework/v4/threat_flow/reports/requests/{request_id}",
+        )
+        resp.raise_for_status()
+
+        if get_resp.json()["status"] == "completed":
+            break
+
+        click.echo(f"Get report response : {get_resp.text}")
+    else:
+        return click.echo(
+            f"Finished with errors:\nTime out, couldn't find a report associated with the request_id : {request_id}"
+        )
+
+    report = get_resp.json()["report"]
+    return click.echo(
+        f"Completed with success:\nReport :\n{json.dumps(report, indent=4)}"
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+</Accordion>
+
+</AccordionGroup>
