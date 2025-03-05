@@ -1,0 +1,86 @@
+---
+title: "Generate a Threat Flow Report"
+---
+
+<Steps>
+
+  <Step title="Create a report request">
+    Use the `threat_flow/reports/request` create a new report request.
+
+    This endpoint returns an id that can be used to fetch the report when it is ready.
+  </Step>
+
+  <Step title="Verify for the report's status">
+    Use the `threat_flow/reports/requests/{request_id}` to verify the status.
+
+    If the report is ready, this endpoint will return an object with the `status` property set to `completed.
+
+    If the report is not yet completed, wait 5 seconds and call this endpoint again.
+  </Step>
+
+  <Step title="Access the report">
+    On success, access the `report` property of the previous response to view the report.
+  </Step>
+
+</Steps>
+
+## End-to-End API Example
+
+This is an end-to-end example in Python.
+
+<AccordionGroup>
+
+<Accordion title="Python SDK Example">
+```python
+import json
+import time
+
+from datetime import datetime
+from datetime import timedelta
+from flareio import FlareApiClient
+
+
+api_client = FlareApiClient.from_env()
+
+# Create a report request
+report_request_resp = api_client.post(
+    "/firework/v4/threat_flow/reports/requests",
+    json={
+        "report_title": f"XSS report - {datetime.now().isoformat()}",
+        "question": "xss vulnerability in banks",
+        "time_range_type": "last_1m",
+        "included_keywords": ["xss"],
+        "excluded_keywords": ["canada"],
+    },
+)
+report_request_resp.raise_for_status()
+request_id: str = report_request_resp.json()["request_id"]
+print(f"Created report request: {request_id=}")
+
+# Wait for the report to be completed
+timeout = datetime.now() + timedelta(minutes=5)
+while datetime.now() < timeout:
+    report_resp = api_client.get(
+        f"/firework/v4/threat_flow/reports/requests/{request_id}",
+    )
+    report_resp.raise_for_status()
+    report_status = report_resp.json()["status"]
+
+    if report_status == "completed":
+        break
+    elif report_status != "processing":
+        raise Exception(f"Unexpected report status: {report_status=}")
+
+    print("Waiting for report to be completed...")
+    time.sleep(5)
+else:
+    raise Exception("Failed to create report within 5 minutes")
+
+# Display the report
+report: dict = report_resp.json()["report"]
+print("Report:")
+print(json.dumps(report, indent=4))
+```
+</Accordion>
+
+</AccordionGroup>
