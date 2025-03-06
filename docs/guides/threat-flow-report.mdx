@@ -5,15 +5,19 @@ title: "Generate a Threat Flow Report"
 <Steps>
 
   <Step title="Create a report request">
-    Use the `threat_flow/reports/request` create a new report request.
+    Use the
+    [threat_flow/reports/request <Icon icon="code" size={16} />](/api-reference/v4/endpoints/create-report-request)
+    endpoint to create a new report request.
 
     This endpoint returns an id that can be used to fetch the report when it is ready.
   </Step>
 
   <Step title="Verify for the report's status">
-    Use the `threat_flow/reports/requests/{request_id}` to verify the status.
+    Use the
+    [/threat_flow/reports/\{report_id\} <Icon icon="code" size={16} />](/api-reference/v4/endpoints/get-report)
+    endpoint to verify the status.
 
-    If the report is ready, this endpoint will return an object with the `status` property set to `completed.
+    If the report is ready, this endpoint will return an object with the `status` property set to `completed`.
 
     If the report is not yet completed, wait 5 seconds and call this endpoint again.
   </Step>
