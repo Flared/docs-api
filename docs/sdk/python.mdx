@@ -83,7 +83,7 @@ for resp in api_client.scroll(
     method="GET",
     url="/leaksdb/v2/sources",
     params={
-        "from": None,
+        "from": last_from,
     },
 ):
     # Rate limiting (default).
@@ -106,7 +106,6 @@ print("The last value for 'next' was", last_from)
 
 The `FlareApiClient` can be initialized with a custom `requests.Session`. This allows, for example,
 to inject custom retry configuration.
-
 
 ```python Custom Session
 import requests
