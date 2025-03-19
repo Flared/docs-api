@@ -25,7 +25,8 @@
             "favicon",
             "screenshot",
             "azure_tenant",
-            "actor"
+            "actor",
+            "cve"
           ],
           "example": "github_repository",
           "type": "string"
@@ -363,6 +364,7 @@
               "forum_content",
               "blog_content",
               "profile",
+              "leaked_credential",
               "illicit_networks",
               "open_web",
               "domains",
@@ -1078,7 +1080,8 @@
               "favicon",
               "screenshot",
               "azure_tenant",
-              "actor"
+              "actor",
+              "cve"
             ],
             "in": "query",
             "name": "target_type",
@@ -1104,7 +1107,8 @@
               "favicon",
               "screenshot",
               "azure_tenant",
-              "actor"
+              "actor",
+              "cve"
             ],
             "in": "query",
             "name": "source_type",
@@ -1236,7 +1240,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, chat_message, forum_topic, forum_post, ransomleak, seller, blog_post, forum_profile, stealer_log, financial_data, bot\n- open_web: source_code_secrets, bucket_object, paste, bucket, service, stack_exchange, source_code_files, social_media, google\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, blog_post, seller, forum_topic, stealer_log, ransomleak, forum_profile, bot, forum_post, financial_data\n- open_web: bucket_object, google, source_code_files, bucket, social_media, paste, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -1269,6 +1273,7 @@
               "forum_content",
               "blog_content",
               "profile",
+              "leaked_credential",
               "illicit_networks",
               "open_web",
               "domains",
@@ -1497,7 +1502,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, chat_message, forum_topic, forum_post, ransomleak, seller, blog_post, forum_profile, stealer_log, financial_data, bot\n- open_web: source_code_secrets, bucket_object, paste, bucket, service, stack_exchange, source_code_files, social_media, google\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, blog_post, seller, forum_topic, stealer_log, ransomleak, forum_profile, bot, forum_post, financial_data\n- open_web: bucket_object, google, source_code_files, bucket, social_media, paste, stack_exchange, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -1530,6 +1535,7 @@
               "forum_content",
               "blog_content",
               "profile",
+              "leaked_credential",
               "illicit_networks",
               "open_web",
               "domains",
@@ -1738,7 +1744,8 @@
               "favicon",
               "screenshot",
               "azure_tenant",
-              "actor"
+              "actor",
+              "cve"
             ],
             "in": "query",
             "name": "related_type",

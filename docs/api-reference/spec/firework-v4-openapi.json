@@ -64,90 +64,6 @@
               "type": "integer",
               "title": "Tenant Id"
             }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
           }
         ],
         "responses": {
@@ -178,101 +94,15 @@
       "post": {
         "summary": "Create Cookie Monitoring Configuration",
         "operationId": "create_cookie_monitoring_configuration_admin_cookies_monitor_post",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CookieMonitoringConfigurationItem"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "201": {
@@ -280,6 +110,84 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actors/{actor_name}/profile": {
+      "get": {
+        "summary": "Get Actor Profile",
+        "operationId": "get_actor_profile_actors__actor_name__profile_get",
+        "parameters": [
+          {
+            "name": "actor_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Actor Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActorProfile"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actors/{actor_name}/timeline": {
+      "get": {
+        "summary": "Get Actor Timeline",
+        "operationId": "get_actor_timeline_actors__actor_name__timeline_get",
+        "parameters": [
+          {
+            "name": "actor_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Actor Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActorTimeline"
+                }
               }
             }
           },
@@ -339,6 +247,22 @@
             }
           },
           {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            }
+          },
+          {
             "name": "feed_owner_id",
             "in": "query",
             "required": false,
@@ -352,90 +276,6 @@
                 }
               ],
               "title": "Feed Owner Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
             }
           }
         ],
@@ -465,92 +305,6 @@
       "post": {
         "summary": "Create Alert",
         "operationId": "create_alert_alerts__post",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -597,90 +351,6 @@
             "schema": {
               "type": "integer",
               "title": "Alert Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
             }
           }
         ],
@@ -729,90 +399,6 @@
               "type": "integer",
               "title": "Alert Id"
             }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
           }
         ],
         "responses": {
@@ -821,6 +407,43 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get Tenant Alert",
+        "operationId": "get_tenant_alert_alerts__alert_id__get",
+        "parameters": [
+          {
+            "name": "alert_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Alert Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Alert"
+                }
               }
             }
           },
@@ -894,90 +517,6 @@
               ],
               "title": "Q"
             }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
           }
         ],
         "responses": {
@@ -1006,92 +545,6 @@
       "post": {
         "summary": "Create Channel",
         "operationId": "create_channel_alerts_channels_post",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1139,90 +592,6 @@
               "type": "integer",
               "title": "Alert Channel Id"
             }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
           }
         ],
         "responses": {
@@ -1257,90 +626,6 @@
             "schema": {
               "type": "integer",
               "title": "Alert Channel Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
             }
           }
         ],
@@ -1387,90 +672,6 @@
               "type": "integer",
               "title": "Alert Channel Id"
             }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
           }
         ],
         "responses": {
@@ -1501,101 +702,15 @@
       "post": {
         "summary": "Bulk Actions",
         "operationId": "bulk_actions_tasks__post",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/BulkActionsRequestBody"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -1621,18 +736,112 @@
         }
       }
     },
-    "/healthz/": {
+    "/integrations/credential_validations": {
       "get": {
-        "summary": "Is Api Up And Running",
-        "operationId": "is_api_up_and_running_healthz__get",
+        "summary": "Get Credential Validations",
+        "operationId": "get_credential_validations_integrations_credential_validations_get",
+        "parameters": [
+          {
+            "name": "credential_hash",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Credential Hash"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string",
-                  "title": "Response Is Api Up And Running Healthz  Get"
+                  "$ref": "#/components/schemas/PaginatedResults_CredentialValidationReponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Validate Credentials",
+        "operationId": "validate_credentials_integrations_credential_validations_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialValidationRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CredentialValidationReponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/credentials/entra-id/validate": {
+      "post": {
+        "summary": "Validate Credentials",
+        "operationId": "validate_credentials_credentials_entra_id_validate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidatedCredential"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -1644,101 +853,15 @@
       "post": {
         "summary": "Current Tenant Feed",
         "operationId": "current_tenant_feed_events_tenant__search_post",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/FeedRequestBody"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -1768,101 +891,15 @@
       "post": {
         "summary": "Global Search",
         "operationId": "global_search_events_global__search_post",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/GlobalSearchRequestBody"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -1900,90 +937,6 @@
             "schema": {
               "type": "integer",
               "title": "Identifier Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
             }
           }
         ],
@@ -2034,90 +987,6 @@
               "type": "integer",
               "title": "Identifier Group Id"
             }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
           }
         ],
         "requestBody": {
@@ -2158,92 +1027,6 @@
       "get": {
         "summary": "Fetch Filters Source Types",
         "operationId": "fetch_filters_source_types_events_filters_types_get",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -2272,92 +1055,6 @@
       "get": {
         "summary": "Fetch Filters Risk Score",
         "operationId": "fetch_filters_risk_score_events_filters_severities_get",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -2386,89 +1083,440 @@
       "post": {
         "summary": "Event Actions",
         "operationId": "event_actions_events_actions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventActionsBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/file_analysis/submit": {
+      "post": {
+        "summary": "Submit Presigned Url",
+        "operationId": "submit_presigned_url_file_analysis_submit_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileAnalysisSubmit"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/healthz/": {
+      "get": {
+        "summary": "Is Api Up And Running",
+        "operationId": "is_api_up_and_running_healthz__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "title": "Response Is Api Up And Running Healthz  Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}": {
+      "get": {
+        "summary": "Get Report",
+        "operationId": "get_report_reports__report_id__get",
         "parameters": [
           {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
+            "name": "report_id",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
-              "title": "X-Auth-Request-User-Id"
+              "title": "Report Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firework__backend__api4__reports__report_datamodels__ReportResponse"
+                }
+              }
             }
           },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/": {
+      "get": {
+        "summary": "List Reports",
+        "operationId": "list_reports_reports__get",
+        "parameters": [
           {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
+            "name": "from_",
+            "in": "query",
+            "required": false,
             "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "From "
             }
           },
           {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "exclusiveMinimum": 0,
+              "default": 20,
+              "title": "Size"
+            }
+          },
+          {
+            "name": "order_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/OrderType",
+              "default": "desc"
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/SortType",
+              "default": "updated_at"
+            }
+          },
+          {
+            "name": "report_types",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pyro__reports__report_models__ReportType"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Report Types"
+            }
+          },
+          {
+            "name": "include_archived",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Archived"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firework__backend__api4__models__PaginatedResults_Report___1"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Report",
+        "operationId": "create_report_reports__post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportCreationPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firework__backend__api4__reports__report_datamodels__ReportResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/tenant_integrations/": {
+      "get": {
+        "summary": "Get Tenant Integrations",
+        "operationId": "get_tenant_integrations_integrations_tenant_integrations__get",
+        "parameters": [
+          {
+            "name": "from_",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "From "
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Size"
+            }
+          },
+          {
+            "name": "order_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/OrderType",
+              "default": "asc"
+            }
+          },
+          {
+            "name": "tenant_id",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
+              "title": "Tenant Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResults_TenantIntegration_"
+                }
+              }
             }
           },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
-              ],
-              "title": "X-Real-Ip"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Tenant Integration",
+        "operationId": "create_tenant_integration_integrations_tenant_integrations__post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTenantIntegration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantIntegration"
+                }
+              }
             }
           },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
-              ],
-              "title": "X-Flare-Referer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/tenant_integrations/{tenant_integration_id}": {
+      "get": {
+        "summary": "Get Tenant Integration",
+        "operationId": "get_tenant_integration_integrations_tenant_integrations__tenant_integration_id__get",
+        "parameters": [
+          {
+            "name": "tenant_integration_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Tenant Integration Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantIntegration"
+                }
+              }
             }
           },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
-              ],
-              "title": "User-Agent"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update Tenant Integration",
+        "operationId": "update_tenant_integration_integrations_tenant_integrations__tenant_integration_id__put",
+        "parameters": [
+          {
+            "name": "tenant_integration_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Tenant Integration Id"
             }
           }
         ],
@@ -2477,7 +1525,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EventActionsBody"
+                "$ref": "#/components/schemas/UpdateTenantIntegration"
               }
             }
           }
@@ -2553,7 +1601,7 @@
                 {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReportType"
+                    "$ref": "#/components/schemas/pyro__threat_flow__core__reports__report_store__ReportType"
                   }
                 },
                 {
@@ -2561,90 +1609,6 @@
                 }
               ],
               "title": "Report Types"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
             }
           }
         ],
@@ -2654,7 +1618,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedResults_Report_"
+                  "$ref": "#/components/schemas/firework__backend__api4__models__PaginatedResults_Report___2"
                 }
               }
             }
@@ -2685,90 +1649,6 @@
               "type": "integer",
               "title": "Report Id"
             }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
           }
         ],
         "responses": {
@@ -2777,7 +1657,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReportResponse"
+                  "$ref": "#/components/schemas/pyro__threat_flow__web__v4__reports__models__ReportResponse"
                 }
               }
             }
@@ -2805,90 +1685,6 @@
             "schema": {
               "type": "integer",
               "title": "Report Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
             }
           }
         ],
@@ -2936,90 +1732,6 @@
               "$ref": "#/components/schemas/ThreatFlowReportDownloadFormat",
               "default": "docx"
             }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
           }
         ],
         "responses": {
@@ -3048,101 +1760,15 @@
       "post": {
         "summary": "Get Related Conversation",
         "operationId": "get_related_conversation_threat_flow_unit_summary_related_conversation_post",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/RelatedConversationRequest"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -3172,92 +1798,6 @@
       "get": {
         "summary": "List Tags",
         "operationId": "list_tags_threat_flow_tags__get",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3286,92 +1826,6 @@
       "get": {
         "summary": "Get And Create Tenant Config",
         "operationId": "get_and_create_tenant_config_threat_flow_tenant_config__get",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3398,101 +1852,15 @@
       "put": {
         "summary": "Create Or Update Tenant Config",
         "operationId": "create_or_update_tenant_config_threat_flow_tenant_config__put",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ThreatFlowTenantConfigPayload"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -3522,92 +1890,6 @@
       "put": {
         "summary": "Create Conversation Summary Request",
         "operationId": "create_conversation_summary_request_threat_flow_conversation_summary_requests__put",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -3679,90 +1961,6 @@
               "$ref": "#/components/schemas/OrderType",
               "default": "desc"
             }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
           }
         ],
         "responses": {
@@ -3793,101 +1991,15 @@
       "post": {
         "summary": "Create Report Request",
         "operationId": "create_report_request_threat_flow_reports_requests_post",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ReportRequestPayload"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -3927,90 +2039,6 @@
               "format": "uuid",
               "title": "Request Info Id"
             }
-          },
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
           }
         ],
         "responses": {
@@ -4020,252 +2048,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ReportRequestInfoResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/file_analysis/submit": {
-      "post": {
-        "summary": "Submit Presigned Url",
-        "operationId": "submit_presigned_url_file_analysis_submit_post",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FileAnalysisSubmit"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/credentials/entra-id/validate": {
-      "post": {
-        "summary": "Validate Credentials",
-        "operationId": "validate_credentials_credentials_entra_id_validate_post",
-        "parameters": [
-          {
-            "name": "X-Auth-Request-User",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-User-Id"
-            }
-          },
-          {
-            "name": "X-Auth-Request-User-Scopes",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "X-Auth-Request-User-Scopes"
-            }
-          },
-          {
-            "name": "X-Auth-Request-Tenant-Id",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "X-Auth-Request-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-real-ip",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Real-Ip"
-            }
-          },
-          {
-            "name": "x-flare-referer",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Flare-Referer"
-            }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User-Agent"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CredentialId"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidatedCredential"
                 }
               }
             }
@@ -4318,6 +2100,7 @@
           "leak",
           "leaked_data",
           "leaked_file",
+          "leaked_credential",
           "listing",
           "lookalike",
           "paste",
@@ -4334,6 +2117,106 @@
           "whois"
         ],
         "title": "ActivityModelName"
+      },
+      "ActorProfile": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "first_seen": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Seen"
+          },
+          "last_seen": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Seen"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country"
+          },
+          "active_sources": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Active Sources"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "active_sources"
+        ],
+        "title": "ActorProfile"
+      },
+      "ActorTimeline": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "interval": {
+            "$ref": "#/components/schemas/OverTimeInterval"
+          },
+          "timeline": {
+            "items": {
+              "$ref": "#/components/schemas/ActorTimelineEntry"
+            },
+            "type": "array",
+            "title": "Timeline"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "interval",
+          "timeline"
+        ],
+        "title": "ActorTimeline"
+      },
+      "ActorTimelineEntry": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Date"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "count"
+        ],
+        "title": "ActorTimelineEntry"
       },
       "Alert": {
         "properties": {
@@ -4413,6 +2296,16 @@
           "start_at": {
             "type": "string",
             "title": "Start At"
+          },
+          "identifier_scope": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IdentifierScope"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -5042,7 +2935,8 @@
           "favicon",
           "screenshot",
           "azure_tenant",
-          "actor"
+          "actor",
+          "cve"
         ],
         "title": "AssetType"
       },
@@ -5180,7 +3074,7 @@
               }
             ],
             "title": "Created After",
-            "default": "2025-03-04T15:32:54.473038Z"
+            "default": "2025-03-18T15:44:56.726208Z"
           },
           "from": {
             "anyOf": [
@@ -5219,8 +3113,15 @@
             "title": "Author Name"
           },
           "date_time": {
-            "type": "string",
-            "format": "date-time",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Date Time"
           }
         },
@@ -5252,7 +3153,7 @@
             "title": "Report Title"
           },
           "time_range_type": {
-            "$ref": "#/components/schemas/pyro__threat_flow__core__conversation_summary_request__datamodels__TimeRangeType",
+            "$ref": "#/components/schemas/TimeRangeType",
             "default": "last_24h"
           },
           "time_range_from": {
@@ -5506,6 +3407,23 @@
         ],
         "title": "CreateAlertChannel"
       },
+      "CreateTenantIntegration": {
+        "properties": {
+          "tenant_id": {
+            "type": "integer",
+            "title": "Tenant Id"
+          },
+          "params": {
+            "$ref": "#/components/schemas/EntraIDParams"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tenant_id",
+          "params"
+        ],
+        "title": "CreateTenantIntegration"
+      },
       "CredentialId": {
         "properties": {
           "credential_id": {
@@ -5518,6 +3436,74 @@
           "credential_id"
         ],
         "title": "CredentialId"
+      },
+      "CredentialValidationReponse": {
+        "properties": {
+          "tenant_integration_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tenant Integration Id"
+          },
+          "credential_hash": {
+            "type": "string",
+            "title": "Credential Hash"
+          },
+          "tenant_id": {
+            "type": "integer",
+            "title": "Tenant Id"
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/CredentialValidationStatus"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tenant_integration_id",
+          "credential_hash",
+          "tenant_id",
+          "uuid",
+          "status",
+          "updated_at"
+        ],
+        "title": "CredentialValidationReponse"
+      },
+      "CredentialValidationRequestBody": {
+        "properties": {
+          "tenant_integration_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tenant Integration Id"
+          },
+          "credential_hash": {
+            "type": "string",
+            "title": "Credential Hash"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tenant_integration_id",
+          "credential_hash"
+        ],
+        "title": "CredentialValidationRequestBody"
+      },
+      "CredentialValidationStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "valid",
+          "invalid"
+        ],
+        "title": "CredentialValidationStatus"
       },
       "CredentialsQuery": {
         "properties": {
@@ -5692,6 +3678,35 @@
           "error"
         ],
         "title": "EnrichedBulkActionTarget"
+      },
+      "EntraIDParams": {
+        "properties": {
+          "params_type": {
+            "type": "string",
+            "const": "entra_id",
+            "title": "Params Type",
+            "default": "entra_id"
+          },
+          "entra_client_id": {
+            "type": "string",
+            "title": "Entra Client Id"
+          },
+          "entra_client_secret": {
+            "type": "string",
+            "title": "Entra Client Secret"
+          },
+          "entra_tenant_id": {
+            "type": "string",
+            "title": "Entra Tenant Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "entra_client_id",
+          "entra_client_secret",
+          "entra_tenant_id"
+        ],
+        "title": "EntraIDParams"
       },
       "EventAction": {
         "properties": {
@@ -6675,6 +4690,24 @@
         ],
         "title": "IdentifierRecommendationState"
       },
+      "IdentifierScope": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "is_disabled": {
+            "type": "boolean",
+            "title": "Is Disabled",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "IdentifierScope"
+      },
       "IdentifierSourceGroup": {
         "type": "string",
         "enum": [
@@ -6796,6 +4829,16 @@
         ],
         "title": "OrderType"
       },
+      "OverTimeInterval": {
+        "type": "string",
+        "enum": [
+          "daily",
+          "weekly",
+          "monthly",
+          "yearly"
+        ],
+        "title": "OverTimeInterval"
+      },
       "PagedCookieConfigurations": {
         "properties": {
           "items": {
@@ -6879,6 +4922,34 @@
           "next"
         ],
         "title": "PaginatedResults[ConversationSummaryRequestResponse]"
+      },
+      "PaginatedResults_CredentialValidationReponse_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CredentialValidationReponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next"
+        ],
+        "title": "PaginatedResults[CredentialValidationReponse]"
       },
       "PaginatedResults_EnrichedBulkAction_": {
         "properties": {
@@ -6964,11 +5035,11 @@
         ],
         "title": "PaginatedResults[PartialAlertChannel]"
       },
-      "PaginatedResults_Report_": {
+      "PaginatedResults_TenantIntegration_": {
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/Report"
+              "$ref": "#/components/schemas/TenantIntegration"
             },
             "type": "array",
             "title": "Items"
@@ -6990,7 +5061,7 @@
           "items",
           "next"
         ],
-        "title": "PaginatedResults[Report]"
+        "title": "PaginatedResults[TenantIntegration]"
       },
       "PartialAlert": {
         "properties": {
@@ -7158,7 +5229,7 @@
           "size": {
             "type": "integer",
             "title": "Size",
-            "default": 50
+            "default": 10
           },
           "search_after": {
             "anyOf": [
@@ -7221,7 +5292,757 @@
         ],
         "title": "RelatedConversationResponse"
       },
-      "Report": {
+      "ReportCreationPayload": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Title"
+          },
+          "author": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Author"
+          },
+          "report_type": {
+            "$ref": "#/components/schemas/pyro__reports__report_models__ReportType"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "author",
+          "report_type"
+        ],
+        "title": "ReportCreationPayload"
+      },
+      "ReportRequestInfoResponse": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/RequestStatus"
+          },
+          "report": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiReport"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "ReportRequestInfoResponse"
+      },
+      "ReportRequestPayload": {
+        "properties": {
+          "report_title": {
+            "type": "string",
+            "title": "Report Title"
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question"
+          },
+          "time_range_type": {
+            "$ref": "#/components/schemas/TimeRangeType",
+            "default": "all"
+          },
+          "time_range_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Range From"
+          },
+          "time_range_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Range To"
+          },
+          "included_keywords": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Included Keywords"
+          },
+          "excluded_keywords": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Excluded Keywords"
+          }
+        },
+        "type": "object",
+        "required": [
+          "report_title"
+        ],
+        "title": "ReportRequestPayload"
+      },
+      "ReportRequestResponse": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Request Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id"
+        ],
+        "title": "ReportRequestResponse"
+      },
+      "ReportStatus": {
+        "type": "string",
+        "enum": [
+          "draft",
+          "processing",
+          "completed"
+        ],
+        "title": "ReportStatus"
+      },
+      "ReportType-Output": {
+        "type": "string",
+        "enum": [
+          "v1",
+          "event_based",
+          "feed_based"
+        ],
+        "title": "ReportType"
+      },
+      "RequestStatus": {
+        "type": "string",
+        "enum": [
+          "processing",
+          "completed",
+          "error"
+        ],
+        "title": "RequestStatus"
+      },
+      "RiskScore": {
+        "type": "integer",
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "title": "RiskScore"
+      },
+      "SearchType": {
+        "type": "string",
+        "enum": [
+          "attachment",
+          "listing",
+          "ransomleak",
+          "forum_post",
+          "forum_topic",
+          "forum_profile",
+          "blog_post",
+          "seller",
+          "paste",
+          "leak",
+          "chat_message",
+          "chat_message/telegram",
+          "domain",
+          "bot",
+          "stealer_log",
+          "infected_devices",
+          "driller",
+          "driller_forum_topic",
+          "driller_forum_post",
+          "driller_profile",
+          "cc",
+          "ccbin",
+          "financial_data",
+          "leaked_data",
+          "leaked_file",
+          "document",
+          "account",
+          "actor",
+          "forum_content",
+          "blog_content",
+          "profile",
+          "leaked_credential",
+          "illicit_networks",
+          "open_web",
+          "domains",
+          "leaks",
+          "social_media_account",
+          "social_media",
+          "source_code",
+          "source_code_secrets",
+          "source_code_files",
+          "stack_exchange",
+          "google",
+          "service",
+          "driller_host",
+          "buckets",
+          "bucket",
+          "bucket_object",
+          "whois",
+          "ad",
+          "ads",
+          "experimental"
+        ],
+        "title": "SearchType"
+      },
+      "SecretQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "secret",
+            "title": "Type"
+          },
+          "secret": {
+            "type": "string",
+            "title": "Secret"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "secret"
+        ],
+        "title": "SecretQuery"
+      },
+      "Severity": {
+        "type": "string",
+        "enum": [
+          "info",
+          "low",
+          "medium",
+          "high",
+          "critical"
+        ],
+        "title": "Severity"
+      },
+      "SortType": {
+        "type": "string",
+        "enum": [
+          "id",
+          "title",
+          "author",
+          "created_at",
+          "updated_at",
+          "status"
+        ],
+        "title": "SortType"
+      },
+      "TagListPayload": {
+        "properties": {
+          "tags": {
+            "items": {
+              "$ref": "#/components/schemas/TagPayload"
+            },
+            "type": "array",
+            "title": "Tags"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tags"
+        ],
+        "title": "TagListPayload"
+      },
+      "TagPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "is_visible": {
+            "type": "boolean",
+            "title": "Is Visible"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "description",
+          "is_visible"
+        ],
+        "title": "TagPayload"
+      },
+      "TenantIntegration": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "tenant_id": {
+            "type": "integer",
+            "title": "Tenant Id"
+          },
+          "params": {
+            "$ref": "#/components/schemas/EntraIDParams"
+          },
+          "is_enabled": {
+            "type": "boolean",
+            "title": "Is Enabled"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "tenant_id",
+          "params",
+          "is_enabled",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "TenantIntegration"
+      },
+      "ThreatFlowReportDownloadFormat": {
+        "type": "string",
+        "enum": [
+          "docx",
+          "pdf"
+        ],
+        "title": "ThreatFlowReportDownloadFormat"
+      },
+      "ThreatFlowReportFormatType": {
+        "type": "string",
+        "enum": [
+          "simple_summary",
+          "expanded_summary"
+        ],
+        "title": "ThreatFlowReportFormatType"
+      },
+      "ThreatFlowTenantConfigPayload": {
+        "properties": {
+          "ignored_tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Ignored Tags"
+          },
+          "subscribed_to_newsletter": {
+            "type": "boolean",
+            "title": "Subscribed To Newsletter"
+          },
+          "emails": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Emails"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ignored_tags",
+          "subscribed_to_newsletter",
+          "emails"
+        ],
+        "title": "ThreatFlowTenantConfigPayload"
+      },
+      "TimeRangeType": {
+        "type": "string",
+        "enum": [
+          "all",
+          "last_24h",
+          "last_2d",
+          "last_7d",
+          "last_1m",
+          "last_3m",
+          "last_6m",
+          "range"
+        ],
+        "title": "TimeRangeType"
+      },
+      "UpdateAlertChannel": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "params": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AlertChannelEmailParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelSlackParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelDiscordParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelSplunkParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelChannelParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelSentinelParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelCgcdParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelTeamsParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelJiraParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelServicenowParams"
+              },
+              {
+                "$ref": "#/components/schemas/AlertChannelWebhookParams"
+              }
+            ],
+            "title": "Params",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "azure_sentinel": "#/components/schemas/AlertChannelSentinelParams",
+                "cgcd": "#/components/schemas/AlertChannelCgcdParams",
+                "channel": "#/components/schemas/AlertChannelChannelParams",
+                "discord": "#/components/schemas/AlertChannelDiscordParams",
+                "email": "#/components/schemas/AlertChannelEmailParams",
+                "jira": "#/components/schemas/AlertChannelJiraParams",
+                "servicenow": "#/components/schemas/AlertChannelServicenowParams",
+                "slack": "#/components/schemas/AlertChannelSlackParams",
+                "splunk": "#/components/schemas/AlertChannelSplunkParams",
+                "teams": "#/components/schemas/AlertChannelTeamsParams",
+                "webhook": "#/components/schemas/AlertChannelWebhookParams"
+              }
+            }
+          },
+          "state": {
+            "$ref": "#/components/schemas/AlertChannelState"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "params",
+          "state"
+        ],
+        "title": "UpdateAlertChannel"
+      },
+      "UpdateTenantIntegration": {
+        "properties": {
+          "params": {
+            "$ref": "#/components/schemas/EntraIDParams"
+          }
+        },
+        "type": "object",
+        "required": [
+          "params"
+        ],
+        "title": "UpdateTenantIntegration"
+      },
+      "UsernameQuery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "username",
+            "title": "Type"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "username"
+        ],
+        "title": "UsernameQuery"
+      },
+      "ValidatedCredential": {
+        "properties": {
+          "is_valid": {
+            "type": "boolean",
+            "title": "Is Valid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "is_valid"
+        ],
+        "title": "ValidatedCredential"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WebhookBasicAuth": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "WebhookBasicAuth"
+      },
+      "firework__backend__api4__models__PaginatedResults_Report___1": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/pyro__reports__report_datamodels__Report"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next"
+        ],
+        "title": "PaginatedResults[Report]"
+      },
+      "firework__backend__api4__models__PaginatedResults_Report___2": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/pyro__threat_flow__core__reports__datamodels__Report"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next"
+        ],
+        "title": "PaginatedResults[Report]"
+      },
+      "firework__backend__api4__reports__report_datamodels__ReportResponse": {
+        "properties": {
+          "report": {
+            "$ref": "#/components/schemas/pyro__reports__report_datamodels__Report"
+          }
+        },
+        "type": "object",
+        "required": [
+          "report"
+        ],
+        "title": "ReportResponse"
+      },
+      "pyro__reports__report_datamodels__Report": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "tenant_id": {
+            "type": "integer",
+            "title": "Tenant Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "author": {
+            "type": "string",
+            "title": "Author"
+          },
+          "report_type": {
+            "$ref": "#/components/schemas/ReportType-Output"
+          },
+          "include_flare_event_links": {
+            "type": "boolean",
+            "title": "Include Flare Event Links"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Uri"
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived",
+            "default": false
+          },
+          "status": {
+            "$ref": "#/components/schemas/ReportStatus",
+            "default": "draft"
+          },
+          "is_ready_for_download": {
+            "type": "boolean",
+            "title": "Is Ready For Download",
+            "default": false
+          },
+          "is_mutable": {
+            "type": "boolean",
+            "title": "Is Mutable",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "tenant_id",
+          "title",
+          "author",
+          "report_type",
+          "include_flare_event_links",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "Report"
+      },
+      "pyro__reports__report_models__ReportType": {
+        "type": "string",
+        "enum": [
+          "v1",
+          "event_based",
+          "feed_based"
+        ],
+        "title": "ReportType"
+      },
+      "pyro__threat_flow__core__reports__datamodels__Report": {
         "properties": {
           "id": {
             "type": "integer",
@@ -7355,135 +6176,7 @@
         ],
         "title": "Report"
       },
-      "ReportRequestInfoResponse": {
-        "properties": {
-          "status": {
-            "$ref": "#/components/schemas/RequestStatus"
-          },
-          "report": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ApiReport"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "required": [
-          "status"
-        ],
-        "title": "ReportRequestInfoResponse"
-      },
-      "ReportRequestPayload": {
-        "properties": {
-          "report_title": {
-            "type": "string",
-            "title": "Report Title"
-          },
-          "question": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Question"
-          },
-          "time_range_type": {
-            "$ref": "#/components/schemas/pyro__threat_flow__core__unit_summaries__search__datamodels__TimeRangeType",
-            "default": "all"
-          },
-          "time_range_from": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Time Range From"
-          },
-          "time_range_to": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Time Range To"
-          },
-          "included_keywords": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Included Keywords"
-          },
-          "excluded_keywords": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Excluded Keywords"
-          }
-        },
-        "type": "object",
-        "required": [
-          "report_title"
-        ],
-        "title": "ReportRequestPayload"
-      },
-      "ReportRequestResponse": {
-        "properties": {
-          "request_id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Request Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "request_id"
-        ],
-        "title": "ReportRequestResponse"
-      },
-      "ReportResponse": {
-        "properties": {
-          "report": {
-            "$ref": "#/components/schemas/Report"
-          }
-        },
-        "type": "object",
-        "required": [
-          "report"
-        ],
-        "title": "ReportResponse"
-      },
-      "ReportType": {
+      "pyro__threat_flow__core__reports__report_store__ReportType": {
         "type": "string",
         "enum": [
           "custom",
@@ -7491,386 +6184,17 @@
         ],
         "title": "ReportType"
       },
-      "RequestStatus": {
-        "type": "string",
-        "enum": [
-          "processing",
-          "completed",
-          "error"
-        ],
-        "title": "RequestStatus"
-      },
-      "RiskScore": {
-        "type": "integer",
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        "title": "RiskScore"
-      },
-      "SearchType": {
-        "type": "string",
-        "enum": [
-          "attachment",
-          "listing",
-          "ransomleak",
-          "forum_post",
-          "forum_topic",
-          "forum_profile",
-          "blog_post",
-          "seller",
-          "paste",
-          "leak",
-          "chat_message",
-          "chat_message/telegram",
-          "domain",
-          "bot",
-          "stealer_log",
-          "infected_devices",
-          "driller",
-          "driller_forum_topic",
-          "driller_forum_post",
-          "driller_profile",
-          "cc",
-          "ccbin",
-          "financial_data",
-          "leaked_data",
-          "leaked_file",
-          "document",
-          "account",
-          "actor",
-          "forum_content",
-          "blog_content",
-          "profile",
-          "illicit_networks",
-          "open_web",
-          "domains",
-          "leaks",
-          "social_media_account",
-          "social_media",
-          "source_code",
-          "source_code_secrets",
-          "source_code_files",
-          "stack_exchange",
-          "google",
-          "service",
-          "driller_host",
-          "buckets",
-          "bucket",
-          "bucket_object",
-          "whois",
-          "ad",
-          "ads",
-          "experimental"
-        ],
-        "title": "SearchType"
-      },
-      "SecretQuery": {
+      "pyro__threat_flow__web__v4__reports__models__ReportResponse": {
         "properties": {
-          "type": {
-            "type": "string",
-            "const": "secret",
-            "title": "Type"
-          },
-          "secret": {
-            "type": "string",
-            "title": "Secret"
+          "report": {
+            "$ref": "#/components/schemas/pyro__threat_flow__core__reports__datamodels__Report"
           }
         },
         "type": "object",
         "required": [
-          "type",
-          "secret"
+          "report"
         ],
-        "title": "SecretQuery"
-      },
-      "Severity": {
-        "type": "string",
-        "enum": [
-          "info",
-          "low",
-          "medium",
-          "high",
-          "critical"
-        ],
-        "title": "Severity"
-      },
-      "TagListPayload": {
-        "properties": {
-          "tags": {
-            "items": {
-              "$ref": "#/components/schemas/TagPayload"
-            },
-            "type": "array",
-            "title": "Tags"
-          }
-        },
-        "type": "object",
-        "required": [
-          "tags"
-        ],
-        "title": "TagListPayload"
-      },
-      "TagPayload": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "type": {
-            "type": "string",
-            "title": "Type"
-          },
-          "description": {
-            "type": "string",
-            "title": "Description"
-          },
-          "is_visible": {
-            "type": "boolean",
-            "title": "Is Visible"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "type",
-          "description",
-          "is_visible"
-        ],
-        "title": "TagPayload"
-      },
-      "ThreatFlowReportDownloadFormat": {
-        "type": "string",
-        "enum": [
-          "docx",
-          "pdf"
-        ],
-        "title": "ThreatFlowReportDownloadFormat"
-      },
-      "ThreatFlowReportFormatType": {
-        "type": "string",
-        "enum": [
-          "simple_summary",
-          "expanded_summary"
-        ],
-        "title": "ThreatFlowReportFormatType"
-      },
-      "ThreatFlowTenantConfigPayload": {
-        "properties": {
-          "ignored_tags": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Ignored Tags"
-          },
-          "subscribed_to_newsletter": {
-            "type": "boolean",
-            "title": "Subscribed To Newsletter"
-          },
-          "emails": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Emails"
-          }
-        },
-        "type": "object",
-        "required": [
-          "ignored_tags",
-          "subscribed_to_newsletter",
-          "emails"
-        ],
-        "title": "ThreatFlowTenantConfigPayload"
-      },
-      "UpdateAlertChannel": {
-        "properties": {
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "params": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/AlertChannelEmailParams"
-              },
-              {
-                "$ref": "#/components/schemas/AlertChannelSlackParams"
-              },
-              {
-                "$ref": "#/components/schemas/AlertChannelDiscordParams"
-              },
-              {
-                "$ref": "#/components/schemas/AlertChannelSplunkParams"
-              },
-              {
-                "$ref": "#/components/schemas/AlertChannelChannelParams"
-              },
-              {
-                "$ref": "#/components/schemas/AlertChannelSentinelParams"
-              },
-              {
-                "$ref": "#/components/schemas/AlertChannelCgcdParams"
-              },
-              {
-                "$ref": "#/components/schemas/AlertChannelTeamsParams"
-              },
-              {
-                "$ref": "#/components/schemas/AlertChannelJiraParams"
-              },
-              {
-                "$ref": "#/components/schemas/AlertChannelServicenowParams"
-              },
-              {
-                "$ref": "#/components/schemas/AlertChannelWebhookParams"
-              }
-            ],
-            "title": "Params",
-            "discriminator": {
-              "propertyName": "type",
-              "mapping": {
-                "azure_sentinel": "#/components/schemas/AlertChannelSentinelParams",
-                "cgcd": "#/components/schemas/AlertChannelCgcdParams",
-                "channel": "#/components/schemas/AlertChannelChannelParams",
-                "discord": "#/components/schemas/AlertChannelDiscordParams",
-                "email": "#/components/schemas/AlertChannelEmailParams",
-                "jira": "#/components/schemas/AlertChannelJiraParams",
-                "servicenow": "#/components/schemas/AlertChannelServicenowParams",
-                "slack": "#/components/schemas/AlertChannelSlackParams",
-                "splunk": "#/components/schemas/AlertChannelSplunkParams",
-                "teams": "#/components/schemas/AlertChannelTeamsParams",
-                "webhook": "#/components/schemas/AlertChannelWebhookParams"
-              }
-            }
-          },
-          "state": {
-            "$ref": "#/components/schemas/AlertChannelState"
-          }
-        },
-        "type": "object",
-        "required": [
-          "name",
-          "params",
-          "state"
-        ],
-        "title": "UpdateAlertChannel"
-      },
-      "UsernameQuery": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "username",
-            "title": "Type"
-          },
-          "username": {
-            "type": "string",
-            "title": "Username"
-          }
-        },
-        "type": "object",
-        "required": [
-          "type",
-          "username"
-        ],
-        "title": "UsernameQuery"
-      },
-      "ValidatedCredential": {
-        "properties": {
-          "is_valid": {
-            "type": "boolean",
-            "title": "Is Valid"
-          }
-        },
-        "type": "object",
-        "required": [
-          "is_valid"
-        ],
-        "title": "ValidatedCredential"
-      },
-      "ValidationError": {
-        "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Location"
-          },
-          "msg": {
-            "type": "string",
-            "title": "Message"
-          },
-          "type": {
-            "type": "string",
-            "title": "Error Type"
-          }
-        },
-        "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
-        "title": "ValidationError"
-      },
-      "WebhookBasicAuth": {
-        "properties": {
-          "username": {
-            "type": "string",
-            "title": "Username"
-          },
-          "password": {
-            "type": "string",
-            "title": "Password"
-          }
-        },
-        "type": "object",
-        "required": [
-          "username",
-          "password"
-        ],
-        "title": "WebhookBasicAuth"
-      },
-      "pyro__threat_flow__core__conversation_summary_request__datamodels__TimeRangeType": {
-        "type": "string",
-        "enum": [
-          "last_24h",
-          "last_2d",
-          "last_7d",
-          "range"
-        ],
-        "title": "TimeRangeType"
-      },
-      "pyro__threat_flow__core__unit_summaries__search__datamodels__TimeRangeType": {
-        "type": "string",
-        "enum": [
-          "all",
-          "last_24h",
-          "last_2d",
-          "last_7d",
-          "last_1m",
-          "last_3m",
-          "last_6m",
-          "range"
-        ],
-        "title": "TimeRangeType"
+        "title": "ReportResponse"
       }
     }
   }
