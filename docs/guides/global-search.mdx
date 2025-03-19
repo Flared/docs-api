@@ -25,6 +25,12 @@ To achieve the desired results, the following body parameters will be used:
 | order | asc | Retrieve results in ascending order so that we can resume fetching in the future. |
 | filter.estimated_created_at.gte | `<from_date>` | Replace `<from_date>` with a timestamp that corresponds to 6 hours that we can fetch all results until the current time.
 
+### Query string examples
+Global search supports the Lucene Query Syntax, which supports, among other things, boolean operators and regexes. Here are some common example queries.
+
+| Description | Example |
+| ----------- | ------- |
+| Search for a telegram channel named "Best Telegram Source" | conversation_name:"Best Telegram Source"
 
 ## Paging
 
@@ -66,7 +72,7 @@ for resp in api_client.scroll(
     json={
         "size": 10,
         "order": "asc",
-        "from": None,
+        "from": last_from,
         "filters": {
             "type": ["chat_message"],
             "estimated_created_at": {"gte": from_timestamp},
