@@ -139,6 +139,25 @@
               "type": "string",
               "title": "Actor Name"
             }
+          },
+          {
+            "name": "sources[]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Sources[]"
+            }
           }
         ],
         "responses": {
@@ -178,6 +197,88 @@
               "type": "string",
               "title": "Actor Name"
             }
+          },
+          {
+            "name": "times",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Times"
+            }
+          },
+          {
+            "name": "search_types[]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SearchType"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search Types[]"
+            }
+          },
+          {
+            "name": "risk_scores[]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RiskScore"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Risk Scores[]"
+            }
+          },
+          {
+            "name": "sources[]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Sources[]"
+            }
+          },
+          {
+            "name": "aggregate_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/StatsAggregates",
+              "default": "monthly"
+            }
           }
         ],
         "responses": {
@@ -187,6 +288,176 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ActorTimeline"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actors/{actor_name}/recent-activities": {
+      "get": {
+        "summary": "Get Actor Recent Activities",
+        "operationId": "get_actor_recent_activities_actors__actor_name__recent_activities_get",
+        "parameters": [
+          {
+            "name": "actor_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Actor Name"
+            }
+          },
+          {
+            "name": "times",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Times"
+            }
+          },
+          {
+            "name": "search_types[]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SearchType"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search Types[]"
+            }
+          },
+          {
+            "name": "risk_scores[]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RiskScore"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Risk Scores[]"
+            }
+          },
+          {
+            "name": "sources[]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Sources[]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActorRecentActivities"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actors/{actor_name}/summary": {
+      "get": {
+        "summary": "Get Actor Summary",
+        "operationId": "get_actor_summary_actors__actor_name__summary_get",
+        "parameters": [
+          {
+            "name": "actor_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Actor Name"
+            }
+          },
+          {
+            "name": "sources[]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Sources[]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActorSummary"
                 }
               }
             }
@@ -775,8 +1046,8 @@
         }
       },
       "post": {
-        "summary": "Validate Credentials",
-        "operationId": "validate_credentials_integrations_credential_validations_post",
+        "summary": "Validate Credential",
+        "operationId": "validate_credential_integrations_credential_validations_post",
         "requestBody": {
           "required": true,
           "content": {
@@ -794,44 +1065,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CredentialValidationReponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/credentials/entra-id/validate": {
-      "post": {
-        "summary": "Validate Credentials",
-        "operationId": "validate_credentials_credentials_entra_id_validate_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CredentialId"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidatedCredential"
                 }
               }
             }
@@ -1207,6 +1440,90 @@
             }
           }
         }
+      },
+      "patch": {
+        "summary": "Update Report",
+        "operationId": "update_report_reports__report_id__patch",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Report Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportUpdatePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firework__backend__api4__reports__report_datamodels__ReportResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Report",
+        "operationId": "delete_report_reports__report_id__delete",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Report Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firework__backend__api4__reports__report_datamodels__ReportResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/reports/": {
@@ -1350,10 +1667,308 @@
         }
       }
     },
-    "/integrations/tenant_integrations/": {
+    "/reports/{report_id}/config": {
+      "get": {
+        "summary": "Get Report Config",
+        "operationId": "get_report_config_reports__report_id__config_get",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Report Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportConfigResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Report Config",
+        "operationId": "update_report_config_reports__report_id__config_patch",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Report Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportConfigUpdatePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportConfigResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}/sections/{uid}": {
+      "get": {
+        "summary": "Get Report Section",
+        "operationId": "get_report_section_reports__report_id__sections__uid__get",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Uid"
+            }
+          },
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Report Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportSectionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Report Section",
+        "operationId": "update_report_section_reports__report_id__sections__uid__patch",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Uid"
+            }
+          },
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Report Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportSectionUpdatePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportSectionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}/sections": {
+      "get": {
+        "summary": "List Report Sections",
+        "operationId": "list_report_sections_reports__report_id__sections_get",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Report Id"
+            }
+          },
+          {
+            "name": "from_",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "From "
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "exclusiveMinimum": 0,
+              "default": 30,
+              "title": "Size"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResults_ReportSection_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}/archive": {
+      "patch": {
+        "summary": "Archive Report",
+        "operationId": "archive_report_reports__report_id__archive_patch",
+        "parameters": [
+          {
+            "name": "report_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Report Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firework__backend__api4__reports__report_datamodels__ReportResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/tenant_integrations": {
       "get": {
         "summary": "Get Tenant Integrations",
-        "operationId": "get_tenant_integrations_integrations_tenant_integrations__get",
+        "operationId": "get_tenant_integrations_integrations_tenant_integrations_get",
         "parameters": [
           {
             "name": "from_",
@@ -1404,6 +2019,16 @@
               "type": "integer",
               "title": "Tenant Id"
             }
+          },
+          {
+            "name": "include_params",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Params"
+            }
           }
         ],
         "responses": {
@@ -1412,7 +2037,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedResults_TenantIntegration_"
+                  "$ref": "#/components/schemas/PaginatedResults_TenantIntegrationItem_"
                 }
               }
             }
@@ -1431,7 +2056,7 @@
       },
       "post": {
         "summary": "Create Tenant Integration",
-        "operationId": "create_tenant_integration_integrations_tenant_integrations__post",
+        "operationId": "create_tenant_integration_integrations_tenant_integrations_post",
         "requestBody": {
           "required": true,
           "content": {
@@ -1448,7 +2073,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenantIntegration"
+                  "$ref": "#/components/schemas/TenantIntegrationItem"
                 }
               }
             }
@@ -1480,6 +2105,16 @@
               "format": "uuid",
               "title": "Tenant Integration Id"
             }
+          },
+          {
+            "name": "include_params",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Params"
+            }
           }
         ],
         "responses": {
@@ -1488,7 +2123,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenantIntegration"
+                  "$ref": "#/components/schemas/TenantIntegrationItem"
                 }
               }
             }
@@ -2174,14 +2809,90 @@
         ],
         "title": "ActorProfile"
       },
+      "ActorRecentActivities": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "recent_activities": {
+            "items": {
+              "$ref": "#/components/schemas/ActorRecentActivity"
+            },
+            "type": "array",
+            "title": "Recent Activities"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "recent_activities"
+        ],
+        "title": "ActorRecentActivities"
+      },
+      "ActorRecentActivity": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Date"
+          },
+          "uid": {
+            "type": "string",
+            "title": "Uid"
+          },
+          "risk_score": {
+            "$ref": "#/components/schemas/RiskScore"
+          },
+          "extra_fields": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extra Fields"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "uid",
+          "risk_score"
+        ],
+        "title": "ActorRecentActivity"
+      },
+      "ActorSummary": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "summary"
+        ],
+        "title": "ActorSummary"
+      },
       "ActorTimeline": {
         "properties": {
           "name": {
             "type": "string",
             "title": "Name"
           },
-          "interval": {
-            "$ref": "#/components/schemas/OverTimeInterval"
+          "aggregate_by": {
+            "$ref": "#/components/schemas/StatsAggregates"
           },
           "timeline": {
             "items": {
@@ -2194,7 +2905,7 @@
         "type": "object",
         "required": [
           "name",
-          "interval",
+          "aggregate_by",
           "timeline"
         ],
         "title": "ActorTimeline"
@@ -2230,6 +2941,10 @@
           "created_at": {
             "type": "string",
             "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "title": "Updated At"
           },
           "id": {
             "type": "integer",
@@ -2313,6 +3028,7 @@
           "feed_definition",
           "type",
           "created_at",
+          "updated_at",
           "id",
           "name",
           "tenant_id",
@@ -2630,13 +3346,9 @@
             "type": "string",
             "title": "Server Url"
           },
-          "username": {
+          "api_key": {
             "type": "string",
-            "title": "Username"
-          },
-          "password": {
-            "type": "string",
-            "title": "Password"
+            "title": "Api Key"
           },
           "table_name": {
             "type": "string",
@@ -2647,8 +3359,7 @@
         "required": [
           "type",
           "server_url",
-          "username",
-          "password",
+          "api_key",
           "table_name"
         ],
         "title": "AlertChannelServicenowParams"
@@ -3074,7 +3785,7 @@
               }
             ],
             "title": "Created After",
-            "default": "2025-03-18T15:44:56.726208Z"
+            "default": "2025-04-23T11:47:45.445296Z"
           },
           "from": {
             "anyOf": [
@@ -3424,19 +4135,6 @@
         ],
         "title": "CreateTenantIntegration"
       },
-      "CredentialId": {
-        "properties": {
-          "credential_id": {
-            "type": "integer",
-            "title": "Credential Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "credential_id"
-        ],
-        "title": "CredentialId"
-      },
       "CredentialValidationReponse": {
         "properties": {
           "tenant_integration_id": {
@@ -3499,9 +4197,9 @@
       "CredentialValidationStatus": {
         "type": "string",
         "enum": [
-          "pending",
-          "valid",
-          "invalid"
+          "match",
+          "no_match",
+          "failed"
         ],
         "title": "CredentialValidationStatus"
       },
@@ -4829,15 +5527,13 @@
         ],
         "title": "OrderType"
       },
-      "OverTimeInterval": {
+      "OtherSectionType": {
         "type": "string",
         "enum": [
-          "daily",
-          "weekly",
-          "monthly",
-          "yearly"
+          "appendix",
+          "executive_summary"
         ],
-        "title": "OverTimeInterval"
+        "title": "OtherSectionType"
       },
       "PagedCookieConfigurations": {
         "properties": {
@@ -5035,11 +5731,11 @@
         ],
         "title": "PaginatedResults[PartialAlertChannel]"
       },
-      "PaginatedResults_TenantIntegration_": {
+      "PaginatedResults_ReportSection_": {
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/TenantIntegration"
+              "$ref": "#/components/schemas/ReportSection"
             },
             "type": "array",
             "title": "Items"
@@ -5061,7 +5757,35 @@
           "items",
           "next"
         ],
-        "title": "PaginatedResults[TenantIntegration]"
+        "title": "PaginatedResults[ReportSection]"
+      },
+      "PaginatedResults_TenantIntegrationItem_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TenantIntegrationItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next"
+        ],
+        "title": "PaginatedResults[TenantIntegrationItem]"
       },
       "PartialAlert": {
         "properties": {
@@ -5292,6 +6016,109 @@
         ],
         "title": "RelatedConversationResponse"
       },
+      "ReportAnalyticSectionType": {
+        "type": "string",
+        "enum": [
+          "analytics",
+          "cumulative_event_growth",
+          "remediated_and_ignored_events",
+          "event_distribution",
+          "mean_time_to_remediation",
+          "total_enabled_identifiers_per_category",
+          "total_identifiers"
+        ],
+        "title": "ReportAnalyticSectionType"
+      },
+      "ReportConfigResponse": {
+        "properties": {
+          "report_config": {
+            "$ref": "#/components/schemas/ReportFeedConfig"
+          }
+        },
+        "type": "object",
+        "required": [
+          "report_config"
+        ],
+        "title": "ReportConfigResponse"
+      },
+      "ReportConfigUpdatePayload": {
+        "properties": {
+          "feed_definition": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FeedDefinition"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "search_types": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SearchType"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Search Types"
+          },
+          "risks": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/RiskScore"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risks"
+          },
+          "time_range_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TimeRangeType"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "time_range_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Range From"
+          },
+          "time_range_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Range To"
+          }
+        },
+        "type": "object",
+        "title": "ReportConfigUpdatePayload"
+      },
       "ReportCreationPayload": {
         "properties": {
           "title": {
@@ -5315,6 +6142,68 @@
           "report_type"
         ],
         "title": "ReportCreationPayload"
+      },
+      "ReportFeedConfig": {
+        "properties": {
+          "report_id": {
+            "type": "integer",
+            "title": "Report Id"
+          },
+          "tenant_id": {
+            "type": "integer",
+            "title": "Tenant Id"
+          },
+          "feed_definition": {
+            "$ref": "#/components/schemas/FeedDefinition"
+          },
+          "identifier_scope": {
+            "$ref": "#/components/schemas/IdentifierScope"
+          },
+          "search_types": {
+            "items": {
+              "$ref": "#/components/schemas/SearchType"
+            },
+            "type": "array",
+            "title": "Search Types"
+          },
+          "available_search_types": {
+            "items": {
+              "$ref": "#/components/schemas/SearchType"
+            },
+            "type": "array",
+            "title": "Available Search Types"
+          },
+          "risks": {
+            "items": {
+              "$ref": "#/components/schemas/RiskScore"
+            },
+            "type": "array",
+            "title": "Risks"
+          },
+          "time_range_from": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Time Range From"
+          },
+          "time_range_to": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Time Range To"
+          }
+        },
+        "type": "object",
+        "required": [
+          "report_id",
+          "tenant_id",
+          "feed_definition",
+          "identifier_scope",
+          "search_types",
+          "available_search_types",
+          "risks",
+          "time_range_from",
+          "time_range_to"
+        ],
+        "title": "ReportFeedConfig"
       },
       "ReportRequestInfoResponse": {
         "properties": {
@@ -5432,6 +6321,128 @@
         ],
         "title": "ReportRequestResponse"
       },
+      "ReportSection": {
+        "properties": {
+          "uid": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Uid"
+          },
+          "report_id": {
+            "type": "integer",
+            "title": "Report Id"
+          },
+          "tenant_id": {
+            "type": "integer",
+            "title": "Tenant Id"
+          },
+          "main_category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SearchType"
+              },
+              {
+                "$ref": "#/components/schemas/ReportAnalyticSectionType"
+              },
+              {
+                "$ref": "#/components/schemas/OtherSectionType"
+              }
+            ],
+            "title": "Main Category"
+          },
+          "sub_category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SearchType"
+              },
+              {
+                "$ref": "#/components/schemas/ReportAnalyticSectionType"
+              },
+              {
+                "$ref": "#/components/schemas/OtherSectionType"
+              }
+            ],
+            "title": "Sub Category"
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "visible": {
+            "type": "boolean",
+            "title": "Visible"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "uid",
+          "report_id",
+          "tenant_id",
+          "main_category",
+          "sub_category",
+          "content",
+          "enabled",
+          "visible",
+          "updated_at"
+        ],
+        "title": "ReportSection"
+      },
+      "ReportSectionResponse": {
+        "properties": {
+          "report_section": {
+            "$ref": "#/components/schemas/ReportSection"
+          }
+        },
+        "type": "object",
+        "required": [
+          "report_section"
+        ],
+        "title": "ReportSectionResponse"
+      },
+      "ReportSectionUpdatePayload": {
+        "properties": {
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content"
+          },
+          "enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enabled"
+          }
+        },
+        "type": "object",
+        "title": "ReportSectionUpdatePayload"
+      },
       "ReportStatus": {
         "type": "string",
         "enum": [
@@ -5449,6 +6460,57 @@
           "feed_based"
         ],
         "title": "ReportType"
+      },
+      "ReportUpdatePayload": {
+        "properties": {
+          "title": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "author": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Author"
+          },
+          "report_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/pyro__reports__report_models__ReportType"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "include_flare_event_links": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Include Flare Event Links"
+          }
+        },
+        "type": "object",
+        "title": "ReportUpdatePayload"
       },
       "RequestStatus": {
         "type": "string",
@@ -5571,6 +6633,16 @@
         ],
         "title": "SortType"
       },
+      "StatsAggregates": {
+        "type": "string",
+        "enum": [
+          "daily",
+          "weekly",
+          "monthly",
+          "yearly"
+        ],
+        "title": "StatsAggregates"
+      },
       "TagListPayload": {
         "properties": {
           "tags": {
@@ -5620,7 +6692,7 @@
         ],
         "title": "TagPayload"
       },
-      "TenantIntegration": {
+      "TenantIntegrationItem": {
         "properties": {
           "id": {
             "type": "string",
@@ -5631,8 +6703,18 @@
             "type": "integer",
             "title": "Tenant Id"
           },
+          "type": {
+            "$ref": "#/components/schemas/TenantIntegrationType"
+          },
           "params": {
-            "$ref": "#/components/schemas/EntraIDParams"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EntraIDParams"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "is_enabled": {
             "type": "boolean",
@@ -5653,12 +6735,20 @@
         "required": [
           "id",
           "tenant_id",
+          "type",
           "params",
           "is_enabled",
           "created_at",
           "updated_at"
         ],
-        "title": "TenantIntegration"
+        "title": "TenantIntegrationItem"
+      },
+      "TenantIntegrationType": {
+        "type": "string",
+        "enum": [
+          "entra_id"
+        ],
+        "title": "TenantIntegrationType"
       },
       "ThreatFlowReportDownloadFormat": {
         "type": "string",
@@ -5821,19 +6911,6 @@
           "username"
         ],
         "title": "UsernameQuery"
-      },
-      "ValidatedCredential": {
-        "properties": {
-          "is_valid": {
-            "type": "boolean",
-            "title": "Is Valid"
-          }
-        },
-        "type": "object",
-        "required": [
-          "is_valid"
-        ],
-        "title": "ValidatedCredential"
       },
       "ValidationError": {
         "properties": {
