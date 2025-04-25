@@ -27,7 +27,7 @@ their session.
   <Step title="Fetch one page of results">
     Use the `cookies/_search` endpoint to fetch one page of results.
 
-    If the returned page of results is empty, this means that all cookies were viewed.
+    If `next` is missing from the response (or is null), this means that you viewed all pages.
   </Step>
 
   <Step title="Verify and Invalidate">
