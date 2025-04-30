@@ -243,6 +243,12 @@
                 ]
               },
               {
+                "group": "Credentials",
+                "pages": [
+                  "api-reference/leaksdb/endpoints/get-credentials-v1"
+                ]
+              },
+              {
                 "group": "Event Feeds",
                 "pages": [
                   "api-reference/v2/endpoints/me/get-mefeed",
