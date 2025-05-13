@@ -3,6 +3,10 @@ title: "List by Bulk Accounts"
 api: "POST https://api.flare.io/leaksdb/identities/by_accounts"
 ---
 
+import GatedAccessFeatureAstp from '/snippets/gated-access-feature-astp.mdx';
+
+<GatedAccessFeatureAstp />
+
 Returns a list of identities with leaked passwords given a list of accounts.
 This endpoint only matches exact accounts and doesn’t allow wildcard or domain searches.
 This is API is useful when doing batch processing.
