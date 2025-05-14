@@ -70,6 +70,35 @@
             ]
           },
           {
+            "group": "Events API",
+            "pages": [
+              {
+                "group": "Events",
+                "pages": [
+                  "api-reference/v2/endpoints/activities/get-activities-",
+                  "api-reference/v2/endpoints/activities/get-activities--ai_assistance",
+                  "api-reference/v4/endpoints/event-actions"
+                ]
+              },
+              {
+                "group": "Event Feeds",
+                "pages": [
+                  "api-reference/v4/endpoints/current-tenant-feed",
+                  "api-reference/v2/endpoints/me/get-mefeedcredentials",
+                  "api-reference/v3/endpoints/identifiers/get-identifiers-feedcredentials",
+                  "api-reference/v4/endpoints/identifier-feed",
+                  "api-reference/v4/endpoints/identifier-group-feed"
+                ]
+              },
+              {
+                "group": "Global Search",
+                "pages": [
+                  "api-reference/v4/endpoints/global-search"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Leaked Credentials API",
             "pages": [
               {
@@ -96,35 +125,6 @@
                 "group": "Cookies",
                 "pages": [
                   "api-reference/leaksdb/endpoints/post-cookies-search"
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Events API",
-            "pages": [
-              {
-                "group": "Events",
-                "pages": [
-                  "api-reference/v2/endpoints/activities/get-activities-",
-                  "api-reference/v2/endpoints/activities/get-activities--ai_assistance",
-                  "api-reference/v4/endpoints/event-actions"
-                ]
-              },
-              {
-                "group": "Event Feeds",
-                "pages": [
-                  "api-reference/v4/endpoints/current-tenant-feed",
-                  "api-reference/v2/endpoints/me/get-mefeedcredentials",
-                  "api-reference/v3/endpoints/identifiers/get-identifiers-feedcredentials",
-                  "api-reference/v4/endpoints/identifier-feed",
-                  "api-reference/v4/endpoints/identifier-group-feed"
-                ]
-              },
-              {
-                "group": "Global Search",
-                "pages": [
-                  "api-reference/v4/endpoints/global-search"
                 ]
               }
             ]
