@@ -56,3 +56,4 @@ ${OPENAPI_POST_PROCESS_SCRIPT} ${SPEC_DIR}/firework-v3-openapi.json
 rm -f ${SPEC_DIR}/firework-v4-*
 
 ${FETCH_SPEC_FILE_SCRIPT} v4 | jq > ${SPEC_DIR}/firework-v4-openapi.json
+${OPENAPI_POST_PROCESS_SCRIPT} ${SPEC_DIR}/firework-v4-openapi.json

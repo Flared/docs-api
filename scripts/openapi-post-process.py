@@ -13,10 +13,18 @@ def main() -> None:
     with open(path, "r") as f:
         openapi_schema = json.loads(f.read())
 
-    openapi_schema["components"]["securitySchemes"]["BearerAuth"] = {
-        "type": "http",
-        "scheme": "bearer",
+    openapi_schema["components"]["securitySchemes"] = {
+        "BearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+        }
     }
+
+    openapi_schema["security"] = [
+        {
+            "BearerAuth": []
+        }
+    ]
 
     with open(path, "w", encoding="utf-8") as f:
         f.write(

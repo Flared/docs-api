@@ -265,7 +265,6 @@
                                 "name",
                                 "keyword",
                                 "search_query",
-                                "dork_query",
                                 "bin",
                                 "ip",
                                 "email",
@@ -276,7 +275,8 @@
                                 "screenshot",
                                 "azure_tenant",
                                 "actor",
-                                "cve"
+                                "cve",
+                                "identity"
                             ],
                             "type": "string"
                         }
@@ -294,7 +294,6 @@
                                 "name",
                                 "keyword",
                                 "search_query",
-                                "dork_query",
                                 "bin",
                                 "ip",
                                 "email",
@@ -305,7 +304,8 @@
                                 "screenshot",
                                 "azure_tenant",
                                 "actor",
-                                "cve"
+                                "cve",
+                                "identity"
                             ],
                             "type": "string"
                         }
@@ -473,7 +473,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, bot, stealer_log, forum_profile, seller, financial_data, ransomleak, chat_message, forum_post, forum_topic, listing\n- open_web: bucket_object, paste, stack_exchange, google, social_media, bucket, source_code_files, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, blog_post, bot, forum_profile, forum_topic, listing, seller, ransomleak, stealer_log, forum_post, chat_message\n- open_web: source_code_files, paste, source_code_secrets, service, bucket_object, stack_exchange, google, social_media_account, bucket\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -530,6 +530,8 @@
                                 "whois",
                                 "ad",
                                 "ads",
+                                "stealer_log_cookie",
+                                "pii",
                                 "experimental"
                             ],
                             "items": {
@@ -593,7 +595,6 @@
                         "name": "risks",
                         "schema": {
                             "enum": [
-                                "0",
                                 "1",
                                 "2",
                                 "3",
@@ -791,7 +792,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, bot, stealer_log, forum_profile, seller, financial_data, ransomleak, chat_message, forum_post, forum_topic, listing\n- open_web: bucket_object, paste, stack_exchange, google, social_media, bucket, source_code_files, source_code_secrets, service\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets, source_code_files, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, blog_post, bot, forum_profile, forum_topic, listing, seller, ransomleak, stealer_log, forum_post, chat_message\n- open_web: source_code_files, paste, source_code_secrets, service, bucket_object, stack_exchange, google, social_media_account, bucket\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -848,6 +849,8 @@
                                 "whois",
                                 "ad",
                                 "ads",
+                                "stealer_log_cookie",
+                                "pii",
                                 "experimental"
                             ],
                             "items": {
@@ -911,7 +914,6 @@
                         "name": "risks",
                         "schema": {
                             "enum": [
-                                "0",
                                 "1",
                                 "2",
                                 "3",
@@ -1077,7 +1079,6 @@
                                 "name",
                                 "keyword",
                                 "search_query",
-                                "dork_query",
                                 "bin",
                                 "ip",
                                 "email",
@@ -1088,7 +1089,8 @@
                                 "screenshot",
                                 "azure_tenant",
                                 "actor",
-                                "cve"
+                                "cve",
+                                "identity"
                             ],
                             "type": "string"
                         }
@@ -1202,7 +1204,8 @@
                             "default": "id",
                             "enum": [
                                 "id",
-                                "name"
+                                "name",
+                                "type"
                             ],
                             "type": "string"
                         }
@@ -1243,11 +1246,11 @@
                                 "username",
                                 "email",
                                 "search_query",
-                                "dork_query",
                                 "bin",
                                 "ip",
                                 "secret",
-                                "azure_tenant"
+                                "azure_tenant",
+                                "identity"
                             ],
                             "items": {
                                 "type": "string"
@@ -1343,7 +1346,8 @@
                             "default": "id",
                             "enum": [
                                 "id",
-                                "name"
+                                "name",
+                                "type"
                             ],
                             "type": "string"
                         }
@@ -1384,11 +1388,11 @@
                                 "username",
                                 "email",
                                 "search_query",
-                                "dork_query",
                                 "bin",
                                 "ip",
                                 "secret",
-                                "azure_tenant"
+                                "azure_tenant",
+                                "identity"
                             ],
                             "items": {
                                 "type": "string"
@@ -1649,11 +1653,11 @@
                                 "username",
                                 "email",
                                 "search_query",
-                                "dork_query",
                                 "bin",
                                 "ip",
                                 "secret",
-                                "azure_tenant"
+                                "azure_tenant",
+                                "identity"
                             ],
                             "items": {
                                 "type": "string"
@@ -1748,7 +1752,6 @@
                             "name",
                             "keyword",
                             "search_query",
-                            "dork_query",
                             "bin",
                             "ip",
                             "email",
@@ -1759,7 +1762,8 @@
                             "screenshot",
                             "azure_tenant",
                             "actor",
-                            "cve"
+                            "cve",
+                            "identity"
                         ],
                         "example": "github_repository",
                         "type": "string"
@@ -1968,11 +1972,11 @@
                             "username",
                             "email",
                             "search_query",
-                            "dork_query",
                             "bin",
                             "ip",
                             "secret",
-                            "azure_tenant"
+                            "azure_tenant",
+                            "identity"
                         ],
                         "example": "domain",
                         "type": "string"
@@ -2050,12 +2054,18 @@
                     "id": {
                         "type": "integer"
                     },
+                    "is_critical": {
+                        "type": "boolean"
+                    },
                     "is_disabled": {
                         "type": "boolean"
                     },
                     "name": {
                         "minLength": 1,
                         "type": "string"
+                    },
+                    "rate_limits": {
+                        "$ref": "#/components/schemas/IdentifierRateLimits"
                     },
                     "risks": {
                         "items": {
@@ -2115,6 +2125,8 @@
                                 "bucket",
                                 "bucket_object",
                                 "whois",
+                                "stealer_log_cookie",
+                                "pii",
                                 "experimental"
                             ],
                             "example": "attachment",
@@ -2145,11 +2157,11 @@
                             "username",
                             "email",
                             "search_query",
-                            "dork_query",
                             "bin",
                             "ip",
                             "secret",
-                            "azure_tenant"
+                            "azure_tenant",
+                            "identity"
                         ],
                         "example": "domain",
                         "type": "string"
@@ -2235,6 +2247,52 @@
                     },
                     "total_identifier_count": {
                         "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "IdentifierRateLimit": {
+                "properties": {
+                    "activity_type": {
+                        "type": "string"
+                    },
+                    "first_rate_limited_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "last_rate_limited_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "activity_type",
+                    "first_rate_limited_at",
+                    "last_rate_limited_at"
+                ],
+                "type": "object"
+            },
+            "IdentifierRateLimits": {
+                "properties": {
+                    "activity_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "first_rate_limited_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/IdentifierRateLimit"
+                        },
+                        "type": "array"
+                    },
+                    "last_rate_limited_at": {
+                        "format": "date-time",
+                        "type": "string"
                     }
                 },
                 "type": "object"
