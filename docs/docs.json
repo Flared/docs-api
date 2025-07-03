@@ -99,13 +99,13 @@
             ]
           },
           {
-            "group": "Leaked Credentials API",
+            "group": "Account and Session Takeover Prevention (ASTP) API",
             "pages": [
               {
                 "group": "Credentials",
                 "pages": [
-                  "api-reference/leaksdb/endpoints/get-credentials",
-                  "api-reference/leaksdb/endpoints/post-credentials-search"
+                  "api-reference/leaksdb/endpoints/post-credentials-search",
+                  "api-reference/leaksdb/endpoints/post-by-accounts"
                 ]
               },
               {
@@ -113,12 +113,6 @@
                 "pages": [
                   "api-reference/leaksdb/endpoints/get-sources",
                   "api-reference/leaksdb/endpoints/get-source"
-                ]
-              },
-              {
-                "group": "Identities",
-                "pages": [
-                  "api-reference/leaksdb/endpoints/post-by-accounts"
                 ]
               },
               {
