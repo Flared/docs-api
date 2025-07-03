@@ -147,6 +147,12 @@
                 ]
               },
               {
+                "group": "Identifier Recommendations",
+                "pages": [
+                  "api-reference/v4/endpoints/fetch-identifier-recommendations"
+                ]
+              },
+              {
                 "group": "Alerts",
                 "pages": [
                   "api-reference/v2/endpoints/identifiers/get-assets-alerts",
