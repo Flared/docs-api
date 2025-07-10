@@ -663,6 +663,24 @@
                 }
             }
         },
+        "/actors/{actor_name}/heatmap": {
+            "get": {
+                "summary": "Get Actor Heatmap",
+                "operationId": "get_actor_heatmap_actors__actor_name__heatmap_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActorHeatmapData"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/alerts/": {
             "get": {
                 "summary": "Tenant Alerts",
@@ -2470,6 +2488,42 @@
                 }
             }
         },
+        "/identifier-recommendations/actions": {
+            "post": {
+                "summary": "Create Action For Identifier Recommendations",
+                "operationId": "create_action_for_identifier_recommendations_identifier_recommendations_actions_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IdentifierRecommendationActionsBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/identities/{asset_uuid}/recent_activities/_count": {
             "get": {
                 "summary": "Get Recent Activities Count",
@@ -2515,7 +2569,7 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "$ref": "#/components/schemas/RecentActivitySearchType"
+                            "$ref": "#/components/schemas/SearchType"
                         }
                     },
                     {
@@ -2614,7 +2668,7 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "$ref": "#/components/schemas/RecentActivitySearchType"
+                            "$ref": "#/components/schemas/SearchType"
                         }
                     },
                     {
@@ -3732,7 +3786,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CreateTenantIntegration"
+                                "$ref": "#/components/schemas/CreateTenantIntegrationPayload"
                             }
                         }
                     }
@@ -3830,7 +3884,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateTenantIntegration"
+                                "$ref": "#/components/schemas/UpdateTenantIntegrationPayload"
                             }
                         }
                     }
@@ -3843,6 +3897,92 @@
                                 "schema": {}
                             }
                         }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/integrations/tenant_integrations/{tenant_integration_id}/idp/disable_account": {
+            "post": {
+                "summary": "Disable Account",
+                "operationId": "disable_account_integrations_tenant_integrations__tenant_integration_id__idp_disable_account_post",
+                "parameters": [
+                    {
+                        "name": "tenant_integration_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Tenant Integration Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DisableAccountPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/integrations/tenant_integrations/{tenant_integration_id}/idp/revoke_sessions": {
+            "post": {
+                "summary": "Revoke Sessions",
+                "operationId": "revoke_sessions_integrations_tenant_integrations__tenant_integration_id__idp_revoke_sessions_post",
+                "parameters": [
+                    {
+                        "name": "tenant_integration_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Tenant Integration Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RevokeSessionsPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
                     },
                     "422": {
                         "description": "Validation Error",
@@ -4492,6 +4632,7 @@
                     "cc_bases",
                     "chat_message",
                     "cookie",
+                    "docker_image",
                     "document",
                     "domain",
                     "driller",
@@ -4508,9 +4649,9 @@
                     "forum_topic",
                     "host",
                     "leak",
+                    "leaked_credential",
                     "leaked_data",
                     "leaked_file",
-                    "leaked_credential",
                     "listing",
                     "lookalike",
                     "paste",
@@ -4520,6 +4661,7 @@
                     "seller",
                     "service",
                     "social_media_account",
+                    "source_code_secret",
                     "stealer_log",
                     "attachment/telegram",
                     "chat_message/telegram",
@@ -4565,6 +4707,18 @@
                     "id"
                 ],
                 "title": "ActivityNode"
+            },
+            "ActivityTenantMetadataEventAction": {
+                "type": "string",
+                "enum": [
+                    "default",
+                    "ignored",
+                    "remediated",
+                    "risk_score_edited",
+                    "exclude_ignored",
+                    "ignored_or_remediated"
+                ],
+                "title": "ActivityTenantMetadataEventAction"
             },
             "ActivityUid": {
                 "properties": {
@@ -4615,6 +4769,27 @@
                     "risk_score"
                 ],
                 "title": "ActorEvent"
+            },
+            "ActorHeatmapData": {
+                "properties": {
+                    "per_hour": {
+                        "items": {
+                            "$ref": "#/components/schemas/HourData"
+                        },
+                        "type": "array",
+                        "title": "Per Hour"
+                    },
+                    "total_count": {
+                        "type": "integer",
+                        "title": "Total Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "per_hour",
+                    "total_count"
+                ],
+                "title": "ActorHeatmapData"
             },
             "ActorMetadata": {
                 "properties": {
@@ -5777,7 +5952,9 @@
                     "accept_recommendation",
                     "reject_recommendation",
                     "remediate",
+                    "unremediate",
                     "ignore",
+                    "unignore",
                     "validate_with_idp"
                 ],
                 "title": "BulkActionType"
@@ -5820,7 +5997,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2025-07-02T23:30:01.593613Z"
+                        "default": "2025-07-08T19:29:38.977447Z"
                     },
                     "from": {
                         "anyOf": [
@@ -6205,8 +6382,13 @@
                 ],
                 "title": "CreateAlertChannel"
             },
-            "CreateTenantIntegration": {
+            "CreateTenantIntegrationPayload": {
                 "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "default": "Entra ID"
+                    },
                     "tenant_id": {
                         "type": "integer",
                         "title": "Tenant Id"
@@ -6225,7 +6407,137 @@
                     "tenant_id",
                     "params"
                 ],
-                "title": "CreateTenantIntegration"
+                "title": "CreateTenantIntegrationPayload"
+            },
+            "CredentialBulkActionFilters": {
+                "properties": {
+                    "query_type": {
+                        "$ref": "#/components/schemas/CredentialsQueryType",
+                        "default": "domain"
+                    },
+                    "term": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Term"
+                    },
+                    "source_term": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Source Term"
+                    },
+                    "search_after": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Search After"
+                    },
+                    "time": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Time"
+                    },
+                    "source_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Source Id"
+                    },
+                    "ignored_source_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ignored Source Id"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "title": "Size",
+                        "default": 10
+                    },
+                    "states": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/ActivityTenantMetadataEventAction"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "States"
+                    },
+                    "password_policies": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/PasswordPolicy"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Password Policies"
+                    },
+                    "password_policy_operator": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PasswordPolicyOperator"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "include_validations": {
+                        "type": "boolean",
+                        "title": "Include Validations",
+                        "default": false
+                    },
+                    "feed_definition": {
+                        "$ref": "#/components/schemas/FeedDefinition"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "feed_definition"
+                ],
+                "title": "CredentialBulkActionFilters"
             },
             "CredentialBulkActionRequestBody": {
                 "properties": {
@@ -6238,14 +6550,150 @@
                         },
                         "type": "array",
                         "title": "Ids"
+                    },
+                    "filters": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/CredentialBulkActionFilters"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "action_params": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ValidateByIDPActionParams"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
                 "required": [
                     "type",
-                    "ids"
+                    "ids",
+                    "filters",
+                    "action_params"
                 ],
                 "title": "CredentialBulkActionRequestBody"
+            },
+            "CredentialFilters": {
+                "properties": {
+                    "query_string": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Query String"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "credential",
+                        "title": "Type",
+                        "default": "credential"
+                    },
+                    "query_type": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/CredentialsQueryType"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "time": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Time"
+                    },
+                    "source_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Source Id"
+                    },
+                    "ignored_source_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ignored Source Id"
+                    },
+                    "password_policies": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/PasswordPolicy"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Password Policies"
+                    },
+                    "password_policy_operator": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PasswordPolicyOperator"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "feed_definition": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/FeedDefinition"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "states": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/ActivityTenantMetadataEventAction"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "States"
+                    }
+                },
+                "type": "object",
+                "title": "CredentialFilters"
             },
             "CredentialValidationReponse": {
                 "properties": {
@@ -6365,6 +6813,51 @@
                     "password"
                 ],
                 "title": "CredentialsQuery"
+            },
+            "CredentialsQueryType": {
+                "type": "string",
+                "enum": [
+                    "email",
+                    "username",
+                    "domain",
+                    "password",
+                    "url"
+                ],
+                "title": "CredentialsQueryType"
+            },
+            "DayOfWeekData": {
+                "properties": {
+                    "day_of_week": {
+                        "type": "integer",
+                        "maximum": 7.0,
+                        "minimum": 1.0,
+                        "title": "Day Of Week",
+                        "description": "The day of the week, from 1 to 7, where 1 is Monday and 7 is Sunday."
+                    },
+                    "count": {
+                        "type": "integer",
+                        "title": "Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "day_of_week",
+                    "count"
+                ],
+                "title": "DayOfWeekData"
+            },
+            "DisableAccountPayload": {
+                "properties": {
+                    "credential_hash": {
+                        "type": "string",
+                        "title": "Credential Hash"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "credential_hash"
+                ],
+                "title": "DisableAccountPayload"
             },
             "DomainAssetEnrichment": {
                 "properties": {
@@ -6610,11 +7103,15 @@
                                     },
                                     {
                                         "$ref": "#/components/schemas/IdentifierFilters"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/CredentialFilters"
                                     }
                                 ],
                                 "discriminator": {
                                     "propertyName": "type",
                                     "mapping": {
+                                        "credential": "#/components/schemas/CredentialFilters",
                                         "group": "#/components/schemas/GroupFilters",
                                         "identifier": "#/components/schemas/IdentifierFilters",
                                         "identifier_recommendation": "#/components/schemas/IdentifierRecommendationFilters",
@@ -7749,6 +8246,35 @@
                 "type": "object",
                 "title": "HTTPValidationError"
             },
+            "HourData": {
+                "properties": {
+                    "hour": {
+                        "type": "integer",
+                        "maximum": 23.0,
+                        "minimum": 0.0,
+                        "title": "Hour",
+                        "description": "The hour of the day, from 0 to 23."
+                    },
+                    "count": {
+                        "type": "integer",
+                        "title": "Count"
+                    },
+                    "per_day": {
+                        "items": {
+                            "$ref": "#/components/schemas/DayOfWeekData"
+                        },
+                        "type": "array",
+                        "title": "Per Day"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "hour",
+                    "count",
+                    "per_day"
+                ],
+                "title": "HourData"
+            },
             "IPData": {
                 "properties": {
                     "type": {
@@ -8196,6 +8722,59 @@
                     "unreachable"
                 ],
                 "title": "IdentifierProperty"
+            },
+            "IdentifierRecommendationAction": {
+                "properties": {
+                    "type": {
+                        "$ref": "#/components/schemas/IdentifierRecommendationActionType"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type"
+                ],
+                "title": "IdentifierRecommendationAction"
+            },
+            "IdentifierRecommendationActionTarget": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "title": "IdentifierRecommendationActionTarget"
+            },
+            "IdentifierRecommendationActionType": {
+                "type": "string",
+                "enum": [
+                    "accept",
+                    "reject"
+                ],
+                "title": "IdentifierRecommendationActionType"
+            },
+            "IdentifierRecommendationActionsBody": {
+                "properties": {
+                    "targets": {
+                        "items": {
+                            "$ref": "#/components/schemas/IdentifierRecommendationActionTarget"
+                        },
+                        "type": "array",
+                        "maxItems": 100,
+                        "title": "Targets"
+                    },
+                    "action": {
+                        "$ref": "#/components/schemas/IdentifierRecommendationAction"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "action"
+                ],
+                "title": "IdentifierRecommendationActionsBody"
             },
             "IdentifierRecommendationFilters": {
                 "properties": {
@@ -9588,6 +10167,25 @@
                 ],
                 "title": "PartialAlertChannel"
             },
+            "PasswordPolicy": {
+                "type": "string",
+                "enum": [
+                    "min_eight_chars",
+                    "special_symbols",
+                    "uppercase",
+                    "lowercase",
+                    "number"
+                ],
+                "title": "PasswordPolicy"
+            },
+            "PasswordPolicyOperator": {
+                "type": "string",
+                "enum": [
+                    "include",
+                    "exclude"
+                ],
+                "title": "PasswordPolicyOperator"
+            },
             "QueryStringQuery": {
                 "properties": {
                     "type": {
@@ -9610,7 +10208,7 @@
             "RecentActivityCookies": {
                 "properties": {
                     "type": {
-                        "$ref": "#/components/schemas/RecentActivitySearchType"
+                        "$ref": "#/components/schemas/SearchType"
                     },
                     "uid": {
                         "type": "string",
@@ -9674,7 +10272,7 @@
             "RecentActivityExposedPII": {
                 "properties": {
                     "type": {
-                        "$ref": "#/components/schemas/RecentActivitySearchType"
+                        "$ref": "#/components/schemas/SearchType"
                     },
                     "uid": {
                         "type": "string",
@@ -9712,7 +10310,7 @@
             "RecentActivityLeakedCredential": {
                 "properties": {
                     "type": {
-                        "$ref": "#/components/schemas/RecentActivitySearchType"
+                        "$ref": "#/components/schemas/SearchType"
                     },
                     "uid": {
                         "type": "string",
@@ -9747,6 +10345,44 @@
                 ],
                 "title": "RecentActivityLeakedCredential"
             },
+            "RecentActivityOpenWebIllicitNetwork": {
+                "properties": {
+                    "type": {
+                        "$ref": "#/components/schemas/SearchType"
+                    },
+                    "uid": {
+                        "type": "string",
+                        "title": "Uid"
+                    },
+                    "creation_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Creation Date"
+                    },
+                    "attribute": {
+                        "type": "string",
+                        "title": "Attribute"
+                    },
+                    "event_type": {
+                        "type": "string",
+                        "title": "Event Type"
+                    },
+                    "source_name": {
+                        "type": "string",
+                        "title": "Source Name"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "uid",
+                    "creation_date",
+                    "attribute",
+                    "event_type",
+                    "source_name"
+                ],
+                "title": "RecentActivityOpenWebIllicitNetwork"
+            },
             "RecentActivityResponse": {
                 "properties": {
                     "items": {
@@ -9763,6 +10399,9 @@
                                 },
                                 {
                                     "$ref": "#/components/schemas/RecentActivityExposedPII"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/RecentActivityOpenWebIllicitNetwork"
                                 }
                             ]
                         },
@@ -9787,22 +10426,10 @@
                 ],
                 "title": "RecentActivityResponse"
             },
-            "RecentActivitySearchType": {
-                "type": "string",
-                "enum": [
-                    "pii",
-                    "leaked_credential",
-                    "stealer_log",
-                    "stealer_log_cookie",
-                    "open_web",
-                    "illicit_networks"
-                ],
-                "title": "RecentActivitySearchType"
-            },
             "RecentActivityStealerLog": {
                 "properties": {
                     "type": {
-                        "$ref": "#/components/schemas/RecentActivitySearchType"
+                        "$ref": "#/components/schemas/SearchType"
                     },
                     "uid": {
                         "type": "string",
@@ -10089,6 +10716,11 @@
                         "type": "string",
                         "minLength": 1,
                         "title": "Author"
+                    },
+                    "time_zone": {
+                        "type": "string",
+                        "title": "Time Zone",
+                        "default": "Etc/UTC"
                     }
                 },
                 "type": "object",
@@ -10468,6 +11100,19 @@
                 ],
                 "title": "RequestStatus"
             },
+            "RevokeSessionsPayload": {
+                "properties": {
+                    "credential_hash": {
+                        "type": "string",
+                        "title": "Credential Hash"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "credential_hash"
+                ],
+                "title": "RevokeSessionsPayload"
+            },
             "RiskScore": {
                 "type": "integer",
                 "enum": [
@@ -10719,6 +11364,10 @@
                         "format": "uuid",
                         "title": "Id"
                     },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
                     "tenant_id": {
                         "type": "integer",
                         "title": "Tenant Id"
@@ -10754,6 +11403,7 @@
                 "type": "object",
                 "required": [
                     "id",
+                    "name",
                     "tenant_id",
                     "type",
                     "params",
@@ -11265,8 +11915,13 @@
                 ],
                 "title": "UpdateReportParameters"
             },
-            "UpdateTenantIntegration": {
+            "UpdateTenantIntegrationPayload": {
                 "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "default": "Entra ID"
+                    },
                     "is_enabled": {
                         "type": "boolean",
                         "title": "Is Enabled",
@@ -11280,7 +11935,7 @@
                 "required": [
                     "params"
                 ],
-                "title": "UpdateTenantIntegration"
+                "title": "UpdateTenantIntegrationPayload"
             },
             "UserTenantAccess": {
                 "properties": {
@@ -11362,6 +12017,26 @@
                     "username"
                 ],
                 "title": "UsernameQuery"
+            },
+            "ValidateByIDPActionParams": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "validate_with_idp",
+                        "title": "Type"
+                    },
+                    "tenant_integration_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Tenant Integration Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "tenant_integration_id"
+                ],
+                "title": "ValidateByIDPActionParams"
             },
             "ValidationError": {
                 "properties": {
