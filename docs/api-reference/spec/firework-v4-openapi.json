@@ -317,7 +317,7 @@
                         }
                     },
                     {
-                        "name": "sources[]",
+                        "name": "sources",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -332,7 +332,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "Sources[]"
+                            "title": "Sources"
                         }
                     }
                 ],
@@ -391,7 +391,7 @@
                         }
                     },
                     {
-                        "name": "search_types[]",
+                        "name": "search_types",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -406,11 +406,11 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "Search Types[]"
+                            "title": "Search Types"
                         }
                     },
                     {
-                        "name": "risk_scores[]",
+                        "name": "risk_scores",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -425,11 +425,11 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "Risk Scores[]"
+                            "title": "Risk Scores"
                         }
                     },
                     {
-                        "name": "sources[]",
+                        "name": "sources",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -444,7 +444,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "Sources[]"
+                            "title": "Sources"
                         }
                     },
                     {
@@ -452,8 +452,15 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/StatsAggregates",
-                            "default": "monthly"
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/StatsAggregates"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Aggregate By"
                         }
                     }
                 ],
@@ -512,7 +519,7 @@
                         }
                     },
                     {
-                        "name": "search_types[]",
+                        "name": "search_types",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -527,11 +534,11 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "Search Types[]"
+                            "title": "Search Types"
                         }
                     },
                     {
-                        "name": "risk_scores[]",
+                        "name": "risk_scores",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -546,11 +553,11 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "Risk Scores[]"
+                            "title": "Risk Scores"
                         }
                     },
                     {
-                        "name": "sources[]",
+                        "name": "sources",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -565,7 +572,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "Sources[]"
+                            "title": "Sources"
                         }
                     }
                 ],
@@ -598,9 +605,9 @@
             }
         },
         "/actors/{actor_name}/summaries": {
-            "post": {
-                "summary": "Generate Actor Summary",
-                "operationId": "generate_actor_summary_actors__actor_name__summaries_post",
+            "get": {
+                "summary": "Get Actor Summaries",
+                "operationId": "get_actor_summaries_actors__actor_name__summaries_get",
                 "parameters": [
                     {
                         "name": "actor_name",
@@ -612,7 +619,7 @@
                         }
                     },
                     {
-                        "name": "sources[]",
+                        "name": "sources",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -627,7 +634,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "Sources[]"
+                            "title": "Sources"
                         }
                     }
                 ],
@@ -645,7 +652,185 @@
                                             "type": "null"
                                         }
                                     ],
-                                    "title": "Response Generate Actor Summary Actors  Actor Name  Summaries Post"
+                                    "title": "Response Get Actor Summaries Actors  Actor Name  Summaries Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/actors/{actor_name}/summaries/{request_id}": {
+            "get": {
+                "summary": "Get Actor Summaries By Request Id",
+                "operationId": "get_actor_summaries_by_request_id_actors__actor_name__summaries__request_id__get",
+                "parameters": [
+                    {
+                        "name": "actor_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Actor Name"
+                        }
+                    },
+                    {
+                        "name": "request_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Request Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ActorSummariesResponse"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "title": "Response Get Actor Summaries By Request Id Actors  Actor Name  Summaries  Request Id  Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/actors/{actor_name}/generate_summaries": {
+            "post": {
+                "summary": "Generate Actor Summaries",
+                "operationId": "generate_actor_summaries_actors__actor_name__generate_summaries_post",
+                "parameters": [
+                    {
+                        "name": "actor_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Actor Name"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActorSummariesGenerationPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ActorSummariesResponse"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "title": "Response Generate Actor Summaries Actors  Actor Name  Generate Summaries Post"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Or Generate Actor Summaries",
+                "operationId": "get_or_generate_actor_summaries_actors__actor_name__generate_summaries_get",
+                "parameters": [
+                    {
+                        "name": "actor_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Actor Name"
+                        }
+                    },
+                    {
+                        "name": "sources",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Sources"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ActorSummariesResponse"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "title": "Response Get Or Generate Actor Summaries Actors  Actor Name  Generate Summaries Get"
                                 }
                             }
                         }
@@ -667,13 +852,93 @@
             "get": {
                 "summary": "Get Actor Heatmap",
                 "operationId": "get_actor_heatmap_actors__actor_name__heatmap_get",
+                "parameters": [
+                    {
+                        "name": "actor_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Actor Name"
+                        }
+                    },
+                    {
+                        "name": "sources",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Sources"
+                        }
+                    },
+                    {
+                        "name": "times",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Times"
+                        }
+                    },
+                    {
+                        "name": "time_zone",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Time Zone"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful Response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ActorHeatmapData"
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ActorHeatmapData"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "title": "Response Get Actor Heatmap Actors  Actor Name  Heatmap Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
                                 }
                             }
                         }
@@ -1175,100 +1440,6 @@
                 }
             }
         },
-        "/identities/{asset_uuid}/application_exposures": {
-            "get": {
-                "summary": "List Identity Application Exposures",
-                "operationId": "list_identity_application_exposures_identities__asset_uuid__application_exposures_get",
-                "parameters": [
-                    {
-                        "name": "asset_uuid",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Asset Uuid"
-                        }
-                    },
-                    {
-                        "name": "next",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Next"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_IdentityApplicationExposures_"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/identities/{asset_uuid}/application_exposures_graph": {
-            "get": {
-                "summary": "Get Identity Application Exposures Graph",
-                "operationId": "get_identity_application_exposures_graph_identities__asset_uuid__application_exposures_graph_get",
-                "parameters": [
-                    {
-                        "name": "asset_uuid",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Asset Uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApplicationExposuresGraph"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/tasks/": {
             "post": {
                 "summary": "Bulk Actions",
@@ -1429,8 +1600,7 @@
                                 "$ref": "#/components/schemas/FeedRequestBody"
                             }
                         }
-                    },
-                    "required": true
+                    }
                 },
                 "responses": {
                     "200": {
@@ -1510,7 +1680,6 @@
                     }
                 ],
                 "requestBody": {
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -1559,7 +1728,6 @@
                     }
                 ],
                 "requestBody": {
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -2524,6 +2692,175 @@
                 }
             }
         },
+        "/identities/{asset_uuid}/old_application_exposures": {
+            "get": {
+                "summary": "List Identity Application Exposures",
+                "operationId": "list_identity_application_exposures_identities__asset_uuid__old_application_exposures_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    },
+                    {
+                        "name": "next",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Next"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 20,
+                            "title": "Size"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_IdentityApplicationExposures_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/identities/{asset_uuid}/application_exposures": {
+            "get": {
+                "summary": "Get Application Exposures",
+                "operationId": "get_application_exposures_identities__asset_uuid__application_exposures_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    },
+                    {
+                        "name": "next",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Next"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 20,
+                            "title": "Size"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_Union_EnrichedCredential__EnrichedCookie__"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/identities/{asset_uuid}/application_exposures_graph": {
+            "get": {
+                "summary": "Get Identity Application Exposures Graph",
+                "operationId": "get_identity_application_exposures_graph_identities__asset_uuid__application_exposures_graph_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApplicationExposuresGraph"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/identities/{asset_uuid}/recent_activities/_count": {
             "get": {
                 "summary": "Get Recent Activities Count",
@@ -2570,32 +2907,6 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/components/schemas/SearchType"
-                        }
-                    },
-                    {
-                        "name": "next",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Next"
-                        }
-                    },
-                    {
-                        "name": "size",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "default": 100,
-                            "title": "Size"
                         }
                     }
                 ],
@@ -2695,6 +3006,24 @@
                             "type": "integer",
                             "default": 100,
                             "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/firework__backend__api4__identities__recent_activities__models__SortType",
+                            "default": "creation_date"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/OrderType",
+                            "default": "desc"
                         }
                     }
                 ],
@@ -2835,10 +3164,10 @@
                 }
             }
         },
-        "/identities/{asset_uuid}/idp_integration_types": {
+        "/identities/{asset_uuid}/idp_user_data": {
             "get": {
-                "summary": "Get Idp Integration Types",
-                "operationId": "get_idp_integration_types_identities__asset_uuid__idp_integration_types_get",
+                "summary": "Get Idp User Data",
+                "operationId": "get_idp_user_data_identities__asset_uuid__idp_user_data_get",
                 "parameters": [
                     {
                         "name": "asset_uuid",
@@ -2858,9 +3187,9 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/TenantIntegrationType"
+                                        "$ref": "#/components/schemas/IdentityIdPUserData"
                                     },
-                                    "title": "Response Get Idp Integration Types Identities  Asset Uuid  Idp Integration Types Get"
+                                    "title": "Response Get Idp User Data Identities  Asset Uuid  Idp User Data Get"
                                 }
                             }
                         }
@@ -3909,6 +4238,126 @@
                         }
                     }
                 }
+            },
+            "patch": {
+                "summary": "Update Partial Tenant Integration",
+                "operationId": "update_partial_tenant_integration_integrations_tenant_integrations__tenant_integration_id__patch",
+                "parameters": [
+                    {
+                        "name": "tenant_integration_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Tenant Integration Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePartialTenantIntegrationPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Tenant Integration",
+                "operationId": "delete_tenant_integration_integrations_tenant_integrations__tenant_integration_id__delete",
+                "parameters": [
+                    {
+                        "name": "tenant_integration_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Tenant Integration Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/integrations/tenant_integrations/test": {
+            "post": {
+                "summary": "Test Tenant Integration",
+                "operationId": "test_tenant_integration_integrations_tenant_integrations_test_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TestTenantIntegrationPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TenantIntegrationStatusResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/integrations/tenant_integrations/{tenant_integration_id}/idp/disable_account": {
@@ -3976,6 +4425,49 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/RevokeSessionsPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/integrations/tenant_integrations/{tenant_integration_id}/idp/mark_user_as_compromised": {
+            "post": {
+                "summary": "Mark User As Compromised",
+                "operationId": "mark_user_as_compromised_integrations_tenant_integrations__tenant_integration_id__idp_mark_user_as_compromised_post",
+                "parameters": [
+                    {
+                        "name": "tenant_integration_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Tenant Integration Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MarkUserAsCompromisedPayload"
                             }
                         }
                     }
@@ -4567,29 +5059,52 @@
             }
         },
         "/tenants/{tenant_id}/users": {
-            "post": {
-                "summary": "Add Tenant Users",
-                "operationId": "add_tenant_users_tenants__tenant_id__users_post",
-                "parameters": [
-                    {
-                        "name": "tenant_id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "title": "Tenant Id"
-                        }
-                    }
-                ],
+            "put": {
+                "summary": "Add Tenant Users Put",
+                "operationId": "add_tenant_users_put_tenants__tenant_id__users_put",
                 "requestBody": {
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/BulkAddUsersToTenantRequestBody"
                             }
                         }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
                     }
+                }
+            },
+            "post": {
+                "summary": "Create Tenant User",
+                "operationId": "create_tenant_user_tenants__tenant_id__users_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTenantUserPayload"
+                            }
+                        }
+                    },
+                    "required": true
                 },
                 "responses": {
                     "200": {
@@ -4633,6 +5148,7 @@
                     "chat_message",
                     "cookie",
                     "docker_image",
+                    "docker_repository",
                     "document",
                     "domain",
                     "driller",
@@ -4848,37 +5364,98 @@
                 ],
                 "title": "ActorProfile"
             },
+            "ActorSourceDistribution": {
+                "properties": {
+                    "source": {
+                        "type": "string",
+                        "title": "Source"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "title": "Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "source",
+                    "count"
+                ],
+                "title": "ActorSourceDistribution"
+            },
+            "ActorSummariesGenerationPayload": {
+                "properties": {
+                    "sources": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "sources"
+                ],
+                "title": "ActorSummariesGenerationPayload"
+            },
             "ActorSummariesResponse": {
                 "properties": {
-                    "profile": {
+                    "request_id": {
                         "type": "string",
+                        "format": "uuid",
+                        "title": "Request Id"
+                    },
+                    "profile": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
                         "title": "Profile"
                     },
                     "heatmap": {
-                        "type": "string",
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
                         "title": "Heatmap"
                     },
                     "activity": {
-                        "type": "string",
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
                         "title": "Activity"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "profile",
-                    "heatmap",
-                    "activity"
+                    "request_id"
                 ],
                 "title": "ActorSummariesResponse"
             },
             "ActorTimeline": {
                 "properties": {
-                    "name": {
-                        "type": "string",
-                        "title": "Name"
-                    },
                     "aggregate_by": {
-                        "$ref": "#/components/schemas/StatsAggregates"
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/StatsAggregates"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "timeline": {
                         "items": {
@@ -4890,8 +5467,6 @@
                 },
                 "type": "object",
                 "required": [
-                    "name",
-                    "aggregate_by",
                     "timeline"
                 ],
                 "title": "ActorTimeline"
@@ -4903,15 +5478,23 @@
                         "format": "date-time",
                         "title": "Date"
                     },
-                    "count": {
+                    "total_count": {
                         "type": "integer",
-                        "title": "Count"
+                        "title": "Total Count"
+                    },
+                    "source_distribution": {
+                        "items": {
+                            "$ref": "#/components/schemas/ActorSourceDistribution"
+                        },
+                        "type": "array",
+                        "title": "Source Distribution",
+                        "default": []
                     }
                 },
                 "type": "object",
                 "required": [
                     "date",
-                    "count"
+                    "total_count"
                 ],
                 "title": "ActorTimelineEntry"
             },
@@ -5660,7 +6243,8 @@
                     "identity",
                     "activity",
                     "leak",
-                    "application"
+                    "application",
+                    "idp_application"
                 ],
                 "title": "ApplicationExposureNodeType"
             },
@@ -5694,6 +6278,13 @@
                         "type": "array",
                         "title": "Application Nodes"
                     },
+                    "idp_application_nodes": {
+                        "items": {
+                            "$ref": "#/components/schemas/IdPApplicationNode"
+                        },
+                        "type": "array",
+                        "title": "Idp Application Nodes"
+                    },
                     "identity_activity_edges": {
                         "items": {
                             "$ref": "#/components/schemas/ApplicationExposureEdge"
@@ -5714,6 +6305,13 @@
                         },
                         "type": "array",
                         "title": "Leak Application Edges"
+                    },
+                    "application_idp_edges": {
+                        "items": {
+                            "$ref": "#/components/schemas/ApplicationExposureEdge"
+                        },
+                        "type": "array",
+                        "title": "Application Idp Edges"
                     }
                 },
                 "type": "object",
@@ -5722,9 +6320,11 @@
                     "activity_nodes",
                     "leak_nodes",
                     "application_nodes",
+                    "idp_application_nodes",
                     "identity_activity_edges",
                     "activity_leak_edges",
-                    "leak_application_edges"
+                    "leak_application_edges",
+                    "application_idp_edges"
                 ],
                 "title": "ApplicationExposuresGraph"
             },
@@ -5761,6 +6361,16 @@
                         "type": "string",
                         "format": "date-time",
                         "title": "Most Recent Leaked At"
+                    },
+                    "idp_type": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantIntegrationType"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "type": {
                         "$ref": "#/components/schemas/ApplicationExposureNodeType",
@@ -5997,7 +6607,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2025-07-08T19:29:38.977447Z"
+                        "default": "2025-07-21T21:34:57.428561Z"
                     },
                     "from": {
                         "anyOf": [
@@ -6400,6 +7010,16 @@
                     },
                     "params": {
                         "$ref": "#/components/schemas/EntraIDParams"
+                    },
+                    "status": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantIntegrationStatus"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
@@ -6408,6 +7028,33 @@
                     "params"
                 ],
                 "title": "CreateTenantIntegrationPayload"
+            },
+            "CreateTenantUserPayload": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "surname": {
+                        "type": "string",
+                        "title": "Surname"
+                    },
+                    "email": {
+                        "type": "string",
+                        "title": "Email"
+                    },
+                    "role": {
+                        "$ref": "#/components/schemas/TenantRoleType"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "surname",
+                    "email",
+                    "role"
+                ],
+                "title": "CreateTenantUserPayload"
             },
             "CredentialBulkActionFilters": {
                 "properties": {
@@ -6528,6 +7175,20 @@
                         "type": "boolean",
                         "title": "Include Validations",
                         "default": false
+                    },
+                    "idp_verification_states": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/CredentialValidationStatus"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Idp Verification States"
                     },
                     "feed_definition": {
                         "$ref": "#/components/schemas/FeedDefinition"
@@ -7168,6 +7829,17 @@
                     "risk_score": {
                         "$ref": "#/components/schemas/RiskScore"
                     },
+                    "application_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Application Name"
+                    },
                     "host_key": {
                         "type": "string",
                         "title": "Host Key"
@@ -7195,6 +7867,12 @@
                     "value": {
                         "type": "string",
                         "title": "Value"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "cookie",
+                        "title": "Type",
+                        "default": "cookie"
                     }
                 },
                 "type": "object",
@@ -7228,6 +7906,17 @@
                     "risk_score": {
                         "$ref": "#/components/schemas/RiskScore"
                     },
+                    "application_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Application Name"
+                    },
                     "url": {
                         "type": "string",
                         "title": "Url"
@@ -7243,6 +7932,12 @@
                     "hash": {
                         "type": "string",
                         "title": "Hash"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "credential",
+                        "title": "Type",
+                        "default": "credential"
                     }
                 },
                 "type": "object",
@@ -7414,6 +8109,20 @@
                         "type": "boolean",
                         "title": "Enable Etl",
                         "default": false
+                    },
+                    "get_users_additional_params": {
+                        "anyOf": [
+                            {
+                                "additionalProperties": {
+                                    "type": "string"
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Get Users Additional Params"
                     }
                 },
                 "type": "object",
@@ -7835,7 +8544,13 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Query"
+                        "title": "Query",
+                        "examples": [
+                            {
+                                "fqdn": "test.com",
+                                "type": "domain"
+                            }
+                        ]
                     },
                     "filters": {
                         "$ref": "#/components/schemas/FeedFilters"
@@ -8080,6 +8795,12 @@
                             }
                         ],
                         "title": "Query",
+                        "examples": [
+                            {
+                                "fqdn": "test.com",
+                                "type": "domain"
+                            }
+                        ],
                         "discriminator": {
                             "propertyName": "type",
                             "mapping": {
@@ -8294,6 +9015,76 @@
                     "ip"
                 ],
                 "title": "IPData"
+            },
+            "IdPApplicationNode": {
+                "properties": {
+                    "application_uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Application Uuid"
+                    },
+                    "domain": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Domain"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "idp_type": {
+                        "$ref": "#/components/schemas/TenantIntegrationType"
+                    },
+                    "labels": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Labels"
+                    },
+                    "logo_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Logo Url"
+                    },
+                    "risk_score": {
+                        "$ref": "#/components/schemas/RiskScore"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/ApplicationExposureNodeType",
+                        "readOnly": true
+                    },
+                    "id": {
+                        "type": "string",
+                        "title": "Id",
+                        "readOnly": true
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "application_uuid",
+                    "domain",
+                    "name",
+                    "idp_type",
+                    "labels",
+                    "logo_url",
+                    "risk_score",
+                    "type",
+                    "id"
+                ],
+                "title": "IdPApplicationNode"
             },
             "Identifier": {
                 "properties": {
@@ -9258,6 +10049,87 @@
                 ],
                 "title": "IdentityDataRequestBody"
             },
+            "IdentityIdPUserApplication": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Uuid"
+                    },
+                    "display_name": {
+                        "type": "string",
+                        "title": "Display Name"
+                    },
+                    "domain_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Domain Name"
+                    },
+                    "labels": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Labels"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "display_name",
+                    "domain_name",
+                    "labels"
+                ],
+                "title": "IdentityIdPUserApplication"
+            },
+            "IdentityIdPUserData": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Uuid"
+                    },
+                    "email": {
+                        "type": "string",
+                        "title": "Email"
+                    },
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "tenant_integration_type": {
+                        "$ref": "#/components/schemas/TenantIntegrationType"
+                    },
+                    "tenant_integration_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Tenant Integration Id"
+                    },
+                    "applications": {
+                        "items": {
+                            "$ref": "#/components/schemas/IdentityIdPUserApplication"
+                        },
+                        "type": "array",
+                        "title": "Applications"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "email",
+                    "username",
+                    "tenant_integration_type",
+                    "tenant_integration_id",
+                    "applications"
+                ],
+                "title": "IdentityIdPUserData"
+            },
             "IdentityIdentifierEntity": {
                 "properties": {
                     "type": {
@@ -9497,6 +10369,19 @@
                     "results"
                 ],
                 "title": "LogoResponse"
+            },
+            "MarkUserAsCompromisedPayload": {
+                "properties": {
+                    "credential_hash": {
+                        "type": "string",
+                        "title": "Credential Hash"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "credential_hash"
+                ],
+                "title": "MarkUserAsCompromisedPayload"
             },
             "MergeIdentitiesBody": {
                 "properties": {
@@ -10025,6 +10910,41 @@
                     "next"
                 ],
                 "title": "PaginatedResults[ThreatFlowReportResponse]"
+            },
+            "PaginatedResults_Union_EnrichedCredential__EnrichedCookie__": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/EnrichedCredential"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/EnrichedCookie"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[Union[EnrichedCredential, EnrichedCookie]]"
             },
             "ParentIdentifierSortType": {
                 "type": "string",
@@ -11188,6 +12108,7 @@
                     "source_code",
                     "source_code_secrets",
                     "source_code_files",
+                    "docker",
                     "stack_exchange",
                     "google",
                     "service",
@@ -11199,6 +12120,7 @@
                     "ad",
                     "ads",
                     "stealer_log_cookie",
+                    "cookie",
                     "pii",
                     "experimental"
                 ],
@@ -11385,6 +12307,9 @@
                             }
                         ]
                     },
+                    "state": {
+                        "$ref": "#/components/schemas/TenantIntegrationState"
+                    },
                     "is_enabled": {
                         "type": "boolean",
                         "title": "Is Enabled"
@@ -11407,11 +12332,73 @@
                     "tenant_id",
                     "type",
                     "params",
+                    "state",
                     "is_enabled",
                     "created_at",
                     "updated_at"
                 ],
                 "title": "TenantIntegrationItem"
+            },
+            "TenantIntegrationState": {
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/TenantIntegrationStatus"
+                    },
+                    "message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Message"
+                    },
+                    "failed_attempts": {
+                        "type": "integer",
+                        "title": "Failed Attempts",
+                        "default": 0
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "status"
+                ],
+                "title": "TenantIntegrationState"
+            },
+            "TenantIntegrationStatus": {
+                "type": "string",
+                "enum": [
+                    "untested",
+                    "error",
+                    "success"
+                ],
+                "title": "TenantIntegrationStatus"
+            },
+            "TenantIntegrationStatusResponse": {
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/TenantIntegrationStatus"
+                    },
+                    "message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Message"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "status",
+                    "message"
+                ],
+                "title": "TenantIntegrationStatusResponse"
             },
             "TenantIntegrationType": {
                 "type": "string",
@@ -11445,6 +12432,18 @@
                     "tenant_role"
                 ],
                 "title": "TenantUserAccess"
+            },
+            "TestTenantIntegrationPayload": {
+                "properties": {
+                    "params": {
+                        "$ref": "#/components/schemas/EntraIDParams"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "params"
+                ],
+                "title": "TestTenantIntegrationPayload"
             },
             "ThreatFlowReportDownloadFormat": {
                 "type": "string",
@@ -11777,6 +12776,34 @@
                 ],
                 "title": "UpdateAlertChannel"
             },
+            "UpdatePartialTenantIntegrationPayload": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "is_enabled": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Is Enabled"
+                    }
+                },
+                "type": "object",
+                "title": "UpdatePartialTenantIntegrationPayload"
+            },
             "UpdateReportParameters": {
                 "properties": {
                     "title": {
@@ -11929,6 +12956,16 @@
                     },
                     "params": {
                         "$ref": "#/components/schemas/EntraIDParams"
+                    },
+                    "status": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantIntegrationStatus"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
@@ -12088,6 +13125,15 @@
                     "password"
                 ],
                 "title": "WebhookBasicAuth"
+            },
+            "firework__backend__api4__identities__recent_activities__models__SortType": {
+                "type": "string",
+                "enum": [
+                    "creation_date",
+                    "event_type",
+                    "source_name"
+                ],
+                "title": "SortType"
             },
             "firework__backend__api4__models__PaginatedResults_Report___1": {
                 "properties": {
