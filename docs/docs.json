@@ -29,10 +29,11 @@
             ]
           },
           {
-            "group": "SDK",
+            "group": "SDK & MCP",
             "pages": [
               "sdk/python",
-              "sdk/go"
+              "sdk/go",
+              "sdk/mcp"
             ]
           },
           {
