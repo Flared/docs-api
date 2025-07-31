@@ -1,0 +1,44 @@
+---
+title: "MCP - Beta"
+---
+
+<Note>
+The MCP server is still in beta and is subject to change.
+</Note>
+
+Flare provides a [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that can be used to ask questions about the Flare API.
+This is useful for developers building Flare API automations with AI-powered integrated development environments (IDE).
+
+Available tools:
+- `Search`: Search across the Flare documentation to fetch relevant context for a given query.
+
+Things the MCP server **cannot** do:
+- Perform queries or actions using the Flare API.
+
+## MCP Server Configuration
+
+The MCP server requires no authentication, it is available at the following URL:
+- `https://api.docs.flare.io/mcp`
+
+The Flare API documentation is also available via the [llms.txt format](https://llmstxt.org/) at the following URL:
+- `https://api.docs.flare.io/llms.txt`
+
+### Cursor
+
+Flare's MCP server can be added to [Cursor](https://cursor.com/) using this one-click link:
+
+<div className="block dark:hidden">
+- [![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=flare-api-docs&config=eyJ1cmwiOiJodHRwczovL2FwaS5kb2NzLmZsYXJlLmlvL21jcCJ9)
+</div>
+
+<div className="hidden dark:block">
+- [![Install MCP Server](https://cursor.com/deeplink/mcp-install-light.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=flare-api-docs&config=eyJ1cmwiOiJodHRwczovL2FwaS5kb2NzLmZsYXJlLmlvL21jcCJ9)
+</div>
+
+If this link does not work for you, you may read more about configuring MCP servers for cursor here:
+- https://docs.cursor.com/en/context/mcp#using-mcp-json
+
+## Others IDEs / Tools
+
+Configuration Guides:
+- Claude Desktop: https://support.anthropic.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp
