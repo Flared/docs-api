@@ -7,7 +7,7 @@ import GatedAccessFeatureAstp from '/snippets/gated-access-feature-astp.mdx';
 <GatedAccessFeatureAstp />
 
 Flare's
-[Leaked Cookies API <Icon icon="code" size={16} />](/api-reference/leaksdb/endpoints/post-cookies-search)
+[Leaked Cookies API <Icon icon="code" size={16} />](/api-reference/astp/endpoints/post-cookies-search)
 allows for searching in cookies matching your domains found in stealer logs.
 Integrators may use this API to identify and invalidate sessions before they are taken over.
 
@@ -72,7 +72,7 @@ fetch_full_event: bool = False
 
 for resp in api_client.scroll(
     method="POST",
-    url="/leaksdb/v2/cookies/_search",
+    url="/astp/v2/cookies/_search",
     json={
         "from": last_from,
         "domain": "scatterholt.com",
