@@ -302,6 +302,47 @@
                 }
             }
         },
+        "/admin/identifiers/{identifier_id}/update_domain_identifier_properties": {
+            "post": {
+                "summary": "Update Domain Identifier Properties",
+                "description": "Schedule the update of the domain identifier properties for a given identifier.",
+                "operationId": "update_domain_identifier_properties_admin_identifiers__identifier_id__update_domain_identifier_properties_post",
+                "parameters": [
+                    {
+                        "name": "identifier_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Identifier Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "title": "Response Update Domain Identifier Properties Admin Identifiers  Identifier Id  Update Domain Identifier Properties Post"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/actors/{actor_name}/profile": {
             "get": {
                 "summary": "Get Actor Profile",
@@ -342,7 +383,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ActorProfile"
+                                    "$ref": "#/components/schemas/ActorMetadata"
                                 }
                             }
                         }
@@ -388,6 +429,22 @@
                                 }
                             ],
                             "title": "Times"
+                        }
+                    },
+                    {
+                        "name": "time_zone",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Time Zone"
                         }
                     },
                     {
@@ -519,6 +576,22 @@
                         }
                     },
                     {
+                        "name": "time_zone",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Time Zone"
+                        }
+                    },
+                    {
                         "name": "search_types",
                         "in": "query",
                         "required": false,
@@ -604,86 +677,11 @@
                 }
             }
         },
-        "/actors/{actor_name}/summaries": {
-            "get": {
-                "summary": "Get Actor Summaries",
-                "operationId": "get_actor_summaries_actors__actor_name__summaries_get",
-                "parameters": [
-                    {
-                        "name": "actor_name",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Actor Name"
-                        }
-                    },
-                    {
-                        "name": "sources",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Sources"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "anyOf": [
-                                        {
-                                            "$ref": "#/components/schemas/ActorSummariesResponse"
-                                        },
-                                        {
-                                            "type": "null"
-                                        }
-                                    ],
-                                    "title": "Response Get Actor Summaries Actors  Actor Name  Summaries Get"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/actors/{actor_name}/summaries/{request_id}": {
+        "/actors/summaries/{request_id}": {
             "get": {
                 "summary": "Get Actor Summaries By Request Id",
-                "operationId": "get_actor_summaries_by_request_id_actors__actor_name__summaries__request_id__get",
+                "operationId": "get_actor_summaries_by_request_id_actors_summaries__request_id__get",
                 "parameters": [
-                    {
-                        "name": "actor_name",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Actor Name"
-                        }
-                    },
                     {
                         "name": "request_id",
                         "in": "path",
@@ -709,7 +707,7 @@
                                             "type": "null"
                                         }
                                     ],
-                                    "title": "Response Get Actor Summaries By Request Id Actors  Actor Name  Summaries  Request Id  Get"
+                                    "title": "Response Get Actor Summaries By Request Id Actors Summaries  Request Id  Get"
                                 }
                             }
                         }
@@ -758,79 +756,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "anyOf": [
-                                        {
-                                            "$ref": "#/components/schemas/ActorSummariesResponse"
-                                        },
-                                        {
-                                            "type": "null"
-                                        }
-                                    ],
-                                    "title": "Response Generate Actor Summaries Actors  Actor Name  Generate Summaries Post"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "get": {
-                "summary": "Get Or Generate Actor Summaries",
-                "operationId": "get_or_generate_actor_summaries_actors__actor_name__generate_summaries_get",
-                "parameters": [
-                    {
-                        "name": "actor_name",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Actor Name"
-                        }
-                    },
-                    {
-                        "name": "sources",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Sources"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "anyOf": [
-                                        {
-                                            "$ref": "#/components/schemas/ActorSummariesResponse"
-                                        },
-                                        {
-                                            "type": "null"
-                                        }
-                                    ],
-                                    "title": "Response Get Or Generate Actor Summaries Actors  Actor Name  Generate Summaries Get"
+                                    "$ref": "#/components/schemas/ActorSummariesResponse"
                                 }
                             }
                         }
@@ -929,6 +855,126 @@
                                         }
                                     ],
                                     "title": "Response Get Actor Heatmap Actors  Actor Name  Heatmap Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/actors/{actor_name}/communication-handles": {
+            "get": {
+                "summary": "Get Actor Communication Handles",
+                "operationId": "get_actor_communication_handles_actors__actor_name__communication_handles_get",
+                "parameters": [
+                    {
+                        "name": "actor_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Actor Name"
+                        }
+                    },
+                    {
+                        "name": "sources",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Sources"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ActorCommunicationHandle"
+                                    },
+                                    "title": "Response Get Actor Communication Handles Actors  Actor Name  Communication Handles Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/actors/{actor_name}/network": {
+            "get": {
+                "summary": "Get Actor Network",
+                "operationId": "get_actor_network_actors__actor_name__network_get",
+                "parameters": [
+                    {
+                        "name": "actor_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Actor Name"
+                        }
+                    },
+                    {
+                        "name": "sources",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Sources"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GraphDTO"
                                 }
                             }
                         }
@@ -1852,6 +1898,44 @@
                 }
             }
         },
+        "/events/extracted_secrets": {
+            "post": {
+                "summary": "Fetch Extracted Secrets",
+                "operationId": "fetch_extracted_secrets_events_extracted_secrets_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EventSecretsBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_SecretItem_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/file_analysis/submit": {
             "post": {
                 "summary": "Submit Presigned Url",
@@ -1900,6 +1984,196 @@
                                 "schema": {
                                     "type": "string",
                                     "title": "Response Is Api Up And Running Healthz  Get"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/identifiers/count": {
+            "get": {
+                "summary": "Get Identifier Count",
+                "operationId": "get_identifier_count_identifiers_count_get",
+                "parameters": [
+                    {
+                        "name": "from_",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From "
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "exclusiveMinimum": 0,
+                            "default": 20,
+                            "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "order_by",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/IdentifierOrderBy",
+                            "default": "id"
+                        }
+                    },
+                    {
+                        "name": "query_string",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Query String"
+                        }
+                    },
+                    {
+                        "name": "feed_owner_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Feed Owner Id"
+                        }
+                    },
+                    {
+                        "name": "is_disabled",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Is Disabled"
+                        }
+                    },
+                    {
+                        "name": "parent_group_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Parent Group Id"
+                        }
+                    },
+                    {
+                        "name": "source_group",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/IdentifierSourceGroup"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "default": "ALL",
+                            "title": "Source Group"
+                        }
+                    },
+                    {
+                        "name": "properties",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/IdentifierProperty"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Properties"
+                        }
+                    },
+                    {
+                        "name": "types",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/IdentifierType"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Types"
+                        }
+                    },
+                    {
+                        "name": "exact_matches_only",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Exact Matches Only"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResult_int_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
                                 }
                             }
                         }
@@ -2115,7 +2389,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResultsWithCount_Identifier_"
+                                    "$ref": "#/components/schemas/PaginatedResults_Identifier_"
                                 }
                             }
                         }
@@ -2539,7 +2813,188 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResultsWithCount_IdentifierRelation_"
+                                    "$ref": "#/components/schemas/PaginatedResults_IdentifierRelation_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/identifiers/{identifier_id}/count": {
+            "get": {
+                "summary": "Get Identifier Count By Id",
+                "operationId": "get_identifier_count_by_id_identifiers__identifier_id__count_get",
+                "parameters": [
+                    {
+                        "name": "identifier_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Identifier Id"
+                        }
+                    },
+                    {
+                        "name": "from_",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From "
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "exclusiveMinimum": 0,
+                            "default": 20,
+                            "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "order_by",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/IdentifierOrderBy",
+                            "default": "id"
+                        }
+                    },
+                    {
+                        "name": "query_string",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Query String"
+                        }
+                    },
+                    {
+                        "name": "feed_owner_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Feed Owner Id"
+                        }
+                    },
+                    {
+                        "name": "is_disabled",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Is Disabled"
+                        }
+                    },
+                    {
+                        "name": "parent_group_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Parent Group Id"
+                        }
+                    },
+                    {
+                        "name": "properties",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/IdentifierProperty"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Properties"
+                        }
+                    },
+                    {
+                        "name": "types",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/IdentifierType"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Types"
+                        }
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/ParentIdentifierSortType",
+                            "default": "reversed_fqdn"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResult_int_"
                                 }
                             }
                         }
@@ -2692,71 +3147,6 @@
                 }
             }
         },
-        "/identities/{asset_uuid}/old_application_exposures": {
-            "get": {
-                "summary": "List Identity Application Exposures",
-                "operationId": "list_identity_application_exposures_identities__asset_uuid__old_application_exposures_get",
-                "parameters": [
-                    {
-                        "name": "asset_uuid",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Asset Uuid"
-                        }
-                    },
-                    {
-                        "name": "next",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Next"
-                        }
-                    },
-                    {
-                        "name": "size",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "default": 20,
-                            "title": "Size"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_IdentityApplicationExposures_"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/identities/{asset_uuid}/application_exposures": {
             "get": {
                 "summary": "Get Application Exposures",
@@ -2772,6 +3162,32 @@
                         }
                     },
                     {
+                        "name": "time",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Time"
+                        }
+                    },
+                    {
+                        "name": "time_zone",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "Etc/UTC",
+                            "title": "Time Zone"
+                        }
+                    },
+                    {
                         "name": "next",
                         "in": "query",
                         "required": false,
@@ -2795,6 +3211,70 @@
                             "type": "integer",
                             "default": 20,
                             "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Domain"
+                        }
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Keyword"
+                        }
+                    },
+                    {
+                        "name": "leak_types",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "cookie",
+                                    "leaked_credential"
+                                ],
+                                "type": "string"
+                            },
+                            "title": "Leak Types"
+                        }
+                    },
+                    {
+                        "name": "cookie_expiration_status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/CookieExpirationStatus"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Cookie Expiration Status"
                         }
                     }
                 ],
@@ -2833,7 +3313,66 @@
                         "required": true,
                         "schema": {
                             "type": "string",
+                            "format": "uuid",
                             "title": "Asset Uuid"
+                        }
+                    },
+                    {
+                        "name": "time",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Time"
+                        }
+                    },
+                    {
+                        "name": "time_zone",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "Etc/UTC",
+                            "title": "Time Zone"
+                        }
+                    },
+                    {
+                        "name": "leak_types",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "cookie",
+                                    "leaked_credential"
+                                ],
+                                "type": "string"
+                            },
+                            "title": "Leak Types"
+                        }
+                    },
+                    {
+                        "name": "cookie_expiration_status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/CookieExpirationStatus"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Cookie Expiration Status"
                         }
                     }
                 ],
@@ -2843,7 +3382,15 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ApplicationExposuresGraph"
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ApplicationExposuresGraph"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "title": "Response Get Identity Application Exposures Graph Identities  Asset Uuid  Application Exposures Graph Get"
                                 }
                             }
                         }
@@ -3034,45 +3581,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/RecentActivityResponse"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/identities/{asset_uuid}/timeline": {
-            "get": {
-                "summary": "Get Recent Activities Timeline",
-                "operationId": "get_recent_activities_timeline_identities__asset_uuid__timeline_get",
-                "parameters": [
-                    {
-                        "name": "asset_uuid",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Asset Uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TimelineResponse"
                                 }
                             }
                         }
@@ -4360,49 +4868,6 @@
                 }
             }
         },
-        "/integrations/tenant_integrations/{tenant_integration_id}/idp/disable_account": {
-            "post": {
-                "summary": "Disable Account",
-                "operationId": "disable_account_integrations_tenant_integrations__tenant_integration_id__idp_disable_account_post",
-                "parameters": [
-                    {
-                        "name": "tenant_integration_id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid",
-                            "title": "Tenant Integration Id"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/DisableAccountPayload"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "204": {
-                        "description": "Successful Response"
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/integrations/tenant_integrations/{tenant_integration_id}/idp/revoke_sessions": {
             "post": {
                 "summary": "Revoke Sessions",
@@ -4425,6 +4890,49 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/RevokeSessionsPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/integrations/tenant_integrations/{tenant_integration_id}/idp/disable_account": {
+            "post": {
+                "summary": "Disable Account",
+                "operationId": "disable_account_integrations_tenant_integrations__tenant_integration_id__idp_disable_account_post",
+                "parameters": [
+                    {
+                        "name": "tenant_integration_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Tenant Integration Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DisableAccountPayload"
                             }
                         }
                     }
@@ -5062,15 +5570,26 @@
             "put": {
                 "summary": "Add Tenant Users Put",
                 "operationId": "add_tenant_users_put_tenants__tenant_id__users_put",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    }
+                ],
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/BulkAddUsersToTenantRequestBody"
                             }
                         }
-                    },
-                    "required": true
+                    }
                 },
                 "responses": {
                     "200": {
@@ -5097,15 +5616,107 @@
                 "summary": "Create Tenant User",
                 "operationId": "create_tenant_user_tenants__tenant_id__users_post",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/CreateTenantUserPayload"
                             }
                         }
-                    },
-                    "required": true
+                    }
                 },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenants/{tenant_id}/users/{user_id}/disable": {
+            "post": {
+                "summary": "Disable Tenant Member",
+                "operationId": "disable_tenant_member_tenants__tenant_id__users__user_id__disable_post",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "User Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tenants/{tenant_id}/users/{user_id}/enable": {
+            "post": {
+                "summary": "Enable Tenant Member",
+                "operationId": "enable_tenant_member_tenants__tenant_id__users__user_id__enable_post",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "User Id"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -5190,19 +5801,15 @@
                 "properties": {
                     "name": {
                         "type": "string",
+                        "enum": [
+                            "stealer_log",
+                            "leak"
+                        ],
                         "title": "Name"
                     },
                     "count": {
                         "type": "integer",
                         "title": "Count"
-                    },
-                    "leak_types": {
-                        "items": {
-                            "$ref": "#/components/schemas/LeakType"
-                        },
-                        "type": "array",
-                        "uniqueItems": true,
-                        "title": "Leak Types"
                     },
                     "type": {
                         "$ref": "#/components/schemas/ApplicationExposureNodeType",
@@ -5218,7 +5825,6 @@
                 "required": [
                     "name",
                     "count",
-                    "leak_types",
                     "type",
                     "id"
                 ],
@@ -5252,6 +5858,28 @@
                     "es_id"
                 ],
                 "title": "ActivityUid"
+            },
+            "ActorCommunicationHandle": {
+                "properties": {
+                    "platform": {
+                        "type": "string",
+                        "title": "Platform"
+                    },
+                    "handles": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true,
+                        "title": "Handles"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "platform",
+                    "handles"
+                ],
+                "title": "ActorCommunicationHandle"
             },
             "ActorEvent": {
                 "properties": {
@@ -5333,36 +5961,72 @@
                         ],
                         "title": "Last Seen"
                     },
-                    "active_sources": {
+                    "is_vetted": {
+                        "type": "boolean",
+                        "title": "Is Vetted",
+                        "default": false
+                    },
+                    "vetted_sources": {
                         "items": {
-                            "type": "string"
+                            "$ref": "#/components/schemas/ActorSource"
                         },
                         "type": "array",
-                        "title": "Active Sources"
+                        "title": "Vetted Sources",
+                        "default": []
+                    },
+                    "active_sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/ActorSource"
+                        },
+                        "type": "array",
+                        "title": "Active Sources",
+                        "default": []
+                    }
+                },
+                "type": "object",
+                "title": "ActorMetadata"
+            },
+            "ActorNodeDTO": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "actor",
+                        "title": "Type",
+                        "default": "actor"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "active_sources"
+                    "id",
+                    "name"
                 ],
-                "title": "ActorMetadata"
+                "title": "ActorNodeDTO"
             },
-            "ActorProfile": {
+            "ActorSource": {
                 "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
                     },
-                    "actor_metadata": {
-                        "$ref": "#/components/schemas/ActorMetadata"
+                    "title": {
+                        "type": "string",
+                        "title": "Title"
                     }
                 },
                 "type": "object",
                 "required": [
                     "name",
-                    "actor_metadata"
+                    "title"
                 ],
-                "title": "ActorProfile"
+                "title": "ActorSource"
             },
             "ActorSourceDistribution": {
                 "properties": {
@@ -5401,8 +6065,15 @@
             "ActorSummariesResponse": {
                 "properties": {
                     "request_id": {
-                        "type": "string",
-                        "format": "uuid",
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
                         "title": "Request Id"
                     },
                     "profile": {
@@ -5437,6 +6108,17 @@
                             }
                         ],
                         "title": "Activity"
+                    },
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
                     }
                 },
                 "type": "object",
@@ -5497,6 +6179,54 @@
                     "total_count"
                 ],
                 "title": "ActorTimelineEntry"
+            },
+            "ActorToActorEdgeDTO": {
+                "properties": {
+                    "source": {
+                        "type": "string",
+                        "title": "Source"
+                    },
+                    "target": {
+                        "type": "string",
+                        "title": "Target"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "related_to",
+                        "title": "Type",
+                        "default": "related_to"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/ActorToActorEdgeParams",
+                        "description": "Additional parameters for the edge"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "source",
+                    "target"
+                ],
+                "title": "ActorToActorEdgeDTO"
+            },
+            "ActorToActorEdgeParams": {
+                "properties": {
+                    "forums": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true,
+                        "title": "Forums",
+                        "default": []
+                    },
+                    "number_of_interactions": {
+                        "type": "integer",
+                        "title": "Number Of Interactions",
+                        "default": 1
+                    }
+                },
+                "type": "object",
+                "title": "ActorToActorEdgeParams"
             },
             "Alert": {
                 "properties": {
@@ -6195,24 +6925,6 @@
                 ],
                 "title": "ApiReport"
             },
-            "ApplicationDetails": {
-                "properties": {
-                    "domain": {
-                        "type": "string",
-                        "title": "Domain"
-                    },
-                    "application_name": {
-                        "type": "string",
-                        "title": "Application Name"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "domain",
-                    "application_name"
-                ],
-                "title": "ApplicationDetails"
-            },
             "ApplicationExposureEdge": {
                 "properties": {
                     "source_id": {
@@ -6340,7 +7052,11 @@
                     },
                     "activity_types": {
                         "items": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                                "stealer_log",
+                                "leak"
+                            ]
                         },
                         "type": "array",
                         "uniqueItems": true,
@@ -6348,7 +7064,11 @@
                     },
                     "leak_types": {
                         "items": {
-                            "$ref": "#/components/schemas/LeakType"
+                            "type": "string",
+                            "enum": [
+                                "cookie",
+                                "leaked_credential"
+                            ]
                         },
                         "type": "array",
                         "uniqueItems": true,
@@ -6607,7 +7327,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2025-07-21T21:34:57.428561Z"
+                        "default": "2025-08-04T17:18:30.066149Z"
                     },
                     "from": {
                         "anyOf": [
@@ -6838,6 +7558,14 @@
                     "time_range_to"
                 ],
                 "title": "ConversationSummaryRequestResponse"
+            },
+            "CookieExpirationStatus": {
+                "type": "string",
+                "enum": [
+                    "active",
+                    "expired"
+                ],
+                "title": "CookieExpirationStatus"
             },
             "CookieMonitoringConfigurationItem": {
                 "properties": {
@@ -7180,7 +7908,7 @@
                         "anyOf": [
                             {
                                 "items": {
-                                    "$ref": "#/components/schemas/CredentialValidationStatus"
+                                    "$ref": "#/components/schemas/CredentialValidationStatusFilter"
                                 },
                                 "type": "array"
                             },
@@ -7351,6 +8079,20 @@
                             }
                         ],
                         "title": "States"
+                    },
+                    "idp_verification_states": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/CredentialValidationStatusFilter"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Idp Verification States"
                     }
                 },
                 "type": "object",
@@ -7424,6 +8166,17 @@
                     "failed"
                 ],
                 "title": "CredentialValidationStatus"
+            },
+            "CredentialValidationStatusFilter": {
+                "type": "string",
+                "enum": [
+                    "match",
+                    "no_match",
+                    "unknown",
+                    "failed",
+                    "pending"
+                ],
+                "title": "CredentialValidationStatusFilter"
             },
             "CredentialsData": {
                 "properties": {
@@ -7935,9 +8688,9 @@
                     },
                     "type": {
                         "type": "string",
-                        "const": "credential",
+                        "const": "leaked_credential",
                         "title": "Type",
-                        "default": "credential"
+                        "default": "leaked_credential"
                     }
                 },
                 "type": "object",
@@ -8136,7 +8889,14 @@
             "EventAction": {
                 "properties": {
                     "type": {
-                        "$ref": "#/components/schemas/LeakedCredentialsBulkActionType"
+                        "type": "string",
+                        "enum": [
+                            "remediate",
+                            "unremediate",
+                            "ignore",
+                            "unignore"
+                        ],
+                        "title": "Type"
                     }
                 },
                 "type": "object",
@@ -8177,6 +8937,37 @@
                     "action"
                 ],
                 "title": "EventActionsBody"
+            },
+            "EventSecretsBody": {
+                "properties": {
+                    "uid": {
+                        "type": "string",
+                        "title": "Uid"
+                    },
+                    "from": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "From"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "maximum": 50.0,
+                        "exclusiveMinimum": 0.0,
+                        "title": "Size",
+                        "default": 10
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uid"
+                ],
+                "title": "EventSecretsBody"
             },
             "FeedConfiguration": {
                 "properties": {
@@ -8851,6 +9642,30 @@
                     "query"
                 ],
                 "title": "GlobalSearchRequestBody"
+            },
+            "GraphDTO": {
+                "properties": {
+                    "nodes": {
+                        "items": {
+                            "$ref": "#/components/schemas/ActorNodeDTO"
+                        },
+                        "type": "array",
+                        "title": "Nodes"
+                    },
+                    "edges": {
+                        "items": {
+                            "$ref": "#/components/schemas/ActorToActorEdgeDTO"
+                        },
+                        "type": "array",
+                        "title": "Edges"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "nodes",
+                    "edges"
+                ],
+                "title": "GraphDTO"
             },
             "GroupFilters": {
                 "properties": {
@@ -9845,12 +10660,14 @@
                                 "type": "null"
                             }
                         ]
+                    },
+                    "is_materialized": {
+                        "type": "boolean",
+                        "title": "Is Materialized",
+                        "default": false
                     }
                 },
                 "type": "object",
-                "required": [
-                    "identifier"
-                ],
                 "title": "IdentifierResponse"
             },
             "IdentifierScope": {
@@ -9954,38 +10771,6 @@
                     "identity"
                 ],
                 "title": "IdentifierType"
-            },
-            "IdentityApplicationExposures": {
-                "properties": {
-                    "cookies": {
-                        "items": {
-                            "$ref": "#/components/schemas/EnrichedCookie"
-                        },
-                        "type": "array",
-                        "title": "Cookies"
-                    },
-                    "credentials": {
-                        "items": {
-                            "$ref": "#/components/schemas/EnrichedCredential"
-                        },
-                        "type": "array",
-                        "title": "Credentials"
-                    },
-                    "applications": {
-                        "items": {
-                            "$ref": "#/components/schemas/ApplicationDetails"
-                        },
-                        "type": "array",
-                        "title": "Applications"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "cookies",
-                    "credentials",
-                    "applications"
-                ],
-                "title": "IdentityApplicationExposures"
             },
             "IdentityData": {
                 "properties": {
@@ -10277,11 +11062,28 @@
             "LeakNode": {
                 "properties": {
                     "leak_type": {
-                        "$ref": "#/components/schemas/LeakType"
+                        "type": "string",
+                        "enum": [
+                            "cookie",
+                            "leaked_credential"
+                        ],
+                        "title": "Leak Type"
                     },
                     "count": {
                         "type": "integer",
                         "title": "Count"
+                    },
+                    "activity_types": {
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "stealer_log",
+                                "leak"
+                            ]
+                        },
+                        "type": "array",
+                        "uniqueItems": true,
+                        "title": "Activity Types"
                     },
                     "type": {
                         "$ref": "#/components/schemas/ApplicationExposureNodeType",
@@ -10297,28 +11099,11 @@
                 "required": [
                     "leak_type",
                     "count",
+                    "activity_types",
                     "type",
                     "id"
                 ],
                 "title": "LeakNode"
-            },
-            "LeakType": {
-                "type": "string",
-                "enum": [
-                    "cookie",
-                    "credential"
-                ],
-                "title": "LeakType"
-            },
-            "LeakedCredentialsBulkActionType": {
-                "type": "string",
-                "enum": [
-                    "remediate",
-                    "unremediate",
-                    "ignore",
-                    "unignore"
-                ],
-                "title": "LeakedCredentialsBulkActionType"
             },
             "LogoRequestBody": {
                 "properties": {
@@ -10537,14 +11322,11 @@
                 ],
                 "title": "PagedCookieConfigurations"
             },
-            "PaginatedResultsWithCount_IdentifierRelation_": {
+            "PaginatedResult_int_": {
                 "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/IdentifierRelation"
-                        },
-                        "type": "array",
-                        "title": "Items"
+                    "item": {
+                        "type": "integer",
+                        "title": "Item"
                     },
                     "next": {
                         "anyOf": [
@@ -10556,52 +11338,14 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "type": "integer",
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "items",
-                    "next",
-                    "total_count"
+                    "item",
+                    "next"
                 ],
-                "title": "PaginatedResultsWithCount[IdentifierRelation]"
-            },
-            "PaginatedResultsWithCount_Identifier_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/Identifier"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "type": "integer",
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next",
-                    "total_count"
-                ],
-                "title": "PaginatedResultsWithCount[Identifier]"
+                "title": "PaginatedResult[int]"
             },
             "PaginatedResults_Alert_": {
                 "properties": {
@@ -10771,11 +11515,11 @@
                 ],
                 "title": "PaginatedResults[FeedItem]"
             },
-            "PaginatedResults_IdentityApplicationExposures_": {
+            "PaginatedResults_IdentifierRelation_": {
                 "properties": {
                     "items": {
                         "items": {
-                            "$ref": "#/components/schemas/IdentityApplicationExposures"
+                            "$ref": "#/components/schemas/IdentifierRelation"
                         },
                         "type": "array",
                         "title": "Items"
@@ -10797,7 +11541,35 @@
                     "items",
                     "next"
                 ],
-                "title": "PaginatedResults[IdentityApplicationExposures]"
+                "title": "PaginatedResults[IdentifierRelation]"
+            },
+            "PaginatedResults_Identifier_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Identifier"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[Identifier]"
             },
             "PaginatedResults_PartialAlertChannel_": {
                 "properties": {
@@ -10854,6 +11626,34 @@
                     "next"
                 ],
                 "title": "PaginatedResults[Recommendation]"
+            },
+            "PaginatedResults_SecretItem_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/SecretItem"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[SecretItem]"
             },
             "PaginatedResults_TenantIntegrationItem_": {
                 "properties": {
@@ -12106,6 +12906,7 @@
                     "social_media_account",
                     "social_media",
                     "source_code",
+                    "source_code_secrets_np",
                     "source_code_secrets",
                     "source_code_files",
                     "docker",
@@ -12145,6 +12946,228 @@
                     "secret"
                 ],
                 "title": "SecretData"
+            },
+            "SecretDetectionRule": {
+                "type": "string",
+                "enum": [
+                    "adafruit_io_key",
+                    "adobe_oauth_client_secret",
+                    "age_recipient_x25519_public_key",
+                    "age_identity_x22519_secret_key",
+                    "anthropic_api_key",
+                    "aws_appsync_api_key",
+                    "amazon_resource_name",
+                    "artifactory_api_key",
+                    "auth0_application_credentials",
+                    "aws_api_key",
+                    "aws_secret_access_key",
+                    "aws_account_id",
+                    "aws_session_token",
+                    "amazon_mws_auth_token",
+                    "aws_api_credentials",
+                    "azure_connection_string",
+                    "azure_app_configuration_connection_string",
+                    "azure_personal_access_token",
+                    "bitbucket_app_password",
+                    "blynk_device_access_token",
+                    "blynk_organization_access_token",
+                    "blynk_organization_client_credentials",
+                    "codeclimate_reporter_id",
+                    "crates_io_api_key",
+                    "databricks_personal_access_token",
+                    "digitalocean_application_access_token",
+                    "digitalocean_personal_access_token",
+                    "digitalocean_refresh_token",
+                    "django_secret_key",
+                    "docker_hub_personal_access_token",
+                    "doppler_cli_token",
+                    "doppler_personal_token",
+                    "doppler_service_token",
+                    "doppler_service_account_token",
+                    "doppler_scim_token",
+                    "doppler_audit_token",
+                    "dropbox_access_token",
+                    "dependency_track_api_key",
+                    "dynatrace_token",
+                    "facebook_secret_key",
+                    "facebook_access_token",
+                    "figma_personal_access_token",
+                    "firecrawl_api_key",
+                    "google_cloud_storage_bucket",
+                    "generic_secret",
+                    "connection_string_in_net_configuration",
+                    "generic_password",
+                    "generic_username_and_password",
+                    "generic_api_key",
+                    "credentials_in_net_system_net_networkcredential",
+                    "credentials_in_net_system_directoryservices_directoryentry",
+                    "sensitive_value_in_net_configuration",
+                    "gitalk_oauth_credentials",
+                    "github_personal_access_token",
+                    "github_oauth_access_token",
+                    "github_app_token",
+                    "github_refresh_token",
+                    "github_client_id",
+                    "github_secret_key",
+                    "gitlab_runner_registration_token",
+                    "gitlab_personal_access_token",
+                    "gitlab_pipeline_trigger_token",
+                    "google_client_id",
+                    "google_oauth_client_secret",
+                    "google_oauth_access_token",
+                    "google_api_key",
+                    "google_oauth_credentials",
+                    "hardcoded_gradle_credentials",
+                    "grafana_api_token",
+                    "grafana_cloud_api_token",
+                    "grafana_service_account_token",
+                    "groq_api_key",
+                    "hashicorp_vault_service_token",
+                    "hashicorp_vault_batch_token",
+                    "hashicorp_vault_recovery_token",
+                    "hashicorp_vault_unseal_key",
+                    "heroku_api_key",
+                    "http_basic_authentication",
+                    "http_bearer_token",
+                    "huggingface_user_access_token",
+                    "jenkins_token_or_crumb",
+                    "jenkins_setup_admin_password",
+                    "jina_search_foundation_api_key",
+                    "json_web_token_secret",
+                    "kagi_api_key",
+                    "password_hash_kerberos",
+                    "kubernetes_bootstrap_token",
+                    "linkedin_client_id",
+                    "linkedin_secret_key",
+                    "mailchimp_api_key",
+                    "mailgun_api_key",
+                    "mapbox_public_access_token",
+                    "mapbox_secret_access_token",
+                    "mapbox_temporary_access_token",
+                    "credentials_in_mongodb_connection_string",
+                    "microsoft_teams_webhook",
+                    "netrc_credentials",
+                    "new_relic_license_key",
+                    "new_relic_api_service_key",
+                    "new_relic_admin_api_key",
+                    "new_relic_insights_insert_key",
+                    "new_relic_insights_query_key",
+                    "new_relic_rest_api_key",
+                    "new_relic_pixie_api_key",
+                    "new_relic_pixie_deploy_key",
+                    "npm_access_token",
+                    "nuget_api_key",
+                    "credentials_in_odbc_connection_string",
+                    "okta_api_token",
+                    "openai_api_key",
+                    "particle_io_access_token",
+                    "pem_encoded_private_key",
+                    "phpmailer_credentials",
+                    "credentials_in_postgresql_connection_uri",
+                    "postman_api_key",
+                    "postmark_api_token",
+                    "credentials_in_psexec_invocation",
+                    "password_hash_md5crypt",
+                    "password_hash_bcrypt",
+                    "password_hash_sha256crypt",
+                    "password_hash_sha512crypt",
+                    "password_hash_cisco_ios_pbkdf2_with_sha256",
+                    "pypi_upload_token",
+                    "react_app_username",
+                    "react_app_password",
+                    "rubygems_api_key",
+                    "aws_s3_bucket",
+                    "salesforce_access_token",
+                    "sauce_token",
+                    "segment_public_api_token",
+                    "sendgrid_api_key",
+                    "shopify_domain",
+                    "shopify_app_secret",
+                    "shopify_access_token",
+                    "slack_bot_token",
+                    "slack_webhook",
+                    "slack_user_token",
+                    "slack_app_token",
+                    "slack_legacy_bot_token",
+                    "sonarqube_token",
+                    "sourcegraph_access_token",
+                    "square_access_token",
+                    "square_oauth_secret",
+                    "stackhawk_api_key",
+                    "stripe_api_key",
+                    "stripe_api_test_key",
+                    "tavily_api_key",
+                    "teamcity_api_token",
+                    "telegram_bot_token",
+                    "thingsboard_access_token",
+                    "thingsboard_provision_device_key",
+                    "thingsboard_provision_device_secret",
+                    "truenas_api_key_websocket",
+                    "truenas_api_key_rest_api",
+                    "twilio_api_key",
+                    "twitter_client_id",
+                    "twitter_secret_key",
+                    "credentials_in_connect_viserver_invocation",
+                    "wireguard_private_key",
+                    "wireguard_preshared_key"
+                ],
+                "title": "SecretDetectionRule"
+            },
+            "SecretItem": {
+                "properties": {
+                    "type": {
+                        "$ref": "#/components/schemas/SecretDetectionRule"
+                    },
+                    "content": {
+                        "type": "string",
+                        "title": "Content"
+                    },
+                    "extracted_secrets": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Extracted Secrets"
+                    },
+                    "position": {
+                        "$ref": "#/components/schemas/SecretPosition"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "content",
+                    "position"
+                ],
+                "title": "SecretItem"
+            },
+            "SecretPosition": {
+                "properties": {
+                    "start_line": {
+                        "type": "integer",
+                        "title": "Start Line"
+                    },
+                    "start_column": {
+                        "type": "integer",
+                        "title": "Start Column"
+                    },
+                    "end_line": {
+                        "type": "integer",
+                        "title": "End Line"
+                    },
+                    "end_column": {
+                        "type": "integer",
+                        "title": "End Column"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "start_line",
+                    "start_column",
+                    "end_line",
+                    "end_column"
+                ],
+                "title": "SecretPosition"
             },
             "SecretQuery": {
                 "properties": {
@@ -12667,22 +13690,6 @@
                     "count"
                 ],
                 "title": "TimelineDateCount"
-            },
-            "TimelineResponse": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/TimelineDateCount"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items"
-                ],
-                "title": "TimelineResponse"
             },
             "TimelineSearchTypeWithValues": {
                 "properties": {
