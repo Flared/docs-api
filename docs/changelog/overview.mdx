@@ -12,6 +12,11 @@ This page lists changes to Flare's API.
 Release notes for the Flare Platform can be found on the [product documentation website](https://docs.flare.io/releases).
 </Note>
 
+<Update label="2025-08" description="API - August 2025">
+  API endpoints using the prefix `/leaksdb/` were changed to `/astp/`.
+  The old prefix remains available as an alias and there are no plans to deprecate it.
+</Update>
+
 <Update label="2025-07" description="MCP - July 2025">
   Released the
   [Flare API Documentation MCP Server <Icon icon="book" size={16} />](/sdk/mcp).
@@ -35,12 +40,12 @@ Release notes for the Flare Platform can be found on the [product documentation 
 
 <Update label="2025-04" description="API - April 2025">
   Released a new version of the List All Credentials endpoint, 
-  [List All Credentials V2 <Icon icon="code" size={16} />](/api-reference/leaksdb/endpoints/get-credentials),
+  [List All Credentials V2 <Icon icon="code" size={16} />](/api-reference/astp/endpoints/get-credentials),
   which supports the
   [Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
 
   The old endpoint is still supported and was marked as deprecated:
-  [List All Credentials V1 <Icon icon="code" size={16} />](/api-reference/leaksdb/endpoints/get-credentials-v1).
+  [List All Credentials V1 <Icon icon="code" size={16} />](/api-reference/astp/endpoints/get-credentials-v1).
 </Update>
 
 <Update label="2025-02-18" description="Python SDK - v0.2.1">
@@ -80,11 +85,11 @@ client = FlareApiClient.from_env()
 
 <Update label="2024-12" description="API - December 2024">
   The
-  [cookies search endpoint <Icon icon="code" size={16} />](/api-reference/leaksdb/endpoints/post-cookies-search)
+  [cookies search endpoint <Icon icon="code" size={16} />](/api-reference/astp/endpoints/post-cookies-search)
   now returns an `uuid` that can be used to uniquely identify cookies.
 
   The
-  [cookies search endpoint <Icon icon="code" size={16} />](/api-reference/leaksdb/endpoints/post-cookies-search)
+  [cookies search endpoint <Icon icon="code" size={16} />](/api-reference/astp/endpoints/post-cookies-search)
   now returns an `imported_at` timestamp that indicates when the cookie was imported to
   Flare's database. It also has a new `imported_after` filter that allows for retrieving
   cookies that were imported after a given timestamp. The
@@ -121,7 +126,7 @@ client = FlareApiClient.from_env()
   with simpler-to-use filters.
 
   Released new
-  [credentials search endpoint <Icon icon="code" size={16} />](/api-reference/leaksdb/endpoints/post-credentials-search)
+  [credentials search endpoint <Icon icon="code" size={16} />](/api-reference/astp/endpoints/post-credentials-search)
   with simpler-to-use filters and support for Flare's standard paging pattern.
 
   Released a [Python SDK <Icon icon="book" size={16} />](/sdk/python).

@@ -105,16 +105,16 @@
               {
                 "group": "Credentials",
                 "pages": [
-                  "api-reference/leaksdb/endpoints/post-credentials-search",
-                  "api-reference/leaksdb/endpoints/post-by-accounts",
-                  "api-reference/leaksdb/endpoints/get-sources",
-                  "api-reference/leaksdb/endpoints/get-source"
+                  "api-reference/astp/endpoints/post-credentials-search",
+                  "api-reference/astp/endpoints/post-by-accounts",
+                  "api-reference/astp/endpoints/get-sources",
+                  "api-reference/astp/endpoints/get-source"
                 ]
               },
               {
                 "group": "Cookies",
                 "pages": [
-                  "api-reference/leaksdb/endpoints/post-cookies-search"
+                  "api-reference/astp/endpoints/post-cookies-search"
                 ]
               }
             ]
@@ -235,9 +235,9 @@
               {
                 "group": "Identities",
                 "pages": [
-                  "api-reference/leaksdb/endpoints/get-by-domain",
-                  "api-reference/leaksdb/endpoints/get-by-keyword",
-                  "api-reference/leaksdb/endpoints/get-by-password"
+                  "api-reference/astp/endpoints/get-by-domain",
+                  "api-reference/astp/endpoints/get-by-keyword",
+                  "api-reference/astp/endpoints/get-by-password"
                 ]
               },
               {
@@ -323,5 +323,11 @@
       "github": "https://github.com/flared",
       "youtube": "https://www.youtube.com/@flarecybersecurity"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/api-reference/leaksdb/:slug*",
+      "destination": "/api-reference/astp/:slug*"
+    }
+  ]
 }
