@@ -77,8 +77,8 @@
               {
                 "group": "Events",
                 "pages": [
-                  "api-reference/v2/endpoints/activities/get-activities-",
-                  "api-reference/v2/endpoints/activities/get-activities--ai_assistance",
+                  "api-reference/v2/endpoints/activities/get-fireworkv2activities-",
+                  "api-reference/v2/endpoints/activities/get-fireworkv2activities--ai_assistance",
                   "api-reference/v4/endpoints/event-actions"
                 ]
               },
@@ -86,8 +86,8 @@
                 "group": "Event Feeds",
                 "pages": [
                   "api-reference/v4/endpoints/current-tenant-feed",
-                  "api-reference/v2/endpoints/me/get-mefeedcredentials",
-                  "api-reference/v3/endpoints/identifiers/get-identifiers-feedcredentials",
+                  "api-reference/v2/endpoints/me/get-fireworkv2mefeedcredentials",
+                  "api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers-feedcredentials",
                   "api-reference/v4/endpoints/identifier-feed",
                   "api-reference/v4/endpoints/identifier-group-feed"
                 ]
@@ -126,21 +126,21 @@
               {
                 "group": "Identifiers",
                 "pages": [
-                  "api-reference/v3/endpoints/identifiers/get-identifiers",
-                  "api-reference/v2/endpoints/identifiers/post-assets",
-                  "api-reference/v2/endpoints/identifiers/put-assets",
-                  "api-reference/v3/endpoints/identifiers/get-identifiers-1",
-                  "api-reference/v2/endpoints/identifiers/delete-assets",
-                  "api-reference/v2/endpoints/identifiers/post-assets-toggle"
+                  "api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers",
+                  "api-reference/v2/endpoints/identifiers/post-fireworkv2assets",
+                  "api-reference/v2/endpoints/identifiers/put-fireworkv2assets",
+                  "api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers-1",
+                  "api-reference/v2/endpoints/identifiers/delete-fireworkv2assets",
+                  "api-reference/v2/endpoints/identifiers/post-fireworkv2assets-toggle"
                 ]
               },
               {
                 "group": "Identifier Groups",
                 "pages": [
-                  "api-reference/v2/endpoints/identifiers/get-assetsgroups",
-                  "api-reference/v2/endpoints/identifiers/post-assetsgroups",
-                  "api-reference/v2/endpoints/identifiers/get-assetsgroups-1",
-                  "api-reference/v2/endpoints/identifiers/delete-assetsgroups"
+                  "api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups",
+                  "api-reference/v2/endpoints/identifiers/post-fireworkv2assetsgroups",
+                  "api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups-1",
+                  "api-reference/v2/endpoints/identifiers/delete-fireworkv2assetsgroups"
                 ]
               },
               {
@@ -153,60 +153,60 @@
               {
                 "group": "Alerts",
                 "pages": [
-                  "api-reference/v2/endpoints/identifiers/get-assets-alerts",
-                  "api-reference/v2/endpoints/identifiers/post-assets-alerts",
-                  "api-reference/v2/endpoints/identifiers/put-assets-alerts",
-                  "api-reference/v2/endpoints/identifiers/delete-assets-alerts",
-                  "api-reference/v2/endpoints/identifiers/get-assetsgroups-alerts",
-                  "api-reference/v2/endpoints/identifiers/post-assetsgroups-alerts",
-                  "api-reference/v2/endpoints/identifiers/put-assetsgroups-alerts",
-                  "api-reference/v2/endpoints/identifiers/delete-assetsgroups-alerts"
+                  "api-reference/v2/endpoints/identifiers/get-fireworkv2assets-alerts",
+                  "api-reference/v2/endpoints/identifiers/post-fireworkv2assets-alerts",
+                  "api-reference/v2/endpoints/identifiers/put-fireworkv2assets-alerts",
+                  "api-reference/v2/endpoints/identifiers/delete-fireworkv2assets-alerts",
+                  "api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups-alerts",
+                  "api-reference/v2/endpoints/identifiers/post-fireworkv2assetsgroups-alerts",
+                  "api-reference/v2/endpoints/identifiers/put-fireworkv2assetsgroups-alerts",
+                  "api-reference/v2/endpoints/identifiers/delete-fireworkv2assetsgroups-alerts"
                 ]
               },
               {
                 "group": "Current User",
                 "pages": [
-                  "api-reference/v2/endpoints/me/get-meprofile",
-                  "api-reference/v2/endpoints/me/get-metenants",
-                  "api-reference/v2/endpoints/me/put-meprofile"
+                  "api-reference/v2/endpoints/me/get-fireworkv2meprofile",
+                  "api-reference/v2/endpoints/me/get-fireworkv2metenants",
+                  "api-reference/v2/endpoints/me/put-fireworkv2meprofile"
                 ]
               },
               {
                 "group": "Organization Members",
                 "pages": [
-                  "api-reference/v2/endpoints/organizations/get-organizations-members",
-                  "api-reference/v2/endpoints/organizations/post-organizations-members",
-                  "api-reference/v2/endpoints/organizations/get-organizations-members-1",
-                  "api-reference/v2/endpoints/organizations/put-organizations-members",
-                  "api-reference/v2/endpoints/organizations/post-organizations-members-enable",
-                  "api-reference/v2/endpoints/organizations/post-organizations-members-disable",
-                  "api-reference/v2/endpoints/organizations/get-organizations-members-tenants",
-                  "api-reference/v2/endpoints/organizations/post-organizations-members-permissions"
+                  "api-reference/v2/endpoints/organizations/get-fireworkv2organizations-members",
+                  "api-reference/v2/endpoints/organizations/post-fireworkv2organizations-members",
+                  "api-reference/v2/endpoints/organizations/get-fireworkv2organizations-members-1",
+                  "api-reference/v2/endpoints/organizations/put-fireworkv2organizations-members",
+                  "api-reference/v2/endpoints/organizations/post-fireworkv2organizations-members-enable",
+                  "api-reference/v2/endpoints/organizations/post-fireworkv2organizations-members-disable",
+                  "api-reference/v2/endpoints/organizations/get-fireworkv2organizations-members-tenants",
+                  "api-reference/v2/endpoints/organizations/post-fireworkv2organizations-members-permissions"
                 ]
               },
               {
                 "group": "Reporting",
                 "pages": [
-                  "api-reference/v2/endpoints/reporting/get-reportingreports",
-                  "api-reference/v2/endpoints/reporting/post-reportingreports",
-                  "api-reference/v2/endpoints/reporting/get-reportingreports-1",
-                  "api-reference/v2/endpoints/reporting/patch-reportingreports",
-                  "api-reference/v2/endpoints/reporting/delete-reportingreports",
-                  "api-reference/v2/endpoints/reporting/post-reportingreports-archive",
-                  "api-reference/v2/endpoints/reporting/get-reportingreports-download"
+                  "api-reference/v2/endpoints/reporting/get-fireworkv2reportingreports",
+                  "api-reference/v2/endpoints/reporting/post-fireworkv2reportingreports",
+                  "api-reference/v2/endpoints/reporting/get-fireworkv2reportingreports-1",
+                  "api-reference/v2/endpoints/reporting/patch-fireworkv2reportingreports",
+                  "api-reference/v2/endpoints/reporting/delete-fireworkv2reportingreports",
+                  "api-reference/v2/endpoints/reporting/post-fireworkv2reportingreports-archive",
+                  "api-reference/v2/endpoints/reporting/get-fireworkv2reportingreports-download"
                 ]
               },
               {
                 "group": "Tenants",
                 "pages": [
-                  "api-reference/v2/endpoints/organizations/get-organizations-tenants",
-                  "api-reference/v2/endpoints/organizations/post-organizations-tenants",
-                  "api-reference/v2/endpoints/tenants/get-tenants",
-                  "api-reference/v2/endpoints/tenants/put-tenants",
-                  "api-reference/v2/endpoints/tenants/post-tenants-archive",
-                  "api-reference/v2/endpoints/tenants/get-tenants-users",
-                  "api-reference/v2/endpoints/tenants/post-tenants-users",
-                  "api-reference/v2/endpoints/tenants/delete-tenants-users"
+                  "api-reference/v2/endpoints/organizations/get-fireworkv2organizations-tenants",
+                  "api-reference/v2/endpoints/organizations/post-fireworkv2organizations-tenants",
+                  "api-reference/v2/endpoints/tenants/get-fireworkv2tenants",
+                  "api-reference/v2/endpoints/tenants/put-fireworkv2tenants",
+                  "api-reference/v2/endpoints/tenants/post-fireworkv2tenants-archive",
+                  "api-reference/v2/endpoints/tenants/get-fireworkv2tenants-users",
+                  "api-reference/v2/endpoints/tenants/post-fireworkv2tenants-users",
+                  "api-reference/v2/endpoints/tenants/delete-fireworkv2tenants-users"
                 ]
               }
             ]
@@ -229,8 +229,8 @@
               {
                 "group": "Global Search",
                 "pages": [
-                  "api-reference/v2/endpoints/search/get-search",
-                  "api-reference/v2/endpoints/search/post-search"
+                  "api-reference/v2/endpoints/search/get-fireworkv2search",
+                  "api-reference/v2/endpoints/search/post-fireworkv2search"
                 ]
               },
               {
@@ -244,10 +244,10 @@
               {
                 "group": "Event Feeds",
                 "pages": [
-                  "api-reference/v2/endpoints/me/get-mefeed",
-                  "api-reference/v3/endpoints/identifiers/get-identifiers-feedcredentials",
-                  "api-reference/v2/endpoints/identifiers/get-assets-feed",
-                  "api-reference/v2/endpoints/identifiers/get-assetsgroups-feed"
+                  "api-reference/v2/endpoints/me/get-fireworkv2mefeed",
+                  "api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers-feedcredentials",
+                  "api-reference/v2/endpoints/identifiers/get-fireworkv2assets-feed",
+                  "api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups-feed"
                 ]
               }
             ]
@@ -329,6 +329,218 @@
     {
       "source": "/api-reference/leaksdb/:slug*",
       "destination": "/api-reference/astp/:slug*"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/activities/get-activities-",
+      "destination": "/api-reference/v2/endpoints/activities/get-fireworkv2activities-"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/activities/get-activities--ai_assistance",
+      "destination": "/api-reference/v2/endpoints/activities/get-fireworkv2activities--ai_assistance"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/me/get-mefeedcredentials",
+      "destination": "/api-reference/v2/endpoints/me/get-fireworkv2mefeedcredentials"
+    },
+    {
+      "source": "/api-reference/v3/endpoints/identifiers/get-identifiers-feedcredentials",
+      "destination": "/api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers-feedcredentials"
+    },
+    {
+      "source": "/api-reference/v3/endpoints/identifiers/get-identifiers",
+      "destination": "/api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/post-assets",
+      "destination": "/api-reference/v2/endpoints/identifiers/post-fireworkv2assets"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/put-assets",
+      "destination": "/api-reference/v2/endpoints/identifiers/put-fireworkv2assets"
+    },
+    {
+      "source": "/api-reference/v3/endpoints/identifiers/get-identifiers-1",
+      "destination": "/api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers-1"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/delete-assets",
+      "destination": "/api-reference/v2/endpoints/identifiers/delete-fireworkv2assets"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/post-assets-toggle",
+      "destination": "/api-reference/v2/endpoints/identifiers/post-fireworkv2assets-toggle"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/get-assetsgroups",
+      "destination": "/api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/post-assetsgroups",
+      "destination": "/api-reference/v2/endpoints/identifiers/post-fireworkv2assetsgroups"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/get-assetsgroups-1",
+      "destination": "/api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups-1"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/delete-assetsgroups",
+      "destination": "/api-reference/v2/endpoints/identifiers/delete-fireworkv2assetsgroups"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/get-assets-alerts",
+      "destination": "/api-reference/v2/endpoints/identifiers/get-fireworkv2assets-alerts"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/post-assets-alerts",
+      "destination": "/api-reference/v2/endpoints/identifiers/post-fireworkv2assets-alerts"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/put-assets-alerts",
+      "destination": "/api-reference/v2/endpoints/identifiers/put-fireworkv2assets-alerts"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/delete-assets-alerts",
+      "destination": "/api-reference/v2/endpoints/identifiers/delete-fireworkv2assets-alerts"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/get-assetsgroups-alerts",
+      "destination": "/api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups-alerts"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/post-assetsgroups-alerts",
+      "destination": "/api-reference/v2/endpoints/identifiers/post-fireworkv2assetsgroups-alerts"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/put-assetsgroups-alerts",
+      "destination": "/api-reference/v2/endpoints/identifiers/put-fireworkv2assetsgroups-alerts"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/delete-assetsgroups-alerts",
+      "destination": "/api-reference/v2/endpoints/identifiers/delete-fireworkv2assetsgroups-alerts"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/me/get-meprofile",
+      "destination": "/api-reference/v2/endpoints/me/get-fireworkv2meprofile"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/me/get-metenants",
+      "destination": "/api-reference/v2/endpoints/me/get-fireworkv2metenants"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/me/put-meprofile",
+      "destination": "/api-reference/v2/endpoints/me/put-fireworkv2meprofile"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/organizations/get-organizations-members",
+      "destination": "/api-reference/v2/endpoints/organizations/get-fireworkv2organizations-members"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/organizations/post-organizations-members",
+      "destination": "/api-reference/v2/endpoints/organizations/post-fireworkv2organizations-members"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/organizations/get-organizations-members-1",
+      "destination": "/api-reference/v2/endpoints/organizations/get-fireworkv2organizations-members-1"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/organizations/put-organizations-members",
+      "destination": "/api-reference/v2/endpoints/organizations/put-fireworkv2organizations-members"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/organizations/post-organizations-members-enable",
+      "destination": "/api-reference/v2/endpoints/organizations/post-fireworkv2organizations-members-enable"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/organizations/post-organizations-members-disable",
+      "destination": "/api-reference/v2/endpoints/organizations/post-fireworkv2organizations-members-disable"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/organizations/get-organizations-members-tenants",
+      "destination": "/api-reference/v2/endpoints/organizations/get-fireworkv2organizations-members-tenants"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/organizations/post-organizations-members-permissions",
+      "destination": "/api-reference/v2/endpoints/organizations/post-fireworkv2organizations-members-permissions"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/reporting/get-reportingreports",
+      "destination": "/api-reference/v2/endpoints/reporting/get-fireworkv2reportingreports"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/reporting/post-reportingreports",
+      "destination": "/api-reference/v2/endpoints/reporting/post-fireworkv2reportingreports"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/reporting/get-reportingreports-1",
+      "destination": "/api-reference/v2/endpoints/reporting/get-fireworkv2reportingreports-1"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/reporting/patch-reportingreports",
+      "destination": "/api-reference/v2/endpoints/reporting/patch-fireworkv2reportingreports"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/reporting/delete-reportingreports",
+      "destination": "/api-reference/v2/endpoints/reporting/delete-fireworkv2reportingreports"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/reporting/post-reportingreports-archive",
+      "destination": "/api-reference/v2/endpoints/reporting/post-fireworkv2reportingreports-archive"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/reporting/get-reportingreports-download",
+      "destination": "/api-reference/v2/endpoints/reporting/get-fireworkv2reportingreports-download"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/organizations/get-organizations-tenants",
+      "destination": "/api-reference/v2/endpoints/organizations/get-fireworkv2organizations-tenants"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/organizations/post-organizations-tenants",
+      "destination": "/api-reference/v2/endpoints/organizations/post-fireworkv2organizations-tenants"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/tenants/get-tenants",
+      "destination": "/api-reference/v2/endpoints/tenants/get-fireworkv2tenants"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/tenants/put-tenants",
+      "destination": "/api-reference/v2/endpoints/tenants/put-fireworkv2tenants"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/tenants/post-tenants-archive",
+      "destination": "/api-reference/v2/endpoints/tenants/post-fireworkv2tenants-archive"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/tenants/get-tenants-users",
+      "destination": "/api-reference/v2/endpoints/tenants/get-fireworkv2tenants-users"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/tenants/post-tenants-users",
+      "destination": "/api-reference/v2/endpoints/tenants/post-fireworkv2tenants-users"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/tenants/delete-tenants-users",
+      "destination": "/api-reference/v2/endpoints/tenants/delete-fireworkv2tenants-users"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/search/get-search",
+      "destination": "/api-reference/v2/endpoints/search/get-fireworkv2search"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/search/post-search",
+      "destination": "/api-reference/v2/endpoints/search/post-fireworkv2search"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/me/get-mefeed",
+      "destination": "/api-reference/v2/endpoints/me/get-fireworkv2mefeed"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/get-assets-feed",
+      "destination": "/api-reference/v2/endpoints/identifiers/get-fireworkv2assets-feed"
+    },
+    {
+      "source": "/api-reference/v2/endpoints/identifiers/get-assetsgroups-feed",
+      "destination": "/api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups-feed"
     }
   ]
 }
