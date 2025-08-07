@@ -50,6 +50,7 @@
               "guides/tenant-credentials",
               "guides/credentials-export-domain",
               "guides/cookie-monitoring",
+              "guides/ioc-feeds",
               "guides/threat-flow-report"
             ]
           }
