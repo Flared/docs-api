@@ -6082,6 +6082,9 @@
                                 "type": "string"
                             },
                             {
+                                "$ref": "#/components/schemas/ExecutiveSummaryOutput"
+                            },
+                            {
                                 "type": "null"
                             }
                         ],
@@ -6093,6 +6096,9 @@
                                 "type": "string"
                             },
                             {
+                                "$ref": "#/components/schemas/HeatmapAnalysisOutput"
+                            },
+                            {
                                 "type": "null"
                             }
                         ],
@@ -6102,6 +6108,9 @@
                         "anyOf": [
                             {
                                 "type": "string"
+                            },
+                            {
+                                "$ref": "#/components/schemas/GeneralActivityAnalysisOutput"
                             },
                             {
                                 "type": "null"
@@ -6145,11 +6154,16 @@
                         },
                         "type": "array",
                         "title": "Timeline"
+                    },
+                    "total_count": {
+                        "type": "integer",
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "timeline"
+                    "timeline",
+                    "total_count"
                 ],
                 "title": "ActorTimeline"
             },
@@ -7327,7 +7341,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2025-08-04T17:18:30.066149Z"
+                        "default": "2025-08-06T21:49:45.377771Z"
                     },
                     "from": {
                         "anyOf": [
@@ -8969,6 +8983,56 @@
                 ],
                 "title": "EventSecretsBody"
             },
+            "ExecutiveSummaryOutput": {
+                "properties": {
+                    "overview": {
+                        "type": "string",
+                        "title": "Overview",
+                        "description": "Paragraph about the actor, including their username(s), presence on forum(s), total post count, and activity date range (use the 'First Post Date' and 'Last Post Date' fields); if the 'Last Post Date' is more than 90 days before 'Today's Date', mention that the actor has not been active for at least 90 days; if the actor is active on a single forum, avoid exclusive phrasing like \u201conly on\u201d or \u201cexclusively on\u201d and instead use neutral language such as \u201cis active on\u201d or \u201cgoes by the username on\u201d."
+                    },
+                    "main_activities_and_motives": {
+                        "type": "string",
+                        "title": "Main Activities And Motives",
+                        "description": "Paragraph about the main activies and motives of the actor. Base your assessment only on the 'General description of the threat actor's activity on the forum' section of the input."
+                    },
+                    "latest_activity": {
+                        "type": "string",
+                        "title": "Latest Activity",
+                        "description": "Short but specific and precise analysis of the threat actor's latest activity (highlighting any named moderators, admins, dates, or type of activity), (always translate everything in English, all examples or output should be always in English). Base your assessment only on the 'Latest activity from the threat actor' section of the input."
+                    },
+                    "potential_associations_with_major_criminal_groups": {
+                        "type": "string",
+                        "title": "Potential Associations With Major Criminal Groups",
+                        "description": "What groups the threat actor is associated with (if any). Base your assessment only on the 'General description of the threat actor's activity on the forum' section of the input."
+                    },
+                    "linguistic_analysis": {
+                        "type": "string",
+                        "title": "Linguistic Analysis",
+                        "description": "Identify each language present, then rate proficiency and confidence from 1-10. If fewer than 100 posts are analyzed, mark the confidence in your assessment as low and adjust the confidence score accordingly. Base your assessment only on the 'Analysis of the threat actor\u2019s writing style' section of the input."
+                    },
+                    "likely_geographical_location": {
+                        "type": "string",
+                        "title": "Likely Geographical Location",
+                        "description": "Identify the likely geography and give a confidence rating (1-10). When you have under 300 posts to analyse, mark confidence in your assessment as low and adjust the confidence score accordingly. Base your assessment only on the 'Description of the posting activity of the threat actor' section of the input."
+                    },
+                    "potential_victims_shortlist": {
+                        "type": "string",
+                        "title": "Potential Victims Shortlist",
+                        "description": "Up to three victims (name only). Base your assessment only on the 'Description of potential victims mentioned in the threat actor's post' section of the input. Paragraph about the potential victim."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "overview",
+                    "main_activities_and_motives",
+                    "latest_activity",
+                    "potential_associations_with_major_criminal_groups",
+                    "linguistic_analysis",
+                    "likely_geographical_location",
+                    "potential_victims_shortlist"
+                ],
+                "title": "ExecutiveSummaryOutput"
+            },
             "FeedConfiguration": {
                 "properties": {
                     "search_types": {
@@ -9491,6 +9555,44 @@
                 "type": "object",
                 "title": "FilterSourceTypes"
             },
+            "GeneralActivityAnalysisOutput": {
+                "properties": {
+                    "overview": {
+                        "type": "string",
+                        "title": "Overview",
+                        "description": "Start with the most impactful criminal activity. Mention tools, exploits, pricing, communication style, unique skills when available. Cite posts and dates that support your statements (always translate them in English)."
+                    },
+                    "variation_of_activity_over_time": {
+                        "type": "string",
+                        "title": "Variation Of Activity Over Time",
+                        "description": "Describe how the actor's tactics, type of activity or targets have changed over time, if applicable."
+                    },
+                    "motivations": {
+                        "type": "string",
+                        "title": "Motivations",
+                        "description": "Explain the actor's likely motives."
+                    },
+                    "affiliations": {
+                        "type": "string",
+                        "title": "Affiliations",
+                        "description": "List groups, services, malware strains or RaaS programmes the actor is linked to."
+                    },
+                    "non_criminal_activity": {
+                        "type": "string",
+                        "title": "Non Criminal Activity",
+                        "description": "Summarise behaviour that is clearly non-criminal."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "overview",
+                    "variation_of_activity_over_time",
+                    "motivations",
+                    "affiliations",
+                    "non_criminal_activity"
+                ],
+                "title": "GeneralActivityAnalysisOutput"
+            },
             "GithubRepositoryData": {
                 "properties": {
                     "type": {
@@ -9782,6 +9884,26 @@
                 "type": "object",
                 "title": "HTTPValidationError"
             },
+            "HeatmapAnalysisOutput": {
+                "properties": {
+                    "general_analysis": {
+                        "type": "string",
+                        "title": "General Analysis",
+                        "description": "The first paragraph contains the years of activities, number of total posts and on which forums as well as if there are any gaps or seasonal trends."
+                    },
+                    "precise_analysis": {
+                        "type": "string",
+                        "title": "Precise Analysis",
+                        "description": "The second paragraph should first outline the actor's peak posting hours and the identified sleep window, explain how these windows align with the chosen time-zone, state the most likely location with confidence and example countries, and then note which days show the highest and lowest overall activity."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "general_analysis",
+                    "precise_analysis"
+                ],
+                "title": "HeatmapAnalysisOutput"
+            },
             "HourData": {
                 "properties": {
                     "hour": {
@@ -9863,17 +9985,6 @@
                         "type": "array",
                         "title": "Labels"
                     },
-                    "logo_url": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Logo Url"
-                    },
                     "risk_score": {
                         "$ref": "#/components/schemas/RiskScore"
                     },
@@ -9894,7 +10005,6 @@
                     "name",
                     "idp_type",
                     "labels",
-                    "logo_url",
                     "risk_score",
                     "type",
                     "id"
