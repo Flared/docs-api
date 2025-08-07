@@ -245,7 +245,6 @@
                 "group": "Event Feeds",
                 "pages": [
                   "api-reference/v2/endpoints/me/get-fireworkv2mefeed",
-                  "api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers-feedcredentials",
                   "api-reference/v2/endpoints/identifiers/get-fireworkv2assets-feed",
                   "api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups-feed"
                 ]
