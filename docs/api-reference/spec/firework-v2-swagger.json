@@ -1,5 +1,5 @@
 {
-  "basePath": "/firework/v2",
+  "basePath": "/",
   "consumes": [
     "application/json"
   ],
@@ -648,29 +648,29 @@
         "search_types": {
           "items": {
             "enum": [
-              "chat_message",
-              "service",
-              "docker",
-              "source_code_files",
-              "seller",
-              "source_code_secrets",
-              "bucket_object",
-              "listing",
-              "blog_post",
-              "forum_post",
-              "stack_exchange",
-              "paste",
-              "google",
               "bot",
-              "domain",
-              "forum_profile",
+              "listing",
+              "bucket_object",
+              "chat_message",
+              "bucket",
+              "source_code_secrets",
+              "blog_post",
+              "ransomleak",
               "social_media_account",
               "leak",
-              "financial_data",
-              "ransomleak",
+              "domain",
+              "seller",
+              "google",
+              "docker",
+              "service",
+              "forum_profile",
+              "paste",
+              "source_code_files",
               "forum_topic",
+              "financial_data",
+              "stack_exchange",
+              "forum_post",
               "stealer_log",
-              "bucket",
               "illicit_networks",
               "open_web",
               "buckets",
@@ -683,7 +683,7 @@
               "infected_devices",
               "social_media"
             ],
-            "example": "chat_message",
+            "example": "bot",
             "type": "string"
           },
           "type": "array"
@@ -760,30 +760,30 @@
         "search_types": {
           "items": {
             "enum": [
-              "chat_message",
-              "service",
-              "docker",
-              "source_code_files",
-              "seller",
-              "source_code_secrets",
-              "bucket_object",
-              "listing",
-              "blog_post",
-              "forum_post",
-              "stack_exchange",
-              "paste",
-              "google",
               "bot",
-              "domain",
-              "forum_profile",
+              "listing",
+              "bucket_object",
+              "chat_message",
+              "bucket",
+              "source_code_secrets",
+              "blog_post",
+              "ransomleak",
               "social_media_account",
               "leak",
-              "financial_data",
-              "ransomleak",
+              "domain",
+              "seller",
+              "google",
+              "docker",
+              "service",
+              "forum_profile",
+              "paste",
+              "source_code_files",
               "forum_topic",
-              "stealer_log",
-              "bucket",
+              "financial_data",
               "ad",
+              "stack_exchange",
+              "forum_post",
+              "stealer_log",
               "illicit_networks",
               "open_web",
               "buckets",
@@ -797,7 +797,7 @@
               "infected_devices",
               "social_media"
             ],
-            "example": "chat_message",
+            "example": "bot",
             "type": "string"
           },
           "type": "array"
@@ -2476,7 +2476,7 @@
     "version": "v2"
   },
   "paths": {
-    "/activities/": {
+    "/firework/v2/activities/": {
       "get": {
         "operationId": "get_activity_endpoint_/activities/",
         "parameters": [
@@ -2503,7 +2503,7 @@
         ]
       }
     },
-    "/activities/actor/profile/{actor_name}": {
+    "/firework/v2/activities/actor/profile/{actor_name}": {
       "get": {
         "operationId": "get_actor_/activities/actor/profile/<string:actor_name>",
         "parameters": [
@@ -2545,7 +2545,7 @@
         }
       ]
     },
-    "/activities/document/{source}/{id}/extensions": {
+    "/firework/v2/activities/document/{source}/{id}/extensions": {
       "get": {
         "operationId": "get_ransom_leak_file_extensions_endpoint_/activities/document/<string:source>/<path:id>/extensions",
         "responses": {
@@ -2578,7 +2578,7 @@
         }
       ]
     },
-    "/activities/document/{source}/{id}/files": {
+    "/firework/v2/activities/document/{source}/{id}/files": {
       "get": {
         "operationId": "get_ransom_leak_files_endpoint_/activities/document/<string:source>/<path:id>/files",
         "responses": {
@@ -2611,7 +2611,7 @@
         }
       ]
     },
-    "/activities/leak/{source}/{keyword}": {
+    "/firework/v2/activities/leak/{source}/{keyword}": {
       "get": {
         "operationId": "get_leak_endpoint_/activities/leak/<string:source>/<string:keyword>",
         "responses": {
@@ -2644,7 +2644,7 @@
         }
       ]
     },
-    "/activities/leak/{source}/{keyword}/count": {
+    "/firework/v2/activities/leak/{source}/{keyword}/count": {
       "get": {
         "operationId": "get_leak_count_/activities/leak/<string:source>/<string:keyword>/count",
         "responses": {
@@ -2671,7 +2671,7 @@
         }
       ]
     },
-    "/activities/{index}/{source}/{id_}/user_metadata": {
+    "/firework/v2/activities/{index}/{source}/{id_}/user_metadata": {
       "get": {
         "operationId": "get_activity_user_metadata_resource_/activities/<string:index>/<string:source>/<path:id_>/user_metadata",
         "responses": {
@@ -2707,7 +2707,7 @@
         }
       ]
     },
-    "/activities/{index}/{source}/{id_}/user_metadata/ignored": {
+    "/firework/v2/activities/{index}/{source}/{id_}/user_metadata/ignored": {
       "parameters": [
         {
           "in": "path",
@@ -2759,7 +2759,7 @@
         ]
       }
     },
-    "/activities/{index}/{source}/{id_}/user_metadata/notes": {
+    "/firework/v2/activities/{index}/{source}/{id_}/user_metadata/notes": {
       "delete": {
         "operationId": "delete_activity_user_metadata_notes_/activities/<string:index>/<string:source>/<path:id_>/user_metadata/notes",
         "responses": {
@@ -2822,7 +2822,7 @@
         ]
       }
     },
-    "/activities/{index}/{source}/{id_}/user_metadata/remediated": {
+    "/firework/v2/activities/{index}/{source}/{id_}/user_metadata/remediated": {
       "parameters": [
         {
           "in": "path",
@@ -2874,7 +2874,7 @@
         ]
       }
     },
-    "/activities/{index}/{source}/{id_}/user_metadata/risk_score": {
+    "/firework/v2/activities/{index}/{source}/{id_}/user_metadata/risk_score": {
       "delete": {
         "operationId": "delete_activity_user_metadata_risk_score_/activities/<string:index>/<string:source>/<path:id_>/user_metadata/risk_score",
         "responses": {
@@ -2937,7 +2937,7 @@
         ]
       }
     },
-    "/activities/{index}/{source}/{id_}/user_metadata/tags": {
+    "/firework/v2/activities/{index}/{source}/{id_}/user_metadata/tags": {
       "delete": {
         "operationId": "delete_activity_user_metadata_tags_/activities/<string:index>/<string:source>/<path:id_>/user_metadata/tags",
         "responses": {
@@ -3014,7 +3014,7 @@
         ]
       }
     },
-    "/activities/{index}/{source}/{id}": {
+    "/firework/v2/activities/{index}/{source}/{id}": {
       "get": {
         "operationId": "get_activity_endpoint_deprecated_/activities/<string:index>/<string:source>/<path:id>",
         "responses": {
@@ -3053,7 +3053,7 @@
         }
       ]
     },
-    "/activities/{index}/{source}/{id}/ai_assistance": {
+    "/firework/v2/activities/{index}/{source}/{id}/ai_assistance": {
       "get": {
         "operationId": "get_activity_assistance_resource_/activities/<string:index>/<string:source>/<path:id>/ai_assistance",
         "responses": {
@@ -3093,7 +3093,7 @@
         }
       ]
     },
-    "/activities/{index}/{source}/{id}/enrichment": {
+    "/firework/v2/activities/{index}/{source}/{id}/enrichment": {
       "get": {
         "operationId": "get_activity_enrichment_endpoint_/activities/<string:index>/<string:source>/<path:id>/enrichment",
         "responses": {
@@ -3132,7 +3132,7 @@
         }
       ]
     },
-    "/activities/{index}/{source}/{id}/events": {
+    "/firework/v2/activities/{index}/{source}/{id}/events": {
       "get": {
         "operationId": "get_entity_events_/activities/<string:index>/<string:source>/<path:id>/events",
         "parameters": [
@@ -3180,7 +3180,7 @@
         }
       ]
     },
-    "/activities/{index}/{source}/{id}/highlights": {
+    "/firework/v2/activities/{index}/{source}/{id}/highlights": {
       "parameters": [
         {
           "in": "path",
@@ -3229,7 +3229,7 @@
         ]
       }
     },
-    "/activities/{index}/{source}/{id}/leaked_data": {
+    "/firework/v2/activities/{index}/{source}/{id}/leaked_data": {
       "get": {
         "operationId": "get_leaked_data_/activities/<string:index>/<string:source>/<path:id>/leaked_data",
         "responses": {
@@ -3268,7 +3268,7 @@
         }
       ]
     },
-    "/activities/{index}/{source}/{id}/messages": {
+    "/firework/v2/activities/{index}/{source}/{id}/messages": {
       "get": {
         "operationId": "get_activity_messages_/activities/<string:index>/<string:source>/<path:id>/messages",
         "responses": {
@@ -3307,7 +3307,7 @@
         }
       ]
     },
-    "/activities/{index}/{source}/{id}/parent_chat_data": {
+    "/firework/v2/activities/{index}/{source}/{id}/parent_chat_data": {
       "get": {
         "operationId": "get_parent_chat_data_/activities/<string:index>/<string:source>/<path:id>/parent_chat_data",
         "responses": {
@@ -3346,7 +3346,7 @@
         }
       ]
     },
-    "/activities/{index}/{source}/{id}/related/{context}": {
+    "/firework/v2/activities/{index}/{source}/{id}/related/{context}": {
       "get": {
         "operationId": "get_related_items_/activities/<string:index>/<string:source>/<path:id>/related/<string:context>",
         "parameters": [
@@ -3409,7 +3409,7 @@
         }
       ]
     },
-    "/activities/{index}/{source}/{id}/translate": {
+    "/firework/v2/activities/{index}/{source}/{id}/translate": {
       "parameters": [
         {
           "in": "path",
@@ -3457,7 +3457,7 @@
         ]
       }
     },
-    "/assets/": {
+    "/firework/v2/assets/": {
       "get": {
         "operationId": "get_assets_/assets/",
         "responses": {
@@ -3511,7 +3511,7 @@
         ]
       }
     },
-    "/assets/groups/": {
+    "/firework/v2/assets/groups/": {
       "get": {
         "operationId": "get_assets_groups_/assets/groups/",
         "responses": {
@@ -3565,7 +3565,7 @@
         ]
       }
     },
-    "/assets/groups/{assets_group_id}": {
+    "/firework/v2/assets/groups/{assets_group_id}": {
       "delete": {
         "operationId": "delete_assets_group_api_/assets/groups/<int:assets_group_id>",
         "responses": {
@@ -3638,7 +3638,7 @@
         ]
       }
     },
-    "/assets/groups/{assets_group_id}/alerts": {
+    "/firework/v2/assets/groups/{assets_group_id}/alerts": {
       "get": {
         "operationId": "get_assets_group_alerts_/assets/groups/<int:assets_group_id>/alerts",
         "responses": {
@@ -3690,7 +3690,7 @@
         ]
       }
     },
-    "/assets/groups/{assets_group_id}/alerts/{alert_id}": {
+    "/firework/v2/assets/groups/{assets_group_id}/alerts/{alert_id}": {
       "delete": {
         "operationId": "delete_assets_group_alert_/assets/groups/<int:assets_group_id>/alerts/<int:alert_id>",
         "responses": {
@@ -3741,7 +3741,7 @@
         ]
       }
     },
-    "/assets/groups/{assets_group_id}/feed": {
+    "/firework/v2/assets/groups/{assets_group_id}/feed": {
       "get": {
         "operationId": "get_assets_group_feed_/assets/groups/<int:assets_group_id>/feed",
         "parameters": [
@@ -3798,7 +3798,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, financial_data, seller, ransomleak, blog_post, forum_topic, bot, stealer_log, forum_post, forum_profile\n- open_web: google, service, docker, source_code_files, source_code_secrets, bucket_object, bucket, stack_exchange, paste, social_media_account\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: bot, listing, chat_message, forum_topic, blog_post, ransomleak, seller, financial_data, forum_post, forum_profile, stealer_log\n- open_web: paste, source_code_files, bucket_object, bucket, source_code_secrets, social_media_account, google, docker, service, stack_exchange\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -4064,7 +4064,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, financial_data, seller, ransomleak, blog_post, forum_topic, bot, stealer_log, forum_post, forum_profile\n- open_web: google, service, docker, source_code_files, source_code_secrets, bucket_object, bucket, stack_exchange, paste, social_media_account\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: bot, listing, chat_message, forum_topic, blog_post, ransomleak, seller, financial_data, forum_post, forum_profile, stealer_log\n- open_web: paste, source_code_files, bucket_object, bucket, source_code_secrets, social_media_account, google, docker, service, stack_exchange\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -4267,7 +4267,7 @@
         ]
       }
     },
-    "/assets/{asset_id}": {
+    "/firework/v2/assets/{asset_id}": {
       "delete": {
         "operationId": "delete_asset_api_/assets/<int:asset_id>",
         "responses": {
@@ -4340,7 +4340,7 @@
         ]
       }
     },
-    "/assets/{asset_id}/alerts": {
+    "/firework/v2/assets/{asset_id}/alerts": {
       "get": {
         "operationId": "get_asset_alerts_/assets/<int:asset_id>/alerts",
         "responses": {
@@ -4392,7 +4392,7 @@
         ]
       }
     },
-    "/assets/{asset_id}/alerts/{alert_id}": {
+    "/firework/v2/assets/{asset_id}/alerts/{alert_id}": {
       "delete": {
         "operationId": "delete_asset_alert_/assets/<int:asset_id>/alerts/<int:alert_id>",
         "responses": {
@@ -4443,7 +4443,7 @@
         ]
       }
     },
-    "/assets/{asset_id}/feed": {
+    "/firework/v2/assets/{asset_id}/feed": {
       "get": {
         "operationId": "get_asset_feed_/assets/<int:asset_id>/feed",
         "parameters": [
@@ -4500,7 +4500,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, financial_data, seller, ransomleak, blog_post, forum_topic, bot, stealer_log, forum_post, forum_profile\n- open_web: google, service, docker, source_code_files, source_code_secrets, bucket_object, bucket, stack_exchange, paste, social_media_account\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: bot, listing, chat_message, forum_topic, blog_post, ransomleak, seller, financial_data, forum_post, forum_profile, stealer_log\n- open_web: paste, source_code_files, bucket_object, bucket, source_code_secrets, social_media_account, google, docker, service, stack_exchange\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -4766,7 +4766,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, financial_data, seller, ransomleak, blog_post, forum_topic, bot, stealer_log, forum_post, forum_profile\n- open_web: google, service, docker, source_code_files, source_code_secrets, bucket_object, bucket, stack_exchange, paste, social_media_account\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: bot, listing, chat_message, forum_topic, blog_post, ransomleak, seller, financial_data, forum_post, forum_profile, stealer_log\n- open_web: paste, source_code_files, bucket_object, bucket, source_code_secrets, social_media_account, google, docker, service, stack_exchange\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -4969,7 +4969,7 @@
         ]
       }
     },
-    "/assets/{asset_id}/highlights/{index}/{source}/{id}": {
+    "/firework/v2/assets/{asset_id}/highlights/{index}/{source}/{id}": {
       "get": {
         "operationId": "get_identifier_activity_highlights_/assets/<int:asset_id>/highlights/<string:index>/<string:source>/<path:id>",
         "responses": {
@@ -5020,7 +5020,7 @@
         }
       ]
     },
-    "/assets/{asset_id}/subdomains/{domain_name}/feed": {
+    "/firework/v2/assets/{asset_id}/subdomains/{domain_name}/feed": {
       "get": {
         "operationId": "get_asset_subdomain_feed_/assets/<int:asset_id>/subdomains/<string:domain_name>/feed",
         "parameters": [
@@ -5077,7 +5077,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, financial_data, seller, ransomleak, blog_post, forum_topic, bot, stealer_log, forum_post, forum_profile\n- open_web: google, service, docker, source_code_files, source_code_secrets, bucket_object, bucket, stack_exchange, paste, social_media_account\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: bot, listing, chat_message, forum_topic, blog_post, ransomleak, seller, financial_data, forum_post, forum_profile, stealer_log\n- open_web: paste, source_code_files, bucket_object, bucket, source_code_secrets, social_media_account, google, docker, service, stack_exchange\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -5294,7 +5294,7 @@
         }
       ]
     },
-    "/assets/{asset_id}/toggle": {
+    "/firework/v2/assets/{asset_id}/toggle": {
       "parameters": [
         {
           "in": "path",
@@ -5332,7 +5332,7 @@
         ]
       }
     },
-    "/me/feed": {
+    "/firework/v2/me/feed": {
       "get": {
         "operationId": "get_current_user_home_feed_/me/feed",
         "parameters": [
@@ -5379,7 +5379,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, financial_data, seller, ransomleak, blog_post, forum_topic, bot, stealer_log, forum_post, forum_profile\n- open_web: google, service, docker, source_code_files, source_code_secrets, bucket_object, bucket, stack_exchange, paste, social_media_account\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: bot, listing, chat_message, forum_topic, blog_post, ransomleak, seller, financial_data, forum_post, forum_profile, stealer_log\n- open_web: paste, source_code_files, bucket_object, bucket, source_code_secrets, social_media_account, google, docker, service, stack_exchange\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -5615,7 +5615,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, financial_data, seller, ransomleak, blog_post, forum_topic, bot, stealer_log, forum_post, forum_profile\n- open_web: google, service, docker, source_code_files, source_code_secrets, bucket_object, bucket, stack_exchange, paste, social_media_account\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: bot, listing, chat_message, forum_topic, blog_post, ransomleak, seller, financial_data, forum_post, forum_profile, stealer_log\n- open_web: paste, source_code_files, bucket_object, bucket, source_code_secrets, social_media_account, google, docker, service, stack_exchange\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -5806,7 +5806,7 @@
         ]
       }
     },
-    "/me/feed/credentials": {
+    "/firework/v2/me/feed/credentials": {
       "get": {
         "operationId": "get_leaked_credentials_feed_endpoint_/me/feed/credentials",
         "parameters": [
@@ -5859,7 +5859,7 @@
         ]
       }
     },
-    "/me/profile": {
+    "/firework/v2/me/profile": {
       "get": {
         "operationId": "get_current_user_profile_/me/profile",
         "responses": {
@@ -5906,7 +5906,7 @@
         ]
       }
     },
-    "/me/tenants": {
+    "/firework/v2/me/tenants": {
       "get": {
         "operationId": "get_current_user_tenants_/me/tenants",
         "responses": {
@@ -5919,7 +5919,7 @@
         ]
       }
     },
-    "/organizations/{organization_id}/members": {
+    "/firework/v2/organizations/{organization_id}/members": {
       "get": {
         "operationId": "get_organization_members_api_/organizations/<int:organization_id>/members",
         "parameters": [
@@ -6001,7 +6001,7 @@
         ]
       }
     },
-    "/organizations/{organization_id}/members/{user_id}": {
+    "/firework/v2/organizations/{organization_id}/members/{user_id}": {
       "get": {
         "operationId": "get_organization_member_api_/organizations/<int:organization_id>/members/<int:user_id>",
         "responses": {
@@ -6063,7 +6063,7 @@
         ]
       }
     },
-    "/organizations/{organization_id}/members/{user_id}/disable": {
+    "/firework/v2/organizations/{organization_id}/members/{user_id}/disable": {
       "parameters": [
         {
           "in": "path",
@@ -6093,7 +6093,7 @@
         ]
       }
     },
-    "/organizations/{organization_id}/members/{user_id}/enable": {
+    "/firework/v2/organizations/{organization_id}/members/{user_id}/enable": {
       "parameters": [
         {
           "in": "path",
@@ -6123,7 +6123,7 @@
         ]
       }
     },
-    "/organizations/{organization_id}/members/{user_id}/permissions": {
+    "/firework/v2/organizations/{organization_id}/members/{user_id}/permissions": {
       "parameters": [
         {
           "in": "path",
@@ -6163,7 +6163,7 @@
         ]
       }
     },
-    "/organizations/{organization_id}/members/{user_id}/tenants": {
+    "/firework/v2/organizations/{organization_id}/members/{user_id}/tenants": {
       "get": {
         "operationId": "get_organization_member_tenants_/organizations/<int:organization_id>/members/<int:user_id>/tenants",
         "parameters": [
@@ -6206,7 +6206,7 @@
         }
       ]
     },
-    "/organizations/{organization_id}/tenants": {
+    "/firework/v2/organizations/{organization_id}/tenants": {
       "get": {
         "operationId": "get_organization_tenants_api_/organizations/<int:organization_id>/tenants",
         "responses": {
@@ -6254,7 +6254,7 @@
         ]
       }
     },
-    "/reporting/reports": {
+    "/firework/v2/reporting/reports": {
       "get": {
         "operationId": "get_reports_endpoint_/reporting/reports",
         "responses": {
@@ -6288,7 +6288,7 @@
         ]
       }
     },
-    "/reporting/reports/{report_id}": {
+    "/firework/v2/reporting/reports/{report_id}": {
       "delete": {
         "operationId": "delete_report_endpoint_/reporting/reports/<int:report_id>",
         "responses": {
@@ -6341,7 +6341,7 @@
         ]
       }
     },
-    "/reporting/reports/{report_id}/archive": {
+    "/firework/v2/reporting/reports/{report_id}/archive": {
       "parameters": [
         {
           "in": "path",
@@ -6362,7 +6362,7 @@
         ]
       }
     },
-    "/reporting/reports/{report_id}/download": {
+    "/firework/v2/reporting/reports/{report_id}/download": {
       "get": {
         "operationId": "get_report_download_endpoint_/reporting/reports/<int:report_id>/download",
         "responses": {
@@ -6383,7 +6383,7 @@
         }
       ]
     },
-    "/search/": {
+    "/firework/v2/search/": {
       "get": {
         "operationId": "get_search_/search/",
         "parameters": [
@@ -6440,7 +6440,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, financial_data, seller, ransomleak, blog_post, forum_topic, bot, stealer_log, forum_post, forum_profile\n- open_web: google, service, docker, source_code_files, source_code_secrets, bucket_object, bucket, stack_exchange, paste, social_media_account\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: bot, listing, chat_message, forum_topic, blog_post, ransomleak, seller, financial_data, forum_post, forum_profile, stealer_log\n- open_web: paste, source_code_files, bucket_object, bucket, source_code_secrets, social_media_account, google, docker, service, stack_exchange\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -6690,7 +6690,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: chat_message, listing, financial_data, seller, ransomleak, blog_post, forum_topic, bot, stealer_log, forum_post, forum_profile\n- open_web: google, service, docker, source_code_files, source_code_secrets, bucket_object, bucket, stack_exchange, paste, social_media_account\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, chat_message/telegram, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, stealer_log_cookie, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: bot, listing, chat_message, forum_topic, blog_post, ransomleak, seller, financial_data, forum_post, forum_profile, stealer_log\n- open_web: paste, source_code_files, bucket_object, bucket, source_code_secrets, social_media_account, google, docker, service, stack_exchange\n- leaks: leak\n- domains: domain\n",
             "enum": [
               "attachment",
               "listing",
@@ -6885,7 +6885,7 @@
         ]
       }
     },
-    "/sources/": {
+    "/firework/v2/sources/": {
       "get": {
         "operationId": "get_sources_endpoint_/sources/",
         "responses": {
@@ -6898,7 +6898,7 @@
         ]
       }
     },
-    "/sources/status": {
+    "/firework/v2/sources/status": {
       "get": {
         "operationId": "get_sources_status_/sources/status",
         "responses": {
@@ -6911,7 +6911,7 @@
         ]
       }
     },
-    "/sources/updates": {
+    "/firework/v2/sources/updates": {
       "get": {
         "operationId": "get_source_updates_/sources/updates",
         "responses": {
@@ -6924,7 +6924,7 @@
         ]
       }
     },
-    "/tenants/{tenant_id}": {
+    "/firework/v2/tenants/{tenant_id}": {
       "get": {
         "operationId": "get_tenant_api_/tenants/<int:tenant_id>",
         "responses": {
@@ -6972,7 +6972,7 @@
         ]
       }
     },
-    "/tenants/{tenant_id}/archive": {
+    "/firework/v2/tenants/{tenant_id}/archive": {
       "parameters": [
         {
           "in": "path",
@@ -6993,7 +6993,7 @@
         ]
       }
     },
-    "/tenants/{tenant_id}/users": {
+    "/firework/v2/tenants/{tenant_id}/users": {
       "get": {
         "operationId": "get_tenant_users_api_/tenants/<int:tenant_id>/users",
         "responses": {
@@ -7038,7 +7038,7 @@
         ]
       }
     },
-    "/tenants/{tenant_id}/users/{user_id}": {
+    "/firework/v2/tenants/{tenant_id}/users/{user_id}": {
       "delete": {
         "operationId": "delete_tenant_users_access_api_/tenants/<int:tenant_id>/users/<int:user_id>",
         "responses": {
