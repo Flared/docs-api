@@ -6,11 +6,11 @@
     },
     "servers": [
         {
-            "url": "https://api.flare.io/firework/v4/"
+            "url": "https://api.flare.io"
         }
     ],
     "paths": {
-        "/admin/cookies/configurations": {
+        "/firework/v4/admin/cookies/configurations": {
             "get": {
                 "summary": "List Cookie Monitoring Configurations",
                 "operationId": "list_cookie_monitoring_configurations_admin_cookies_configurations_get",
@@ -90,7 +90,7 @@
                 }
             }
         },
-        "/admin/cookies/monitor": {
+        "/firework/v4/admin/cookies/monitor": {
             "post": {
                 "summary": "Create Cookie Monitoring Configuration",
                 "operationId": "create_cookie_monitoring_configuration_admin_cookies_monitor_post",
@@ -126,7 +126,7 @@
                 }
             }
         },
-        "/admin/threat_flow/reports": {
+        "/firework/v4/admin/threat_flow/reports": {
             "get": {
                 "summary": "List Reports",
                 "operationId": "list_reports_admin_threat_flow_reports_get",
@@ -216,7 +216,7 @@
                 }
             }
         },
-        "/admin/threat_flow/reports/{report_id}": {
+        "/firework/v4/admin/threat_flow/reports/{report_id}": {
             "get": {
                 "summary": "Get Report",
                 "operationId": "get_report_admin_threat_flow_reports__report_id__get",
@@ -302,7 +302,7 @@
                 }
             }
         },
-        "/admin/identifiers/{identifier_id}/update_domain_identifier_properties": {
+        "/firework/v4/admin/identifiers/{identifier_id}/update_domain_identifier_properties": {
             "post": {
                 "summary": "Update Domain Identifier Properties",
                 "description": "Schedule the update of the domain identifier properties for a given identifier.",
@@ -343,7 +343,7 @@
                 }
             }
         },
-        "/actors/{actor_name}/profile": {
+        "/firework/v4/actors/{actor_name}/profile": {
             "get": {
                 "summary": "Get Actor Profile",
                 "operationId": "get_actor_profile_actors__actor_name__profile_get",
@@ -401,7 +401,7 @@
                 }
             }
         },
-        "/actors/{actor_name}/timeline": {
+        "/firework/v4/actors/{actor_name}/timeline": {
             "get": {
                 "summary": "Get Actor Timeline",
                 "operationId": "get_actor_timeline_actors__actor_name__timeline_get",
@@ -545,7 +545,7 @@
                 }
             }
         },
-        "/actors/{actor_name}/recent-activities": {
+        "/firework/v4/actors/{actor_name}/recent-activities": {
             "get": {
                 "summary": "Get Actor Recent Activities",
                 "operationId": "get_actor_recent_activities_actors__actor_name__recent_activities_get",
@@ -677,7 +677,7 @@
                 }
             }
         },
-        "/actors/summaries/{request_id}": {
+        "/firework/v4/actors/summaries/{request_id}": {
             "get": {
                 "summary": "Get Actor Summaries By Request Id",
                 "operationId": "get_actor_summaries_by_request_id_actors_summaries__request_id__get",
@@ -725,7 +725,7 @@
                 }
             }
         },
-        "/actors/{actor_name}/generate_summaries": {
+        "/firework/v4/actors/{actor_name}/generate_summaries": {
             "post": {
                 "summary": "Generate Actor Summaries",
                 "operationId": "generate_actor_summaries_actors__actor_name__generate_summaries_post",
@@ -774,7 +774,7 @@
                 }
             }
         },
-        "/actors/{actor_name}/heatmap": {
+        "/firework/v4/actors/{actor_name}/heatmap": {
             "get": {
                 "summary": "Get Actor Heatmap",
                 "operationId": "get_actor_heatmap_actors__actor_name__heatmap_get",
@@ -872,7 +872,7 @@
                 }
             }
         },
-        "/actors/{actor_name}/communication-handles": {
+        "/firework/v4/actors/{actor_name}/communication-handles": {
             "get": {
                 "summary": "Get Actor Communication Handles",
                 "operationId": "get_actor_communication_handles_actors__actor_name__communication_handles_get",
@@ -934,7 +934,7 @@
                 }
             }
         },
-        "/actors/{actor_name}/network": {
+        "/firework/v4/actors/{actor_name}/network": {
             "get": {
                 "summary": "Get Actor Network",
                 "operationId": "get_actor_network_actors__actor_name__network_get",
@@ -992,7 +992,7 @@
                 }
             }
         },
-        "/alerts/": {
+        "/firework/v4/alerts/": {
             "get": {
                 "summary": "Tenant Alerts",
                 "operationId": "tenant_alerts_alerts__get",
@@ -1127,7 +1127,7 @@
                 }
             }
         },
-        "/alerts/{alert_id}": {
+        "/firework/v4/alerts/{alert_id}": {
             "patch": {
                 "summary": "Update Alert",
                 "operationId": "update_alert_alerts__alert_id__patch",
@@ -1248,7 +1248,7 @@
                 }
             }
         },
-        "/alerts/channels": {
+        "/firework/v4/alerts/channels": {
             "get": {
                 "summary": "Alert Channels",
                 "operationId": "alert_channels_alerts_channels_get",
@@ -1367,7 +1367,7 @@
                 }
             }
         },
-        "/alerts/channels/{alert_channel_id}": {
+        "/firework/v4/alerts/channels/{alert_channel_id}": {
             "delete": {
                 "summary": "Delete Channel",
                 "operationId": "delete_channel_alerts_channels__alert_channel_id__delete",
@@ -1486,7 +1486,7 @@
                 }
             }
         },
-        "/tasks/": {
+        "/firework/v4/tasks/": {
             "post": {
                 "summary": "Bulk Actions",
                 "operationId": "bulk_actions_tasks__post",
@@ -1524,7 +1524,7 @@
                 }
             }
         },
-        "/integrations/credential_validations": {
+        "/firework/v4/integrations/credential_validations": {
             "get": {
                 "summary": "Get Credential Validations",
                 "operationId": "get_credential_validations_integrations_credential_validations_get",
@@ -1599,7 +1599,7 @@
                 }
             }
         },
-        "/credentials/bulk_action": {
+        "/firework/v4/credentials/bulk_action": {
             "post": {
                 "summary": "Create Credential Bulk Action",
                 "operationId": "create_credential_bulk_action_credentials_bulk_action_post",
@@ -1635,7 +1635,7 @@
                 }
             }
         },
-        "/events/tenant/_search": {
+        "/firework/v4/events/tenant/_search": {
             "post": {
                 "summary": "Current Tenant Feed",
                 "operationId": "current_tenant_feed_events_tenant__search_post",
@@ -1672,7 +1672,7 @@
                 }
             }
         },
-        "/events/global/_search": {
+        "/firework/v4/events/global/_search": {
             "post": {
                 "summary": "Global Search",
                 "operationId": "global_search_events_global__search_post",
@@ -1710,7 +1710,7 @@
                 }
             }
         },
-        "/events/identifiers/{identifier_id}/_search": {
+        "/firework/v4/events/identifiers/{identifier_id}/_search": {
             "post": {
                 "summary": "Identifier Feed",
                 "operationId": "identifier_feed_events_identifiers__identifier_id___search_post",
@@ -1758,7 +1758,7 @@
                 }
             }
         },
-        "/events/identifier_groups/{identifier_group_id}/_search": {
+        "/firework/v4/events/identifier_groups/{identifier_group_id}/_search": {
             "post": {
                 "summary": "Identifier Group Feed",
                 "operationId": "identifier_group_feed_events_identifier_groups__identifier_group_id___search_post",
@@ -1806,7 +1806,7 @@
                 }
             }
         },
-        "/events/filters/types": {
+        "/firework/v4/events/filters/types": {
             "get": {
                 "summary": "Fetch Filters Source Types",
                 "operationId": "fetch_filters_source_types_events_filters_types_get",
@@ -1834,7 +1834,7 @@
                 }
             }
         },
-        "/events/filters/severities": {
+        "/firework/v4/events/filters/severities": {
             "get": {
                 "summary": "Fetch Filters Risk Score",
                 "operationId": "fetch_filters_risk_score_events_filters_severities_get",
@@ -1862,7 +1862,7 @@
                 }
             }
         },
-        "/events/actions": {
+        "/firework/v4/events/actions": {
             "post": {
                 "summary": "Event Actions",
                 "operationId": "event_actions_events_actions_post",
@@ -1898,7 +1898,7 @@
                 }
             }
         },
-        "/events/extracted_secrets": {
+        "/firework/v4/events/extracted_secrets": {
             "post": {
                 "summary": "Fetch Extracted Secrets",
                 "operationId": "fetch_extracted_secrets_events_extracted_secrets_post",
@@ -1936,7 +1936,7 @@
                 }
             }
         },
-        "/file_analysis/submit": {
+        "/firework/v4/file_analysis/submit": {
             "post": {
                 "summary": "Submit Presigned Url",
                 "operationId": "submit_presigned_url_file_analysis_submit_post",
@@ -1972,7 +1972,7 @@
                 }
             }
         },
-        "/healthz/": {
+        "/firework/v4/healthz/": {
             "get": {
                 "summary": "Is Api Up And Running",
                 "operationId": "is_api_up_and_running_healthz__get",
@@ -1991,7 +1991,7 @@
                 }
             }
         },
-        "/identifiers/count": {
+        "/firework/v4/identifiers/count": {
             "get": {
                 "summary": "Get Identifier Count",
                 "operationId": "get_identifier_count_identifiers_count_get",
@@ -2181,7 +2181,7 @@
                 }
             }
         },
-        "/identifiers/": {
+        "/firework/v4/identifiers/": {
             "post": {
                 "summary": "Create Identifier",
                 "operationId": "create_identifier_identifiers__post",
@@ -2407,7 +2407,7 @@
                 }
             }
         },
-        "/identifiers/{identifier_id}": {
+        "/firework/v4/identifiers/{identifier_id}": {
             "put": {
                 "summary": "Update Identifier By Id",
                 "operationId": "update_identifier_by_id_identifiers__identifier_id__put",
@@ -2493,7 +2493,7 @@
                 }
             }
         },
-        "/identifiers/identity_by_asset_data": {
+        "/firework/v4/identifiers/identity_by_asset_data": {
             "post": {
                 "summary": "Fetch Identifier By Asset Data",
                 "operationId": "fetch_identifier_by_asset_data_identifiers_identity_by_asset_data_post",
@@ -2572,7 +2572,7 @@
                 }
             }
         },
-        "/identifiers/identity_by_email": {
+        "/firework/v4/identifiers/identity_by_email": {
             "get": {
                 "summary": "Fetch Identity By Email",
                 "operationId": "fetch_identity_by_email_identifiers_identity_by_email_get",
@@ -2612,7 +2612,7 @@
                 }
             }
         },
-        "/identifiers/merge_identities": {
+        "/firework/v4/identifiers/merge_identities": {
             "post": {
                 "summary": "Merge Identity Identifiers",
                 "operationId": "merge_identity_identifiers_identifiers_merge_identities_post",
@@ -2650,7 +2650,7 @@
                 }
             }
         },
-        "/identifiers/{identifier_id}/relations": {
+        "/firework/v4/identifiers/{identifier_id}/relations": {
             "get": {
                 "summary": "Get Identifier Relations",
                 "operationId": "get_identifier_relations_identifiers__identifier_id__relations_get",
@@ -2831,7 +2831,7 @@
                 }
             }
         },
-        "/identifiers/{identifier_id}/count": {
+        "/firework/v4/identifiers/{identifier_id}/count": {
             "get": {
                 "summary": "Get Identifier Count By Id",
                 "operationId": "get_identifier_count_by_id_identifiers__identifier_id__count_get",
@@ -3012,7 +3012,7 @@
                 }
             }
         },
-        "/identifier-recommendations/": {
+        "/firework/v4/identifier-recommendations/": {
             "get": {
                 "summary": "Fetch Identifier Recommendations",
                 "operationId": "fetch_identifier_recommendations_identifier_recommendations__get",
@@ -3111,7 +3111,7 @@
                 }
             }
         },
-        "/identifier-recommendations/actions": {
+        "/firework/v4/identifier-recommendations/actions": {
             "post": {
                 "summary": "Create Action For Identifier Recommendations",
                 "operationId": "create_action_for_identifier_recommendations_identifier_recommendations_actions_post",
@@ -3147,7 +3147,7 @@
                 }
             }
         },
-        "/identities/{asset_uuid}/application_exposures": {
+        "/firework/v4/identities/{asset_uuid}/application_exposures": {
             "get": {
                 "summary": "Get Application Exposures",
                 "operationId": "get_application_exposures_identities__asset_uuid__application_exposures_get",
@@ -3302,7 +3302,7 @@
                 }
             }
         },
-        "/identities/{asset_uuid}/application_exposures_graph": {
+        "/firework/v4/identities/{asset_uuid}/application_exposures_graph": {
             "get": {
                 "summary": "Get Identity Application Exposures Graph",
                 "operationId": "get_identity_application_exposures_graph_identities__asset_uuid__application_exposures_graph_get",
@@ -3408,7 +3408,7 @@
                 }
             }
         },
-        "/identities/{asset_uuid}/recent_activities/_count": {
+        "/firework/v4/identities/{asset_uuid}/recent_activities/_count": {
             "get": {
                 "summary": "Get Recent Activities Count",
                 "operationId": "get_recent_activities_count_identities__asset_uuid__recent_activities__count_get",
@@ -3481,7 +3481,7 @@
                 }
             }
         },
-        "/identities/{asset_uuid}/recent_activities/_search": {
+        "/firework/v4/identities/{asset_uuid}/recent_activities/_search": {
             "get": {
                 "summary": "Get Recent Activities Search",
                 "operationId": "get_recent_activities_search_identities__asset_uuid__recent_activities__search_get",
@@ -3598,7 +3598,7 @@
                 }
             }
         },
-        "/identities/{asset_uuid}/timeline_by_search_type": {
+        "/firework/v4/identities/{asset_uuid}/timeline_by_search_type": {
             "get": {
                 "summary": "Get Recent Activities Timeline By Search Type",
                 "operationId": "get_recent_activities_timeline_by_search_type_identities__asset_uuid__timeline_by_search_type_get",
@@ -3672,7 +3672,7 @@
                 }
             }
         },
-        "/identities/{asset_uuid}/idp_user_data": {
+        "/firework/v4/identities/{asset_uuid}/idp_user_data": {
             "get": {
                 "summary": "Get Idp User Data",
                 "operationId": "get_idp_user_data_identities__asset_uuid__idp_user_data_get",
@@ -3715,7 +3715,7 @@
                 }
             }
         },
-        "/logos/": {
+        "/firework/v4/logos/": {
             "post": {
                 "summary": "Get Logos From Domains",
                 "operationId": "get_logos_from_domains_logos__post",
@@ -3753,7 +3753,7 @@
                 }
             }
         },
-        "/reports/{report_id}": {
+        "/firework/v4/reports/{report_id}": {
             "get": {
                 "summary": "Get Report",
                 "operationId": "get_report_reports__report_id__get",
@@ -3876,7 +3876,7 @@
                 }
             }
         },
-        "/reports/": {
+        "/firework/v4/reports/": {
             "get": {
                 "summary": "List Reports",
                 "operationId": "list_reports_reports__get",
@@ -4027,7 +4027,7 @@
                 }
             }
         },
-        "/reports/{report_id}/generate": {
+        "/firework/v4/reports/{report_id}/generate": {
             "post": {
                 "summary": "Generate Report",
                 "operationId": "generate_report_reports__report_id__generate_post",
@@ -4064,7 +4064,7 @@
                 }
             }
         },
-        "/reports/{report_id}/generate_csv": {
+        "/firework/v4/reports/{report_id}/generate_csv": {
             "post": {
                 "summary": "Generate Report Csv",
                 "operationId": "generate_report_csv_reports__report_id__generate_csv_post",
@@ -4101,7 +4101,7 @@
                 }
             }
         },
-        "/reports/{report_id}/config": {
+        "/firework/v4/reports/{report_id}/config": {
             "get": {
                 "summary": "Get Report Config",
                 "operationId": "get_report_config_reports__report_id__config_get",
@@ -4187,7 +4187,7 @@
                 }
             }
         },
-        "/reports/{report_id}/download": {
+        "/firework/v4/reports/{report_id}/download": {
             "get": {
                 "summary": "Download Report",
                 "operationId": "download_report_reports__report_id__download_get",
@@ -4239,7 +4239,7 @@
                 }
             }
         },
-        "/reports/{report_id}/sections/{uid}": {
+        "/firework/v4/reports/{report_id}/sections/{uid}": {
             "get": {
                 "summary": "Get Report Section",
                 "operationId": "get_report_section_reports__report_id__sections__uid__get",
@@ -4345,7 +4345,7 @@
                 }
             }
         },
-        "/reports/{report_id}/sections": {
+        "/firework/v4/reports/{report_id}/sections": {
             "get": {
                 "summary": "List Report Sections",
                 "operationId": "list_report_sections_reports__report_id__sections_get",
@@ -4412,7 +4412,7 @@
                 }
             }
         },
-        "/reports/{report_id}/archive": {
+        "/firework/v4/reports/{report_id}/archive": {
             "patch": {
                 "summary": "Archive Report",
                 "operationId": "archive_report_reports__report_id__archive_patch",
@@ -4451,7 +4451,7 @@
                 }
             }
         },
-        "/reports/{report_id}/summarize/{uid}": {
+        "/firework/v4/reports/{report_id}/summarize/{uid}": {
             "patch": {
                 "summary": "Generate Summary",
                 "operationId": "generate_summary_reports__report_id__summarize__uid__patch",
@@ -4510,7 +4510,7 @@
                 }
             }
         },
-        "/integrations/tenant_integrations": {
+        "/firework/v4/integrations/tenant_integrations": {
             "get": {
                 "summary": "Get Tenant Integrations",
                 "operationId": "get_tenant_integrations_integrations_tenant_integrations_get",
@@ -4652,7 +4652,7 @@
                 }
             }
         },
-        "/integrations/tenant_integrations/{tenant_integration_id}": {
+        "/firework/v4/integrations/tenant_integrations/{tenant_integration_id}": {
             "get": {
                 "summary": "Get Tenant Integration",
                 "operationId": "get_tenant_integration_integrations_tenant_integrations__tenant_integration_id__get",
@@ -4830,7 +4830,7 @@
                 }
             }
         },
-        "/integrations/tenant_integrations/test": {
+        "/firework/v4/integrations/tenant_integrations/test": {
             "post": {
                 "summary": "Test Tenant Integration",
                 "operationId": "test_tenant_integration_integrations_tenant_integrations_test_post",
@@ -4868,7 +4868,7 @@
                 }
             }
         },
-        "/integrations/tenant_integrations/{tenant_integration_id}/idp/revoke_sessions": {
+        "/firework/v4/integrations/tenant_integrations/{tenant_integration_id}/idp/revoke_sessions": {
             "post": {
                 "summary": "Revoke Sessions",
                 "operationId": "revoke_sessions_integrations_tenant_integrations__tenant_integration_id__idp_revoke_sessions_post",
@@ -4911,7 +4911,7 @@
                 }
             }
         },
-        "/integrations/tenant_integrations/{tenant_integration_id}/idp/disable_account": {
+        "/firework/v4/integrations/tenant_integrations/{tenant_integration_id}/idp/disable_account": {
             "post": {
                 "summary": "Disable Account",
                 "operationId": "disable_account_integrations_tenant_integrations__tenant_integration_id__idp_disable_account_post",
@@ -4954,7 +4954,7 @@
                 }
             }
         },
-        "/integrations/tenant_integrations/{tenant_integration_id}/idp/mark_user_as_compromised": {
+        "/firework/v4/integrations/tenant_integrations/{tenant_integration_id}/idp/mark_user_as_compromised": {
             "post": {
                 "summary": "Mark User As Compromised",
                 "operationId": "mark_user_as_compromised_integrations_tenant_integrations__tenant_integration_id__idp_mark_user_as_compromised_post",
@@ -4997,7 +4997,7 @@
                 }
             }
         },
-        "/threat_flow/reports/": {
+        "/firework/v4/threat_flow/reports/": {
             "get": {
                 "summary": "List Reports",
                 "operationId": "list_reports_threat_flow_reports__get",
@@ -5081,7 +5081,7 @@
                 }
             }
         },
-        "/threat_flow/reports/{report_id}": {
+        "/firework/v4/threat_flow/reports/{report_id}": {
             "get": {
                 "summary": "Get Report",
                 "operationId": "get_report_threat_flow_reports__report_id__get",
@@ -5155,7 +5155,7 @@
                 }
             }
         },
-        "/threat_flow/reports/{report_id}/download": {
+        "/firework/v4/threat_flow/reports/{report_id}/download": {
             "get": {
                 "summary": "Download Report",
                 "operationId": "download_report_threat_flow_reports__report_id__download_get",
@@ -5201,7 +5201,7 @@
                 }
             }
         },
-        "/threat_flow/unit_summary/related_conversation": {
+        "/firework/v4/threat_flow/unit_summary/related_conversation": {
             "post": {
                 "summary": "Get Related Conversation",
                 "operationId": "get_related_conversation_threat_flow_unit_summary_related_conversation_post",
@@ -5239,7 +5239,7 @@
                 }
             }
         },
-        "/threat_flow/tags/": {
+        "/firework/v4/threat_flow/tags/": {
             "get": {
                 "summary": "List Tags",
                 "operationId": "list_tags_threat_flow_tags__get",
@@ -5267,7 +5267,7 @@
                 }
             }
         },
-        "/threat_flow/tenant_config/": {
+        "/firework/v4/threat_flow/tenant_config/": {
             "get": {
                 "summary": "Get And Create Tenant Config",
                 "operationId": "get_and_create_tenant_config_threat_flow_tenant_config__get",
@@ -5331,7 +5331,7 @@
                 }
             }
         },
-        "/threat_flow/conversation_summary_requests/": {
+        "/firework/v4/threat_flow/conversation_summary_requests/": {
             "put": {
                 "summary": "Create Conversation Summary Request",
                 "operationId": "create_conversation_summary_request_threat_flow_conversation_summary_requests__put",
@@ -5432,7 +5432,7 @@
                 }
             }
         },
-        "/threat_flow/reports/requests": {
+        "/firework/v4/threat_flow/reports/requests": {
             "post": {
                 "summary": "Create Report Request",
                 "operationId": "create_report_request_threat_flow_reports_requests_post",
@@ -5470,7 +5470,7 @@
                 }
             }
         },
-        "/threat_flow/reports/requests/{request_info_id}": {
+        "/firework/v4/threat_flow/reports/requests/{request_info_id}": {
             "get": {
                 "summary": "Get Report Request",
                 "operationId": "get_report_request_threat_flow_reports_requests__request_info_id__get",
@@ -5510,7 +5510,7 @@
                 }
             }
         },
-        "/organizations/{organization_id}/users/{user_id}/tenants": {
+        "/firework/v4/organizations/{organization_id}/users/{user_id}/tenants": {
             "post": {
                 "summary": "Add User To Tenants",
                 "operationId": "add_user_to_tenants_organizations__organization_id__users__user_id__tenants_post",
@@ -5566,7 +5566,7 @@
                 }
             }
         },
-        "/tenants/{tenant_id}/users": {
+        "/firework/v4/tenants/{tenant_id}/users": {
             "put": {
                 "summary": "Add Tenant Users Put",
                 "operationId": "add_tenant_users_put_tenants__tenant_id__users_put",
@@ -5647,7 +5647,7 @@
                 }
             }
         },
-        "/tenants/{tenant_id}/users/{user_id}/disable": {
+        "/firework/v4/tenants/{tenant_id}/users/{user_id}/disable": {
             "post": {
                 "summary": "Disable Tenant Member",
                 "operationId": "disable_tenant_member_tenants__tenant_id__users__user_id__disable_post",
@@ -5693,7 +5693,7 @@
                 }
             }
         },
-        "/tenants/{tenant_id}/users/{user_id}/enable": {
+        "/firework/v4/tenants/{tenant_id}/users/{user_id}/enable": {
             "post": {
                 "summary": "Enable Tenant Member",
                 "operationId": "enable_tenant_member_tenants__tenant_id__users__user_id__enable_post",
@@ -7341,7 +7341,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2025-08-06T21:49:45.377771Z"
+                        "default": "2025-08-07T14:41:01.845889Z"
                     },
                     "from": {
                         "anyOf": [
