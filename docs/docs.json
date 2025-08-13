@@ -236,7 +236,8 @@
               {
                 "group": "Credentials",
                 "pages": [
-                  "api-reference/leaksdb/endpoints/get-credentials"
+                  "api-reference/leaksdb/endpoints/get-credentials-v1",
+                  "api-reference/leaksdb/endpoints/get-credentials-v2"
                 ]
               },
               {
