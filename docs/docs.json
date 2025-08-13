@@ -333,10 +333,6 @@
   },
   "redirects": [
     {
-      "source": "/api-reference/leaksdb/:slug*",
-      "destination": "/api-reference/astp/:slug*"
-    },
-    {
       "source": "/api-reference/v2/endpoints/activities/get-activities-",
       "destination": "/api-reference/v2/endpoints/activities/get-fireworkv2activities-"
     },
