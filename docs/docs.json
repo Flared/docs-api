@@ -234,6 +234,12 @@
                 ]
               },
               {
+                "group": "Credentials",
+                "pages": [
+                  "api-reference/leaksdb/endpoints/get-credentials"
+                ]
+              },
+              {
                 "group": "Identities",
                 "pages": [
                   "api-reference/astp/endpoints/get-by-domain",
