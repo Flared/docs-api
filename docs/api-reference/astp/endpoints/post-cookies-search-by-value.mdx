@@ -1,0 +1,52 @@
+---
+title: "Search Cookies by Value"
+api: "POST https://api.flare.io/astp/v2/cookies/_search_by_value"
+authMethod: "bearer"
+---
+
+import GatedAccessFeatureAstp from '/snippets/gated-access-feature-astp.mdx';
+
+<GatedAccessFeatureAstp />
+
+Returns a list of cookies matching the value provided, paginated and in descending order from most recently added to least recently added.
+
+<ResponseExample>
+
+```json Response Example
+{
+        "items": [
+            {
+                "uuid": "44672461-aca4-4b3b-b192-6bd5429c4c6d",
+                "domain": "scatterholt.com",
+                "expires_at": "2024-10-18T00:00:00+00:00",
+                "imported_at": "2024-01-01T00:00:00+00:00",
+                "name": "session",
+                "path": "/",
+                "event_uid": "stealer_log/stealer_logs_live/12345",
+                "value": "abcdefghijkl",
+            },
+        ],
+        "next": "WzFd",
+}
+```
+
+</ResponseExample>
+
+## Paging
+
+This endpoint supports the 
+[Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
+
+## Body Parameters
+
+<ParamField body="value" type="string">
+  The exact value for which you want to search cookies.
+</ParamField>
+
+<ParamField body="size" type="number">
+  The number of results to fetch. (default: 100, max: 2000)
+</ParamField>
+
+<ParamField body="from" type="string">
+  The `next` value from the last response.
+</ParamField>

@@ -115,7 +115,8 @@
               {
                 "group": "Cookies",
                 "pages": [
-                  "api-reference/astp/endpoints/post-cookies-search"
+                  "api-reference/astp/endpoints/post-cookies-search",
+                  "api-reference/astp/endpoints/post-cookies-search-by-value"
                 ]
               }
             ]
