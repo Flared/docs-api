@@ -8,7 +8,7 @@ import GatedAccessFeatureAstp from '/snippets/gated-access-feature-astp.mdx';
 
 <GatedAccessFeatureAstp />
 
-Returns a list of credentials matching the query provided.
+Returns a list of cookies matching the query provided.
 
 <ResponseExample>
 
@@ -49,6 +49,10 @@ See the guide for using this endpoint:
   The exact domain for which you want to search cookies. Subdomains will not be included.
 </ParamField>
 
+<ParamField body="value" type="string">
+  The exact cookie value for which you want to search cookies.
+</ParamField>
+
 <ParamField body="size" type="number">
   The number of results to fetch. (default: 100, max: 2000)
 </ParamField>
@@ -71,4 +75,9 @@ See the guide for using this endpoint:
 
 <ParamField body="expires_after" type="string">
   ISO-formatted datetime string to filter for cookie expiration, for example `2024-10-29T17:50:44.237148+00:00`.
+</ParamField>
+
+<ParamField query="order" type="string">
+  Order in which you want to browse the cookies. One of `asc` or `desc`.
+  It defaults to `asc` which is the recommended way to use the API to obtain newly imported cookies.
 </ParamField>
