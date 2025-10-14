@@ -34,10 +34,14 @@ If you receive 429 errors, Flare's recommended course of action is to wait 10 se
 
 
 ## Quotas
-API users are responsible for monitoring their Global Search API usage and ensuring it remains within their allocated monthly quota.
+API users are responsible for monitoring their Global Search usage and ensuring it remains within their allocated monthly quota.
 
-Users with account administration rights can also view their Global Search API monthly calls by logging into the platform and navigating to [the tenants page](https://app.flare.io/#/tenants).
+Users with account administration rights can also view their Global Search monthly usage by logging into the platform and navigating to [the tenants page](https://app.flare.io/#/tenants).
 
-Moreover, each global search response includes the `X-Flare-Global-Searches-Remaining` header, indicating the number of API calls remaining in your monthly allocation.
+Moreover, each global search response includes the `X-Flare-Global-Searches-Remaining` header, indicating the number of searches remaining in your monthly allocation.
+
+When you reach the maximum number of results for a search, the response includes the `X-Flare-Global-Searches-Batch-Reached` header. Performing another search afterward will trigger a quota increase.
 
 To avoid service interruptions or missed events, we recommend implementing proactive monitoring of your usage.
+
+For additional information, please refer to [Global Search Quota](https://docs.flare.io/global-search-quota).
