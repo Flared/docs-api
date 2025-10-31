@@ -1,0 +1,127 @@
+---
+title: "Seller"
+---
+
+The `seller` event type represents a vendor profile extracted from darknet marketplaces or illicit e-commerce platforms.  
+Each record corresponds to a seller’s identity page, including their alias, reputation score, number of transactions, and contact details (such as PGP public keys or Telegram handles).  
+This information is used to track threat actor personas, understand marketplace reputations, and correlate sellers across multiple marketplaces or identities.  
+
+```json Example Content
+{
+  "activity": {
+    "data": {
+      "es_id": "dark_market/seller_12345",
+      "es_score": 1.0,
+      "highlights": {},
+      "id": "seller_12345",
+      "index": "seller",
+      "metadata": {
+        "estimated_created_at": "2025-03-25T17:20:23Z",
+        "event_id": null,
+        "first_crawled_at": "2025-01-10T16:35:15Z",
+        "last_crawled_at": "2025-03-25T17:21:05Z",
+        "payload_digest": null,
+        "scraped_at": "2025-03-25T17:21:06Z",
+        "source": "dark_market",
+        "crawled_by": null,
+        "flare_url": "https://app.cti.example.com/#/seller/dark_market/seller_12345"
+      },
+      "uid": "seller/dark_market/seller_12345",
+      "url": "http://darkmarketxyz.onion/seller/profile/seller_12345",
+      "browser_url": null,
+      "about": "Seller specializing in high-demand illicit goods and services with a focus on reliability, discretion, and customer satisfaction.",
+      "about_en": null,
+      "actor": "seller_12345",
+      "actor_id": "seller_12345",
+      "actor_name": "seller_12345",
+      "contact_info": {
+        "public_pgp_fingerprint": "-----BEGIN PGP PUBLIC KEY BLOCK-----\nVersion: BCPG v1.58\n\n[Truncated PGP public key data for documentation example]\n-----END PGP PUBLIC KEY BLOCK-----",
+        "public_pgp_uid": null
+      },
+      "title": null,
+      "transactions_count": null,
+      "rating": ["0.00"],
+      "ratings_count": null,
+      "rating_pos": null,
+      "rating_neg": null,
+      "ship_to": null,
+      "ship_from": null,
+      "features": {
+        "domains": null,
+        "emails": null,
+        "ip_addresses": null,
+        "ip_addresses_cidr": null,
+        "reversed_domains": null,
+        "urls": null,
+        "usernames": null,
+        "vulnerabilities": null
+      }
+    },
+    "duplicates": [],
+    "header": {
+      "actor": "seller_12345",
+      "actor_id": "seller_12345",
+      "bank": null,
+      "bin": null,
+      "brand": null,
+      "credential_count": null,
+      "category_name": "",
+      "content_hash": "seller/dark_market/seller_12345",
+      "content_preview": "Seller specializing in high-demand illicit goods and services...",
+      "country": null,
+      "duplicates": [],
+      "es_score": 1.0,
+      "expiration": null,
+      "highlights": {},
+      "host": null,
+      "id": "seller_12345",
+      "infection_date": null,
+      "parent_id": null,
+      "parent_title": null,
+      "parent_title_en": null,
+      "parent_uid": null,
+      "parent_uids": [],
+      "risk": {
+        "score": 3
+      },
+      "similar_items_count": 0,
+      "source": "dark_market",
+      "source_name": "Dark Market",
+      "target_name": "Dark Market",
+      "tags": [],
+      "notes": null,
+      "state_code": null,
+      "timestamp": "2025-03-25T17:20:23Z",
+      "title": "seller_12345",
+      "type": "seller",
+      "uid": "seller/dark_market/seller_12345",
+      "user_risk_score": null,
+      "user_notes": null,
+      "ignored_at": null,
+      "remediated_at": null,
+      "verb": "",
+      "external_url": null,
+      "external_netloc": null,
+      "can_have_duplicates": true,
+      "priority_action_uuid_related": false,
+      "analyzers_items_uids": [],
+      "victim_name": null,
+      "contains_secrets": null,
+      "secrets_metadata": null
+    },
+    "history_logs": null,
+    "metadata": {
+      "estimated_created_at": "2025-03-25T17:20:23Z",
+      "event_id": null,
+      "first_crawled_at": "2025-01-10T16:35:15Z",
+      "last_crawled_at": "2025-03-25T17:21:05Z",
+      "payload_digest": null,
+      "scraped_at": "2025-03-25T17:21:06Z",
+      "source": "dark_market",
+      "crawled_by": null,
+      "flare_url": "https://app.cti.example.com/#/seller/dark_market/seller_12345"
+    },
+    "similar_items": []
+  }
+}
+```

@@ -1,0 +1,112 @@
+---
+title: "Ransomleak (document)"
+---
+
+The `ransomleak` (or `document` subtype) represents a public leak post made by a ransomware group on a dark web site or leak portal.  
+Each record corresponds to a specific victim organization whose exfiltrated data is published as part of extortion attempts.  
+These entries typically include:
+- Victim details (company name, country, industry).
+- Leak description and download links to stolen archives.
+- Threat statements or ransom instructions.
+- Screenshots or excerpts of the leaked data for proof.
+
+```json Example Content
+{
+  "id": "example-id-91011",
+  "title": "Example Leak - www.example.com PART1",
+  "url": "http://exampleonionaddress.onion/page_company.php?id=123",
+  "browser_url": null,
+  "main": "Brief description of the leak content and references to external onion links",
+  "body": "Shortened representation of the text body",
+  "type": "RANSOMLEAK",
+  "response_url": "http://exampleonionaddress.onion/page_company.php?id=123",
+  "docmeta": {
+    "title": "Example Leak - www.example.com PART1"
+  },
+  "screenshots": [
+    {
+      "preview_url": "https://example-screenshot-storage.s3.amazonaws.com/examplehash1",
+      "extracted_content": "Short text snippet from screenshot 1"
+    },
+    {
+      "preview_url": "https://example-screenshot-storage.s3.amazonaws.com/examplehash2",
+      "extracted_content": "Short text snippet from screenshot 2"
+    },
+    {
+      "preview_url": "https://example-screenshot-storage.s3.amazonaws.com/examplehash3",
+      "extracted_content": "Short text snippet from screenshot 3"
+    }
+  ],
+  "victim_metadata": {
+    "name": "Example Financial Institution S.A.",
+    "display_name": "Example Financial Institution S.A.",
+    "domain": "example.com",
+    "alternative_domains": null,
+    "industry": "Financial Services",
+    "employee_count": 250,
+    "city": "Example City",
+    "state": "Example State",
+    "country": "Example Country",
+    "latitude": -25.3,
+    "longitude": -57.63
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "category_name": "Ransom Leak",
+    "content_hash": "hashvalue123xyz",
+    "content_preview": "Brief preview of the leaked page content",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "example-id-91011",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": { "score": 3 },
+    "similar_items_count": 0,
+    "source": "example_source",
+    "source_name": "Example Leak Source",
+    "target_name": "Example Leak Target",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-10-28T19:49:18.173119+00:00",
+    "title": "Example Leak - www.example.com PART1",
+    "type": "ransomleak",
+    "uid": "document/example_source/example-id-91011",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "victim_name": "Example Financial Institution S.A.",
+    "contains_secrets": null,
+    "secrets_metadata": null
+  },
+  "history_logs": null,
+  "metadata": {
+    "estimated_created_at": "2025-10-28T19:49:18.173119+00:00",
+    "event_id": null,
+    "first_crawled_at": "2024-11-29T15:03:18.015000+00:00",
+    "last_crawled_at": "2025-10-28T19:49:20.490310+00:00",
+    "payload_digest": "hashvalue123xyz",
+    "scraped_at": "2025-10-28T19:49:20.981763+00:00",
+    "source": "example_source",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/document/eraleign/example-id-91011"
+  },
+  "similar_items": []
+}
+```

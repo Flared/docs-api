@@ -1,0 +1,143 @@
+---
+title: "Bucket Object"
+---
+
+The `bucket_object` type represents individual files (objects) discovered within publicly exposed cloud storage buckets, such as those hosted on Amazon S3, Azure Blob Storage, or Google Cloud Storage.  
+Each record identifies a single accessible object, typically containing metadata like its bucket location, provider, file path, and exposure source.  
+
+```json Example Content
+{
+  "id": "example-id-67890",
+  "title": "Example Bucket Object example-user@example.com.json",
+  "content": null,
+  "content_en": null,
+  "url": null,
+  "browser_url": null,
+  "metadata": {
+    "estimated_created_at": "2022-09-29T05:41:31.384630+00:00",
+    "event_id": null,
+    "first_crawled_at": "2022-09-29T05:41:31.384630+00:00",
+    "last_crawled_at": "2022-10-03T01:32:45.841604+00:00",
+    "payload_digest": null,
+    "scraped_at": "2022-10-03T01:32:45.845075+00:00",
+    "source": "example_source",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/bucket_object/grayhat_warfare/example-id-67890"
+  },
+  "bucket": {
+    "host": "example.blob.core.windows.net",
+    "bucket_id": "example-bucket-id",
+    "id": "azure/example-bucket-id",
+    "provider": "azure"
+  },
+  "commit": {
+    "author_email": null,
+    "author_id": null,
+    "author_name": null,
+    "committer_email": null,
+    "committer_id": null,
+    "committer_name": null,
+    "sha": null,
+    "patch_url": null
+  },
+  "code": {
+    "commit_name": null,
+    "commit_date": null,
+    "path": null,
+    "commit_email": null
+  },
+  "drill_type": "bucket_object",
+  "dork_name": null,
+  "html_url": null,
+  "is_secret_detection_rule_match": null,
+  "issue": {
+    "id": null,
+    "state": null,
+    "title": null,
+    "tags": null,
+    "assignee_id": null,
+    "assignee_name": null
+  },
+  "project_name": null,
+  "project": {
+    "owner_name": null,
+    "owner_id": null,
+    "owner_type": null,
+    "tags": null,
+    "last_activity_at": null,
+    "language": null,
+    "followers_count": null,
+    "forks_count": null,
+    "is_fork": null
+  },
+  "resource_url": [
+    "https://example.blob.core.windows.net/publiccontainer/Users/example-user@example.com.json"
+  ],
+  "secret_detection_rule_id": null,
+  "snippets": null,
+  "user": {
+    "email": null,
+    "company": null,
+    "full_name": null,
+    "location": null,
+    "followers_count": null
+  },
+  "features": {
+    "domains": ["example.blob.core.windows.net"],
+    "emails": null,
+    "ip_addresses": null,
+    "ip_addresses_cidr": null,
+    "reversed_domains": ["net.windows.core.blob.example"],
+    "urls": ["https://example.blob.core.windows.net/publiccontainer/Users/example-user@example.com.json"],
+    "usernames": null,
+    "vulnerabilities": null
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "category_name": "Drill",
+    "content_hash": "bucket_object/example_source/example-id-67890",
+    "content_preview": "example-user@example.com.json on Azure at example.blob.core.windows.net",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "example-id-67890",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": { "score": 2 },
+    "similar_items_count": 0,
+    "source": "example_source",
+    "source_name": "Example Source",
+    "target_name": "Example Target",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2022-09-29T05:41:31.384630+00:00",
+    "title": "Example Bucket Object example-user@example.com.json",
+    "type": "bucket_object",
+    "uid": "bucket_object/example_source/example-id-67890",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "pushed",
+    "external_url": "https://example.blob.core.windows.net/publiccontainer/Users/example-user@example.com.json",
+    "external_netloc": "example.blob.core.windows.net",
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "victim_name": null,
+    "contains_secrets": false,
+    "secrets_metadata": []
+  },
+  "history_logs": null,
+  "similar_items": []
+}
+```

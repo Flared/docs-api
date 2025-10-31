@@ -1,0 +1,109 @@
+---
+title: "Forum Post"
+---
+
+The `forum_post` type represents an individual message or reply made within a forum thread on an underground or hacker-oriented site.  
+Each record contains the message text, author alias, thread association, and metadata such as timestamps and extracted indicators (domains, emails, etc.).  
+
+```json Example Content
+{
+  "id": "example-id-77889",
+  "title": "Leaked Database – Government Regulatory Agency (INDONESIA)",
+  "url": "http://hiddenforumexample.onion/showthread.php?pid=77889#pid77889",
+  "browser_url": "http://hiddenforumexample.onion/Thread-Leaked-Government-Agency-Database",
+  "actor": "DarkLeakX",
+  "actor_id": null,
+  "actor_name": "DarkLeakX",
+  "category_name": "Databases",
+  "category_path_name": null,
+  "content": "Thread posted by user DarkLeakX offering multiple CSV files allegedly exfiltrated from a government nuclear regulatory body. The actor lists multiple database names and sample table filenames suggesting personnel and licensing data. The post includes redacted sample entries with identifiers and email addresses, indicating exposure of administrative and technical staff information. The dataset is hosted on an external anonymous file service (URL redacted) and mirrored through multiple onion links. Mentions of CSV exports such as 'users.csv', 'licenses.csv', and 'requests.csv' are included. The author claims to provide access upon contact or trade.",
+  "content_en": null,
+  "title_en": null,
+  "posted_at": "2025-10-28T18:50:57.328427+05:30",
+  "topic_id": "9999",
+  "topic_title": "Leaked Database – Government Regulatory Agency (INDONESIA)",
+  "topic_title_en": null,
+  "features": {
+    "domains": [
+      "example.gov.id",
+      "examplemail.com",
+      "anonfiles.onion"
+    ],
+    "emails": [
+      "admin@example.gov.id",
+      "contact@examplemail.com"
+    ],
+    "ip_addresses": null,
+    "ip_addresses_cidr": null,
+    "reversed_domains": [
+      "id.gov.example",
+      "com.examplemail",
+      "onion.anonfiles"
+    ],
+    "urls": [
+      "https://example.gov.id",
+      "https://anonfiles.onion/example"
+    ],
+    "usernames": ["DarkLeakX", "ParanoidHax"],
+    "vulnerabilities": null
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "DarkLeakX",
+    "actor_id": null,
+    "category_name": "Databases",
+    "content_hash": "hashvalue123xyz",
+    "content_preview": "Forum post advertising leaked Indonesian government database with multiple CSV exports and user data samples.",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "example-id-77889",
+    "infection_date": null,
+    "parent_id": "9999",
+    "parent_title": "Leaked Database – Government Regulatory Agency (INDONESIA)",
+    "parent_title_en": null,
+    "parent_uid": "forum_topic/darkforums/example-id-9999",
+    "parent_uids": [],
+    "risk": { "score": 3 },
+    "similar_items_count": 0,
+    "source": "darkforums",
+    "source_name": "DarkForums",
+    "target_name": "DarkForums",
+    "tags": ["darkweb", "leak", "database", "government", "cti"],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-10-28T13:20:57.328427+00:00",
+    "title": "Leaked Database – Government Regulatory Agency (INDONESIA)",
+    "type": "forum_post",
+    "uid": "forum_post/darkforums/example-id-77889",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "posted",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "victim_name": "Government Regulatory Agency (Indonesia)",
+    "contains_secrets": null,
+    "secrets_metadata": null
+  },
+  "history_logs": null,
+  "metadata": {
+    "estimated_created_at": "2025-10-28T13:20:57.328427+00:00",
+    "event_id": null,
+    "first_crawled_at": "2025-10-28T19:00:57.328427+00:00",
+    "last_crawled_at": "2025-10-28T19:00:57.328427+00:00",
+    "payload_digest": "hashvalue123xyz",
+    "scraped_at": "2025-10-28T19:00:57.394413+00:00",
+    "source": "darkforums",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/forum_post/darkforums/example-id-77889"
+  },
+  "similar_items": []
+}
+```
