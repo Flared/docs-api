@@ -1,0 +1,74 @@
+---
+title: "Blog Post"
+---
+
+The `blog_post` type represents blog-style documents and text-based publications that have been discovered and indexed by Flare across document-sharing or content-hosting platforms such as Scribd, Medium, or public paste/document repositories.  
+These records generally include technical manuals, guides, or articles that are accessible to the public, potentially containing sensitive, proprietary, or copyrighted materials.
+
+```json Example Content
+{
+  "id": "example-id-12345",
+  "title": "Example Technical Document | PDF | Mechanical Part | Component Type",
+  "description": "Example Product Line Full Description",
+  "content": "Brief summary of the document contents",
+  "url": "https://example.com/document/example-id-12345",
+  "browser_url": "https://example.com/document/example-id-12345",
+  "metadata": {
+    "estimated_created_at": "2025-10-27T05:51:19.667458+00:00",
+    "event_id": null,
+    "first_crawled_at": "2025-10-27T05:51:19.667458+00:00",
+    "last_crawled_at": "2025-10-27T05:51:19.667458+00:00",
+    "payload_digest": "hashvalue123abc",
+    "scraped_at": "2025-10-27T05:51:22.483346+00:00",
+    "source": "example_source",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/blog_post/scribd/example-id-12345"
+  },
+  "header": {
+    "actor": "John Doe",
+    "actor_id": null,
+    "category_name": "",
+    "content_hash": "hashvalue123abc",
+    "content_preview": "Short excerpt from the document text",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "id": "example-id-12345",
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": { "score": 2 },
+    "similar_items_count": 0,
+    "source": "example_source",
+    "source_name": "Example Platform",
+    "target_name": "Example Platform",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-10-27T05:51:19.667458+00:00",
+    "title": "Example Technical Document | PDF | Mechanical Part | Component Type",
+    "type": "blog_post",
+    "uid": "blog_post/example_source/example-id-12345",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "posted",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "victim_name": null,
+    "contains_secrets": null,
+    "secrets_metadata": null
+  },
+  "duplicates": [],
+  "history_logs": null,
+  "similar_items": []
+}
+
+```

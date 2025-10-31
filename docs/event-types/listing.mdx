@@ -1,0 +1,138 @@
+---
+title: "Listing"
+---
+
+The `listing` type represents marketplace product advertisements sourced from dark web or illicit online markets.
+Each record captures a single product post, including its title, description, seller information, price, and shipping regions.  
+Listings can refer to drugs, malware, guides, digital goods, counterfeit items, or stolen data, depending on the source market.  
+
+```json Example Content
+{
+  "activity": {
+    "data": {
+      "es_id": "dark_market/listing_12345",
+      "es_score": 1.0,
+      "highlights": {},
+      "id": "listing_12345",
+      "index": "listing",
+      "metadata": {
+        "estimated_created_at": "2025-03-12T09:15:00Z",
+        "event_id": null,
+        "first_crawled_at": "2025-03-12T09:15:00Z",
+        "last_crawled_at": "2025-03-14T16:30:00Z",
+        "payload_digest": "abcdef0987654321abcdef0987654321abcdef09",
+        "scraped_at": "2025-03-14T16:31:00Z",
+        "source": "dark_market",
+        "crawled_by": null,
+        "flare_url": "https://app.cti.example.com/#/listing/dark_market/listing_12345"
+      },
+      "uid": "listing/dark_market/listing_12345",
+      "url": "http://darkmarketxyz.onion/products/listing_12345",
+      "browser_url": null,
+      "actor": "vendor_alpha",
+      "actor_id": "vendor_alpha",
+      "actor_name": "vendor_alpha",
+      "category_name": null,
+      "classification": {
+        "classes": {
+          "is_carding": null,
+          "is_bypass": null,
+          "is_ident_fraud": null,
+          "is_doc_fraud": null,
+          "is_phishing": null,
+          "is_money_xfer": null,
+          "is_cashout": null,
+          "is_virt_currency": null,
+          "is_hacking": null,
+          "is_misc_financial": null
+        },
+        "types": {
+          "is_guide": null,
+          "is_service": null,
+          "is_software": null,
+          "is_hardware": null,
+          "is_data": null
+        }
+      },
+      "currency": "usd",
+      "description": "Listing for a cybercrime-related product with anonymized shipment details and general marketplace disclaimers.",
+      "description_en": null,
+      "description_preview": [""],
+      "escrow": null,
+      "price": "75.00",
+      "seller_id": "vendor_alpha",
+      "seller_name": "vendor_alpha",
+      "ship_to": ["Worldwide"],
+      "ship_from": ["United States"],
+      "title": "Synthetic Product Sample",
+      "title_en": null,
+      "stock_count": 8000
+    },
+    "duplicates": [],
+    "header": {
+      "actor": "vendor_alpha",
+      "actor_id": "vendor_alpha",
+      "bank": null,
+      "bin": null,
+      "brand": null,
+      "credential_count": null,
+      "category_name": "",
+      "content_hash": "abcdef0987654321abcdef0987654321abcdef09",
+      "content_preview": "Listing for a cybercrime-related product with anonymized shipment details...",
+      "country": null,
+      "duplicates": [],
+      "es_score": 1.0,
+      "expiration": null,
+      "highlights": {},
+      "host": null,
+      "id": "listing_12345",
+      "infection_date": null,
+      "parent_id": null,
+      "parent_title": null,
+      "parent_title_en": null,
+      "parent_uid": null,
+      "parent_uids": [],
+      "risk": {
+        "score": 3
+      },
+      "similar_items_count": 0,
+      "source": "dark_market",
+      "source_name": "Dark Market",
+      "target_name": "Dark Market",
+      "tags": [],
+      "notes": null,
+      "state_code": null,
+      "timestamp": "2025-03-12T09:15:00Z",
+      "title": "Synthetic Product Sample",
+      "type": "listing",
+      "uid": "listing/dark_market/listing_12345",
+      "user_risk_score": null,
+      "user_notes": null,
+      "ignored_at": null,
+      "remediated_at": null,
+      "verb": "announced",
+      "external_url": null,
+      "external_netloc": null,
+      "can_have_duplicates": true,
+      "priority_action_uuid_related": false,
+      "analyzers_items_uids": [],
+      "victim_name": null,
+      "contains_secrets": null,
+      "secrets_metadata": null
+    },
+    "history_logs": null,
+    "metadata": {
+      "estimated_created_at": "2025-03-12T09:15:00Z",
+      "event_id": null,
+      "first_crawled_at": "2025-03-12T09:15:00Z",
+      "last_crawled_at": "2025-03-14T16:30:00Z",
+      "payload_digest": "abcdef0987654321abcdef0987654321abcdef09",
+      "scraped_at": "2025-03-14T16:31:00Z",
+      "source": "dark_market",
+      "crawled_by": null,
+      "flare_url": "https://app.cti.example.com/#/listing/dark_market/listing_12345"
+    },
+    "similar_items": []
+  }
+}
+```

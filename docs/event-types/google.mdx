@@ -1,0 +1,96 @@
+---
+title: "Google"
+---
+
+The `driller_google` type represents Google search-based reconnaissance data, gathered through Flare’s “Driller” engine.  
+This data consists of crafted Google dork queries and their discovered URLs; used to identify exposed files, misconfigured services, or leaked data indexed by Google. 
+
+```json Example Content
+{
+  "id": "example-id-413",
+  "title": "Example Intelligence Scrape — Search Engine Crawl",
+  "url": null,
+  "browser_url": null,
+  "content": "Short summary: archived HTML capture of a publicly-posted 'best hacking tools' article scraped from a search engine result. Contains article metadata, markup, and embedded tracking scripts — treated as an intelligence artifact for CTI indexing (do not execute any embedded code).",
+  "bucket": {
+    "host": null,
+    "bucket_id": null,
+    "id": null,
+    "provider": null
+  },
+  "commit": {
+    "author_email": null,
+    "author_id": null,
+    "author_name": null,
+    "committer_email": null,
+    "committer_id": null,
+    "committer_name": null,
+    "sha": null,
+    "patch_url": null
+  },
+  "code": {
+    "commit_name": null,
+    "commit_date": null,
+    "path": null,
+    "commit_email": null
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "category_name": "driller",
+    "content_hash": "driller/google_search/example-id-413",
+    "content_preview": "Search-engine-captured page about 'Best Hacking Tools' with full HTML and embedded metadata.",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "example-id-413",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": { "score": 1 },
+    "similar_items_count": 0,
+    "source": "google_search",
+    "source_name": "Search Engine Crawl",
+    "target_name": "Search Engine Crawl",
+    "tags": ["crawler", "html", "intake"],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-03-21T21:08:10.949536+00:00",
+    "title": "Example Intelligence Scrape — Search Engine Crawl",
+    "type": "driller",
+    "uid": "driller/google_search/example-id-413",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "scraped",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "victim_name": null,
+    "contains_secrets": null,
+    "secrets_metadata": null
+  },
+  "history_logs": null,
+  "metadata": {
+    "estimated_created_at": "2025-03-21T21:08:10.949536+00:00",
+    "event_id": null,
+    "first_crawled_at": "2025-03-21T21:08:10.949536+00:00",
+    "last_crawled_at": "2025-03-25T22:49:57.146074+00:00",
+    "payload_digest": "example-payload-digest-1445a761",
+    "scraped_at": "2025-03-25T22:49:57.160355+00:00",
+    "source": "google_search",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/driller/google_search/2c3aedb836e52893c8254ac0ac6bf4bca8dce5c1"
+  },
+  "similar_items": []
+}
+```

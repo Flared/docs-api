@@ -261,6 +261,33 @@
         ]
       },
       {
+        "tab": "Event Types",
+        "groups": [
+          {
+            "group": "Events",
+            "pages": [
+              "event-types/overview",
+              "event-types/blog-post",
+              "event-types/bucket-object",
+              "event-types/bucket",
+              "event-types/document",
+              "event-types/domain",
+              "event-types/experimental",
+              "event-types/forum-post",
+              "event-types/forum-topic",
+              "event-types/google",
+              "event-types/leak",
+              "event-types/listing",
+              "event-types/paste",
+              "event-types/profile",
+              "event-types/seller",
+              "event-types/source-code",
+              "event-types/stealer-log"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Changelog",
         "groups": [
           {
@@ -296,9 +323,7 @@
       "display": "interactive"
     },
     "mdx": {
-      "server": [
-        "http://api.flare.io/"
-      ],
+      "server": ["http://api.flare.io/"],
       "auth": {
         "method": "bearer"
       }

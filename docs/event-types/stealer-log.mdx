@@ -1,0 +1,242 @@
+---
+title: "Stealer Log"
+---
+
+The `stealer_log` (also observed as `bot` in some indices) represents a record of a compromised device whose credentials and browsing data were harvested by an information stealer malware (such as RedLine, Raccoon, or Vidar).  
+These entries originate from dark-web marketplaces (for example, “Russian Market”) where attackers sell logs containing cookies, saved passwords, and session tokens from infected machines.  
+Each document corresponds to a single device or “bot,” with metadata describing where and when it was first seen, its environment (OS, IP, ISP), and the websites and services discovered in its data.
+
+```json Example Content
+{
+  "activity": {
+    "data": {
+      "es_id": "stealer_logs/sample_log_doc_000002",
+      "es_score": 1.0,
+      "highlights": {},
+      "id": "sample_log_doc_000002",
+      "index": "stealer_log",
+      "metadata": {
+        "estimated_created_at": "2025-10-24T03:51:00+00:00",
+        "event_id": null,
+        "first_crawled_at": "2025-10-28T18:35:15.095033+00:00",
+        "last_crawled_at": "2025-10-28T18:35:15.095033+00:00",
+        "payload_digest": "f8fbcbf034e346eedf2a8abed80b883433ddccaf",
+        "scraped_at": "2025-10-28T18:35:17.333487+00:00",
+        "source": "stealer_logs",
+        "crawled_by": null,
+        "flare_url": "https://app.example.com/#/stealer_log/stealer_logs/sample_log_doc_000002"
+      },
+      "uid": "stealer_log/stealer_logs/sample_log_doc_000002",
+      "url": null,
+      "browser_url": null,
+      "name": null,
+      "installed_at": "2025-10-24T03:51:00+00:00",
+      "updated_at": null,
+      "seller_id": null,
+      "isp": null,
+      "information": null,
+      "credentials": [
+        {
+          "url": "https://www.epicgames.com/id/login",
+          "username": "user1@example.com",
+          "password": "raf*********",
+          "application": "Browser/Logins/Edge_Default[edeafc70].txt"
+        }
+      ],
+      "cookies": [
+        {
+          "host_key": ".instagram.com",
+          "path": "/",
+          "expires_utc": "2026-03-04T02:22:08",
+          "name": "datr",
+          "value": "REDACTED"
+        },
+        {
+          "host_key": ".mediafire.com",
+          "path": "/",
+          "expires_utc": "2026-03-04T12:54:47",
+          "name": "ukey",
+          "value": "REDACTED"
+        }
+      ],
+      "user_information": {
+        "ip_address": "198.51.100.1",
+        "ip_network": null,
+        "username": "user_display_name",
+        "country_code": "BR",
+        "zip_code": "",
+        "location": "",
+        "hwid": "HWID-REDACTED-0001",
+        "current_language": "",
+        "screensize_width": 1920,
+        "screensize_height": 1080,
+        "timezone": "UTC-3",
+        "os": "Windows 11 24H2 build 26200 (64 Bit)",
+        "uac": "",
+        "process_elevation": null,
+        "available_keyboards": [
+          "Portuguese"
+        ],
+        "hardware": [
+          "CPU: AMD Ryzen 5 5500",
+          "RAM: 16278 MB",
+          "HOSTNAME: HOST-XXXX"
+        ],
+        "anti_viruses": null
+      },
+      "malware_information": {
+        "malware_family": "unknown",
+        "build_id": "",
+        "file_location": "",
+        "infection_date": "2025-10-24T03:51:00+00:00"
+      },
+      "files": [
+        "Browser/Autofill/Blink_Default[99168010].txt",
+        "Browser/Autofill/Blink_Default[9cf42651].txt",
+        "Browser/Autofill/Blink_Default[edeafc70].txt",
+        "Browser/Autofill/Blink_Default[f4116c65].txt"
+      ],
+      "price": null,
+      "currency": null,
+      "features": {
+        "domains": [
+          "account.educacross.com.br",
+          "accounts.google.com",
+          "bitly.com",
+          "connect.ubisoft.com",
+          "discord.com",
+          "gmail.com",
+          "hotmail.com",
+          "myaccount.google.com",
+          "saladofuturo.educacao.sp.gov.br",
+          "store.steampowered.com",
+          "www.epicgames.com",
+          "www.fortnite.com",
+          "www.roblox.com"
+        ],
+        "emails": [
+          "user1@example.com",
+          "user2@example.com"
+        ],
+        "ip_addresses": [
+          "198.51.100.1"
+        ],
+        "ip_addresses_cidr": [
+          "198.51.100.1"
+        ],
+        "reversed_domains": [
+          "br.com.educacross.account",
+          "br.gov.sp.educacao.saladofuturo",
+          "com.bitly",
+          "com.discord",
+          "com.epicgames.www",
+          "com.fortnite.www",
+          "com.gmail",
+          "com.google.accounts",
+          "com.google.myaccount",
+          "com.hotmail",
+          "com.roblox.www",
+          "com.steampowered.store",
+          "com.ubisoft.connect"
+        ],
+        "urls": [
+          "https://account.educacross.com.br/login",
+          "https://accounts.google.com/v3/signin/challenge/pwd",
+          "https://bitly.com/a/sign_up",
+          "https://connect.ubisoft.com/login",
+          "https://connect.ubisoft.com/oauth/create",
+          "https://discord.com/channels/@me",
+          "https://myaccount.google.com/signinoptions/password",
+          "https://saladofuturo.educacao.sp.gov.br/login-alunos",
+          "https://store.steampowered.com/join/completesignup",
+          "https://www.epicgames.com/id/login",
+          "https://www.fortnite.com/id/login/customized",
+          "https://www.roblox.com/login"
+        ],
+        "usernames": [
+          "user120063621",
+          "user_display_name",
+          "user_display_2",
+          "user_display_3",
+          "user_display_4",
+          "user_display_5",
+          "user1@example.com",
+          "user2@example.com",
+          "user_display_6"
+        ],
+        "vulnerabilities": null
+      },
+      "sources": [
+        "stealer_logs_private"
+      ]
+    },
+    "duplicates": [],
+    "header": {
+      "actor": null,
+      "actor_id": null,
+      "bank": null,
+      "bin": null,
+      "brand": null,
+      "credential_count": 17,
+      "category_name": "Infected Device",
+      "content_hash": "f8fbcbf034e346eedf2a8abed80b883433ddccaf",
+      "content_preview": "17 credentials",
+      "country": null,
+      "duplicates": [],
+      "es_score": 1.0,
+      "expiration": null,
+      "highlights": {},
+      "host": null,
+      "id": "sample_log_doc_000002",
+      "infection_date": "2025-10-24T03:51:00+00:00",
+      "parent_id": null,
+      "parent_title": null,
+      "parent_title_en": null,
+      "parent_uid": null,
+      "parent_uids": [
+        "chat_message/telegram/0000000000/00000000000"
+      ],
+      "risk": {
+        "score": 3
+      },
+      "similar_items_count": 0,
+      "source": "stealer_logs",
+      "source_name": "Stealer Logs",
+      "target_name": "Stealer Logs",
+      "tags": [],
+      "notes": null,
+      "state_code": null,
+      "timestamp": "2025-10-24T03:51:00+00:00",
+      "title": "",
+      "type": "stealer_log",
+      "uid": "stealer_log/stealer_logs/sample_log_doc_000002",
+      "user_risk_score": null,
+      "user_notes": null,
+      "ignored_at": null,
+      "remediated_at": null,
+      "verb": "sold",
+      "external_url": "s3://example-bucket/0000000000/00000000000000000000000000000000000000",
+      "external_netloc": "example-bucket",
+      "can_have_duplicates": true,
+      "priority_action_uuid_related": false,
+      "analyzers_items_uids": [],
+      "victim_name": null,
+      "contains_secrets": null,
+      "secrets_metadata": null
+    },
+    "history_logs": null,
+    "metadata": {
+      "estimated_created_at": "2025-10-24T03:51:00+00:00",
+      "event_id": null,
+      "first_crawled_at": "2025-10-28T18:35:15.095033+00:00",
+      "last_crawled_at": "2025-10-28T18:35:15.095033+00:00",
+      "payload_digest": "f8fbcbf034e346eedf2a8abed80b883433ddccaf",
+      "scraped_at": "2025-10-28T18:35:17.333487+00:00",
+      "source": "stealer_logs",
+      "crawled_by": null,
+      "flare_url": "https://app.example.com/#/stealer_log/stealer_logs/sample_log_doc_000002"
+    },
+    "similar_items": []
+  }
+}
+```

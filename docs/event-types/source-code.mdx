@@ -1,0 +1,126 @@
+---
+title: "Source code"
+---
+
+The `source_code` event type captures data originating from public source code repositories or registries, such as Docker Hub, GitHub, or GitLab.  
+These entries are used to identify potentially exposed code, build artifacts, or embedded secrets that may represent a security risk.  
+For Docker images, Flare extracts and analyzes metadata such as the image digest, architecture, tags, and embedded configuration or environment data.
+
+```json Example Content
+{
+  "activity": {
+    "data": {
+      "es_id": "dockerhub/image_12345",
+      "es_score": 1.0,
+      "highlights": {},
+      "id": "image_12345",
+      "index": "docker_image",
+      "metadata": {
+        "estimated_created_at": "2025-03-20T19:58:52Z",
+        "event_id": null,
+        "first_crawled_at": "2025-03-20T20:00:00Z",
+        "last_crawled_at": "2025-03-20T20:00:00Z",
+        "payload_digest": "abc123def456ghi789jkl012mno345pqr678stu901",
+        "scraped_at": "2025-03-20T20:00:15Z",
+        "source": "dockerhub",
+        "crawled_by": null,
+        "flare_url": "https://app.cti.example.com/#/docker_image/dockerhub/image_12345"
+      },
+      "uid": "docker_image/dockerhub/image_12345",
+      "url": null,
+      "browser_url": null,
+      "digest": "sha256:abc123def456ghi789jkl012mno345pqr678stu901",
+      "architecture": "amd64",
+      "variant": null,
+      "os": "linux",
+      "os_features": null,
+      "os_version": null,
+      "size": 19240105,
+      "last_pushed_at": "2025-03-20T19:58:52Z",
+      "last_pulled_at": "2025-03-20T19:58:54Z",
+      "tag": [
+        {
+          "name": "frontend-prod-latest",
+          "repository_name": "exampleorg/webapp"
+        }
+      ],
+      "content": "Dockerfile contents with environment setup, package installations, and service configuration steps. Example truncated for documentation purposes.",
+      "features": {
+        "domains": ["nginx.org", "example.com"],
+        "emails": ["maintainer@example.com"],
+        "ip_addresses": null,
+        "ip_addresses_cidr": null,
+        "reversed_domains": ["org.nginx", "com.example"],
+        "urls": ["https://nginx.org/packages/alpine", "https://example.com/repo"],
+        "usernames": null,
+        "vulnerabilities": null
+      }
+    },
+    "duplicates": [],
+    "header": {
+      "actor": null,
+      "actor_id": null,
+      "bank": null,
+      "bin": null,
+      "brand": null,
+      "credential_count": null,
+      "category_name": "Docker Image",
+      "content_hash": "abc123def456ghi789jkl012mno345pqr678stu901",
+      "content_preview": "Dockerfile setup with environment and service configuration steps...",
+      "country": null,
+      "duplicates": [],
+      "es_score": 1.0,
+      "expiration": null,
+      "highlights": {},
+      "host": null,
+      "id": "image_12345",
+      "infection_date": null,
+      "parent_id": null,
+      "parent_title": null,
+      "parent_title_en": null,
+      "parent_uid": null,
+      "parent_uids": [],
+      "risk": {
+        "score": 1
+      },
+      "similar_items_count": 0,
+      "source": "dockerhub",
+      "source_name": "Docker Hub",
+      "target_name": "Docker Hub",
+      "tags": [],
+      "notes": null,
+      "state_code": null,
+      "timestamp": "2025-03-20T19:58:52Z",
+      "title": "Docker Image image_12345 (exampleorg/webapp:frontend-prod-latest)",
+      "type": "docker_image",
+      "uid": "docker_image/dockerhub/image_12345",
+      "user_risk_score": null,
+      "user_notes": null,
+      "ignored_at": null,
+      "remediated_at": null,
+      "verb": "",
+      "external_url": null,
+      "external_netloc": null,
+      "can_have_duplicates": true,
+      "priority_action_uuid_related": false,
+      "analyzers_items_uids": [],
+      "victim_name": null,
+      "contains_secrets": false,
+      "secrets_metadata": []
+    },
+    "history_logs": null,
+    "metadata": {
+      "estimated_created_at": "2025-03-20T19:58:52Z",
+      "event_id": null,
+      "first_crawled_at": "2025-03-20T20:00:00Z",
+      "last_crawled_at": "2025-03-20T20:00:00Z",
+      "payload_digest": "abc123def456ghi789jkl012mno345pqr678stu901",
+      "scraped_at": "2025-03-20T20:00:15Z",
+      "source": "dockerhub",
+      "crawled_by": null,
+      "flare_url": "https://app.cti.example.com/#/docker_image/dockerhub/image_12345"
+    },
+    "similar_items": []
+  }
+}
+```

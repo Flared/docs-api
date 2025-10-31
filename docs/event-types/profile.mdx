@@ -1,0 +1,120 @@
+---
+title: "Profile"
+---
+
+The `driller_profile` type captures developer identity profiles discovered on software development platforms such as GitHub, GitLab, or Bitbucket.  
+These profiles are enriched by analyzing open-source repositories, contributor metadata, and contact information to build intelligence around potentially exposed developer accounts or threat-linked GitHub users. 
+
+```json Example Content
+{
+  "activity": {
+    "data": {
+      "es_id": "driller_github/user_98765",
+      "es_score": 1.0,
+      "highlights": {},
+      "id": "user_98765",
+      "index": "driller_profile",
+      "metadata": {
+        "estimated_created_at": "2025-03-08T17:04:18Z",
+        "event_id": null,
+        "first_crawled_at": "2025-02-10T05:04:09Z",
+        "last_crawled_at": "2025-03-08T17:04:19Z",
+        "payload_digest": null,
+        "scraped_at": "2025-03-08T17:04:19Z",
+        "source": "github",
+        "crawled_by": null,
+        "flare_url": "https://app.cti.example.com/#/driller_profile/github/user_98765"
+      },
+      "uid": "driller_profile/github/user_98765",
+      "url": null,
+      "browser_url": null,
+      "about": "",
+      "about_en": null,
+      "contact_info": {
+        "twitter": null,
+        "email": "example_contact@protonmail.com"
+      },
+      "location": null,
+      "website": null,
+      "groups": null,
+      "username": null,
+      "realname": "User98765",
+      "features": {
+        "domains": null,
+        "emails": ["example_contact@protonmail.com"],
+        "ip_addresses": null,
+        "ip_addresses_cidr": null,
+        "reversed_domains": null,
+        "urls": null,
+        "usernames": null,
+        "vulnerabilities": null
+      }
+    },
+    "duplicates": [],
+    "header": {
+      "actor": "User98765",
+      "actor_id": "User98765",
+      "bank": null,
+      "bin": null,
+      "brand": null,
+      "credential_count": null,
+      "category_name": "",
+      "content_hash": "driller_profile/github/user_98765",
+      "content_preview": "...",
+      "country": null,
+      "duplicates": [],
+      "es_score": 1.0,
+      "expiration": null,
+      "highlights": {},
+      "host": null,
+      "id": "user_98765",
+      "infection_date": null,
+      "parent_id": null,
+      "parent_title": null,
+      "parent_title_en": null,
+      "parent_uid": null,
+      "parent_uids": [],
+      "risk": {
+        "score": 1
+      },
+      "similar_items_count": 0,
+      "source": "github",
+      "source_name": "GitHub",
+      "target_name": "GitHub",
+      "tags": [],
+      "notes": null,
+      "state_code": null,
+      "timestamp": "2025-03-08T17:04:18Z",
+      "title": "User98765",
+      "type": "driller_profile",
+      "uid": "driller_profile/github/user_98765",
+      "user_risk_score": null,
+      "user_notes": null,
+      "ignored_at": null,
+      "remediated_at": null,
+      "verb": "",
+      "external_url": null,
+      "external_netloc": null,
+      "can_have_duplicates": true,
+      "priority_action_uuid_related": false,
+      "analyzers_items_uids": [],
+      "victim_name": null,
+      "contains_secrets": null,
+      "secrets_metadata": null
+    },
+    "history_logs": null,
+    "metadata": {
+      "estimated_created_at": "2025-03-08T17:04:18Z",
+      "event_id": null,
+      "first_crawled_at": "2025-02-10T05:04:09Z",
+      "last_crawled_at": "2025-03-08T17:04:19Z",
+      "payload_digest": null,
+      "scraped_at": "2025-03-08T17:04:19Z",
+      "source": "github",
+      "crawled_by": null,
+      "flare_url": "https://app.cti.example.com/#/driller_profile/github/user_98765"
+    },
+    "similar_items": []
+  }
+}
+```

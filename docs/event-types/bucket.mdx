@@ -1,0 +1,89 @@
+---
+title: "Bucket"
+---
+
+The `bucket` type represents publicly exposed cloud storage containers, such as Amazon S3, Azure Blob, or Google Cloud Storage buckets.  
+These records document information about misconfigured or accessible cloud storage endpoints, including domain names, providers, and discovered files.  
+
+```json Example Content
+{
+  "id": "example-id-34567",
+  "title": "Example Bucket example-bucket.s3.amazonaws.com on Aws",
+  "url": null,
+  "browser_url": null,
+  "metadata": {
+    "estimated_created_at": "2022-07-20T08:01:19.174392+00:00",
+    "event_id": null,
+    "first_crawled_at": "2022-07-20T08:01:19.174392+00:00",
+    "last_crawled_at": "2022-08-15T04:24:18.493735+00:00",
+    "payload_digest": null,
+    "scraped_at": "2022-08-15T04:24:18.495069+00:00",
+    "source": "example_source",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/bucket/grayhat_warfare/example-id-34567"
+  },
+  "resource_url": "https://example-bucket.s3.amazonaws.com",
+  "domain": "example-bucket.s3.amazonaws.com",
+  "provider": "aws",
+  "content_type": null,
+  "file_count": 1,
+  "files": [],
+  "features": {
+    "domains": ["example-bucket.s3.amazonaws.com"],
+    "emails": null,
+    "ip_addresses": null,
+    "ip_addresses_cidr": null,
+    "reversed_domains": ["com.amazonaws.s3.example-bucket"],
+    "urls": null,
+    "usernames": null,
+    "vulnerabilities": null
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "category_name": "aws",
+    "content_hash": "bucket/example_source/example-id-34567",
+    "content_preview": "",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "example-id-34567",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": { "score": 2 },
+    "similar_items_count": 0,
+    "source": "example_source",
+    "source_name": "Example Source",
+    "target_name": "Example Target",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2022-07-20T08:01:19.174392+00:00",
+    "title": "Example Bucket example-bucket.s3.amazonaws.com on Aws",
+    "type": "bucket",
+    "uid": "bucket/example_source/example-id-34567",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "victim_name": null,
+    "contains_secrets": null,
+    "secrets_metadata": null
+  },
+  "history_logs": null,
+  "similar_items": []
+}
+```
