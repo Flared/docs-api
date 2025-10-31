@@ -18,14 +18,12 @@ import os
     ) == [
         _ExtractedMarkdownBlock(
             header="python",
-            body="""
-print("hello")
+            body="""print("hello")
 """,
         ),
         _ExtractedMarkdownBlock(
             header="python HEY",
-            body="""
-import os
+            body="""import os
 """,
         ),
     ]

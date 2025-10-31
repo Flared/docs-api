@@ -19,3 +19,4 @@ jobs:
         python-version: ${{ matrix.python-version }}
         architecture: x64
     - run: make lint
+    - run: make test
