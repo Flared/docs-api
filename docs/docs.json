@@ -97,7 +97,8 @@
           {
             "group": "Global Search API",
             "pages": [
-              "api-reference/v4/endpoints/global-search"
+              "api-reference/v4/endpoints/global-search",
+              "api-reference/v4/endpoints/credentials-global-search"
             ]
           },
           {
