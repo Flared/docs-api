@@ -91,13 +91,13 @@
                   "api-reference/v4/endpoints/identifier-feed",
                   "api-reference/v4/endpoints/identifier-group-feed"
                 ]
-              },
-              {
-                "group": "Global Search",
-                "pages": [
-                  "api-reference/v4/endpoints/global-search"
-                ]
               }
+            ]
+          },
+          {
+            "group": "Global Search API",
+            "pages": [
+              "api-reference/v4/endpoints/global-search"
             ]
           },
           {
