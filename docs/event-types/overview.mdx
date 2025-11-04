@@ -3,21 +3,31 @@ title: "Event Types"
 description: "Overview of all Flare API event types"
 ---
 
-| Event Type      | Documentation                                                                   |
-| --------------- | ------------------------------------------------------------------------------- |
-| `blog_post`     | [Blog Post <Icon icon="book" size={16} />](/event-types/blog-post)              |
-| `bucket_object` | [Bucket Object <Icon icon="book" size={16} />](/event-types/bucket-object)      |
-| `bucket`        | [Bucket <Icon icon="book" size={16} />](/event-types/bucket)                    |
-| `document`      | [Ransomleak (document) <Icon icon="book" size={16} />](/event-types/document)   |
-| `domain`        | [Lookalike Domain (domain) <Icon icon="book" size={16} />](/event-types/domain) |
-| `experimental`  | [Experimental <Icon icon="book" size={16} />](/event-types/experimental)        |
-| `forum_post`    | [Forum Post <Icon icon="book" size={16} />](/event-types/forum-post)            |
-| `forum_topic`   | [Forum Topic <Icon icon="book" size={16} />](/event-types/forum-topic)          |
-| `google`        | [Google <Icon icon="book" size={16} />](/event-types/google)                    |
-| `leak`          | [Leaked Credentials (leak) <Icon icon="book" size={16} />](/event-types/leak)   |
-| `listing`       | [Listing <Icon icon="book" size={16} />](/event-types/listing)                  |
-| `paste`         | [Paste <Icon icon="book" size={16} />](/event-types/paste)                      |
-| `profile`       | [Profile <Icon icon="book" size={16} />](/event-types/profile)                  |
-| `seller`        | [Seller <Icon icon="book" size={16} />](/event-types/seller)                    |
-| `source_code`   | [Source code <Icon icon="book" size={16} />](/event-types/source-code)          |
-| `stealer_log`   | [Stealer Log <Icon icon="book" size={16} />](/event-types/stealer-log)          |
+| Event Type                                                                | Documentation                                                                                                                       |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `blog_post`                                                               | [Blog Post <Icon icon="book" size={16} />](/event-types/blog-post)                                                                  |
+| `bucket_object`                                                           | [Bucket Object <Icon icon="book" size={16} />](/event-types/bucket-object)                                                          |
+| `bucket`                                                                  | [Bucket <Icon icon="book" size={16} />](/event-types/bucket)                                                                        |
+| `document`                                                                | [Ransomleak (document) <Icon icon="book" size={16} />](/event-types/document)                                                       |
+| `domain`                                                                  | [Lookalike Domain (domain) <Icon icon="book" size={16} />](/event-types/domain)                                                     |
+| `experimental`                                                            | [Experimental <Icon icon="book" size={16} />](/event-types/experimental)                                                            |
+| `forum_post`                                                              | [Forum Post <Icon icon="book" size={16} />](/event-types/forum-post)                                                                |
+| `forum_topic`                                                             | [Forum Topic <Icon icon="book" size={16} />](/event-types/forum-topic)                                                              |
+| `google`                                                                  | [Google <Icon icon="book" size={16} />](/event-types/google)                                                                        |
+| `leak`                                                                    | [Leaked Credentials (leak) <Icon icon="book" size={16} />](/event-types/leak)                                                       |
+| `listing`                                                                 | [Listing <Icon icon="book" size={16} />](/event-types/listing)                                                                      |
+| `paste`                                                                   | [Paste <Icon icon="book" size={16} />](/event-types/paste)                                                                          |
+| `profile`                                                                 | [Profile <Icon icon="book" size={16} />](/event-types/profile)                                                                      |
+| `seller`                                                                  | [Seller <Icon icon="book" size={16} />](/event-types/seller)                                                                        |
+| `source_code`                                                             | [Source code <Icon icon="book" size={16} />](/event-types/source-code)                                                              |
+| `stealer_log`                                                             | [Stealer Log <Icon icon="book" size={16} />](/event-types/stealer-log)                                                              |
+| `driller`, `driller_forum_topic`, `driller_forum_post`, `driller_profile` | Not intended to be directly searchable, can be found by searching the types they power like `source_code`, `google` or `forum_post` |
+| `chat_message`                                                            | Chats that are ingested, mostly Telegram.                                                                                           |
+| `attachment`                                                              | Attachments that are collected in telegram chats.                                                                                   |
+| `social_media`                                                            | Social media accounts that we find related to events that match identifiers.                                                        |
+| `experimental`                                                            | Evolving list of test sources uncovered by our research team.                                                                       |
+| `service`                                                                 | Hosts with potentially exposed services that we discover on the open web.                                                           |
+
+# Categories
+
+See [Event Source Filters <Icon icon="book" size={16} />](/advanced/event-source-filters)
