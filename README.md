@@ -12,6 +12,13 @@ This repository contains the source of https://api.docs.flare.io.
 
 ## Dependencies
 
+**Interpreters**
+
+- Python: This repository contains a `.python-version` file for pyenv. Use it with `pyenv local`.
+- Node: This repository contains a `.nvmrc` for nvm. Use it with `nvm use`.
+
+**Packages**
+
 You will need `openapi-generator` in order to generate the OpenAPI files.
 
 On macOS, install with:
