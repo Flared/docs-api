@@ -15,7 +15,7 @@ This repository contains the source of https://api.docs.flare.io.
 **Interpreters**
 
 - Python: This repository contains a `.python-version` file for pyenv. Use it with `pyenv local`.
-- Node: This repository contains a `.nvmrc` for nvm. Use it with `nvm use`.
+- Node: This repository contains a `.nvmrc` file for nvm. Use it with `nvm use`.
 
 **Packages**
 
