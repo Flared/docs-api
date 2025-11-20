@@ -33,7 +33,10 @@ lintlify: venv
 	venv/bin/python -m lintlify.main
 
 .PHONY: lint
-lint: broken-links venv mypy lintlify format-check
+lint: broken-links mypy lintlify format-check
+
+.PHONY: ci
+ci: broken-links mypy lintlify format-check test
 
 .PHONY: format
 format: venv
@@ -45,7 +48,7 @@ format-check: venv
 	venv/bin/ruff format --check
 
 .PHONY: mypy
-mypy:
+mypy: venv
 	venv/bin/mypy --strict scripts/*.py
 	venv/bin/mypy --strict --ignore-missing-imports -p lintlify
 
