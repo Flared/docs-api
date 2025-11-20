@@ -58,12 +58,12 @@ resp = client.get("/tokens/test")
 print(resp.json())
 ```
 
-## Paging Util
+## Paging Util - Generic
 
 The `FlareApiClient` has a `scroll` method that can be used with endpoints that support the
 [Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
 
-```python Paging Util Example
+```python Paging Util - Generic Example
 import os
 import time
 
@@ -100,6 +100,46 @@ for resp in api_client.scroll(
     last_from = resp_data.get("next") or last_from
 
 print("The last value for 'next' was", last_from)
+```
+
+## Paging Util - Event Feeds
+
+The `FlareApiClient` has a `scroll_events` method that can be used with event feeds endpoints.
+The advantage of this method over `scroll` is that it also automates the fetching of individual events.
+
+```python Paging Util - Event Feeds Example
+import datetime
+
+from flareio import FlareApiClient
+
+
+api_client = FlareApiClient.from_env()
+initial_cursor = None
+
+from_timestamp: str = (
+    datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(hours=1)
+).isoformat()
+
+for event, next_cursor in api_client.scroll_events(
+    method="POST",
+    pages_url="/firework/v4/events/global/_search",
+    events_url="/firework/v2/activities/",
+    json={
+        "size": 10,
+        "order": "asc",
+        "from": initial_cursor,
+        "filters": {
+            "type": ["chat_message"],
+            "estimated_created_at": {"gte": from_timestamp},
+        },
+        "query": {
+            "type": "query_string",
+            "query_string": "hello",
+        },
+    },
+):
+    print(f"Full event data: {event}")
+    print(f"The next execution could resume using from={next_cursor}")
 ```
 
 ## Custom Session
