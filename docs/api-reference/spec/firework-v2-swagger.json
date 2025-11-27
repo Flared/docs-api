@@ -1764,43 +1764,11 @@
       "properties": {
         "description": {
           "description": "The Tenant's purpose / description",
-          "example": "nullable string",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "global_search_calls_limit": {
-          "description": "The number of global search api calls allowed for the tenant",
-          "example": "nullable integer",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "identifier_limit": {
-          "description": "The number of identifiers allowed for the tenant",
-          "example": "nullable integer",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "identifier_rotation_limit": {
-          "description": "The number of identifiers rotations permitted per month",
-          "example": "nullable integer",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "identities_limit": {
-          "description": "The number of identities allowed for the tenant",
-          "example": "nullable integer",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "description": "The number of API calls allowed for the tenant.",
+          "type": "integer"
         },
         "industry": {
           "description": "The Tenant's industry",
@@ -1825,29 +1793,17 @@
         },
         "number_of_employees": {
           "description": "The number of employees for the tenant",
-          "example": "nullable integer",
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": "integer"
         },
-        "permissions": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "type": {
-          "description": "The Tenant's type",
-          "type": "string"
+        "prevent_global_search": {
+          "type": "boolean"
         }
       },
       "required": [
         "description",
         "industry",
         "name",
-        "number_of_employees",
-        "type"
+        "number_of_employees"
       ],
       "type": "object"
     },

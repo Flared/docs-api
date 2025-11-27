@@ -7534,6 +7534,14 @@
             },
             "TenantData": {
                 "properties": {
+                    "description": {
+                        "description": "The Tenant's purpose / description",
+                        "type": "string"
+                    },
+                    "global_search_calls_limit": {
+                        "description": "The number of API calls allowed for the tenant.",
+                        "type": "integer"
+                    },
                     "industry": {
                         "description": "The Tenant's industry",
                         "enum": [
@@ -7555,21 +7563,19 @@
                         "description": "The Tenant display name",
                         "type": "string"
                     },
-                    "permissions": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                    "number_of_employees": {
+                        "description": "The number of employees for the tenant",
+                        "type": "integer"
                     },
-                    "type": {
-                        "description": "The Tenant's type",
-                        "type": "string"
+                    "prevent_global_search": {
+                        "type": "boolean"
                     }
                 },
                 "required": [
+                    "description",
                     "industry",
                     "name",
-                    "type"
+                    "number_of_employees"
                 ],
                 "type": "object"
             },
