@@ -324,7 +324,7 @@
       "display": "interactive"
     },
     "mdx": {
-      "server": ["http://api.flare.io/"],
+      "server": ["https://api.flare.io/"],
       "auth": {
         "method": "bearer"
       }
