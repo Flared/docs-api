@@ -3614,7 +3614,7 @@
                 "tags": [
                     "public"
                 ],
-                "summary": "Update Tenant Metadata",
+                "summary": "Update Event metadata",
                 "operationId": "update_tenant_metadata_events_tenant_metadata_patch",
                 "parameters": [
                     {
