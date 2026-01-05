@@ -207,7 +207,8 @@
                   "api-reference/v2/endpoints/tenants/post-fireworkv2tenants-archive",
                   "api-reference/v2/endpoints/tenants/get-fireworkv2tenants-users",
                   "api-reference/v2/endpoints/tenants/post-fireworkv2tenants-users",
-                  "api-reference/v2/endpoints/tenants/delete-fireworkv2tenants-users"
+                  "api-reference/v2/endpoints/tenants/delete-fireworkv2tenants-users",
+                  "api-reference/v4/endpoints/public/update-tenant-metadata"
                 ]
               }
             ]
