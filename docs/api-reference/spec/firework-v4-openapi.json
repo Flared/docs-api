@@ -13,7 +13,8 @@
         "/firework/v4/admin/asset-authorization/": {
             "put": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Update Request Status",
                 "operationId": "update_request_status_admin_asset_authorization__put",
@@ -52,7 +53,8 @@
             },
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Search Authorization Requests",
                 "operationId": "search_authorization_requests_admin_asset_authorization__post",
@@ -188,7 +190,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CookieMonitoringConfigurationItem"
+                                "$ref": "#/components/schemas/CreateCookieMonitoringConfigurationItem"
                             }
                         }
                     },
@@ -202,6 +204,41 @@
                                 "schema": {}
                             }
                         }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/cookies/configurations/{id}": {
+            "delete": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Delete Cookie Monitoring Configuration",
+                "operationId": "delete_cookie_monitoring_configuration_admin_cookies_configurations__id__delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
                     },
                     "422": {
                         "description": "Validation Error",
@@ -314,7 +351,8 @@
         "/firework/v4/admin/identifiers/{identifier_id}/update_domain_identifier_properties": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Update Domain Identifier Properties",
                 "description": "Schedule the update of the domain identifier properties for a given identifier.",
@@ -358,7 +396,8 @@
         "/firework/v4/admin/organizations/{organization_id}/allowed_restricted_terms": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Get Allowed Restricted Terms",
                 "operationId": "get_allowed_restricted_terms_admin_organizations__organization_id__allowed_restricted_terms_get",
@@ -398,7 +437,8 @@
             },
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Add Allowed Restricted Term",
                 "operationId": "add_allowed_restricted_term_admin_organizations__organization_id__allowed_restricted_terms_post",
@@ -448,7 +488,8 @@
         "/firework/v4/admin/organizations/{organization_id}/allowed_restricted_terms/{restricted_term_id}": {
             "delete": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Delete Allowed Restricted Terms",
                 "operationId": "delete_allowed_restricted_terms_admin_organizations__organization_id__allowed_restricted_terms__restricted_term_id__delete",
@@ -505,7 +546,8 @@
             },
             "put": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Update Allowed Restricted Terms",
                 "operationId": "update_allowed_restricted_terms_admin_organizations__organization_id__allowed_restricted_terms__restricted_term_id__put",
@@ -564,7 +606,8 @@
         "/firework/v4/admin/restricted_terms/is_allowed": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Is Allowed",
                 "operationId": "is_allowed_admin_restricted_terms_is_allowed_post",
@@ -605,7 +648,8 @@
         "/firework/v4/admin/restricted_terms/are_allowed": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Are Allowed",
                 "operationId": "are_allowed_admin_restricted_terms_are_allowed_post",
@@ -646,7 +690,8 @@
         "/firework/v4/admin/restricted_terms": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Get Restricted Terms",
                 "operationId": "get_restricted_terms_admin_restricted_terms_get",
@@ -677,7 +722,8 @@
         "/firework/v4/admin/tenants/{tenant_id}/enable": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Enable Tenant",
                 "operationId": "enable_tenant_admin_tenants__tenant_id__enable_post",
@@ -856,7 +902,15 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/InviteLinkResponse"
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/InviteLinkResponse"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ],
+                                    "title": "Response Get Tenant Flare Community Invite Link Admin Tenants  Tenant Id  Flare Community Invite Link Get"
                                 }
                             }
                         }
@@ -2151,7 +2205,8 @@
         "/firework/v4/alerts/": {
             "get": {
                 "tags": [
-                    "public"
+                    "public",
+                    "team=experience"
                 ],
                 "summary": "Tenant Alerts",
                 "operationId": "tenant_alerts_alerts__get",
@@ -2251,7 +2306,8 @@
             },
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Create Alert",
                 "operationId": "create_alert_alerts__post",
@@ -2292,7 +2348,8 @@
         "/firework/v4/alerts/{alert_id}": {
             "patch": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Update Alert",
                 "operationId": "update_alert_alerts__alert_id__patch",
@@ -2342,7 +2399,8 @@
             },
             "delete": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Delete Alert",
                 "operationId": "delete_alert_alerts__alert_id__delete",
@@ -2380,7 +2438,8 @@
             },
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Get Tenant Alert",
                 "operationId": "get_tenant_alert_alerts__alert_id__get",
@@ -2422,7 +2481,8 @@
         "/firework/v4/alerts/channels": {
             "get": {
                 "tags": [
-                    "public"
+                    "public",
+                    "team=experience"
                 ],
                 "summary": "Alert Channels",
                 "operationId": "alert_channels_alerts_channels_get",
@@ -2506,7 +2566,8 @@
             },
             "post": {
                 "tags": [
-                    "public"
+                    "public",
+                    "team=experience"
                 ],
                 "summary": "Create Channel",
                 "operationId": "create_channel_alerts_channels_post",
@@ -2547,7 +2608,8 @@
         "/firework/v4/alerts/channels/{alert_channel_id}": {
             "delete": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Delete Channel",
                 "operationId": "delete_channel_alerts_channels__alert_channel_id__delete",
@@ -2585,7 +2647,8 @@
             },
             "put": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Update Channel",
                 "operationId": "update_channel_alerts_channels__alert_channel_id__put",
@@ -2633,7 +2696,8 @@
             },
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Get Alert Channel",
                 "operationId": "get_alert_channel_alerts_channels__alert_channel_id__get",
@@ -2675,7 +2739,8 @@
         "/firework/v4/assets/by_data": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Get Or Create Asset By Data",
                 "operationId": "get_or_create_asset_by_data_assets_by_data_post",
@@ -2760,7 +2825,8 @@
         "/firework/v4/assets/{asset_uuid}": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Get Asset By Uuid",
                 "operationId": "get_asset_by_uuid_assets__asset_uuid__get",
@@ -2802,7 +2868,8 @@
         "/firework/v4/asset-authorization/": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Request Authorization",
                 "operationId": "request_authorization_asset_authorization__post",
@@ -2843,7 +2910,8 @@
         "/firework/v4/tasks/": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Bulk Actions",
                 "operationId": "bulk_actions_tasks__post",
@@ -3046,7 +3114,8 @@
         "/firework/v4/credentials/bulk_action": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Create Credential Bulk Action",
                 "operationId": "create_credential_bulk_action_credentials_bulk_action_post",
@@ -3440,7 +3509,8 @@
         "/firework/v4/events/actions": {
             "post": {
                 "tags": [
-                    "public"
+                    "public",
+                    "team=experience"
                 ],
                 "summary": "Event Actions",
                 "operationId": "event_actions_events_actions_post",
@@ -3612,9 +3682,10 @@
         "/firework/v4/events/tenant/metadata": {
             "patch": {
                 "tags": [
-                    "public"
+                    "public",
+                    "team=experience"
                 ],
-                "summary": "Update Event Metadata",
+                "summary": "Update Tenant Metadata",
                 "operationId": "update_tenant_metadata_events_tenant_metadata_patch",
                 "parameters": [
                     {
@@ -4151,7 +4222,8 @@
         "/firework/v4/identifier-recommendations/": {
             "get": {
                 "tags": [
-                    "public"
+                    "public",
+                    "team=experience"
                 ],
                 "summary": "Fetch Identifier Recommendations",
                 "operationId": "fetch_identifier_recommendations_identifier_recommendations__get",
@@ -4253,7 +4325,8 @@
         "/firework/v4/identifier-recommendations/actions": {
             "post": {
                 "tags": [
-                    "public"
+                    "public",
+                    "team=experience"
                 ],
                 "summary": "Create Action For Identifier Recommendations",
                 "operationId": "create_action_for_identifier_recommendations_identifier_recommendations_actions_post",
@@ -4292,7 +4365,8 @@
         "/firework/v4/identifiers/count": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Get Identifier Count",
                 "operationId": "get_identifier_count_identifiers_count_get",
@@ -4536,7 +4610,8 @@
         "/firework/v4/identifiers/": {
             "post": {
                 "tags": [
-                    "public"
+                    "public",
+                    "team=experience"
                 ],
                 "summary": "Create Identifier",
                 "operationId": "create_identifier_identifiers__post",
@@ -4821,7 +4896,8 @@
         "/firework/v4/identifiers/{identifier_id}": {
             "put": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Update Identifier By Id",
                 "operationId": "update_identifier_by_id_identifiers__identifier_id__put",
@@ -4871,7 +4947,8 @@
             },
             "get": {
                 "tags": [
-                    "public"
+                    "public",
+                    "team=experience"
                 ],
                 "summary": "Get Identifier",
                 "operationId": "get_identifier_identifiers__identifier_id__get",
@@ -4913,7 +4990,8 @@
         "/firework/v4/identifiers/identity_by_asset_data": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Fetch Identifier By Asset Data",
                 "operationId": "fetch_identifier_by_asset_data_identifiers_identity_by_asset_data_post",
@@ -5013,7 +5091,8 @@
         "/firework/v4/identifiers/identity_by_email": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Fetch Identity By Email",
                 "operationId": "fetch_identity_by_email_identifiers_identity_by_email_get",
@@ -5056,7 +5135,8 @@
         "/firework/v4/identifiers/merge_identities": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Merge Identity Identifiers",
                 "operationId": "merge_identity_identifiers_identifiers_merge_identities_post",
@@ -5097,7 +5177,8 @@
         "/firework/v4/identifiers/{identifier_id}/relations": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Get Identifier Relations",
                 "operationId": "get_identifier_relations_identifiers__identifier_id__relations_get",
@@ -5313,7 +5394,8 @@
         "/firework/v4/identifiers/{identifier_id}/count": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Get Identifier Count By Id",
                 "operationId": "get_identifier_count_by_id_identifiers__identifier_id__count_get",
@@ -6458,7 +6540,8 @@
         "/firework/v4/organizations/{organization_id}/users/{user_id}/tenants": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Add User To Tenants",
                 "operationId": "add_user_to_tenants_organizations__organization_id__users__user_id__tenants_post",
@@ -6517,7 +6600,8 @@
         "/firework/v4/organizations/{organization_id}/demo_tenant": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Create Demo Tenant",
                 "operationId": "create_demo_tenant_organizations__organization_id__demo_tenant_post",
@@ -8759,7 +8843,8 @@
         "/firework/v4/tenants/{tenant_id}/users": {
             "put": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Add Tenant Users Put",
                 "operationId": "add_tenant_users_put_tenants__tenant_id__users_put",
@@ -8807,7 +8892,8 @@
             },
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Create Tenant User",
                 "operationId": "create_tenant_user_tenants__tenant_id__users_post",
@@ -8846,7 +8932,8 @@
         "/firework/v4/tenants/{tenant_id}/users/{user_id}/disable": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Disable Tenant Member",
                 "operationId": "disable_tenant_member_tenants__tenant_id__users__user_id__disable_post",
@@ -8895,7 +8982,8 @@
         "/firework/v4/tenants/{tenant_id}/users/{user_id}/enable": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Enable Tenant Member",
                 "operationId": "enable_tenant_member_tenants__tenant_id__users__user_id__enable_post",
@@ -8944,7 +9032,8 @@
         "/firework/v4/tenants/{tenant_id}": {
             "put": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=experience"
                 ],
                 "summary": "Update Tenant",
                 "operationId": "update_tenant_tenants__tenant_id__put",
@@ -12183,6 +12272,7 @@
                     "export",
                     "move",
                     "edit",
+                    "edit_event",
                     "update_count",
                     "accept_recommendation",
                     "reject_recommendation",
@@ -12232,7 +12322,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2025-12-16T17:48:50.356717Z"
+                        "default": "2026-01-05T15:04:02.866993Z"
                     },
                     "from": {
                         "anyOf": [
@@ -12507,6 +12597,10 @@
             },
             "CookieMonitoringConfigurationItem": {
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
                     "domain": {
                         "type": "string",
                         "title": "Domain"
@@ -12514,10 +12608,18 @@
                     "tenant_id": {
                         "type": "integer",
                         "title": "Tenant Id"
+                    },
+                    "names": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Names"
                     }
                 },
                 "type": "object",
                 "required": [
+                    "id",
                     "domain",
                     "tenant_id"
                 ],
@@ -12734,6 +12836,31 @@
                     "reason"
                 ],
                 "title": "CreateAuthorizationRequest"
+            },
+            "CreateCookieMonitoringConfigurationItem": {
+                "properties": {
+                    "domain": {
+                        "type": "string",
+                        "title": "Domain"
+                    },
+                    "tenant_id": {
+                        "type": "integer",
+                        "title": "Tenant Id"
+                    },
+                    "names": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Names"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "domain",
+                    "tenant_id"
+                ],
+                "title": "CreateCookieMonitoringConfigurationItem"
             },
             "CreateDemoTenantRequestBody": {
                 "properties": {
@@ -13483,7 +13610,7 @@
                                 "$ref": "#/components/schemas/pyro__leaks__types__DomainQuery"
                             },
                             {
-                                "$ref": "#/components/schemas/pyro__firework__backend__api4__events__models__EmailQuery"
+                                "$ref": "#/components/schemas/pyro__leaks__types__EmailQuery"
                             },
                             {
                                 "$ref": "#/components/schemas/pyro__leaks__types__KeywordQuery"
@@ -14789,6 +14916,30 @@
                         },
                         "type": "array",
                         "title": "Tags"
+                    },
+                    "remediated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Remediated At"
+                    },
+                    "ignored_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ignored At"
                     }
                 },
                 "type": "object",
@@ -14852,7 +15003,7 @@
                                         "$ref": "#/components/schemas/IpQuery"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/pyro__firework__backend__api4__events__models__EmailQuery"
+                                        "$ref": "#/components/schemas/pyro__leaks__types__EmailQuery"
                                     },
                                     {
                                         "$ref": "#/components/schemas/pyro__firework__backend__api4__events__models__SecretQuery"
@@ -15511,7 +15662,7 @@
                                 "$ref": "#/components/schemas/IpQuery"
                             },
                             {
-                                "$ref": "#/components/schemas/pyro__firework__backend__api4__events__models__EmailQuery"
+                                "$ref": "#/components/schemas/pyro__leaks__types__EmailQuery"
                             },
                             {
                                 "$ref": "#/components/schemas/pyro__firework__backend__api4__events__models__SecretQuery"
@@ -17725,15 +17876,21 @@
                         "description": "Single paragraph providing an analytical summary of the post."
                     },
                     "actor_intent": {
-                        "type": "string",
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
                         "title": "Actor Intent",
-                        "description": "Single paragraph summarizing the actor's intent."
+                        "description": "Single paragraph summarizing the actor's intent. If the actor's intent is not clear, return None."
                     }
                 },
                 "type": "object",
                 "required": [
-                    "overview",
-                    "actor_intent"
+                    "overview"
                 ],
                 "title": "OriginalPostSummaryOutput"
             },
@@ -23551,25 +23708,6 @@
                 ],
                 "title": "AuthorizationResponse"
             },
-            "pyro__firework__backend__api4__events__models__EmailQuery": {
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "const": "email",
-                        "title": "Type"
-                    },
-                    "email": {
-                        "type": "string",
-                        "title": "Email"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "type",
-                    "email"
-                ],
-                "title": "EmailQuery"
-            },
             "pyro__firework__backend__api4__events__models__SecretQuery": {
                 "properties": {
                     "type": {
@@ -23619,6 +23757,25 @@
                     "fqdn"
                 ],
                 "title": "DomainQuery"
+            },
+            "pyro__leaks__types__EmailQuery": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "email",
+                        "title": "Type"
+                    },
+                    "email": {
+                        "type": "string",
+                        "title": "Email"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "email"
+                ],
+                "title": "EmailQuery"
             },
             "pyro__leaks__types__KeywordQuery": {
                 "properties": {
