@@ -1,0 +1,64 @@
+---
+title: "Stealer Log"
+---
+
+The `stealer_log` (also observed as `bot` in some indices) represents a record of a compromised device whose credentials and browsing data were harvested by an information stealer malware (such as RedLine, Raccoon, or Vidar).
+These entries originate from dark-web marketplaces (for example, “Russian Market”) where attackers sell logs containing cookies, saved passwords, and session tokens from infected machines.
+Each document corresponds to a single device or “bot,” with metadata describing where and when it was first seen, its environment (OS, IP, ISP), and the websites and services discovered in its data.
+
+```json Example Content
+{
+  "data": {
+    "name": null,
+    "installed_at": "2025-01-01T00:00:00.000000+00:00",
+    "updated_at": null,
+    "isp": null,
+    "information": null,
+    "victim_information": {
+      "ip_address": "127.0.0.1",
+      "ip_network": null,
+      "username": "admin",
+      "country_code": "USA",
+      "zip_code": "",
+      "location": "",
+      "hwid": "",
+      "current_language": "",
+      "screensize_width": 1920,
+      "screensize_height": 1080,
+      "timezone": "UTC+7",
+      "os": "Windows 10 22H2 Pro (Build 19045) (64 Bit)",
+      "uac": "",
+      "process_elevation": null,
+      "available_keyboards": [
+        "English"
+      ],
+      "hardware": [
+        "CPU: Intel(R) Core(TM) i3-10105F CPU @ 3.70GHz (4 cores, 8 threads)",
+        "RAM: 31.92 GB",
+        "HOSTNAME: DESKTOP-123456"
+      ],
+      "anti_viruses": null
+    },
+    "malware_information": {
+      "malware_family": "Lumastealer",
+      "build_id": "",
+      "file_location": "",
+      "infected_at": "2025-01-01T00:00:00.000000+00:00"
+    }
+  },
+  "event_type": "stealer_log",
+  "metadata": {
+    "estimated_created_at": "2025-01-01T00:00:00.000000+00:00",
+    "matched_at": "2025-01-01T00:00:00.000000+00:00",
+    "severity": "critical",
+    "uid": "stealer_log/stealer_logs/123456789",
+    "flare_url": "https://app.example.com/#/stealer_log/stealer_logs/123456789"
+  },
+}
+```
+
+{/*
+  TODO: Figure out whether we want an explanation of some/all of the return fields
+This could then be used by the documentation page for the new event endpoint rather than replace
+the existing event-types?
+*/}

@@ -1,0 +1,26 @@
+---
+title: "Blog Post"
+---
+
+The `blog_post` type represents blog-style documents and text-based publications that have been discovered and indexed by Flare across document-sharing or content-hosting platforms such as Scribd, Medium, or public paste/document repositories.
+These records generally include technical manuals, guides, or articles that are accessible to the public, potentially containing sensitive, proprietary, or copyrighted materials.
+
+```json Example Content
+{
+  "event_type": "blog_post",
+  "metadata": {
+    "estimated_created_at": "2025-01-01T00:00:00Z",
+    "matched_at": "2025-01-01T00:00:00Z",
+    "severity": "info",
+    "uid": "blog_post/blog_name/123456789",
+    "flare_url": "https://app.flare.io/#/blog_post/blog_name/123456789"
+  },
+  "data": {
+    "url": "https://www.blog_name.com/document/123456789/post_slug",
+    "content": "Post content",
+    "description": "Post description",
+    "posted_at": "2025-01-01T00:00:00Z"
+  }
+}
+
+```
