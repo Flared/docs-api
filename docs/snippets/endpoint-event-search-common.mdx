@@ -45,7 +45,7 @@
 
 ## Paging
 
-This endpoint supports the 
+This endpoint supports the
 [Flare standard paging pattern <Icon icon="book" size={16} />](/concepts/paging).
 
 ## Body Parameters
@@ -243,6 +243,18 @@ This endpoint supports the
           Format: ISO-8601
         </ParamField>
       </Expandable>
+    </ParamField>
+
+    <ParamField body="tags" type="string[]">
+      If provided, results will be filtered on the tags.
+    </ParamField>
+
+    <ParamField body="is_ignored" type="bool">
+      If set to true, results will be filtered to be events that have been ignored.
+    </ParamField>
+
+    <ParamField body="is_remediated" type="bool">
+      If set to true, results will be filtered to be events that have been remediated.
     </ParamField>
   </Expandable>
 </ParamField>
