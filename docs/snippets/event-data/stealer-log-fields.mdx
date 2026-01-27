@@ -1,0 +1,66 @@
+<ResponseField name="data" type="object" required>
+  Stealer Log Event Data
+  <Expandable defaultOpen>
+    <ResponseField name="victim_information" type="object">
+      Collection of data that relates to the victim's and their infected device.
+      <Expandable defaultOpen>
+        <ResponseField name="ip_address" type="string" />
+        <ResponseField name="ip_network" type="string" />
+        <ResponseField name="username" type="string">
+          Username of the device's account that was accessed.
+        </ResponseField>
+        <ResponseField name="country_code" type="string" />
+        <ResponseField name="zip_code" type="string" />
+        <ResponseField name="location" type="string">
+          Location set on the device.
+        </ResponseField>
+        <ResponseField name="hwid" type="string">
+          The hardware id of the device.
+        </ResponseField>
+        <ResponseField name="current_language" type="string">
+          Language set on the device.
+        </ResponseField>
+        <ResponseField name="screensize_width" type="integer">
+          Screen width in pixels.
+        </ResponseField>
+        <ResponseField name="screensize_height" type="integer">
+          Screen height in pixels.
+        </ResponseField>
+        <ResponseField name="timezone" type="string" />
+        <ResponseField name="os" type="string">
+          Operating System of the device.
+        </ResponseField>
+        <ResponseField name="uac" type="string">
+          The device's User Account Control setting.
+        </ResponseField>
+        <ResponseField name="process_elevation" type="boolean">
+          Indicator that the malware was ran as administrator/super user.
+        </ResponseField>
+        <ResponseField name="available_keyboards" type="string[]">
+          Available keyboard configurations/languages.
+        </ResponseField>
+        <ResponseField name="hardware" type="string[]">
+          List of hardware detected on the device.
+        </ResponseField>
+        <ResponseField name="anti_viruses" type="string[]">
+          List of anti-virus software detected on the device.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="malware_information" type="object">
+      Data pertaining to the malware used to infect the device.
+      <Expandable defaultOpen>
+        <ResponseField name="malware_family" type="string">
+          Classification of the malware family used for infection.
+        </ResponseField>
+        <ResponseField name="build_id" type="string">
+          The build id of the malware.
+        </ResponseField>
+        <ResponseField name="file_location" type="string" />
+        <ResponseField name="infected_at" type="date">
+          Date of infection of the device.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>

@@ -1,0 +1,33 @@
+<ResponseField name="data" type="object" required>
+  Credit Card Event Data
+  <Expandable defaultOpen>
+    <ResponseField name="bank" type="string">
+      Name of the bank related to the card/information leak.
+    </ResponseField>
+    <ResponseField name="bin" type="integer">
+      Associated BIN to a leaked credit card.
+    </ResponseField>
+    <ResponseField name="brand" type="string">
+      Major brand of the leaked credit card.
+      Ex: VISA
+    </ResponseField>
+    <ResponseField name="country" type="string">
+      The country of origin of the leaked card/information.
+    </ResponseField>
+    <ResponseField name="expiration" type="date">
+      Expiration of the leaked card.
+    </ResponseField>
+    <ResponseField name="owner" type="string">
+      Name of the owner found on the card.
+    </ResponseField>
+    <ResponseField name="state_code" type="string">
+      Initials of the state tied to the card. This is included for American leaked cards.
+    </ResponseField>
+    <ResponseField name="zip" type="string">
+      Zip code of the address attached to the leaked card. This is included for American leaked cards.
+    </ResponseField>
+    <ResponseField name="has_cvv" type="boolean">
+      When true, this means that the leaked data includes the CVV of the leaked card.
+    </ResponseField>
+  </Expandable>
+</ResponseField>

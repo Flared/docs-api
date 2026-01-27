@@ -3,59 +3,19 @@ title: "Get Event"
 api: "GET https://api.flare.io/firework/v4/events/"
 authMethod: "bearer"
 ---
+import BlogPostFieldData from '/snippets/event-data/blog-post-fields.mdx'
+import BlogPostModelData from '/snippets/event-data/blog-post-model.mdx'
+import CreditCardFieldData from '/snippets/event-data/credit-card-fields.mdx'
+import CreditCardModelData from '/snippets/event-data/credit-card-model.mdx'
+import StealerLogFieldData from '/snippets/event-data/stealer-log-fields.mdx'
+import StealerLogModelData from '/snippets/event-data/stealer-log-model.mdx'
 
 Returns data for a specific event.
 
 <Panel>
   <ResponseExample>
-    ```json Blog Post
-      {
-        "data": {
-          "url": "<string>",
-          "content": "<string>",
-          "description": "<string>",
-          "posted_at": "2025-01-01T00:00:00.000000+00:00"
-        },
-        "metadata": {
-          "estimated_created_at": "2023-11-07T05:31:56Z",
-          "flare_url": "<string>",
-          "matched_at": "2023-11-07T05:31:56Z",
-          "severity": "info",
-          "uid": "<string>"
-        },
-        "event_type": "blog_post",
-      }
-    ```
-    ```json Financial
-      {
-        "data": {
-          "bank": "<string>",
-          "bin": "<integer>",
-          "brand": "<string>",
-          "country": "<string>",
-          "expiration": "2030-05-01T00:00:00+00:00",
-          "owner": "<string>",
-          "state_code": "<string>",
-          "zip": "<string>",
-          "has_cvv": "<boolean>",
-          "has_date_of_birth": "<boolean>",
-          "has_mother_maiden_name": "<boolean>",
-          "has_phone": "<boolean>",
-          "has_pin": "<boolean>",
-          "has_ssn": "<boolean>",
-          "has_track_1": "<boolean>",
-          "has_vbv": "<boolean>"
-        },
-        "metadata": {
-          "estimated_created_at": "2023-11-07T05:31:56Z",
-          "flare_url": "<string>",
-          "matched_at": "2023-11-07T05:31:56Z",
-          "severity": "info",
-          "uid": "<string>"
-        },
-        "event_type": "cc",
-      }
-    ```
+    <BlogPostModelData />
+    <CreditCardModelData />
     ```json Ransom Leak
       {
         "data": {
@@ -88,51 +48,7 @@ Returns data for a specific event.
         "event_type": "listing",
       }
     ```
-    ```json Stealer Log
-      {
-        "data": {
-          "victim_information": {
-            "ip_address": "<string>",
-            "ip_network": "<string>",
-            "username": "<string>",
-            "country_code": "<string>",
-            "zip_code": "<string>",
-            "location": "<string>",
-            "hwid": "<string>",
-            "current_language": "<string>",
-            "screensize_width": 123,
-            "screensize_height": 123,
-            "timezone": "<string>",
-            "os": "<string>",
-            "uac": "<string>",
-            "process_elevation": "<string>",
-            "available_keyboards": [
-              "<string>"
-            ],
-            "hardware": [
-              "<string>"
-            ],
-            "anti_viruses": [
-              "<string>"
-            ]
-          },
-          "malware_information": {
-            "malware_family": "<string>",
-            "build_id": "<string>",
-            "file_location": "<string>",
-            "infected_at": "2023-11-07T05:31:56Z"
-          }
-        },
-        "metadata": {
-          "estimated_created_at": "2023-11-07T05:31:56Z",
-          "flare_url": "<string>",
-          "matched_at": "2023-11-07T05:31:56Z",
-          "severity": "info",
-          "uid": "<string>"
-        },
-        "event_type": "stealer_log"
-      }
-    ```
+    <StealerLogModelData />
   </ResponseExample>
 </Panel>
 
@@ -147,58 +63,10 @@ Returns data for a specific event.
 Response fields differ based on event type as follows:
 <Tabs>
   <Tab title="Blog Post">
-    <ResponseField name="data" type="object" required>
-      Blog Post Event Data
-      <Expandable defaultOpen>
-        <ResponseField name="url" type="string">
-          Url of the specific blog post.
-        </ResponseField>
-        <ResponseField name="content" type="string">
-          Content of the Blog Post.
-        </ResponseField>
-        <ResponseField name="description" type="string" optional>
-          Blog Post description, if provided.
-        </ResponseField>
-        <ResponseField name="posted_at" type="date">
-          The date the blog post was posted on the web.
-        </ResponseField>
-      </Expandable>
-    </ResponseField>
+    <BlogPostFieldData />
   </Tab>
-  <Tab title="Financial">
-    <ResponseField name="data" type="object" required>
-      Financial Event Data
-      <Expandable defaultOpen>
-        <ResponseField name="bank" type="string">
-          Name of the bank related to the card/information leak.
-        </ResponseField>
-        <ResponseField name="bin" type="integer">
-          Associated BIN to a leaked credit card.
-        </ResponseField>
-        <ResponseField name="brand" type="string">
-          Major brand of the leaked credit card.
-          Ex: VISA
-        </ResponseField>
-        <ResponseField name="country" type="string">
-          The country of origin of the leaked card/information.
-        </ResponseField>
-        <ResponseField name="expiration" type="date">
-          Expiration of the leaked card.
-        </ResponseField>
-        <ResponseField name="owner" type="string">
-          Name of the owner found on the card.
-        </ResponseField>
-        <ResponseField name="state_code" type="string">
-          Initials of the state tied to the card. This is included for American leaked cards.
-        </ResponseField>
-        <ResponseField name="zip" type="string">
-          Zip code of the address attached to the leaked card. This is included for American leaked cards.
-        </ResponseField>
-        <ResponseField name="has_cvv" type="boolean">
-          When true, this means that the leaked data includes the CVV of the leaked card.
-        </ResponseField>
-      </Expandable>
-    </ResponseField>
+  <Tab title="Credit Card">
+    <CreditCardFieldData />
   </Tab>
   <Tab title="Ransom Leak">
     <ResponseField name="data" type="object" required>
@@ -209,12 +77,7 @@ Response fields differ based on event type as follows:
     </ResponseField>
   </Tab>
   <Tab title="Stealer Log">
-    <ResponseField name="data" type="object" required>
-      Stealer Log Event Data
-      <Expandable>
-        <ResponseField name="url" type="string" />
-      </Expandable>
-    </ResponseField>
+    <StealerLogFieldData />
   </Tab>
 </Tabs>
 
