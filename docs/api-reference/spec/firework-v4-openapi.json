@@ -34,7 +34,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/pyro__firework__backend__api4__asset_authorization__datamodels__AuthorizationResponse"
+                                    "$ref": "#/components/schemas/AuthorizationResponse"
                                 }
                             }
                         }
@@ -105,7 +105,7 @@
                 "operationId": "list_cookie_monitoring_configurations_admin_cookies_configurations_get",
                 "parameters": [
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -117,7 +117,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -996,7 +996,7 @@
                         }
                     },
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -1008,7 +1008,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -2212,7 +2212,7 @@
                 "operationId": "tenant_alerts_alerts__get",
                 "parameters": [
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -2224,7 +2224,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -2488,7 +2488,7 @@
                 "operationId": "alert_channels_alerts_channels_get",
                 "parameters": [
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -2500,7 +2500,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -2889,7 +2889,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/pyro__firework__backend__api4__asset_authorization__datamodels__AuthorizationResponse"
+                                    "$ref": "#/components/schemas/AuthorizationResponse"
                                 }
                             }
                         }
@@ -3195,10 +3195,71 @@
         "/firework/v4/events/": {
             "get": {
                 "tags": [
-                    "private"
+                    "public"
                 ],
                 "summary": "Get Event",
                 "operationId": "get_event_events__get",
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Uid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/pyro__events__firework__stealerlog__StealerLogEvent"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/RansomLeakEvent"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/LookalikeDomainEvent"
+                                        }
+                                    ],
+                                    "discriminator": {
+                                        "propertyName": "event_type",
+                                        "mapping": {
+                                            "stealer_log": "#/components/schemas/pyro__events__firework__stealerlog__StealerLogEvent",
+                                            "ransomleak": "#/components/schemas/RansomLeakEvent",
+                                            "lookalike": "#/components/schemas/LookalikeDomainEvent"
+                                        }
+                                    },
+                                    "title": "Response Get Event Events  Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/events/ui": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Event Ui",
+                "operationId": "get_event_ui_events_ui_get",
                 "parameters": [
                     {
                         "name": "uid",
@@ -3716,6 +3777,46 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/TenantMetadataResponse"
                                 }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/events/html": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Event Html",
+                "operationId": "get_event_html_events_html_get",
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Uid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     },
@@ -4372,7 +4473,7 @@
                 "operationId": "get_identifier_count_identifiers_count_get",
                 "parameters": [
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -4384,7 +4485,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -4658,7 +4759,7 @@
                 "operationId": "get_identifiers_identifiers__get",
                 "parameters": [
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -4670,7 +4771,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -5193,7 +5294,7 @@
                         }
                     },
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -5205,7 +5306,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -5410,7 +5511,7 @@
                         }
                     },
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -5422,7 +5523,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -6444,7 +6545,7 @@
                         }
                     },
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -6456,7 +6557,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -7398,7 +7499,7 @@
                 "operationId": "list_reports_report_groups__report_group_id__reports__get",
                 "parameters": [
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -7410,7 +7511,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -7439,7 +7540,7 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/pyro__reports__report_store__SortType",
+                            "$ref": "#/components/schemas/SortType",
                             "default": "updated_at"
                         }
                     },
@@ -7452,7 +7553,7 @@
                                 {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/pyro__reports__report_types__ReportType"
+                                        "$ref": "#/components/schemas/ReportType"
                                     }
                                 },
                                 {
@@ -7906,7 +8007,7 @@
                         }
                     },
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -7918,7 +8019,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -8332,7 +8433,7 @@
                 "operationId": "get_tenant_integrations_integrations_tenant_integrations_get",
                 "parameters": [
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -8344,7 +8445,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -9091,7 +9192,7 @@
                 "operationId": "list_reports_threat_flow_reports__get",
                 "parameters": [
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -9103,7 +9204,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -9193,7 +9294,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/pyro__threat_flow__web__v4__reports__models__ReportResponse"
+                                    "$ref": "#/components/schemas/ReportResponse"
                                 }
                             }
                         }
@@ -9283,7 +9384,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/pyro__threat_flow__web__v4__reports__models__ReportResponse"
+                                    "$ref": "#/components/schemas/ReportResponse"
                                 }
                             }
                         }
@@ -9626,7 +9727,7 @@
                 "operationId": "list_sandbox_submissions_sandbox_get",
                 "parameters": [
                     {
-                        "name": "from_",
+                        "name": "from",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -9638,7 +9739,7 @@
                                     "type": "null"
                                 }
                             ],
-                            "title": "From "
+                            "title": "From"
                         }
                     },
                     {
@@ -9819,6 +9920,47 @@
                 ],
                 "summary": "Stream Submission Report",
                 "operationId": "stream_submission_report_sandbox_submissions__submission_uuid__report_get",
+                "parameters": [
+                    {
+                        "name": "submission_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Submission Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/sandbox/submissions/{submission_uuid}/iocs/csv": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Stream Iocs Csv",
+                "operationId": "stream_iocs_csv_sandbox_submissions__submission_uuid__iocs_csv_get",
                 "parameters": [
                     {
                         "name": "submission_uuid",
@@ -11153,6 +11295,20 @@
                                 "type": "null"
                             }
                         ]
+                    },
+                    "custom_headers": {
+                        "anyOf": [
+                            {
+                                "additionalProperties": {
+                                    "type": "string"
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Custom Headers"
                     }
                 },
                 "type": "object",
@@ -12003,6 +12159,31 @@
                 ],
                 "title": "AuthorizationRequestItemTenant"
             },
+            "AuthorizationResponse": {
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "title": "Success"
+                    },
+                    "error_message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error Message"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "success",
+                    "error_message"
+                ],
+                "title": "AuthorizationResponse"
+            },
             "AuthorizeAssetRequestStatus": {
                 "type": "string",
                 "enum": [
@@ -12322,7 +12503,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2026-01-05T15:04:02.866993Z"
+                        "default": "2026-01-08T20:17:43.618686Z"
                     },
                     "from": {
                         "anyOf": [
@@ -13607,16 +13788,16 @@
                     "query": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/pyro__leaks__types__DomainQuery"
+                                "$ref": "#/components/schemas/DomainQuery"
                             },
                             {
-                                "$ref": "#/components/schemas/pyro__leaks__types__EmailQuery"
+                                "$ref": "#/components/schemas/EmailQuery"
                             },
                             {
-                                "$ref": "#/components/schemas/pyro__leaks__types__KeywordQuery"
+                                "$ref": "#/components/schemas/KeywordQuery"
                             },
                             {
-                                "$ref": "#/components/schemas/pyro__firework__backend__api4__events__models__SecretQuery"
+                                "$ref": "#/components/schemas/SecretQuery"
                             },
                             {
                                 "$ref": "#/components/schemas/AuthDomainQuery"
@@ -13813,6 +13994,25 @@
                 ],
                 "title": "DomainData"
             },
+            "DomainQuery": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "domain",
+                        "title": "Type"
+                    },
+                    "fqdn": {
+                        "type": "string",
+                        "title": "Fqdn"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "fqdn"
+                ],
+                "title": "DomainQuery"
+            },
             "DomainRestrictedTerm": {
                 "properties": {
                     "type": {
@@ -13876,6 +14076,25 @@
                     "email"
                 ],
                 "title": "EmailData"
+            },
+            "EmailQuery": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "email",
+                        "title": "Type"
+                    },
+                    "email": {
+                        "type": "string",
+                        "title": "Email"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "email"
+                ],
+                "title": "EmailQuery"
             },
             "EnrichedBulkAction": {
                 "properties": {
@@ -14430,6 +14649,57 @@
                 ],
                 "title": "EventInput"
             },
+            "EventMetadata": {
+                "properties": {
+                    "estimated_created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Estimated Created At"
+                    },
+                    "flare_url": {
+                        "type": "string",
+                        "maxLength": 2083,
+                        "minLength": 1,
+                        "format": "uri",
+                        "title": "Flare Url"
+                    },
+                    "matched_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Matched At"
+                    },
+                    "severity": {
+                        "$ref": "#/components/schemas/EventSeverity"
+                    },
+                    "uid": {
+                        "type": "string",
+                        "title": "Uid"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "estimated_created_at",
+                    "flare_url",
+                    "matched_at",
+                    "severity",
+                    "uid"
+                ],
+                "title": "EventMetadata"
+            },
             "EventSecretsBody": {
                 "properties": {
                     "uid": {
@@ -14460,6 +14730,17 @@
                     "uid"
                 ],
                 "title": "EventSecretsBody"
+            },
+            "EventSeverity": {
+                "type": "string",
+                "enum": [
+                    "info",
+                    "low",
+                    "medium",
+                    "high",
+                    "critical"
+                ],
+                "title": "EventSeverity"
             },
             "ExecutiveSummaryOutput": {
                 "properties": {
@@ -14787,6 +15068,23 @@
                     },
                     "materialized_at": {
                         "$ref": "#/components/schemas/FeedDateFilter"
+                    },
+                    "tags": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Tags"
+                    },
+                    "is_ignored": {
+                        "type": "boolean",
+                        "title": "Is Ignored",
+                        "default": false
+                    },
+                    "is_remediated": {
+                        "type": "boolean",
+                        "title": "Is Remediated",
+                        "default": false
                     }
                 },
                 "type": "object",
@@ -14982,7 +15280,7 @@
                                         "$ref": "#/components/schemas/UsernameQuery"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/pyro__leaks__types__DomainQuery"
+                                        "$ref": "#/components/schemas/DomainQuery"
                                     },
                                     {
                                         "$ref": "#/components/schemas/BrandQuery"
@@ -14991,7 +15289,7 @@
                                         "$ref": "#/components/schemas/NameQuery"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/pyro__leaks__types__KeywordQuery"
+                                        "$ref": "#/components/schemas/KeywordQuery"
                                     },
                                     {
                                         "$ref": "#/components/schemas/QueryStringQuery"
@@ -15003,10 +15301,10 @@
                                         "$ref": "#/components/schemas/IpQuery"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/pyro__leaks__types__EmailQuery"
+                                        "$ref": "#/components/schemas/EmailQuery"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/pyro__firework__backend__api4__events__models__SecretQuery"
+                                        "$ref": "#/components/schemas/SecretQuery"
                                     },
                                     {
                                         "$ref": "#/components/schemas/CredentialsQuery"
@@ -15641,7 +15939,7 @@
                                 "$ref": "#/components/schemas/UsernameQuery"
                             },
                             {
-                                "$ref": "#/components/schemas/pyro__leaks__types__DomainQuery"
+                                "$ref": "#/components/schemas/DomainQuery"
                             },
                             {
                                 "$ref": "#/components/schemas/BrandQuery"
@@ -15650,7 +15948,7 @@
                                 "$ref": "#/components/schemas/NameQuery"
                             },
                             {
-                                "$ref": "#/components/schemas/pyro__leaks__types__KeywordQuery"
+                                "$ref": "#/components/schemas/KeywordQuery"
                             },
                             {
                                 "$ref": "#/components/schemas/QueryStringQuery"
@@ -15662,10 +15960,10 @@
                                 "$ref": "#/components/schemas/IpQuery"
                             },
                             {
-                                "$ref": "#/components/schemas/pyro__leaks__types__EmailQuery"
+                                "$ref": "#/components/schemas/EmailQuery"
                             },
                             {
-                                "$ref": "#/components/schemas/pyro__firework__backend__api4__events__models__SecretQuery"
+                                "$ref": "#/components/schemas/SecretQuery"
                             },
                             {
                                 "$ref": "#/components/schemas/CredentialsQuery"
@@ -17567,6 +17865,25 @@
                 ],
                 "title": "KeywordData"
             },
+            "KeywordQuery": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "keyword",
+                        "title": "Type"
+                    },
+                    "keyword": {
+                        "type": "string",
+                        "title": "Keyword"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "keyword"
+                ],
+                "title": "KeywordQuery"
+            },
             "KeywordRestrictedTerm": {
                 "properties": {
                     "type": {
@@ -17747,6 +18064,175 @@
                     "results"
                 ],
                 "title": "LogoResponse"
+            },
+            "LookalikeDomainEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "lookalike",
+                        "title": "Event Type",
+                        "default": "lookalike"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/LookalikeDomainEventData"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "metadata"
+                ],
+                "title": "LookalikeDomainEvent"
+            },
+            "LookalikeDomainEventData": {
+                "properties": {
+                    "domain": {
+                        "type": "string",
+                        "title": "Domain"
+                    },
+                    "registered_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Registered At"
+                    },
+                    "identifier_domains": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Identifier Domains"
+                    },
+                    "feed": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Feed"
+                    },
+                    "cert_data": {
+                        "anyOf": [
+                            {
+                                "additionalProperties": true,
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Cert Data"
+                    },
+                    "subject": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Subject"
+                    },
+                    "issuer": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Issuer"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "domain",
+                    "registered_at",
+                    "identifier_domains",
+                    "feed",
+                    "cert_data",
+                    "subject",
+                    "issuer"
+                ],
+                "title": "LookalikeDomainEventData"
+            },
+            "MalwareInformation": {
+                "properties": {
+                    "malware_family": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Malware Family"
+                    },
+                    "build_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Build Id"
+                    },
+                    "file_location": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "File Location"
+                    },
+                    "infected_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Infected At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "malware_family",
+                    "build_id",
+                    "file_location",
+                    "infected_at"
+                ],
+                "title": "MalwareInformation"
             },
             "MarkUserAsCompromisedPayload": {
                 "properties": {
@@ -19076,6 +19562,100 @@
                 ],
                 "title": "QueryStringQuery"
             },
+            "RansomLeakEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "ransomleak",
+                        "title": "Event Type",
+                        "default": "ransomleak"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/RansomLeakEventData"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "metadata"
+                ],
+                "title": "RansomLeakEvent"
+            },
+            "RansomLeakEventData": {
+                "properties": {
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url"
+                    },
+                    "response_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Response Url"
+                    },
+                    "title": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Title"
+                    },
+                    "content": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Content"
+                    },
+                    "body": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Body"
+                    },
+                    "victim_information": {
+                        "$ref": "#/components/schemas/VictimInfo"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "url",
+                    "response_url",
+                    "title",
+                    "content",
+                    "body",
+                    "victim_information"
+                ],
+                "title": "RansomLeakEventData"
+            },
             "RecentActivityCountResponse": {
                 "properties": {
                     "count": {
@@ -19447,7 +20027,7 @@
                         "title": "Author"
                     },
                     "report_type": {
-                        "$ref": "#/components/schemas/pyro__reports__report_types__ReportType"
+                        "$ref": "#/components/schemas/ReportType-Output"
                     },
                     "created_at": {
                         "type": "string",
@@ -19729,7 +20309,7 @@
                         "title": "Author"
                     },
                     "report_type": {
-                        "$ref": "#/components/schemas/pyro__reports__report_types__ReportType"
+                        "$ref": "#/components/schemas/ReportType-Output"
                     },
                     "created_at": {
                         "type": "string",
@@ -20201,6 +20781,18 @@
                 ],
                 "title": "ReportRequestResponse"
             },
+            "ReportResponse": {
+                "properties": {
+                    "report": {
+                        "$ref": "#/components/schemas/PydanticThreatFlowReport"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "report"
+                ],
+                "title": "ReportResponse"
+            },
             "ReportSchedulerData": {
                 "properties": {
                     "report_group_id": {
@@ -20501,6 +21093,24 @@
                 ],
                 "title": "ReportStatus"
             },
+            "ReportType": {
+                "type": "string",
+                "enum": [
+                    "v1",
+                    "event_based",
+                    "feed_based"
+                ],
+                "title": "ReportType"
+            },
+            "ReportType-Output": {
+                "type": "string",
+                "enum": [
+                    "v1",
+                    "event_based",
+                    "feed_based"
+                ],
+                "title": "ReportType"
+            },
             "ReportUpdatePayload": {
                 "properties": {
                     "title": {
@@ -20530,7 +21140,7 @@
                     "report_type": {
                         "anyOf": [
                             {
-                                "$ref": "#/components/schemas/pyro__reports__report_types__ReportType"
+                                "$ref": "#/components/schemas/ReportType"
                             },
                             {
                                 "type": "null"
@@ -21358,6 +21968,25 @@
                 ],
                 "title": "SecretPosition"
             },
+            "SecretQuery": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "secret",
+                        "title": "Type"
+                    },
+                    "secret": {
+                        "type": "string",
+                        "title": "Secret"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "secret"
+                ],
+                "title": "SecretQuery"
+            },
             "Severity": {
                 "type": "string",
                 "enum": [
@@ -21368,6 +21997,18 @@
                     "critical"
                 ],
                 "title": "Severity"
+            },
+            "SortType": {
+                "type": "string",
+                "enum": [
+                    "id",
+                    "title",
+                    "author",
+                    "created_at",
+                    "updated_at",
+                    "status"
+                ],
+                "title": "SortType"
             },
             "Source": {
                 "properties": {
@@ -21973,6 +22614,36 @@
                     "actions"
                 ],
                 "title": "StealerLogEvent"
+            },
+            "StealerLogEventData": {
+                "properties": {
+                    "victim_information": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/VictimInformation"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "malware_information": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/MalwareInformation"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "victim_information",
+                    "malware_information"
+                ],
+                "title": "StealerLogEventData"
             },
             "StealerLogFindingCookie": {
                 "properties": {
@@ -23650,6 +24321,372 @@
                 ],
                 "title": "ValidationError"
             },
+            "VictimInfo": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "display_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Display Name"
+                    },
+                    "domain": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Domain"
+                    },
+                    "alternative_domains": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Alternative Domains"
+                    },
+                    "industry": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Industry"
+                    },
+                    "employee_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Employee Count"
+                    },
+                    "city": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "City"
+                    },
+                    "state": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "State"
+                    },
+                    "country": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Country"
+                    },
+                    "latitude": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Latitude"
+                    },
+                    "longitude": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Longitude"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "display_name",
+                    "domain",
+                    "alternative_domains",
+                    "industry",
+                    "employee_count",
+                    "city",
+                    "state",
+                    "country",
+                    "latitude",
+                    "longitude"
+                ],
+                "title": "VictimInfo"
+            },
+            "VictimInformation": {
+                "properties": {
+                    "ip_address": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "ipvanyaddress"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ip Address"
+                    },
+                    "ip_network": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "ipvanynetwork"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ip Network"
+                    },
+                    "username": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Username"
+                    },
+                    "country_code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Country Code"
+                    },
+                    "zip_code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Zip Code"
+                    },
+                    "location": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Location"
+                    },
+                    "hwid": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Hwid"
+                    },
+                    "current_language": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Current Language"
+                    },
+                    "screensize_width": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Screensize Width"
+                    },
+                    "screensize_height": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Screensize Height"
+                    },
+                    "timezone": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Timezone"
+                    },
+                    "os": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Os"
+                    },
+                    "uac": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Uac"
+                    },
+                    "process_elevation": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Process Elevation"
+                    },
+                    "available_keyboards": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Available Keyboards"
+                    },
+                    "hardware": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Hardware"
+                    },
+                    "anti_viruses": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Anti Viruses"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "ip_address",
+                    "ip_network",
+                    "username",
+                    "country_code",
+                    "zip_code",
+                    "location",
+                    "hwid",
+                    "current_language",
+                    "screensize_width",
+                    "screensize_height",
+                    "timezone",
+                    "os",
+                    "uac",
+                    "process_elevation",
+                    "available_keyboards",
+                    "hardware",
+                    "anti_viruses"
+                ],
+                "title": "VictimInformation"
+            },
             "WebhookBasicAuth": {
                 "properties": {
                     "username": {
@@ -23683,49 +24720,27 @@
                 ],
                 "title": "SortType"
             },
-            "pyro__firework__backend__api4__asset_authorization__datamodels__AuthorizationResponse": {
+            "pyro__events__firework__stealerlog__StealerLogEvent": {
                 "properties": {
-                    "success": {
-                        "type": "boolean",
-                        "title": "Success"
+                    "event_type": {
+                        "type": "string",
+                        "const": "stealer_log",
+                        "title": "Event Type",
+                        "default": "stealer_log"
                     },
-                    "error_message": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Error Message"
+                    "data": {
+                        "$ref": "#/components/schemas/StealerLogEventData"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "success",
-                    "error_message"
+                    "data",
+                    "metadata"
                 ],
-                "title": "AuthorizationResponse"
-            },
-            "pyro__firework__backend__api4__events__models__SecretQuery": {
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "const": "secret",
-                        "title": "Type"
-                    },
-                    "secret": {
-                        "type": "string",
-                        "title": "Secret"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "type",
-                    "secret"
-                ],
-                "title": "SecretQuery"
+                "title": "StealerLogEvent"
             },
             "pyro__firework__backend__api4__reports__report_groups__reports__report_datamodels__ReportResponse": {
                 "properties": {
@@ -23738,84 +24753,6 @@
                     "report"
                 ],
                 "title": "ReportResponse"
-            },
-            "pyro__leaks__types__DomainQuery": {
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "const": "domain",
-                        "title": "Type"
-                    },
-                    "fqdn": {
-                        "type": "string",
-                        "title": "Fqdn"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "type",
-                    "fqdn"
-                ],
-                "title": "DomainQuery"
-            },
-            "pyro__leaks__types__EmailQuery": {
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "const": "email",
-                        "title": "Type"
-                    },
-                    "email": {
-                        "type": "string",
-                        "title": "Email"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "type",
-                    "email"
-                ],
-                "title": "EmailQuery"
-            },
-            "pyro__leaks__types__KeywordQuery": {
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "const": "keyword",
-                        "title": "Type"
-                    },
-                    "keyword": {
-                        "type": "string",
-                        "title": "Keyword"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "type",
-                    "keyword"
-                ],
-                "title": "KeywordQuery"
-            },
-            "pyro__reports__report_store__SortType": {
-                "type": "string",
-                "enum": [
-                    "id",
-                    "title",
-                    "author",
-                    "created_at",
-                    "updated_at",
-                    "status"
-                ],
-                "title": "SortType"
-            },
-            "pyro__reports__report_types__ReportType": {
-                "type": "string",
-                "enum": [
-                    "v1",
-                    "event_based",
-                    "feed_based"
-                ],
-                "title": "ReportType"
             },
             "pyro__threat_flow__core__reports__report_store__ReportType": {
                 "type": "string",
@@ -23834,18 +24771,6 @@
                     "tenant_id"
                 ],
                 "title": "SortType"
-            },
-            "pyro__threat_flow__web__v4__reports__models__ReportResponse": {
-                "properties": {
-                    "report": {
-                        "$ref": "#/components/schemas/PydanticThreatFlowReport"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "report"
-                ],
-                "title": "ReportResponse"
             }
         },
         "securitySchemes": {
