@@ -195,7 +195,28 @@ Response fields differ based on event type as follows:
           Zip code of the address attached to the leaked card. This is included for American leaked cards.
         </ResponseField>
         <ResponseField name="has_cvv" type="boolean">
-          When true, this means that the leaked data includes the CVV of the leaked card.
+          When true, the leaked data includes the CVV of the leaked card.
+        </ResponseField>
+        <ResponseField name="has_date_of_birth" type="boolean">
+          When true, the leaked data includes the date of birth attached to the cardholder.
+        </ResponseField>
+        <ResponseField name="has_mother_maiden_name" type="boolean">
+          When true, the leaked data includes the mother's maiden name attached to the cardholder.
+        </ResponseField>
+        <ResponseField name="has_phone" type="boolean">
+          When true, the leaked data includes the phone number of the cardholder.
+        </ResponseField>
+        <ResponseField name="has_pin" type="boolean">
+          When true, the leaked data includes the pin for the card.
+        </ResponseField>
+        <ResponseField name="has_ssn" type="boolean">
+          When true, the leaked data includes the SSN of the cardholder.
+        </ResponseField>
+        <ResponseField name="has_track_1" type="boolean">
+          When true, the leaked data includes the data from the magnetic stripe of the card.
+        </ResponseField>
+        <ResponseField name="has_vbv" type="boolean">
+          When true, the leaked data includes the Verified by Visa authentication information for the card.
         </ResponseField>
       </Expandable>
     </ResponseField>
@@ -204,7 +225,7 @@ Response fields differ based on event type as follows:
     <ResponseField name="data" type="object" required>
       RansomLeak Event Data
       <Expandable>
-        <ResponseField name="url" type="string" />
+        <ResponseField name="field" type="string" />
       </Expandable>
     </ResponseField>
   </Tab>
@@ -212,7 +233,7 @@ Response fields differ based on event type as follows:
     <ResponseField name="data" type="object" required>
       Stealer Log Event Data
       <Expandable>
-        <ResponseField name="url" type="string" />
+        <ResponseField name="field" type="string" />
       </Expandable>
     </ResponseField>
   </Tab>
