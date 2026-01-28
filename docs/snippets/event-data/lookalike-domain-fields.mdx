@@ -1,0 +1,22 @@
+<ResponseField name="data" type="object" required>
+  LookAlike Domain Event Data
+  <Expandable defaultOpen>
+    <ResponseField name="domain" type="string">
+      Domain of the detected lookalike domain.
+    </ResponseField>
+    <ResponseField name="registered_at" type="date">
+      Associated BIN to a leaked credit card.
+    </ResponseField>
+    <ResponseField name="feed" type="integer">
+      Flare feed id where the event can be found.
+    </ResponseField>
+    <ResponseField name="identifier_domain" type="string[]">
+      List of domains contained in your identifiers that match on this lookalike domain.
+    </ResponseField>
+    <ResponseField name="cert_date" type="date">
+      Date the certificate was issued for the lookalike domain.
+    </ResponseField>
+    <ResponseField name="subject" type="string" />
+    <ResponseField name="issuers" type="string[]" />
+  </Expandable>
+</ResponseField>

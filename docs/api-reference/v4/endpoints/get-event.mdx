@@ -7,6 +7,8 @@ import BlogPostFieldData from '/snippets/event-data/blog-post-fields.mdx'
 import BlogPostModelData from '/snippets/event-data/blog-post-model.mdx'
 import CreditCardFieldData from '/snippets/event-data/credit-card-fields.mdx'
 import CreditCardModelData from '/snippets/event-data/credit-card-model.mdx'
+import LookAlikeFieldData from '/snippets/event-data/lookalike-domain-fields.mdx'
+import LookAlikeModelData from '/snippets/event-data/lookalike-domain-model.mdx'
 import RansomLeakFieldData from '/snippets/event-data/ransomleak-fields.mdx'
 import RansomLeakModelData from '/snippets/event-data/ransomleak-model.mdx'
 import StealerLogFieldData from '/snippets/event-data/stealer-log-fields.mdx'
@@ -18,6 +20,7 @@ Returns data for a specific event.
   <ResponseExample>
     <BlogPostModelData />
     <CreditCardModelData />
+    <LookAlikeModelData />
     <RansomLeakModelData />
     <StealerLogModelData />
   </ResponseExample>
@@ -38,6 +41,9 @@ Response fields differ based on event type as follows:
   </Tab>
   <Tab title="Credit Card">
     <CreditCardFieldData />
+  </Tab>
+  <Tab title="LookAlike Domain">
+    <LookAlikeFieldData />
   </Tab>
   <Tab title="Ransom Leak">
     <RansomLeakFieldData />
