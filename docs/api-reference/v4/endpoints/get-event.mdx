@@ -7,6 +7,8 @@ import BlogPostFieldData from '/snippets/event-data/blog-post-fields.mdx'
 import BlogPostModelData from '/snippets/event-data/blog-post-model.mdx'
 import CreditCardFieldData from '/snippets/event-data/credit-card-fields.mdx'
 import CreditCardModelData from '/snippets/event-data/credit-card-model.mdx'
+import RansomLeakFieldData from '/snippets/event-data/ransomleak-fields.mdx'
+import RansomLeakModelData from '/snippets/event-data/ransomleak-model.mdx'
 import StealerLogFieldData from '/snippets/event-data/stealer-log-fields.mdx'
 import StealerLogModelData from '/snippets/event-data/stealer-log-model.mdx'
 
@@ -16,38 +18,7 @@ Returns data for a specific event.
   <ResponseExample>
     <BlogPostModelData />
     <CreditCardModelData />
-    ```json Ransom Leak
-      {
-        "data": {
-          "victim_information": {
-            "name": "<string>",
-            "display_name": "<string>",
-            "domain": "<string>",
-            "alternative_domains": "[<string>]",
-            "industry": "<string>",
-            "employee_count": "<integer>",
-            "city": "<string>",
-            "state": "<string>",
-            "country": "<string>",
-            "latitude": "<float>",
-            "longitude": "<float>"
-          }
-          "url": "<string>",
-          "response_url": "<string>",
-          "title": "<string>",
-          "content": "<string",
-          "body": "<string>",
-        },
-        "metadata": {
-          "estimated_created_at": "2023-11-07T05:31:56Z",
-          "flare_url": "<string>",
-          "matched_at": "2023-11-07T05:31:56Z",
-          "severity": "info",
-          "uid": "<string>"
-        },
-        "event_type": "listing",
-      }
-    ```
+    <RansomLeakModelData />
     <StealerLogModelData />
   </ResponseExample>
 </Panel>
@@ -69,12 +40,7 @@ Response fields differ based on event type as follows:
     <CreditCardFieldData />
   </Tab>
   <Tab title="Ransom Leak">
-    <ResponseField name="data" type="object" required>
-      RansomLeak Event Data
-      <Expandable>
-        <ResponseField name="url" type="string" />
-      </Expandable>
-    </ResponseField>
+    <RansomLeakFieldData />
   </Tab>
   <Tab title="Stealer Log">
     <StealerLogFieldData />

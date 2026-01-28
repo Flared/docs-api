@@ -1,0 +1,33 @@
+<ResponseField name="data" type="object" required>
+  RansomLeak Event Data
+  <Expandable defaultOpen>
+    <ResponseField name="victim_information" type="object">
+      <Expandable>
+        <ResponseField name="name" type="string">
+          Name of the affected entity, this could be a company or a person.
+        </ResponseField>
+        <ResponseField name="display_name" type="string" />
+        <ResponseField name="domain" type="string" />
+        <ResponseField name="alternative_domains" type="string[]" />
+        <ResponseField name="industry" type="string">
+          Industry of operation of the victim. Ex: Healthcare
+        </ResponseField>
+        <ResponseField name="employee_count" type="integer">
+          Enployee count of the ransomed entity.
+        </ResponseField>
+        <ResponseField name="city" type="string">
+          City of operations of the entity's Headquarters.
+        </ResponseField>
+        <ResponseField name="state" type="string" />
+        <ResponseField name="country" type="string" />
+        <ResponseField name="latitude" type="float" />
+        <ResponseField name="longitude" type="float" />
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="url" type="string" />
+    <ResponseField name="response_url" type="string" />
+    <ResponseField name="title" type="string" />
+    <ResponseField name="content" type="string" />
+    <ResponseField name="body" type="string" />
+  </Expandable>
+</ResponseField>
