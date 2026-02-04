@@ -1,0 +1,81 @@
+---
+title: 'List and Update Identity Identifiers'
+---
+Identifiers (domains, keywords, identities, and other types) can be listed and updated via the Management API.
+This guide covers how to list identifiers, retrieve a specific identifier by ID, and update it using the endpoints below.
+
+## Steps
+<Steps>
+
+  <Step title="List identifiers">
+    Use the
+    [Get Identifiers <Icon icon="code" size={16} />](/api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers)
+    endpoint to retrieve all identifiers. Apply filters to narrow down results to specific identifiers you want to update.
+  </Step>
+
+  <Step title="Get the full identifier by ID">
+    Use the
+    [Get Identifier <Icon icon="code" size={16} />](/api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers-1)
+    endpoint with the identifier ID to retrieve its complete details and associated data needed to perform the update.
+  </Step>
+
+  <Step title="Update the identifier by ID">
+    Use the
+    [Update Asset (Identifier) <Icon icon="code" size={16} />](/api-reference/v2/endpoints/identifiers/put-fireworkv2assets)
+    endpoint to apply the desired changes to each identifier.
+  </Step>
+
+</Steps>
+
+## End-to-end examples
+
+<AccordionGroup>
+
+<Accordion title="Python SDK Example">
+```python
+import time
+
+from flareio import FlareApiClient
+
+api_client = FlareApiClient.from_env()
+
+# 1. List all identifiers
+for resp in api_client.scroll(
+    method="GET",
+    url="/firework/v3/identifiers/",
+):
+    # Rate limiting (default).
+    time.sleep(0.25)
+
+    data = resp.json()
+    items = data.get("items", [])
+
+    for item in items:
+        # Rate limiting (default).
+        time.sleep(0.25)
+
+        identifier_id = item.get("id")
+
+        # 2. Get the full identifier by ID
+        identifier_resp = api_client.get(f"/firework/v3/identifiers/{identifier_id}")
+        identifier = identifier_resp.json().get("identifier")
+
+        # Rate limiting (default).
+        time.sleep(0.25)
+
+        # 3. Do the necessary updates to the identifier
+        api_client.put(
+            f"/firework/v2/assets/{identifier_id}",
+            json={
+                "name": identifier.get("name", "")
+                + " (updated)",  # Example: update name or other fields
+                "type": identifier.get("type"),  # Required
+                "data": identifier.get("data"),  # Required
+                # Include other fields from the Identifier schema as needed
+            },
+        )
+        print(f"Updated identifier {identifier_id}")
+```
+</Accordion>
+
+</AccordionGroup>

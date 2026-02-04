@@ -51,7 +51,8 @@
               "guides/credentials-export-domain",
               "guides/cookie-monitoring",
               "guides/ioc-feeds",
-              "guides/threat-flow-report"
+              "guides/threat-flow-report",
+              "guides/update-identifiers"
             ]
           }
         ]
