@@ -1211,7 +1211,7 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/SortType",
+                            "$ref": "#/components/schemas/pyro__threat_flow__core__reports__report_store__SortType",
                             "default": "id"
                         }
                     },
@@ -1331,66 +1331,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ThreatFlowReportResponse"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/firework/v4/admin/hubspot/sync": {
-            "post": {
-                "tags": [
-                    "public",
-                    "team=experience"
-                ],
-                "summary": "Hubspot Force Sync For Organization",
-                "operationId": "hubspot_force_sync_for_organization_admin_hubspot_sync_post",
-                "parameters": [
-                    {
-                        "name": "hubspot_company_id",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "title": "Hubspot Company Id"
-                        }
-                    },
-                    {
-                        "name": "domain",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Domain"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "boolean",
-                                    "title": "Response Hubspot Force Sync For Organization Admin Hubspot Sync Post"
                                 }
                             }
                         }
@@ -3017,6 +2957,99 @@
                 }
             }
         },
+        "/firework/v4/alerts/test": {
+            "post": {
+                "tags": [
+                    "private",
+                    "team=integration"
+                ],
+                "summary": "Test Channel Validation",
+                "operationId": "test_channel_validation_alerts_test_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelEmailParams"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelSlackParams"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelDiscordParams"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelSplunkParams"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelChannelParams"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelLegacySentinelParams"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelSentinelV2Params"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelTeamsParams"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelJiraParams"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelServiceNowParams"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/AlertChannelWebhookParams"
+                                    }
+                                ],
+                                "title": "Test Channel Payload",
+                                "discriminator": {
+                                    "propertyName": "type",
+                                    "mapping": {
+                                        "email": "#/components/schemas/AlertChannelEmailParams",
+                                        "slack": "#/components/schemas/AlertChannelSlackParams",
+                                        "discord": "#/components/schemas/AlertChannelDiscordParams",
+                                        "splunk": "#/components/schemas/AlertChannelSplunkParams",
+                                        "channel": "#/components/schemas/AlertChannelChannelParams",
+                                        "azure_sentinel": "#/components/schemas/AlertChannelLegacySentinelParams",
+                                        "azure_sentinel_v2": "#/components/schemas/AlertChannelSentinelV2Params",
+                                        "teams": "#/components/schemas/AlertChannelTeamsParams",
+                                        "jira": "#/components/schemas/AlertChannelJiraParams",
+                                        "servicenow": "#/components/schemas/AlertChannelServiceNowParams",
+                                        "webhook": "#/components/schemas/AlertChannelWebhookParams"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertChannelStatusReponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/assets/by_data": {
             "post": {
                 "tags": [
@@ -3745,6 +3778,12 @@
                                 "schema": {
                                     "oneOf": [
                                         {
+                                            "$ref": "#/components/schemas/BlogPostEvent"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/BucketEvent"
+                                        },
+                                        {
                                             "$ref": "#/components/schemas/FinancialEvent"
                                         },
                                         {
@@ -3754,23 +3793,17 @@
                                             "$ref": "#/components/schemas/RansomLeakEvent"
                                         },
                                         {
-                                            "$ref": "#/components/schemas/BucketEvent"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/BlogPostEvent"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent"
+                                            "$ref": "#/components/schemas/StealerLogEvent"
                                         }
                                     ],
                                     "discriminator": {
                                         "propertyName": "event_type",
                                         "mapping": {
+                                            "blog_post": "#/components/schemas/BlogPostEvent",
+                                            "bucket": "#/components/schemas/BucketEvent",
                                             "cc": "#/components/schemas/FinancialEvent",
                                             "lookalike": "#/components/schemas/LookalikeDomainEvent",
                                             "ransomleak": "#/components/schemas/RansomLeakEvent",
-                                            "bucket": "#/components/schemas/BucketEvent",
-                                            "blog_post": "#/components/schemas/BlogPostEvent",
                                             "stealer_log": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent"
                                         }
                                     },
@@ -3843,7 +3876,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/StealerLogEvent"
+                                    "$ref": "#/components/schemas/pyro__events__event_datamodels__StealerLogEvent"
                                 }
                             }
                         }
@@ -6926,7 +6959,7 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/pyro__entities__identities__profile__sort_type__SortType",
+                            "$ref": "#/components/schemas/SortType",
                             "default": "creation_date"
                         }
                     },
@@ -10855,6 +10888,15 @@
                             "$ref": "#/components/schemas/GlobalSearchSource",
                             "default": "all"
                         }
+                    },
+                    {
+                        "name": "aggregate_by",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/OverTimeInterval",
+                            "default": "monthly"
+                        }
                     }
                 ],
                 "responses": {
@@ -12229,6 +12271,30 @@
                     "success"
                 ],
                 "title": "AlertChannelStatus"
+            },
+            "AlertChannelStatusReponse": {
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/AlertChannelStatus"
+                    },
+                    "message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Message"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "status",
+                    "message"
+                ],
+                "title": "AlertChannelStatusReponse"
             },
             "AlertChannelSummary": {
                 "properties": {
@@ -13664,7 +13730,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2026-02-03T13:48:20.825158Z"
+                        "default": "2026-02-03T16:09:16.809405Z"
                     },
                     "from": {
                         "anyOf": [
@@ -20336,6 +20402,16 @@
                 ],
                 "title": "OtherSectionType"
             },
+            "OverTimeInterval": {
+                "type": "string",
+                "enum": [
+                    "daily",
+                    "weekly",
+                    "monthly",
+                    "yearly"
+                ],
+                "title": "OverTimeInterval"
+            },
             "PagedCookieConfigurations": {
                 "properties": {
                     "items": {
@@ -24093,10 +24169,15 @@
             "SortType": {
                 "type": "string",
                 "enum": [
-                    "id",
-                    "published_at",
-                    "organization_id",
-                    "tenant_id"
+                    "creation_date",
+                    "credentials_count",
+                    "event_type",
+                    "information_type",
+                    "ip_address",
+                    "last_seen",
+                    "leaked_date",
+                    "password",
+                    "source_name"
                 ],
                 "title": "SortType"
             },
@@ -24759,25 +24840,25 @@
             },
             "StealerLogEvent": {
                 "properties": {
-                    "type": {
+                    "event_type": {
                         "type": "string",
                         "const": "stealer_log",
-                        "title": "Type",
+                        "title": "Event Type",
                         "default": "stealer_log"
                     },
                     "data": {
-                        "$ref": "#/components/schemas/StealerLogData"
+                        "$ref": "#/components/schemas/StealerLogEventData"
                     },
-                    "actions": {
-                        "$ref": "#/components/schemas/StealerLogActions"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
                     }
                 },
                 "type": "object",
                 "required": [
                     "data",
-                    "actions"
+                    "metadata"
                 ],
-                "title": "StealerLogEvent"
+                "title": "Stealer Log"
             },
             "StealerLogEventData": {
                 "properties": {
@@ -26778,20 +26859,27 @@
                 ],
                 "title": "WebhookBasicAuth"
             },
-            "pyro__entities__identities__profile__sort_type__SortType": {
-                "type": "string",
-                "enum": [
-                    "creation_date",
-                    "credentials_count",
-                    "event_type",
-                    "information_type",
-                    "ip_address",
-                    "last_seen",
-                    "leaked_date",
-                    "password",
-                    "source_name"
+            "pyro__events__event_datamodels__StealerLogEvent": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "stealer_log",
+                        "title": "Type",
+                        "default": "stealer_log"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/StealerLogData"
+                    },
+                    "actions": {
+                        "$ref": "#/components/schemas/StealerLogActions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "actions"
                 ],
-                "title": "SortType"
+                "title": "StealerLogEvent"
             },
             "pyro__findings__ransomleaks__datamodels__VictimInformation": {
                 "properties": {
@@ -26943,28 +27031,6 @@
                 ],
                 "title": "VictimInformation"
             },
-            "pyro__findings__stealerlogs__datamodels__StealerLogEvent": {
-                "properties": {
-                    "event_type": {
-                        "type": "string",
-                        "const": "stealer_log",
-                        "title": "Event Type",
-                        "default": "stealer_log"
-                    },
-                    "data": {
-                        "$ref": "#/components/schemas/StealerLogEventData"
-                    },
-                    "metadata": {
-                        "$ref": "#/components/schemas/EventMetadata"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "data",
-                    "metadata"
-                ],
-                "title": "Stealer Log"
-            },
             "pyro__firework__backend__api4__reports__report_groups__reports__report_datamodels__ReportResponse": {
                 "properties": {
                     "report": {
@@ -26996,6 +27062,16 @@
                     "standard"
                 ],
                 "title": "ReportType"
+            },
+            "pyro__threat_flow__core__reports__report_store__SortType": {
+                "type": "string",
+                "enum": [
+                    "id",
+                    "published_at",
+                    "organization_id",
+                    "tenant_id"
+                ],
+                "title": "SortType"
             }
         },
         "securitySchemes": {

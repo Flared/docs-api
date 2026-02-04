@@ -1,0 +1,187 @@
+{/*
+    If you are in pyro:
+    - If this file changes, you should also modify the API docs.
+    - https://github.com/flared/docs-api/
+
+    If you are in mintlify:
+    - Don't edit this directly, edit the generator in pyro.
+    - pyro/pyro/findings/mintlify/test_finding_models.py
+*/}
+
+```json Blog Post
+{
+    "event_type": "blog_post",
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    },
+    "data": {
+        "url": "https://www.blog_name.com/post_slug",
+        "content": "Post content",
+        "description": "Post description",
+        "posted_at": "2025-01-01T00:00:00"
+    }
+}
+```
+
+```json Bucket
+{
+    "event_type": "bucket",
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    },
+    "data": {
+        "url": "https://bucket.public.com/file.txt",
+        "bucket": {
+            "host": "bucket.public.com",
+            "provider": "s3"
+        }
+    }
+}
+```
+
+```json Credit Card
+{
+    "event_type": "cc",
+    "data": {
+        "bank": "Bank of the North",
+        "bin": "12345",
+        "brand": "VISA",
+        "country": "NP",
+        "expiration": "2030-05-01T00:00:00",
+        "owner": "BOW",
+        "state_code": "SW",
+        "zip": "H0H0H0",
+        "has_cvv": true,
+        "has_date_of_birth": false,
+        "has_mother_maiden_name": false,
+        "has_phone": true,
+        "has_pin": null,
+        "has_ssn": false,
+        "has_track_1": null,
+        "has_vbv": null
+    },
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    }
+}
+```
+
+```json Lookalike Domain
+{
+    "event_type": "lookalike",
+    "data": {
+        "domain": "importante.com",
+        "registered_at": "2025-01-01T00:00:00",
+        "identifier_domains": [
+            "important.co"
+        ],
+        "feed": null,
+        "cert_data": null,
+        "subject": null,
+        "issuer": "/C=US/CN=R3/O=Let's Encrypt"
+    },
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    }
+}
+```
+
+```json Ransom Leak
+{
+    "event_type": "ransomleak",
+    "data": {
+        "url": "http://payupnow.onion/leaks.php",
+        "response_url": "http://payupnow.onion/leaks.php",
+        "title": "Leak Name - Victim Name",
+        "content": "Ransom Leak Listing Content",
+        "body": "Ransom Leak Listing Body",
+        "victim_information": {
+            "name": "Victim Name",
+            "display_name": "Victim Name",
+            "domain": "victim-domain.com",
+            "alternative_domains": [
+                "victim.co"
+            ],
+            "industry": "Non-Profit",
+            "employee_count": 1,
+            "city": "New York",
+            "state": "New York",
+            "country": "USA",
+            "latitude": 123.456,
+            "longitude": 123.456
+        }
+    },
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    }
+}
+```
+
+```json Stealer Log
+{
+    "event_type": "stealer_log",
+    "data": {
+        "victim_information": {
+            "ip_address": "127.0.0.1",
+            "ip_network": "127.0.0.0/8",
+            "username": "admin",
+            "country_code": "USA",
+            "zip_code": null,
+            "location": null,
+            "hwid": null,
+            "current_language": "en-US",
+            "screensize_width": 1920,
+            "screensize_height": 1080,
+            "timezone": "UTC+7",
+            "os": "Windows 10 22H2 Pro (Build 19045) (64 Bit)",
+            "uac": null,
+            "process_elevation": false,
+            "available_keyboards": [
+                "en-US"
+            ],
+            "hardware": [
+                "CPU: Intel(R) Core(TM) i3-10105F CPU @ 3.70GHz (4 cores, 8 threads)",
+                "RAM: 31.92 GB",
+                "HOSTNAME: DESKTOP-123456"
+            ],
+            "anti_viruses": [
+                "Windows Defender",
+                "Avast Antivirus"
+            ]
+        },
+        "malware_information": {
+            "malware_family": "Lumastealer",
+            "build_id": "1234567890",
+            "file_location": "C:\\Windows\\System32\\malware.exe",
+            "infected_at": "2025-01-01T00:00:00"
+        }
+    },
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    }
+}
+```
