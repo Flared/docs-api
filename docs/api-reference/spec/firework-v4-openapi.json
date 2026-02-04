@@ -894,6 +894,33 @@
                             "type": "integer",
                             "title": "Tenant Id"
                         }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 10,
+                            "title": "Size"
+                        }
                     }
                 ],
                 "responses": {
@@ -902,15 +929,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "anyOf": [
-                                        {
-                                            "$ref": "#/components/schemas/InviteLinkResponse"
-                                        },
-                                        {
-                                            "type": "null"
-                                        }
-                                    ],
-                                    "title": "Response Get Tenant Flare Community Invite Link Admin Tenants  Tenant Id  Flare Community Invite Link Get"
+                                    "$ref": "#/components/schemas/PaginatedResults_InviteLinkResponse__datetime_"
                                 }
                             }
                         }
@@ -960,7 +979,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/InviteLinkResponse"
+                                    "$ref": "#/components/schemas/CreateInviteLinkResponse"
                                 }
                             }
                         }
@@ -1192,7 +1211,7 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/pyro__threat_flow__core__reports__report_store__SortType",
+                            "$ref": "#/components/schemas/SortType",
                             "default": "id"
                         }
                     },
@@ -1329,6 +1348,194 @@
                 }
             }
         },
+        "/firework/v4/admin/hubspot/sync": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=experience"
+                ],
+                "summary": "Hubspot Force Sync For Organization",
+                "operationId": "hubspot_force_sync_for_organization_admin_hubspot_sync_post",
+                "parameters": [
+                    {
+                        "name": "hubspot_company_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Hubspot Company Id"
+                        }
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Domain"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean",
+                                    "title": "Response Hubspot Force Sync For Organization Admin Hubspot Sync Post"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/hubspot/do_sync": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=experience"
+                ],
+                "summary": "Hubspot Do Sync",
+                "operationId": "hubspot_do_sync_admin_hubspot_do_sync_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HubspotDoSyncRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean",
+                                    "title": "Response Hubspot Do Sync Admin Hubspot Do Sync Post"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/actors/{uuid}/uid": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Actor Uid From Uuid",
+                "description": "This endpoint is temporary until we migrate all actor services to use the asset uuid.",
+                "operationId": "get_actor_uid_from_uuid_actors__uuid__uid_get",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActorUid"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/actors/uuid": {
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Asset Uuid",
+                "operationId": "get_asset_uuid_actors_uuid_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActorBodyPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "title": "Response Get Asset Uuid Actors Uuid Post"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/actors/{actor_name}/profile": {
             "get": {
                 "tags": [
@@ -1347,22 +1554,28 @@
                         }
                     },
                     {
-                        "name": "sources",
+                        "name": "actor_id",
                         "in": "query",
                         "required": false,
                         "schema": {
                             "anyOf": [
                                 {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "type": "string"
                                 },
                                 {
                                     "type": "null"
                                 }
                             ],
-                            "title": "Sources"
+                            "title": "Actor Id"
+                        }
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Source"
                         }
                     }
                 ],
@@ -1372,7 +1585,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ActorMetadata"
+                                    "$ref": "#/components/schemas/FrontendActorMetadata"
                                 }
                             }
                         }
@@ -1405,6 +1618,22 @@
                         "schema": {
                             "type": "string",
                             "title": "Actor Name"
+                        }
+                    },
+                    {
+                        "name": "aggregate_by",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/StatsAggregates"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Aggregate By"
                         }
                     },
                     {
@@ -1478,38 +1707,28 @@
                         }
                     },
                     {
-                        "name": "sources",
+                        "name": "actor_id",
                         "in": "query",
                         "required": false,
                         "schema": {
                             "anyOf": [
                                 {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "type": "string"
                                 },
                                 {
                                     "type": "null"
                                 }
                             ],
-                            "title": "Sources"
+                            "title": "Actor Id"
                         }
                     },
                     {
-                        "name": "aggregate_by",
+                        "name": "source",
                         "in": "query",
-                        "required": false,
+                        "required": true,
                         "schema": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/components/schemas/StatsAggregates"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Aggregate By"
+                            "type": "string",
+                            "title": "Source"
                         }
                     }
                 ],
@@ -1625,22 +1844,28 @@
                         }
                     },
                     {
-                        "name": "sources",
+                        "name": "actor_id",
                         "in": "query",
                         "required": false,
                         "schema": {
                             "anyOf": [
                                 {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "type": "string"
                                 },
                                 {
                                     "type": "null"
                                 }
                             ],
-                            "title": "Sources"
+                            "title": "Actor Id"
+                        }
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Source"
                         }
                     }
                 ],
@@ -1675,7 +1900,7 @@
         "/firework/v4/actors/{actor_name}/analysis/metadata": {
             "get": {
                 "tags": [
-                    "private"
+                    "public"
                 ],
                 "summary": "Get Actor Analysis Metadata",
                 "operationId": "get_actor_analysis_metadata_actors__actor_name__analysis_metadata_get",
@@ -1690,22 +1915,28 @@
                         }
                     },
                     {
-                        "name": "sources",
+                        "name": "actor_id",
                         "in": "query",
                         "required": false,
                         "schema": {
                             "anyOf": [
                                 {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "type": "string"
                                 },
                                 {
                                     "type": "null"
                                 }
                             ],
-                            "title": "Sources"
+                            "title": "Actor Id"
+                        }
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Source"
                         }
                     }
                 ],
@@ -1898,25 +2129,6 @@
                         }
                     },
                     {
-                        "name": "sources",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Sources"
-                        }
-                    },
-                    {
                         "name": "times",
                         "in": "query",
                         "required": false,
@@ -1946,6 +2158,69 @@
                                 }
                             ],
                             "title": "Time Zone"
+                        }
+                    },
+                    {
+                        "name": "search_types",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SearchType"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Search Types"
+                        }
+                    },
+                    {
+                        "name": "risk_scores",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RiskScore"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Risk Scores"
+                        }
+                    },
+                    {
+                        "name": "actor_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Actor Id"
+                        }
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Source"
                         }
                     }
                 ],
@@ -1999,22 +2274,28 @@
                         }
                     },
                     {
-                        "name": "sources",
+                        "name": "actor_id",
                         "in": "query",
                         "required": false,
                         "schema": {
                             "anyOf": [
                                 {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "type": "string"
                                 },
                                 {
                                     "type": "null"
                                 }
                             ],
-                            "title": "Sources"
+                            "title": "Actor Id"
+                        }
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Source"
                         }
                     }
                 ],
@@ -2780,7 +3061,7 @@
                                         "$ref": "#/components/schemas/UsernameData"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/EmailData"
+                                        "$ref": "#/components/schemas/EmailData-Input"
                                     },
                                     {
                                         "$ref": "#/components/schemas/SecretData"
@@ -3192,6 +3473,252 @@
                 }
             }
         },
+        "/firework/v4/entities": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "List Entities",
+                "operationId": "list_entities_entities_get",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "",
+                            "title": "Query"
+                        }
+                    },
+                    {
+                        "name": "types",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/EntityType"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Types"
+                        }
+                    },
+                    {
+                        "name": "updated_at_time_range",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/TimeRangeType"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Updated At Time Range"
+                        }
+                    },
+                    {
+                        "name": "sources",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Sources"
+                        }
+                    },
+                    {
+                        "name": "sort_by_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Sort By Key"
+                        }
+                    },
+                    {
+                        "name": "sort_by_direction",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/OrderType",
+                            "default": "desc"
+                        }
+                    },
+                    {
+                        "name": "search_after",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Search After"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 10,
+                            "title": "Size"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_EntityBrowserResponse__str_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/entities/count": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Count Entities",
+                "operationId": "count_entities_entities_count_get",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "",
+                            "title": "Query"
+                        }
+                    },
+                    {
+                        "name": "types",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/EntityType"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Types"
+                        }
+                    },
+                    {
+                        "name": "updated_at_time_range",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/TimeRangeType"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Updated At Time Range"
+                        }
+                    },
+                    {
+                        "name": "sources",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Sources"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "title": "Response Count Entities Entities Count Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/events/": {
             "get": {
                 "tags": [
@@ -3218,21 +3745,33 @@
                                 "schema": {
                                     "oneOf": [
                                         {
-                                            "$ref": "#/components/schemas/pyro__events__firework__stealerlog__StealerLogEvent"
+                                            "$ref": "#/components/schemas/FinancialEvent"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/LookalikeDomainEvent"
                                         },
                                         {
                                             "$ref": "#/components/schemas/RansomLeakEvent"
                                         },
                                         {
-                                            "$ref": "#/components/schemas/LookalikeDomainEvent"
+                                            "$ref": "#/components/schemas/BucketEvent"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/BlogPostEvent"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent"
                                         }
                                     ],
                                     "discriminator": {
                                         "propertyName": "event_type",
                                         "mapping": {
-                                            "stealer_log": "#/components/schemas/pyro__events__firework__stealerlog__StealerLogEvent",
+                                            "cc": "#/components/schemas/FinancialEvent",
+                                            "lookalike": "#/components/schemas/LookalikeDomainEvent",
                                             "ransomleak": "#/components/schemas/RansomLeakEvent",
-                                            "lookalike": "#/components/schemas/LookalikeDomainEvent"
+                                            "bucket": "#/components/schemas/BucketEvent",
+                                            "blog_post": "#/components/schemas/BlogPostEvent",
+                                            "stealer_log": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent"
                                         }
                                     },
                                     "title": "Response Get Event Events  Get"
@@ -3833,6 +4372,119 @@
                 }
             }
         },
+        "/firework/v4/events/_expand": {
+            "get": {
+                "tags": [
+                    "public",
+                    "team=experience"
+                ],
+                "summary": "Expand Event Field",
+                "operationId": "expand_event_field_events__expand_get",
+                "parameters": [
+                    {
+                        "name": "field",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/ExpandableField"
+                        }
+                    },
+                    {
+                        "name": "uid",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Uid"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 20,
+                            "exclusiveMinimum": 0,
+                            "default": 20,
+                            "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "reveal_full_contents",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Reveal Full Contents"
+                        }
+                    },
+                    {
+                        "name": "search_term",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Search Term"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/PaginatedResults_StealerLogCredential__str_"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/PaginatedResults_StealerLogCookie__str_"
+                                        }
+                                    ],
+                                    "title": "Response Expand Event Field Events  Expand Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/file_analysis/submit": {
             "post": {
                 "tags": [
@@ -3856,6 +4508,49 @@
                         "content": {
                             "application/json": {
                                 "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/forum-threads/{uuid}/topic-uid-and-title": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Forum Thread Topic Uid And Title",
+                "description": "This endpoint is temporary until we migrate all forum thread services to use the asset uuid.",
+                "operationId": "get_forum_thread_topic_uid_and_title_forum_threads__uuid__topic_uid_and_title_get",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ForumThreadTopicUidAndTitlePayload"
+                                }
                             }
                         }
                     },
@@ -5129,7 +5824,7 @@
                                         "$ref": "#/components/schemas/CredentialsData"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/EmailData"
+                                        "$ref": "#/components/schemas/EmailData-Input"
                                     },
                                     {
                                         "$ref": "#/components/schemas/UsernameData"
@@ -5154,7 +5849,7 @@
                                         "search_query": "#/components/schemas/SearchQueryData",
                                         "github_repository": "#/components/schemas/GithubRepositoryData",
                                         "credentials": "#/components/schemas/CredentialsData",
-                                        "email": "#/components/schemas/EmailData",
+                                        "email": "#/components/schemas/EmailData-Input",
                                         "username": "#/components/schemas/UsernameData",
                                         "secret": "#/components/schemas/SecretData",
                                         "name": "#/components/schemas/NameData"
@@ -7540,7 +8235,7 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/SortType",
+                            "$ref": "#/components/schemas/pyro__reports__report_store__SortType",
                             "default": "updated_at"
                         }
                     },
@@ -9130,6 +9825,49 @@
                 }
             }
         },
+        "/firework/v4/tenants/{tenant_id}/role": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Get Tenant Member Role",
+                "operationId": "get_tenant_member_role_tenants__tenant_id__role_get",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TenantMemberRoleResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/tenants/{tenant_id}": {
             "put": {
                 "tags": [
@@ -10035,6 +10773,247 @@
                     }
                 }
             }
+        },
+        "/firework/v4/hubspot/flare_sync_webhook": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=experience"
+                ],
+                "summary": "Handle Hubspot Flare Sync Webhook",
+                "operationId": "handle_hubspot_flare_sync_webhook_hubspot_flare_sync_webhook_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HubspotWebhookFlareSyncEvent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/usage/global_search/by_feature": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Get Global Search Usage By Feature",
+                "operationId": "get_global_search_usage_by_feature_usage_global_search_by_feature_get",
+                "parameters": [
+                    {
+                        "name": "time",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Times"
+                        }
+                    },
+                    {
+                        "name": "tenant_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Tenant Id"
+                        }
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/GlobalSearchSource",
+                            "default": "all"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GlobalSearchUsageByFeatureResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/usage/global_search/by_member": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Get Global Search Usage By Member",
+                "operationId": "get_global_search_usage_by_member_usage_global_search_by_member_get",
+                "parameters": [
+                    {
+                        "name": "time",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Times"
+                        }
+                    },
+                    {
+                        "name": "tenant_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Tenant Id"
+                        }
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/GlobalSearchSource",
+                            "default": "all"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GlobalSearchUsageByMemberData"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/usage/global_search/by_tenant": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Get Global Search Usage By Tenant",
+                "operationId": "get_global_search_usage_by_tenant_usage_global_search_by_tenant_get",
+                "parameters": [
+                    {
+                        "name": "time",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Times"
+                        }
+                    },
+                    {
+                        "name": "tenant_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Tenant Id"
+                        }
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/GlobalSearchSource",
+                            "default": "all"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GlobalSearchUsageByTenantData"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -10101,6 +11080,7 @@
                 "enum": [
                     "account",
                     "actor",
+                    "actor_entity",
                     "actor_summary",
                     "ad",
                     "attachment",
@@ -10116,6 +11096,10 @@
                     "docker_repository",
                     "document",
                     "domain",
+                    "domain_favicon",
+                    "domain_ip_address",
+                    "domain_screenshot",
+                    "domain_title",
                     "driller",
                     "driller_forum_post",
                     "driller_forum_topic",
@@ -10127,8 +11111,9 @@
                     "forum_category",
                     "forum_post",
                     "forum_profile",
-                    "forum_topic",
+                    "forum_thread_entity",
                     "forum_thread_summary",
+                    "forum_topic",
                     "host",
                     "leak",
                     "leaked_credential",
@@ -10301,6 +11286,17 @@
                         "type": "integer",
                         "title": "Events Summarized Count"
                     },
+                    "total_events_summary_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Events Summary Count"
+                    },
                     "total_events_count": {
                         "type": "integer",
                         "title": "Total Events Count"
@@ -10315,6 +11311,30 @@
                     "total_events_count"
                 ],
                 "title": "ActorAnalysisMetadataResponse"
+            },
+            "ActorBodyPayload": {
+                "properties": {
+                    "actor_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Actor Id"
+                    },
+                    "source": {
+                        "type": "string",
+                        "title": "Source"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "source"
+                ],
+                "title": "ActorBodyPayload"
             },
             "ActorCommunicationHandle": {
                 "properties": {
@@ -10358,68 +11378,6 @@
                 ],
                 "title": "ActorHeatmapData"
             },
-            "ActorMetadata": {
-                "properties": {
-                    "first_seen": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen"
-                    },
-                    "last_seen": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen"
-                    },
-                    "total_events": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Events"
-                    },
-                    "is_vetted": {
-                        "type": "boolean",
-                        "title": "Is Vetted",
-                        "default": false
-                    },
-                    "vetted_sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/EnrichedSource"
-                        },
-                        "type": "array",
-                        "title": "Vetted Sources",
-                        "default": []
-                    },
-                    "active_sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/EnrichedSource"
-                        },
-                        "type": "array",
-                        "title": "Active Sources",
-                        "default": []
-                    }
-                },
-                "type": "object",
-                "title": "ActorMetadata"
-            },
             "ActorNetwork": {
                 "properties": {
                     "nodes": {
@@ -10446,13 +11404,6 @@
             },
             "ActorNetworkGenerationPayload": {
                 "properties": {
-                    "sources": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
                     "actor_id": {
                         "anyOf": [
                             {
@@ -10464,13 +11415,17 @@
                         ],
                         "title": "Actor Id"
                     },
+                    "source": {
+                        "type": "string",
+                        "title": "Source"
+                    },
                     "group_by": {
                         "$ref": "#/components/schemas/GroupByType"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "sources",
+                    "source",
                     "group_by"
                 ],
                 "title": "ActorNetworkGenerationPayload"
@@ -10537,17 +11492,25 @@
             },
             "ActorSummariesGenerationPayload": {
                 "properties": {
-                    "sources": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array",
-                        "title": "Sources"
+                    "actor_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Actor Id"
+                    },
+                    "source": {
+                        "type": "string",
+                        "title": "Source"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "sources"
+                    "source"
                 ],
                 "title": "ActorSummariesGenerationPayload"
             },
@@ -10591,12 +11554,16 @@
                     "profile": {
                         "anyOf": [
                             {
+                                "$ref": "#/components/schemas/GeneralProfileSummaryOutput"
+                            },
+                            {
                                 "$ref": "#/components/schemas/ExecutiveSummaryOutput"
                             },
                             {
                                 "type": "null"
                             }
-                        ]
+                        ],
+                        "title": "Profile"
                     },
                     "heatmap": {
                         "anyOf": [
@@ -10682,6 +11649,35 @@
                     "total_count"
                 ],
                 "title": "ActorTimelineEntry"
+            },
+            "ActorUid": {
+                "properties": {
+                    "actor_name": {
+                        "type": "string",
+                        "title": "Actor Name"
+                    },
+                    "actor_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Actor Id"
+                    },
+                    "source": {
+                        "type": "string",
+                        "title": "Source"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "actor_name",
+                    "source"
+                ],
+                "title": "ActorUid"
             },
             "AddAllowedRestrictedTermRequest": {
                 "properties": {
@@ -11839,7 +12835,7 @@
                                 "$ref": "#/components/schemas/UsernameData"
                             },
                             {
-                                "$ref": "#/components/schemas/EmailData"
+                                "$ref": "#/components/schemas/EmailData-Output"
                             },
                             {
                                 "$ref": "#/components/schemas/SecretData"
@@ -11860,7 +12856,7 @@
                                 "brand": "#/components/schemas/BrandData",
                                 "credentials": "#/components/schemas/CredentialsData",
                                 "domain": "#/components/schemas/DomainData",
-                                "email": "#/components/schemas/EmailData",
+                                "email": "#/components/schemas/EmailData-Output",
                                 "github_repository": "#/components/schemas/GithubRepositoryData",
                                 "identity": "#/components/schemas/IdentityData",
                                 "ip": "#/components/schemas/IPData",
@@ -12378,6 +13374,89 @@
                 ],
                 "title": "BinQuery"
             },
+            "BlogPostData": {
+                "properties": {
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url",
+                        "description": "The URL of the blog post."
+                    },
+                    "content": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Content",
+                        "description": "The content of the blog post."
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description",
+                        "description": "The description of the blog post."
+                    },
+                    "posted_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Posted At",
+                        "description": "The date and time the blog post was posted."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "url",
+                    "content",
+                    "description",
+                    "posted_at"
+                ],
+                "title": "BlogPostData"
+            },
+            "BlogPostEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "blog_post",
+                        "title": "Event Type",
+                        "default": "blog_post"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/BlogPostData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Blog Post"
+            },
             "BrandData": {
                 "properties": {
                     "type": {
@@ -12416,6 +13495,87 @@
                     "name"
                 ],
                 "title": "BrandQuery"
+            },
+            "BucketData": {
+                "properties": {
+                    "host": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Host",
+                        "description": "The host of the bucket."
+                    },
+                    "provider": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Provider",
+                        "description": "The provider of the bucket."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "host",
+                    "provider"
+                ],
+                "title": "BucketData"
+            },
+            "BucketEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "bucket",
+                        "title": "Event Type",
+                        "default": "bucket"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/BucketEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Bucket"
+            },
+            "BucketEventData": {
+                "properties": {
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url",
+                        "description": "The URL to the bucket."
+                    },
+                    "bucket": {
+                        "$ref": "#/components/schemas/BucketData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "url",
+                    "bucket"
+                ],
+                "title": "BucketEventData"
             },
             "BulkActionStatus": {
                 "type": "string",
@@ -12461,7 +13621,8 @@
                     "unremediate",
                     "ignore",
                     "unignore",
-                    "validate_with_idp"
+                    "validate_with_idp",
+                    "authorize"
                 ],
                 "title": "BulkActionType"
             },
@@ -12503,7 +13664,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2026-01-08T20:17:43.618686Z"
+                        "default": "2026-02-03T13:48:20.825158Z"
                     },
                     "from": {
                         "anyOf": [
@@ -13092,6 +14253,19 @@
                 ],
                 "title": "CreateDemoTenantRequestBody"
             },
+            "CreateInviteLinkResponse": {
+                "properties": {
+                    "invite_magic_link": {
+                        "type": "string",
+                        "title": "Invite Magic Link"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "invite_magic_link"
+                ],
+                "title": "CreateInviteLinkResponse"
+            },
             "CreateTenantIntegrationPayload": {
                 "properties": {
                     "name": {
@@ -13109,7 +14283,15 @@
                         "default": true
                     },
                     "params": {
-                        "$ref": "#/components/schemas/EntraIDParams"
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/EntraIDParams"
+                            },
+                            {
+                                "$ref": "#/components/schemas/ForetraceParams"
+                            }
+                        ],
+                        "title": "Params"
                     },
                     "status": {
                         "anyOf": [
@@ -14057,7 +15239,7 @@
                 ],
                 "title": "DomainStatus"
             },
-            "EmailData": {
+            "EmailData-Input": {
                 "properties": {
                     "type": {
                         "type": "string",
@@ -14068,6 +15250,25 @@
                     "email": {
                         "type": "string",
                         "format": "email",
+                        "title": "Email"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "email"
+                ],
+                "title": "EmailData"
+            },
+            "EmailData-Output": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "email",
+                        "title": "Type",
+                        "default": "email"
+                    },
+                    "email": {
+                        "type": "string",
                         "title": "Email"
                     }
                 },
@@ -14378,6 +15579,68 @@
                     "title"
                 ],
                 "title": "EnrichedSource"
+            },
+            "EntityBrowserResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "sources": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "sources"
+                ],
+                "title": "EntityBrowserResponse"
+            },
+            "EntityType": {
+                "type": "string",
+                "enum": [
+                    "actor",
+                    "forum-thread"
+                ],
+                "title": "EntityType"
             },
             "EntraIDFailedValidationDetails": {
                 "properties": {
@@ -14791,6 +16054,14 @@
                     "potential_victims_shortlist"
                 ],
                 "title": "ExecutiveSummaryOutput"
+            },
+            "ExpandableField": {
+                "type": "string",
+                "enum": [
+                    "credentials",
+                    "cookies"
+                ],
+                "title": "ExpandableField"
             },
             "FeatureFlagDefinition": {
                 "properties": {
@@ -15492,6 +16763,245 @@
                 "type": "object",
                 "title": "FilterSourceTypes"
             },
+            "FinancialEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "cc",
+                        "title": "Event Type",
+                        "default": "cc"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/FinancialEventData"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "metadata"
+                ],
+                "title": "Credit Card"
+            },
+            "FinancialEventData": {
+                "properties": {
+                    "bank": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Bank",
+                        "description": "The bank associated with the leaked credit card."
+                    },
+                    "bin": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Bin",
+                        "description": "The BIN (Bank Identification Number) of the credit card."
+                    },
+                    "brand": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Brand",
+                        "description": "The brand of the leakedcredit card. Ex: VISA"
+                    },
+                    "country": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Country",
+                        "description": "The country the leakedcredit card was issued in."
+                    },
+                    "expiration": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Expiration",
+                        "description": "The expiration date of the leaked credit card."
+                    },
+                    "owner": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Owner",
+                        "description": "The owner of the leaked credit card."
+                    },
+                    "state_code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "State Code",
+                        "description": "The state code tied to the leaked credit card."
+                    },
+                    "zip": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Zip",
+                        "description": "The zip code tied to the leaked credit card."
+                    },
+                    "has_cvv": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Has Cvv",
+                        "description": "Whether the CVV was included in the leaked data."
+                    },
+                    "has_date_of_birth": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Has Date Of Birth",
+                        "description": "Whether the date of birth was included in the leaked data."
+                    },
+                    "has_mother_maiden_name": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Has Mother Maiden Name",
+                        "description": "Whether the mother's maiden name was included in the leaked data."
+                    },
+                    "has_phone": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Has Phone",
+                        "description": "Whether the phone number was included in the leaked data."
+                    },
+                    "has_pin": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Has Pin",
+                        "description": "Whether the card's PIN was included in the leaked data."
+                    },
+                    "has_ssn": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Has Ssn",
+                        "description": "Whether the card owner's SSN was included in the leaked data."
+                    },
+                    "has_track_1": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Has Track 1",
+                        "description": "Whether the card's track 1 (magnetic stripe data) was included in the leaked data."
+                    },
+                    "has_vbv": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Has Vbv",
+                        "description": "Whether the card's VBV (Verified by Visa) data was included in the leaked data."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "bank",
+                    "bin",
+                    "brand",
+                    "country",
+                    "expiration",
+                    "owner",
+                    "state_code",
+                    "zip",
+                    "has_cvv",
+                    "has_date_of_birth",
+                    "has_mother_maiden_name",
+                    "has_phone",
+                    "has_pin",
+                    "has_ssn",
+                    "has_track_1",
+                    "has_vbv"
+                ],
+                "title": "FinancialEventData"
+            },
             "FlareInviteLinkRequest": {
                 "properties": {
                     "organization_name": {
@@ -15512,6 +17022,18 @@
                     "domains"
                 ],
                 "title": "FlareInviteLinkRequest"
+            },
+            "ForetraceParams": {
+                "properties": {
+                    "params_type": {
+                        "type": "string",
+                        "const": "flare_community",
+                        "title": "Params Type",
+                        "default": "flare_community"
+                    }
+                },
+                "type": "object",
+                "title": "ForetraceParams"
             },
             "ForumThreadAnalysisMetadataResponse": {
                 "properties": {
@@ -15603,9 +17125,20 @@
                         ],
                         "title": "Total Events"
                     },
-                    "creator": {
+                    "creator_actor_name": {
                         "type": "string",
-                        "title": "Creator"
+                        "title": "Creator Actor Name"
+                    },
+                    "creator_actor_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Creator Actor Id"
                     },
                     "category": {
                         "anyOf": [
@@ -15636,7 +17169,7 @@
                 },
                 "type": "object",
                 "required": [
-                    "creator",
+                    "creator_actor_name",
                     "source"
                 ],
                 "title": "ForumThreadMetadata"
@@ -15778,6 +17311,106 @@
                 ],
                 "title": "ForumThreadTimelineEntry"
             },
+            "ForumThreadTopicUidAndTitlePayload": {
+                "properties": {
+                    "forum_topic_uid": {
+                        "type": "string",
+                        "title": "Forum Topic Uid"
+                    },
+                    "title": {
+                        "type": "string",
+                        "title": "Title"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "forum_topic_uid",
+                    "title"
+                ],
+                "title": "ForumThreadTopicUidAndTitlePayload"
+            },
+            "FrontendActorMetadata": {
+                "properties": {
+                    "actor_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Actor Id"
+                    },
+                    "actor_name": {
+                        "type": "string",
+                        "title": "Actor Name"
+                    },
+                    "aliases": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Aliases",
+                        "default": []
+                    },
+                    "first_seen": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen"
+                    },
+                    "last_seen": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen"
+                    },
+                    "total_events": {
+                        "type": "integer",
+                        "title": "Total Events",
+                        "default": 0
+                    },
+                    "is_vetted": {
+                        "type": "boolean",
+                        "title": "Is Vetted",
+                        "default": false
+                    },
+                    "vetted_sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/EnrichedSource"
+                        },
+                        "type": "array",
+                        "title": "Vetted Sources",
+                        "default": []
+                    },
+                    "active_sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/EnrichedSource"
+                        },
+                        "type": "array",
+                        "title": "Active Sources",
+                        "default": []
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "actor_name"
+                ],
+                "title": "FrontendActorMetadata"
+            },
             "GeneralActivityAnalysisOutput": {
                 "properties": {
                     "overview": {
@@ -15815,6 +17448,32 @@
                     "non_criminal_activity"
                 ],
                 "title": "GeneralActivityAnalysisOutput"
+            },
+            "GeneralProfileSummaryOutput": {
+                "properties": {
+                    "overview": {
+                        "type": "string",
+                        "title": "Overview",
+                        "description": "Paragraph about the general description of the actor activity, using the high level context of the actor to produce your analysis."
+                    },
+                    "main_activities_and_motives": {
+                        "type": "string",
+                        "title": "Main Activities And Motives",
+                        "description": "A concise, analytical paragraph describing the actor's main activities, technical sophistication indicators, and specific threats to sectors. Write in a narrative style without numbered lists or bullet points. Keep it shorter and more focused than a detailed breakdown."
+                    },
+                    "potential_associations": {
+                        "type": "string",
+                        "title": "Potential Associations",
+                        "description": "Paragraph about the potential associations of the actor if relevant. Identify what groups the actor is associated with (if any). If none are identified, state that clearly."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "overview",
+                    "main_activities_and_motives",
+                    "potential_associations"
+                ],
+                "title": "GeneralProfileSummaryOutput"
             },
             "GetAllowedRestrictedTermsResponse": {
                 "properties": {
@@ -15928,6 +17587,14 @@
                 ],
                 "title": "GlobalFeedItem"
             },
+            "GlobalSearchFeature": {
+                "type": "string",
+                "enum": [
+                    "events",
+                    "credentials"
+                ],
+                "title": "GlobalSearchFeature"
+            },
             "GlobalSearchRequestBody": {
                 "properties": {
                     "query": {
@@ -16029,6 +17696,138 @@
                     "query"
                 ],
                 "title": "GlobalSearchRequestBody"
+            },
+            "GlobalSearchSource": {
+                "type": "string",
+                "enum": [
+                    "all",
+                    "api",
+                    "flare_platform"
+                ],
+                "title": "GlobalSearchSource"
+            },
+            "GlobalSearchUsageByFeatureResponse": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/GlobalSearchUsageFeature"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items"
+                ],
+                "title": "GlobalSearchUsageByFeatureResponse"
+            },
+            "GlobalSearchUsageByMemberData": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/GlobalSearchUsageByMemberDataPoint"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items"
+                ],
+                "title": "GlobalSearchUsageByMemberData"
+            },
+            "GlobalSearchUsageByMemberDataPoint": {
+                "properties": {
+                    "member": {
+                        "type": "string",
+                        "title": "Member"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "title": "Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "member",
+                    "count"
+                ],
+                "title": "GlobalSearchUsageByMemberDataPoint"
+            },
+            "GlobalSearchUsageByTenantData": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/GlobalSearchUsageByTenantDataPoint"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items"
+                ],
+                "title": "GlobalSearchUsageByTenantData"
+            },
+            "GlobalSearchUsageByTenantDataPoint": {
+                "properties": {
+                    "tenant_name": {
+                        "type": "string",
+                        "title": "Tenant Name"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "title": "Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "tenant_name",
+                    "count"
+                ],
+                "title": "GlobalSearchUsageByTenantDataPoint"
+            },
+            "GlobalSearchUsageFeature": {
+                "properties": {
+                    "feature": {
+                        "$ref": "#/components/schemas/GlobalSearchFeature"
+                    },
+                    "values": {
+                        "items": {
+                            "$ref": "#/components/schemas/GlobalSearchUsageFeatureValue"
+                        },
+                        "type": "array",
+                        "title": "Values"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "feature",
+                    "values"
+                ],
+                "title": "GlobalSearchUsageFeature"
+            },
+            "GlobalSearchUsageFeatureValue": {
+                "properties": {
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Timestamp"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "title": "Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "timestamp",
+                    "count"
+                ],
+                "title": "GlobalSearchUsageFeatureValue"
             },
             "GroupByType": {
                 "type": "string",
@@ -16309,6 +18108,134 @@
                 ],
                 "title": "HourData"
             },
+            "HubspotDoSyncRequest": {
+                "properties": {
+                    "hubspot_id": {
+                        "type": "integer",
+                        "title": "Hubspot Id"
+                    },
+                    "domain": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Domain"
+                    },
+                    "organization_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Organization Id"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "merged_object_ids": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array",
+                        "title": "Merged Object Ids",
+                        "default": []
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "hubspot_id",
+                    "domain",
+                    "organization_id",
+                    "name"
+                ],
+                "title": "HubspotDoSyncRequest"
+            },
+            "HubspotLifecycleStage": {
+                "type": "string",
+                "enum": [
+                    "1281177943"
+                ],
+                "title": "HubspotLifecycleStage"
+            },
+            "HubspotWebhookFlareSyncEvent": {
+                "properties": {
+                    "hubspot_id": {
+                        "type": "integer",
+                        "title": "Hubspot Id"
+                    },
+                    "domain": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Domain"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "organization_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Organization Id"
+                    },
+                    "lifecycle_stage": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/HubspotLifecycleStage"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "merged_object_ids": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array",
+                        "title": "Merged Object Ids",
+                        "default": []
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "hubspot_id"
+                ],
+                "title": "HubspotWebhookFlareSyncEvent"
+            },
             "IPData": {
                 "properties": {
                     "type": {
@@ -16455,7 +18382,7 @@
                                 "$ref": "#/components/schemas/UsernameData"
                             },
                             {
-                                "$ref": "#/components/schemas/EmailData"
+                                "$ref": "#/components/schemas/EmailData-Output"
                             },
                             {
                                 "$ref": "#/components/schemas/SecretData"
@@ -16476,7 +18403,7 @@
                                 "brand": "#/components/schemas/BrandData",
                                 "credentials": "#/components/schemas/CredentialsData",
                                 "domain": "#/components/schemas/DomainData",
-                                "email": "#/components/schemas/EmailData",
+                                "email": "#/components/schemas/EmailData-Output",
                                 "github_repository": "#/components/schemas/GithubRepositoryData",
                                 "identity": "#/components/schemas/IdentityData",
                                 "ip": "#/components/schemas/IPData",
@@ -17124,7 +19051,7 @@
                                 "$ref": "#/components/schemas/CredentialsData"
                             },
                             {
-                                "$ref": "#/components/schemas/EmailData"
+                                "$ref": "#/components/schemas/EmailData-Input"
                             },
                             {
                                 "$ref": "#/components/schemas/UsernameData"
@@ -17148,7 +19075,7 @@
                                 "brand": "#/components/schemas/BrandData",
                                 "credentials": "#/components/schemas/CredentialsData",
                                 "domain": "#/components/schemas/DomainData",
-                                "email": "#/components/schemas/EmailData",
+                                "email": "#/components/schemas/EmailData-Input",
                                 "github_repository": "#/components/schemas/GithubRepositoryData",
                                 "identity": "#/components/schemas/IdentityDataRequestBody",
                                 "ip": "#/components/schemas/IPData",
@@ -17256,7 +19183,8 @@
                     "USER",
                     "SYSTEM_RELATION",
                     "SELF_ONBOARDING",
-                    "ATTRIBUTE"
+                    "ATTRIBUTE",
+                    "IDP_SYNC"
                 ],
                 "title": "IdentifierSource"
             },
@@ -17265,6 +19193,7 @@
                 "enum": [
                     "ALL",
                     "USER",
+                    "COUNTED",
                     "SYSTEM",
                     "USER_AND_ATTRIBUTE"
                 ],
@@ -17373,7 +19302,7 @@
                     "data": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/EmailData"
+                                "$ref": "#/components/schemas/EmailData-Output"
                             },
                             {
                                 "$ref": "#/components/schemas/UsernameData"
@@ -17386,7 +19315,7 @@
                         "discriminator": {
                             "propertyName": "type",
                             "mapping": {
-                                "email": "#/components/schemas/EmailData",
+                                "email": "#/components/schemas/EmailData-Output",
                                 "name": "#/components/schemas/NameData",
                                 "username": "#/components/schemas/UsernameData"
                             }
@@ -17431,7 +19360,7 @@
                         "items": {
                             "oneOf": [
                                 {
-                                    "$ref": "#/components/schemas/EmailData"
+                                    "$ref": "#/components/schemas/EmailData-Input"
                                 },
                                 {
                                     "$ref": "#/components/schemas/UsernameData"
@@ -17443,7 +19372,7 @@
                             "discriminator": {
                                 "propertyName": "type",
                                 "mapping": {
-                                    "email": "#/components/schemas/EmailData",
+                                    "email": "#/components/schemas/EmailData-Input",
                                     "name": "#/components/schemas/NameData",
                                     "username": "#/components/schemas/UsernameData"
                                 }
@@ -17818,11 +19747,19 @@
                     "invite_magic_link": {
                         "type": "string",
                         "title": "Invite Magic Link"
+                    },
+                    "domains": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Domains"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "invite_magic_link"
+                    "invite_magic_link",
+                    "domains"
                 ],
                 "title": "InviteLinkResponse"
             },
@@ -18085,13 +20022,14 @@
                     "data",
                     "metadata"
                 ],
-                "title": "LookalikeDomainEvent"
+                "title": "Lookalike Domain"
             },
             "LookalikeDomainEventData": {
                 "properties": {
                     "domain": {
                         "type": "string",
-                        "title": "Domain"
+                        "title": "Domain",
+                        "description": "The domain of the lookalike domain."
                     },
                     "registered_at": {
                         "anyOf": [
@@ -18103,7 +20041,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Registered At"
+                        "title": "Registered At",
+                        "description": "The date and time the lookalike domain was registered."
                     },
                     "identifier_domains": {
                         "anyOf": [
@@ -18117,7 +20056,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Identifier Domains"
+                        "title": "Identifier Domains",
+                        "description": "Domain identifiers matching the lookalike domains"
                     },
                     "feed": {
                         "anyOf": [
@@ -18128,7 +20068,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Feed"
+                        "title": "Feed",
+                        "description": "The feed where the lookalike domain was found"
                     },
                     "cert_data": {
                         "anyOf": [
@@ -18140,7 +20081,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Cert Data"
+                        "title": "Cert Data",
+                        "description": "The certificate data of the lookalike domain."
                     },
                     "subject": {
                         "anyOf": [
@@ -18151,7 +20093,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Subject"
+                        "title": "Subject",
+                        "description": "The subject of the certificate of the lookalike domain."
                     },
                     "issuer": {
                         "anyOf": [
@@ -18162,7 +20105,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Issuer"
+                        "title": "Issuer",
+                        "description": "The issuer of the certificate of the lookalike domain."
                     }
                 },
                 "type": "object",
@@ -18188,7 +20132,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Malware Family"
+                        "title": "Malware Family",
+                        "description": "The malware family used for device infection."
                     },
                     "build_id": {
                         "anyOf": [
@@ -18199,7 +20144,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Build Id"
+                        "title": "Build Id",
+                        "description": "The build ID of the malware used for device infection."
                     },
                     "file_location": {
                         "anyOf": [
@@ -18210,7 +20156,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "File Location"
+                        "title": "File Location",
+                        "description": "The file location of the malware used for device infection."
                     },
                     "infected_at": {
                         "anyOf": [
@@ -18222,7 +20169,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Infected At"
+                        "title": "Infected At",
+                        "description": "The date and time the malware was used to infect the victim's device."
                     }
                 },
                 "type": "object",
@@ -18581,6 +20529,34 @@
                 ],
                 "title": "PaginatedResults[EnrichedBulkAction, str]"
             },
+            "PaginatedResults_EntityBrowserResponse__str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/EntityBrowserResponse"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[EntityBrowserResponse, str]"
+            },
             "PaginatedResults_FeedItem__str_": {
                 "properties": {
                     "items": {
@@ -18692,6 +20668,35 @@
                     "next"
                 ],
                 "title": "PaginatedResults[Identifier, str]"
+            },
+            "PaginatedResults_InviteLinkResponse__datetime_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/InviteLinkResponse"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[InviteLinkResponse, datetime]"
             },
             "PaginatedResults_PartialAlertChannel__str_": {
                 "properties": {
@@ -18972,6 +20977,62 @@
                     "next"
                 ],
                 "title": "PaginatedResults[SourceWithTenantCount, str]"
+            },
+            "PaginatedResults_StealerLogCookie__str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/StealerLogCookie"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[StealerLogCookie, str]"
+            },
+            "PaginatedResults_StealerLogCredential__str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/StealerLogCredential"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[StealerLogCredential, str]"
             },
             "PaginatedResults_TenantFlareCommunityUser__int_": {
                 "properties": {
@@ -19582,7 +21643,7 @@
                     "data",
                     "metadata"
                 ],
-                "title": "RansomLeakEvent"
+                "title": "Ransom Leak"
             },
             "RansomLeakEventData": {
                 "properties": {
@@ -19595,7 +21656,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Url"
+                        "title": "Url",
+                        "description": "The URL of the ransom leak post."
                     },
                     "response_url": {
                         "anyOf": [
@@ -19606,7 +21668,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Response Url"
+                        "title": "Response Url",
+                        "description": "The URL of the response to the ransom leak post."
                     },
                     "title": {
                         "anyOf": [
@@ -19617,7 +21680,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Title"
+                        "title": "Title",
+                        "description": "The title of the ransom leak post."
                     },
                     "content": {
                         "anyOf": [
@@ -19628,7 +21692,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Content"
+                        "title": "Content",
+                        "description": "The content of the ransom leak post."
                     },
                     "body": {
                         "anyOf": [
@@ -19639,10 +21704,19 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Body"
+                        "title": "Body",
+                        "description": "The body of the ransom leak post."
                     },
                     "victim_information": {
-                        "$ref": "#/components/schemas/VictimInfo"
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/pyro__findings__ransomleaks__datamodels__VictimInformation"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The information relating to the victim of the ransom leak."
                     }
                 },
                 "type": "object",
@@ -19883,7 +21957,7 @@
                                 "$ref": "#/components/schemas/AzureTenantData"
                             },
                             {
-                                "$ref": "#/components/schemas/EmailData"
+                                "$ref": "#/components/schemas/EmailData-Output"
                             },
                             {
                                 "$ref": "#/components/schemas/UsernameData"
@@ -19895,7 +21969,7 @@
                             "mapping": {
                                 "azure_tenant": "#/components/schemas/AzureTenantData",
                                 "domain": "#/components/schemas/DomainData",
-                                "email": "#/components/schemas/EmailData",
+                                "email": "#/components/schemas/EmailData-Output",
                                 "username": "#/components/schemas/UsernameData"
                             }
                         }
@@ -21195,12 +23269,30 @@
                         },
                         "type": "array",
                         "title": "Noisy"
+                    },
+                    "freemail": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/DomainRestrictedTerm"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/KeywordRestrictedTerm"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/PresetRestrictedTerm"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Freemail"
                     }
                 },
                 "type": "object",
                 "required": [
                     "restricted",
-                    "noisy"
+                    "noisy",
+                    "freemail"
                 ],
                 "title": "RestrictedTerms"
             },
@@ -22002,11 +24094,9 @@
                 "type": "string",
                 "enum": [
                     "id",
-                    "title",
-                    "author",
-                    "created_at",
-                    "updated_at",
-                    "status"
+                    "published_at",
+                    "organization_id",
+                    "tenant_id"
                 ],
                 "title": "SortType"
             },
@@ -22577,6 +24667,80 @@
                 ],
                 "title": "StealerLogActions"
             },
+            "StealerLogCookie": {
+                "properties": {
+                    "host_key": {
+                        "type": "string",
+                        "title": "Host Key"
+                    },
+                    "path": {
+                        "type": "string",
+                        "title": "Path"
+                    },
+                    "expires_utc": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Expires Utc"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "value": {
+                        "type": "string",
+                        "title": "Value"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "host_key",
+                    "path",
+                    "expires_utc",
+                    "name",
+                    "value"
+                ],
+                "title": "StealerLogCookie"
+            },
+            "StealerLogCredential": {
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "title": "Url"
+                    },
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "password": {
+                        "type": "string",
+                        "title": "Password"
+                    },
+                    "hash": {
+                        "type": "string",
+                        "title": "Hash"
+                    },
+                    "application": {
+                        "type": "string",
+                        "title": "Application"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "url",
+                    "username",
+                    "password",
+                    "hash",
+                    "application"
+                ],
+                "title": "StealerLogCredential"
+            },
             "StealerLogData": {
                 "properties": {
                     "credentials": {
@@ -22625,7 +24789,8 @@
                             {
                                 "type": "null"
                             }
-                        ]
+                        ],
+                        "description": "Collection of data that relates to the victim and their infected device."
                     },
                     "malware_information": {
                         "anyOf": [
@@ -22635,7 +24800,8 @@
                             {
                                 "type": "null"
                             }
-                        ]
+                        ],
+                        "description": "Collection of data that relates to the malware that was used to infect the victim's device."
                     }
                 },
                 "type": "object",
@@ -22945,16 +25111,13 @@
                                 "$ref": "#/components/schemas/EntraIDParams"
                             },
                             {
+                                "$ref": "#/components/schemas/ForetraceParams"
+                            },
+                            {
                                 "type": "null"
                             }
-                        ]
-                    },
-                    "features": {
-                        "items": {
-                            "$ref": "#/components/schemas/EntraIDFeature"
-                        },
-                        "type": "array",
-                        "title": "Features"
+                        ],
+                        "title": "Params"
                     },
                     "state": {
                         "$ref": "#/components/schemas/TenantIntegrationState"
@@ -22981,7 +25144,6 @@
                     "tenant_id",
                     "type",
                     "params",
-                    "features",
                     "state",
                     "is_enabled",
                     "created_at",
@@ -23074,9 +25236,34 @@
             "TenantIntegrationType": {
                 "type": "string",
                 "enum": [
-                    "entra_id"
+                    "entra_id",
+                    "flare_community"
                 ],
                 "title": "TenantIntegrationType"
+            },
+            "TenantMemberRoleResponse": {
+                "properties": {
+                    "role": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TenantRoleType"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "is_organization_admin": {
+                        "type": "boolean",
+                        "title": "Is Organization Admin"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "role",
+                    "is_organization_admin"
+                ],
+                "title": "TenantMemberRoleResponse"
             },
             "TenantMetadataResponse": {
                 "properties": {
@@ -23378,7 +25565,15 @@
             "TestTenantIntegrationPayload": {
                 "properties": {
                     "params": {
-                        "$ref": "#/components/schemas/EntraIDParams"
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/EntraIDParams"
+                            },
+                            {
+                                "$ref": "#/components/schemas/ForetraceParams"
+                            }
+                        ],
+                        "title": "Params"
                     }
                 },
                 "type": "object",
@@ -24019,7 +26214,15 @@
                         "default": true
                     },
                     "params": {
-                        "$ref": "#/components/schemas/EntraIDParams"
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/EntraIDParams"
+                            },
+                            {
+                                "$ref": "#/components/schemas/ForetraceParams"
+                            }
+                        ],
+                        "title": "Params"
                     },
                     "status": {
                         "anyOf": [
@@ -24321,149 +26524,6 @@
                 ],
                 "title": "ValidationError"
             },
-            "VictimInfo": {
-                "properties": {
-                    "name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Name"
-                    },
-                    "display_name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Display Name"
-                    },
-                    "domain": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Domain"
-                    },
-                    "alternative_domains": {
-                        "anyOf": [
-                            {
-                                "items": {
-                                    "type": "string"
-                                },
-                                "type": "array"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Alternative Domains"
-                    },
-                    "industry": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Industry"
-                    },
-                    "employee_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Employee Count"
-                    },
-                    "city": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "City"
-                    },
-                    "state": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "State"
-                    },
-                    "country": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Country"
-                    },
-                    "latitude": {
-                        "anyOf": [
-                            {
-                                "type": "number"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Latitude"
-                    },
-                    "longitude": {
-                        "anyOf": [
-                            {
-                                "type": "number"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Longitude"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "name",
-                    "display_name",
-                    "domain",
-                    "alternative_domains",
-                    "industry",
-                    "employee_count",
-                    "city",
-                    "state",
-                    "country",
-                    "latitude",
-                    "longitude"
-                ],
-                "title": "VictimInfo"
-            },
             "VictimInformation": {
                 "properties": {
                     "ip_address": {
@@ -24499,7 +26559,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Username"
+                        "title": "Username",
+                        "description": "The username of account accessed on the infected device."
                     },
                     "country_code": {
                         "anyOf": [
@@ -24510,7 +26571,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Country Code"
+                        "title": "Country Code",
+                        "description": "The country code tied to the infected device."
                     },
                     "zip_code": {
                         "anyOf": [
@@ -24543,7 +26605,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Hwid"
+                        "title": "Hwid",
+                        "description": "The hardware ID of the infected device."
                     },
                     "current_language": {
                         "anyOf": [
@@ -24554,7 +26617,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Current Language"
+                        "title": "Current Language",
+                        "description": "The current language selected on the infected device."
                     },
                     "screensize_width": {
                         "anyOf": [
@@ -24565,7 +26629,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Screensize Width"
+                        "title": "Screensize Width",
+                        "description": "The width of the screen in pixels."
                     },
                     "screensize_height": {
                         "anyOf": [
@@ -24576,7 +26641,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Screensize Height"
+                        "title": "Screensize Height",
+                        "description": "The height of the screen in pixels."
                     },
                     "timezone": {
                         "anyOf": [
@@ -24587,7 +26653,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Timezone"
+                        "title": "Timezone",
+                        "description": "The timezone of the infected device."
                     },
                     "os": {
                         "anyOf": [
@@ -24598,7 +26665,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Os"
+                        "title": "Os",
+                        "description": "The operating system of the infected device."
                     },
                     "uac": {
                         "anyOf": [
@@ -24609,18 +26677,20 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Uac"
+                        "title": "Uac",
+                        "description": "The user account control (UAC) setting of the infected device."
                     },
                     "process_elevation": {
                         "anyOf": [
                             {
-                                "type": "string"
+                                "type": "boolean"
                             },
                             {
                                 "type": "null"
                             }
                         ],
-                        "title": "Process Elevation"
+                        "title": "Process Elevation",
+                        "description": "Whether operations during infection were elevated to administrator privileges."
                     },
                     "available_keyboards": {
                         "anyOf": [
@@ -24634,7 +26704,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Available Keyboards"
+                        "title": "Available Keyboards",
+                        "description": "The available keyboard layouts on the infected device."
                     },
                     "hardware": {
                         "anyOf": [
@@ -24648,7 +26719,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Hardware"
+                        "title": "Hardware",
+                        "description": "The hardware components of the infected device."
                     },
                     "anti_viruses": {
                         "anyOf": [
@@ -24662,7 +26734,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Anti Viruses"
+                        "title": "Anti Viruses",
+                        "description": "The anti-viruses installed on the infected device."
                     }
                 },
                 "type": "object",
@@ -24720,7 +26793,157 @@
                 ],
                 "title": "SortType"
             },
-            "pyro__events__firework__stealerlog__StealerLogEvent": {
+            "pyro__findings__ransomleaks__datamodels__VictimInformation": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "The name of the victim. This is the name of the company or organization that was breached."
+                    },
+                    "display_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Display Name"
+                    },
+                    "domain": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Domain",
+                        "description": "The domain of the victim. This is the domain of the company or organization that was breached."
+                    },
+                    "alternative_domains": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Alternative Domains"
+                    },
+                    "industry": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Industry",
+                        "description": "The industry of the company or organization that was breached."
+                    },
+                    "employee_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Employee Count",
+                        "description": "The number of employees of the company or organization that was breached."
+                    },
+                    "city": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "City",
+                        "description": "The city of operation of the company or organization that was breached."
+                    },
+                    "state": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "State",
+                        "description": "The state of operation of the company or organization that was breached."
+                    },
+                    "country": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Country",
+                        "description": "The country of operation of the company or organization that was breached."
+                    },
+                    "latitude": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Latitude"
+                    },
+                    "longitude": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Longitude"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "display_name",
+                    "domain",
+                    "alternative_domains",
+                    "industry",
+                    "employee_count",
+                    "city",
+                    "state",
+                    "country",
+                    "latitude",
+                    "longitude"
+                ],
+                "title": "VictimInformation"
+            },
+            "pyro__findings__stealerlogs__datamodels__StealerLogEvent": {
                 "properties": {
                     "event_type": {
                         "type": "string",
@@ -24740,7 +26963,7 @@
                     "data",
                     "metadata"
                 ],
-                "title": "StealerLogEvent"
+                "title": "Stealer Log"
             },
             "pyro__firework__backend__api4__reports__report_groups__reports__report_datamodels__ReportResponse": {
                 "properties": {
@@ -24754,6 +26977,18 @@
                 ],
                 "title": "ReportResponse"
             },
+            "pyro__reports__report_store__SortType": {
+                "type": "string",
+                "enum": [
+                    "id",
+                    "title",
+                    "author",
+                    "created_at",
+                    "updated_at",
+                    "status"
+                ],
+                "title": "SortType"
+            },
             "pyro__threat_flow__core__reports__report_store__ReportType": {
                 "type": "string",
                 "enum": [
@@ -24761,16 +26996,6 @@
                     "standard"
                 ],
                 "title": "ReportType"
-            },
-            "pyro__threat_flow__core__reports__report_store__SortType": {
-                "type": "string",
-                "enum": [
-                    "id",
-                    "published_at",
-                    "organization_id",
-                    "tenant_id"
-                ],
-                "title": "SortType"
             }
         },
         "securitySchemes": {

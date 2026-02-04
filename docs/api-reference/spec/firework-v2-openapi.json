@@ -377,16 +377,6 @@
                     "required": true
                 },
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ActivityUserMetadata"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
                     "400": {
                         "content": {
                             "application/json": {
@@ -396,6 +386,16 @@
                             }
                         },
                         "description": "Query is invalid."
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActivityUserMetadata"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     }
                 },
                 "tags": [
@@ -482,16 +482,6 @@
                     "required": true
                 },
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ActivityUserMetadata"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
                     "400": {
                         "content": {
                             "application/json": {
@@ -501,6 +491,16 @@
                             }
                         },
                         "description": "Query is invalid."
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActivityUserMetadata"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     }
                 },
                 "tags": [
@@ -549,16 +549,6 @@
                     "required": true
                 },
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ActivityUserMetadata"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
                     "400": {
                         "content": {
                             "application/json": {
@@ -568,6 +558,16 @@
                             }
                         },
                         "description": "Query is invalid."
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActivityUserMetadata"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     }
                 },
                 "tags": [
@@ -654,16 +654,6 @@
                     "required": true
                 },
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ActivityUserMetadata"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
                     "400": {
                         "content": {
                             "application/json": {
@@ -673,6 +663,16 @@
                             }
                         },
                         "description": "Query is invalid."
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActivityUserMetadata"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     }
                 },
                 "tags": [
@@ -1124,10 +1124,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "content": {},
-                        "description": "Returns the related leaked_data"
-                    },
                     "404": {
                         "content": {
                             "application/json": {
@@ -1137,6 +1133,10 @@
                             }
                         },
                         "description": "Activity not found"
+                    },
+                    "200": {
+                        "content": {},
+                        "description": "Returns the related leaked_data"
                     }
                 },
                 "tags": [
@@ -1224,10 +1224,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "content": {},
-                        "description": "Returns the related parent_uids data"
-                    },
                     "404": {
                         "content": {
                             "application/json": {
@@ -1237,6 +1233,10 @@
                             }
                         },
                         "description": "Activity not found"
+                    },
+                    "200": {
+                        "content": {},
+                        "description": "Returns the related parent_uids data"
                     }
                 },
                 "tags": [
@@ -1295,10 +1295,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "content": {},
-                        "description": "Returns related activities"
-                    },
                     "400": {
                         "content": {
                             "application/json": {
@@ -1318,6 +1314,10 @@
                             }
                         },
                         "description": "Activity not found"
+                    },
+                    "200": {
+                        "content": {},
+                        "description": "Returns related activities"
                     }
                 },
                 "tags": [
@@ -1831,7 +1831,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, bot, seller, chat_message, stealer_log, blog_post, financial_data, forum_topic, ransomleak, forum_profile, forum_post\n- open_web: social_media_account, paste, docker, bucket, stack_exchange, source_code_secrets, service, bucket_object, google, source_code_files\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -2037,15 +2037,15 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Search"
+                                    "$ref": "#/components/schemas/HttpError"
                                 }
                             }
                         },
-                        "description": "Returns the search result(s)."
+                        "description": "Identifier group does not exist."
                     },
                     "400": {
                         "content": {
@@ -2057,15 +2057,15 @@
                         },
                         "description": "Query is invalid."
                     },
-                    "404": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpError"
+                                    "$ref": "#/components/schemas/Search"
                                 }
                             }
                         },
-                        "description": "Identifier group does not exist."
+                        "description": "Returns the search result(s)."
                     }
                 },
                 "tags": [
@@ -2151,7 +2151,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, bot, seller, chat_message, stealer_log, blog_post, financial_data, forum_topic, ransomleak, forum_profile, forum_post\n- open_web: social_media_account, paste, docker, bucket, stack_exchange, source_code_secrets, service, bucket_object, google, source_code_files\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -2357,15 +2357,15 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Search"
+                                    "$ref": "#/components/schemas/HttpError"
                                 }
                             }
                         },
-                        "description": "Returns the search result(s)."
+                        "description": "Identifier group does not exist."
                     },
                     "400": {
                         "content": {
@@ -2377,15 +2377,15 @@
                         },
                         "description": "Query is invalid."
                     },
-                    "404": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpError"
+                                    "$ref": "#/components/schemas/Search"
                                 }
                             }
                         },
-                        "description": "Identifier group does not exist."
+                        "description": "Returns the search result(s)."
                     }
                 },
                 "tags": [
@@ -2467,16 +2467,6 @@
                     "required": true
                 },
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/post_assets__assets__200_response"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
                     "400": {
                         "content": {
                             "application/json": {
@@ -2486,6 +2476,16 @@
                             }
                         },
                         "description": "Query is invalid."
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/post_assets__assets__200_response"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     }
                 },
                 "tags": [
@@ -2722,7 +2722,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, bot, seller, chat_message, stealer_log, blog_post, financial_data, forum_topic, ransomleak, forum_profile, forum_post\n- open_web: social_media_account, paste, docker, bucket, stack_exchange, source_code_secrets, service, bucket_object, google, source_code_files\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -2928,15 +2928,15 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Search"
+                                    "$ref": "#/components/schemas/HttpError"
                                 }
                             }
                         },
-                        "description": "Returns the search result(s)."
+                        "description": "Identifier does not exist."
                     },
                     "400": {
                         "content": {
@@ -2948,15 +2948,15 @@
                         },
                         "description": "Query is invalid."
                     },
-                    "404": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpError"
+                                    "$ref": "#/components/schemas/Search"
                                 }
                             }
                         },
-                        "description": "Identifier does not exist."
+                        "description": "Returns the search result(s)."
                     }
                 },
                 "tags": [
@@ -3042,7 +3042,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, bot, seller, chat_message, stealer_log, blog_post, financial_data, forum_topic, ransomleak, forum_profile, forum_post\n- open_web: social_media_account, paste, docker, bucket, stack_exchange, source_code_secrets, service, bucket_object, google, source_code_files\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -3248,15 +3248,15 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Search"
+                                    "$ref": "#/components/schemas/HttpError"
                                 }
                             }
                         },
-                        "description": "Returns the search result(s)."
+                        "description": "Identifier does not exist."
                     },
                     "400": {
                         "content": {
@@ -3268,15 +3268,15 @@
                         },
                         "description": "Query is invalid."
                     },
-                    "404": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpError"
+                                    "$ref": "#/components/schemas/Search"
                                 }
                             }
                         },
-                        "description": "Identifier does not exist."
+                        "description": "Returns the search result(s)."
                     }
                 },
                 "tags": [
@@ -3326,16 +3326,6 @@
                         "content": {},
                         "description": "Returns the highlights of the identifier data matching on an activity content."
                     },
-                    "400": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpError"
-                                }
-                            }
-                        },
-                        "description": "Query is invalid."
-                    },
                     "404": {
                         "content": {
                             "application/json": {
@@ -3345,6 +3335,16 @@
                             }
                         },
                         "description": "Identifier or activity does not exist."
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpError"
+                                }
+                            }
+                        },
+                        "description": "Query is invalid."
                     }
                 },
                 "tags": [
@@ -3440,7 +3440,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, bot, seller, chat_message, stealer_log, blog_post, financial_data, forum_topic, ransomleak, forum_profile, forum_post\n- open_web: social_media_account, paste, docker, bucket, stack_exchange, source_code_secrets, service, bucket_object, google, source_code_files\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -3646,15 +3646,15 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Search"
+                                    "$ref": "#/components/schemas/HttpError"
                                 }
                             }
                         },
-                        "description": "Returns the search result(s)."
+                        "description": "Identifier does not exist."
                     },
                     "400": {
                         "content": {
@@ -3666,15 +3666,15 @@
                         },
                         "description": "Query is invalid."
                     },
-                    "404": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpError"
+                                    "$ref": "#/components/schemas/Search"
                                 }
                             }
                         },
-                        "description": "Identifier does not exist."
+                        "description": "Returns the search result(s)."
                     }
                 },
                 "tags": [
@@ -3782,7 +3782,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, bot, seller, chat_message, stealer_log, blog_post, financial_data, forum_topic, ransomleak, forum_profile, forum_post\n- open_web: social_media_account, paste, docker, bucket, stack_exchange, source_code_secrets, service, bucket_object, google, source_code_files\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -4061,7 +4061,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, bot, seller, chat_message, stealer_log, blog_post, financial_data, forum_topic, ransomleak, forum_profile, forum_post\n- open_web: social_media_account, paste, docker, bucket, stack_exchange, source_code_secrets, service, bucket_object, google, source_code_files\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -4387,16 +4387,6 @@
                     "required": true
                 },
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/put_current_user_profile__me_profile_200_response"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
                     "400": {
                         "content": {
                             "application/json": {
@@ -4406,6 +4396,16 @@
                             }
                         },
                         "description": "Update is invalid"
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/put_current_user_profile__me_profile_200_response"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     }
                 },
                 "tags": [
@@ -4464,16 +4464,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/OrganizationMemberPage"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
                     "404": {
                         "content": {
                             "application/json": {
@@ -4483,6 +4473,16 @@
                             }
                         },
                         "description": "Organization not found"
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrganizationMemberPage"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     }
                 },
                 "tags": [
@@ -4512,16 +4512,6 @@
                     "required": true
                 },
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/post_organization_members_api__organizations__int_organization_id__members_200_response"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
                     "404": {
                         "content": {
                             "application/json": {
@@ -4531,6 +4521,16 @@
                             }
                         },
                         "description": "Organization not found"
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/post_organization_members_api__organizations__int_organization_id__members_200_response"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     }
                 },
                 "tags": [
@@ -5122,7 +5122,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, bot, seller, chat_message, stealer_log, blog_post, financial_data, forum_topic, ransomleak, forum_profile, forum_post\n- open_web: social_media_account, paste, docker, bucket, stack_exchange, source_code_secrets, service, bucket_object, google, source_code_files\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -5326,16 +5326,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Search"
-                                }
-                            }
-                        },
-                        "description": "Returns the search result(s)."
-                    },
                     "400": {
                         "content": {
                             "application/json": {
@@ -5345,6 +5335,16 @@
                             }
                         },
                         "description": "Query is invalid."
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Search"
+                                }
+                            }
+                        },
+                        "description": "Returns the search result(s)."
                     }
                 },
                 "tags": [
@@ -5422,7 +5422,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, bot, seller, chat_message, stealer_log, blog_post, financial_data, forum_topic, ransomleak, forum_profile, forum_post\n- open_web: social_media_account, paste, docker, bucket, stack_exchange, source_code_secrets, service, bucket_object, google, source_code_files\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -5626,16 +5626,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Search"
-                                }
-                            }
-                        },
-                        "description": "Returns the search result(s)."
-                    },
                     "400": {
                         "content": {
                             "application/json": {
@@ -5645,6 +5635,16 @@
                             }
                         },
                         "description": "Query is invalid."
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Search"
+                                }
+                            }
+                        },
+                        "description": "Returns the search result(s)."
                     }
                 },
                 "tags": [
@@ -5885,89 +5885,877 @@
     },
     "components": {
         "responses": {
-            "HTTPException": {
+            "ParseError": {
                 "content": {},
-                "description": ""
+                "description": "When a mask can't be parsed"
             },
             "MaskError": {
                 "content": {},
                 "description": "When any error occurs on mask"
             },
-            "ParseError": {
+            "HTTPException": {
                 "content": {},
-                "description": "When a mask can't be parsed"
+                "description": ""
             }
         },
         "schemas": {
-            "ActivityAiAssistance": {
+            "HttpError": {
                 "properties": {
-                    "prompt": {
+                    "message": {
                         "type": "string"
                     },
-                    "response": {
-                        "type": "string"
-                    },
-                    "uid": {
+                    "code": {
                         "type": "string"
                     }
                 },
                 "type": "object"
             },
-            "ActivityUserMetadata": {
+            "Search": {
                 "properties": {
-                    "ignored_at": {
-                        "format": "date-time",
+                    "items": {
+                        "items": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "nb_hits": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/SearchLinks"
+                    },
+                    "search_after": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchLinks": {
+                "properties": {
+                    "next": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "IdentifierCreate": {
+                "properties": {
+                    "name": {
+                        "minLength": 1,
                         "type": "string"
                     },
-                    "remediated_asset_uuid": {
+                    "type": {
+                        "enum": [
+                            "domain",
+                            "brand",
+                            "name",
+                            "keyword",
+                            "github_repository",
+                            "username",
+                            "email",
+                            "search_query",
+                            "bin",
+                            "ip",
+                            "secret",
+                            "azure_tenant",
+                            "identity"
+                        ],
+                        "example": "domain",
                         "type": "string"
                     },
-                    "remediated_at": {
-                        "format": "date-time",
-                        "type": "string"
+                    "search_types": {
+                        "items": {
+                            "enum": [
+                                "listing",
+                                "bot",
+                                "social_media_account",
+                                "stealer_log",
+                                "domain",
+                                "bucket",
+                                "stack_exchange",
+                                "blog_post",
+                                "ransomleak",
+                                "service",
+                                "bucket_object",
+                                "forum_profile",
+                                "google",
+                                "source_code_files",
+                                "seller",
+                                "paste",
+                                "chat_message",
+                                "docker",
+                                "ad",
+                                "financial_data",
+                                "forum_topic",
+                                "source_code_secrets",
+                                "leak",
+                                "forum_post",
+                                "illicit_networks",
+                                "open_web",
+                                "buckets",
+                                "source_code",
+                                "leaks",
+                                "domains",
+                                "forum_content",
+                                "blog_content",
+                                "profile",
+                                "ads",
+                                "infected_devices",
+                                "social_media"
+                            ],
+                            "example": "listing",
+                            "type": "string"
+                        },
+                        "type": "array"
                     },
-                    "risk_score_updated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "tags": {
+                    "experimental_search_types": {
                         "items": {
                             "type": "string"
                         },
                         "type": "array"
                     },
-                    "uid": {
+                    "risks": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "data": {
+                        "properties": {},
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "data",
+                    "name",
+                    "search_types",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "Identifier": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "tenant_id": {
+                        "type": "integer"
+                    },
+                    "feed_id": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "enum": [
+                            "domain",
+                            "brand",
+                            "name",
+                            "keyword",
+                            "github_repository",
+                            "username",
+                            "email",
+                            "search_query",
+                            "bin",
+                            "ip",
+                            "secret",
+                            "azure_tenant",
+                            "identity"
+                        ],
+                        "example": "domain",
+                        "type": "string"
+                    },
+                    "search_types": {
+                        "items": {
+                            "enum": [
+                                "listing",
+                                "bot",
+                                "social_media_account",
+                                "stealer_log",
+                                "domain",
+                                "bucket",
+                                "stack_exchange",
+                                "blog_post",
+                                "ransomleak",
+                                "service",
+                                "bucket_object",
+                                "forum_profile",
+                                "google",
+                                "source_code_files",
+                                "seller",
+                                "paste",
+                                "chat_message",
+                                "docker",
+                                "financial_data",
+                                "forum_topic",
+                                "source_code_secrets",
+                                "leak",
+                                "forum_post",
+                                "illicit_networks",
+                                "open_web",
+                                "buckets",
+                                "source_code",
+                                "leaks",
+                                "domains",
+                                "forum_content",
+                                "blog_content",
+                                "profile",
+                                "infected_devices",
+                                "social_media"
+                            ],
+                            "example": "listing",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "experimental_search_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "v3_refs": {
+                        "$ref": "#/components/schemas/V3_Refs"
+                    },
+                    "risks": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "name": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "data": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "fetching_progress": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "urn": {
+                        "description": "The uniform resource name of the identifier.",
+                        "type": "string"
+                    },
+                    "is_disabled": {
+                        "type": "boolean"
+                    },
+                    "source": {
+                        "enum": [
+                            "USER",
+                            "SYSTEM_RELATION",
+                            "SELF_ONBOARDING",
+                            "ATTRIBUTE",
+                            "IDP_SYNC"
+                        ],
+                        "example": "USER",
+                        "type": "string"
+                    },
+                    "data_updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "data",
+                    "name",
+                    "search_types",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "V3_Refs": {
+                "properties": {
+                    "asset_uuid": {
                         "type": "string"
                     }
                 },
                 "type": "object"
             },
-            "ActivityUserMetadataIgnored": {
+            "IdentifierToggle": {
                 "properties": {
-                    "identifier_id": {
-                        "type": "integer"
-                    },
-                    "is_ignored": {
+                    "is_disabled": {
+                        "default": true,
+                        "description": "The `is_disabled` parameter is used to toggle the asset as either enabled or disabled.",
                         "type": "boolean"
                     }
                 },
                 "required": [
-                    "is_ignored"
+                    "is_disabled"
                 ],
                 "type": "object"
             },
-            "ActivityUserMetadataRemediated": {
+            "FeedAlert": {
                 "properties": {
-                    "identifier_id": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "id": {
                         "type": "integer"
                     },
-                    "is_remediated": {
+                    "type": {
+                        "enum": [
+                            "email",
+                            "channel",
+                            "azure_sentinel",
+                            "azure_sentinel_v2",
+                            "slack",
+                            "discord",
+                            "splunk",
+                            "jira",
+                            "teams",
+                            "servicenow",
+                            "webhook"
+                        ],
+                        "example": "email",
+                        "type": "string"
+                    },
+                    "feed_url": {
+                        "type": "string"
+                    },
+                    "feed_target_type": {
+                        "enum": [
+                            "assets/groups",
+                            "assets",
+                            "home"
+                        ],
+                        "example": "assets/groups",
+                        "type": "string"
+                    },
+                    "feed_target_id": {
+                        "type": "integer"
+                    },
+                    "frequency": {
+                        "type": "integer"
+                    },
+                    "start_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "params": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "tenant_id": {
+                        "type": "integer"
+                    },
+                    "organization_id": {
+                        "type": "integer"
+                    },
+                    "search_types": {
+                        "items": {
+                            "enum": [
+                                "attachment",
+                                "listing",
+                                "ransomleak",
+                                "forum_post",
+                                "forum_topic",
+                                "forum_profile",
+                                "blog_post",
+                                "seller",
+                                "paste",
+                                "leak",
+                                "chat_message",
+                                "domain",
+                                "bot",
+                                "stealer_log",
+                                "infected_devices",
+                                "driller",
+                                "driller_forum_topic",
+                                "driller_forum_post",
+                                "driller_profile",
+                                "cc",
+                                "ccbin",
+                                "financial_data",
+                                "leaked_data",
+                                "leaked_file",
+                                "document",
+                                "account",
+                                "actor",
+                                "forum_content",
+                                "blog_content",
+                                "profile",
+                                "leaked_credential",
+                                "illicit_networks",
+                                "open_web",
+                                "domains",
+                                "leaks",
+                                "social_media_account",
+                                "social_media",
+                                "source_code",
+                                "source_code_secrets_np",
+                                "source_code_secrets",
+                                "source_code_files",
+                                "docker",
+                                "stack_exchange",
+                                "google",
+                                "service",
+                                "driller_host",
+                                "buckets",
+                                "bucket",
+                                "bucket_object",
+                                "whois",
+                                "ad",
+                                "ads",
+                                "cookie",
+                                "pii",
+                                "experimental"
+                            ],
+                            "example": "attachment",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "experimental_search_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "risks": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "tenant_alert_channel_id": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "frequency",
+                    "params",
+                    "start_at",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "IdentifierGroup": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "tenant_id": {
+                        "type": "integer"
+                    },
+                    "feed_id": {
+                        "type": "integer"
+                    },
+                    "feed_owner_id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "urn": {
+                        "description": "The uniform resource name of the identifier group.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateGroupData": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Organization": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Display name",
+                        "type": "string"
+                    },
+                    "type": {
+                        "enum": [
+                            "direct",
+                            "service-firm",
+                            "training"
+                        ],
+                        "example": "direct",
+                        "type": "string"
+                    },
+                    "settings": {
+                        "$ref": "#/components/schemas/OrganizationSettings"
+                    },
+                    "file_analysis_enabled": {
+                        "type": "boolean"
+                    },
+                    "user_limit": {
+                        "type": "integer"
+                    },
+                    "access_level": {
+                        "type": "integer"
+                    },
+                    "urn": {
+                        "description": "The uniform resource name of the organization.",
+                        "type": "string"
+                    },
+                    "access_end_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "archived_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "authorization_workflow_enabled": {
                         "type": "boolean"
                     }
                 },
                 "required": [
-                    "is_remediated"
+                    "name"
                 ],
+                "type": "object"
+            },
+            "OrganizationSettings": {
+                "properties": {
+                    "permissions": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "through_distributor": {
+                        "type": "boolean"
+                    },
+                    "hs_takedown_properties": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationHSProperties": {
+                "type": "object"
+            },
+            "NewTenantInfo": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "industry": {
+                        "enum": [
+                            "global",
+                            "transport",
+                            "education",
+                            "energy",
+                            "finance",
+                            "healthcare",
+                            "manufacturing",
+                            "retail",
+                            "software",
+                            "telecommunication"
+                        ],
+                        "example": "global",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Tenant": {
+                "properties": {
+                    "id": {
+                        "description": "Tenant ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Tenant name",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Tenant type",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "This tenant's purpose",
+                        "type": "string"
+                    },
+                    "organization_id": {
+                        "description": "ID of the owner organization",
+                        "type": "integer"
+                    },
+                    "urn": {
+                        "description": "The uniform resource name of the tenant.",
+                        "type": "string"
+                    },
+                    "number_of_employees": {
+                        "description": "The number of employees for the tenant.",
+                        "type": "integer"
+                    },
+                    "industry": {
+                        "description": "The industry of the tenant.",
+                        "type": "string"
+                    },
+                    "is_disabled": {
+                        "description": "Indicates if the tenant is disabled",
+                        "type": "boolean"
+                    },
+                    "is_archived": {
+                        "description": "Indicates if the tenant is archived",
+                        "type": "boolean"
+                    },
+                    "feed_id": {
+                        "description": "ID of the feed",
+                        "type": "integer"
+                    },
+                    "permissions": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "prevent_global_search": {
+                        "description": "Indicates if the tenant can perform global searches",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "TenantWithCounts": {
+                "properties": {
+                    "next": {
+                        "type": "string"
+                    },
+                    "items": {
+                        "$ref": "#/components/schemas/TenantWithCounts"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatedPermission": {
+                "properties": {
+                    "updated_value": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "AuditEvent": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "organization_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "data": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "original_data": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "affected_entities": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "actor_data": {
+                        "properties": {},
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "data"
+                ],
+                "type": "object"
+            },
+            "OrganizationMemberData": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "organization_member_permissions": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "user_permissions": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "memberships": {
+                        "items": {
+                            "$ref": "#/components/schemas/UserTenantMembership"
+                        },
+                        "type": "array"
+                    },
+                    "send_welcome_email": {
+                        "default": true,
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "email",
+                    "name",
+                    "organization_member_permissions",
+                    "surname"
+                ],
+                "type": "object"
+            },
+            "UserTenantMembership": {
+                "properties": {
+                    "tenant_id": {
+                        "type": "integer"
+                    },
+                    "is_readonly": {
+                        "type": "boolean"
+                    },
+                    "role": {
+                        "enum": [
+                            "viewer",
+                            "editor",
+                            "admin"
+                        ],
+                        "example": "viewer",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "tenant_id"
+                ],
+                "type": "object"
+            },
+            "OrganizationMemberWithMetadata": {
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/OrganizationMember"
+                    },
+                    "tenant_count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationMember": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "organization_member_permissions": {
+                        "$ref": "#/components/schemas/OrganizationMemberPermission"
+                    },
+                    "is_disabled": {
+                        "type": "boolean"
+                    },
+                    "registered_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "urn": {
+                        "description": "The uniform resource name of the member.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationMemberPermission": {
+                "properties": {
+                    "*": {
+                        "additionalProperties": {
+                            "type": "boolean"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationMemberPage": {
+                "properties": {
+                    "members": {
+                        "items": {
+                            "$ref": "#/components/schemas/OrganizationMemberWithMetadata"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "EnableState": {
+                "properties": {
+                    "is_disabled": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "PermissionData": {
+                "properties": {
+                    "permission": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "permission",
+                    "value"
+                ],
+                "type": "object"
+            },
+            "OrganizationMonthlyUsage": {
+                "properties": {
+                    "timestamp": {
+                        "type": "string"
+                    },
+                    "identifier_count": {
+                        "type": "integer"
+                    },
+                    "global_search_calls_count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "HighlightPayload": {
+                "properties": {
+                    "query_string": {
+                        "type": "string"
+                    },
+                    "identifier_ids": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    }
+                },
                 "type": "object"
             },
             "ActivityUserNotes": {
@@ -5981,6 +6769,35 @@
                 ],
                 "type": "object"
             },
+            "ActivityUserMetadata": {
+                "properties": {
+                    "uid": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "risk_score_updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "remediated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "ignored_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "remediated_asset_uuid": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "ActivityUserRiskScore": {
                 "properties": {
                     "risk_score": {
@@ -5990,6 +6807,48 @@
                 "required": [
                     "risk_score"
                 ],
+                "type": "object"
+            },
+            "ActivityUserMetadataRemediated": {
+                "properties": {
+                    "is_remediated": {
+                        "type": "boolean"
+                    },
+                    "identifier_id": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "is_remediated"
+                ],
+                "type": "object"
+            },
+            "ActivityUserMetadataIgnored": {
+                "properties": {
+                    "is_ignored": {
+                        "type": "boolean"
+                    },
+                    "identifier_id": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "is_ignored"
+                ],
+                "type": "object"
+            },
+            "ActivityAiAssistance": {
+                "properties": {
+                    "uid": {
+                        "type": "string"
+                    },
+                    "prompt": {
+                        "type": "string"
+                    },
+                    "response": {
+                        "type": "string"
+                    }
+                },
                 "type": "object"
             },
             "ActivityUserTags": {
@@ -6006,272 +6865,331 @@
                 ],
                 "type": "object"
             },
-            "AlertUpdate": {
+            "UserUpdate": {
                 "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "last_result_date": {
-                        "format": "date",
+                    "name": {
                         "type": "string"
                     },
-                    "processed_at": {
-                        "format": "date",
+                    "surname": {
+                        "type": "string"
+                    },
+                    "settings": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "language": {
+                        "type": "string"
+                    },
+                    "color_scheme": {
+                        "enum": [
+                            "auto",
+                            "light",
+                            "dark"
+                        ],
+                        "example": "auto",
                         "type": "string"
                     }
                 },
+                "required": [
+                    "color_scheme",
+                    "name",
+                    "settings",
+                    "surname"
+                ],
                 "type": "object"
             },
-            "ArchiveFile": {
-                "properties": {
-                    "data": {
-                        "$ref": "#/components/schemas/ArchiveFileData"
+            "UserProfile": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/User"
                     },
-                    "errors": {
-                        "$ref": "#/components/schemas/ArchiveFileErrors"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "metadata": {
-                        "$ref": "#/components/schemas/ArchiveFileMetadata"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "ransomleak_uid": {
-                        "type": "string"
-                    },
-                    "retry_after": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "retry_count": {
-                        "type": "integer"
-                    },
-                    "source": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "status_updated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "url": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "ArchiveFileData": {
-                "properties": {
-                    "parts": {
-                        "items": {
-                            "$ref": "#/components/schemas/MultiPartData"
+                    {
+                        "properties": {
+                            "settings": {
+                                "$ref": "#/components/schemas/UserSettings"
+                            },
+                            "feature_flags": {
+                                "$ref": "#/components/schemas/UserProfile_allOf_feature_flags"
+                            },
+                            "tenants": {
+                                "items": {
+                                    "$ref": "#/components/schemas/Tenant"
+                                },
+                                "type": "array"
+                            },
+                            "is_sso_mandatory": {
+                                "type": "boolean"
+                            },
+                            "has_password": {
+                                "type": "boolean"
+                            },
+                            "urn": {
+                                "type": "string"
+                            },
+                            "cello_jwt": {
+                                "type": "string"
+                            },
+                            "needs_eusa": {
+                                "type": "boolean"
+                            },
+                            "domain": {
+                                "type": "string"
+                            },
+                            "language": {
+                                "type": "string"
+                            }
                         },
-                        "type": "array"
-                    }
-                },
-                "type": "object"
-            },
-            "ArchiveFileErrorData": {
-                "properties": {
-                    "traceback": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "ArchiveFileErrors": {
-                "properties": {
-                    "errors": {
-                        "items": {
-                            "$ref": "#/components/schemas/ArchiveFileErrorData"
-                        },
-                        "type": "array"
-                    }
-                },
-                "type": "object"
-            },
-            "ArchiveFileMetadata": {
-                "properties": {
-                    "estimated_created_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "event_id": {
-                        "type": "integer"
-                    },
-                    "event_id_v2": {
-                        "type": "string"
-                    },
-                    "first_crawled_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "last_crawled_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "scraped_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "scraper_id": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "AuditEvent": {
-                "properties": {
-                    "actor_data": {
-                        "properties": {},
                         "type": "object"
-                    },
-                    "affected_entities": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "created_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "data": {
-                        "properties": {},
-                        "type": "object"
-                    },
+                    }
+                ]
+            },
+            "User": {
+                "properties": {
                     "id": {
                         "type": "integer"
+                    },
+                    "name": {
+                        "description": "Users's name",
+                        "type": "string"
+                    },
+                    "surname": {
+                        "description": "User's surname",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "User's email",
+                        "type": "string"
                     },
                     "organization_id": {
+                        "description": "ID of the owner organization",
                         "type": "integer"
                     },
-                    "original_data": {
+                    "settings": {
+                        "$ref": "#/components/schemas/UserSettings"
+                    },
+                    "is_disabled": {
+                        "type": "boolean"
+                    },
+                    "feature_flags": {
                         "properties": {},
                         "type": "object"
                     },
-                    "user_id": {
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "data"
-                ],
-                "type": "object"
-            },
-            "CredentialUrl": {
-                "properties": {
-                    "credential_hash": {
-                        "type": "string"
-                    },
-                    "domain": {
-                        "type": "string"
-                    },
-                    "is_stealer_log": {
-                        "type": "boolean"
-                    },
-                    "url": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "Details": {
-                "properties": {
-                    "summary": {
-                        "$ref": "#/components/schemas/InsightText"
-                    },
-                    "title": {
-                        "$ref": "#/components/schemas/InsightText"
-                    }
-                },
-                "required": [
-                    "title"
-                ],
-                "type": "object"
-            },
-            "EnableState": {
-                "properties": {
-                    "is_disabled": {
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
-            "ExportPriorityActionVisualizationData": {
-                "properties": {
-                    "format": {
-                        "enum": [
-                            "csv"
-                        ],
-                        "example": "csv",
-                        "type": "string"
-                    },
-                    "stream": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "format",
-                    "stream"
-                ],
-                "type": "object"
-            },
-            "FeedAlert": {
-                "properties": {
-                    "created_at": {
+                    "registered_at": {
                         "format": "date-time",
                         "type": "string"
                     },
-                    "experimental_search_types": {
+                    "urn": {
+                        "description": "The uniform resource name of the user.",
+                        "type": "string"
+                    },
+                    "organization_member_permissions": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "language": {
+                        "description": "User's language",
+                        "type": "string"
+                    },
+                    "color_scheme": {
+                        "enum": [
+                            "auto",
+                            "light",
+                            "dark"
+                        ],
+                        "example": "auto",
+                        "type": "string"
+                    },
+                    "flare_role": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "color_scheme",
+                    "email",
+                    "language",
+                    "name"
+                ],
+                "type": "object"
+            },
+            "UserSettings": {
+                "properties": {
+                    "default_search": {
+                        "type": "string"
+                    },
+                    "permissions": {
                         "items": {
                             "type": "string"
                         },
                         "type": "array"
                     },
-                    "feed_target_id": {
-                        "type": "integer"
-                    },
-                    "feed_target_type": {
-                        "enum": [
-                            "assets/groups",
-                            "assets",
-                            "home"
-                        ],
-                        "example": "assets/groups",
+                    "organization_member_permissions": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "PaginatedCredentials": {
+                "properties": {
+                    "next": {
                         "type": "string"
                     },
-                    "feed_url": {
-                        "type": "string"
-                    },
-                    "frequency": {
-                        "type": "integer"
-                    },
+                    "items": {
+                        "$ref": "#/components/schemas/LeakActivityCredential"
+                    }
+                },
+                "type": "object"
+            },
+            "LeakActivityCredential": {
+                "properties": {
                     "id": {
                         "type": "integer"
+                    },
+                    "source_id": {
+                        "type": "string"
+                    },
+                    "imported_at": {
+                        "type": "string"
+                    },
+                    "identity_name": {
+                        "type": "string"
+                    },
+                    "hash": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "$ref": "#/components/schemas/source"
+                    },
+                    "remediated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "ignored_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "known_password_id": {
+                        "type": "integer"
+                    },
+                    "credential_hash": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "identity_name",
+                    "imported_at",
+                    "source_id"
+                ],
+                "type": "object"
+            },
+            "source": {
+                "properties": {
+                    "id": {
+                        "type": "string"
                     },
                     "name": {
                         "type": "string"
                     },
-                    "organization_id": {
-                        "type": "integer"
+                    "description_en": {
+                        "type": "string"
+                    },
+                    "description_fr": {
+                        "type": "string"
+                    },
+                    "breached_at": {
+                        "type": "string"
+                    },
+                    "leaked_at": {
+                        "type": "string"
+                    },
+                    "pii_tags": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "id"
+                ],
+                "type": "object"
+            },
+            "GroupedFeedAlerts": {
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
                     },
                     "params": {
                         "properties": {},
                         "type": "object"
                     },
-                    "risks": {
+                    "alerts": {
+                        "$ref": "#/components/schemas/FeedAlert"
+                    },
+                    "organization_settings": {
+                        "$ref": "#/components/schemas/OrganizationSettings"
+                    }
+                },
+                "required": [
+                    "alerts",
+                    "key",
+                    "organization_settings",
+                    "params",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "AlertUpdate": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "processed_at": {
+                        "format": "date",
+                        "type": "string"
+                    },
+                    "last_result_date": {
+                        "format": "date",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PageView": {
+                "properties": {
+                    "route": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "route"
+                ],
+                "type": "object"
+            },
+            "TenantIgnoredTerms": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "terms": {
                         "items": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "type": "array"
                     },
@@ -6339,507 +7257,344 @@
                         },
                         "type": "array"
                     },
-                    "start_at": {
+                    "created_at": {
                         "format": "date-time",
                         "type": "string"
                     },
-                    "tenant_alert_channel_id": {
-                        "type": "integer"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "type": {
-                        "enum": [
-                            "email",
-                            "channel",
-                            "azure_sentinel",
-                            "azure_sentinel_v2",
-                            "slack",
-                            "discord",
-                            "splunk",
-                            "jira",
-                            "teams",
-                            "servicenow",
-                            "webhook"
-                        ],
-                        "example": "email",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "frequency",
-                    "params",
-                    "start_at",
-                    "type"
-                ],
-                "type": "object"
-            },
-            "FootprintVisualizationChart": {
-                "properties": {
-                    "data": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "id": {
-                        "type": "string"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "enum": [
-                            "comparison_chart",
-                            "tabular_chart",
-                            "radial_chart",
-                            "line_chart",
-                            "bar_chart",
-                            "radar_chart"
-                        ],
-                        "example": "comparison_chart",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "data",
-                    "id",
-                    "type"
-                ],
-                "type": "object"
-            },
-            "GroupedFeedAlerts": {
-                "properties": {
-                    "alerts": {
-                        "$ref": "#/components/schemas/FeedAlert"
-                    },
-                    "key": {
-                        "type": "string"
-                    },
-                    "organization_settings": {
-                        "$ref": "#/components/schemas/OrganizationSettings"
-                    },
-                    "params": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "type": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "alerts",
-                    "key",
-                    "organization_settings",
-                    "params",
-                    "type"
-                ],
-                "type": "object"
-            },
-            "HighlightPayload": {
-                "properties": {
-                    "identifier_ids": {
-                        "items": {
-                            "type": "integer"
-                        },
-                        "type": "array"
-                    },
-                    "query_string": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "HttpError": {
-                "properties": {
-                    "code": {
-                        "type": "string"
-                    },
-                    "message": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "Identifier": {
-                "properties": {
-                    "count": {
-                        "type": "integer"
-                    },
-                    "data": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "data_updated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "experimental_search_types": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "feed_id": {
-                        "type": "integer"
-                    },
-                    "fetching_progress": {
-                        "type": "integer"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "is_disabled": {
-                        "type": "boolean"
-                    },
-                    "name": {
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "risks": {
-                        "items": {
-                            "type": "integer"
-                        },
-                        "type": "array"
-                    },
-                    "search_types": {
-                        "items": {
-                            "enum": [
-                                "listing",
-                                "source_code_files",
-                                "service",
-                                "stealer_log",
-                                "social_media_account",
-                                "ransomleak",
-                                "forum_post",
-                                "bot",
-                                "docker",
-                                "chat_message",
-                                "stack_exchange",
-                                "forum_topic",
-                                "paste",
-                                "seller",
-                                "source_code_secrets",
-                                "blog_post",
-                                "domain",
-                                "google",
-                                "bucket_object",
-                                "financial_data",
-                                "bucket",
-                                "leak",
-                                "forum_profile",
-                                "illicit_networks",
-                                "open_web",
-                                "buckets",
-                                "source_code",
-                                "leaks",
-                                "domains",
-                                "forum_content",
-                                "blog_content",
-                                "profile",
-                                "infected_devices",
-                                "social_media"
-                            ],
-                            "example": "listing",
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "source": {
-                        "enum": [
-                            "USER",
-                            "SYSTEM_RELATION",
-                            "SELF_ONBOARDING",
-                            "ATTRIBUTE"
-                        ],
-                        "example": "USER",
-                        "type": "string"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "type": {
-                        "enum": [
-                            "domain",
-                            "brand",
-                            "name",
-                            "keyword",
-                            "github_repository",
-                            "username",
-                            "email",
-                            "search_query",
-                            "bin",
-                            "ip",
-                            "secret",
-                            "azure_tenant",
-                            "identity"
-                        ],
-                        "example": "domain",
-                        "type": "string"
-                    },
-                    "urn": {
-                        "description": "The uniform resource name of the identifier.",
-                        "type": "string"
-                    },
-                    "v3_refs": {
-                        "$ref": "#/components/schemas/V3_Refs"
-                    }
-                },
-                "required": [
-                    "data",
-                    "name",
-                    "search_types",
-                    "type"
-                ],
-                "type": "object"
-            },
-            "IdentifierCreate": {
-                "properties": {
-                    "data": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "experimental_search_types": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "name": {
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "risks": {
-                        "items": {
-                            "type": "integer"
-                        },
-                        "type": "array"
-                    },
-                    "search_types": {
-                        "items": {
-                            "enum": [
-                                "listing",
-                                "source_code_files",
-                                "service",
-                                "stealer_log",
-                                "social_media_account",
-                                "ad",
-                                "ransomleak",
-                                "forum_post",
-                                "bot",
-                                "docker",
-                                "chat_message",
-                                "stack_exchange",
-                                "forum_topic",
-                                "paste",
-                                "seller",
-                                "source_code_secrets",
-                                "blog_post",
-                                "domain",
-                                "google",
-                                "bucket_object",
-                                "financial_data",
-                                "bucket",
-                                "leak",
-                                "forum_profile",
-                                "illicit_networks",
-                                "open_web",
-                                "buckets",
-                                "source_code",
-                                "leaks",
-                                "domains",
-                                "forum_content",
-                                "blog_content",
-                                "profile",
-                                "ads",
-                                "infected_devices",
-                                "social_media"
-                            ],
-                            "example": "listing",
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "type": {
-                        "enum": [
-                            "domain",
-                            "brand",
-                            "name",
-                            "keyword",
-                            "github_repository",
-                            "username",
-                            "email",
-                            "search_query",
-                            "bin",
-                            "ip",
-                            "secret",
-                            "azure_tenant",
-                            "identity"
-                        ],
-                        "example": "domain",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "data",
-                    "name",
-                    "search_types",
-                    "type"
-                ],
-                "type": "object"
-            },
-            "IdentifierGroup": {
-                "properties": {
-                    "feed_id": {
-                        "type": "integer"
-                    },
-                    "feed_owner_id": {
-                        "type": "integer"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "urn": {
-                        "description": "The uniform resource name of the identifier group.",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierRelationData": {
-                "properties": {
-                    "asset_relation_uuid": {
-                        "type": "string"
-                    },
-                    "identifier_id": {
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "asset_relation_uuid",
-                    "identifier_id"
-                ],
-                "type": "object"
-            },
-            "IdentifierToggle": {
-                "properties": {
-                    "is_disabled": {
-                        "default": true,
-                        "description": "The `is_disabled` parameter is used to toggle the asset as either enabled or disabled.",
+                    "clean_past_events": {
                         "type": "boolean"
                     }
                 },
                 "required": [
-                    "is_disabled"
+                    "clean_past_events",
+                    "created_at",
+                    "name",
+                    "search_types",
+                    "uuid"
                 ],
                 "type": "object"
             },
-            "Import": {
+            "TenantData": {
+                "properties": {
+                    "name": {
+                        "description": "The Tenant display name",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "The Tenant's purpose / description",
+                        "type": "string"
+                    },
+                    "number_of_employees": {
+                        "description": "The number of employees for the tenant",
+                        "type": "integer"
+                    },
+                    "industry": {
+                        "description": "The Tenant's industry",
+                        "enum": [
+                            "global",
+                            "transport",
+                            "education",
+                            "energy",
+                            "finance",
+                            "healthcare",
+                            "manufacturing",
+                            "retail",
+                            "software",
+                            "telecommunication"
+                        ],
+                        "example": "global",
+                        "type": "string"
+                    },
+                    "global_search_calls_limit": {
+                        "description": "The number of API calls allowed for the tenant.",
+                        "type": "integer"
+                    },
+                    "prevent_global_search": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "description",
+                    "industry",
+                    "name",
+                    "number_of_employees"
+                ],
+                "type": "object"
+            },
+            "UserTenantAccessRequest": {
+                "properties": {
+                    "users": {
+                        "items": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/UserTenantAccess"
+                                }
+                            ],
+                            "description": "User given access to a tenant.",
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "UserTenantAccess": {
+                "properties": {
+                    "user_id": {
+                        "description": "The ID of the user to add to the tenant",
+                        "type": "integer"
+                    },
+                    "is_readonly": {
+                        "description": "Access given to the user for the tenant",
+                        "type": "boolean"
+                    },
+                    "role": {
+                        "description": "Role given to the user for the tenant",
+                        "enum": [
+                            "viewer",
+                            "editor",
+                            "admin"
+                        ],
+                        "example": "viewer",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "user_id"
+                ],
+                "type": "object"
+            },
+            "TenantUsers": {
+                "properties": {
+                    "next": {
+                        "type": "integer"
+                    },
+                    "items": {
+                        "$ref": "#/components/schemas/TenantUser"
+                    }
+                },
+                "type": "object"
+            },
+            "TenantUser": {
                 "properties": {
                     "id": {
                         "type": "integer"
                     },
-                    "integration": {
-                        "enum": [
-                            "csv"
-                        ],
-                        "example": "csv",
+                    "name": {
                         "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "is_readonly": {
+                        "type": "boolean"
+                    },
+                    "role": {
+                        "enum": [
+                            "viewer",
+                            "editor",
+                            "admin"
+                        ],
+                        "example": "viewer",
+                        "type": "string"
+                    },
+                    "is_disabled": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "TenantDiscoveryPolicy": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
                     },
                     "tenant_id": {
                         "type": "integer"
                     },
                     "type": {
                         "enum": [
-                            "identifiers"
+                            "auto-accept",
+                            "ignore-pattern"
                         ],
-                        "example": "identifiers",
+                        "example": "auto-accept",
+                        "type": "string"
+                    },
+                    "identifier_types": {
+                        "items": {
+                            "enum": [
+                                "domain",
+                                "brand",
+                                "name",
+                                "keyword",
+                                "github_repository",
+                                "username",
+                                "email",
+                                "search_query",
+                                "bin",
+                                "ip",
+                                "secret",
+                                "azure_tenant",
+                                "identity"
+                            ],
+                            "example": "domain",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "terms": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "enabled": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "NewReport": {
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "elements": {
+                        "items": {
+                            "$ref": "#/components/schemas/ReportElementUpdate"
+                        },
+                        "type": "array"
+                    },
+                    "audience": {
+                        "enum": [
+                            "technical",
+                            "general"
+                        ],
+                        "example": "technical",
                         "type": "string"
                     }
                 },
                 "required": [
-                    "id",
-                    "integration",
-                    "tenant_id",
-                    "type"
+                    "author",
+                    "title"
                 ],
                 "type": "object"
             },
-            "ImportItemFailures": {
+            "ReportElementUpdate": {
                 "properties": {
-                    "message": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "position": {
+                        "type": "integer"
+                    },
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "sort_by": {
+                        "enum": [
+                            "custom",
+                            "alphabetical",
+                            "date"
+                        ],
+                        "example": "custom",
+                        "type": "string"
+                    },
+                    "time_interval": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatedReport": {
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "elements": {
+                        "items": {
+                            "$ref": "#/components/schemas/ReportElementUpdate"
+                        },
+                        "type": "array"
+                    },
+                    "audience": {
+                        "enum": [
+                            "technical",
+                            "general"
+                        ],
+                        "example": "technical",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PriorityActionHeader": {
+                "properties": {
+                    "uuid": {
                         "type": "string"
                     },
                     "type": {
-                        "enum": [
-                            "unknown_identifier_type",
-                            "bad_identifier_query",
-                            "above_max_group_nesting",
-                            "unknown_identifier_source",
-                            "identifier_not_allowed",
-                            "identifier_type_not_allowed",
-                            "too_many_attributes",
-                            "invalid_attribute_format"
-                        ],
-                        "example": "unknown_identifier_type",
                         "type": "string"
-                    }
-                },
-                "required": [
-                    "message",
-                    "type"
-                ],
-                "type": "object"
-            },
-            "Insight": {
-                "properties": {
-                    "analysis": {
-                        "$ref": "#/components/schemas/InsightText"
                     },
-                    "date": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "created_at": {
                         "format": "date-time",
                         "type": "string"
                     },
-                    "paragraph": {
-                        "$ref": "#/components/schemas/InsightText"
+                    "status_last_updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "snooze_until": {
+                        "format": "date-time",
+                        "type": "string"
                     },
                     "title": {
                         "$ref": "#/components/schemas/InsightText"
                     },
-                    "type": {
-                        "type": "string"
+                    "summary": {
+                        "$ref": "#/components/schemas/InsightText"
                     },
-                    "visualization": {
+                    "tags": {
                         "items": {
-                            "$ref": "#/components/schemas/FootprintVisualizationChart"
+                            "type": "string"
                         },
                         "type": "array"
                     }
                 },
                 "required": [
-                    "analysis",
-                    "date",
-                    "paragraph",
+                    "created_at",
+                    "snooze_until",
+                    "status",
+                    "status_last_updated_at",
+                    "tags",
                     "title",
-                    "type"
+                    "type",
+                    "uuid"
                 ],
                 "type": "object"
             },
             "InsightText": {
                 "properties": {
+                    "text": {
+                        "description": "Text for the insight",
+                        "type": "string"
+                    },
                     "params": {
                         "description": "Relevant data related to the text",
                         "properties": {},
                         "type": "object"
-                    },
-                    "text": {
-                        "description": "Text for the insight",
-                        "type": "string"
                     }
                 },
                 "required": [
@@ -6847,66 +7602,26 @@
                 ],
                 "type": "object"
             },
-            "LeakActivityCredential": {
+            "Details": {
                 "properties": {
-                    "credential_hash": {
-                        "type": "string"
+                    "title": {
+                        "$ref": "#/components/schemas/InsightText"
                     },
-                    "domain": {
-                        "type": "string"
-                    },
-                    "hash": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "identity_name": {
-                        "type": "string"
-                    },
-                    "ignored_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "imported_at": {
-                        "type": "string"
-                    },
-                    "known_password_id": {
-                        "type": "integer"
-                    },
-                    "remediated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "source": {
-                        "$ref": "#/components/schemas/source"
-                    },
-                    "source_id": {
-                        "type": "string"
+                    "summary": {
+                        "$ref": "#/components/schemas/InsightText"
                     }
                 },
                 "required": [
-                    "id",
-                    "identity_name",
-                    "imported_at",
-                    "source_id"
+                    "title"
                 ],
-                "type": "object"
-            },
-            "LeakedCredential": {
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    }
-                },
                 "type": "object"
             },
             "Mitre": {
                 "properties": {
-                    "mitigation": {
+                    "techniques": {
                         "$ref": "#/components/schemas/MitreLink"
                     },
-                    "techniques": {
+                    "mitigation": {
                         "$ref": "#/components/schemas/MitreLink"
                     }
                 },
@@ -6938,364 +7653,10 @@
                 ],
                 "type": "object"
             },
-            "MultiPartData": {
-                "properties": {
-                    "size": {
-                        "type": "integer"
-                    },
-                    "url": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "NewReport": {
-                "properties": {
-                    "audience": {
-                        "enum": [
-                            "technical",
-                            "general"
-                        ],
-                        "example": "technical",
-                        "type": "string"
-                    },
-                    "author": {
-                        "type": "string"
-                    },
-                    "elements": {
-                        "items": {
-                            "$ref": "#/components/schemas/ReportElementUpdate"
-                        },
-                        "type": "array"
-                    },
-                    "title": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "author",
-                    "title"
-                ],
-                "type": "object"
-            },
-            "NewTenantInfo": {
-                "properties": {
-                    "description": {
-                        "type": "string"
-                    },
-                    "industry": {
-                        "enum": [
-                            "global",
-                            "transport",
-                            "education",
-                            "energy",
-                            "finance",
-                            "healthcare",
-                            "manufacturing",
-                            "retail",
-                            "software",
-                            "telecommunication"
-                        ],
-                        "example": "global",
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "Organization": {
-                "properties": {
-                    "access_end_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "access_level": {
-                        "type": "integer"
-                    },
-                    "archived_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "authorization_workflow_enabled": {
-                        "type": "boolean"
-                    },
-                    "file_analysis_enabled": {
-                        "type": "boolean"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "name": {
-                        "description": "Display name",
-                        "type": "string"
-                    },
-                    "settings": {
-                        "$ref": "#/components/schemas/OrganizationSettings"
-                    },
-                    "type": {
-                        "enum": [
-                            "direct",
-                            "service-firm",
-                            "training"
-                        ],
-                        "example": "direct",
-                        "type": "string"
-                    },
-                    "urn": {
-                        "description": "The uniform resource name of the organization.",
-                        "type": "string"
-                    },
-                    "user_limit": {
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "name"
-                ],
-                "type": "object"
-            },
-            "OrganizationHSProperties": {
-                "type": "object"
-            },
-            "OrganizationMember": {
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "is_disabled": {
-                        "type": "boolean"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "organization_member_permissions": {
-                        "$ref": "#/components/schemas/OrganizationMemberPermission"
-                    },
-                    "registered_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "surname": {
-                        "type": "string"
-                    },
-                    "urn": {
-                        "description": "The uniform resource name of the member.",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "OrganizationMemberData": {
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "memberships": {
-                        "items": {
-                            "$ref": "#/components/schemas/UserTenantMembership"
-                        },
-                        "type": "array"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "organization_member_permissions": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "send_welcome_email": {
-                        "default": true,
-                        "type": "boolean"
-                    },
-                    "surname": {
-                        "type": "string"
-                    },
-                    "user_permissions": {
-                        "properties": {},
-                        "type": "object"
-                    }
-                },
-                "required": [
-                    "email",
-                    "name",
-                    "organization_member_permissions",
-                    "surname"
-                ],
-                "type": "object"
-            },
-            "OrganizationMemberPage": {
-                "properties": {
-                    "members": {
-                        "items": {
-                            "$ref": "#/components/schemas/OrganizationMemberWithMetadata"
-                        },
-                        "type": "array"
-                    }
-                },
-                "type": "object"
-            },
-            "OrganizationMemberPermission": {
-                "properties": {
-                    "*": {
-                        "additionalProperties": {
-                            "type": "boolean"
-                        },
-                        "type": "object"
-                    }
-                },
-                "type": "object"
-            },
-            "OrganizationMemberWithMetadata": {
-                "properties": {
-                    "tenant_count": {
-                        "type": "integer"
-                    },
-                    "user": {
-                        "$ref": "#/components/schemas/OrganizationMember"
-                    }
-                },
-                "type": "object"
-            },
-            "OrganizationMonthlyUsage": {
-                "properties": {
-                    "global_search_calls_count": {
-                        "type": "integer"
-                    },
-                    "identifier_count": {
-                        "type": "integer"
-                    },
-                    "timestamp": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "OrganizationSettings": {
-                "properties": {
-                    "hs_takedown_properties": {
-                        "type": "object"
-                    },
-                    "permissions": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "through_distributor": {
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
-            "PageView": {
-                "properties": {
-                    "created_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "route": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "route"
-                ],
-                "type": "object"
-            },
-            "PaginatedCredentials": {
-                "properties": {
-                    "items": {
-                        "$ref": "#/components/schemas/LeakActivityCredential"
-                    },
-                    "next": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "PartialSource": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "PermissionData": {
-                "properties": {
-                    "permission": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "boolean"
-                    }
-                },
-                "required": [
-                    "permission",
-                    "value"
-                ],
-                "type": "object"
-            },
-            "PriorityActionHeader": {
-                "properties": {
-                    "created_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "snooze_until": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "status_last_updated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "summary": {
-                        "$ref": "#/components/schemas/InsightText"
-                    },
-                    "tags": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "title": {
-                        "$ref": "#/components/schemas/InsightText"
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "uuid": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "created_at",
-                    "snooze_until",
-                    "status",
-                    "status_last_updated_at",
-                    "tags",
-                    "title",
-                    "type",
-                    "uuid"
-                ],
-                "type": "object"
-            },
             "PriorityActionRelatedActivity": {
                 "properties": {
-                    "remediated": {
-                        "type": "boolean"
+                    "uuid": {
+                        "type": "string"
                     },
                     "tenant_id": {
                         "type": "integer"
@@ -7303,8 +7664,8 @@
                     "uid": {
                         "type": "string"
                     },
-                    "uuid": {
-                        "type": "string"
+                    "remediated": {
+                        "type": "boolean"
                     }
                 },
                 "required": [
@@ -7315,58 +7676,143 @@
                 ],
                 "type": "object"
             },
+            "ExportPriorityActionVisualizationData": {
+                "properties": {
+                    "stream": {
+                        "type": "string"
+                    },
+                    "format": {
+                        "enum": [
+                            "csv"
+                        ],
+                        "example": "csv",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "format",
+                    "stream"
+                ],
+                "type": "object"
+            },
+            "Insight": {
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "title": {
+                        "$ref": "#/components/schemas/InsightText"
+                    },
+                    "paragraph": {
+                        "$ref": "#/components/schemas/InsightText"
+                    },
+                    "analysis": {
+                        "$ref": "#/components/schemas/InsightText"
+                    },
+                    "visualization": {
+                        "items": {
+                            "$ref": "#/components/schemas/FootprintVisualizationChart"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "analysis",
+                    "date",
+                    "paragraph",
+                    "title",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "FootprintVisualizationChart": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "enum": [
+                            "comparison_chart",
+                            "tabular_chart",
+                            "radial_chart",
+                            "line_chart",
+                            "bar_chart",
+                            "radar_chart"
+                        ],
+                        "example": "comparison_chart",
+                        "type": "string"
+                    },
+                    "data": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "title": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "data",
+                    "id",
+                    "type"
+                ],
+                "type": "object"
+            },
             "RansomLeakData": {
                 "properties": {
+                    "uid": {
+                        "description": "event uid of the ransomleak",
+                        "type": "string"
+                    },
                     "breached_at": {
                         "description": "Date of the ransomleak",
                         "format": "date-time",
                         "type": "string"
-                    },
-                    "country": {
-                        "description": "Country of the victim",
-                        "type": "string"
-                    },
-                    "domain": {
-                        "description": "Domain of the victim",
-                        "type": "string"
-                    },
-                    "employee_count": {
-                        "description": "Number of employee of the victim",
-                        "type": "integer"
                     },
                     "event_created_at": {
                         "description": "Date of the ransomleak event in the feed",
                         "format": "date-time",
                         "type": "string"
                     },
-                    "identifiers": {
-                        "items": {
-                            "$ref": "#/components/schemas/RansomLeakIdentifierData"
-                        },
-                        "type": "array"
-                    },
-                    "industry": {
-                        "description": "Industry of the victim",
-                        "type": "string"
+                    "risk_score": {
+                        "description": "Computed risk of the ransomleak",
+                        "type": "integer"
                     },
                     "publisher": {
                         "description": "Publisher of the ransomleak",
                         "type": "string"
                     },
-                    "risk_score": {
-                        "description": "Computed risk of the ransomleak",
-                        "type": "integer"
-                    },
-                    "uid": {
-                        "description": "event uid of the ransomleak",
+                    "victim": {
+                        "description": "Victim of the ransomleak",
                         "type": "string"
+                    },
+                    "domain": {
+                        "description": "Domain of the victim",
+                        "type": "string"
+                    },
+                    "country": {
+                        "description": "Country of the victim",
+                        "type": "string"
+                    },
+                    "industry": {
+                        "description": "Industry of the victim",
+                        "type": "string"
+                    },
+                    "employee_count": {
+                        "description": "Number of employee of the victim",
+                        "type": "integer"
                     },
                     "user_metadata": {
                         "$ref": "#/components/schemas/ActivityUserMetadata"
                     },
-                    "victim": {
-                        "description": "Victim of the ransomleak",
-                        "type": "string"
+                    "identifiers": {
+                        "items": {
+                            "$ref": "#/components/schemas/RansomLeakIdentifierData"
+                        },
+                        "type": "array"
                     }
                 },
                 "required": [
@@ -7394,59 +7840,73 @@
                 },
                 "type": "object"
             },
-            "ReportElementUpdate": {
+            "date_count": {
                 "properties": {
-                    "enabled": {
-                        "type": "boolean"
+                    "date": {
+                        "format": "date-time",
+                        "type": "string"
                     },
+                    "count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Import": {
+                "properties": {
                     "id": {
                         "type": "integer"
                     },
-                    "position": {
-                        "type": "integer"
-                    },
-                    "sort_by": {
+                    "type": {
                         "enum": [
-                            "custom",
-                            "alphabetical",
-                            "date"
+                            "identifiers"
                         ],
-                        "example": "custom",
+                        "example": "identifiers",
                         "type": "string"
                     },
-                    "time_interval": {
+                    "integration": {
+                        "enum": [
+                            "csv"
+                        ],
+                        "example": "csv",
                         "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "Search": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "properties": {},
-                            "type": "object"
-                        },
-                        "type": "array"
                     },
-                    "links": {
-                        "$ref": "#/components/schemas/SearchLinks"
-                    },
-                    "nb_hits": {
+                    "tenant_id": {
                         "type": "integer"
-                    },
-                    "search_after": {
-                        "type": "string"
                     }
                 },
+                "required": [
+                    "id",
+                    "integration",
+                    "tenant_id",
+                    "type"
+                ],
                 "type": "object"
             },
-            "SearchLinks": {
+            "ImportItemFailures": {
                 "properties": {
-                    "next": {
+                    "type": {
+                        "enum": [
+                            "unknown_identifier_type",
+                            "bad_identifier_query",
+                            "above_max_group_nesting",
+                            "unknown_identifier_source",
+                            "identifier_not_allowed",
+                            "identifier_type_not_allowed",
+                            "too_many_attributes",
+                            "invalid_attribute_format"
+                        ],
+                        "example": "unknown_identifier_type",
+                        "type": "string"
+                    },
+                    "message": {
                         "type": "string"
                     }
                 },
+                "required": [
+                    "message",
+                    "type"
+                ],
                 "type": "object"
             },
             "Subdomains": {
@@ -7460,341 +7920,34 @@
                 ],
                 "type": "object"
             },
-            "TableChartDataModel": {
+            "CredentialUrl": {
                 "properties": {
-                    "items": {
-                        "items": {
-                            "properties": {},
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "title": {
+                    "url": {
                         "type": "string"
+                    },
+                    "credential_hash": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "type": "string"
+                    },
+                    "is_stealer_log": {
+                        "type": "boolean"
                     }
                 },
                 "type": "object"
             },
-            "Tenant": {
+            "LeakedCredential": {
                 "properties": {
-                    "description": {
-                        "description": "This tenant's purpose",
-                        "type": "string"
-                    },
-                    "feed_id": {
-                        "description": "ID of the feed",
-                        "type": "integer"
-                    },
-                    "id": {
-                        "description": "Tenant ID",
-                        "type": "integer"
-                    },
-                    "industry": {
-                        "description": "The industry of the tenant.",
-                        "type": "string"
-                    },
-                    "is_archived": {
-                        "description": "Indicates if the tenant is archived",
-                        "type": "boolean"
-                    },
-                    "is_disabled": {
-                        "description": "Indicates if the tenant is disabled",
-                        "type": "boolean"
-                    },
-                    "name": {
-                        "description": "Tenant name",
-                        "type": "string"
-                    },
-                    "number_of_employees": {
-                        "description": "The number of employees for the tenant.",
-                        "type": "integer"
-                    },
-                    "organization_id": {
-                        "description": "ID of the owner organization",
-                        "type": "integer"
-                    },
-                    "permissions": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "prevent_global_search": {
-                        "description": "Indicates if the tenant can perform global searches",
-                        "type": "boolean"
-                    },
-                    "type": {
-                        "description": "Tenant type",
-                        "type": "string"
-                    },
-                    "urn": {
-                        "description": "The uniform resource name of the tenant.",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "TenantData": {
-                "properties": {
-                    "description": {
-                        "description": "The Tenant's purpose / description",
-                        "type": "string"
-                    },
-                    "global_search_calls_limit": {
-                        "description": "The number of API calls allowed for the tenant.",
-                        "type": "integer"
-                    },
-                    "industry": {
-                        "description": "The Tenant's industry",
-                        "enum": [
-                            "global",
-                            "transport",
-                            "education",
-                            "energy",
-                            "finance",
-                            "healthcare",
-                            "manufacturing",
-                            "retail",
-                            "software",
-                            "telecommunication"
-                        ],
-                        "example": "global",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "The Tenant display name",
-                        "type": "string"
-                    },
-                    "number_of_employees": {
-                        "description": "The number of employees for the tenant",
-                        "type": "integer"
-                    },
-                    "prevent_global_search": {
-                        "type": "boolean"
-                    }
-                },
-                "required": [
-                    "description",
-                    "industry",
-                    "name",
-                    "number_of_employees"
-                ],
-                "type": "object"
-            },
-            "TenantDiscoveryPolicy": {
-                "properties": {
-                    "enabled": {
-                        "type": "boolean"
-                    },
                     "id": {
                         "type": "integer"
-                    },
-                    "identifier_types": {
-                        "items": {
-                            "enum": [
-                                "domain",
-                                "brand",
-                                "name",
-                                "keyword",
-                                "github_repository",
-                                "username",
-                                "email",
-                                "search_query",
-                                "bin",
-                                "ip",
-                                "secret",
-                                "azure_tenant",
-                                "identity"
-                            ],
-                            "example": "domain",
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "terms": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "type": {
-                        "enum": [
-                            "auto-accept",
-                            "ignore-pattern"
-                        ],
-                        "example": "auto-accept",
-                        "type": "string"
                     }
                 },
                 "type": "object"
             },
-            "TenantIgnoredTerms": {
+            "PartialSource": {
                 "properties": {
-                    "clean_past_events": {
-                        "type": "boolean"
-                    },
-                    "created_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "search_types": {
-                        "items": {
-                            "enum": [
-                                "attachment",
-                                "listing",
-                                "ransomleak",
-                                "forum_post",
-                                "forum_topic",
-                                "forum_profile",
-                                "blog_post",
-                                "seller",
-                                "paste",
-                                "leak",
-                                "chat_message",
-                                "domain",
-                                "bot",
-                                "stealer_log",
-                                "infected_devices",
-                                "driller",
-                                "driller_forum_topic",
-                                "driller_forum_post",
-                                "driller_profile",
-                                "cc",
-                                "ccbin",
-                                "financial_data",
-                                "leaked_data",
-                                "leaked_file",
-                                "document",
-                                "account",
-                                "actor",
-                                "forum_content",
-                                "blog_content",
-                                "profile",
-                                "leaked_credential",
-                                "illicit_networks",
-                                "open_web",
-                                "domains",
-                                "leaks",
-                                "social_media_account",
-                                "social_media",
-                                "source_code",
-                                "source_code_secrets_np",
-                                "source_code_secrets",
-                                "source_code_files",
-                                "docker",
-                                "stack_exchange",
-                                "google",
-                                "service",
-                                "driller_host",
-                                "buckets",
-                                "bucket",
-                                "bucket_object",
-                                "whois",
-                                "ad",
-                                "ads",
-                                "cookie",
-                                "pii",
-                                "experimental"
-                            ],
-                            "example": "attachment",
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "terms": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "uuid": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "clean_past_events",
-                    "created_at",
-                    "name",
-                    "search_types",
-                    "uuid"
-                ],
-                "type": "object"
-            },
-            "TenantUser": {
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
                     "id": {
-                        "type": "integer"
-                    },
-                    "is_disabled": {
-                        "type": "boolean"
-                    },
-                    "is_readonly": {
-                        "type": "boolean"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "role": {
-                        "enum": [
-                            "viewer",
-                            "editor",
-                            "admin"
-                        ],
-                        "example": "viewer",
-                        "type": "string"
-                    },
-                    "surname": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "TenantUsers": {
-                "properties": {
-                    "items": {
-                        "$ref": "#/components/schemas/TenantUser"
-                    },
-                    "next": {
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "TenantWithCounts": {
-                "properties": {
-                    "items": {
-                        "$ref": "#/components/schemas/TenantWithCounts"
-                    },
-                    "next": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "TimeChartSerie": {
-                "properties": {
-                    "color": {
-                        "type": "string"
-                    },
-                    "data": {
-                        "items": {
-                            "items": {
-                                "type": "integer"
-                            },
-                            "type": "array"
-                        },
-                        "type": "array"
-                    },
-                    "interval": {
                         "type": "string"
                     },
                     "name": {
@@ -7803,302 +7956,7 @@
                 },
                 "type": "object"
             },
-            "UpdateGroupData": {
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "UpdatedPermission": {
-                "properties": {
-                    "updated_value": {
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
-            "UpdatedReport": {
-                "properties": {
-                    "audience": {
-                        "enum": [
-                            "technical",
-                            "general"
-                        ],
-                        "example": "technical",
-                        "type": "string"
-                    },
-                    "author": {
-                        "type": "string"
-                    },
-                    "elements": {
-                        "items": {
-                            "$ref": "#/components/schemas/ReportElementUpdate"
-                        },
-                        "type": "array"
-                    },
-                    "title": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "User": {
-                "properties": {
-                    "color_scheme": {
-                        "enum": [
-                            "auto",
-                            "light",
-                            "dark"
-                        ],
-                        "example": "auto",
-                        "type": "string"
-                    },
-                    "email": {
-                        "description": "User's email",
-                        "type": "string"
-                    },
-                    "feature_flags": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "flare_role": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "is_disabled": {
-                        "type": "boolean"
-                    },
-                    "language": {
-                        "description": "User's language",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Users's name",
-                        "type": "string"
-                    },
-                    "organization_id": {
-                        "description": "ID of the owner organization",
-                        "type": "integer"
-                    },
-                    "organization_member_permissions": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "registered_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "settings": {
-                        "$ref": "#/components/schemas/UserSettings"
-                    },
-                    "surname": {
-                        "description": "User's surname",
-                        "type": "string"
-                    },
-                    "urn": {
-                        "description": "The uniform resource name of the user.",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "color_scheme",
-                    "email",
-                    "language",
-                    "name"
-                ],
-                "type": "object"
-            },
-            "UserProfile": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/User"
-                    },
-                    {
-                        "properties": {
-                            "cello_jwt": {
-                                "type": "string"
-                            },
-                            "domain": {
-                                "type": "string"
-                            },
-                            "feature_flags": {
-                                "$ref": "#/components/schemas/UserProfile_allOf_feature_flags"
-                            },
-                            "has_password": {
-                                "type": "boolean"
-                            },
-                            "is_sso_mandatory": {
-                                "type": "boolean"
-                            },
-                            "language": {
-                                "type": "string"
-                            },
-                            "needs_eusa": {
-                                "type": "boolean"
-                            },
-                            "settings": {
-                                "$ref": "#/components/schemas/UserSettings"
-                            },
-                            "tenants": {
-                                "items": {
-                                    "$ref": "#/components/schemas/Tenant"
-                                },
-                                "type": "array"
-                            },
-                            "urn": {
-                                "type": "string"
-                            }
-                        },
-                        "type": "object"
-                    }
-                ]
-            },
-            "UserSettings": {
-                "properties": {
-                    "default_search": {
-                        "type": "string"
-                    },
-                    "organization_member_permissions": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "permissions": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    }
-                },
-                "type": "object"
-            },
-            "UserTenantAccess": {
-                "properties": {
-                    "is_readonly": {
-                        "description": "Access given to the user for the tenant",
-                        "type": "boolean"
-                    },
-                    "role": {
-                        "description": "Role given to the user for the tenant",
-                        "enum": [
-                            "viewer",
-                            "editor",
-                            "admin"
-                        ],
-                        "example": "viewer",
-                        "type": "string"
-                    },
-                    "user_id": {
-                        "description": "The ID of the user to add to the tenant",
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "user_id"
-                ],
-                "type": "object"
-            },
-            "UserTenantAccessRequest": {
-                "properties": {
-                    "users": {
-                        "items": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/components/schemas/UserTenantAccess"
-                                }
-                            ],
-                            "description": "User given access to a tenant.",
-                            "type": "object"
-                        },
-                        "type": "array"
-                    }
-                },
-                "type": "object"
-            },
-            "UserTenantMembership": {
-                "properties": {
-                    "is_readonly": {
-                        "type": "boolean"
-                    },
-                    "role": {
-                        "enum": [
-                            "viewer",
-                            "editor",
-                            "admin"
-                        ],
-                        "example": "viewer",
-                        "type": "string"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "tenant_id"
-                ],
-                "type": "object"
-            },
-            "UserUpdate": {
-                "properties": {
-                    "color_scheme": {
-                        "enum": [
-                            "auto",
-                            "light",
-                            "dark"
-                        ],
-                        "example": "auto",
-                        "type": "string"
-                    },
-                    "language": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "settings": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "surname": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "color_scheme",
-                    "name",
-                    "settings",
-                    "surname"
-                ],
-                "type": "object"
-            },
-            "V3_Refs": {
-                "properties": {
-                    "asset_uuid": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "average_by_risk_score": {
-                "properties": {
-                    "risk_score": {
-                        "type": "integer"
-                    },
-                    "values": {
-                        "items": {
-                            "$ref": "#/components/schemas/date_count"
-                        },
-                        "type": "array"
-                    }
-                },
-                "type": "object"
-            },
-            "average_by_search_type": {
+            "count_by_search_type": {
                 "properties": {
                     "search_type": {
                         "type": "string"
@@ -8126,7 +7984,7 @@
                 },
                 "type": "object"
             },
-            "count_by_search_type": {
+            "average_by_search_type": {
                 "properties": {
                     "search_type": {
                         "type": "string"
@@ -8140,48 +7998,191 @@
                 },
                 "type": "object"
             },
-            "date_count": {
+            "average_by_risk_score": {
                 "properties": {
-                    "count": {
+                    "risk_score": {
                         "type": "integer"
                     },
-                    "date": {
+                    "values": {
+                        "items": {
+                            "$ref": "#/components/schemas/date_count"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "TimeChartSerie": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "items": {
+                            "items": {
+                                "type": "integer"
+                            },
+                            "type": "array"
+                        },
+                        "type": "array"
+                    },
+                    "color": {
+                        "type": "string"
+                    },
+                    "interval": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TableChartDataModel": {
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "items": {
+                        "items": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "IdentifierRelationData": {
+                "properties": {
+                    "identifier_id": {
+                        "type": "integer"
+                    },
+                    "asset_relation_uuid": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "asset_relation_uuid",
+                    "identifier_id"
+                ],
+                "type": "object"
+            },
+            "ArchiveFile": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/ArchiveFileData"
+                    },
+                    "ransomleak_uid": {
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/ArchiveFileMetadata"
+                    },
+                    "status_updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "errors": {
+                        "$ref": "#/components/schemas/ArchiveFileErrors"
+                    },
+                    "retry_count": {
+                        "type": "integer"
+                    },
+                    "retry_after": {
                         "format": "date-time",
                         "type": "string"
                     }
                 },
                 "type": "object"
             },
-            "source": {
+            "ArchiveFileData": {
                 "properties": {
-                    "breached_at": {
-                        "type": "string"
-                    },
-                    "description_en": {
-                        "type": "string"
-                    },
-                    "description_fr": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "string"
-                    },
-                    "leaked_at": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "pii_tags": {
+                    "parts": {
                         "items": {
-                            "type": "string"
+                            "$ref": "#/components/schemas/MultiPartData"
                         },
                         "type": "array"
                     }
                 },
-                "required": [
-                    "id"
-                ],
+                "type": "object"
+            },
+            "MultiPartData": {
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ArchiveFileMetadata": {
+                "properties": {
+                    "first_crawled_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "last_crawled_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "estimated_created_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "scraper_id": {
+                        "type": "string"
+                    },
+                    "scraped_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "event_id": {
+                        "type": "integer"
+                    },
+                    "event_id_v2": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ArchiveFileErrors": {
+                "properties": {
+                    "errors": {
+                        "items": {
+                            "$ref": "#/components/schemas/ArchiveFileErrorData"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "ArchiveFileErrorData": {
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "traceback": {
+                        "type": "string"
+                    }
+                },
                 "type": "object"
             },
             "get_activity_assistance_resource__activities__string_index___string_source___path_id__ai_assistance_200_response": {
