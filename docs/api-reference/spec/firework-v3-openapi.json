@@ -160,10 +160,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "content": {},
-                        "description": "Returns the activity"
-                    },
                     "404": {
                         "content": {
                             "application/json": {
@@ -173,6 +169,10 @@
                             }
                         },
                         "description": "Activity not found"
+                    },
+                    "200": {
+                        "content": {},
+                        "description": "Returns the activity"
                     }
                 },
                 "tags": [
@@ -483,7 +483,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_topic, stealer_log, seller, blog_post, chat_message, forum_post, listing, bot, forum_profile, ransomleak, financial_data\n- open_web: bucket, docker, service, social_media_account, source_code_files, source_code_secrets, stack_exchange, paste, bucket_object, google\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -689,15 +689,15 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "403": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Search"
+                                    "$ref": "#/components/schemas/HttpError"
                                 }
                             }
                         },
-                        "description": "Returns the search result(s)."
+                        "description": "Forbidden."
                     },
                     "400": {
                         "content": {
@@ -709,15 +709,15 @@
                         },
                         "description": "Query is invalid."
                     },
-                    "403": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpError"
+                                    "$ref": "#/components/schemas/Search"
                                 }
                             }
                         },
-                        "description": "Forbidden."
+                        "description": "Returns the search result(s)."
                     }
                 },
                 "tags": [
@@ -803,7 +803,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: listing, forum_topic, seller, stealer_log, blog_post, ransomleak, forum_post, bot, financial_data, chat_message, forum_profile\n- open_web: stack_exchange, paste, source_code_files, service, source_code_secrets, social_media_account, google, bucket_object, docker, bucket\n- leaks: leak\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_topic, stealer_log, seller, blog_post, chat_message, forum_post, listing, bot, forum_profile, ransomleak, financial_data\n- open_web: bucket, docker, service, social_media_account, source_code_files, source_code_secrets, stack_exchange, paste, bucket_object, google\n- leaks: leak\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -1009,15 +1009,15 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "403": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Search"
+                                    "$ref": "#/components/schemas/HttpError"
                                 }
                             }
                         },
-                        "description": "Returns the search result(s)."
+                        "description": "Forbidden."
                     },
                     "400": {
                         "content": {
@@ -1029,15 +1029,15 @@
                         },
                         "description": "Query is invalid."
                     },
-                    "403": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpError"
+                                    "$ref": "#/components/schemas/Search"
                                 }
                             }
                         },
-                        "description": "Forbidden."
+                        "description": "Returns the search result(s)."
                     }
                 },
                 "tags": [
@@ -1211,6 +1211,7 @@
                             "enum": [
                                 "ALL",
                                 "USER",
+                                "COUNTED",
                                 "SYSTEM",
                                 "USER_AND_ATTRIBUTE"
                             ],
@@ -1235,7 +1236,6 @@
                         "in": "query",
                         "name": "properties",
                         "schema": {
-                            "default": "[]",
                             "enum": [
                                 "recent",
                                 "interest",
@@ -1256,7 +1256,6 @@
                         "in": "query",
                         "name": "types",
                         "schema": {
-                            "default": "[]",
                             "enum": [
                                 "domain",
                                 "brand",
@@ -1354,6 +1353,7 @@
                             "enum": [
                                 "ALL",
                                 "USER",
+                                "COUNTED",
                                 "SYSTEM",
                                 "USER_AND_ATTRIBUTE"
                             ],
@@ -1378,7 +1378,6 @@
                         "in": "query",
                         "name": "properties",
                         "schema": {
-                            "default": "[]",
                             "enum": [
                                 "recent",
                                 "interest",
@@ -1399,7 +1398,6 @@
                         "in": "query",
                         "name": "types",
                         "schema": {
-                            "default": "[]",
                             "enum": [
                                 "domain",
                                 "brand",
@@ -1643,7 +1641,6 @@
                         "in": "query",
                         "name": "properties",
                         "schema": {
-                            "default": "[]",
                             "enum": [
                                 "recent",
                                 "interest",
@@ -1664,7 +1661,6 @@
                         "in": "query",
                         "name": "types",
                         "schema": {
-                            "default": "[]",
                             "enum": [
                                 "domain",
                                 "brand",
@@ -1748,22 +1744,25 @@
     },
     "components": {
         "responses": {
-            "HTTPException": {
+            "ParseError": {
                 "content": {},
-                "description": ""
+                "description": "When a mask can't be parsed"
             },
             "MaskError": {
                 "content": {},
                 "description": "When any error occurs on mask"
             },
-            "ParseError": {
+            "HTTPException": {
                 "content": {},
-                "description": "When a mask can't be parsed"
+                "description": ""
             }
         },
         "schemas": {
             "Asset": {
                 "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
                     "asset_type": {
                         "enum": [
                             "github_repository",
@@ -1792,9 +1791,6 @@
                         "example": "github_repository",
                         "type": "string"
                     },
-                    "cursor": {
-                        "type": "string"
-                    },
                     "data": {
                         "$ref": "#/components/schemas/AssetData"
                     },
@@ -1802,7 +1798,7 @@
                         "properties": {},
                         "type": "object"
                     },
-                    "uuid": {
+                    "cursor": {
                         "type": "string"
                     }
                 },
@@ -1813,55 +1809,69 @@
             },
             "AssetData": {
                 "properties": {
-                    "asset_url": {
-                        "type": "string"
-                    },
-                    "bin": {
-                        "type": "integer"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "first_name": {
-                        "type": "string"
-                    },
-                    "fqdn": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "ip": {
-                        "type": "string"
-                    },
-                    "keyword": {
-                        "type": "string"
-                    },
-                    "last_name": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "profile_url": {
-                        "type": "string"
-                    },
                     "repo_name": {
                         "type": "string"
                     },
                     "repo_owner": {
                         "type": "string"
                     },
+                    "fqdn": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "first_name": {
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "keyword": {
+                        "type": "string"
+                    },
                     "search_query": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "integer"
+                    },
+                    "bin": {
+                        "type": "integer"
+                    },
+                    "ip": {
+                        "type": "string"
+                    },
+                    "asset_url": {
+                        "type": "string"
+                    },
+                    "username": {
                         "type": "string"
                     },
                     "site": {
                         "type": "string"
                     },
-                    "tenant_id": {
+                    "profile_url": {
                         "type": "string"
                     },
-                    "username": {
+                    "tenant_id": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AssetRelations": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/AssetRelation"
+                        },
+                        "type": "array"
+                    },
+                    "next": {
                         "type": "string"
                     }
                 },
@@ -1869,29 +1879,26 @@
             },
             "AssetRelation": {
                 "properties": {
-                    "metadata": {
-                        "$ref": "#/components/schemas/AssetRelationMetadata"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/AssetRelationParams"
-                    },
-                    "source_data": {
-                        "$ref": "#/components/schemas/AssetData"
-                    },
-                    "source_type": {
+                    "uuid": {
                         "type": "string"
                     },
                     "source_uuid": {
                         "type": "string"
                     },
-                    "target_data": {
-                        "$ref": "#/components/schemas/AssetData"
+                    "source_type": {
+                        "type": "string"
                     },
                     "target_type": {
                         "type": "string"
                     },
                     "target_uuid": {
                         "type": "string"
+                    },
+                    "target_data": {
+                        "$ref": "#/components/schemas/AssetData"
+                    },
+                    "source_data": {
+                        "$ref": "#/components/schemas/AssetData"
                     },
                     "type": {
                         "enum": [
@@ -1914,8 +1921,11 @@
                         "example": "subdomain_of",
                         "type": "string"
                     },
-                    "uuid": {
-                        "type": "string"
+                    "metadata": {
+                        "$ref": "#/components/schemas/AssetRelationMetadata"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/AssetRelationParams"
                     }
                 },
                 "required": [
@@ -1938,35 +1948,75 @@
             },
             "AssetRelationParams": {
                 "properties": {
+                    "number_of_leaked_secrets": {
+                        "type": "integer"
+                    },
                     "number_of_commits": {
+                        "type": "integer"
+                    },
+                    "number_of_mentions": {
                         "type": "integer"
                     },
                     "number_of_domain_commits": {
                         "type": "integer"
                     },
-                    "number_of_domain_emails": {
-                        "type": "integer"
-                    },
                     "number_of_email_commits": {
                         "type": "integer"
                     },
+                    "number_of_domain_emails": {
+                        "type": "integer"
+                    },
                     "number_of_github_projects": {
-                        "type": "integer"
-                    },
-                    "number_of_leaked_secrets": {
-                        "type": "integer"
-                    },
-                    "number_of_mentions": {
                         "type": "integer"
                     }
                 },
                 "type": "object"
             },
-            "AssetRelations": {
+            "HttpError": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Search": {
                 "properties": {
                     "items": {
                         "items": {
-                            "$ref": "#/components/schemas/AssetRelation"
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "nb_hits": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/SearchLinks"
+                    },
+                    "search_after": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchLinks": {
+                "properties": {
+                    "next": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "IdentifierChildren": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/IdentifierChild"
                         },
                         "type": "array"
                     },
@@ -1976,21 +2026,32 @@
                 },
                 "type": "object"
             },
-            "BulkActionFilters": {
+            "IdentifierChild": {
                 "properties": {
-                    "q": {
-                        "type": "string"
+                    "metadata": {
+                        "$ref": "#/components/schemas/AssetRelationMetadata"
                     },
-                    "recommendation_state": {
-                        "enum": [
-                            "recommended",
-                            "accepted",
-                            "rejected"
-                        ],
-                        "example": "recommended",
-                        "type": "string"
+                    "child_identifier": {
+                        "$ref": "#/components/schemas/Identifier"
+                    }
+                },
+                "type": "object"
+            },
+            "Identifier": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
                     },
-                    "types": {
+                    "tenant_id": {
+                        "type": "integer"
+                    },
+                    "feed_id": {
+                        "type": "integer"
+                    },
+                    "feed_owner_id": {
+                        "type": "integer"
+                    },
+                    "type": {
                         "enum": [
                             "domain",
                             "brand",
@@ -2008,98 +2069,6 @@
                         ],
                         "example": "domain",
                         "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "CollectionUpdate": {
-                "properties": {
-                    "content": {
-                        "type": "string"
-                    },
-                    "date": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "HttpError": {
-                "properties": {
-                    "code": {
-                        "type": "string"
-                    },
-                    "message": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "Identifier": {
-                "properties": {
-                    "asset_uuid": {
-                        "type": "string"
-                    },
-                    "count": {
-                        "type": "integer"
-                    },
-                    "data": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "data_updated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "enrichments": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "event_count": {
-                        "type": "integer"
-                    },
-                    "experimental_search_types": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "feed_id": {
-                        "type": "integer"
-                    },
-                    "feed_owner_id": {
-                        "type": "integer"
-                    },
-                    "fetching_progress": {
-                        "type": "integer"
-                    },
-                    "first_rate_limited_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "is_critical": {
-                        "type": "boolean"
-                    },
-                    "is_disabled": {
-                        "type": "boolean"
-                    },
-                    "name": {
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "rate_limits": {
-                        "$ref": "#/components/schemas/IdentifierRateLimits"
-                    },
-                    "risks": {
-                        "items": {
-                            "type": "integer"
-                        },
-                        "type": "array"
                     },
                     "search_types": {
                         "items": {
@@ -2163,20 +2132,221 @@
                         },
                         "type": "array"
                     },
+                    "experimental_search_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "risks": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "name": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "asset_uuid": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "fetching_progress": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "urn": {
+                        "description": "The uniform resource name of the identifier.",
+                        "type": "string"
+                    },
+                    "is_disabled": {
+                        "type": "boolean"
+                    },
+                    "is_critical": {
+                        "type": "boolean"
+                    },
                     "source": {
                         "enum": [
                             "USER",
                             "SYSTEM_RELATION",
                             "SELF_ONBOARDING",
-                            "ATTRIBUTE"
+                            "ATTRIBUTE",
+                            "IDP_SYNC"
                         ],
                         "example": "USER",
                         "type": "string"
                     },
+                    "enrichments": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "data_updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "event_count": {
+                        "type": "integer"
+                    },
+                    "first_rate_limited_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "rate_limits": {
+                        "$ref": "#/components/schemas/IdentifierRateLimits"
+                    }
+                },
+                "required": [
+                    "asset_uuid",
+                    "data",
+                    "data_updated_at",
+                    "name",
+                    "search_types",
+                    "source",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "IdentifierRateLimits": {
+                "properties": {
+                    "first_rate_limited_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "last_rate_limited_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "activity_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/IdentifierRateLimit"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "IdentifierRateLimit": {
+                "properties": {
+                    "first_rate_limited_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "last_rate_limited_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "activity_type": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "activity_type",
+                    "first_rate_limited_at",
+                    "last_rate_limited_at"
+                ],
+                "type": "object"
+            },
+            "PaginatedIdentifiers": {
+                "properties": {
+                    "next": {
+                        "type": "string"
+                    },
+                    "items": {
+                        "$ref": "#/components/schemas/Identifier"
+                    }
+                },
+                "type": "object"
+            },
+            "PaginatedIdentifierGroupsWithCounts": {
+                "properties": {
+                    "next": {
+                        "type": "string"
+                    },
+                    "items": {
+                        "$ref": "#/components/schemas/IdentifierGroupWithCounts"
+                    }
+                },
+                "type": "object"
+            },
+            "IdentifierGroupWithCounts": {
+                "properties": {
+                    "group": {
+                        "$ref": "#/components/schemas/IdentifierGroup"
+                    },
+                    "identifier_count": {
+                        "type": "integer"
+                    },
+                    "total_identifier_count": {
+                        "type": "integer"
+                    },
+                    "rate_limited_identifiers_count": {
+                        "type": "integer"
+                    },
+                    "event_count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "IdentifierGroup": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
                     "tenant_id": {
                         "type": "integer"
                     },
-                    "type": {
+                    "feed_id": {
+                        "type": "integer"
+                    },
+                    "feed_owner_id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "urn": {
+                        "description": "The uniform resource name of the identifier group.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PaginatedIdentifierRelations": {
+                "properties": {
+                    "next": {
+                        "type": "string"
+                    },
+                    "items": {
+                        "$ref": "#/components/schemas/Identifier"
+                    }
+                },
+                "type": "object"
+            },
+            "BulkActionFilters": {
+                "properties": {
+                    "recommendation_state": {
+                        "enum": [
+                            "recommended",
+                            "accepted",
+                            "rejected"
+                        ],
+                        "example": "recommended",
+                        "type": "string"
+                    },
+                    "types": {
                         "enum": [
                             "domain",
                             "brand",
@@ -2195,265 +2365,56 @@
                         "example": "domain",
                         "type": "string"
                     },
-                    "urn": {
-                        "description": "The uniform resource name of the identifier.",
+                    "q": {
                         "type": "string"
                     }
                 },
-                "required": [
-                    "asset_uuid",
-                    "data",
-                    "data_updated_at",
-                    "name",
-                    "search_types",
-                    "source",
-                    "type"
-                ],
                 "type": "object"
             },
-            "IdentifierChild": {
+            "PaginatedCredentials": {
                 "properties": {
-                    "child_identifier": {
-                        "$ref": "#/components/schemas/Identifier"
-                    },
-                    "metadata": {
-                        "$ref": "#/components/schemas/AssetRelationMetadata"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierChildren": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/IdentifierChild"
-                        },
-                        "type": "array"
-                    },
                     "next": {
                         "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierGroup": {
-                "properties": {
-                    "feed_id": {
-                        "type": "integer"
-                    },
-                    "feed_owner_id": {
-                        "type": "integer"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "urn": {
-                        "description": "The uniform resource name of the identifier group.",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierGroupWithCounts": {
-                "properties": {
-                    "event_count": {
-                        "type": "integer"
-                    },
-                    "group": {
-                        "$ref": "#/components/schemas/IdentifierGroup"
-                    },
-                    "identifier_count": {
-                        "type": "integer"
-                    },
-                    "rate_limited_identifiers_count": {
-                        "type": "integer"
-                    },
-                    "total_identifier_count": {
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierRateLimit": {
-                "properties": {
-                    "activity_type": {
-                        "type": "string"
-                    },
-                    "first_rate_limited_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "last_rate_limited_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "activity_type",
-                    "first_rate_limited_at",
-                    "last_rate_limited_at"
-                ],
-                "type": "object"
-            },
-            "IdentifierRateLimits": {
-                "properties": {
-                    "activity_types": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "first_rate_limited_at": {
-                        "format": "date-time",
-                        "type": "string"
                     },
                     "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/IdentifierRateLimit"
-                        },
-                        "type": "array"
-                    },
-                    "last_rate_limited_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierRecommendation": {
-                "properties": {
-                    "asset": {
-                        "$ref": "#/components/schemas/Asset"
-                    },
-                    "asset_id": {
-                        "type": "integer"
-                    },
-                    "asset_name": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "reasons": {
-                        "items": {
-                            "$ref": "#/components/schemas/Reason"
-                        },
-                        "type": "array"
-                    },
-                    "recommendation_group_id": {
-                        "type": "integer"
-                    },
-                    "state": {
-                        "enum": [
-                            "recommended",
-                            "accepted",
-                            "rejected"
-                        ],
-                        "example": "recommended",
-                        "type": "string"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "updated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierRecommendationGroup": {
-                "properties": {
-                    "asset_id": {
-                        "type": "integer"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierRecommendationGroupWithEnrichments": {
-                "properties": {
-                    "asset_id": {
-                        "type": "integer"
-                    },
-                    "asset_type": {
-                        "type": "string"
-                    },
-                    "available_asset_types": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "filtered_recommendations_count": {
-                        "type": "integer"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "last_updated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "total_recommendations_count": {
-                        "type": "integer"
+                        "$ref": "#/components/schemas/LeakActivityCredential"
                     }
                 },
                 "type": "object"
             },
             "LeakActivityCredential": {
                 "properties": {
-                    "domain": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "source_id": {
+                        "type": "string"
+                    },
+                    "imported_at": {
+                        "type": "string"
+                    },
+                    "identity_name": {
                         "type": "string"
                     },
                     "hash": {
                         "type": "string"
                     },
-                    "id": {
-                        "type": "integer"
+                    "domain": {
+                        "type": "string"
                     },
-                    "identity_name": {
+                    "source": {
+                        "$ref": "#/components/schemas/source"
+                    },
+                    "remediated_at": {
+                        "format": "date-time",
                         "type": "string"
                     },
                     "ignored_at": {
                         "format": "date-time",
                         "type": "string"
                     },
-                    "imported_at": {
-                        "type": "string"
-                    },
                     "known_password_id": {
                         "type": "integer"
-                    },
-                    "remediated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "source": {
-                        "$ref": "#/components/schemas/source"
-                    },
-                    "source_id": {
-                        "type": "string"
                     }
                 },
                 "required": [
@@ -2464,110 +2425,87 @@
                 ],
                 "type": "object"
             },
-            "MonitoredChannel": {
+            "source": {
                 "properties": {
-                    "category": {
+                    "id": {
                         "type": "string"
                     },
-                    "conversation_id": {
-                        "type": "integer"
-                    },
-                    "conversation_uid": {
+                    "name": {
                         "type": "string"
                     },
-                    "description": {
+                    "description_en": {
                         "type": "string"
                     },
-                    "last_crawled_at": {
-                        "format": "date-time",
+                    "description_fr": {
                         "type": "string"
                     },
-                    "member_count": {
-                        "type": "integer"
-                    },
-                    "message_count": {
-                        "type": "integer"
-                    },
-                    "source": {
+                    "breached_at": {
                         "type": "string"
                     },
-                    "subcategory": {
+                    "leaked_at": {
                         "type": "string"
                     },
-                    "title": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "PaginatedCredentials": {
-                "properties": {
-                    "items": {
-                        "$ref": "#/components/schemas/LeakActivityCredential"
-                    },
-                    "next": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "PaginatedCursoredCredentials": {
-                "properties": {
-                    "cursors": {
+                    "pii_tags": {
                         "items": {
                             "type": "string"
                         },
                         "type": "array"
-                    },
-                    "items": {
-                        "$ref": "#/components/schemas/LeakActivityCredential"
-                    },
-                    "next": {
-                        "type": "string"
                     }
                 },
+                "required": [
+                    "id"
+                ],
                 "type": "object"
             },
-            "PaginatedIdentifierGroupsWithCounts": {
+            "IdentifierRecommendation": {
                 "properties": {
-                    "items": {
-                        "$ref": "#/components/schemas/IdentifierGroupWithCounts"
+                    "id": {
+                        "type": "integer"
                     },
-                    "next": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "PaginatedIdentifierRelations": {
-                "properties": {
-                    "items": {
-                        "$ref": "#/components/schemas/Identifier"
+                    "asset_id": {
+                        "type": "integer"
                     },
-                    "next": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "PaginatedIdentifiers": {
-                "properties": {
-                    "items": {
-                        "$ref": "#/components/schemas/Identifier"
+                    "asset": {
+                        "$ref": "#/components/schemas/Asset"
                     },
-                    "next": {
+                    "tenant_id": {
+                        "type": "integer"
+                    },
+                    "reasons": {
+                        "items": {
+                            "$ref": "#/components/schemas/Reason"
+                        },
+                        "type": "array"
+                    },
+                    "state": {
+                        "enum": [
+                            "recommended",
+                            "accepted",
+                            "rejected"
+                        ],
+                        "example": "recommended",
                         "type": "string"
+                    },
+                    "updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "asset_name": {
+                        "type": "string"
+                    },
+                    "recommendation_group_id": {
+                        "type": "integer"
                     }
                 },
                 "type": "object"
             },
             "Reason": {
                 "properties": {
-                    "from_asset_name": {
-                        "type": "string"
-                    },
                     "from_identifier_id": {
                         "type": "integer"
+                    },
+                    "from_asset_name": {
+                        "type": "string"
                     },
                     "recommendation_pipeline_id": {
                         "enum": [
@@ -2589,65 +2527,124 @@
                 },
                 "type": "object"
             },
-            "Search": {
+            "IdentifierRecommendationGroupWithEnrichments": {
                 "properties": {
-                    "items": {
-                        "items": {
-                            "properties": {},
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "links": {
-                        "$ref": "#/components/schemas/SearchLinks"
-                    },
-                    "nb_hits": {
+                    "id": {
                         "type": "integer"
                     },
-                    "search_after": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "SearchLinks": {
-                "properties": {
-                    "next": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "source": {
-                "properties": {
-                    "breached_at": {
-                        "type": "string"
+                    "tenant_id": {
+                        "type": "integer"
                     },
-                    "description_en": {
-                        "type": "string"
-                    },
-                    "description_fr": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "string"
-                    },
-                    "leaked_at": {
-                        "type": "string"
+                    "asset_id": {
+                        "type": "integer"
                     },
                     "name": {
                         "type": "string"
                     },
-                    "pii_tags": {
+                    "asset_type": {
+                        "type": "string"
+                    },
+                    "filtered_recommendations_count": {
+                        "type": "integer"
+                    },
+                    "total_recommendations_count": {
+                        "type": "integer"
+                    },
+                    "available_asset_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "last_updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "IdentifierRecommendationGroup": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "tenant_id": {
+                        "type": "integer"
+                    },
+                    "asset_id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CollectionUpdate": {
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "MonitoredChannel": {
+                "properties": {
+                    "conversation_id": {
+                        "type": "integer"
+                    },
+                    "conversation_uid": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "subcategory": {
+                        "type": "string"
+                    },
+                    "last_crawled_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "message_count": {
+                        "type": "integer"
+                    },
+                    "member_count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "PaginatedCursoredCredentials": {
+                "properties": {
+                    "next": {
+                        "type": "string"
+                    },
+                    "items": {
+                        "$ref": "#/components/schemas/LeakActivityCredential"
+                    },
+                    "cursors": {
                         "items": {
                             "type": "string"
                         },
                         "type": "array"
                     }
                 },
-                "required": [
-                    "id"
-                ],
                 "type": "object"
             },
             "post_asset_by_data_api__assets__by_data_200_response": {
