@@ -32,6 +32,14 @@ The intelligence feeds use HTTP Basic Auth, which most TAXII clients support:
 Obtaining an API key is documented in the
 [Authentication Guide <Icon icon="book" size={16} />](/concepts/authentication).
 
+
+## Query Parameters
+
+| Parameter name | Description | Example |
+| -------------- | ----------- | ------- |
+| added_after | filter the IOCs that were added after the timestamp  | `?added_after=2026-02-04T12:05:00.000Z` |
+| limit | restricts the results by the specified amount | `?limit=25` |
+
 ## Code Examples
 
 Code examples for connecting to the feeds can be found in this Github repository:
