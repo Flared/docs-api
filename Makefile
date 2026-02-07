@@ -5,21 +5,21 @@ run:
 .PHONY: api-generate-openapi
 api-generate-openapi: venv
 	bash -c '\
-		source venv/bin/activate \
+		source .venv/bin/activate \
 		&& ./scripts/api-generate-openapi \
 	'
 
 .PHONY: api-generate-pages
 api-generate-pages: venv
 	bash -c '\
-		source venv/bin/activate \
+		source .venv/bin/activate \
 		&& ./scripts/api-generate-pages \
 	'
 
 .PHONY: api-generate-all
 api-generate-all: venv
 	bash -c '\
-		source venv/bin/activate \
+		source .venv/bin/activate \
 		&& ./scripts/api-generate-openapi \
 		&& ./scripts/api-generate-pages \
 	'
@@ -30,7 +30,7 @@ broken-links:
 
 .PHONY: lintlify
 lintlify: venv
-	venv/bin/python -m lintlify.main
+	.venv/bin/python -m lintlify.main
 
 .PHONY: lint
 lint: broken-links mypy lintlify format-check
@@ -40,26 +40,27 @@ ci: broken-links mypy lintlify format-check test
 
 .PHONY: format
 format: venv
-	venv/bin/ruff check --fix
-	venv/bin/ruff format
+	uv run ruff check --fix
+	uv run ruff format
 
 .PHONY: format-check
 format-check: venv
-	venv/bin/ruff format --check
+	uv run ruff format --check
 
 .PHONY: mypy
 mypy: venv
-	venv/bin/mypy --strict scripts/*.py
-	venv/bin/mypy --strict --ignore-missing-imports -p lintlify
+	uv run mypy --strict scripts/*.py
+	uv run mypy --strict --ignore-missing-imports -p lintlify
 
-venv: requirements.txt
-	rm -rf venv
-	python3 -m venv venv
-	venv/bin/pip install -r requirements.txt
+.PHONY: venv
+venv: .venv
+
+.venv: uv.lock pyproject.toml
+	uv sync
 
 .PHONY: test
 test: venv
-	PYTHONPATH=. venv/bin/pytest lintlify -vv
+	uv run pytest src -vv
 
 .PHONY: clean
 clean:

@@ -12,12 +12,13 @@ This repository contains the source of https://api.docs.flare.io.
 
 ## Dependencies
 
-**Interpreters**
+**General**
 
-- Python: This repository contains a `.python-version` file for [pyenv](https://github.com/pyenv/pyenv). Use it with `pyenv local`.
-- Node: This repository contains a `.nvmrc` file for [nvm](https://github.com/nvm-sh/nvm). Use it with `nvm use`.
+- `python`: This repository contains a `.python-version` file for [pyenv](https://github.com/pyenv/pyenv). Use it with `pyenv local`.
+- `node`: This repository contains a `.nvmrc` file for [nvm](https://github.com/nvm-sh/nvm). Use it with `nvm use`.
+- `uv`: https://docs.astral.sh/uv/
 
-**Packages**
+**openapi-generator**
 
 You will need `openapi-generator` in order to generate the OpenAPI files.
 
