@@ -1,6 +1,7 @@
 import dataclasses
 import re
 import subprocess
+import tempfile
 
 from lintlify.context import LintContext
 from lintlify.error import LintError
@@ -71,20 +72,23 @@ def _lint_mdx_file_code_blocks(
 
         # Run mypy
         if not is_incomplete_example:
-            try:
-                subprocess.check_output(
-                    args=[
-                        lint_context.mypy_path,
-                        "--ignore-missing-imports",
-                        "/dev/stdin",
-                    ],
-                    input=python_block.body.encode("utf-8"),
-                )
-            except subprocess.CalledProcessError as ex:
-                yield LintError(
-                    filename=filename,
-                    message=ex.stdout.decode(),
-                )
+            with tempfile.NamedTemporaryFile() as f:
+                f.write(python_block.body.encode("utf-8"))
+                f.flush()
+                try:
+                    subprocess.check_output(
+                        args=[
+                            lint_context.ty_path,
+                            "check",
+                            "--ignore=unresolved-import",
+                            f.name,
+                        ],
+                    )
+                except subprocess.CalledProcessError as ex:
+                    yield LintError(
+                        filename=filename,
+                        message=ex.stdout.decode(),
+                    )
 
         # Run ruff check
         try:
