@@ -21,22 +21,47 @@ However, we recommend that you invoke it using [uv](https://docs.astral.sh/uv/).
 # Running the last version
 uvx flareio-cli --help
 
-# Running a specific version
+# Running a specific version. This ensures CLI stability.
 uvx flareio-cli@version --help
 ```
 
 You may find all available versions on the Github [releases](https://github.com/Flared/flareio-cli/releases) page.
 
-## Exporting Tenant Events
+## Configuration
 
-You may export a tenant's events using the `export-tenant-feed` command:
-- The output will be written to `output.txt`.
+Most commands will require exporting environment variables `FLARE_API_KEY` and `FLARE_TENANT_ID`:
+```bash
+export FLARE_API_KEY="<api-key>"
+export FLARE_TENANT_ID="<tenant-id>"
+```
+
+## Usage Examples
+
+### Exporting Tenant Events
+
+You may export a tenant's events to a CSV using the `export-tenant-feed` command:
+- The output will be written to `output.csv`.
 - The `cursor.txt` file can be used to resume the export from the last place it stopped.
 
 ```bash
-export FLARE_API_KEY="<api-key>"
-uvx run flareio-cli export-tenant-feed \
+uvx flareio-cli export-tenant-feed \
     --cursor-file=cursor.txt \
-    --output-file=output.txt \
+    --output-file=output.csv \
     --from-date=2025-01-01
 ```
+
+### Exporting Tenant Credentials
+
+You may export a tenant's credentials to a CSV using the `export-tenant-credentials` command:
+- The output will be written to `output.csv`.
+- The `cursor.txt` file can be used to resume the export from the last place it stopped.
+
+```bash
+uvx flareio-cli export-tenant-credentials \
+    --cursor-file=cursor.txt \
+    --output-file=output.csv
+```
+
+## Feedback
+
+The `flareio-cli` project is still considered beta. Feedback may be directed to the [Github Project issues](https://github.com/Flared/flareio-cli/issues).
