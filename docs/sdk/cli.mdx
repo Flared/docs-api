@@ -9,10 +9,14 @@ The CLI utility is still in beta and is subject to change.
 Flare publishes a [CLI interface](https://github.com/flared/flareio-cli) for interacting with the Flare API.
 It automates basic tasks such exporting events to output files.
 
-## Running directly with `uvx`
+## Installing
 
-We recommend that you run `flareio-cli` using [uv](https://docs.astral.sh/uv/).
+`flareio-cli` is [available on PyPI](https://pypi.org/project/flareio-cli/), you can install it using:
+```bash
+pip install flareio-cli
+```
 
+However, we recommend that you invoke it using [uv](https://docs.astral.sh/uv/). Example:
 ```bash
 # Running the last version
 uvx flareio-cli --help
@@ -21,16 +25,7 @@ uvx flareio-cli --help
 uvx flareio-cli@version --help
 ```
 
-You may find all available versions on the [releases](https://github.com/Flared/flareio-cli/releases) page.
-
-## Installing - PIP
-
-You may install the CLI using pip with the following command:
-
-```bash
-pip install flareio-cli
-```
-
+You may find all available versions on the Github [releases](https://github.com/Flared/flareio-cli/releases) page.
 
 ## Exporting Tenant Events
 
