@@ -11,21 +11,27 @@ It automates basic tasks such exporting events to output files.
 
 ## Installing
 
-`flareio-cli` is [available on PyPI](https://pypi.org/project/flareio-cli/), you can install it using:
-```bash
-pip install flareio-cli
-```
+`flareio-cli` is [available on PyPI](https://pypi.org/project/flareio-cli/).
+You may find all available versions on the Github [releases](https://github.com/Flared/flareio-cli/releases) page.
 
-However, we recommend that you invoke it using [uv](https://docs.astral.sh/uv/). Example:
+Invoke it directly using [uv](https://docs.astral.sh/uv/) (recommended):
 ```bash
-# Running the last version
+# Running the most recent version.
 uvx flareio-cli --help
 
-# Running a specific version. This ensures CLI stability.
+# Running a specific version. Recommended to ensure stability.
+# Example: uvx flareio-cli@0.5.0 --help
 uvx flareio-cli@version --help
 ```
 
-You may find all available versions on the Github [releases](https://github.com/Flared/flareio-cli/releases) page.
+Or install it:
+```bash
+# Using uv
+uv tool install flareio-cli
+
+# Using pip
+pip install flareio-cli
+```
 
 ## Configuration
 
@@ -71,4 +77,4 @@ uvx flareio-cli export-tenant-credentials \
 
 ## Feedback
 
-The `flareio-cli` project is still considered beta. Feedback may be directed to the [Github Project issues](https://github.com/Flared/flareio-cli/issues).
+The `flareio-cli` project is still considered beta. Feedback may be directed to the [Github project's issues](https://github.com/Flared/flareio-cli/issues).
