@@ -1,0 +1,41 @@
+---
+title: "CLI (beta)"
+---
+
+<Note>
+The CLI utility is still in beta and is subject to change.
+</Note>
+
+Flare publishes a [CLI interface](https://github.com/flared/flareio-cli) for interacting with the Flare API.
+It automates basic tasks such exporting events to output files.
+
+## Running directly with uvx
+
+We recommend that you run `flareio-cli` using [uv](https://docs.astral.sh/uv/).
+
+```bash
+uvx flareio-cli --help
+```
+
+## Installing - PIP
+
+You may install the CLI using pip with the following command:
+
+```bash
+pip install flareio-cli
+```
+
+
+## Exporting Tenant Events
+
+You may export a tenant's events using the `export-tenant-feed` command:
+- The output will be written to `output.txt`.
+- The `cursor.txt` file can be used to resume the export from the last place it stopped.
+
+```bash
+export FLARE_API_KEY="<api-key>"
+uvx run flareio-cli export-tenant-feed \
+    --cursor-file=cursor.txt \
+    --output-file=output.txt \
+    --from-date=2025-01-01
+```
