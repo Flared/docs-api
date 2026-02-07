@@ -17,6 +17,7 @@ def get_repo_dir() -> str:
         os.path.join(
             os.path.dirname(__file__),
             "..",
+            "..",
         )
     )
 

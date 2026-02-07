@@ -1,3 +1,25 @@
+[project]
+name = "lintlify"
+version = "0.1.0"
+authors = [
+    { name = "Alexandre Viau", email="alexandre.viau@flare.io>" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic==2.12.3",
+    "mypy==1.18.2",
+    "ruff==0.14.3",
+    "python-frontmatter==1.1.0",
+    "requests==2.32.5",
+    "pytest==8.4.2",
+    "types-requests==2.32.4.20250913",
+    "flareio>=1.2.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.28,<0.10.0"]
+build-backend = "uv_build"
+
 [tool.ruff.lint]
 extend-select = [
     "I",
@@ -8,7 +30,6 @@ extend-select = [
     "C417",
     "C419",
 ]
-
 
 [tool.ruff.lint.isort]
 force-single-line = true
