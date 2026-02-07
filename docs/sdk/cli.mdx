@@ -75,6 +75,19 @@ uvx flareio-cli export-tenant-credentials \
     --output-file=output.csv
 ```
 
+### Exporting Identifier Credentials
+
+You may export an identifier's credentials to a CSV using the `export-identifier-credentials` command:
+- The output will be written to `output.csv`.
+- The `cursor.txt` file can be used to resume the export from the last place it stopped.
+
+```bash
+uvx flareio-cli export-identifier-credentials \
+    --identifier-id=123 \
+    --cursor-file=cursor.txt \
+    --output-file=output.csv
+```
+
 ## Feedback
 
 The `flareio-cli` project is still considered beta.
