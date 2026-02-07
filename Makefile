@@ -33,10 +33,10 @@ lintlify: venv
 	.venv/bin/python -m lintlify.main
 
 .PHONY: lint
-lint: broken-links mypy lintlify format-check
+lint: broken-links check lintlify format-check
 
 .PHONY: ci
-ci: broken-links mypy lintlify format-check test
+ci: broken-links check lintlify format-check test
 
 .PHONY: format
 format: venv
@@ -47,15 +47,15 @@ format: venv
 format-check: venv
 	uv run ruff format --check
 
-.PHONY: mypy
-mypy: venv
-	uv run mypy --strict scripts/*.py
-	uv run mypy --strict --ignore-missing-imports -p lintlify
+.PHONY: check
+check: venv
+	uv run ty check
 
 .PHONY: venv
 venv: .venv
 
 .venv: uv.lock pyproject.toml
+	rm -rf .venv
 	uv sync
 
 .PHONY: test

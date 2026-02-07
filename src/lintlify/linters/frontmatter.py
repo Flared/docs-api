@@ -46,7 +46,7 @@ def _lint_frontmatter_file_openapi(
     mdx_file: mdx.MdxFile,
 ) -> t.Iterator[LintError]:
     property = _FrontmatterOpenapi.from_raw(
-        mdx_file.post.metadata["openapi"],
+        str(mdx_file.post.metadata["openapi"]),
     )
 
     for reference_file in lint_context.openapi_files:

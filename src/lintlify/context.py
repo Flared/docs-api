@@ -11,12 +11,12 @@ class LintContext:
     repository_root: str
 
     @property
-    def mypy_path(self) -> str:
+    def ty_path(self) -> str:
         return os.path.join(
             self.repository_root,
             ".venv",
             "bin",
-            "mypy",
+            "ty",
         )
 
     @property
