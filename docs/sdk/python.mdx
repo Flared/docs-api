@@ -120,7 +120,7 @@ from_timestamp: str = (
     datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(hours=1)
 ).isoformat()
 
-for event, next_cursor in api_client.scroll_events(
+for result in api_client.scroll_events(
     method="POST",
     pages_url="/firework/v4/events/global/_search",
     events_url="/firework/v2/activities/",
@@ -138,8 +138,8 @@ for event, next_cursor in api_client.scroll_events(
         },
     },
 ):
-    print(f"Full event data: {event}")
-    print(f"The next execution could resume using from={next_cursor}")
+    print(f"Full event data: {result.event}")
+    print(f"The next execution could resume using from={result.next}")
 ```
 
 ## Custom Session
