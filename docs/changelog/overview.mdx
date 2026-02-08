@@ -12,6 +12,17 @@ This page lists changes to Flare's API.
 Release notes for the Flare Platform can be found on the [product documentation website](https://docs.flare.io/releases).
 </Note>
 
+<Update label="2026-02-08" description="Python SDK - v2.0.0">
+  Released version 2.0.0 of the
+  [Python SDK <Icon icon="book" size={16} />](/sdk/python).
+
+  This release changes the API of `scroll_events` to yield `ScrollEventsResult` objects.
+  This new object exposes `metadata`, `event` and `next` fields.
+  
+  The previous API for this method wouldn't expose the `metadata` and forced users of the library
+  to implement their own pagination logic.
+</Update>
+
 <Update label="2026-02" description="CLI - February 2026">
   Released the beta of the
   [Flare API CLI <Icon icon="book" size={16} />](/sdk/cli)
