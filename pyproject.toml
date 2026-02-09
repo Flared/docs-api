@@ -13,7 +13,7 @@ dependencies = [
     "requests>=2.32",
     "pytest>=8.4.2",
     "types-requests>=2.32",
-    "flareio>=2.0.0",
+    "flareio>=2.1.0",
 ]
 
 [build-system]
