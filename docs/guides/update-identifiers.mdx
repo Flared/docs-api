@@ -33,35 +33,32 @@ This guide covers how to list identifiers, retrieve a specific identifier by ID,
 
 <Accordion title="Python SDK Example">
 ```python
-import time
-
 from flareio import FlareApiClient
+from flareio.ratelimit import Limiter
+
 
 api_client = FlareApiClient.from_env()
+
+limiter_default = Limiter.from_seconds(0.25)
 
 # 1. List all identifiers
 for resp in api_client.scroll(
     method="GET",
     url="/firework/v3/identifiers/",
 ):
-    # Rate limiting (default).
-    time.sleep(0.25)
+    limiter_default.tick()
 
-    data = resp.json()
-    items = data.get("items", [])
+    for item in resp.json()["items"]:
+        limiter_default.tick()
 
-    for item in items:
-        # Rate limiting (default).
-        time.sleep(0.25)
-
-        identifier_id = item.get("id")
+        identifier_id = item["id"]
 
         # 2. Get the full identifier by ID
         identifier_resp = api_client.get(f"/firework/v3/identifiers/{identifier_id}")
-        identifier = identifier_resp.json().get("identifier")
+        identifier = identifier_resp.json()["identifier"]
 
         # Rate limiting (default).
-        time.sleep(0.25)
+        limiter_default.tick()
 
         # 3. Do the necessary updates to the identifier
         api_client.put(

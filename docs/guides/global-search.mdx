@@ -52,12 +52,15 @@ These are end-to-end examples in various programming languages.
 <Accordion title="Python SDK Example">
 ```python
 import datetime
-import time
 
 from flareio import FlareApiClient
+from flareio.ratelimit import Limiter
 
 
 api_client = FlareApiClient.from_env()
+
+limiter_search = Limiter.from_seconds(1)
+limiter_default = Limiter.from_seconds(0.25)
 
 from_timestamp: str = (
     datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(hours=1)
@@ -83,8 +86,7 @@ for resp in api_client.scroll(
         },
     },
 ):
-    # Rate limiting (search).
-    time.sleep(1)
+    limiter_search.tick()
 
     resp_data: dict = resp.json()
     items: list[dict] = resp_data["items"]
@@ -97,8 +99,7 @@ for resp in api_client.scroll(
 
     # (Optional): Get the full data
     for item in items:
-        # Rate limiting (default).
-        time.sleep(0.25)
+        limiter_default.tick()
 
         event_response = api_client.get(
             url="/firework/v2/activities/",
