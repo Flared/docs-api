@@ -64,4 +64,4 @@ test: venv
 
 .PHONY: clean
 clean:
-	rm -rf venv
+	rm -rf .venv
