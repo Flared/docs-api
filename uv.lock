@@ -56,14 +56,14 @@ wheels = [
 
 [[package]]
 name = "flareio"
-version = "2.1.0"
+version = "2.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/90/27/15a26d3d9fc626f4dc599db64b11ad73021c1200acf9cc1810539940e4c4/flareio-2.1.0.tar.gz", hash = "sha256:1d0550ee4908353d658e20f444cc1373995c3336beaac8c9903d85a2e9768108", size = 4594, upload-time = "2026-02-09T00:57:57.474Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ba/0f/32e0cdb1e641d544af34c4dad10b923c71adc69e9f05a3766cf4c65589bd/flareio-2.3.0.tar.gz", hash = "sha256:a2f1ecafc78075779a3cd8fe6c8e96e6aed5d354b658d725ebd06de8708d2fe2", size = 4632, upload-time = "2026-02-09T01:24:48.074Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c8/63/549dfbc78951d41bf22781eecd3fe5a9f52cbefb00e9009418e1d0736016/flareio-2.1.0-py3-none-any.whl", hash = "sha256:05b4c31eda1a8d0dd4cf8a9bb1047c1d84a1c4dd83396468e65b9d55a7065282", size = 6065, upload-time = "2026-02-09T00:57:58.128Z" },
+    { url = "https://files.pythonhosted.org/packages/2f/e5/f9e2662d238e6660a8ce2715dcb51239343ba05b1d1d3cbcc8f5809bc791/flareio-2.3.0-py3-none-any.whl", hash = "sha256:9e309c851ffa7b7c284e08af91887399ff3e8981d8283cc4c780f252296823e6", size = 6103, upload-time = "2026-02-09T01:24:46.431Z" },
 ]
 
 [[package]]
@@ -101,7 +101,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flareio", specifier = ">=2.1.0" },
+    { name = "flareio", specifier = ">=2.3.0" },
     { name = "pydantic", specifier = ">=2.12.3" },
     { name = "pytest", specifier = ">=8.4.2" },
     { name = "python-frontmatter", specifier = ">=1.1.0" },
