@@ -68,9 +68,9 @@ These are end-to-end examples in various programming languages.
 <Accordion title="Python SDK Example">
 ```python
 import os
-import time
 
 from flareio import FlareApiClient
+from flareio.ratelimit import Limiter
 
 
 api_key = os.environ.get("FLARE_API_KEY")
@@ -78,6 +78,8 @@ if not api_key:
     raise Exception("Please provide an API key")
 
 api_client = FlareApiClient(api_key=api_key)
+
+limiter_default = Limiter.from_seconds(0.25)
 
 last_from: str | None = None
 fetched_pages: int = 0
@@ -90,7 +92,7 @@ for resp in api_client.scroll(
     },
 ):
     # Rate limiting (default).
-    time.sleep(0.25)
+    limiter_default.tick()
 
     # Get results from the response
     resp_data = resp.json()
@@ -109,9 +111,9 @@ print("The last value for 'next' was", last_from)
 <Accordion title="Python Generic Example">
 ```python
 import os
-import time
 
 from flareio import FlareApiClient
+from flareio.ratelimit import Limiter
 
 
 api_key = os.environ.get("FLARE_API_KEY")
@@ -120,12 +122,13 @@ if not api_key:
 
 api_client = FlareApiClient(api_key=api_key)
 
+limiter_default = Limiter.from_seconds(0.25)
+
 from_: str | None = None
 fetched_pages: int = 0
 
 while True:
-    # Rate limiting (default).
-    time.sleep(0.25)
+    limiter_default.tick()
 
     params: dict = {}
     if from_:

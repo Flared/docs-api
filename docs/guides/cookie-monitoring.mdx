@@ -56,15 +56,17 @@ This is an end-to-end example in Python.
 <Accordion title="Python SDK Example">
 ```python
 import json
-import time
 
 from datetime import datetime
 from datetime import timedelta
 from datetime import timezone
 from flareio import FlareApiClient
+from flareio.ratelimit import Limiter
 
 
 api_client = FlareApiClient.from_env()
+
+limiter_default = Limiter.from_seconds(0.25)
 
 last_from: str | None = None
 fetched_pages: int = 0
@@ -86,8 +88,7 @@ for resp in api_client.scroll(
         ).isoformat(),
     },
 ):
-    # Rate limiting (default).
-    time.sleep(0.25)
+    limiter_default.tick()
 
     resp_data: dict = resp.json()
 
@@ -105,7 +106,7 @@ for resp in api_client.scroll(
 
         # Optionally fetch more information about how it was leaked...
         if fetch_full_event:
-            time.sleep(0.2)
+            limiter_default.tick()
             full_event = api_client.get(
                 url="/firework/v2/activities/",
                 params={

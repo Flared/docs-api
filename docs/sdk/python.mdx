@@ -65,9 +65,9 @@ The `FlareApiClient` has a `scroll` method that can be used with endpoints that 
 
 ```python Paging Util - Generic Example
 import os
-import time
 
 from flareio import FlareApiClient
+from flareio.ratelimit import Limiter
 
 
 api_key = os.environ.get("FLARE_API_KEY")
@@ -75,6 +75,8 @@ if not api_key:
     raise Exception("Please provide an API key")
 
 api_client = FlareApiClient(api_key=api_key)
+
+limiter = Limiter.from_seconds(0.25)
 
 last_from: str | None = None
 fetched_pages: int = 0
@@ -87,7 +89,7 @@ for resp in api_client.scroll(
     },
 ):
     # Rate limiting (default).
-    time.sleep(0.25)
+    limiter.tick()
 
     # Get results from the response
     resp_data = resp.json()
