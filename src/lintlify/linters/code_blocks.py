@@ -80,7 +80,6 @@ def _lint_mdx_file_code_blocks(
                         args=[
                             lint_context.ty_path,
                             "check",
-                            "--ignore=unresolved-import",
                             f.name,
                         ],
                     )
@@ -90,7 +89,25 @@ def _lint_mdx_file_code_blocks(
                         message=ex.stdout.decode(),
                     )
 
-        # Run ruff check
+        # Ruff: check
+        try:
+            subprocess.check_output(
+                args=[
+                    lint_context.ruff_path,
+                    "check",
+                    "--diff",
+                    "--stdin-filename",
+                    filename,
+                ],
+                input=python_block.body.encode("utf-8"),
+            )
+        except subprocess.CalledProcessError as ex:
+            yield LintError(
+                filename=filename,
+                message=ex.stdout.decode(),
+            )
+
+        # Ruff: format check
         try:
             subprocess.check_output(
                 args=[

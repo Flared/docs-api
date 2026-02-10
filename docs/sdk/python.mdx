@@ -51,6 +51,7 @@ export FLARE_TENANT_ID="<tenant-id>"
 ```python
 from flareio import FlareApiClient
 
+
 client = FlareApiClient.from_env()
 
 resp = client.get("/tokens/test")
