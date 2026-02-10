@@ -41,3 +41,8 @@ combine-as-imports = true
 forced-separate = [
     "typing",
 ]
+
+[tool.ty.analysis]
+allowed-unresolved-imports = [
+    "taxii2client.**",
+]
