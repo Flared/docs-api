@@ -1,0 +1,20 @@
+---
+openapi: firework-v4-openapi get /firework/v4/events/_expand
+---
+
+import EventExpandFieldExamples from '/snippets/event_expand_field_examples.mdx'
+import EventExpandFieldValidFields from '/snippets/event_expand_field_valid_fields.mdx'
+
+Returns a page of items for a particular expanded field in a specified event.
+
+<Panel>
+  <ResponseExample>
+    <EventExpandFieldExamples />
+  </ResponseExample>
+</Panel>
+
+### Expandable fields
+
+The following fields can be expanded for the given event type.
+
+<EventExpandFieldValidFields />
