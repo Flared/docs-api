@@ -23,7 +23,7 @@ Invoke it directly using [uv](https://docs.astral.sh/uv/) (recommended):
 uvx flareio-cli --help
 
 # Running a specific version. Recommended to ensure stability.
-# Example: uvx flareio-cli@0.5.0 --help
+# Example: uvx flareio-cli@0.8.0 --help
 uvx flareio-cli@version --help
 ```
 
@@ -57,11 +57,9 @@ uvx flareio-cli help
 
 You may export a tenant's events to a CSV using the `export-tenant-feed` command:
 - The output will be written to `output.csv`.
-- The `cursor.txt` file can be used to resume the export from the last place it stopped.
 
 ```bash
 uvx flareio-cli export-tenant-feed \
-    --cursor-file=cursor.txt \
     --output-file=output.csv \
     --from-date=2025-01-01
 ```
@@ -70,11 +68,9 @@ uvx flareio-cli export-tenant-feed \
 
 You may export a tenant's credentials to a CSV using the `export-tenant-credentials` command:
 - The output will be written to `output.csv`.
-- The `cursor.txt` file can be used to resume the export from the last place it stopped.
 
 ```bash
 uvx flareio-cli export-tenant-credentials \
-    --cursor-file=cursor.txt \
     --output-file=output.csv
 ```
 
@@ -82,12 +78,10 @@ uvx flareio-cli export-tenant-credentials \
 
 You may export an identifier's credentials to a CSV using the `export-identifier-credentials` command:
 - The output will be written to `output.csv`.
-- The `cursor.txt` file can be used to resume the export from the last place it stopped.
 
 ```bash
 uvx flareio-cli export-identifier-credentials \
     --identifier-id=123 \
-    --cursor-file=cursor.txt \
     --output-file=output.csv
 ```
 
