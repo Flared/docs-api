@@ -1,0 +1,11 @@
+---
+title: "Stealer Log"
+---
+
+import StealerLogExample from '/snippets/event_model_examples/stealer_log.mdx'
+
+The `stealer_log` (also observed as `bot` in some indices) represents a record of a compromised device whose credentials and browsing data were harvested by an information stealer malware (such as RedLine, Raccoon, or Vidar).
+These entries originate from dark-web marketplaces (for example, “Russian Market”) where attackers sell logs containing cookies, saved passwords, and session tokens from infected machines.
+Each document corresponds to a single device or “bot,” with metadata describing where and when it was first seen, its environment (OS, IP, ISP), and the websites and services discovered in its data.
+
+<StealerLogExample />
