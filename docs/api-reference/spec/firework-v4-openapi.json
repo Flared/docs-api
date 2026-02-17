@@ -929,7 +929,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_InviteLinkResponse__datetime_"
+                                    "$ref": "#/components/schemas/PaginatedResults_InviteLinkResponse_datetime_"
                                 }
                             }
                         }
@@ -1047,7 +1047,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_TenantFlareCommunityUser__int_"
+                                    "$ref": "#/components/schemas/PaginatedResults_TenantFlareCommunityUser_int_"
                                 }
                             }
                         }
@@ -1238,7 +1238,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_ThreatFlowReportResponse__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_ThreatFlowReportResponse_str_"
                                 }
                             }
                         }
@@ -1434,33 +1434,22 @@
                 }
             }
         },
-        "/firework/v4/actors/{actor_name}/uuid": {
+        "/firework/v4/actors/uuid": {
             "post": {
                 "tags": [
                     "private"
                 ],
                 "summary": "Get Asset Uuid",
-                "operationId": "get_asset_uuid_actors__actor_name__uuid_post",
-                "parameters": [
-                    {
-                        "name": "actor_name",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Actor Name"
-                        }
-                    }
-                ],
+                "operationId": "get_asset_uuid_actors_uuid_post",
                 "requestBody": {
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/ActorBodyPayload"
                             }
                         }
-                    }
+                    },
+                    "required": true
                 },
                 "responses": {
                     "200": {
@@ -1469,7 +1458,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "string",
-                                    "title": "Response Get Asset Uuid Actors  Actor Name  Uuid Post"
+                                    "title": "Response Get Asset Uuid Actors Uuid Post"
                                 }
                             }
                         }
@@ -1487,46 +1476,22 @@
                 }
             }
         },
-        "/firework/v4/actors/{actor_name}/profile": {
+        "/firework/v4/actors/{asset_uuid}/metadata": {
             "get": {
                 "tags": [
                     "private"
                 ],
-                "summary": "Get Actor Profile",
-                "operationId": "get_actor_profile_actors__actor_name__profile_get",
+                "summary": "Get Actor Metadata Endpoint",
+                "operationId": "get_actor_metadata_endpoint_actors__asset_uuid__metadata_get",
                 "parameters": [
                     {
-                        "name": "actor_name",
+                        "name": "asset_uuid",
                         "in": "path",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "title": "Actor Name"
-                        }
-                    },
-                    {
-                        "name": "actor_id",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Actor Id"
-                        }
-                    },
-                    {
-                        "name": "source",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Source"
+                            "format": "uuid",
+                            "title": "Asset Uuid"
                         }
                     }
                 ],
@@ -1554,21 +1519,22 @@
                 }
             }
         },
-        "/firework/v4/actors/{actor_name}/timeline": {
+        "/firework/v4/actors/{asset_uuid}/timeline": {
             "get": {
                 "tags": [
                     "private"
                 ],
                 "summary": "Get Actor Timeline",
-                "operationId": "get_actor_timeline_actors__actor_name__timeline_get",
+                "operationId": "get_actor_timeline_actors__asset_uuid__timeline_get",
                 "parameters": [
                     {
-                        "name": "actor_name",
+                        "name": "asset_uuid",
                         "in": "path",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "title": "Actor Name"
+                            "format": "uuid",
+                            "title": "Asset Uuid"
                         }
                     },
                     {
@@ -1656,31 +1622,6 @@
                             ],
                             "title": "Risk Scores"
                         }
-                    },
-                    {
-                        "name": "actor_id",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Actor Id"
-                        }
-                    },
-                    {
-                        "name": "source",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Source"
-                        }
                     }
                 ],
                 "responses": {
@@ -1690,147 +1631,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ActorTimeline"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/firework/v4/actors/{actor_name}/recent-activities": {
-            "get": {
-                "tags": [
-                    "private"
-                ],
-                "summary": "Get Actor Recent Activities",
-                "operationId": "get_actor_recent_activities_actors__actor_name__recent_activities_get",
-                "parameters": [
-                    {
-                        "name": "actor_name",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Actor Name"
-                        }
-                    },
-                    {
-                        "name": "times",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Times"
-                        }
-                    },
-                    {
-                        "name": "time_zone",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Time Zone"
-                        }
-                    },
-                    {
-                        "name": "search_types",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/SearchType"
-                                    }
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Search Types"
-                        }
-                    },
-                    {
-                        "name": "risk_scores",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/RiskScore"
-                                    }
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Risk Scores"
-                        }
-                    },
-                    {
-                        "name": "actor_id",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Actor Id"
-                        }
-                    },
-                    {
-                        "name": "source",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Source"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/EventInput"
-                                    },
-                                    "title": "Response Get Actor Recent Activities Actors  Actor Name  Recent Activities Get"
                                 }
                             }
                         }
@@ -1895,46 +1695,22 @@
                 }
             }
         },
-        "/firework/v4/actors/{actor_name}/analysis/metadata": {
+        "/firework/v4/actors/{asset_uuid}/analysis/metadata": {
             "get": {
                 "tags": [
                     "private"
                 ],
                 "summary": "Get Actor Analysis Metadata",
-                "operationId": "get_actor_analysis_metadata_actors__actor_name__analysis_metadata_get",
+                "operationId": "get_actor_analysis_metadata_actors__asset_uuid__analysis_metadata_get",
                 "parameters": [
                     {
-                        "name": "actor_name",
+                        "name": "asset_uuid",
                         "in": "path",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "title": "Actor Name"
-                        }
-                    },
-                    {
-                        "name": "actor_id",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Actor Id"
-                        }
-                    },
-                    {
-                        "name": "source",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Source"
+                            "format": "uuid",
+                            "title": "Asset Uuid"
                         }
                     }
                 ],
@@ -2058,21 +1834,22 @@
                 }
             }
         },
-        "/firework/v4/actors/{actor_name}/heatmap": {
+        "/firework/v4/actors/{asset_uuid}/heatmap": {
             "get": {
                 "tags": [
                     "private"
                 ],
                 "summary": "Get Actor Heatmap",
-                "operationId": "get_actor_heatmap_actors__actor_name__heatmap_get",
+                "operationId": "get_actor_heatmap_actors__asset_uuid__heatmap_get",
                 "parameters": [
                     {
-                        "name": "actor_name",
+                        "name": "asset_uuid",
                         "in": "path",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "title": "Actor Name"
+                            "format": "uuid",
+                            "title": "Asset Uuid"
                         }
                     },
                     {
@@ -2144,31 +1921,6 @@
                             ],
                             "title": "Risk Scores"
                         }
-                    },
-                    {
-                        "name": "actor_id",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Actor Id"
-                        }
-                    },
-                    {
-                        "name": "source",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Source"
-                        }
                     }
                 ],
                 "responses": {
@@ -2185,7 +1937,7 @@
                                             "type": "null"
                                         }
                                     ],
-                                    "title": "Response Get Actor Heatmap Actors  Actor Name  Heatmap Get"
+                                    "title": "Response Get Actor Heatmap Actors  Asset Uuid  Heatmap Get"
                                 }
                             }
                         }
@@ -2440,7 +2192,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_Alert__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_Alert_str_"
                                 }
                             }
                         }
@@ -2700,7 +2452,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_PartialAlertChannel__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_PartialAlertChannel_str_"
                                 }
                             }
                         }
@@ -3026,7 +2778,7 @@
                                         "$ref": "#/components/schemas/UsernameData"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/EmailData-Input"
+                                        "$ref": "#/components/schemas/EmailData"
                                     },
                                     {
                                         "$ref": "#/components/schemas/SecretData"
@@ -3177,7 +2929,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_EnrichedBulkAction__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_EnrichedBulkAction_str_"
                                 }
                             }
                         }
@@ -3218,7 +2970,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_ASTPCookiePayload__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_ASTPCookiePayload_str_"
                                 }
                             }
                         }
@@ -3239,7 +2991,8 @@
         "/firework/v4/integrations/credential_validations": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Get Credential Validations",
                 "operationId": "get_credential_validations_integrations_credential_validations_get",
@@ -3260,7 +3013,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_CredentialValidationReponse__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_CredentialValidationReponse_str_"
                                 }
                             }
                         }
@@ -3279,7 +3032,8 @@
             },
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Validate Credential",
                 "operationId": "validate_credential_integrations_credential_validations_post",
@@ -3320,7 +3074,8 @@
         "/firework/v4/integrations/credential_validations/{tenant_id}/reset": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Reset Credential Validations",
                 "operationId": "reset_credential_validations_integrations_credential_validations__tenant_id__reset_post",
@@ -3420,7 +3175,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_Credential__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_Credential_str_"
                                 }
                             }
                         }
@@ -3568,7 +3323,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_EntityAPIResponseTypes__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_EntityAPIResponseTypes_str_"
                                 }
                             }
                         }
@@ -3687,7 +3442,8 @@
         "/firework/v4/events/": {
             "get": {
                 "tags": [
-                    "public"
+                    "public",
+                    "team=integration"
                 ],
                 "summary": "Get Event",
                 "operationId": "get_event_events__get",
@@ -3722,9 +3478,6 @@
                                             "$ref": "#/components/schemas/FinancialEvent"
                                         },
                                         {
-                                            "$ref": "#/components/schemas/DockerImageEvent"
-                                        },
-                                        {
                                             "$ref": "#/components/schemas/ForumPostEvent"
                                         },
                                         {
@@ -3740,13 +3493,10 @@
                                             "$ref": "#/components/schemas/RansomLeakEvent"
                                         },
                                         {
-                                            "$ref": "#/components/schemas/ServiceEvent"
-                                        },
-                                        {
                                             "$ref": "#/components/schemas/SocialMediaEvent"
                                         },
                                         {
-                                            "$ref": "#/components/schemas/StealerLogEvent"
+                                            "$ref": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent"
                                         }
                                     ],
                                     "discriminator": {
@@ -3756,13 +3506,11 @@
                                             "bucket": "#/components/schemas/BucketEvent",
                                             "chat_message": "#/components/schemas/ChatMessageEvent",
                                             "cc": "#/components/schemas/FinancialEvent",
-                                            "docker_image": "#/components/schemas/DockerImageEvent",
                                             "forum_post": "#/components/schemas/ForumPostEvent",
                                             "listing": "#/components/schemas/ListingEvent",
                                             "lookalike": "#/components/schemas/LookalikeDomainEvent",
                                             "paste": "#/components/schemas/PasteEvent",
                                             "ransomleak": "#/components/schemas/RansomLeakEvent",
-                                            "service": "#/components/schemas/ServiceEvent",
                                             "social_media_account": "#/components/schemas/SocialMediaEvent",
                                             "stealer_log": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent"
                                         }
@@ -3876,7 +3624,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_FeedItem__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_FeedItem_str_"
                                 }
                             }
                         }
@@ -3917,7 +3665,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_GlobalFeedItem__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_GlobalFeedItem_str_"
                                 }
                             }
                         }
@@ -3968,7 +3716,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_FeedItem__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_FeedItem_str_"
                                 }
                             }
                         }
@@ -4019,7 +3767,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_FeedItem__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_FeedItem_str_"
                                 }
                             }
                         }
@@ -4162,7 +3910,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_SecretItem__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_SecretItem_str_"
                                 }
                             }
                         }
@@ -4428,10 +4176,10 @@
                                 "schema": {
                                     "anyOf": [
                                         {
-                                            "$ref": "#/components/schemas/PaginatedResults_StealerLogCredential__str_"
+                                            "$ref": "#/components/schemas/PaginatedResults_StealerLogCredential_str_"
                                         },
                                         {
-                                            "$ref": "#/components/schemas/PaginatedResults_StealerLogCookie__str_"
+                                            "$ref": "#/components/schemas/PaginatedResults_StealerLogCookie_str_"
                                         }
                                     ],
                                     "title": "Response Expand Event Field Events  Expand Get"
@@ -5067,7 +4815,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_Recommendation__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_Recommendation_str_"
                                 }
                             }
                         }
@@ -5352,7 +5100,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResult_int__str_"
+                                    "$ref": "#/components/schemas/PaginatedResult_int_str_"
                                 }
                             }
                         }
@@ -5638,7 +5386,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_Identifier__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_Identifier_str_"
                                 }
                             }
                         }
@@ -5791,7 +5539,7 @@
                                         "$ref": "#/components/schemas/CredentialsData"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/EmailData-Input"
+                                        "$ref": "#/components/schemas/EmailData"
                                     },
                                     {
                                         "$ref": "#/components/schemas/UsernameData"
@@ -5816,7 +5564,7 @@
                                         "search_query": "#/components/schemas/SearchQueryData",
                                         "github_repository": "#/components/schemas/GithubRepositoryData",
                                         "credentials": "#/components/schemas/CredentialsData",
-                                        "email": "#/components/schemas/EmailData-Input",
+                                        "email": "#/components/schemas/EmailData",
                                         "username": "#/components/schemas/UsernameData",
                                         "secret": "#/components/schemas/SecretData",
                                         "name": "#/components/schemas/NameData"
@@ -6179,7 +5927,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_IdentifierRelation__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_IdentifierRelation_str_"
                                 }
                             }
                         }
@@ -6396,7 +6144,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResult_int__str_"
+                                    "$ref": "#/components/schemas/PaginatedResult_int_str_"
                                 }
                             }
                         }
@@ -6554,7 +6302,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_Union_EnrichedCredential__EnrichedCookie___str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_Union_EnrichedCredential__EnrichedCookie__str_"
                                 }
                             }
                         }
@@ -7207,6 +6955,48 @@
                 }
             }
         },
+        "/firework/v4/domains/{asset_uuid}/metadata": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Domain Profile Metadata",
+                "operationId": "get_domain_profile_metadata_domains__asset_uuid__metadata_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DomainProfileMetadataResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/leaks/sources": {
             "get": {
                 "tags": [
@@ -7284,7 +7074,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_SourceWithTenantCount__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_SourceWithTenantCount_str_"
                                 }
                             }
                         }
@@ -7611,7 +7401,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_ReportGroupData__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_ReportGroupData_str_"
                                 }
                             }
                         }
@@ -7861,7 +7651,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_ReportData__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_ReportData_str_"
                                 }
                             }
                         }
@@ -8245,7 +8035,7 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/SortType",
+                            "$ref": "#/components/schemas/pyro__reports__report_store__SortType",
                             "default": "updated_at"
                         }
                     },
@@ -8295,7 +8085,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_Report__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_Report_str_"
                                 }
                             }
                         }
@@ -8746,7 +8536,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_ReportSectionPayload__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_ReportSectionPayload_str_"
                                 }
                             }
                         }
@@ -9132,7 +8922,8 @@
         "/firework/v4/integrations/tenant_integrations": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Get Tenant Integrations",
                 "operationId": "get_tenant_integrations_integrations_tenant_integrations_get",
@@ -9220,7 +9011,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_TenantIntegrationItem__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_TenantIntegrationItem_str_"
                                 }
                             }
                         }
@@ -9239,7 +9030,8 @@
             },
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Create Tenant Integration",
                 "operationId": "create_tenant_integration_integrations_tenant_integrations_post",
@@ -9280,7 +9072,8 @@
         "/firework/v4/integrations/tenant_integrations/{tenant_integration_id}": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Get Tenant Integration",
                 "operationId": "get_tenant_integration_integrations_tenant_integrations__tenant_integration_id__get",
@@ -9331,7 +9124,8 @@
             },
             "put": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Update Tenant Integration",
                 "operationId": "update_tenant_integration_integrations_tenant_integrations__tenant_integration_id__put",
@@ -9380,7 +9174,8 @@
             },
             "patch": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Update Partial Tenant Integration",
                 "operationId": "update_partial_tenant_integration_integrations_tenant_integrations__tenant_integration_id__patch",
@@ -9429,7 +9224,8 @@
             },
             "delete": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Delete Tenant Integration",
                 "operationId": "delete_tenant_integration_integrations_tenant_integrations__tenant_integration_id__delete",
@@ -9470,7 +9266,8 @@
         "/firework/v4/integrations/tenant_integrations/test": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Test Tenant Integration",
                 "operationId": "test_tenant_integration_integrations_tenant_integrations_test_post",
@@ -9511,7 +9308,8 @@
         "/firework/v4/integrations/tenant_integrations/{tenant_integration_id}/idp/revoke_sessions": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Revoke Sessions",
                 "operationId": "revoke_sessions_integrations_tenant_integrations__tenant_integration_id__idp_revoke_sessions_post",
@@ -9557,7 +9355,8 @@
         "/firework/v4/integrations/tenant_integrations/{tenant_integration_id}/idp/disable_account": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Disable Account",
                 "operationId": "disable_account_integrations_tenant_integrations__tenant_integration_id__idp_disable_account_post",
@@ -9603,7 +9402,8 @@
         "/firework/v4/integrations/tenant_integrations/{tenant_integration_id}/idp/mark_user_as_compromised": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Mark User As Compromised",
                 "operationId": "mark_user_as_compromised_integrations_tenant_integrations__tenant_integration_id__idp_mark_user_as_compromised_post",
@@ -9983,7 +9783,7 @@
                                 {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/ReportType"
+                                        "$ref": "#/components/schemas/pyro__threat_flow__core__reports__report_store__ReportType"
                                     }
                                 },
                                 {
@@ -10000,7 +9800,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_PydanticThreatFlowReport__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_PydanticThreatFlowReport_str_"
                                 }
                             }
                         }
@@ -10042,7 +9842,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ReportResponse"
+                                    "$ref": "#/components/schemas/pyro__threat_flow__web__v4__reports__models__ReportResponse"
                                 }
                             }
                         }
@@ -10132,7 +9932,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ReportResponse"
+                                    "$ref": "#/components/schemas/pyro__threat_flow__web__v4__reports__models__ReportResponse"
                                 }
                             }
                         }
@@ -10469,7 +10269,8 @@
         "/firework/v4/sandbox": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "List Sandbox Submissions",
                 "operationId": "list_sandbox_submissions_sandbox_get",
@@ -10518,7 +10319,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_SandboxSampleSubmission__str_"
+                                    "$ref": "#/components/schemas/PaginatedResults_SandboxSampleSubmission_str_"
                                 }
                             }
                         }
@@ -10539,7 +10340,8 @@
         "/firework/v4/sandbox/submit_url": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Submit Url",
                 "operationId": "submit_url_sandbox_submit_url_post",
@@ -10580,7 +10382,8 @@
         "/firework/v4/sandbox/{job_id}/vnc_url": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Get Vnc Url",
                 "operationId": "get_vnc_url_sandbox__job_id__vnc_url_get",
@@ -10622,7 +10425,8 @@
         "/firework/v4/sandbox/file_upload_url": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Get File Upload Url",
                 "operationId": "get_file_upload_url_sandbox_file_upload_url_get",
@@ -10664,7 +10468,8 @@
         "/firework/v4/sandbox/submissions/{submission_uuid}/report": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Stream Submission Report",
                 "operationId": "stream_submission_report_sandbox_submissions__submission_uuid__report_get",
@@ -10705,7 +10510,8 @@
         "/firework/v4/sandbox/submissions/{submission_uuid}/iocs/csv": {
             "get": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Stream Iocs Csv",
                 "operationId": "stream_iocs_csv_sandbox_submissions__submission_uuid__iocs_csv_get",
@@ -10746,7 +10552,8 @@
         "/firework/v4/sandbox/submissions/{submission_uuid}/archive": {
             "post": {
                 "tags": [
-                    "private"
+                    "private",
+                    "team=integration"
                 ],
                 "summary": "Archive Submission",
                 "operationId": "archive_submission_sandbox_submissions__submission_uuid__archive_post",
@@ -11362,40 +11169,6 @@
                 ],
                 "title": "ActivityUid"
             },
-            "Actor": {
-                "properties": {
-                    "id": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Id",
-                        "description": "ID of the author of the forum post. These IDs relate to the forum platform."
-                    },
-                    "name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Name",
-                        "description": "Name of the author of the forum post."
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "id",
-                    "name"
-                ],
-                "title": "Actor"
-            },
             "ActorAPIResponse": {
                 "properties": {
                     "uuid": {
@@ -11554,15 +11327,12 @@
             "ActorBodyPayload": {
                 "properties": {
                     "actor_id": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
+                        "type": "string",
                         "title": "Actor Id"
+                    },
+                    "actor_name": {
+                        "type": "string",
+                        "title": "Actor Name"
                     },
                     "source": {
                         "type": "string",
@@ -11571,6 +11341,8 @@
                 },
                 "type": "object",
                 "required": [
+                    "actor_id",
+                    "actor_name",
                     "source"
                 ],
                 "title": "ActorBodyPayload"
@@ -11878,8 +11650,7 @@
                         "title": "Title"
                     },
                     "source": {
-                        "type": "string",
-                        "title": "Source"
+                        "$ref": "#/components/schemas/EnrichedSource"
                     },
                     "event_count": {
                         "type": "integer",
@@ -11967,14 +11738,7 @@
                         "title": "Actor Name"
                     },
                     "actor_id": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
+                        "type": "string",
                         "title": "Actor Id"
                     },
                     "source": {
@@ -11985,6 +11749,7 @@
                 "type": "object",
                 "required": [
                     "actor_name",
+                    "actor_id",
                     "source"
                 ],
                 "title": "ActorUid"
@@ -13169,7 +12934,7 @@
                                 "$ref": "#/components/schemas/UsernameData"
                             },
                             {
-                                "$ref": "#/components/schemas/EmailData-Output"
+                                "$ref": "#/components/schemas/EmailData"
                             },
                             {
                                 "$ref": "#/components/schemas/SecretData"
@@ -13190,7 +12955,7 @@
                                 "brand": "#/components/schemas/BrandData",
                                 "credentials": "#/components/schemas/CredentialsData",
                                 "domain": "#/components/schemas/DomainData",
-                                "email": "#/components/schemas/EmailData-Output",
+                                "email": "#/components/schemas/EmailData",
                                 "github_repository": "#/components/schemas/GithubRepositoryData",
                                 "identity": "#/components/schemas/IdentityData",
                                 "ip": "#/components/schemas/IPData",
@@ -13998,7 +13763,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2026-02-12T20:01:15.359500Z"
+                        "default": "2026-02-16T21:14:39.946381Z"
                     },
                     "from": {
                         "anyOf": [
@@ -14141,29 +13906,16 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Posted At"
+                        "title": "Posted At",
+                        "description": "The time the chat message was posted."
                     },
                     "actor": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/pyro__findings__chat_messages__datamodels__ChatMessageEventData__Actor"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "default": {}
+                        "$ref": "#/components/schemas/pyro__findings__chat_messages__datamodels__ChatMessageEventData__Actor",
+                        "description": "Collection of data about the actor of the chat message."
                     },
                     "context": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/pyro__findings__chat_messages__datamodels__ChatMessageEventData__Context"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "default": {}
+                        "$ref": "#/components/schemas/pyro__findings__chat_messages__datamodels__ChatMessageEventData__Context",
+                        "description": "Collection of data about the context of the chat message."
                     },
                     "content": {
                         "anyOf": [
@@ -14174,29 +13926,16 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Content"
+                        "title": "Content",
+                        "description": "The content of the chat message."
                     },
                     "parent_context": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/ParentContext"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "default": {}
+                        "$ref": "#/components/schemas/ParentContext",
+                        "description": "Collection of data about the context of the parent chat message."
                     },
                     "forward_info": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/ForwardInfo"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "default": {}
+                        "$ref": "#/components/schemas/ForwardInfo",
+                        "description": "Collection of data about the forward information of the chat message."
                     },
                     "was_forwarded": {
                         "anyOf": [
@@ -14207,7 +13946,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Was Forwarded"
+                        "title": "Was Forwarded",
+                        "description": "Whether the chat message was forwarded."
                     }
                 },
                 "type": "object",
@@ -14224,7 +13964,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Carding"
+                        "title": "Is Carding",
+                        "description": "Whether the listing is classified as carding."
                     },
                     "is_bypass": {
                         "anyOf": [
@@ -14235,7 +13976,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Bypass"
+                        "title": "Is Bypass",
+                        "description": "Whether the listing is classified as a bypass."
                     },
                     "is_ident_fraud": {
                         "anyOf": [
@@ -14246,7 +13988,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Ident Fraud"
+                        "title": "Is Ident Fraud",
+                        "description": "Whether the listing is classified as identity fraud."
                     },
                     "is_doc_fraud": {
                         "anyOf": [
@@ -14257,7 +14000,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Doc Fraud"
+                        "title": "Is Doc Fraud",
+                        "description": "Whether the listing is classified as document fraud."
                     },
                     "is_phishing": {
                         "anyOf": [
@@ -14268,7 +14012,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Phishing"
+                        "title": "Is Phishing",
+                        "description": "Whether the listing is classified as phishing."
                     },
                     "is_money_xfer": {
                         "anyOf": [
@@ -14279,7 +14024,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Money Xfer"
+                        "title": "Is Money Xfer",
+                        "description": "Whether the listing is classified as money transfer."
                     },
                     "is_cashout": {
                         "anyOf": [
@@ -14290,7 +14036,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Cashout"
+                        "title": "Is Cashout",
+                        "description": "Whether the listing is classified as a cashout."
                     },
                     "is_virt_currency": {
                         "anyOf": [
@@ -14301,7 +14048,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Virt Currency"
+                        "title": "Is Virt Currency",
+                        "description": "Whether the listing is classified as a virtual currency transaction."
                     },
                     "is_hacking": {
                         "anyOf": [
@@ -14312,7 +14060,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Hacking"
+                        "title": "Is Hacking",
+                        "description": "Whether the listing is classified as hacking activities."
                     },
                     "is_misc_financial": {
                         "anyOf": [
@@ -14323,7 +14072,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Misc Financial"
+                        "title": "Is Misc Financial",
+                        "description": "Whether the listing is classified as miscellaneous financial activities."
                     }
                 },
                 "type": "object",
@@ -14333,32 +14083,15 @@
                 "properties": {
                     "classes": {
                         "$ref": "#/components/schemas/Classes",
-                        "default": {}
+                        "description": "Data about the classes identified in the listing."
                     },
                     "types": {
                         "$ref": "#/components/schemas/Types",
-                        "default": {}
+                        "description": "Data about the possible listing type."
                     }
                 },
                 "type": "object",
                 "title": "Classification"
-            },
-            "Context": {
-                "properties": {
-                    "category_name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Category Name"
-                    }
-                },
-                "type": "object",
-                "title": "Context"
             },
             "ConversationMessage": {
                 "properties": {
@@ -15679,169 +15412,6 @@
                 ],
                 "title": "DisableAccountPayload"
             },
-            "DockerImageEvent": {
-                "properties": {
-                    "event_type": {
-                        "type": "string",
-                        "const": "docker_image",
-                        "title": "Event Type",
-                        "default": "docker_image"
-                    },
-                    "data": {
-                        "$ref": "#/components/schemas/DockerImageEventData"
-                    },
-                    "metadata": {
-                        "$ref": "#/components/schemas/EventMetadata"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "data",
-                    "metadata"
-                ],
-                "title": "Docker Image"
-            },
-            "DockerImageEventData": {
-                "properties": {
-                    "content": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Content"
-                    },
-                    "browser_url": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Browser Url"
-                    },
-                    "digest": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Digest"
-                    },
-                    "architecture": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Architecture"
-                    },
-                    "variant": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Variant"
-                    },
-                    "os": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Os"
-                    },
-                    "os_features": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array",
-                        "title": "Os Features",
-                        "default": []
-                    },
-                    "os_version": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Os Version"
-                    },
-                    "last_pushed_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Pushed At"
-                    },
-                    "last_pulled_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Pulled At"
-                    },
-                    "tags": {
-                        "anyOf": [
-                            {
-                                "items": {
-                                    "$ref": "#/components/schemas/Tag"
-                                },
-                                "type": "array"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Tags",
-                        "default": []
-                    },
-                    "size": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Size"
-                    }
-                },
-                "type": "object",
-                "title": "DockerImageEventData"
-            },
             "DomainAssetEnrichment": {
                 "properties": {
                     "type": {
@@ -15926,6 +15496,64 @@
                 ],
                 "title": "DomainData"
             },
+            "DomainProfileMetadataResponse": {
+                "properties": {
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url"
+                    },
+                    "current_title": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Current Title"
+                    },
+                    "current_favicon": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Current Favicon"
+                    },
+                    "first_seen_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "First Seen At"
+                    },
+                    "sources": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "url",
+                    "current_title",
+                    "current_favicon",
+                    "first_seen_at",
+                    "sources"
+                ],
+                "title": "DomainProfileMetadataResponse"
+            },
             "DomainQuery": {
                 "properties": {
                     "type": {
@@ -15989,7 +15617,7 @@
                 ],
                 "title": "DomainStatus"
             },
-            "EmailData-Input": {
+            "EmailData": {
                 "properties": {
                     "type": {
                         "type": "string",
@@ -16000,25 +15628,6 @@
                     "email": {
                         "type": "string",
                         "format": "email",
-                        "title": "Email"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "email"
-                ],
-                "title": "EmailData"
-            },
-            "EmailData-Output": {
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "const": "email",
-                        "title": "Type",
-                        "default": "email"
-                    },
-                    "email": {
-                        "type": "string",
                         "title": "Email"
                     }
                 },
@@ -16415,7 +16024,9 @@
                     },
                     "entra_client_secret": {
                         "type": "string",
-                        "title": "Entra Client Secret"
+                        "format": "password",
+                        "title": "Entra Client Secret",
+                        "writeOnly": true
                     },
                     "entra_client_secret_encrypted": {
                         "anyOf": [
@@ -16593,30 +16204,6 @@
                     "event_uids"
                 ],
                 "title": "EventFilters"
-            },
-            "EventInput": {
-                "properties": {
-                    "uid": {
-                        "type": "string",
-                        "title": "Uid"
-                    },
-                    "date": {
-                        "type": "string",
-                        "format": "date-time",
-                        "title": "Date"
-                    },
-                    "source_name": {
-                        "type": "string",
-                        "title": "Source Name"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "uid",
-                    "date",
-                    "source_name"
-                ],
-                "title": "EventInput"
             },
             "EventMetadata": {
                 "properties": {
@@ -17694,7 +17281,7 @@
             "ForumPostData": {
                 "properties": {
                     "actor": {
-                        "$ref": "#/components/schemas/Actor",
+                        "$ref": "#/components/schemas/pyro__findings__forum_posts__datamodels__ForumPostData__Actor",
                         "description": "Details about the author of the forum post."
                     },
                     "context": {
@@ -18184,7 +17771,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Forwarded From"
+                        "title": "Forwarded From",
+                        "description": "The username of the chat message forwarder."
                     },
                     "forwarded_from_author_id": {
                         "anyOf": [
@@ -18195,7 +17783,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Forwarded From Author Id"
+                        "title": "Forwarded From Author Id",
+                        "description": "The ID of the chat message forwarder."
                     },
                     "forwarded_from_chat_id": {
                         "anyOf": [
@@ -18206,7 +17795,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Forwarded From Chat Id"
+                        "title": "Forwarded From Chat Id",
+                        "description": "The ID of the chat the message is being forwarded from."
                     },
                     "forwarded_from_conversation_id": {
                         "anyOf": [
@@ -18217,7 +17807,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Forwarded From Conversation Id"
+                        "title": "Forwarded From Conversation Id",
+                        "description": "The conversation ID the message is being forwarded from."
                     },
                     "forwarded_from_user_id": {
                         "anyOf": [
@@ -18228,7 +17819,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Forwarded From User Id"
+                        "title": "Forwarded From User Id",
+                        "description": "The ID of the user the message is being forwarded from."
                     },
                     "forwarded_from_username": {
                         "anyOf": [
@@ -18239,7 +17831,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Forwarded From Username"
+                        "title": "Forwarded From Username",
+                        "description": "The username of the user the message is being forwarded from."
                     },
                     "forwarded_message_time": {
                         "anyOf": [
@@ -18251,7 +17844,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Forwarded Message Time"
+                        "title": "Forwarded Message Time",
+                        "description": "The time the message was forwarded."
                     }
                 },
                 "type": "object",
@@ -18603,12 +18197,17 @@
                     "count": {
                         "type": "integer",
                         "title": "Count"
+                    },
+                    "is_deleted": {
+                        "type": "boolean",
+                        "title": "Is Deleted"
                     }
                 },
                 "type": "object",
                 "required": [
                     "tenant_name",
-                    "count"
+                    "count",
+                    "is_deleted"
                 ],
                 "title": "GlobalSearchUsageByTenantDataPoint"
             },
@@ -19204,7 +18803,7 @@
                                 "$ref": "#/components/schemas/UsernameData"
                             },
                             {
-                                "$ref": "#/components/schemas/EmailData-Output"
+                                "$ref": "#/components/schemas/EmailData"
                             },
                             {
                                 "$ref": "#/components/schemas/SecretData"
@@ -19225,7 +18824,7 @@
                                 "brand": "#/components/schemas/BrandData",
                                 "credentials": "#/components/schemas/CredentialsData",
                                 "domain": "#/components/schemas/DomainData",
-                                "email": "#/components/schemas/EmailData-Output",
+                                "email": "#/components/schemas/EmailData",
                                 "github_repository": "#/components/schemas/GithubRepositoryData",
                                 "identity": "#/components/schemas/IdentityData",
                                 "ip": "#/components/schemas/IPData",
@@ -19873,7 +19472,7 @@
                                 "$ref": "#/components/schemas/CredentialsData"
                             },
                             {
-                                "$ref": "#/components/schemas/EmailData-Input"
+                                "$ref": "#/components/schemas/EmailData"
                             },
                             {
                                 "$ref": "#/components/schemas/UsernameData"
@@ -19897,7 +19496,7 @@
                                 "brand": "#/components/schemas/BrandData",
                                 "credentials": "#/components/schemas/CredentialsData",
                                 "domain": "#/components/schemas/DomainData",
-                                "email": "#/components/schemas/EmailData-Input",
+                                "email": "#/components/schemas/EmailData",
                                 "github_repository": "#/components/schemas/GithubRepositoryData",
                                 "identity": "#/components/schemas/IdentityDataRequestBody",
                                 "ip": "#/components/schemas/IPData",
@@ -20137,7 +19736,7 @@
                     "data": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/EmailData-Output"
+                                "$ref": "#/components/schemas/EmailData"
                             },
                             {
                                 "$ref": "#/components/schemas/UsernameData"
@@ -20150,7 +19749,7 @@
                         "discriminator": {
                             "propertyName": "type",
                             "mapping": {
-                                "email": "#/components/schemas/EmailData-Output",
+                                "email": "#/components/schemas/EmailData",
                                 "name": "#/components/schemas/NameData",
                                 "username": "#/components/schemas/UsernameData"
                             }
@@ -20195,7 +19794,7 @@
                         "items": {
                             "oneOf": [
                                 {
-                                    "$ref": "#/components/schemas/EmailData-Input"
+                                    "$ref": "#/components/schemas/EmailData"
                                 },
                                 {
                                     "$ref": "#/components/schemas/UsernameData"
@@ -20207,7 +19806,7 @@
                             "discriminator": {
                                 "propertyName": "type",
                                 "mapping": {
-                                    "email": "#/components/schemas/EmailData-Input",
+                                    "email": "#/components/schemas/EmailData",
                                     "name": "#/components/schemas/NameData",
                                     "username": "#/components/schemas/UsernameData"
                                 }
@@ -20589,12 +20188,18 @@
                         },
                         "type": "array",
                         "title": "Domains"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
                     }
                 },
                 "type": "object",
                 "required": [
                     "invite_magic_link",
-                    "domains"
+                    "domains",
+                    "created_at"
                 ],
                 "title": "InviteLinkResponse"
             },
@@ -20820,7 +20425,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Url"
+                        "title": "Url",
+                        "description": "The URL to the listing."
                     },
                     "title": {
                         "anyOf": [
@@ -20831,7 +20437,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Title"
+                        "title": "Title",
+                        "description": "The title of the listing."
                     },
                     "content": {
                         "anyOf": [
@@ -20842,7 +20449,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Content"
+                        "title": "Content",
+                        "description": "The content within the listing."
                     },
                     "currency": {
                         "anyOf": [
@@ -20853,7 +20461,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Currency"
+                        "title": "Currency",
+                        "description": "The currency expected in the listing."
                     },
                     "escrow": {
                         "anyOf": [
@@ -20864,7 +20473,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Escrow"
+                        "title": "Escrow",
+                        "description": "Whether the listing requires escrow."
                     },
                     "price": {
                         "anyOf": [
@@ -20875,7 +20485,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Price"
+                        "title": "Price",
+                        "description": "The price of the listing."
                     },
                     "ship_to": {
                         "items": {
@@ -20883,6 +20494,7 @@
                         },
                         "type": "array",
                         "title": "Ship To",
+                        "description": "The countries eligible for shipping.",
                         "default": []
                     },
                     "ship_from": {
@@ -20891,6 +20503,7 @@
                         },
                         "type": "array",
                         "title": "Ship From",
+                        "description": "The countries eligible for shipping.",
                         "default": []
                     },
                     "stock_count": {
@@ -20902,37 +20515,20 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Stock Count"
+                        "title": "Stock Count",
+                        "description": "The quantity of the items or service in stock."
                     },
                     "actor": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/pyro__findings__listing__datamodels__ListingEventData__Actor"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                        "$ref": "#/components/schemas/pyro__findings__listing__datamodels__ListingEventData__Actor",
+                        "description": "Data about the seller."
                     },
                     "classification": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/Classification"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                        "$ref": "#/components/schemas/Classification",
+                        "description": "Data about the possible classifications of the listing."
                     },
                     "context": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/Context"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                        "$ref": "#/components/schemas/pyro__findings__listing__datamodels__ListingEventData__Context",
+                        "description": "Data offering context to the listing."
                     }
                 },
                 "type": "object",
@@ -21360,7 +20956,7 @@
                 ],
                 "title": "PagedCookieConfigurations"
             },
-            "PaginatedResult_int__str_": {
+            "PaginatedResult_int_str_": {
                 "properties": {
                     "item": {
                         "type": "integer",
@@ -21385,7 +20981,7 @@
                 ],
                 "title": "PaginatedResult[int, str]"
             },
-            "PaginatedResults_ASTPCookiePayload__str_": {
+            "PaginatedResults_ASTPCookiePayload_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21413,7 +21009,7 @@
                 ],
                 "title": "PaginatedResults[ASTPCookiePayload, str]"
             },
-            "PaginatedResults_Alert__str_": {
+            "PaginatedResults_Alert_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21441,7 +21037,7 @@
                 ],
                 "title": "PaginatedResults[Alert, str]"
             },
-            "PaginatedResults_CredentialValidationReponse__str_": {
+            "PaginatedResults_CredentialValidationReponse_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21469,7 +21065,7 @@
                 ],
                 "title": "PaginatedResults[CredentialValidationReponse, str]"
             },
-            "PaginatedResults_Credential__str_": {
+            "PaginatedResults_Credential_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21497,7 +21093,7 @@
                 ],
                 "title": "PaginatedResults[Credential, str]"
             },
-            "PaginatedResults_EnrichedBulkAction__str_": {
+            "PaginatedResults_EnrichedBulkAction_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21525,7 +21121,7 @@
                 ],
                 "title": "PaginatedResults[EnrichedBulkAction, str]"
             },
-            "PaginatedResults_EntityAPIResponseTypes__str_": {
+            "PaginatedResults_EntityAPIResponseTypes_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21553,7 +21149,7 @@
                 ],
                 "title": "PaginatedResults[EntityAPIResponseTypes, str]"
             },
-            "PaginatedResults_FeedItem__str_": {
+            "PaginatedResults_FeedItem_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21581,7 +21177,7 @@
                 ],
                 "title": "PaginatedResults[FeedItem, str]"
             },
-            "PaginatedResults_GlobalFeedItem__str_": {
+            "PaginatedResults_GlobalFeedItem_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21609,7 +21205,7 @@
                 ],
                 "title": "PaginatedResults[GlobalFeedItem, str]"
             },
-            "PaginatedResults_IdentifierRelation__str_": {
+            "PaginatedResults_IdentifierRelation_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21637,7 +21233,7 @@
                 ],
                 "title": "PaginatedResults[IdentifierRelation, str]"
             },
-            "PaginatedResults_Identifier__str_": {
+            "PaginatedResults_Identifier_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21665,7 +21261,7 @@
                 ],
                 "title": "PaginatedResults[Identifier, str]"
             },
-            "PaginatedResults_InviteLinkResponse__datetime_": {
+            "PaginatedResults_InviteLinkResponse_datetime_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21694,7 +21290,7 @@
                 ],
                 "title": "PaginatedResults[InviteLinkResponse, datetime]"
             },
-            "PaginatedResults_PartialAlertChannel__str_": {
+            "PaginatedResults_PartialAlertChannel_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21722,7 +21318,7 @@
                 ],
                 "title": "PaginatedResults[PartialAlertChannel, str]"
             },
-            "PaginatedResults_PydanticThreatFlowReport__str_": {
+            "PaginatedResults_PydanticThreatFlowReport_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21750,7 +21346,7 @@
                 ],
                 "title": "PaginatedResults[PydanticThreatFlowReport, str]"
             },
-            "PaginatedResults_Recommendation__str_": {
+            "PaginatedResults_Recommendation_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21778,7 +21374,7 @@
                 ],
                 "title": "PaginatedResults[Recommendation, str]"
             },
-            "PaginatedResults_ReportData__str_": {
+            "PaginatedResults_ReportData_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21806,7 +21402,7 @@
                 ],
                 "title": "PaginatedResults[ReportData, str]"
             },
-            "PaginatedResults_ReportGroupData__str_": {
+            "PaginatedResults_ReportGroupData_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21834,7 +21430,7 @@
                 ],
                 "title": "PaginatedResults[ReportGroupData, str]"
             },
-            "PaginatedResults_ReportSectionPayload__str_": {
+            "PaginatedResults_ReportSectionPayload_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21862,7 +21458,7 @@
                 ],
                 "title": "PaginatedResults[ReportSectionPayload, str]"
             },
-            "PaginatedResults_Report__str_": {
+            "PaginatedResults_Report_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21890,7 +21486,7 @@
                 ],
                 "title": "PaginatedResults[Report, str]"
             },
-            "PaginatedResults_SandboxSampleSubmission__str_": {
+            "PaginatedResults_SandboxSampleSubmission_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21918,7 +21514,7 @@
                 ],
                 "title": "PaginatedResults[SandboxSampleSubmission, str]"
             },
-            "PaginatedResults_SecretItem__str_": {
+            "PaginatedResults_SecretItem_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21946,7 +21542,7 @@
                 ],
                 "title": "PaginatedResults[SecretItem, str]"
             },
-            "PaginatedResults_SourceWithTenantCount__str_": {
+            "PaginatedResults_SourceWithTenantCount_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -21974,7 +21570,7 @@
                 ],
                 "title": "PaginatedResults[SourceWithTenantCount, str]"
             },
-            "PaginatedResults_StealerLogCookie__str_": {
+            "PaginatedResults_StealerLogCookie_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -22002,7 +21598,7 @@
                 ],
                 "title": "PaginatedResults[StealerLogCookie, str]"
             },
-            "PaginatedResults_StealerLogCredential__str_": {
+            "PaginatedResults_StealerLogCredential_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -22030,7 +21626,7 @@
                 ],
                 "title": "PaginatedResults[StealerLogCredential, str]"
             },
-            "PaginatedResults_TenantFlareCommunityUser__int_": {
+            "PaginatedResults_TenantFlareCommunityUser_int_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -22058,7 +21654,7 @@
                 ],
                 "title": "PaginatedResults[TenantFlareCommunityUser, int]"
             },
-            "PaginatedResults_TenantIntegrationItem__str_": {
+            "PaginatedResults_TenantIntegrationItem_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -22086,7 +21682,7 @@
                 ],
                 "title": "PaginatedResults[TenantIntegrationItem, str]"
             },
-            "PaginatedResults_ThreatFlowReportResponse__str_": {
+            "PaginatedResults_ThreatFlowReportResponse_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -22114,7 +21710,7 @@
                 ],
                 "title": "PaginatedResults[ThreatFlowReportResponse, str]"
             },
-            "PaginatedResults_Union_EnrichedCredential__EnrichedCookie___str_": {
+            "PaginatedResults_Union_EnrichedCredential__EnrichedCookie__str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -22828,7 +22424,7 @@
                     "victim_information": {
                         "anyOf": [
                             {
-                                "$ref": "#/components/schemas/VictimInformation"
+                                "$ref": "#/components/schemas/pyro__findings__ransomleaks__datamodels__VictimInformation"
                             },
                             {
                                 "type": "null"
@@ -23075,7 +22671,7 @@
                                 "$ref": "#/components/schemas/AzureTenantData"
                             },
                             {
-                                "$ref": "#/components/schemas/EmailData-Output"
+                                "$ref": "#/components/schemas/EmailData"
                             },
                             {
                                 "$ref": "#/components/schemas/UsernameData"
@@ -23087,7 +22683,7 @@
                             "mapping": {
                                 "azure_tenant": "#/components/schemas/AzureTenantData",
                                 "domain": "#/components/schemas/DomainData",
-                                "email": "#/components/schemas/EmailData-Output",
+                                "email": "#/components/schemas/EmailData",
                                 "username": "#/components/schemas/UsernameData"
                             }
                         }
@@ -23973,18 +23569,6 @@
                 ],
                 "title": "ReportRequestResponse"
             },
-            "ReportResponse": {
-                "properties": {
-                    "report": {
-                        "$ref": "#/components/schemas/PydanticThreatFlowReport"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "report"
-                ],
-                "title": "ReportResponse"
-            },
             "ReportSchedulerData": {
                 "properties": {
                     "report_group_id": {
@@ -24284,14 +23868,6 @@
                     "paused"
                 ],
                 "title": "ReportStatus"
-            },
-            "ReportType": {
-                "type": "string",
-                "enum": [
-                    "custom",
-                    "standard"
-                ],
-                "title": "ReportType"
             },
             "ReportType-Output": {
                 "type": "string",
@@ -25197,172 +24773,6 @@
                 ],
                 "title": "SecretQuery"
             },
-            "ServiceEvent": {
-                "properties": {
-                    "event_type": {
-                        "type": "string",
-                        "const": "service",
-                        "title": "Event Type",
-                        "default": "service"
-                    },
-                    "data": {
-                        "$ref": "#/components/schemas/ServiceEventData"
-                    },
-                    "metadata": {
-                        "$ref": "#/components/schemas/EventMetadata"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "data",
-                    "metadata"
-                ],
-                "title": "Service"
-            },
-            "ServiceEventData": {
-                "properties": {
-                    "url": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Url",
-                        "description": "The URL to the service. This is often an IP address and port combination."
-                    },
-                    "asn": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Asn",
-                        "description": "The Autonomous System Number."
-                    },
-                    "content": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Content",
-                        "description": "The content received from shodan scan."
-                    },
-                    "service": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Service",
-                        "description": "The service type, examples include http, https, dns, etc."
-                    },
-                    "product": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Product"
-                    },
-                    "port": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Port",
-                        "description": "The port used to access the service."
-                    },
-                    "ip_address": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Ip Address",
-                        "description": "The IP address of the service."
-                    },
-                    "organization": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Organization",
-                        "description": "The organization the service belongs to."
-                    },
-                    "hostname": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Hostname"
-                    },
-                    "country_code": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Country Code",
-                        "description": "The country code representing where the service is hosted."
-                    },
-                    "vulnerabilities": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array",
-                        "title": "Vulnerabilities",
-                        "description": "The list of possible vulnerabilities that could be present on the service."
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "url",
-                    "asn",
-                    "content",
-                    "service",
-                    "product",
-                    "port",
-                    "ip_address",
-                    "organization",
-                    "hostname",
-                    "country_code"
-                ],
-                "title": "ServiceEventData"
-            },
             "Severity": {
                 "type": "string",
                 "enum": [
@@ -25437,18 +24847,6 @@
                 },
                 "type": "object",
                 "title": "SocialMediaEventData"
-            },
-            "SortType": {
-                "type": "string",
-                "enum": [
-                    "id",
-                    "title",
-                    "author",
-                    "created_at",
-                    "updated_at",
-                    "status"
-                ],
-                "title": "SortType"
             },
             "Source": {
                 "properties": {
@@ -26111,28 +25509,6 @@
                 ],
                 "title": "StealerLogData"
             },
-            "StealerLogEvent": {
-                "properties": {
-                    "event_type": {
-                        "type": "string",
-                        "const": "stealer_log",
-                        "title": "Event Type",
-                        "default": "stealer_log"
-                    },
-                    "data": {
-                        "$ref": "#/components/schemas/StealerLogEventData"
-                    },
-                    "metadata": {
-                        "$ref": "#/components/schemas/EventMetadata"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "data",
-                    "metadata"
-                ],
-                "title": "Stealer Log"
-            },
             "StealerLogEventData": {
                 "properties": {
                     "victim_information": {
@@ -26319,34 +25695,6 @@
                     "span"
                 ],
                 "title": "SubdomainTag"
-            },
-            "Tag": {
-                "properties": {
-                    "name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Name"
-                    },
-                    "repository_name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Repository Name"
-                    }
-                },
-                "type": "object",
-                "title": "Tag"
             },
             "TagListPayload": {
                 "properties": {
@@ -27317,7 +26665,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Guide"
+                        "title": "Is Guide",
+                        "description": "Whether the listing is a guide. Ex: 'How to extort a website'"
                     },
                     "is_service": {
                         "anyOf": [
@@ -27328,7 +26677,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Service"
+                        "title": "Is Service",
+                        "description": "Whether the listing is offering a service. Ex: 'I will help you extort a website'"
                     },
                     "is_software": {
                         "anyOf": [
@@ -27339,7 +26689,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Software"
+                        "title": "Is Software",
+                        "description": "Whether the listing is offering software. Ex: 'I will sell you a software to extort a website'"
                     },
                     "is_hardware": {
                         "anyOf": [
@@ -27350,7 +26701,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Hardware"
+                        "title": "Is Hardware",
+                        "description": "Whether the listing is offering hardware. Ex: 'I will sell you a hardware'"
                     },
                     "is_data": {
                         "anyOf": [
@@ -27361,7 +26713,8 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Is Data"
+                        "title": "Is Data",
+                        "description": "Whether the listing is offering data. Ex: 'I will sell you victim data'"
                     }
                 },
                 "type": "object",
@@ -27973,6 +27326,13 @@
                     "type": {
                         "type": "string",
                         "title": "Error Type"
+                    },
+                    "input": {
+                        "title": "Input"
+                    },
+                    "ctx": {
+                        "type": "object",
+                        "title": "Context"
                     }
                 },
                 "type": "object",
@@ -27983,7 +27343,283 @@
                 ],
                 "title": "ValidationError"
             },
-            "VictimInformation": {
+            "WebhookBasicAuth": {
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "password": {
+                        "type": "string",
+                        "title": "Password"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "username",
+                    "password"
+                ],
+                "title": "WebhookBasicAuth"
+            },
+            "pyro__entities__identities__profile__sort_type__SortType": {
+                "type": "string",
+                "enum": [
+                    "creation_date",
+                    "credentials_count",
+                    "event_type",
+                    "information_type",
+                    "ip_address",
+                    "last_seen",
+                    "leaked_date",
+                    "password",
+                    "source_name"
+                ],
+                "title": "SortType"
+            },
+            "pyro__events__event_datamodels__StealerLogEvent": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "stealer_log",
+                        "title": "Type",
+                        "default": "stealer_log"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/StealerLogData"
+                    },
+                    "actions": {
+                        "$ref": "#/components/schemas/StealerLogActions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "actions"
+                ],
+                "title": "StealerLogEvent"
+            },
+            "pyro__findings__chat_messages__datamodels__ChatMessageEventData__Actor": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id",
+                        "description": "The ID of the chat message author."
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "The username of the chat message author."
+                    }
+                },
+                "type": "object",
+                "title": "Actor"
+            },
+            "pyro__findings__chat_messages__datamodels__ChatMessageEventData__Context": {
+                "properties": {
+                    "conversation_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Conversation Id",
+                        "description": "The ID of the conversation where the chat message was found."
+                    },
+                    "conversation_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Conversation Name",
+                        "description": "The name of the conversation where the chat message was found."
+                    }
+                },
+                "type": "object",
+                "title": "Context"
+            },
+            "pyro__findings__forum_posts__datamodels__ForumPostData__Actor": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id",
+                        "description": "ID of the author of the forum post. These IDs relate to the forum platform."
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "Name of the author of the forum post."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "title": "Actor"
+            },
+            "pyro__findings__forum_posts__datamodels__ForumPostData__Context": {
+                "properties": {
+                    "category_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Category Name",
+                        "description": "Category of the forum, these vary between forum platforms."
+                    },
+                    "topic_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Topic Id",
+                        "description": "Topic ID of the forum post."
+                    },
+                    "topic_title": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Topic Title",
+                        "description": "Title of the topic the post was made in."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "category_name",
+                    "topic_id",
+                    "topic_title"
+                ],
+                "title": "Context"
+            },
+            "pyro__findings__listing__datamodels__ListingEventData__Actor": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id",
+                        "description": "The ID of the seller."
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "The name/username of the seller."
+                    }
+                },
+                "type": "object",
+                "title": "Actor"
+            },
+            "pyro__findings__listing__datamodels__ListingEventData__Context": {
+                "properties": {
+                    "category_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Category Name",
+                        "description": "The category of the listing, as seen on the market."
+                    }
+                },
+                "type": "object",
+                "title": "Context"
+            },
+            "pyro__findings__paste__datamodels__PasteEventData__Actor": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "title": "Actor"
+            },
+            "pyro__findings__ransomleaks__datamodels__VictimInformation": {
                 "properties": {
                     "name": {
                         "anyOf": [
@@ -28133,223 +27769,27 @@
                 ],
                 "title": "VictimInformation"
             },
-            "WebhookBasicAuth": {
+            "pyro__findings__stealerlogs__datamodels__StealerLogEvent": {
                 "properties": {
-                    "username": {
-                        "type": "string",
-                        "title": "Username"
-                    },
-                    "password": {
-                        "type": "string",
-                        "title": "Password"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "username",
-                    "password"
-                ],
-                "title": "WebhookBasicAuth"
-            },
-            "pyro__entities__identities__profile__sort_type__SortType": {
-                "type": "string",
-                "enum": [
-                    "creation_date",
-                    "credentials_count",
-                    "event_type",
-                    "information_type",
-                    "ip_address",
-                    "last_seen",
-                    "leaked_date",
-                    "password",
-                    "source_name"
-                ],
-                "title": "SortType"
-            },
-            "pyro__events__event_datamodels__StealerLogEvent": {
-                "properties": {
-                    "type": {
+                    "event_type": {
                         "type": "string",
                         "const": "stealer_log",
-                        "title": "Type",
+                        "title": "Event Type",
                         "default": "stealer_log"
                     },
                     "data": {
-                        "$ref": "#/components/schemas/StealerLogData"
+                        "$ref": "#/components/schemas/StealerLogEventData"
                     },
-                    "actions": {
-                        "$ref": "#/components/schemas/StealerLogActions"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
                     }
                 },
                 "type": "object",
                 "required": [
                     "data",
-                    "actions"
+                    "metadata"
                 ],
-                "title": "StealerLogEvent"
-            },
-            "pyro__findings__chat_messages__datamodels__ChatMessageEventData__Actor": {
-                "properties": {
-                    "id": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Id"
-                    },
-                    "name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Name"
-                    }
-                },
-                "type": "object",
-                "title": "Actor"
-            },
-            "pyro__findings__chat_messages__datamodels__ChatMessageEventData__Context": {
-                "properties": {
-                    "conversation_id": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Conversation Id"
-                    },
-                    "conversation_name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Conversation Name"
-                    }
-                },
-                "type": "object",
-                "title": "Context"
-            },
-            "pyro__findings__forum_posts__datamodels__ForumPostData__Context": {
-                "properties": {
-                    "category_name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Category Name",
-                        "description": "Category of the forum, these vary between forum platforms."
-                    },
-                    "topic_id": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Topic Id",
-                        "description": "Topic ID of the forum post."
-                    },
-                    "topic_title": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Topic Title",
-                        "description": "Title of the topic the post was made in."
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "category_name",
-                    "topic_id",
-                    "topic_title"
-                ],
-                "title": "Context"
-            },
-            "pyro__findings__listing__datamodels__ListingEventData__Actor": {
-                "properties": {
-                    "id": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Id"
-                    },
-                    "name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Name"
-                    }
-                },
-                "type": "object",
-                "title": "Actor"
-            },
-            "pyro__findings__paste__datamodels__PasteEventData__Actor": {
-                "properties": {
-                    "id": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Id"
-                    },
-                    "name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Name"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "id",
-                    "name"
-                ],
-                "title": "Actor"
+                "title": "Stealer Log"
             },
             "pyro__findings__stealerlogs__datamodels__VictimInformation": {
                 "properties": {
@@ -28599,12 +28039,32 @@
                 ],
                 "title": "ReportResponse"
             },
+            "pyro__reports__report_store__SortType": {
+                "type": "string",
+                "enum": [
+                    "id",
+                    "title",
+                    "author",
+                    "created_at",
+                    "updated_at",
+                    "status"
+                ],
+                "title": "SortType"
+            },
             "pyro__reports__report_types__ReportType": {
                 "type": "string",
                 "enum": [
                     "v1",
                     "event_based",
                     "feed_based"
+                ],
+                "title": "ReportType"
+            },
+            "pyro__threat_flow__core__reports__report_store__ReportType": {
+                "type": "string",
+                "enum": [
+                    "custom",
+                    "standard"
                 ],
                 "title": "ReportType"
             },
@@ -28617,6 +28077,18 @@
                     "tenant_id"
                 ],
                 "title": "SortType"
+            },
+            "pyro__threat_flow__web__v4__reports__models__ReportResponse": {
+                "properties": {
+                    "report": {
+                        "$ref": "#/components/schemas/PydanticThreatFlowReport"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "report"
+                ],
+                "title": "ReportResponse"
             }
         },
         "securitySchemes": {

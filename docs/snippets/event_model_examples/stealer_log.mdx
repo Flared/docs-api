@@ -1,0 +1,58 @@
+{/*
+    If you are in pyro:
+    - If this file changes, you should also modify the API docs.
+    - https://github.com/flared/docs-api/
+
+    If you are in mintlify:
+    - Don't edit this directly, edit the generator in pyro.
+    - pyro/pyro/mintlify/test_firework_event_models.py
+*/}
+
+```json Stealer Log
+{
+    "event_type": "stealer_log",
+    "data": {
+        "victim_information": {
+            "ip_address": "127.0.0.1",
+            "ip_network": "127.0.0.0/8",
+            "username": "admin",
+            "country_code": "USA",
+            "zip_code": null,
+            "location": null,
+            "hwid": null,
+            "current_language": "en-US",
+            "screensize_width": 1920,
+            "screensize_height": 1080,
+            "timezone": "UTC+7",
+            "os": "Windows 10 22H2 Pro (Build 19045) (64 Bit)",
+            "uac": null,
+            "process_elevation": false,
+            "available_keyboards": [
+                "en-US"
+            ],
+            "hardware": [
+                "CPU: Intel(R) Core(TM) i3-10105F CPU @ 3.70GHz (4 cores, 8 threads)",
+                "RAM: 31.92 GB",
+                "HOSTNAME: DESKTOP-123456"
+            ],
+            "anti_viruses": [
+                "Windows Defender",
+                "Avast Antivirus"
+            ]
+        },
+        "malware_information": {
+            "malware_family": "Lumastealer",
+            "build_id": "1234567890",
+            "file_location": "C:\\Windows\\System32\\malware.exe",
+            "infected_at": "2025-01-01T00:00:00"
+        }
+    },
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    }
+}
+```
