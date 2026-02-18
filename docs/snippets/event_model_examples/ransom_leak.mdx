@@ -1,0 +1,44 @@
+{/*
+    If you are in pyro:
+    - If this file changes, you should also modify the API docs.
+    - https://github.com/flared/docs-api/
+
+    If you are in mintlify:
+    - Don't edit this directly, edit the generator in pyro.
+    - pyro/pyro/mintlify/test_firework_event_models.py
+*/}
+
+```json Ransom Leak
+{
+    "event_type": "ransomleak",
+    "data": {
+        "url": "http://payupnow.onion/leaks.php",
+        "response_url": "http://payupnow.onion/leaks.php",
+        "title": "Leak Name - Victim Name",
+        "content": "Ransom Leak Listing Content",
+        "body": "Ransom Leak Listing Body",
+        "victim_information": {
+            "name": "Victim Name",
+            "display_name": "Victim Name",
+            "domain": "victim-domain.com",
+            "alternative_domains": [
+                "victim.co"
+            ],
+            "industry": "Non-Profit",
+            "employee_count": 1,
+            "city": "New York",
+            "state": "New York",
+            "country": "USA",
+            "latitude": 123.456,
+            "longitude": 123.456
+        }
+    },
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    }
+}
+```

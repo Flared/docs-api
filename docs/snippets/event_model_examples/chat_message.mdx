@@ -1,0 +1,48 @@
+{/*
+    If you are in pyro:
+    - If this file changes, you should also modify the API docs.
+    - https://github.com/flared/docs-api/
+
+    If you are in mintlify:
+    - Don't edit this directly, edit the generator in pyro.
+    - pyro/pyro/mintlify/test_firework_event_models.py
+*/}
+
+```json Chat Message
+{
+    "event_type": "chat_message",
+    "data": {
+        "posted_at": "2025-01-01T00:00:00",
+        "actor": {
+            "id": "7432892726",
+            "name": "chatty_cathy"
+        },
+        "context": {
+            "conversation_id": "end_index",
+            "conversation_name": "interesting chat"
+        },
+        "content": "This is the content of the message",
+        "parent_context": {
+            "parent_uid": "parent_uid",
+            "parent_type": "parent_type"
+        },
+        "forward_info": {
+            "forwarded_from": "forwarded_from",
+            "forwarded_from_author_id": "forwarded_from_author_id",
+            "forwarded_from_chat_id": 1,
+            "forwarded_from_conversation_id": "forwarded_from_conversation_id",
+            "forwarded_from_user_id": 1,
+            "forwarded_from_username": "forwarded_from_username",
+            "forwarded_message_time": "2025-01-01T00:00:00"
+        },
+        "was_forwarded": false
+    },
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    }
+}
+```

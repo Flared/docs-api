@@ -1,0 +1,13 @@
+---
+title: "Bucket"
+---
+
+import BucketExample from '/snippets/event_model_examples/bucket.mdx'
+
+The `bucket` type represents publicly exposed cloud storage containers, such as Amazon S3, Azure Blob, or Google Cloud Storage buckets.
+These records document information about misconfigured or accessible cloud storage endpoints, including domain names, providers, and discovered files.
+
+This type includes `bucket_object`, representing individual files (objects) discovered within publicly exposed cloud storage buckets.
+Each record identifies a single accessible object, typically containing metadata like its bucket location, provider, file path, and exposure source.
+
+<BucketExample />
