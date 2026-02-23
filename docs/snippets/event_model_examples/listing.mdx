@@ -1,0 +1,65 @@
+{/*
+    If you are in pyro:
+    - If this file changes, you should also modify the API docs.
+    - https://github.com/flared/docs-api/
+
+    If you are in mintlify:
+    - Don't edit this directly, edit the generator in pyro.
+    - pyro/pyro/mintlify/test_firework_event_models.py
+*/}
+
+```json Listing
+{
+    "event_type": "listing",
+    "data": {
+        "url": "http://b14ckm4rk3t.onion/product/123456789",
+        "title": "Something for sale",
+        "content": "Long item description",
+        "currency": "eur",
+        "escrow": true,
+        "price": 38.0,
+        "ship_to": [
+            "Europe"
+        ],
+        "ship_from": [
+            "Spain"
+        ],
+        "stock_count": 5,
+        "actor": {
+            "id": "ddc591f1257ab24eee28435286945abc0520",
+            "name": "goodie_seller"
+        },
+        "classification": {
+            "classes": {
+                "is_carding": false,
+                "is_bypass": true,
+                "is_ident_fraud": false,
+                "is_doc_fraud": true,
+                "is_phishing": true,
+                "is_money_xfer": true,
+                "is_cashout": false,
+                "is_virt_currency": false,
+                "is_hacking": false,
+                "is_misc_financial": false
+            },
+            "types": {
+                "is_guide": false,
+                "is_service": false,
+                "is_software": true,
+                "is_hardware": false,
+                "is_data": false
+            }
+        },
+        "context": {
+            "category_name": "Goodies"
+        }
+    },
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    }
+}
+```
