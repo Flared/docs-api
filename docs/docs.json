@@ -80,6 +80,7 @@
                 "group": "Events",
                 "pages": [
                   "api-reference/v2/endpoints/activities/get-fireworkv2activities-",
+                  "api-reference/v4/endpoints/get-event",
                   "api-reference/v2/endpoints/activities/get-fireworkv2activities--ai_assistance",
                   "api-reference/v4/endpoints/event-actions",
                   "api-reference/v4/endpoints/public/update-tenant-metadata"
@@ -286,7 +287,24 @@
               "event-types/profile",
               "event-types/seller",
               "event-types/source-code",
-              "event-types/stealer-log"
+              "event-types/stealer-log",
+              {
+                "group": "Events V2 (Beta)",
+                "pages": [
+                  "event-types-v2/overview",
+                  "event-types-v2/blog-post",
+                  "event-types-v2/bucket",
+                  "event-types-v2/chat-message",
+                  "event-types-v2/document",
+                  "event-types-v2/domain",
+                  "event-types-v2/forum-post",
+                  "event-types-v2/listing",
+                  "event-types-v2/paste",
+                  "event-types-v2/ransom-leak",
+                  "event-types-v2/social-media-account",
+                  "event-types-v2/stealer-log"
+                ]
+              }
             ]
           }
         ]
