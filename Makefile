@@ -24,7 +24,7 @@ api-generate-all: venv
 		&& ./scripts/api-generate-pages \
 	'
 
-.PHONY: boken-links
+.PHONY: broken-links
 broken-links:
 	cd docs && npx mintlify broken-links
 
