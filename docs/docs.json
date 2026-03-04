@@ -15,9 +15,7 @@
         "groups": [
           {
             "group": "Introduction",
-            "pages": [
-              "introduction/getting-started"
-            ]
+            "pages": ["introduction/getting-started"]
           },
           {
             "group": "Base Concepts",
@@ -30,18 +28,11 @@
           },
           {
             "group": "SDK, MCP & CLI",
-            "pages": [
-              "sdk/python",
-              "sdk/go",
-              "sdk/cli",
-              "sdk/mcp"
-            ]
+            "pages": ["sdk/python", "sdk/go", "sdk/cli", "sdk/mcp"]
           },
           {
             "group": "Advanced",
-            "pages": [
-              "advanced/event-source-filters"
-            ]
+            "pages": ["advanced/event-source-filters"]
           },
           {
             "group": "Guides",
@@ -80,6 +71,7 @@
                 "group": "Events",
                 "pages": [
                   "api-reference/v2/endpoints/activities/get-fireworkv2activities-",
+                  "api-reference/v4/endpoints/get-event",
                   "api-reference/v2/endpoints/activities/get-fireworkv2activities--ai_assistance",
                   "api-reference/v4/endpoints/event-actions",
                   "api-reference/v4/endpoints/public/update-tenant-metadata"
@@ -118,9 +110,7 @@
               },
               {
                 "group": "Cookies",
-                "pages": [
-                  "api-reference/astp/endpoints/post-cookies-search"
-                ]
+                "pages": ["api-reference/astp/endpoints/post-cookies-search"]
               }
             ]
           },
@@ -288,6 +278,22 @@
               "event-types/source-code",
               "event-types/stealer-log"
             ]
+          },
+          {
+            "group": "Events V2 (Beta)",
+            "pages": [
+              "event-types-v2/overview",
+              "event-types-v2/blog-post",
+              "event-types-v2/bucket",
+              "event-types-v2/chat-message",
+              "event-types-v2/domain",
+              "event-types-v2/forum-post",
+              "event-types-v2/listing",
+              "event-types-v2/paste",
+              "event-types-v2/ransom-leak",
+              "event-types-v2/social-media-account",
+              "event-types-v2/stealer-log"
+            ]
           }
         ]
       },
@@ -296,9 +302,7 @@
         "groups": [
           {
             "group": "Changelog",
-            "pages": [
-              "changelog/overview"
-            ]
+            "pages": ["changelog/overview"]
           }
         ]
       }
