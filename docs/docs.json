@@ -15,7 +15,9 @@
         "groups": [
           {
             "group": "Introduction",
-            "pages": ["introduction/getting-started"]
+            "pages": [
+              "introduction/getting-started"
+            ]
           },
           {
             "group": "Base Concepts",
@@ -28,11 +30,18 @@
           },
           {
             "group": "SDK, MCP & CLI",
-            "pages": ["sdk/python", "sdk/go", "sdk/cli", "sdk/mcp"]
+            "pages": [
+              "sdk/python",
+              "sdk/go",
+              "sdk/cli",
+              "sdk/mcp"
+            ]
           },
           {
             "group": "Advanced",
-            "pages": ["advanced/event-source-filters"]
+            "pages": [
+              "advanced/event-source-filters"
+            ]
           },
           {
             "group": "Guides",
@@ -110,7 +119,9 @@
               },
               {
                 "group": "Cookies",
-                "pages": ["api-reference/astp/endpoints/post-cookies-search"]
+                "pages": [
+                  "api-reference/astp/endpoints/post-cookies-search"
+                ]
               }
             ]
           },
@@ -270,7 +281,7 @@
               "event-types/forum-post",
               "event-types/forum-topic",
               "event-types/google",
-              "event-types/leak",
+              "event-types/leaked-credential",
               "event-types/listing",
               "event-types/paste",
               "event-types/profile",
@@ -302,7 +313,9 @@
         "groups": [
           {
             "group": "Changelog",
-            "pages": ["changelog/overview"]
+            "pages": [
+              "changelog/overview"
+            ]
           }
         ]
       }
@@ -331,7 +344,9 @@
       "display": "interactive"
     },
     "mdx": {
-      "server": ["https://api.flare.io/"],
+      "server": [
+        "https://api.flare.io/"
+      ],
       "auth": {
         "method": "bearer"
       }
