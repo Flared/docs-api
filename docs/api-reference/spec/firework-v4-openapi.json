@@ -15299,6 +15299,13 @@
                             }
                         ],
                         "title": "Event Uid"
+                    },
+                    "auth_domains": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Auth Domains"
                     }
                 },
                 "type": "object",
@@ -21029,7 +21036,8 @@
             "IncludeOptions": {
                 "type": "string",
                 "enum": [
-                    "known_password_id"
+                    "known_password_id",
+                    "auth_domains"
                 ],
                 "title": "IncludeOptions"
             },
