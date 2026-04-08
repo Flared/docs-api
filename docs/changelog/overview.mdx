@@ -12,6 +12,14 @@ This page lists changes to Flare's API.
 Release notes for the Flare Platform can be found on the [product documentation website](https://docs.flare.io/releases).
 </Note>
 
+<Update label="2026-04" description="API - April 2026">
+  Added new endpoints to manage [Matching Policies <Icon icon="code" size={16} />](/api-reference/v4/endpoints/list-matching-policies).
+
+  This is useful for customers who want precise control over which events appear in an Identifier’s feed, either by including or excluding events based on keywords, or by scoping results with a specific search query.
+
+  <Icon icon="warning" size={16} /> This deprecates the use of the `blacklist` parameter (Ignored Terms) in Identifiers.
+</Update>
+
 <Update label="2026-03" description="API - March 2026">
   Added new value for the `include` parameter in the [Global Search Credentials Endpoint <Icon icon="code" size={16} />](/api-reference/v4/endpoints/credentials-global-search).
 
