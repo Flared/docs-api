@@ -53,7 +53,8 @@
               "guides/cookie-monitoring",
               "guides/ioc-feeds",
               "guides/threat-flow-report",
-              "guides/update-identifiers"
+              "guides/update-identifiers",
+              "guides/create-identifiers-with-matching-policies"
             ]
           }
         ]
