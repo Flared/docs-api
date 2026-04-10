@@ -71,8 +71,9 @@ matching_policy_resp = api_client.post(
         "value": {"keywords": ["term1", "term2", "term3"]},
     },
 )
-matching_policy_name = matching_policy_resp.json()["name"]
-matching_policy_uuid = matching_policy_resp.json()["uuid"]
+matching_policy = matching_policy_resp.json()
+matching_policy_name = matching_policy["name"]
+matching_policy_uuid = matching_policy["uuid"]
 
 # Rate limiting (default).
 limiter_default.tick()
