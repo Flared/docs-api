@@ -21862,6 +21862,7 @@
                     "clean_past_events": {
                         "type": "boolean",
                         "title": "Clean Past Events",
+                        "description": "Whether this policy will be applied to historical events",
                         "default": false
                     }
                 },
