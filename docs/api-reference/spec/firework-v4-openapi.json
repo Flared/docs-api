@@ -393,6 +393,59 @@
                 }
             }
         },
+        "/firework/v4/admin/identifiers/{tenant_id}/free_trial_identifier": {
+            "post": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Create Identifier For Free Trial",
+                "operationId": "create_identifier_for_free_trial_admin_identifiers__tenant_id__free_trial_identifier_post",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IdentifierRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/IdentifierResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/admin/organizations/{organization_id}/allowed_restricted_terms": {
             "get": {
                 "tags": [
@@ -1406,19 +1459,19 @@
                 }
             }
         },
-        "/firework/v4/admin/hubspot/do_sync": {
+        "/firework/v4/admin/identifier_recommendations/llm": {
             "post": {
                 "tags": [
-                    "public",
+                    "private",
                     "team=experience"
                 ],
-                "summary": "Hubspot Do Sync",
-                "operationId": "hubspot_do_sync_admin_hubspot_do_sync_post",
+                "summary": "Create Llm Recommendations",
+                "operationId": "create_llm_recommendations_admin_identifier_recommendations_llm_post",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/HubspotDoSyncRequest"
+                                "$ref": "#/components/schemas/CreateLLMRecommendationsRequest"
                             }
                         }
                     },
@@ -1430,8 +1483,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "boolean",
-                                    "title": "Response Hubspot Do Sync Admin Hubspot Do Sync Post"
+                                    "$ref": "#/components/schemas/CreateLLMRecommendationsResponse"
                                 }
                             }
                         }
@@ -2792,6 +2844,46 @@
                 }
             }
         },
+        "/firework/v4/alerts/preview": {
+            "post": {
+                "tags": [
+                    "private",
+                    "team=integration"
+                ],
+                "summary": "Preview Alerts",
+                "operationId": "preview_alerts_alerts_preview_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PreviewAlerts"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/assets/by_data": {
             "post": {
                 "tags": [
@@ -2971,15 +3063,97 @@
                 "summary": "Generate Async Request",
                 "operationId": "generate_async_request_requests__post",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/GenerateAsyncRequestPayload"
                             }
                         }
-                    },
-                    "required": true
+                    }
                 },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "List Async Requests",
+                "operationId": "list_async_requests_requests__get",
+                "parameters": [
+                    {
+                        "name": "request_type",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/AsyncRequestType"
+                        }
+                    },
+                    {
+                        "name": "statuses",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/AsyncRequestStatus"
+                            },
+                            "default": [
+                                "pending",
+                                "processing"
+                            ],
+                            "title": "Statuses"
+                        }
+                    },
+                    {
+                        "name": "created_after",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Created After"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "exclusiveMinimum": 0,
+                            "default": 50,
+                            "title": "Size"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -3331,13 +3505,123 @@
                 }
             }
         },
-        "/firework/v4/entities": {
+        "/firework/v4/entities/{asset_uuid}/alert_level": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Alert Level",
+                "operationId": "get_alert_level_entities__asset_uuid__alert_level_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertLevelResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/entities/{asset_uuid}/alert_level/timeline": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Exposure Level Timeline",
+                "operationId": "get_exposure_level_timeline_entities__asset_uuid__alert_level_timeline_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    },
+                    {
+                        "name": "time",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Time"
+                        }
+                    },
+                    {
+                        "name": "time_zone",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "Etc/UTC",
+                            "title": "Time Zone"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertLevelTimelineResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/cti/entities": {
             "get": {
                 "tags": [
                     "private"
                 ],
                 "summary": "List Entities",
-                "operationId": "list_entities_entities_get",
+                "operationId": "list_entities_cti_entities_get",
                 "parameters": [
                     {
                         "name": "query",
@@ -3479,13 +3763,13 @@
                 }
             }
         },
-        "/firework/v4/entities/count": {
+        "/firework/v4/cti/entities/count": {
             "get": {
                 "tags": [
                     "private"
                 ],
                 "summary": "Count Entities",
-                "operationId": "count_entities_entities_count_get",
+                "operationId": "count_entities_cti_entities_count_get",
                 "parameters": [
                     {
                         "name": "query",
@@ -3559,7 +3843,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "integer",
-                                    "title": "Response Count Entities Entities Count Get"
+                                    "title": "Response Count Entities Cti Entities Count Get"
                                 }
                             }
                         }
@@ -3577,13 +3861,13 @@
                 }
             }
         },
-        "/firework/v4/entities/{asset_uuid}/alert_level": {
+        "/firework/v4/cti/entities/{asset_uuid}": {
             "get": {
                 "tags": [
                     "private"
                 ],
-                "summary": "Get Alert Level",
-                "operationId": "get_alert_level_entities__asset_uuid__alert_level_get",
+                "summary": "Get Entity",
+                "operationId": "get_entity_cti_entities__asset_uuid__get",
                 "parameters": [
                     {
                         "name": "asset_uuid",
@@ -3601,75 +3885,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AlertLevelResponse"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/firework/v4/entities/{asset_uuid}/alert_level/timeline": {
-            "get": {
-                "tags": [
-                    "private"
-                ],
-                "summary": "Get Exposure Level Timeline",
-                "operationId": "get_exposure_level_timeline_entities__asset_uuid__alert_level_timeline_get",
-                "parameters": [
-                    {
-                        "name": "asset_uuid",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Asset Uuid"
-                        }
-                    },
-                    {
-                        "name": "time",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Time"
-                        }
-                    },
-                    {
-                        "name": "time_zone",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "default": "Etc/UTC",
-                            "title": "Time Zone"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AlertLevelTimelineResponse"
+                                    "$ref": "#/components/schemas/EntityAPIResponseTypes"
                                 }
                             }
                         }
@@ -3816,6 +4032,7 @@
                             "anyOf": [
                                 {
                                     "type": "string",
+                                    "contentMediaType": "application/octet-stream",
                                     "format": "base64url"
                                 },
                                 {
@@ -5933,6 +6150,49 @@
                 }
             }
         },
+        "/firework/v4/identifiers/identity_by_asset_uuid": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Fetch Identity By Asset Uuid",
+                "operationId": "fetch_identity_by_asset_uuid_identifiers_identity_by_asset_uuid_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/IdentifierResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/identifiers/entity_by_domain": {
             "get": {
                 "tags": [
@@ -6435,6 +6695,619 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/PaginatedResult_int_str_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/matching_policies": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "Create Matching Policy",
+                "operationId": "create_matching_policy_matching_policies_post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/components/schemas/CreateIncludedKeywordsBody"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/CreateExcludedKeywordsBody"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/CreateLuceneQueryBody"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/CreateAstpCookiesBody"
+                                    }
+                                ],
+                                "title": "Body"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MatchingPolicyPayload"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "List Matching Policies",
+                "operationId": "list_matching_policies_matching_policies_get",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 25,
+                            "exclusiveMinimum": 0,
+                            "default": 25,
+                            "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/OrderType",
+                            "default": "desc"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_MatchingPolicyPayload_str_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/matching_policies/{policy_uuid}": {
+            "put": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "Update Matching Policy",
+                "operationId": "update_matching_policy_matching_policies__policy_uuid__put",
+                "parameters": [
+                    {
+                        "name": "policy_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Policy Uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateMatchingPolicyBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MatchingPolicyPayload"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "Get Matching Policy",
+                "operationId": "get_matching_policy_matching_policies__policy_uuid__get",
+                "parameters": [
+                    {
+                        "name": "policy_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Policy Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MatchingPolicyPayload"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "Delete Matching Policy",
+                "operationId": "delete_matching_policy_matching_policies__policy_uuid__delete",
+                "parameters": [
+                    {
+                        "name": "policy_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Policy Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/matching_policies/by_identifier_id/{identifier_id}": {
+            "get": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "List Matching Policies By Identifier Id",
+                "operationId": "list_matching_policies_by_identifier_id_matching_policies_by_identifier_id__identifier_id__get",
+                "parameters": [
+                    {
+                        "name": "identifier_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Identifier Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/MatchingPolicyAssignmentPayload"
+                                    },
+                                    "title": "Response List Matching Policies By Identifier Id Matching Policies By Identifier Id  Identifier Id  Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/matching_policies/{policy_uuid}/assignments": {
+            "get": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "List Policy Assignments",
+                "operationId": "list_policy_assignments_matching_policies__policy_uuid__assignments_get",
+                "parameters": [
+                    {
+                        "name": "policy_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Policy Uuid"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "exclusiveMinimum": 0,
+                            "default": 25,
+                            "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/OrderType",
+                            "default": "desc"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_PolicyAssignedIdentifierPayload_str_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "Assign Policy",
+                "operationId": "assign_policy_matching_policies__policy_uuid__assignments_post",
+                "parameters": [
+                    {
+                        "name": "policy_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Policy Uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PolicyAssignmentsBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "Unassign Policy",
+                "operationId": "unassign_policy_matching_policies__policy_uuid__assignments_delete",
+                "parameters": [
+                    {
+                        "name": "policy_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Policy Uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PolicyAssignmentsBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/matching_policies/{policy_uuid}/assignments/count": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=data-engineering"
+                ],
+                "summary": "Count Assignments",
+                "operationId": "count_assignments_matching_policies__policy_uuid__assignments_count_get",
+                "parameters": [
+                    {
+                        "name": "policy_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Policy Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AssignmentCountPayload"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/identities/": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "List Identities",
+                "operationId": "list_identities_identities__get",
+                "parameters": [
+                    {
+                        "name": "next",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Next"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_IdentityBrowserItemResponse_str_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/identities/_count": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Identities Count",
+                "operationId": "identities_count_identities__count_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "title": "Response Identities Count Identities  Count Get"
                                 }
                             }
                         }
@@ -10014,6 +10887,17 @@
                 ],
                 "summary": "Create Tenant User",
                 "operationId": "create_tenant_user_tenants__tenant_id__users_post",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -10172,6 +11056,235 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/TenantMemberRoleResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/tenants/{tenant_id}/sso_configuration": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Get Tenant Sso Configuration",
+                "operationId": "get_tenant_sso_configuration_tenants__tenant_id__sso_configuration_get",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/SAMLSSOConfigurationData-Output"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/GoogleSSOConfigurationData"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/NotConfiguredSSOConfigurationData"
+                                        }
+                                    ],
+                                    "discriminator": {
+                                        "propertyName": "type",
+                                        "mapping": {
+                                            "SAML": "#/components/schemas/SAMLSSOConfigurationData-Output",
+                                            "Google": "#/components/schemas/GoogleSSOConfigurationData",
+                                            "not_configured": "#/components/schemas/NotConfiguredSSOConfigurationData"
+                                        }
+                                    },
+                                    "title": "Response Get Tenant Sso Configuration Tenants  Tenant Id  Sso Configuration Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Update Tenant Sso Configuration",
+                "operationId": "update_tenant_sso_configuration_tenants__tenant_id__sso_configuration_put",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/components/schemas/SAMLSSOConfigurationData-Input"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/GoogleSSOConfigurationData"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/NotConfiguredSSOConfigurationData"
+                                    }
+                                ],
+                                "title": "Payload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/SAMLSSOConfigurationData-Output"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/GoogleSSOConfigurationData"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/NotConfiguredSSOConfigurationData"
+                                        }
+                                    ],
+                                    "discriminator": {
+                                        "propertyName": "type",
+                                        "mapping": {
+                                            "SAML": "#/components/schemas/SAMLSSOConfigurationData-Output",
+                                            "Google": "#/components/schemas/GoogleSSOConfigurationData",
+                                            "not_configured": "#/components/schemas/NotConfiguredSSOConfigurationData"
+                                        }
+                                    },
+                                    "title": "Response Update Tenant Sso Configuration Tenants  Tenant Id  Sso Configuration Put"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/tenants/{tenant_id}/sso_signing_certificate": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Get Tenant Sso Signing Certificate",
+                "operationId": "get_tenant_sso_signing_certificate_tenants__tenant_id__sso_signing_certificate_get",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SigningCertificateResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/tenants/{tenant_id}/sso_encryption_certificate": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Get Tenant Sso Encryption Certificate",
+                "operationId": "get_tenant_sso_encryption_certificate_tenants__tenant_id__sso_encryption_certificate_get",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EncryptionCertificateResponse"
                                 }
                             }
                         }
@@ -10976,14 +12089,56 @@
                 }
             }
         },
-        "/firework/v4/sandbox/submissions/{submission_uuid}/report": {
+        "/firework/v4/sandbox/submissions/{submission_uuid}/sample_report": {
             "get": {
                 "tags": [
                     "private",
                     "team=integration"
                 ],
-                "summary": "Stream Submission Report",
-                "operationId": "stream_submission_report_sandbox_submissions__submission_uuid__report_get",
+                "summary": "Stream Submission Sample Report",
+                "operationId": "stream_submission_sample_report_sandbox_submissions__submission_uuid__sample_report_get",
+                "parameters": [
+                    {
+                        "name": "submission_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Submission Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/sandbox/submissions/{submission_uuid}/dynamic_report": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=integration"
+                ],
+                "summary": "Stream Submission Dynamic Report",
+                "operationId": "stream_submission_dynamic_report_sandbox_submissions__submission_uuid__dynamic_report_get",
                 "parameters": [
                     {
                         "name": "submission_uuid",
@@ -11115,6 +12270,46 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/HubspotWebhookFlareSyncEvent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/hubspot/flare_sync_tenant_webhook": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=experience"
+                ],
+                "summary": "Handle Hubspot Flare Sync Tenant Webhook",
+                "operationId": "handle_hubspot_flare_sync_tenant_webhook_hubspot_flare_sync_tenant_webhook_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HubspotWebhookFlareSyncTenantEvent"
                             }
                         }
                     },
@@ -11515,6 +12710,7 @@
                     "domain_ip_address",
                     "domain_screenshot",
                     "domain_title",
+                    "domain_whois_rdap",
                     "driller",
                     "driller_forum_post",
                     "driller_forum_topic",
@@ -11530,23 +12726,34 @@
                     "forum_thread_summary",
                     "forum_topic",
                     "host",
+                    "intelligence_object",
+                    "invalid_credential",
                     "leak",
                     "leaked_credential",
                     "leaked_data",
                     "leaked_file",
                     "listing",
                     "lookalike",
+                    "mitigated_credential",
                     "paste",
                     "ransomleak",
                     "ransomleak_file_listing",
                     "score_event",
+                    "sdo_attack_pattern",
+                    "sdo_campaign",
+                    "sdo_indicator",
+                    "sdo_infrastructure",
+                    "sdo_malware",
+                    "sdo_vulnerability",
                     "seller",
                     "service",
                     "social_media_account",
                     "source_code_secret",
                     "stealer_log",
                     "attachment/telegram",
+                    "threat_actor_group",
                     "threat_flow_summary",
+                    "valid_credential",
                     "whois"
                 ],
                 "title": "ActivityModelName"
@@ -11693,6 +12900,17 @@
                         "type": "string",
                         "title": "Name"
                     },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
                     "created_at": {
                         "anyOf": [
                             {
@@ -11716,13 +12934,6 @@
                             }
                         ],
                         "title": "Updated At"
-                    },
-                    "sources": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array",
-                        "title": "Sources"
                     },
                     "first_seen_at": {
                         "anyOf": [
@@ -11748,6 +12959,17 @@
                         ],
                         "title": "Last Seen At"
                     },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
                     "description": {
                         "anyOf": [
                             {
@@ -11765,11 +12987,10 @@
                     "uuid",
                     "type",
                     "name",
+                    "created_by",
+                    "sources",
                     "created_at",
                     "updated_at",
-                    "sources",
-                    "first_seen_at",
-                    "last_seen_at",
                     "description"
                 ],
                 "title": "ActorAPIResponse"
@@ -13526,38 +14747,225 @@
             "AssetType": {
                 "type": "string",
                 "enum": [
-                    "github_repository",
-                    "username",
-                    "user_id",
-                    "domain",
-                    "brand",
-                    "name",
-                    "keyword",
-                    "search_query",
-                    "bin",
-                    "ip",
-                    "email",
                     "account",
-                    "secret",
-                    "credentials",
-                    "favicon",
-                    "screenshot",
                     "azure_tenant",
-                    "thread",
-                    "actor",
+                    "bin",
+                    "brand",
+                    "credentials",
                     "cve",
+                    "directory",
+                    "domain",
+                    "email",
+                    "external_id",
+                    "favicon",
+                    "file",
+                    "filename",
+                    "github_repository",
+                    "ip",
+                    "ipv6_addr",
+                    "keyword",
+                    "mac_addr",
+                    "mitre_technique",
+                    "mutex",
+                    "name",
+                    "screenshot",
+                    "search_query",
+                    "secret",
+                    "thread",
+                    "url",
+                    "user_id",
+                    "username",
+                    "windows_registry_key",
+                    "x509_certificate",
+                    "actor",
+                    "attack_pattern",
+                    "campaign",
+                    "forum_thread",
                     "identity",
-                    "forum_thread"
+                    "indicator",
+                    "infrastructure",
+                    "malware",
+                    "vulnerability"
                 ],
                 "title": "AssetType"
+            },
+            "AssignmentCountPayload": {
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "title": "Count",
+                        "description": "The number of identifiers this policy is assigned to"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "count"
+                ],
+                "title": "AssignmentCountPayload"
+            },
+            "AstpCookiesValue": {
+                "properties": {
+                    "cookie_names": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Cookie Names"
+                    },
+                    "match_subdomains": {
+                        "type": "boolean",
+                        "title": "Match Subdomains",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "cookie_names"
+                ],
+                "title": "AstpCookiesValue"
+            },
+            "AsyncRequestStatus": {
+                "type": "string",
+                "enum": [
+                    "pending",
+                    "processing",
+                    "completed",
+                    "error"
+                ],
+                "title": "AsyncRequestStatus"
             },
             "AsyncRequestType": {
                 "type": "string",
                 "enum": [
                     "actor_summary",
-                    "intel"
+                    "intel",
+                    "event_translation"
                 ],
                 "title": "AsyncRequestType"
+            },
+            "AttackPatternEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "kill_chain_phases": {
+                        "items": {
+                            "$ref": "#/components/schemas/KillChainAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Kill Chain Phases"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "kill_chain_phases",
+                    "marking_definitions"
+                ],
+                "title": "AttackPatternEntityAPIResponse"
             },
             "AuthDomainQuery": {
                 "properties": {
@@ -14297,7 +15705,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2026-03-04T00:15:18.857403Z"
+                        "default": "2026-04-07T19:47:22.921386Z"
                     },
                     "from": {
                         "anyOf": [
@@ -14372,6 +15780,157 @@
                     "bin"
                 ],
                 "title": "CCBinData"
+            },
+            "CTIEntitySourceAPIResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "title": "CTIEntitySourceAPIResponse"
+            },
+            "CampaignEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "marking_definitions"
+                ],
+                "title": "CampaignEntityAPIResponse"
             },
             "CategoryStatsHistogram": {
                 "properties": {
@@ -15025,6 +16584,30 @@
                 ],
                 "title": "CreateAlertChannel"
             },
+            "CreateAstpCookiesBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "ASTP_COOKIES",
+                        "title": "Type"
+                    },
+                    "value": {
+                        "$ref": "#/components/schemas/AstpCookiesValue",
+                        "description": "The value of the matching policy in the form of cookie names"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "type",
+                    "value"
+                ],
+                "title": "CreateAstpCookiesBody"
+            },
             "CreateAuthorizationRequest": {
                 "properties": {
                     "asset_uuid": {
@@ -15118,6 +16701,56 @@
                 ],
                 "title": "CreateDemoTenantRequestBody"
             },
+            "CreateExcludedKeywordsBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "The name of the matching policy"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "EXCLUDED_KEYWORDS",
+                        "title": "Type"
+                    },
+                    "value": {
+                        "$ref": "#/components/schemas/KeywordsValue",
+                        "description": "The value of the matching policy in the form of keywords"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "type",
+                    "value"
+                ],
+                "title": "CreateExcludedKeywordsBody"
+            },
+            "CreateIncludedKeywordsBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "The name of the matching policy"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "INCLUDED_KEYWORDS",
+                        "title": "Type"
+                    },
+                    "value": {
+                        "$ref": "#/components/schemas/KeywordsValue",
+                        "description": "The value of the matching policy in the form of keywords"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "type",
+                    "value"
+                ],
+                "title": "CreateIncludedKeywordsBody"
+            },
             "CreateInviteLinkResponse": {
                 "properties": {
                     "invite_magic_link": {
@@ -15131,12 +16764,72 @@
                 ],
                 "title": "CreateInviteLinkResponse"
             },
-            "CreateTenantIntegrationPayload": {
+            "CreateLLMRecommendationsRequest": {
+                "properties": {
+                    "recommendations": {
+                        "items": {
+                            "$ref": "#/components/schemas/LLMRecommendationRequest"
+                        },
+                        "type": "array",
+                        "title": "Recommendations"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "recommendations"
+                ],
+                "title": "CreateLLMRecommendationsRequest"
+            },
+            "CreateLLMRecommendationsResponse": {
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "title": "Success"
+                    },
+                    "recommendation_created": {
+                        "type": "integer",
+                        "title": "Recommendation Created"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "success",
+                    "recommendation_created"
+                ],
+                "title": "CreateLLMRecommendationsResponse"
+            },
+            "CreateLuceneQueryBody": {
                 "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name",
-                        "default": "Entra ID"
+                        "description": "The name of the matching policy"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "LUCENE_QUERY",
+                        "title": "Type"
+                    },
+                    "value": {
+                        "$ref": "#/components/schemas/LuceneValue",
+                        "description": "The value of the matching policy in the form of a Lucene query"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "type",
+                    "value"
+                ],
+                "title": "CreateLuceneQueryBody"
+            },
+            "CreateTenantIntegrationPayload": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "minLength": 1,
+                        "title": "Name"
                     },
                     "tenant_id": {
                         "type": "integer",
@@ -15174,6 +16867,7 @@
                 },
                 "type": "object",
                 "required": [
+                    "name",
                     "tenant_id",
                     "params"
                 ],
@@ -15734,7 +17428,8 @@
                     "unknown",
                     "failed",
                     "not_found",
-                    "mitigated"
+                    "mitigated",
+                    "throttled"
                 ],
                 "title": "CredentialValidationStatus"
             },
@@ -15744,12 +17439,30 @@
                     "match",
                     "no_match",
                     "unknown",
+                    "throttled",
                     "failed",
                     "not_found",
                     "mitigated",
                     "pending"
                 ],
                 "title": "CredentialValidationStatusFilter"
+            },
+            "CredentialValidationThresholdPolicy": {
+                "properties": {
+                    "max_attempts": {
+                        "type": "integer",
+                        "title": "Max Attempts",
+                        "default": 10
+                    },
+                    "period_seconds": {
+                        "type": "integer",
+                        "minimum": 1.0,
+                        "title": "Period Seconds",
+                        "default": 3600
+                    }
+                },
+                "type": "object",
+                "title": "CredentialValidationThresholdPolicy"
             },
             "CredentialsData": {
                 "properties": {
@@ -16312,6 +18025,19 @@
                 ],
                 "title": "EmailQuery"
             },
+            "EncryptionCertificateResponse": {
+                "properties": {
+                    "encryption_certificate": {
+                        "type": "string",
+                        "title": "Encryption Certificate"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "encryption_certificate"
+                ],
+                "title": "EncryptionCertificateResponse"
+            },
             "EnrichedBulkAction": {
                 "properties": {
                     "id": {
@@ -16602,14 +18328,27 @@
                     },
                     {
                         "$ref": "#/components/schemas/ForumThreadAPIResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/AttackPatternEntityAPIResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/CampaignEntityAPIResponse"
                     }
                 ]
             },
             "EntityType": {
                 "type": "string",
                 "enum": [
+                    "attack_pattern",
                     "actor",
-                    "forum-thread"
+                    "campaign",
+                    "forum_thread",
+                    "identity",
+                    "indicator",
+                    "infrastructure",
+                    "malware",
+                    "vulnerability"
                 ],
                 "title": "EntityType"
             },
@@ -16751,6 +18490,16 @@
                         "uniqueItems": true,
                         "title": "Features"
                     },
+                    "lockout_policy": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/CredentialValidationThresholdPolicy"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
                     "entra_client_secret": {
                         "anyOf": [
                             {
@@ -16759,11 +18508,10 @@
                                 "writeOnly": true
                             },
                             {
-                                "$ref": "#/components/schemas/_Unset"
+                                "type": "null"
                             }
                         ],
-                        "title": "Entra Client Secret",
-                        "default": "__UNSET__"
+                        "title": "Entra Client Secret"
                     }
                 },
                 "type": "object",
@@ -16875,6 +18623,16 @@
                         "type": "array",
                         "uniqueItems": true,
                         "title": "Features"
+                    },
+                    "lockout_policy": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/CredentialValidationThresholdPolicy"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "entra_client_secret": {
                         "type": "string",
@@ -18207,6 +19965,17 @@
                         "type": "string",
                         "title": "Name"
                     },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
                     "created_at": {
                         "anyOf": [
                             {
@@ -18230,13 +19999,6 @@
                             }
                         ],
                         "title": "Updated At"
-                    },
-                    "sources": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array",
-                        "title": "Sources"
                     },
                     "first_seen_at": {
                         "anyOf": [
@@ -18262,6 +20024,17 @@
                         ],
                         "title": "Last Seen At"
                     },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
                     "description": {
                         "anyOf": [
                             {
@@ -18279,11 +20052,10 @@
                     "uuid",
                     "type",
                     "name",
+                    "created_by",
+                    "sources",
                     "created_at",
                     "updated_at",
-                    "sources",
-                    "first_seen_at",
-                    "last_seen_at",
                     "description"
                 ],
                 "title": "ForumThreadAPIResponse"
@@ -19122,6 +20894,30 @@
                 ],
                 "title": "GlobalSearchUsageFeatureValue"
             },
+            "GoogleSSOConfigurationData": {
+                "properties": {
+                    "is_enabled": {
+                        "type": "boolean",
+                        "title": "Is Enabled"
+                    },
+                    "is_mandatory": {
+                        "type": "boolean",
+                        "title": "Is Mandatory"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "Google",
+                        "title": "Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "is_enabled",
+                    "is_mandatory",
+                    "type"
+                ],
+                "title": "GoogleSSOConfigurationData"
+            },
             "GroupByType": {
                 "type": "string",
                 "enum": [
@@ -19401,63 +21197,6 @@
                 ],
                 "title": "HourData"
             },
-            "HubspotDoSyncRequest": {
-                "properties": {
-                    "hubspot_id": {
-                        "type": "integer",
-                        "title": "Hubspot Id"
-                    },
-                    "domain": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Domain"
-                    },
-                    "organization_id": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Organization Id"
-                    },
-                    "name": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Name"
-                    },
-                    "merged_object_ids": {
-                        "items": {
-                            "type": "integer"
-                        },
-                        "type": "array",
-                        "title": "Merged Object Ids",
-                        "default": []
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "hubspot_id",
-                    "domain",
-                    "organization_id",
-                    "name"
-                ],
-                "title": "HubspotDoSyncRequest"
-            },
             "HubspotLifecycleStage": {
                 "type": "string",
                 "enum": [
@@ -19528,6 +21267,59 @@
                     "hubspot_id"
                 ],
                 "title": "HubspotWebhookFlareSyncEvent"
+            },
+            "HubspotWebhookFlareSyncTenantEvent": {
+                "properties": {
+                    "hubspot_company_id": {
+                        "type": "integer",
+                        "title": "Hubspot Company Id"
+                    },
+                    "hubspot_tenant_id": {
+                        "type": "integer",
+                        "title": "Hubspot Tenant Id"
+                    },
+                    "merged_object_ids": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array",
+                        "title": "Merged Object Ids",
+                        "default": []
+                    },
+                    "flare_tenant_name": {
+                        "type": "string",
+                        "title": "Flare Tenant Name"
+                    },
+                    "organization_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Organization Id"
+                    },
+                    "tenant_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Tenant Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "hubspot_company_id",
+                    "hubspot_tenant_id",
+                    "flare_tenant_name"
+                ],
+                "title": "HubspotWebhookFlareSyncTenantEvent"
             },
             "IPData": {
                 "properties": {
@@ -20060,6 +21852,26 @@
                 ],
                 "title": "IdentifierGroupType"
             },
+            "IdentifierMatchingPolicyBody": {
+                "properties": {
+                    "matching_policy_uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Matching Policy Uuid"
+                    },
+                    "clean_past_events": {
+                        "type": "boolean",
+                        "title": "Clean Past Events",
+                        "description": "Whether this policy will be applied to historical events",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "matching_policy_uuid"
+                ],
+                "title": "IdentifierMatchingPolicyBody"
+            },
             "IdentifierMetadata": {
                 "properties": {
                     "critical": {
@@ -20189,6 +22001,20 @@
                             }
                         ]
                     },
+                    "relevancy_score_types": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/RecommendationRelevancyScoreType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Relevancy Score Types"
+                    },
                     "type": {
                         "type": "string",
                         "const": "identifier_recommendation",
@@ -20246,6 +22072,20 @@
                                 "type": "null"
                             }
                         ]
+                    },
+                    "relevancy_score_types": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/RecommendationRelevancyScoreType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Relevancy Score Types"
                     },
                     "type": {
                         "type": "string",
@@ -20407,6 +22247,20 @@
                     },
                     "metadata": {
                         "$ref": "#/components/schemas/IdentifierMetadata"
+                    },
+                    "matching_policies": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/IdentifierMatchingPolicyBody"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Matching Policies"
                     }
                 },
                 "type": "object",
@@ -20489,6 +22343,7 @@
                     "SYSTEM_RELATION",
                     "SELF_ONBOARDING",
                     "ATTRIBUTE",
+                    "LOOKALIKE_DOMAIN",
                     "IDP_SYNC"
                 ],
                 "title": "IdentifierSource"
@@ -20501,7 +22356,8 @@
                     "COUNTED",
                     "SYSTEM",
                     "USER_AND_ATTRIBUTE",
-                    "USER_AND_SYSTEM"
+                    "USER_AND_SYSTEM",
+                    "LOOKALIKE_DOMAIN"
                 ],
                 "title": "IdentifierSourceGroup"
             },
@@ -20633,6 +22489,177 @@
                     "data"
                 ],
                 "title": "IdentityAttribute"
+            },
+            "IdentityBrowserCounts": {
+                "properties": {
+                    "passwords": {
+                        "type": "integer",
+                        "title": "Passwords"
+                    },
+                    "stealer_logs": {
+                        "type": "integer",
+                        "title": "Stealer Logs"
+                    },
+                    "pii": {
+                        "type": "integer",
+                        "title": "Pii"
+                    },
+                    "illicit_networks": {
+                        "type": "integer",
+                        "title": "Illicit Networks"
+                    },
+                    "open_web": {
+                        "type": "integer",
+                        "title": "Open Web"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "passwords",
+                    "stealer_logs",
+                    "pii",
+                    "illicit_networks",
+                    "open_web"
+                ],
+                "title": "IdentityBrowserCounts"
+            },
+            "IdentityBrowserItemResponse": {
+                "properties": {
+                    "asset_uuid": {
+                        "type": "string",
+                        "title": "Asset Uuid"
+                    },
+                    "risk": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Risk"
+                    },
+                    "email": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Email"
+                    },
+                    "display_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Display Name"
+                    },
+                    "title": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Title"
+                    },
+                    "department": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Department"
+                    },
+                    "account_type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Account Type"
+                    },
+                    "is_active": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Is Active"
+                    },
+                    "vip": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Vip"
+                    },
+                    "is_on_premises_sync_enabled": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Is On Premises Sync Enabled"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "counts": {
+                        "$ref": "#/components/schemas/IdentityBrowserCounts"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "asset_uuid",
+                    "risk",
+                    "email",
+                    "display_name",
+                    "title",
+                    "department",
+                    "account_type",
+                    "is_active",
+                    "vip",
+                    "is_on_premises_sync_enabled",
+                    "last_seen_at",
+                    "counts"
+                ],
+                "title": "IdentityBrowserItemResponse"
             },
             "IdentityData": {
                 "properties": {
@@ -20791,6 +22818,18 @@
                         ],
                         "title": "Password Changed At"
                     },
+                    "account_created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Account Created At"
+                    },
                     "refresh_tokens_valid_from": {
                         "anyOf": [
                             {
@@ -20861,6 +22900,7 @@
                     "department",
                     "is_on_premises_sync_enabled",
                     "password_changed_at",
+                    "account_created_at",
                     "refresh_tokens_valid_from",
                     "sign_in_sessions_valid_from",
                     "last_synced_at",
@@ -21048,6 +23088,14 @@
                 ],
                 "title": "IndicatorType"
             },
+            "IntelType": {
+                "type": "string",
+                "enum": [
+                    "unit_summary_based",
+                    "custom_intel"
+                ],
+                "title": "IntelType"
+            },
             "InviteLinkResponse": {
                 "properties": {
                     "invite_magic_link": {
@@ -21180,6 +23228,138 @@
                     "term"
                 ],
                 "title": "KeywordRestrictedTerm"
+            },
+            "KeywordsValue": {
+                "properties": {
+                    "keywords": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Keywords"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "keywords"
+                ],
+                "title": "KeywordsValue"
+            },
+            "KillChainAPIResponse": {
+                "properties": {
+                    "kill_chain_name": {
+                        "type": "string",
+                        "title": "Kill Chain Name"
+                    },
+                    "phase_name": {
+                        "type": "string",
+                        "title": "Phase Name"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "kill_chain_name",
+                    "phase_name"
+                ],
+                "title": "KillChainAPIResponse"
+            },
+            "LLMRecommendationRequest": {
+                "properties": {
+                    "asset": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/CCBinData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/IPData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/BrandData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/KeywordData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/AzureTenantData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/DomainData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/SearchQueryData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/GithubRepositoryData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/CredentialsData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/EmailData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/UsernameData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/SecretData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/NameData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/IdentityDataRequestBody"
+                            }
+                        ],
+                        "title": "Asset",
+                        "discriminator": {
+                            "propertyName": "type",
+                            "mapping": {
+                                "azure_tenant": "#/components/schemas/AzureTenantData",
+                                "bin": "#/components/schemas/CCBinData",
+                                "brand": "#/components/schemas/BrandData",
+                                "credentials": "#/components/schemas/CredentialsData",
+                                "domain": "#/components/schemas/DomainData",
+                                "email": "#/components/schemas/EmailData",
+                                "github_repository": "#/components/schemas/GithubRepositoryData",
+                                "identity": "#/components/schemas/IdentityDataRequestBody",
+                                "ip": "#/components/schemas/IPData",
+                                "keyword": "#/components/schemas/KeywordData",
+                                "name": "#/components/schemas/NameData",
+                                "search_query": "#/components/schemas/SearchQueryData",
+                                "secret": "#/components/schemas/SecretData",
+                                "username": "#/components/schemas/UsernameData"
+                            }
+                        }
+                    },
+                    "tenant_id": {
+                        "type": "integer",
+                        "title": "Tenant Id"
+                    },
+                    "reason": {
+                        "type": "string",
+                        "title": "Reason"
+                    },
+                    "relevancy_score": {
+                        "type": "integer",
+                        "maximum": 100.0,
+                        "minimum": 0.0,
+                        "title": "Relevancy Score"
+                    },
+                    "seen_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Seen At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "asset",
+                    "tenant_id",
+                    "reason",
+                    "relevancy_score",
+                    "seen_at"
+                ],
+                "title": "LLMRecommendationRequest"
             },
             "Language": {
                 "type": "string",
@@ -21588,6 +23768,20 @@
                 ],
                 "title": "LookalikeDomainEventData"
             },
+            "LuceneValue": {
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "title": "Query",
+                        "description": "The lucene query of the matching policy"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "query"
+                ],
+                "title": "LuceneValue"
+            },
             "MalwareInformation": {
                 "properties": {
                     "malware_family": {
@@ -21661,6 +23855,126 @@
                     "credential_hash"
                 ],
                 "title": "MarkUserAsCompromisedPayload"
+            },
+            "MarkingDefinition": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "definition_type": {
+                        "$ref": "#/components/schemas/MarkingDefinitionType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "definition_type",
+                    "name"
+                ],
+                "title": "MarkingDefinition"
+            },
+            "MarkingDefinitionType": {
+                "type": "string",
+                "enum": [
+                    "tlp"
+                ],
+                "title": "MarkingDefinitionType"
+            },
+            "MatchingPolicyAssignmentPayload": {
+                "properties": {
+                    "matching_policy": {
+                        "$ref": "#/components/schemas/MatchingPolicyPayload"
+                    },
+                    "assigned_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Assigned At",
+                        "description": "The date and time this policy was assigned to the identifier"
+                    },
+                    "clean_past_events": {
+                        "type": "boolean",
+                        "title": "Clean Past Events",
+                        "description": "Whether this policy has been applied to historical events"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "matching_policy",
+                    "assigned_at",
+                    "clean_past_events"
+                ],
+                "title": "MatchingPolicyAssignmentPayload"
+            },
+            "MatchingPolicyPayload": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid4",
+                        "title": "Uuid",
+                        "description": "The UUID of the matching policy"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "The name of the matching policy"
+                    },
+                    "policy_type": {
+                        "$ref": "#/components/schemas/MatchingPolicyType",
+                        "description": "The type of the matching policy"
+                    },
+                    "value": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/KeywordsValue"
+                            },
+                            {
+                                "$ref": "#/components/schemas/LuceneValue"
+                            },
+                            {
+                                "$ref": "#/components/schemas/AstpCookiesValue"
+                            }
+                        ],
+                        "title": "Value",
+                        "description": "The value of the matching policy depending on its type"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At",
+                        "description": "The date and time the matching policy was created"
+                    },
+                    "last_updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Last Updated At",
+                        "description": "The date and time the matching policy was last updated"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "name",
+                    "policy_type",
+                    "value",
+                    "created_at",
+                    "last_updated_at"
+                ],
+                "title": "MatchingPolicyPayload"
+            },
+            "MatchingPolicyType": {
+                "type": "string",
+                "enum": [
+                    "INCLUDED_KEYWORDS",
+                    "EXCLUDED_KEYWORDS",
+                    "LUCENE_QUERY",
+                    "ASTP_COOKIES"
+                ],
+                "title": "MatchingPolicyType"
             },
             "MergeIdentitiesBody": {
                 "properties": {
@@ -21738,6 +24052,30 @@
                 ],
                 "title": "NameQuery"
             },
+            "NotConfiguredSSOConfigurationData": {
+                "properties": {
+                    "is_enabled": {
+                        "type": "boolean",
+                        "title": "Is Enabled"
+                    },
+                    "is_mandatory": {
+                        "type": "boolean",
+                        "title": "Is Mandatory"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "not_configured",
+                        "title": "Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "is_enabled",
+                    "is_mandatory",
+                    "type"
+                ],
+                "title": "NotConfiguredSSOConfigurationData"
+            },
             "OktaFailedValidationDetails": {
                 "properties": {
                     "invalid_parameter_field": {
@@ -21765,6 +24103,16 @@
                     "okta_domain": {
                         "type": "string",
                         "title": "Okta Domain"
+                    },
+                    "lockout_policy": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/CredentialValidationThresholdPolicy"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
@@ -21791,6 +24139,16 @@
                     "okta_domain": {
                         "type": "string",
                         "title": "Okta Domain"
+                    },
+                    "lockout_policy": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/CredentialValidationThresholdPolicy"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
@@ -22227,6 +24585,34 @@
                 ],
                 "title": "PaginatedResults[Identifier, str]"
             },
+            "PaginatedResults_IdentityBrowserItemResponse_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/IdentityBrowserItemResponse"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[IdentityBrowserItemResponse, str]"
+            },
             "PaginatedResults_InviteLinkResponse_datetime_": {
                 "properties": {
                     "items": {
@@ -22256,6 +24642,34 @@
                 ],
                 "title": "PaginatedResults[InviteLinkResponse, datetime]"
             },
+            "PaginatedResults_MatchingPolicyPayload_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/MatchingPolicyPayload"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[MatchingPolicyPayload, str]"
+            },
             "PaginatedResults_PartialAlertChannel_str_": {
                 "properties": {
                     "items": {
@@ -22283,6 +24697,34 @@
                     "next"
                 ],
                 "title": "PaginatedResults[PartialAlertChannel, str]"
+            },
+            "PaginatedResults_PolicyAssignedIdentifierPayload_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/PolicyAssignedIdentifierPayload"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[PolicyAssignedIdentifierPayload, str]"
             },
             "PaginatedResults_PydanticThreatFlowReport_str_": {
                 "properties": {
@@ -23068,6 +25510,62 @@
                 ],
                 "title": "PiiCollection[StealerLogFindingCredential]"
             },
+            "PolicyAssignedIdentifierPayload": {
+                "properties": {
+                    "identifier_id": {
+                        "type": "integer",
+                        "title": "Identifier Id",
+                        "description": "The ID of the identifier this policy is assigned to"
+                    },
+                    "identifier_name": {
+                        "type": "string",
+                        "title": "Identifier Name",
+                        "description": "The name of the identifier this policy is assigned to"
+                    },
+                    "clean_past_events": {
+                        "type": "boolean",
+                        "title": "Clean Past Events",
+                        "description": "Whether this policy has been applied to historical events"
+                    },
+                    "assigned_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Assigned At",
+                        "description": "The date and time this policy was assigned to the identifier"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "identifier_id",
+                    "identifier_name",
+                    "clean_past_events",
+                    "assigned_at"
+                ],
+                "title": "PolicyAssignedIdentifierPayload"
+            },
+            "PolicyAssignmentsBody": {
+                "properties": {
+                    "identifier_ids": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array",
+                        "title": "Identifier Ids",
+                        "description": "The IDs of the identifiers to assign the policy to"
+                    },
+                    "clean_past_events": {
+                        "type": "boolean",
+                        "title": "Clean Past Events",
+                        "description": "Whether this policy will be applied to historical events",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "identifier_ids"
+                ],
+                "title": "PolicyAssignmentsBody"
+            },
             "PresetRestrictedTerm": {
                 "properties": {
                     "type": {
@@ -23133,6 +25631,27 @@
                 ],
                 "title": "PresetRestrictedTermItem"
             },
+            "PreviewAlerts": {
+                "properties": {
+                    "alert_channel_id": {
+                        "type": "integer",
+                        "title": "Alert Channel Id"
+                    },
+                    "event_uids": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Event Uids"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "alert_channel_id",
+                    "event_uids"
+                ],
+                "title": "PreviewAlerts"
+            },
             "PublishReportPayload": {
                 "properties": {
                     "title": {
@@ -23159,6 +25678,10 @@
                     "format_type": {
                         "$ref": "#/components/schemas/ThreatFlowReportFormatType",
                         "default": "simple_summary"
+                    },
+                    "intel_type": {
+                        "$ref": "#/components/schemas/IntelType",
+                        "default": "unit_summary_based"
                     },
                     "title": {
                         "type": "string",
@@ -23661,6 +26184,15 @@
                     "data"
                 ],
                 "title": "Recommendation"
+            },
+            "RecommendationRelevancyScoreType": {
+                "type": "string",
+                "enum": [
+                    "HIGH",
+                    "MEDIUM",
+                    "LOW"
+                ],
+                "title": "RecommendationRelevancyScoreType"
             },
             "RelatedConversationRequest": {
                 "properties": {
@@ -24900,6 +27432,13 @@
                 "type": "object",
                 "title": "ReportUpdatePayload"
             },
+            "RequestSigningAlgorithm": {
+                "type": "string",
+                "enum": [
+                    "rsa-sha256"
+                ],
+                "title": "RequestSigningAlgorithm"
+            },
             "RequestStatus": {
                 "type": "string",
                 "enum": [
@@ -24995,6 +27534,169 @@
                 ],
                 "title": "RiskScore"
             },
+            "SAMLConfigurationData-Input": {
+                "properties": {
+                    "MetadataURL": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Metadataurl"
+                    },
+                    "MetadataFile": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Metadatafile"
+                    },
+                    "EncryptedResponses": {
+                        "type": "boolean",
+                        "title": "Encryptedresponses",
+                        "default": false
+                    },
+                    "RequestSigningAlgorithm": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/RequestSigningAlgorithm"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "title": "SAMLConfigurationData"
+            },
+            "SAMLConfigurationData-Output": {
+                "properties": {
+                    "MetadataURL": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Metadataurl"
+                    },
+                    "MetadataFile": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Metadatafile"
+                    },
+                    "EncryptedResponses": {
+                        "type": "boolean",
+                        "title": "Encryptedresponses",
+                        "default": "false"
+                    },
+                    "RequestSigningAlgorithm": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/RequestSigningAlgorithm"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "title": "SAMLConfigurationData"
+            },
+            "SAMLConfigurationMappings": {
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "title": "Email"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "email"
+                ],
+                "title": "SAMLConfigurationMappings"
+            },
+            "SAMLSSOConfigurationData-Input": {
+                "properties": {
+                    "is_enabled": {
+                        "type": "boolean",
+                        "title": "Is Enabled"
+                    },
+                    "is_mandatory": {
+                        "type": "boolean",
+                        "title": "Is Mandatory"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "SAML",
+                        "title": "Type"
+                    },
+                    "configuration": {
+                        "$ref": "#/components/schemas/SAMLConfigurationData-Input"
+                    },
+                    "mappings": {
+                        "$ref": "#/components/schemas/SAMLConfigurationMappings"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "is_enabled",
+                    "is_mandatory",
+                    "type",
+                    "configuration",
+                    "mappings"
+                ],
+                "title": "SAMLSSOConfigurationData"
+            },
+            "SAMLSSOConfigurationData-Output": {
+                "properties": {
+                    "is_enabled": {
+                        "type": "boolean",
+                        "title": "Is Enabled"
+                    },
+                    "is_mandatory": {
+                        "type": "boolean",
+                        "title": "Is Mandatory"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "SAML",
+                        "title": "Type"
+                    },
+                    "configuration": {
+                        "$ref": "#/components/schemas/SAMLConfigurationData-Output"
+                    },
+                    "mappings": {
+                        "$ref": "#/components/schemas/SAMLConfigurationMappings"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "is_enabled",
+                    "is_mandatory",
+                    "type",
+                    "configuration",
+                    "mappings"
+                ],
+                "title": "SAMLSSOConfigurationData"
+            },
             "SandboxSampleSubmission": {
                 "properties": {
                     "uuid": {
@@ -25060,7 +27762,10 @@
                         "format": "date-time",
                         "title": "Submitted At"
                     },
-                    "report_status": {
+                    "sample_report_status": {
+                        "$ref": "#/components/schemas/SandboxSubmissionReportStatus"
+                    },
+                    "dynamic_report_status": {
                         "$ref": "#/components/schemas/SandboxSubmissionReportStatus"
                     },
                     "verdict": {
@@ -25092,7 +27797,8 @@
                     "external_job_id",
                     "size",
                     "submitted_at",
-                    "report_status",
+                    "sample_report_status",
+                    "dynamic_report_status",
                     "verdict",
                     "is_archived"
                 ],
@@ -25514,6 +28220,7 @@
                     "illicit_networks",
                     "open_web",
                     "domains",
+                    "intelligence_object",
                     "leaks",
                     "social_media_account",
                     "social_media",
@@ -25809,6 +28516,19 @@
                     "critical"
                 ],
                 "title": "Severity"
+            },
+            "SigningCertificateResponse": {
+                "properties": {
+                    "signing_certificate": {
+                        "type": "string",
+                        "title": "Signing Certificate"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "signing_certificate"
+                ],
+                "title": "SigningCertificateResponse"
             },
             "SocialMediaEvent": {
                 "properties": {
@@ -27210,6 +29930,17 @@
                             }
                         ],
                         "title": "Access End At"
+                    },
+                    "hubspot_tenant_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Hubspot Tenant Id"
                     }
                 },
                 "type": "object",
@@ -27228,7 +29959,8 @@
                     "identifier_limit",
                     "permissions",
                     "prevent_global_search",
-                    "access_end_at"
+                    "access_end_at",
+                    "hubspot_tenant_id"
                 ],
                 "title": "TenantPayload"
             },
@@ -27405,7 +30137,8 @@
                 "type": "string",
                 "enum": [
                     "simple_summary",
-                    "expanded_summary"
+                    "expanded_summary",
+                    "finished_intel_standard"
                 ],
                 "title": "ThreatFlowReportFormatType"
             },
@@ -27916,6 +30649,36 @@
                 ],
                 "title": "UpdateAuthorizationRequest"
             },
+            "UpdateMatchingPolicyBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "The new name of the matching policy"
+                    },
+                    "value": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/KeywordsValue"
+                            },
+                            {
+                                "$ref": "#/components/schemas/LuceneValue"
+                            },
+                            {
+                                "$ref": "#/components/schemas/AstpCookiesValue"
+                            }
+                        ],
+                        "title": "Value",
+                        "description": "The new value of the matching policy depending on its type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "title": "UpdateMatchingPolicyBody"
+            },
             "UpdatePartialTenantIntegrationPayload": {
                 "properties": {
                     "name": {
@@ -28082,8 +30845,9 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "title": "Name",
-                        "default": "Entra ID"
+                        "maxLength": 255,
+                        "minLength": 1,
+                        "title": "Name"
                     },
                     "is_enabled": {
                         "type": "boolean",
@@ -28117,6 +30881,7 @@
                 },
                 "type": "object",
                 "required": [
+                    "name",
                     "params"
                 ],
                 "title": "UpdateTenantIntegrationPayload"
@@ -28270,7 +31035,6 @@
                     "qa.test-bench",
                     "ai-assist-disabled",
                     "leaked_files.allow_download",
-                    "stealer_logs.allow_chat_messages",
                     "file_transfers",
                     "supply_chain_monitoring",
                     "threat_flow_custom_reports",
@@ -28297,7 +31061,11 @@
                     "full_text_contents_download",
                     "foretrace",
                     "labs",
-                    "iem.credentials_browser"
+                    "iem.credentials_browser",
+                    "iem.identity_sync",
+                    "iem.credentials_browser_bulk_validation",
+                    "advanced_security_mode",
+                    "llm_recommendations"
                 ],
                 "title": "UserPermissions"
             },
@@ -28434,13 +31202,6 @@
                     "password"
                 ],
                 "title": "WebhookBasicAuth"
-            },
-            "_Unset": {
-                "type": "string",
-                "enum": [
-                    "__UNSET__"
-                ],
-                "title": "_Unset"
             },
             "pyro__entities__domain__profile__sort_type__SortType": {
                 "type": "string",
