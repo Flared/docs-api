@@ -182,6 +182,7 @@
               "commits_with",
               "found_from",
               "resolves_to",
+              "has",
               "has_account_on",
               "has_favicon",
               "has_screenshot",
@@ -199,28 +200,52 @@
             "type": "string",
             "description": "The `target_type` parameter is used to filter which type of target assets related we want to list  \n\nUsed only with `source_uuid` \n\n",
             "enum": [
-              "github_repository",
-              "username",
-              "user_id",
-              "domain",
-              "brand",
-              "name",
-              "keyword",
-              "search_query",
-              "bin",
-              "ip",
-              "email",
               "account",
-              "secret",
-              "credentials",
-              "favicon",
-              "screenshot",
               "azure_tenant",
-              "thread",
-              "actor",
+              "bin",
+              "brand",
+              "credentials",
               "cve",
+              "directory",
+              "domain",
+              "email",
+              "external_id",
+              "favicon",
+              "file",
+              "filename",
+              "canonical_name",
+              "country",
+              "github_repository",
+              "ip",
+              "ipv6_addr",
+              "keyword",
+              "mac_addr",
+              "mitre_technique",
+              "mutex",
+              "name",
+              "screenshot",
+              "search_query",
+              "secret",
+              "thread",
+              "url",
+              "user_id",
+              "username",
+              "windows_registry_key",
+              "x509_certificate",
+              "actor",
+              "attack_pattern",
+              "chat_channel",
+              "campaign",
+              "forum_thread",
               "identity",
-              "forum_thread"
+              "indicator",
+              "infrastructure",
+              "location",
+              "malware",
+              "organization",
+              "threat_actor",
+              "threat_actor_group",
+              "vulnerability"
             ]
           },
           {
@@ -229,28 +254,52 @@
             "type": "string",
             "description": "The `source_type` parameter is used to filter which type of source assets related we want to list  \n\nUsed only with `target_uuid` \n\n",
             "enum": [
-              "github_repository",
-              "username",
-              "user_id",
-              "domain",
-              "brand",
-              "name",
-              "keyword",
-              "search_query",
-              "bin",
-              "ip",
-              "email",
               "account",
-              "secret",
-              "credentials",
-              "favicon",
-              "screenshot",
               "azure_tenant",
-              "thread",
-              "actor",
+              "bin",
+              "brand",
+              "credentials",
               "cve",
+              "directory",
+              "domain",
+              "email",
+              "external_id",
+              "favicon",
+              "file",
+              "filename",
+              "canonical_name",
+              "country",
+              "github_repository",
+              "ip",
+              "ipv6_addr",
+              "keyword",
+              "mac_addr",
+              "mitre_technique",
+              "mutex",
+              "name",
+              "screenshot",
+              "search_query",
+              "secret",
+              "thread",
+              "url",
+              "user_id",
+              "username",
+              "windows_registry_key",
+              "x509_certificate",
+              "actor",
+              "attack_pattern",
+              "chat_channel",
+              "campaign",
+              "forum_thread",
               "identity",
-              "forum_thread"
+              "indicator",
+              "infrastructure",
+              "location",
+              "malware",
+              "organization",
+              "threat_actor",
+              "threat_actor_group",
+              "vulnerability"
             ]
           },
           {
@@ -401,7 +450,7 @@
             "name": "types",
             "in": "query",
             "type": "array",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, ransomleak, chat_message, forum_post, stealer_log, forum_profile, bot, forum_topic, financial_data, seller, listing\n- open_web: docker, source_code_files, stack_exchange, google, bucket_object, source_code_secrets, social_media_account, bucket, service, paste\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, financial_data, listing, forum_post, seller, forum_topic, stealer_log, ransomleak, bot, blog_post, chat_message\n- open_web: google, source_code_files, service, source_code_secrets, bucket_object, social_media_account, paste, stack_exchange, bucket, docker\n- leaks: leak\n- domains: domain\n",
             "items": {
               "type": "string"
             },
@@ -441,6 +490,7 @@
               "illicit_networks",
               "open_web",
               "domains",
+              "intelligence_object",
               "leaks",
               "social_media_account",
               "social_media",
@@ -657,7 +707,7 @@
             "name": "types",
             "in": "query",
             "type": "array",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, ransomleak, chat_message, forum_post, stealer_log, forum_profile, bot, forum_topic, financial_data, seller, listing\n- open_web: docker, source_code_files, stack_exchange, google, bucket_object, source_code_secrets, social_media_account, bucket, service, paste\n- leaks: leak\n- domains: domain\n",
+            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, financial_data, listing, forum_post, seller, forum_topic, stealer_log, ransomleak, bot, blog_post, chat_message\n- open_web: google, source_code_files, service, source_code_secrets, bucket_object, social_media_account, paste, stack_exchange, bucket, docker\n- leaks: leak\n- domains: domain\n",
             "items": {
               "type": "string"
             },
@@ -697,6 +747,7 @@
               "illicit_networks",
               "open_web",
               "domains",
+              "intelligence_object",
               "leaks",
               "social_media_account",
               "social_media",
@@ -868,6 +919,7 @@
               "commits_with",
               "found_from",
               "resolves_to",
+              "has",
               "has_account_on",
               "has_favicon",
               "has_screenshot",
@@ -885,28 +937,52 @@
             "type": "string",
             "description": "The `related_type` parameter is used to filter which type of assets related we want to list  \n\n",
             "enum": [
-              "github_repository",
-              "username",
-              "user_id",
-              "domain",
-              "brand",
-              "name",
-              "keyword",
-              "search_query",
-              "bin",
-              "ip",
-              "email",
               "account",
-              "secret",
-              "credentials",
-              "favicon",
-              "screenshot",
               "azure_tenant",
-              "thread",
-              "actor",
+              "bin",
+              "brand",
+              "credentials",
               "cve",
+              "directory",
+              "domain",
+              "email",
+              "external_id",
+              "favicon",
+              "file",
+              "filename",
+              "canonical_name",
+              "country",
+              "github_repository",
+              "ip",
+              "ipv6_addr",
+              "keyword",
+              "mac_addr",
+              "mitre_technique",
+              "mutex",
+              "name",
+              "screenshot",
+              "search_query",
+              "secret",
+              "thread",
+              "url",
+              "user_id",
+              "username",
+              "windows_registry_key",
+              "x509_certificate",
+              "actor",
+              "attack_pattern",
+              "chat_channel",
+              "campaign",
+              "forum_thread",
               "identity",
-              "forum_thread"
+              "indicator",
+              "infrastructure",
+              "location",
+              "malware",
+              "organization",
+              "threat_actor",
+              "threat_actor_group",
+              "vulnerability"
             ]
           },
           {
@@ -992,7 +1068,8 @@
               "COUNTED",
               "SYSTEM",
               "USER_AND_ATTRIBUTE",
-              "USER_AND_SYSTEM"
+              "USER_AND_SYSTEM",
+              "LOOKALIKE_DOMAIN"
             ]
           },
           {
@@ -1108,7 +1185,8 @@
               "COUNTED",
               "SYSTEM",
               "USER_AND_ATTRIBUTE",
-              "USER_AND_SYSTEM"
+              "USER_AND_SYSTEM",
+              "LOOKALIKE_DOMAIN"
             ]
           },
           {
@@ -1459,30 +1537,54 @@
         },
         "asset_type": {
           "type": "string",
-          "example": "github_repository",
+          "example": "account",
           "enum": [
-            "github_repository",
-            "username",
-            "user_id",
-            "domain",
-            "brand",
-            "name",
-            "keyword",
-            "search_query",
-            "bin",
-            "ip",
-            "email",
             "account",
-            "secret",
-            "credentials",
-            "favicon",
-            "screenshot",
             "azure_tenant",
-            "thread",
-            "actor",
+            "bin",
+            "brand",
+            "credentials",
             "cve",
+            "directory",
+            "domain",
+            "email",
+            "external_id",
+            "favicon",
+            "file",
+            "filename",
+            "canonical_name",
+            "country",
+            "github_repository",
+            "ip",
+            "ipv6_addr",
+            "keyword",
+            "mac_addr",
+            "mitre_technique",
+            "mutex",
+            "name",
+            "screenshot",
+            "search_query",
+            "secret",
+            "thread",
+            "url",
+            "user_id",
+            "username",
+            "windows_registry_key",
+            "x509_certificate",
+            "actor",
+            "attack_pattern",
+            "chat_channel",
+            "campaign",
+            "forum_thread",
             "identity",
-            "forum_thread"
+            "indicator",
+            "infrastructure",
+            "location",
+            "malware",
+            "organization",
+            "threat_actor",
+            "threat_actor_group",
+            "vulnerability"
           ]
         },
         "data": {
@@ -1603,6 +1705,7 @@
             "commits_with",
             "found_from",
             "resolves_to",
+            "has",
             "has_account_on",
             "has_favicon",
             "has_screenshot",
@@ -1807,6 +1910,7 @@
               "illicit_networks",
               "open_web",
               "domains",
+              "intelligence_object",
               "leaks",
               "social_media_account",
               "social_media",
@@ -1882,6 +1986,7 @@
             "SYSTEM_RELATION",
             "SELF_ONBOARDING",
             "ATTRIBUTE",
+            "LOOKALIKE_DOMAIN",
             "IDP_SYNC"
           ]
         },
@@ -2265,12 +2370,16 @@
             "activity_discovery",
             "subdomain_from_domain",
             "azure_tenant_from_domain",
-            "domain_from_azure_tenant"
+            "domain_from_azure_tenant",
+            "llm_based"
           ]
         },
         "seen_at": {
           "type": "string",
           "format": "date-time"
+        },
+        "reason": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -2284,13 +2393,33 @@
           "type": "integer"
         },
         "asset_id": {
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ],
+          "example": "nullable integer"
         },
         "name": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
         },
         "asset_type": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        },
+        "group_type": {
+          "type": "string",
+          "example": "identifiers",
+          "enum": [
+            "identifiers",
+            "llm"
+          ]
         },
         "filtered_recommendations_count": {
           "type": "integer"
@@ -2299,6 +2428,12 @@
           "type": "integer"
         },
         "available_asset_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "available_relevancy_score_types": {
           "type": "array",
           "items": {
             "type": "string"
@@ -2320,10 +2455,26 @@
           "type": "integer"
         },
         "asset_id": {
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ],
+          "example": "nullable integer"
         },
         "name": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        },
+        "group_type": {
+          "type": "string",
+          "example": "identifiers",
+          "enum": [
+            "identifiers",
+            "llm"
+          ]
         }
       },
       "type": "object"

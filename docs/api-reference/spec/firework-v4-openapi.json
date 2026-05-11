@@ -96,6 +96,47 @@
                 }
             }
         },
+        "/firework/v4/admin/events/import": {
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Import Event",
+                "operationId": "import_event_admin_events_import_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ImportExperimentalEventModel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ImportEventResult"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/admin/cookies/configurations": {
             "get": {
                 "tags": [
@@ -304,15 +345,155 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Create Feature Flag",
+                "operationId": "create_feature_flag_admin_feature_flags__post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateFeatureFlagPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FeatureFlagResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
-        "/firework/v4/admin/feature_flags/{feature_flag_name}": {
+        "/firework/v4/admin/feature_flags/status": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Feature Flag Status",
+                "operationId": "get_feature_flag_status_admin_feature_flags_status_get",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "title": "Page"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 100,
+                            "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "User Id"
+                        }
+                    },
+                    {
+                        "name": "tenant_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Tenant Id"
+                        }
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Organization Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListFeatureFlagsStatusResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/feature_flags/details/{feature_flag_name}": {
             "get": {
                 "tags": [
                     "private"
                 ],
                 "summary": "Get Feature Flag",
-                "operationId": "get_feature_flag_admin_feature_flags__feature_flag_name__get",
+                "operationId": "get_feature_flag_admin_feature_flags_details__feature_flag_name__get",
                 "parameters": [
                     {
                         "name": "feature_flag_name",
@@ -332,6 +513,527 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/FeatureFlagDefinition"
                                 }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/feature_flags/user-lists": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "List Feature Flag User Lists",
+                "operationId": "list_feature_flag_user_lists_admin_feature_flags_user_lists_get",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "title": "Page"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 100,
+                            "title": "Size"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListFeatureFlagUserListsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Create Feature Flag User List",
+                "operationId": "create_feature_flag_user_list_admin_feature_flags_user_lists_post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateFeatureFlagUserListPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FeatureFlagUserListResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/feature_flags/user-lists/{iid}": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Feature Flag User List",
+                "operationId": "get_feature_flag_user_list_admin_feature_flags_user_lists__iid__get",
+                "parameters": [
+                    {
+                        "name": "iid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Iid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FeatureFlagUserList"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/feature_flags/user-lists/{user_list_iid}": {
+            "put": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Update Feature Flag User List",
+                "operationId": "update_feature_flag_user_list_admin_feature_flags_user_lists__user_list_iid__put",
+                "parameters": [
+                    {
+                        "name": "user_list_iid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "User List Iid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateFeatureFlagUserListPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FeatureFlagUserListResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Delete Feature Flag User List",
+                "operationId": "delete_feature_flag_user_list_admin_feature_flags_user_lists__user_list_iid__delete",
+                "parameters": [
+                    {
+                        "name": "user_list_iid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "User List Iid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/feature_flags/by_name/{feature_flag_name}/add_member": {
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Add Member For Feature Flag",
+                "operationId": "add_member_for_feature_flag_admin_feature_flags_by_name__feature_flag_name__add_member_post",
+                "parameters": [
+                    {
+                        "name": "feature_flag_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Feature Flag Name"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MemberMutationPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/feature_flags/by_name/{feature_flag_name}/remove_member": {
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Remove Member For Feature Flag",
+                "operationId": "remove_member_for_feature_flag_admin_feature_flags_by_name__feature_flag_name__remove_member_post",
+                "parameters": [
+                    {
+                        "name": "feature_flag_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Feature Flag Name"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MemberMutationPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/feature_flags/by_name/{feature_flag_name}": {
+            "patch": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Update Feature Flag",
+                "operationId": "update_feature_flag_admin_feature_flags_by_name__feature_flag_name__patch",
+                "parameters": [
+                    {
+                        "name": "feature_flag_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Feature Flag Name"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateFeatureFlagPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Delete Feature Flag",
+                "operationId": "delete_feature_flag_admin_feature_flags_by_name__feature_flag_name__delete",
+                "parameters": [
+                    {
+                        "name": "feature_flag_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Feature Flag Name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/feature_flags/by_name/{feature_flag_name}/strategies/{strategy_id}": {
+            "patch": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Update Strategy For Feature Flag",
+                "operationId": "update_strategy_for_feature_flag_admin_feature_flags_by_name__feature_flag_name__strategies__strategy_id__patch",
+                "parameters": [
+                    {
+                        "name": "feature_flag_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Feature Flag Name"
+                        }
+                    },
+                    {
+                        "name": "strategy_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Strategy Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateStrategyPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/feature_flags/by_name/{feature_flag_name}/strategies": {
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Create Strategy For Feature Flag",
+                "operationId": "create_strategy_for_feature_flag_admin_feature_flags_by_name__feature_flag_name__strategies_post",
+                "parameters": [
+                    {
+                        "name": "feature_flag_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Feature Flag Name"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateStrategyPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     },
@@ -831,12 +1533,27 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EnableFlareCommunityRequest",
+                                "default": {
+                                    "auto_provision_users": false,
+                                    "manual_users": []
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Successful Response",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/EnableFlareCommunityResponse"
+                                }
                             }
                         }
                     },
@@ -1258,6 +1975,58 @@
                         "content": {
                             "application/json": {
                                 "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/tenants/{tenant_id}/flare_community/parse_csv": {
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Parse Csv",
+                "operationId": "parse_csv_admin_tenants__tenant_id__flare_community_parse_csv_post",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_parse_csv_admin_tenants__tenant_id__flare_community_parse_csv_post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CSVParseResponse"
+                                }
                             }
                         }
                     },
@@ -2868,6 +3637,48 @@
                         "content": {
                             "application/json": {
                                 "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/intels/validate-topic": {
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Validate Intel Topic",
+                "description": "UX-only guidance: validates that an intel topic does not contain PII\nbefore submission. Note that this check is not enforced server-side when\nthe intel is created",
+                "operationId": "validate_intel_topic_intels_validate_topic_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ValidateIntelTopicPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidateIntelTopicResponse"
+                                }
                             }
                         }
                     },
@@ -6737,6 +7548,9 @@
                                     },
                                     {
                                         "$ref": "#/components/schemas/CreateAstpCookiesBody"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/CreateAstpDomainBody"
                                     }
                                 ],
                                 "title": "Body"
@@ -7253,6 +8067,32 @@
                 "operationId": "list_identities_identities__get",
                 "parameters": [
                     {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Q"
+                        }
+                    },
+                    {
+                        "name": "vip_only",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Vip Only"
+                        }
+                    },
+                    {
                         "name": "next",
                         "in": "query",
                         "required": false,
@@ -7276,38 +8116,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/PaginatedResults_IdentityBrowserItemResponse_str_"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/firework/v4/identities/_count": {
-            "get": {
-                "tags": [
-                    "private"
-                ],
-                "summary": "Identities Count",
-                "operationId": "identities_count_identities__count_get",
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "integer",
-                                    "title": "Response Identities Count Identities  Count Get"
                                 }
                             }
                         }
@@ -11353,6 +12161,47 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Delete Tenant",
+                "operationId": "delete_tenant_tenants__tenant_id__delete",
+                "parameters": [
+                    {
+                        "name": "tenant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Tenant Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeleteTenantResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/firework/v4/threat_flow/reports/": {
@@ -12337,6 +13186,47 @@
                 }
             }
         },
+        "/firework/v4/audit_logs/_search": {
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Search Audit Events",
+                "operationId": "search_audit_events_audit_logs__search_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuditEventRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuditEventSearchResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/usage/global_search/by_feature": {
             "get": {
                 "tags": [
@@ -12690,7 +13580,6 @@
                 "enum": [
                     "account",
                     "actor",
-                    "actor_entity",
                     "actor_summary",
                     "ad",
                     "attachment",
@@ -12707,6 +13596,7 @@
                     "document",
                     "domain",
                     "domain_favicon",
+                    "domain_dns_records",
                     "domain_ip_address",
                     "domain_screenshot",
                     "domain_title",
@@ -12722,7 +13612,6 @@
                     "forum_category",
                     "forum_post",
                     "forum_profile",
-                    "forum_thread_entity",
                     "forum_thread_summary",
                     "forum_topic",
                     "host",
@@ -12743,7 +13632,12 @@
                     "sdo_campaign",
                     "sdo_indicator",
                     "sdo_infrastructure",
+                    "sdo_location",
                     "sdo_malware",
+                    "sdo_relationship",
+                    "sdo_threat_actor",
+                    "sdo_threat_actor_group",
+                    "sdo_tool",
                     "sdo_vulnerability",
                     "seller",
                     "service",
@@ -12751,7 +13645,6 @@
                     "source_code_secret",
                     "stealer_log",
                     "attachment/telegram",
-                    "threat_actor_group",
                     "threat_flow_summary",
                     "valid_credential",
                     "whois"
@@ -12885,7 +13778,8 @@
                     "model_name",
                     "es_id"
                 ],
-                "title": "ActivityUid"
+                "title": "ActivityUid",
+                "description": "Pyro cluster document identity\n\nes_id in the Pyro cluster is <source>/<id> and used directly as doc _id"
             },
             "ActorAPIResponse": {
                 "properties": {
@@ -14760,6 +15654,8 @@
                     "favicon",
                     "file",
                     "filename",
+                    "canonical_name",
+                    "country",
                     "github_repository",
                     "ip",
                     "ipv6_addr",
@@ -14779,12 +15675,17 @@
                     "x509_certificate",
                     "actor",
                     "attack_pattern",
+                    "chat_channel",
                     "campaign",
                     "forum_thread",
                     "identity",
                     "indicator",
                     "infrastructure",
+                    "location",
                     "malware",
+                    "organization",
+                    "threat_actor",
+                    "threat_actor_group",
                     "vulnerability"
                 ],
                 "title": "AssetType"
@@ -14810,11 +15711,13 @@
                             "type": "string"
                         },
                         "type": "array",
-                        "title": "Cookie Names"
+                        "title": "Cookie Names",
+                        "description": "The cookie names to monitor"
                     },
                     "match_subdomains": {
                         "type": "boolean",
                         "title": "Match Subdomains",
+                        "description": "Whether this policy will be applied to monitor subdomains of the assigned domain identifiers",
                         "default": false
                     }
                 },
@@ -14823,6 +15726,17 @@
                     "cookie_names"
                 ],
                 "title": "AstpCookiesValue"
+            },
+            "AstpDomainValue": {
+                "properties": {
+                    "match_mode": {
+                        "$ref": "#/components/schemas/DomainMatchMode",
+                        "description": "The domain match mode for this policy",
+                        "default": "email_domain_only"
+                    }
+                },
+                "type": "object",
+                "title": "AstpDomainValue"
             },
             "AsyncRequestStatus": {
                 "type": "string",
@@ -14838,6 +15752,7 @@
                 "type": "string",
                 "enum": [
                     "actor_summary",
+                    "delete_tenant",
                     "intel",
                     "event_translation"
                 ],
@@ -14966,6 +15881,285 @@
                     "marking_definitions"
                 ],
                 "title": "AttackPatternEntityAPIResponse"
+            },
+            "AuditEventActorData": {
+                "properties": {
+                    "user_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "User Id"
+                    },
+                    "user_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "User Name"
+                    },
+                    "user_email": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "User Email"
+                    },
+                    "organization_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Organization Id"
+                    },
+                    "tenant_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Tenant Id"
+                    },
+                    "ip": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ip"
+                    },
+                    "user_agent": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "User Agent"
+                    },
+                    "flare_referer": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Flare Referer"
+                    },
+                    "cloudfront_headers": {
+                        "anyOf": [
+                            {
+                                "additionalProperties": {
+                                    "type": "string"
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Cloudfront Headers"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_id",
+                    "user_name",
+                    "user_email",
+                    "organization_id",
+                    "tenant_id",
+                    "ip",
+                    "user_agent",
+                    "flare_referer",
+                    "cloudfront_headers"
+                ],
+                "title": "AuditEventActorData"
+            },
+            "AuditEventAffectedEntities": {
+                "properties": {
+                    "affected_organization_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Affected Organization Id"
+                    },
+                    "affected_tenant_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Affected Tenant Id"
+                    },
+                    "affected_user_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Affected User Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "affected_organization_id",
+                    "affected_tenant_id",
+                    "affected_user_id"
+                ],
+                "title": "AuditEventAffectedEntities"
+            },
+            "AuditEventItem": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    },
+                    "data": {
+                        "additionalProperties": true,
+                        "type": "object",
+                        "title": "Data"
+                    },
+                    "original_data": {
+                        "anyOf": [
+                            {
+                                "additionalProperties": true,
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Original Data"
+                    },
+                    "affected_entities": {
+                        "$ref": "#/components/schemas/AuditEventAffectedEntities"
+                    },
+                    "actor_data": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/AuditEventActorData"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "created_at",
+                    "data",
+                    "original_data",
+                    "affected_entities",
+                    "actor_data"
+                ],
+                "title": "AuditEventItem"
+            },
+            "AuditEventPagingBody": {
+                "properties": {
+                    "from_": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "From"
+                    },
+                    "order": {
+                        "$ref": "#/components/schemas/OrderType",
+                        "default": "desc"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "title": "Size",
+                        "default": 50
+                    }
+                },
+                "type": "object",
+                "title": "AuditEventPagingBody"
+            },
+            "AuditEventRequestBody": {
+                "properties": {
+                    "pagination": {
+                        "$ref": "#/components/schemas/AuditEventPagingBody"
+                    }
+                },
+                "type": "object",
+                "title": "AuditEventRequestBody"
+            },
+            "AuditEventSearchResponse": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/AuditEventItem"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "AuditEventSearchResponse"
             },
             "AuthDomainQuery": {
                 "properties": {
@@ -15484,6 +16678,20 @@
                 ],
                 "title": "Blog Post"
             },
+            "Body_parse_csv_admin_tenants__tenant_id__flare_community_parse_csv_post": {
+                "properties": {
+                    "csv_file": {
+                        "type": "string",
+                        "contentMediaType": "application/octet-stream",
+                        "title": "Csv File"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "csv_file"
+                ],
+                "title": "Body_parse_csv_admin_tenants__tenant_id__flare_community_parse_csv_post"
+            },
             "Body_upload_organization_logo_organizations__organization_id__logo_post": {
                 "properties": {
                     "logo": {
@@ -15705,7 +16913,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2026-04-07T19:47:22.921386Z"
+                        "default": "2026-05-10T17:04:06.675280Z"
                     },
                     "from": {
                         "anyOf": [
@@ -15780,6 +16988,27 @@
                     "bin"
                 ],
                 "title": "CCBinData"
+            },
+            "CSVParseResponse": {
+                "properties": {
+                    "users": {
+                        "items": {
+                            "$ref": "#/components/schemas/ProvisionUserItemRequest"
+                        },
+                        "type": "array",
+                        "title": "Users"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "title": "Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "users",
+                    "count"
+                ],
+                "title": "CSVParseResponse"
             },
             "CTIEntitySourceAPIResponse": {
                 "properties": {
@@ -15964,6 +17193,114 @@
                     "unique_sources"
                 ],
                 "title": "CategoryStatsHistogram"
+            },
+            "ChatChannelEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description"
+                ],
+                "title": "ChatChannelEntityAPIResponse"
             },
             "ChatMessageEvent": {
                 "properties": {
@@ -16588,7 +17925,9 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "title": "Name"
+                        "minLength": 1,
+                        "title": "Name",
+                        "description": "The name of the matching policy"
                     },
                     "type": {
                         "type": "string",
@@ -16607,6 +17946,32 @@
                     "value"
                 ],
                 "title": "CreateAstpCookiesBody"
+            },
+            "CreateAstpDomainBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Name",
+                        "description": "The name of the matching policy"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "ASTP_DOMAIN",
+                        "title": "Type"
+                    },
+                    "value": {
+                        "$ref": "#/components/schemas/AstpDomainValue",
+                        "description": "The value of the matching policy in the form of a domain match mode"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "type",
+                    "value"
+                ],
+                "title": "CreateAstpDomainBody"
             },
             "CreateAuthorizationRequest": {
                 "properties": {
@@ -16705,6 +18070,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Name",
                         "description": "The name of the matching policy"
                     },
@@ -16726,10 +18092,64 @@
                 ],
                 "title": "CreateExcludedKeywordsBody"
             },
+            "CreateFeatureFlagPayload": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Name"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "title": "Active"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "active",
+                    "description"
+                ],
+                "title": "CreateFeatureFlagPayload"
+            },
+            "CreateFeatureFlagUserListPayload": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Name"
+                    },
+                    "members": {
+                        "items": {
+                            "$ref": "#/components/schemas/StrategyMember"
+                        },
+                        "type": "array",
+                        "title": "Members"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "members"
+                ],
+                "title": "CreateFeatureFlagUserListPayload"
+            },
             "CreateIncludedKeywordsBody": {
                 "properties": {
                     "name": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Name",
                         "description": "The name of the matching policy"
                     },
@@ -16802,6 +18222,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Name",
                         "description": "The name of the matching policy"
                     },
@@ -16823,6 +18244,57 @@
                 ],
                 "title": "CreateLuceneQueryBody"
             },
+            "CreateStrategyPayload": {
+                "properties": {
+                    "strategy_type": {
+                        "$ref": "#/components/schemas/GitlabFeatureFlagStrategyName"
+                    },
+                    "scopes": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/UpdateGitlabFeatureFlagScopePayload"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Scopes"
+                    },
+                    "members": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/StrategyMember"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Members"
+                    },
+                    "user_list_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "User List Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "strategy_type"
+                ],
+                "title": "CreateStrategyPayload"
+            },
             "CreateTenantIntegrationPayload": {
                 "properties": {
                     "name": {
@@ -16841,7 +18313,7 @@
                         "default": true
                     },
                     "params": {
-                        "anyOf": [
+                        "oneOf": [
                             {
                                 "$ref": "#/components/schemas/EntraIDInputParams"
                             },
@@ -16852,7 +18324,15 @@
                                 "$ref": "#/components/schemas/OktaInputParams"
                             }
                         ],
-                        "title": "Params"
+                        "title": "Params",
+                        "discriminator": {
+                            "propertyName": "params_type",
+                            "mapping": {
+                                "entra_id": "#/components/schemas/EntraIDInputParams",
+                                "flare_community": "#/components/schemas/ForetraceInputParams",
+                                "okta": "#/components/schemas/OktaInputParams"
+                            }
+                        }
                     },
                     "status": {
                         "anyOf": [
@@ -17667,6 +19147,24 @@
                 ],
                 "title": "DayOfWeekData"
             },
+            "DeleteTenantResponse": {
+                "properties": {
+                    "request_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Request Id"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/AsyncRequestStatus"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "request_id",
+                    "status"
+                ],
+                "title": "DeleteTenantResponse"
+            },
             "DisableAccountPayload": {
                 "properties": {
                     "credential_hash": {
@@ -17679,6 +19177,57 @@
                     "credential_hash"
                 ],
                 "title": "DisableAccountPayload"
+            },
+            "DnsRecordsInfo": {
+                "properties": {
+                    "a_records": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "A Records"
+                    },
+                    "aaaa_records": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Aaaa Records"
+                    },
+                    "mx_records": {
+                        "items": {
+                            "$ref": "#/components/schemas/MxRecord"
+                        },
+                        "type": "array",
+                        "title": "Mx Records"
+                    },
+                    "ns_records": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Ns Records"
+                    },
+                    "txt_records": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Txt Records"
+                    },
+                    "has_dmarc": {
+                        "type": "boolean",
+                        "title": "Has Dmarc",
+                        "default": false
+                    },
+                    "has_spf": {
+                        "type": "boolean",
+                        "title": "Has Spf",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "title": "DnsRecordsInfo"
             },
             "DomainAssetEnrichment": {
                 "properties": {
@@ -17792,6 +19341,15 @@
                 ],
                 "title": "DomainEventHistoryResponse"
             },
+            "DomainMatchMode": {
+                "type": "string",
+                "enum": [
+                    "email_domain_only",
+                    "auth_domain_and_email_domain",
+                    "auth_domain_only"
+                ],
+                "title": "DomainMatchMode"
+            },
             "DomainProfileEvent": {
                 "properties": {
                     "uid": {
@@ -17840,6 +19398,9 @@
                                     "type": "string"
                                 },
                                 "type": "array"
+                            },
+                            {
+                                "$ref": "#/components/schemas/DnsRecordsInfo"
                             },
                             {
                                 "type": "null"
@@ -18024,6 +19585,40 @@
                     "email"
                 ],
                 "title": "EmailQuery"
+            },
+            "EnableFlareCommunityRequest": {
+                "properties": {
+                    "auto_provision_users": {
+                        "type": "boolean",
+                        "title": "Auto Provision Users",
+                        "default": false
+                    },
+                    "manual_users": {
+                        "items": {
+                            "$ref": "#/components/schemas/ProvisionUserItemRequest"
+                        },
+                        "type": "array",
+                        "title": "Manual Users"
+                    }
+                },
+                "type": "object",
+                "title": "EnableFlareCommunityRequest"
+            },
+            "EnableFlareCommunityResponse": {
+                "properties": {
+                    "provisioned_users_created": {
+                        "type": "integer",
+                        "title": "Provisioned Users Created",
+                        "default": 0
+                    },
+                    "provisioned_users_already_existed": {
+                        "type": "integer",
+                        "title": "Provisioned Users Already Existed",
+                        "default": 0
+                    }
+                },
+                "type": "object",
+                "title": "EnableFlareCommunityResponse"
             },
             "EncryptionCertificateResponse": {
                 "properties": {
@@ -18327,13 +19922,31 @@
                         "$ref": "#/components/schemas/ActorAPIResponse"
                     },
                     {
-                        "$ref": "#/components/schemas/ForumThreadAPIResponse"
-                    },
-                    {
                         "$ref": "#/components/schemas/AttackPatternEntityAPIResponse"
                     },
                     {
                         "$ref": "#/components/schemas/CampaignEntityAPIResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/ChatChannelEntityAPIResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/ForumThreadAPIResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/IndicatorEntityAPIResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/InfrastructureEntityAPIResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/MalwareEntityAPIResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/ThreatActorGroupEntityAPIResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/VulnerabilityEntityAPIResponse"
                     }
                 ]
             },
@@ -18343,11 +19956,16 @@
                     "attack_pattern",
                     "actor",
                     "campaign",
+                    "chat_channel",
                     "forum_thread",
                     "identity",
                     "indicator",
                     "infrastructure",
+                    "location",
                     "malware",
+                    "organization",
+                    "threat_actor",
+                    "threat_actor_group",
                     "vulnerability"
                 ],
                 "title": "EntityType"
@@ -18382,19 +20000,6 @@
                 },
                 "type": "object",
                 "title": "EntraIDFailedValidationDetails"
-            },
-            "EntraIDFeature": {
-                "type": "string",
-                "enum": [
-                    "manually_disable_accounts",
-                    "manually_mark_as_compromised",
-                    "manually_revoke_sessions",
-                    "automatically_validate_credentials",
-                    "automatically_disable_accounts",
-                    "automatically_mark_as_compromised",
-                    "automatically_revoke_sessions"
-                ],
-                "title": "EntraIDFeature"
             },
             "EntraIDInputParams": {
                 "properties": {
@@ -18484,7 +20089,7 @@
                     },
                     "features": {
                         "items": {
-                            "$ref": "#/components/schemas/EntraIDFeature"
+                            "$ref": "#/components/schemas/IdPFeature"
                         },
                         "type": "array",
                         "uniqueItems": true,
@@ -18618,7 +20223,7 @@
                     },
                     "features": {
                         "items": {
-                            "$ref": "#/components/schemas/EntraIDFeature"
+                            "$ref": "#/components/schemas/IdPFeature"
                         },
                         "type": "array",
                         "uniqueItems": true,
@@ -18837,6 +20442,60 @@
                 ],
                 "title": "ExpandableField"
             },
+            "ExperimentalEventMetadata": {
+                "properties": {
+                    "source": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Source"
+                    },
+                    "id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Id"
+                    },
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url"
+                    },
+                    "extra": {
+                        "anyOf": [
+                            {
+                                "additionalProperties": true,
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Extra"
+                    },
+                    "estimated_created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Estimated Created At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "source",
+                    "id"
+                ],
+                "title": "ExperimentalEventMetadata"
+            },
             "FaviconHashType": {
                 "type": "string",
                 "enum": [
@@ -18953,6 +20612,146 @@
                 "type": "object",
                 "title": "FeatureFlagMetrics"
             },
+            "FeatureFlagResponse": {
+                "properties": {
+                    "feature_flag": {
+                        "$ref": "#/components/schemas/FeatureFlagDefinition"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "feature_flag"
+                ],
+                "title": "FeatureFlagResponse"
+            },
+            "FeatureFlagStatus": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "Description"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "title": "Enabled"
+                    },
+                    "enabled_by": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/FeatureFlagStatusEnabledByTenant"
+                            },
+                            {
+                                "$ref": "#/components/schemas/FeatureFlagStatusEnabledByOrganization"
+                            },
+                            {
+                                "$ref": "#/components/schemas/FeatureFlagStatusEnabledByGlobal"
+                            },
+                            {
+                                "$ref": "#/components/schemas/FeatureFlagStatusEnabledByUser"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Enabled By"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "description",
+                    "enabled",
+                    "enabled_by"
+                ],
+                "title": "FeatureFlagStatus"
+            },
+            "FeatureFlagStatusEnabledByGlobal": {
+                "properties": {
+                    "source": {
+                        "type": "string",
+                        "const": "global",
+                        "title": "Source",
+                        "default": "global"
+                    }
+                },
+                "type": "object",
+                "title": "FeatureFlagStatusEnabledByGlobal"
+            },
+            "FeatureFlagStatusEnabledByOrganization": {
+                "properties": {
+                    "source": {
+                        "type": "string",
+                        "const": "organization",
+                        "title": "Source",
+                        "default": "organization"
+                    },
+                    "organization_id": {
+                        "type": "integer",
+                        "title": "Organization Id"
+                    },
+                    "is_user_list": {
+                        "type": "boolean",
+                        "title": "Is User List"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "organization_id",
+                    "is_user_list"
+                ],
+                "title": "FeatureFlagStatusEnabledByOrganization"
+            },
+            "FeatureFlagStatusEnabledByTenant": {
+                "properties": {
+                    "source": {
+                        "type": "string",
+                        "const": "tenant",
+                        "title": "Source",
+                        "default": "tenant"
+                    },
+                    "tenant_id": {
+                        "type": "integer",
+                        "title": "Tenant Id"
+                    },
+                    "is_user_list": {
+                        "type": "boolean",
+                        "title": "Is User List"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "tenant_id",
+                    "is_user_list"
+                ],
+                "title": "FeatureFlagStatusEnabledByTenant"
+            },
+            "FeatureFlagStatusEnabledByUser": {
+                "properties": {
+                    "source": {
+                        "type": "string",
+                        "const": "user",
+                        "title": "Source",
+                        "default": "user"
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "title": "User Id"
+                    },
+                    "is_user_list": {
+                        "type": "boolean",
+                        "title": "Is User List"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_id",
+                    "is_user_list"
+                ],
+                "title": "FeatureFlagStatusEnabledByUser"
+            },
             "FeatureFlagStrategy": {
                 "properties": {
                     "id": {
@@ -18971,21 +20770,20 @@
                     },
                     "scopes": {
                         "items": {
-                            "$ref": "#/components/schemas/GitlabEnvironmentScope"
+                            "$ref": "#/components/schemas/GitlabFeatureFlagScope"
                         },
                         "type": "array",
                         "title": "Scopes"
                     },
-                    "gitlab_user_list_name": {
+                    "user_list": {
                         "anyOf": [
                             {
-                                "type": "string"
+                                "$ref": "#/components/schemas/FeatureFlagUserList"
                             },
                             {
                                 "type": "null"
                             }
-                        ],
-                        "title": "Gitlab User List Name"
+                        ]
                     }
                 },
                 "type": "object",
@@ -18997,11 +20795,59 @@
                 ],
                 "title": "FeatureFlagStrategy"
             },
+            "FeatureFlagUserList": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "iid": {
+                        "type": "integer",
+                        "title": "Iid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "members": {
+                        "items": {
+                            "$ref": "#/components/schemas/StrategyMember"
+                        },
+                        "type": "array",
+                        "title": "Members"
+                    },
+                    "metrics": {
+                        "$ref": "#/components/schemas/FeatureFlagMetrics"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "iid",
+                    "name",
+                    "members",
+                    "metrics"
+                ],
+                "title": "FeatureFlagUserList"
+            },
+            "FeatureFlagUserListResponse": {
+                "properties": {
+                    "user_list": {
+                        "$ref": "#/components/schemas/FeatureFlagUserList"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_list"
+                ],
+                "title": "FeatureFlagUserListResponse"
+            },
             "Features": {
                 "type": "string",
                 "enum": [
                     "standard",
-                    "takedown"
+                    "takedown",
+                    "browser_extension"
                 ],
                 "title": "Features"
             },
@@ -20597,6 +22443,23 @@
                 ],
                 "title": "GitlabEnvironmentScope"
             },
+            "GitlabFeatureFlagScope": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "environment_scope": {
+                        "$ref": "#/components/schemas/GitlabEnvironmentScope"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "environment_scope"
+                ],
+                "title": "GitlabFeatureFlagScope"
+            },
             "GitlabFeatureFlagStrategyName": {
                 "type": "string",
                 "enum": [
@@ -21399,6 +23262,20 @@
                 ],
                 "title": "IdPApplicationNode"
             },
+            "IdPFeature": {
+                "type": "string",
+                "enum": [
+                    "full_idp_sync",
+                    "manually_disable_accounts",
+                    "manually_mark_as_compromised",
+                    "manually_revoke_sessions",
+                    "automatically_validate_credentials",
+                    "automatically_disable_accounts",
+                    "automatically_mark_as_compromised",
+                    "automatically_revoke_sessions"
+                ],
+                "title": "IdPFeature"
+            },
             "IdPUserAccountType": {
                 "type": "string",
                 "enum": [
@@ -21862,7 +23739,7 @@
                     "clean_past_events": {
                         "type": "boolean",
                         "title": "Clean Past Events",
-                        "description": "Whether this policy will be applied to historical events",
+                        "description": "Determines whether or not this policy should be applied to events that have already matched this identifier.",
                         "default": false
                     }
                 },
@@ -23073,6 +24950,53 @@
                 ],
                 "title": "IdentityProfileBanner"
             },
+            "ImportEventResult": {
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "title": "Success"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "success"
+                ],
+                "title": "ImportEventResult"
+            },
+            "ImportExperimentalEventModel": {
+                "properties": {
+                    "metadata": {
+                        "$ref": "#/components/schemas/ExperimentalEventMetadata"
+                    },
+                    "data": {
+                        "additionalProperties": true,
+                        "type": "object",
+                        "title": "Data"
+                    },
+                    "content": {
+                        "type": "string",
+                        "title": "Content"
+                    },
+                    "tenant_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Tenant Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data",
+                    "content"
+                ],
+                "title": "ImportExperimentalEventModel"
+            },
             "IncludeOptions": {
                 "type": "string",
                 "enum": [
@@ -23081,12 +25005,319 @@
                 ],
                 "title": "IncludeOptions"
             },
+            "IndicatorEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "pattern": {
+                        "type": "string",
+                        "title": "Pattern"
+                    },
+                    "pattern_version": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Pattern Version"
+                    },
+                    "indicator_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Indicator Types"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "valid_from": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Valid From"
+                    },
+                    "valid_until": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Valid Until"
+                    },
+                    "kill_chain_phases": {
+                        "items": {
+                            "$ref": "#/components/schemas/KillChainAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Kill Chain Phases"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "pattern",
+                    "pattern_version",
+                    "indicator_types",
+                    "description",
+                    "valid_from",
+                    "valid_until",
+                    "kill_chain_phases",
+                    "marking_definitions"
+                ],
+                "title": "IndicatorEntityAPIResponse"
+            },
             "IndicatorType": {
                 "type": "string",
                 "enum": [
                     "URL"
                 ],
                 "title": "IndicatorType"
+            },
+            "InfrastructureEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "infrastructure_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Infrastructure Types"
+                    },
+                    "kill_chain_phases": {
+                        "items": {
+                            "$ref": "#/components/schemas/KillChainAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Kill Chain Phases"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "infrastructure_types",
+                    "kill_chain_phases",
+                    "marking_definitions"
+                ],
+                "title": "InfrastructureEntityAPIResponse"
             },
             "IntelType": {
                 "type": "string",
@@ -23425,6 +25656,38 @@
                 ],
                 "title": "LeaksOrderBy"
             },
+            "ListFeatureFlagUserListsResponse": {
+                "properties": {
+                    "user_lists": {
+                        "items": {
+                            "$ref": "#/components/schemas/FeatureFlagUserList"
+                        },
+                        "type": "array",
+                        "title": "User Lists"
+                    },
+                    "total": {
+                        "type": "integer",
+                        "title": "Total"
+                    },
+                    "next_page": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next Page"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_lists",
+                    "total"
+                ],
+                "title": "ListFeatureFlagUserListsResponse"
+            },
             "ListFeatureFlagsResponse": {
                 "properties": {
                     "feature_flags": {
@@ -23456,6 +25719,38 @@
                     "total"
                 ],
                 "title": "ListFeatureFlagsResponse"
+            },
+            "ListFeatureFlagsStatusResponse": {
+                "properties": {
+                    "feature_flags": {
+                        "items": {
+                            "$ref": "#/components/schemas/FeatureFlagStatus"
+                        },
+                        "type": "array",
+                        "title": "Feature Flags"
+                    },
+                    "total": {
+                        "type": "integer",
+                        "title": "Total"
+                    },
+                    "next_page": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next Page"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "feature_flags",
+                    "total"
+                ],
+                "title": "ListFeatureFlagsStatusResponse"
             },
             "ListingEvent": {
                 "properties": {
@@ -23782,6 +26077,138 @@
                 ],
                 "title": "LuceneValue"
             },
+            "MalwareEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "malware_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Malware Types"
+                    },
+                    "kill_chain_phases": {
+                        "items": {
+                            "$ref": "#/components/schemas/KillChainAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Kill Chain Phases"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "malware_types",
+                    "kill_chain_phases",
+                    "marking_definitions"
+                ],
+                "title": "MalwareEntityAPIResponse"
+            },
             "MalwareInformation": {
                 "properties": {
                     "malware_family": {
@@ -23928,18 +26355,7 @@
                         "description": "The type of the matching policy"
                     },
                     "value": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/KeywordsValue"
-                            },
-                            {
-                                "$ref": "#/components/schemas/LuceneValue"
-                            },
-                            {
-                                "$ref": "#/components/schemas/AstpCookiesValue"
-                            }
-                        ],
-                        "title": "Value",
+                        "$ref": "#/components/schemas/PolicyValue",
                         "description": "The value of the matching policy depending on its type"
                     },
                     "created_at": {
@@ -23972,9 +26388,22 @@
                     "INCLUDED_KEYWORDS",
                     "EXCLUDED_KEYWORDS",
                     "LUCENE_QUERY",
-                    "ASTP_COOKIES"
+                    "ASTP_COOKIES",
+                    "ASTP_DOMAIN"
                 ],
                 "title": "MatchingPolicyType"
+            },
+            "MemberMutationPayload": {
+                "properties": {
+                    "member": {
+                        "$ref": "#/components/schemas/StrategyMember"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "member"
+                ],
+                "title": "MemberMutationPayload"
             },
             "MergeIdentitiesBody": {
                 "properties": {
@@ -23993,6 +26422,24 @@
                     "to_identifier_id"
                 ],
                 "title": "MergeIdentitiesBody"
+            },
+            "MxRecord": {
+                "properties": {
+                    "priority": {
+                        "type": "integer",
+                        "title": "Priority"
+                    },
+                    "exchange": {
+                        "type": "string",
+                        "title": "Exchange"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "priority",
+                    "exchange"
+                ],
+                "title": "MxRecord"
             },
             "NameData": {
                 "properties": {
@@ -24104,6 +26551,26 @@
                         "type": "string",
                         "title": "Okta Domain"
                     },
+                    "okta_service_app_client_id": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "minLength": 1
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Okta Service App Client Id"
+                    },
+                    "features": {
+                        "items": {
+                            "$ref": "#/components/schemas/IdPFeature"
+                        },
+                        "type": "array",
+                        "uniqueItems": true,
+                        "title": "Features"
+                    },
                     "lockout_policy": {
                         "anyOf": [
                             {
@@ -24139,6 +26606,25 @@
                     "okta_domain": {
                         "type": "string",
                         "title": "Okta Domain"
+                    },
+                    "okta_service_app_client_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Okta Service App Client Id"
+                    },
+                    "features": {
+                        "items": {
+                            "$ref": "#/components/schemas/IdPFeature"
+                        },
+                        "type": "array",
+                        "uniqueItems": true,
+                        "title": "Features"
                     },
                     "lockout_policy": {
                         "anyOf": [
@@ -24324,6 +26810,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24352,6 +26849,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24380,6 +26888,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24408,6 +26927,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24436,6 +26966,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24464,6 +27005,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24492,6 +27044,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24520,6 +27083,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24548,6 +27122,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24576,6 +27161,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24604,6 +27200,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24633,6 +27240,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24661,6 +27279,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24689,6 +27318,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24717,6 +27357,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24745,6 +27396,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24773,6 +27435,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24801,6 +27474,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24829,6 +27513,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24857,6 +27552,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24885,6 +27591,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24913,6 +27630,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24941,6 +27669,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24969,6 +27708,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -24997,6 +27747,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -25025,6 +27786,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -25053,6 +27825,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -25081,6 +27864,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -25109,6 +27903,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -25144,6 +27949,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -25566,6 +28382,22 @@
                 ],
                 "title": "PolicyAssignmentsBody"
             },
+            "PolicyValue": {
+                "anyOf": [
+                    {
+                        "$ref": "#/components/schemas/KeywordsValue"
+                    },
+                    {
+                        "$ref": "#/components/schemas/LuceneValue"
+                    },
+                    {
+                        "$ref": "#/components/schemas/AstpCookiesValue"
+                    },
+                    {
+                        "$ref": "#/components/schemas/AstpDomainValue"
+                    }
+                ]
+            },
             "PresetRestrictedTerm": {
                 "properties": {
                     "type": {
@@ -25651,6 +28483,42 @@
                     "event_uids"
                 ],
                 "title": "PreviewAlerts"
+            },
+            "ProvisionUserItemRequest": {
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "title": "Email"
+                    },
+                    "idp_user_uuid": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Idp User Uuid"
+                    },
+                    "full_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Full Name"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "email"
+                ],
+                "title": "ProvisionUserItemRequest"
             },
             "PublishReportPayload": {
                 "properties": {
@@ -27852,6 +30720,7 @@
                     "in_progress",
                     "queued",
                     "success",
+                    "temporary_error",
                     "error"
                 ],
                 "title": "SandboxSubmissionStatus"
@@ -27863,6 +30732,7 @@
                     "malicious",
                     "suspicious",
                     "pending",
+                    "temporary_error",
                     "error",
                     "not_applicable"
                 ],
@@ -27915,9 +30785,6 @@
             "Scope": {
                 "type": "string",
                 "enum": [
-                    "authenticated",
-                    "authenticated-sso",
-                    "authenticated-mfa",
                     "firework",
                     "leaksdb",
                     "astp-credentials",
@@ -27927,7 +30794,6 @@
                     "do-not-track",
                     "admin",
                     "ratelimited",
-                    "apikey",
                     "bypass-mfa",
                     "search-unrestricted",
                     "private-endpoints",
@@ -29696,6 +32562,18 @@
                             }
                         ],
                         "title": "Failed Validation Details"
+                    },
+                    "last_synchronized_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Synchronized At"
                     }
                 },
                 "type": "object",
@@ -30097,7 +32975,7 @@
             "TestTenantIntegrationPayload": {
                 "properties": {
                     "params": {
-                        "anyOf": [
+                        "oneOf": [
                             {
                                 "$ref": "#/components/schemas/EntraIDInputParams"
                             },
@@ -30108,7 +32986,15 @@
                                 "$ref": "#/components/schemas/OktaInputParams"
                             }
                         ],
-                        "title": "Params"
+                        "title": "Params",
+                        "discriminator": {
+                            "propertyName": "params_type",
+                            "mapping": {
+                                "entra_id": "#/components/schemas/EntraIDInputParams",
+                                "flare_community": "#/components/schemas/ForetraceInputParams",
+                                "okta": "#/components/schemas/OktaInputParams"
+                            }
+                        }
                     }
                 },
                 "type": "object",
@@ -30124,6 +33010,166 @@
                     "forum_thread"
                 ],
                 "title": "ThreadType"
+            },
+            "ThreatActorGroupEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "aliases": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Aliases"
+                    },
+                    "goals": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Goals"
+                    },
+                    "resource_level": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Resource Level"
+                    },
+                    "primary_motivation": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Primary Motivation"
+                    },
+                    "secondary_motivations": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Secondary Motivations"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "aliases",
+                    "goals",
+                    "resource_level",
+                    "primary_motivation",
+                    "secondary_motivations",
+                    "marking_definitions"
+                ],
+                "title": "ThreatActorGroupEntityAPIResponse"
             },
             "ThreatFlowReportDownloadFormat": {
                 "type": "string",
@@ -30649,26 +33695,124 @@
                 ],
                 "title": "UpdateAuthorizationRequest"
             },
+            "UpdateFeatureFlagPayload": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "active": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Active"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    }
+                },
+                "type": "object",
+                "title": "UpdateFeatureFlagPayload"
+            },
+            "UpdateFeatureFlagUserListPayload": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "members": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/StrategyMember"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Members"
+                    }
+                },
+                "type": "object",
+                "title": "UpdateFeatureFlagUserListPayload"
+            },
+            "UpdateGitlabFeatureFlagScopePayload": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "environment_scope": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/GitlabEnvironmentScope"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "_destroy": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Destroy"
+                    }
+                },
+                "type": "object",
+                "title": "UpdateGitlabFeatureFlagScopePayload"
+            },
             "UpdateMatchingPolicyBody": {
                 "properties": {
                     "name": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Name",
                         "description": "The new name of the matching policy"
                     },
                     "value": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/KeywordsValue"
-                            },
-                            {
-                                "$ref": "#/components/schemas/LuceneValue"
-                            },
-                            {
-                                "$ref": "#/components/schemas/AstpCookiesValue"
-                            }
-                        ],
-                        "title": "Value",
+                        "$ref": "#/components/schemas/PolicyValue",
                         "description": "The new value of the matching policy depending on its type"
                     }
                 },
@@ -30841,6 +33985,72 @@
                 ],
                 "title": "UpdateReportParameters"
             },
+            "UpdateStrategyPayload": {
+                "properties": {
+                    "strategy_type": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/GitlabFeatureFlagStrategyName"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "scopes": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/UpdateGitlabFeatureFlagScopePayload"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Scopes"
+                    },
+                    "members": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/StrategyMember"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Members"
+                    },
+                    "user_list_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "User List Id"
+                    },
+                    "_destroy": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Destroy"
+                    }
+                },
+                "type": "object",
+                "title": "UpdateStrategyPayload"
+            },
             "UpdateTenantIntegrationPayload": {
                 "properties": {
                     "name": {
@@ -30855,7 +34065,7 @@
                         "default": true
                     },
                     "params": {
-                        "anyOf": [
+                        "oneOf": [
                             {
                                 "$ref": "#/components/schemas/EntraIDInputParams"
                             },
@@ -30866,7 +34076,15 @@
                                 "$ref": "#/components/schemas/OktaInputParams"
                             }
                         ],
-                        "title": "Params"
+                        "title": "Params",
+                        "discriminator": {
+                            "propertyName": "params_type",
+                            "mapping": {
+                                "entra_id": "#/components/schemas/EntraIDInputParams",
+                                "flare_community": "#/components/schemas/ForetraceInputParams",
+                                "okta": "#/components/schemas/OktaInputParams"
+                            }
+                        }
                     },
                     "status": {
                         "anyOf": [
@@ -31145,6 +34363,40 @@
                 ],
                 "title": "ValidateByIDPActionParams"
             },
+            "ValidateIntelTopicPayload": {
+                "properties": {
+                    "topic": {
+                        "type": "string",
+                        "title": "Topic"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "topic"
+                ],
+                "title": "ValidateIntelTopicPayload"
+            },
+            "ValidateIntelTopicResponse": {
+                "properties": {
+                    "valid": {
+                        "type": "boolean",
+                        "title": "Valid"
+                    },
+                    "violations": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Violations"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "valid",
+                    "violations"
+                ],
+                "title": "ValidateIntelTopicResponse"
+            },
             "ValidationError": {
                 "properties": {
                     "loc": {
@@ -31184,6 +34436,122 @@
                     "type"
                 ],
                 "title": "ValidationError"
+            },
+            "VulnerabilityEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "marking_definitions"
+                ],
+                "title": "VulnerabilityEntityAPIResponse"
             },
             "WebhookBasicAuth": {
                 "properties": {
