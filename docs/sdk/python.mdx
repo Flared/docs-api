@@ -145,6 +145,22 @@ for result in api_client.scroll_events(
     print(f"The next execution could resume using from={result.next}")
 ```
 
+## Using a Proxy
+
+To route requests through an HTTP proxy, pass a `proxies` dict to `FlareApiClient`. It accepts the same format as the [`requests` `proxies` argument](https://requests.readthedocs.io/en/latest/user/advanced/#proxies).
+
+```python Using a Proxy
+from flareio import FlareApiClient
+
+
+client = FlareApiClient(
+    api_key="fw_...",
+    proxies={"https": "http://proxy.corp.local:8080"},
+)
+```
+
+The `HTTP_PROXY` and `HTTPS_PROXY` environment variables are also picked up by `requests`, so setting them is enough if you'd rather not pass `proxies` explicitly.
+
 ## Custom Session
 
 The `FlareApiClient` can be initialized with a custom `requests.Session`. This allows, for example,
