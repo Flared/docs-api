@@ -85,6 +85,7 @@
                   "api-reference/v4/endpoints/expand-event-field",
                   "api-reference/v2/endpoints/activities/get-fireworkv2activities--ai_assistance",
                   "api-reference/v4/endpoints/event-actions",
+                  "api-reference/v4/endpoints/credential-actions",
                   "api-reference/v4/endpoints/public/update-tenant-metadata"
                 ]
               },
