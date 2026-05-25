@@ -4874,6 +4874,48 @@
                 }
             }
         },
+        "/firework/v4/chat-channels/{asset_uuid}/generate-summaries": {
+            "post": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Post Generate Chat Channel Summaries",
+                "operationId": "post_generate_chat_channel_summaries_chat_channels__asset_uuid__generate_summaries_post",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatChannelSummariesResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/cti/entities": {
             "get": {
                 "tags": [
@@ -5145,6 +5187,74 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/EntityAPIResponseTypes"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/cti/entities/{asset_uuid}/relations": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "List Entity Relations",
+                "operationId": "list_entity_relations_cti_entities__asset_uuid__relations_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 10,
+                            "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "from_",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From "
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_CTIEntityRelationshipResponse_str_"
                                 }
                             }
                         }
@@ -6884,6 +6994,185 @@
                 }
             }
         },
+        "/firework/v4/identifiers/": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=experience"
+                ],
+                "summary": "Create Public Identifier",
+                "operationId": "create_public_identifier_identifiers__post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PublicIdentifierRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublicIdentifierResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "public",
+                    "team=experience",
+                    "feature=identifiers"
+                ],
+                "summary": "List Identifiers",
+                "operationId": "list_identifiers_identifiers__get",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "exclusiveMinimum": 0,
+                            "default": 20,
+                            "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "order_by",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/IdentifierOrderBy",
+                            "default": "id"
+                        }
+                    },
+                    {
+                        "name": "is_disabled",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "boolean"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Is Disabled"
+                        }
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Group Id"
+                        }
+                    },
+                    {
+                        "name": "types",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/IdentifierType"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Types"
+                        }
+                    },
+                    {
+                        "name": "authorization_status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/IdentifierAuthorizationStatus"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Authorization Status"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_PublicIdentifierResponse_str_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/identifiers/ui": {
             "post": {
                 "tags": [
@@ -7170,185 +7459,6 @@
                 }
             }
         },
-        "/firework/v4/identifiers/": {
-            "post": {
-                "tags": [
-                    "public",
-                    "team=experience"
-                ],
-                "summary": "Create Identifier",
-                "operationId": "create_identifier_identifiers__post",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/IdentifierRequestBody"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/IdentifierResponse"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "get": {
-                "tags": [
-                    "public",
-                    "team=experience",
-                    "feature=identifiers"
-                ],
-                "summary": "List Identifiers",
-                "operationId": "list_identifiers_identifiers__get",
-                "parameters": [
-                    {
-                        "name": "from",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "From"
-                        }
-                    },
-                    {
-                        "name": "size",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "maximum": 100,
-                            "exclusiveMinimum": 0,
-                            "default": 20,
-                            "title": "Size"
-                        }
-                    },
-                    {
-                        "name": "order_by",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/components/schemas/IdentifierOrderBy",
-                            "default": "id"
-                        }
-                    },
-                    {
-                        "name": "is_disabled",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "boolean"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Is Disabled"
-                        }
-                    },
-                    {
-                        "name": "group_id",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "integer"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Group Id"
-                        }
-                    },
-                    {
-                        "name": "types",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/IdentifierType"
-                                    }
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Types"
-                        }
-                    },
-                    {
-                        "name": "authorization_status",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/components/schemas/IdentifierAuthorizationStatus"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Authorization Status"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_PublicIdentifierResponse_str_"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/firework/v4/identifiers/ui/{identifier_id}": {
             "put": {
                 "tags": [
@@ -7516,21 +7626,7 @@
                 "responses": {
                     "200": {
                         "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
+                        "content": {}
                     }
                 }
             }
@@ -9583,6 +9679,168 @@
                                         "$ref": "#/components/schemas/IdentityIdPUserPayload"
                                     },
                                     "title": "Response Get Idp User Data Identities  Asset Uuid  Idp User Data Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/domains/": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "List Domains",
+                "operationId": "list_domains_domains__get",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Q"
+                        }
+                    },
+                    {
+                        "name": "lookalike_only",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Lookalike Only"
+                        }
+                    },
+                    {
+                        "name": "severity",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Severity"
+                        }
+                    },
+                    {
+                        "name": "related_domain",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Related Domain"
+                        }
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Source"
+                        }
+                    },
+                    {
+                        "name": "next",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Next"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/pyro__entities__domain__domain_browser_sort_type__SortType",
+                            "default": "severity"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/OrderType",
+                            "default": "desc"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "exclusiveMinimum": 0,
+                            "default": 10,
+                            "title": "Size"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_DomainBrowserItemResponse_str_"
                                 }
                             }
                         }
@@ -16409,6 +16667,53 @@
                 ],
                 "title": "AssetEnrichmentType"
             },
+            "AssetRelationType": {
+                "type": "string",
+                "enum": [
+                    "analysis_of",
+                    "attributed_to",
+                    "authored_by",
+                    "based_on",
+                    "beacons_to",
+                    "characterizes",
+                    "commits_with",
+                    "communicates_with",
+                    "compromises",
+                    "consists_of",
+                    "contributed_to",
+                    "controls",
+                    "delivers",
+                    "downloads",
+                    "drops",
+                    "dynamic_analysis_of",
+                    "exfiltrate_to",
+                    "exploits",
+                    "found_from",
+                    "has",
+                    "has_account_on",
+                    "has_favicon",
+                    "has_screenshot",
+                    "hosts",
+                    "impersonates",
+                    "indicates",
+                    "investigates",
+                    "links_to_azure_tenant",
+                    "located_at",
+                    "looks_like",
+                    "mentioned_in",
+                    "mitigates",
+                    "originates_from",
+                    "owns",
+                    "related_to",
+                    "resolves_to",
+                    "static_analysis_of",
+                    "subdomain_of",
+                    "targets",
+                    "uses",
+                    "variant_of"
+                ],
+                "title": "AssetRelationType"
+            },
             "AssetResponse": {
                 "properties": {
                     "asset": {
@@ -16802,6 +17107,39 @@
                             }
                         ],
                         "title": "Cloudfront Headers"
+                    },
+                    "impersonator_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Impersonator Id"
+                    },
+                    "impersonator_email": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Impersonator Email"
+                    },
+                    "impersonator_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Impersonator Name"
                     }
                 },
                 "type": "object",
@@ -17890,7 +18228,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2026-05-20T18:49:30.465642Z"
+                        "default": "2026-05-24T19:25:47.229439Z"
                     },
                     "from": {
                         "anyOf": [
@@ -17987,6 +18325,56 @@
                 ],
                 "title": "CSVParseResponse"
             },
+            "CTIEntityRelationshipResponse": {
+                "properties": {
+                    "source_entity": {
+                        "$ref": "#/components/schemas/EntityData"
+                    },
+                    "target_entity": {
+                        "$ref": "#/components/schemas/EntityData"
+                    },
+                    "relation_type": {
+                        "$ref": "#/components/schemas/AssetRelationType"
+                    },
+                    "modified_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Modified At"
+                    },
+                    "valid_from": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Valid From"
+                    },
+                    "valid_until": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Valid Until"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "source_entity",
+                    "target_entity",
+                    "relation_type",
+                    "modified_at"
+                ],
+                "title": "CTIEntityRelationshipResponse"
+            },
             "CTIEntitySourceAPIResponse": {
                 "properties": {
                     "id": {
@@ -18021,6 +18409,25 @@
                     "id"
                 ],
                 "title": "CTIEntitySourceAPIResponse"
+            },
+            "CTIEntityType": {
+                "type": "string",
+                "enum": [
+                    "actor",
+                    "attack_pattern",
+                    "campaign",
+                    "chat_channel",
+                    "external_report",
+                    "forum_thread",
+                    "indicator",
+                    "infrastructure",
+                    "location",
+                    "malware",
+                    "threat_actor",
+                    "threat_actor_group",
+                    "tool",
+                    "vulnerability"
+                ]
             },
             "CampaignEntityAPIResponse": {
                 "properties": {
@@ -18392,6 +18799,50 @@
                     "source"
                 ],
                 "title": "ChatChannelMetadata"
+            },
+            "ChatChannelSummariesResponse": {
+                "properties": {
+                    "request_id": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Request Id"
+                    },
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "summarized_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Summarized At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "request_id"
+                ],
+                "title": "ChatChannelSummariesResponse"
             },
             "ChatChannelTimeline": {
                 "properties": {
@@ -20480,6 +20931,75 @@
                 ],
                 "title": "DomainAssetEnrichment"
             },
+            "DomainBrowserItemResponse": {
+                "properties": {
+                    "asset_uuid": {
+                        "type": "string",
+                        "title": "Asset Uuid"
+                    },
+                    "risk": {
+                        "type": "integer",
+                        "title": "Risk"
+                    },
+                    "fqdn": {
+                        "type": "string",
+                        "title": "Fqdn"
+                    },
+                    "related_domain": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Related Domain"
+                    },
+                    "sources": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "discovered_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Discovered At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "asset_uuid",
+                    "risk",
+                    "fqdn",
+                    "related_domain",
+                    "sources",
+                    "discovered_at",
+                    "updated_at"
+                ],
+                "title": "DomainBrowserItemResponse"
+            },
             "DomainData": {
                 "properties": {
                     "type": {
@@ -21121,6 +21641,9 @@
                         "$ref": "#/components/schemas/ChatChannelEntityAPIResponse"
                     },
                     {
+                        "$ref": "#/components/schemas/ExternalReportEntityAPIResponse"
+                    },
+                    {
                         "$ref": "#/components/schemas/ForumThreadAPIResponse"
                     },
                     {
@@ -21130,15 +21653,59 @@
                         "$ref": "#/components/schemas/InfrastructureEntityAPIResponse"
                     },
                     {
+                        "$ref": "#/components/schemas/LocationEntityAPIResponse"
+                    },
+                    {
                         "$ref": "#/components/schemas/MalwareEntityAPIResponse"
+                    },
+                    {
+                        "$ref": "#/components/schemas/ThreatActorEntityAPIResponse"
                     },
                     {
                         "$ref": "#/components/schemas/ThreatActorGroupEntityAPIResponse"
                     },
                     {
+                        "$ref": "#/components/schemas/ToolEntityAPIResponse"
+                    },
+                    {
                         "$ref": "#/components/schemas/VulnerabilityEntityAPIResponse"
                     }
                 ]
+            },
+            "EntityData": {
+                "properties": {
+                    "asset_uuid": {
+                        "type": "string",
+                        "title": "Asset Uuid"
+                    },
+                    "entity_type": {
+                        "$ref": "#/components/schemas/CTIEntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "confidence": {
+                        "type": "integer",
+                        "title": "Confidence"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "asset_uuid",
+                    "entity_type",
+                    "name",
+                    "sources",
+                    "confidence"
+                ],
+                "title": "EntityData"
             },
             "EntityType": {
                 "type": "string",
@@ -21688,6 +22255,143 @@
                     "id"
                 ],
                 "title": "ExperimentalEventMetadata"
+            },
+            "ExternalReportEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "report_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Report Types"
+                    },
+                    "published": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Published"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "report_types",
+                    "published",
+                    "marking_definitions"
+                ],
+                "title": "ExternalReportEntityAPIResponse"
             },
             "FaviconHashType": {
                 "type": "string",
@@ -26024,6 +26728,18 @@
                             }
                         ],
                         "title": "Is Active"
+                    },
+                    "last_login_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Login At"
                     }
                 },
                 "type": "object",
@@ -26042,7 +26758,8 @@
                     "sign_in_sessions_valid_from",
                     "last_synced_at",
                     "password_policies",
-                    "is_active"
+                    "is_active",
+                    "last_login_at"
                 ],
                 "title": "IdentityIdPUserPayload"
             },
@@ -27199,6 +27916,134 @@
                 "type": "object",
                 "title": "ListingEventData"
             },
+            "LocationEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "country_code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Country Code"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "country_code",
+                    "marking_definitions"
+                ],
+                "title": "LocationEntityAPIResponse"
+            },
             "LogoRequestBody": {
                 "properties": {
                     "domains": {
@@ -28241,6 +29086,45 @@
                 ],
                 "title": "PaginatedResults[AuditEventItemResponse, str]"
             },
+            "PaginatedResults_CTIEntityRelationshipResponse_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntityRelationshipResponse"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[CTIEntityRelationshipResponse, str]"
+            },
             "PaginatedResults_CredentialValidationReponse_str_": {
                 "properties": {
                     "items": {
@@ -28318,6 +29202,45 @@
                     "next"
                 ],
                 "title": "PaginatedResults[Credential, str]"
+            },
+            "PaginatedResults_DomainBrowserItemResponse_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/DomainBrowserItemResponse"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[DomainBrowserItemResponse, str]"
             },
             "PaginatedResults_EnrichedBulkAction_str_": {
                 "properties": {
@@ -29930,6 +30853,131 @@
                     "email"
                 ],
                 "title": "ProvisionUserItemRequest"
+            },
+            "PublicIdentifierRequestBody": {
+                "properties": {
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/CCBinData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/IPData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/BrandData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/KeywordData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/AzureTenantData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/DomainData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/SearchQueryData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/GithubRepositoryData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/CredentialsData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/EmailData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/UsernameData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/SecretData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/NameData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/IdentityDataRequestBody"
+                            }
+                        ],
+                        "title": "Data",
+                        "discriminator": {
+                            "propertyName": "type",
+                            "mapping": {
+                                "azure_tenant": "#/components/schemas/AzureTenantData",
+                                "bin": "#/components/schemas/CCBinData",
+                                "brand": "#/components/schemas/BrandData",
+                                "credentials": "#/components/schemas/CredentialsData",
+                                "domain": "#/components/schemas/DomainData",
+                                "email": "#/components/schemas/EmailData",
+                                "github_repository": "#/components/schemas/GithubRepositoryData",
+                                "identity": "#/components/schemas/IdentityDataRequestBody",
+                                "ip": "#/components/schemas/IPData",
+                                "keyword": "#/components/schemas/KeywordData",
+                                "name": "#/components/schemas/NameData",
+                                "search_query": "#/components/schemas/SearchQueryData",
+                                "secret": "#/components/schemas/SecretData",
+                                "username": "#/components/schemas/UsernameData"
+                            }
+                        }
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "categories": {
+                        "items": {
+                            "$ref": "#/components/schemas/SearchType"
+                        },
+                        "type": "array",
+                        "title": "Categories"
+                    },
+                    "emerging_categories": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Emerging Categories"
+                    },
+                    "severities": {
+                        "items": {
+                            "$ref": "#/components/schemas/Severity"
+                        },
+                        "type": "array",
+                        "title": "Severities"
+                    },
+                    "group_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "string",
+                                "const": "corporate_group"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Group Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "categories",
+                    "emerging_categories",
+                    "severities"
+                ],
+                "title": "PublicIdentifierRequestBody"
             },
             "PublicIdentifierResponse": {
                 "properties": {
@@ -34669,6 +35717,206 @@
                 ],
                 "title": "ThreadType"
             },
+            "ThreatActorEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "threat_actor_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Threat Actor Types"
+                    },
+                    "aliases": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Aliases"
+                    },
+                    "roles": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Roles"
+                    },
+                    "goals": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Goals"
+                    },
+                    "sophistication": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Sophistication"
+                    },
+                    "resource_level": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Resource Level"
+                    },
+                    "primary_motivation": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Primary Motivation"
+                    },
+                    "secondary_motivation": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Secondary Motivation"
+                    },
+                    "personal_motivations": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Personal Motivations"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "threat_actor_types",
+                    "aliases",
+                    "roles",
+                    "goals",
+                    "sophistication",
+                    "resource_level",
+                    "primary_motivation",
+                    "secondary_motivation",
+                    "personal_motivations",
+                    "marking_definitions"
+                ],
+                "title": "ThreatActorEntityAPIResponse"
+            },
             "ThreatActorGroupEntityAPIResponse": {
                 "properties": {
                     "uuid": {
@@ -35143,6 +36391,150 @@
                 },
                 "type": "object",
                 "title": "Times"
+            },
+            "ToolEntityAPIResponse": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "title": "Uuid"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "tool_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Tool Types"
+                    },
+                    "kill_chain_phases": {
+                        "items": {
+                            "$ref": "#/components/schemas/KillChainAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Kill Chain Phases"
+                    },
+                    "tool_version": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Tool Version"
+                    },
+                    "marking_definitions": {
+                        "items": {
+                            "$ref": "#/components/schemas/MarkingDefinition"
+                        },
+                        "type": "array",
+                        "title": "Marking Definitions"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "type",
+                    "name",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "tool_types",
+                    "kill_chain_phases",
+                    "tool_version",
+                    "marking_definitions"
+                ],
+                "title": "ToolEntityAPIResponse"
             },
             "TopActorsSummaryOutput": {
                 "properties": {
@@ -36316,6 +37708,16 @@
                 },
                 "type": "object",
                 "title": "WhoisRdapInfo"
+            },
+            "pyro__entities__domain__domain_browser_sort_type__SortType": {
+                "type": "string",
+                "enum": [
+                    "severity",
+                    "fqdn",
+                    "discovered_at",
+                    "updated_at"
+                ],
+                "title": "SortType"
             },
             "pyro__entities__domain__profile__sort_type__SortType": {
                 "type": "string",
