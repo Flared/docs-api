@@ -1,0 +1,95 @@
+---
+title: 'Create And Assign Matching Policies to Identifiers'
+---
+Identifiers (domains, keywords, identities, and other types) and Matching Policies (excluded_keywords, lucene_query and other types) can be created, updated and listed via the Management API.
+
+Matching Policies are useful for customers who want precise control over which events appear in an Identifier’s feed, either by including or excluding events based on keywords, or by scoping results with a specific search query.
+
+This guide covers how to create an identifier and apply a matching policy to it. 
+
+## Steps
+<Steps>
+
+  <Step title="Create an identifier">
+    Use the
+    [Create Identifier <Icon icon="code" size={16} />](/api-reference/v2/endpoints/identifiers/post-fireworkv2assets)
+    endpoint to create an identifier. Apply filters to narrow down results to specific identifiers you want to match.
+  </Step>
+
+  <Step title="Create a matching policy">
+    Use the
+    [Create Matching Policy <Icon icon="code" size={16} />](/api-reference/v4/endpoints/create-matching-policy)
+    endpoint to create a matching policy to precisely control which events should appear in the identifier's feed.
+  </Step>
+
+  <Step title="Assign the matching policy to the identifier">
+    Use the
+    [Assign Policy <Icon icon="code" size={16} />](/api-reference/v4/endpoints/assign-policy)
+    endpoint to assign the matching policy to the identifier.
+  </Step>
+
+</Steps>
+
+## End-to-end examples
+
+<AccordionGroup>
+
+<Accordion title="Python SDK Example">
+```python
+from flareio import FlareApiClient
+from flareio.ratelimit import Limiter
+
+
+api_client = FlareApiClient.from_env()
+
+limiter_default = Limiter.from_seconds(0.25)
+
+# 1. Create an Identifier
+identifier_resp = api_client.post(
+    "/firework/v2/assets/",
+    json={
+        "name": "scatterholt.com",
+        "type": "domain",
+        "search_types": [
+            "forum_post",
+        ],
+        "data": {"type": "domain", "fqdn": "scatterholt.com"},
+        "risks": [1, 2, 3, 4, 5],
+    },
+)
+
+identifier = identifier_resp.json()["asset"]
+identifier_id = identifier["id"]
+
+# Rate limiting (default).
+limiter_default.tick()
+
+# 2. Create a Matching Policy
+matching_policy_resp = api_client.post(
+    "/firework/v4/matching_policies",
+    json={
+        "name": "Terms to ignore",
+        "type": "EXCLUDED_KEYWORDS",
+        "value": {"keywords": ["term1", "term2", "term3"]},
+    },
+)
+matching_policy = matching_policy_resp.json()
+matching_policy_name = matching_policy["name"]
+matching_policy_uuid = matching_policy["uuid"]
+
+# Rate limiting (default).
+limiter_default.tick()
+
+# 3. Assign the matching policy to the identifier
+api_client.post(
+    f"/firework/v4/matching_policies/{matching_policy_uuid}/assignments",
+    json={"identifier_ids": [identifier_id], "clean_past_events": False},
+)
+
+print(
+    f"Created identifier {identifier_id} with matching policy '{matching_policy_name}' assigned to it"
+)
+```
+</Accordion>
+
+</AccordionGroup>
