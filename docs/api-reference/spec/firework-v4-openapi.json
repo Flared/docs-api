@@ -96,6 +96,111 @@
                 }
             }
         },
+        "/firework/v4/admin/organizations/{organization_id}/audit_logs/_search": {
+            "post": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Search Admin Audit Events",
+                "operationId": "search_admin_audit_events_admin_organizations__organization_id__audit_logs__search_post",
+                "parameters": [
+                    {
+                        "name": "organization_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Organization Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuditEventRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResultsWithTotalCount_AuditEventItemResponse_str_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/admin/organizations/{organization_id}/audit_logs/{audit_log_id}": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=experience"
+                ],
+                "summary": "Get Admin Audit Log",
+                "operationId": "get_admin_audit_log_admin_organizations__organization_id__audit_logs__audit_log_id__get",
+                "parameters": [
+                    {
+                        "name": "organization_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Organization Id"
+                        }
+                    },
+                    {
+                        "name": "audit_log_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Audit Log Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuditEventItemResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/admin/banners/": {
             "get": {
                 "tags": [
@@ -1232,7 +1337,7 @@
         "/firework/v4/admin/identifiers/{tenant_id}/free_trial_identifier": {
             "post": {
                 "tags": [
-                    "private",
+                    "public",
                     "team=experience"
                 ],
                 "summary": "Create Identifier For Free Trial",
@@ -4784,6 +4889,90 @@
                 }
             }
         },
+        "/firework/v4/chat-channels/{asset_uuid}/analysis/metadata": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Chat Channel Analysis Metadata",
+                "operationId": "get_chat_channel_analysis_metadata_chat_channels__asset_uuid__analysis_metadata_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnalysisMetadataResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/chat-channels/{asset_uuid}/uid": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Chat Channel Uid From Asset Uuid",
+                "operationId": "get_chat_channel_uid_from_asset_uuid_chat_channels__asset_uuid__uid_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatChannelUidWithNameResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/chat-channels/{asset_uuid}/breakdown": {
             "get": {
                 "tags": [
@@ -4874,6 +5063,90 @@
                 }
             }
         },
+        "/firework/v4/chat-channels/{asset_uuid}/key-actors": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Chat Channel Key Actors",
+                "operationId": "get_chat_channel_key_actors_chat_channels__asset_uuid__key_actors_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatChannelKeyActorsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/chat-channels/{asset_uuid}/mentioned-channels": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Chat Channel Mentioned Channels",
+                "operationId": "get_chat_channel_mentioned_channels_chat_channels__asset_uuid__mentioned_channels_get",
+                "parameters": [
+                    {
+                        "name": "asset_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Asset Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatChannelMentionedChannelsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/chat-channels/{asset_uuid}/generate-summaries": {
             "post": {
                 "tags": [
@@ -4889,6 +5162,49 @@
                         "schema": {
                             "type": "string",
                             "title": "Asset Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatChannelSummariesResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/chat-channels/summaries/{request_id}": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Chat Channel Summaries By Request Id",
+                "operationId": "get_chat_channel_summaries_by_request_id_chat_channels_summaries__request_id__get",
+                "parameters": [
+                    {
+                        "name": "request_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Request Id"
                         }
                     }
                 ],
@@ -6574,6 +6890,90 @@
                 }
             }
         },
+        "/firework/v4/free_trials/status": {
+            "get": {
+                "tags": [
+                    "private",
+                    "team=growth"
+                ],
+                "summary": "Get Free Trial Status",
+                "operationId": "get_free_trial_status_free_trials_status_get",
+                "parameters": [
+                    {
+                        "name": "module",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/HubspotModuleFreeTrialName"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FreeTrialStatusResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/free_trials/activate": {
+            "post": {
+                "tags": [
+                    "private",
+                    "team=growth"
+                ],
+                "summary": "Activate Free Trial",
+                "operationId": "activate_free_trial_free_trials_activate_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActivateFreeTrialRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActivateFreeTrialResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/healthz/": {
             "get": {
                 "tags": [
@@ -7122,7 +7522,18 @@
                                 {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/IdentifierType"
+                                        "enum": [
+                                            "bin",
+                                            "ip",
+                                            "keyword",
+                                            "azure_tenant",
+                                            "domain",
+                                            "search_query",
+                                            "github_repository",
+                                            "secret",
+                                            "identity"
+                                        ],
+                                        "type": "string"
                                     }
                                 },
                                 {
@@ -7510,16 +7921,14 @@
                         }
                     }
                 }
-            }
-        },
-        "/firework/v4/identifiers/{identifier_id}": {
-            "put": {
+            },
+            "get": {
                 "tags": [
-                    "public",
+                    "private",
                     "team=experience"
                 ],
-                "summary": "Update Identifier By Id",
-                "operationId": "update_identifier_by_id_identifiers__identifier_id__put",
+                "summary": "Get Identifier",
+                "operationId": "get_identifier_identifiers_ui__identifier_id__get",
                 "parameters": [
                     {
                         "name": "identifier_id",
@@ -7531,16 +7940,6 @@
                         }
                     }
                 ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/IdentifierRequestBody"
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -7563,14 +7962,67 @@
                         }
                     }
                 }
+            }
+        },
+        "/firework/v4/identifiers/{identifier_id}": {
+            "put": {
+                "tags": [
+                    "public",
+                    "team=experience"
+                ],
+                "summary": "Update Identifier By Id Public",
+                "operationId": "update_identifier_by_id_public_identifiers__identifier_id__put",
+                "parameters": [
+                    {
+                        "name": "identifier_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Identifier Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PublicIdentifierRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublicIdentifierResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "get": {
                 "tags": [
                     "public",
                     "team=experience"
                 ],
-                "summary": "Get Identifier",
-                "operationId": "get_identifier_identifiers__identifier_id__get",
+                "summary": "Get Identifier Public",
+                "operationId": "get_identifier_public_identifiers__identifier_id__get",
                 "parameters": [
                     {
                         "name": "identifier_id",
@@ -7588,7 +8040,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/IdentifierResponse"
+                                    "$ref": "#/components/schemas/PublicIdentifierResponse"
                                 }
                             }
                         }
@@ -7624,9 +8076,23 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "202": {
                         "description": "Successful Response",
-                        "content": {}
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -8995,7 +9461,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_IdentityBrowserItemResponse_str_"
+                                    "$ref": "#/components/schemas/PaginatedResultsWithTotalCount_IdentityBrowserItemResponse_str_"
                                 }
                             }
                         }
@@ -9788,6 +10254,73 @@
                         }
                     },
                     {
+                        "name": "updated_dates",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/Times"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Updated Dates"
+                        }
+                    },
+                    {
+                        "name": "discovered_dates",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/Times"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Discovered Dates"
+                        }
+                    },
+                    {
+                        "name": "registrar",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Registrar"
+                        }
+                    },
+                    {
+                        "name": "registered_dates",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/Times"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Registered Dates"
+                        }
+                    },
+                    {
                         "name": "next",
                         "in": "query",
                         "required": false,
@@ -9840,7 +10373,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_DomainBrowserItemResponse_str_"
+                                    "$ref": "#/components/schemas/PaginatedResultsWithTotalCount_DomainBrowserItemResponse_str_"
                                 }
                             }
                         }
@@ -9858,13 +10391,13 @@
                 }
             }
         },
-        "/firework/v4/domains/{asset_uuid}/metadata": {
+        "/firework/v4/domains/{asset_uuid}": {
             "get": {
                 "tags": [
                     "private"
                 ],
-                "summary": "Get Domain Profile Metadata",
-                "operationId": "get_domain_profile_metadata_domains__asset_uuid__metadata_get",
+                "summary": "Get Domain Profile",
+                "operationId": "get_domain_profile_domains__asset_uuid__get",
                 "parameters": [
                     {
                         "name": "asset_uuid",
@@ -9882,15 +10415,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "anyOf": [
-                                        {
-                                            "$ref": "#/components/schemas/DomainProfileMetadataResponse"
-                                        },
-                                        {
-                                            "type": "null"
-                                        }
-                                    ],
-                                    "title": "Response Get Domain Profile Metadata Domains  Asset Uuid  Metadata Get"
+                                    "$ref": "#/components/schemas/DomainProfileResponse"
                                 }
                             }
                         }
@@ -10070,6 +10595,54 @@
                             "exclusiveMinimum": 0,
                             "default": 20,
                             "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "is_verified",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "boolean"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Is Verified"
+                        }
+                    },
+                    {
+                        "name": "has_credentials",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "boolean"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Has Credentials"
+                        }
+                    },
+                    {
+                        "name": "has_pii",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "boolean"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Has Pii"
                         }
                     }
                 ],
@@ -10454,6 +11027,52 @@
                                 "schema": {}
                             }
                         }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/organizations/{organization_id}/signup_intent": {
+            "patch": {
+                "tags": [
+                    "private",
+                    "team=growth"
+                ],
+                "summary": "Update Signup Intent",
+                "operationId": "update_signup_intent_organizations__organization_id__signup_intent_patch",
+                "parameters": [
+                    {
+                        "name": "organization_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Organization Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateSignupIntentRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
                     },
                     "422": {
                         "description": "Validation Error",
@@ -14251,7 +14870,49 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResults_AuditEventItemResponse_str_"
+                                    "$ref": "#/components/schemas/PaginatedResultsWithTotalCount_AuditEventItemResponse_str_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/audit_logs/{audit_log_id}": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "Get Audit Log",
+                "operationId": "get_audit_log_audit_logs__audit_log_id__get",
+                "parameters": [
+                    {
+                        "name": "audit_log_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Audit Log Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuditEventItemResponse"
                                 }
                             }
                         }
@@ -14556,6 +15217,101 @@
                     }
                 }
             }
+        },
+        "/firework/v4/vip_protection/": {
+            "post": {
+                "tags": [
+                    "private",
+                    "team=growth"
+                ],
+                "summary": "Create Vip Protection Identifier",
+                "operationId": "create_vip_protection_identifier_vip_protection__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VipProtectionCreateBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VipProtectionResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/vip_protection/{identifier_id}": {
+            "put": {
+                "tags": [
+                    "private",
+                    "team=growth"
+                ],
+                "summary": "Update Vip Protection Identifier",
+                "operationId": "update_vip_protection_identifier_vip_protection__identifier_id__put",
+                "parameters": [
+                    {
+                        "name": "identifier_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Identifier Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VipProtectionUpdateRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VipProtectionResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -14617,6 +15373,40 @@
                 ],
                 "title": "ASTPCookiePayload"
             },
+            "ActivateFreeTrialRequest": {
+                "properties": {
+                    "module": {
+                        "$ref": "#/components/schemas/HubspotModuleFreeTrialName"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "module"
+                ],
+                "title": "ActivateFreeTrialRequest"
+            },
+            "ActivateFreeTrialResponse": {
+                "properties": {
+                    "module": {
+                        "$ref": "#/components/schemas/HubspotModuleFreeTrialName"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/FreeTrialStatus"
+                    },
+                    "end_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "End Date"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "module",
+                    "status",
+                    "end_date"
+                ],
+                "title": "ActivateFreeTrialResponse"
+            },
             "ActivityModelName": {
                 "type": "string",
                 "enum": [
@@ -14631,6 +15421,7 @@
                     "bucket_object",
                     "cc",
                     "cc_bases",
+                    "chat_channel_summary",
                     "chat_message",
                     "cookie",
                     "docker_image",
@@ -16257,6 +17048,67 @@
                 ],
                 "title": "AllowedRestrictedTermType"
             },
+            "AnalysisMetadataResponse": {
+                "properties": {
+                    "summarized_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Summarized At"
+                    },
+                    "summarization_start_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Summarization Start At"
+                    },
+                    "summarization_end_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Summarization End At"
+                    },
+                    "events_summarized_count": {
+                        "type": "integer",
+                        "title": "Events Summarized Count"
+                    },
+                    "total_events_summary_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Events Summary Count"
+                    },
+                    "total_events_count": {
+                        "type": "integer",
+                        "title": "Total Events Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "summarized_at",
+                    "summarization_start_at",
+                    "summarization_end_at",
+                    "events_summarized_count",
+                    "total_events_count"
+                ],
+                "title": "AnalysisMetadataResponse"
+            },
             "ApiReport": {
                 "properties": {
                     "id": {
@@ -16851,6 +17703,7 @@
                 "enum": [
                     "actor_summary",
                     "chat_channel_summary",
+                    "chat_channel_topic_classification",
                     "delete_tenant",
                     "intel",
                     "event_translation"
@@ -16987,20 +17840,7 @@
                     "created",
                     "updated",
                     "deleted",
-                    "viewed",
-                    "exported",
-                    "ignored",
-                    "unignored",
-                    "remediated",
-                    "unremediated",
-                    "enabled",
-                    "disabled",
-                    "accepted",
-                    "rejected",
-                    "searched",
-                    "generated",
-                    "synced",
-                    "submitted"
+                    "viewed"
                 ],
                 "title": "AuditEventAction"
             },
@@ -17222,7 +18062,6 @@
                     "authorize_asset_request",
                     "blacklisted_term",
                     "credential",
-                    "footprint",
                     "identifier",
                     "identifier_recommendation",
                     "integration",
@@ -17234,6 +18073,7 @@
                     "search",
                     "sensitive_data",
                     "tenant",
+                    "tenant_membership",
                     "threat_flow",
                     "cmi_allowed_restricted_term",
                     "cmi_app_banner",
@@ -17326,6 +18166,25 @@
                             }
                         ],
                         "title": "Lte"
+                    },
+                    "impersonation": {
+                        "$ref": "#/components/schemas/ImpersonationFilter",
+                        "default": "exclude"
+                    },
+                    "q": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Q"
+                    },
+                    "source": {
+                        "$ref": "#/components/schemas/AuditEventSource",
+                        "default": "all"
                     }
                 },
                 "type": "object",
@@ -17384,6 +18243,16 @@
                                 "type": "null"
                             }
                         ]
+                    },
+                    "source": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/AuditEventSource"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
@@ -17395,7 +18264,8 @@
                     "affected_entities",
                     "actor_data",
                     "type",
-                    "action"
+                    "action",
+                    "source"
                 ],
                 "title": "AuditEventItemResponse"
             },
@@ -17436,6 +18306,15 @@
                 },
                 "type": "object",
                 "title": "AuditEventRequestBody"
+            },
+            "AuditEventSource": {
+                "type": "string",
+                "enum": [
+                    "all",
+                    "api",
+                    "platform"
+                ],
+                "title": "AuditEventSource"
             },
             "AuthDomainQuery": {
                 "properties": {
@@ -18228,7 +19107,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2026-05-24T19:25:47.229439Z"
+                        "default": "2026-06-03T17:05:22.967172Z"
                     },
                     "from": {
                         "anyOf": [
@@ -18336,6 +19215,13 @@
                     "relation_type": {
                         "$ref": "#/components/schemas/AssetRelationType"
                     },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
                     "modified_at": {
                         "type": "string",
                         "format": "date-time",
@@ -18371,6 +19257,7 @@
                     "source_entity",
                     "target_entity",
                     "relation_type",
+                    "sources",
                     "modified_at"
                 ],
                 "title": "CTIEntityRelationshipResponse"
@@ -18578,6 +19465,40 @@
                 ],
                 "title": "CategoryStatsHistogram"
             },
+            "ChatChannelActor": {
+                "properties": {
+                    "actor_uid": {
+                        "$ref": "#/components/schemas/ActorUid"
+                    },
+                    "asset_uuid": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Asset Uuid"
+                    },
+                    "last_message_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Last Message At"
+                    },
+                    "message_count": {
+                        "type": "integer",
+                        "title": "Message Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "actor_uid",
+                    "last_message_at",
+                    "message_count"
+                ],
+                "title": "ChatChannelActor"
+            },
             "ChatChannelAssetUuidPayload": {
                 "properties": {
                     "thread_id": {
@@ -18689,6 +19610,17 @@
                             }
                         ],
                         "title": "Description"
+                    },
+                    "conversation_link": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Conversation Link"
                     }
                 },
                 "type": "object",
@@ -18700,9 +19632,42 @@
                     "sources",
                     "created_at",
                     "updated_at",
-                    "description"
+                    "description",
+                    "conversation_link"
                 ],
                 "title": "ChatChannelEntityAPIResponse"
+            },
+            "ChatChannelKeyActorsResponse": {
+                "properties": {
+                    "key_actors": {
+                        "items": {
+                            "$ref": "#/components/schemas/ChatChannelActor"
+                        },
+                        "type": "array",
+                        "title": "Key Actors"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "key_actors"
+                ],
+                "title": "ChatChannelKeyActorsResponse"
+            },
+            "ChatChannelMentionedChannelsResponse": {
+                "properties": {
+                    "mentioned_channels": {
+                        "items": {
+                            "$ref": "#/components/schemas/CommunicationHandle"
+                        },
+                        "type": "array",
+                        "title": "Mentioned Channels"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "mentioned_channels"
+                ],
+                "title": "ChatChannelMentionedChannelsResponse"
             },
             "ChatChannelMetadata": {
                 "properties": {
@@ -18741,6 +19706,9 @@
                         ],
                         "title": "Total Events"
                     },
+                    "uid": {
+                        "$ref": "#/components/schemas/ChatChannelUid"
+                    },
                     "name": {
                         "type": "string",
                         "title": "Name"
@@ -18759,7 +19727,7 @@
                         ],
                         "title": "Description"
                     },
-                    "handle": {
+                    "conversation_link": {
                         "anyOf": [
                             {
                                 "type": "string"
@@ -18768,7 +19736,7 @@
                                 "type": "null"
                             }
                         ],
-                        "title": "Handle"
+                        "title": "Conversation Link"
                     },
                     "chat_type": {
                         "anyOf": [
@@ -18791,10 +19759,18 @@
                             }
                         ],
                         "title": "Member Count"
+                    },
+                    "topics": {
+                        "items": {
+                            "$ref": "#/components/schemas/ChatChannelTopic"
+                        },
+                        "type": "array",
+                        "title": "Topics"
                     }
                 },
                 "type": "object",
                 "required": [
+                    "uid",
                     "name",
                     "source"
                 ],
@@ -18893,6 +19869,65 @@
                     "total_count"
                 ],
                 "title": "ChatChannelTimelineEntry"
+            },
+            "ChatChannelTopic": {
+                "properties": {
+                    "topic_id": {
+                        "type": "string",
+                        "title": "Topic Id"
+                    },
+                    "label": {
+                        "type": "string",
+                        "title": "Label"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "topic_id",
+                    "label"
+                ],
+                "title": "ChatChannelTopic"
+            },
+            "ChatChannelUid": {
+                "properties": {
+                    "thread_id": {
+                        "type": "string",
+                        "title": "Thread Id"
+                    },
+                    "source": {
+                        "type": "string",
+                        "title": "Source"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "thread_id",
+                    "source"
+                ],
+                "title": "ChatChannelUid"
+            },
+            "ChatChannelUidWithNameResponse": {
+                "properties": {
+                    "thread_id": {
+                        "type": "string",
+                        "title": "Thread Id"
+                    },
+                    "source": {
+                        "type": "string",
+                        "title": "Source"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "thread_id",
+                    "source",
+                    "name"
+                ],
+                "title": "ChatChannelUidWithNameResponse"
             },
             "ChatMessageEvent": {
                 "properties": {
@@ -19114,6 +20149,27 @@
                 },
                 "type": "object",
                 "title": "Classification"
+            },
+            "CommunicationHandle": {
+                "properties": {
+                    "platform": {
+                        "type": "string",
+                        "title": "Platform"
+                    },
+                    "handles": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Handles"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "platform",
+                    "handles"
+                ],
+                "title": "CommunicationHandle"
             },
             "ConversationMessage": {
                 "properties": {
@@ -20945,6 +22001,29 @@
                         "type": "string",
                         "title": "Fqdn"
                     },
+                    "registrar": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Registrar"
+                    },
+                    "registered_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Registered At"
+                    },
                     "related_domain": {
                         "anyOf": [
                             {
@@ -20993,6 +22072,8 @@
                     "asset_uuid",
                     "risk",
                     "fqdn",
+                    "registrar",
+                    "registered_at",
                     "related_domain",
                     "sources",
                     "discovered_at",
@@ -21056,6 +22137,92 @@
                     "auth_domain_only"
                 ],
                 "title": "DomainMatchMode"
+            },
+            "DomainProfileCertificateResponse": {
+                "properties": {
+                    "subject": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Subject"
+                    },
+                    "issuer": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Issuer"
+                    },
+                    "not_before": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Not Before"
+                    },
+                    "not_after": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Not After"
+                    },
+                    "authority_info_access": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Authority Info Access"
+                    },
+                    "subject_alt_names": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Subject Alt Names"
+                    },
+                    "is_extended_validation": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Is Extended Validation"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "subject",
+                    "issuer",
+                    "not_before",
+                    "not_after",
+                    "authority_info_access",
+                    "subject_alt_names",
+                    "is_extended_validation"
+                ],
+                "title": "DomainProfileCertificateResponse"
             },
             "DomainProfileEvent": {
                 "properties": {
@@ -21164,6 +22331,17 @@
                         ],
                         "title": "Current Favicon"
                     },
+                    "current_screenshot": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Current Screenshot"
+                    },
                     "first_seen_at": {
                         "anyOf": [
                             {
@@ -21189,10 +22367,49 @@
                     "url",
                     "current_title",
                     "current_favicon",
+                    "current_screenshot",
                     "first_seen_at",
                     "sources"
                 ],
                 "title": "DomainProfileMetadataResponse"
+            },
+            "DomainProfileResponse": {
+                "properties": {
+                    "asset_uuid": {
+                        "type": "string",
+                        "title": "Asset Uuid"
+                    },
+                    "fqdn": {
+                        "type": "string",
+                        "title": "Fqdn"
+                    },
+                    "risk": {
+                        "type": "integer",
+                        "title": "Risk"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/DomainProfileMetadataResponse"
+                    },
+                    "certificate": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DomainProfileCertificateResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "asset_uuid",
+                    "fqdn",
+                    "risk",
+                    "metadata",
+                    "certificate"
+                ],
+                "title": "DomainProfileResponse"
             },
             "DomainQuery": {
                 "properties": {
@@ -21685,13 +22902,6 @@
                         "type": "string",
                         "title": "Name"
                     },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
                     "confidence": {
                         "type": "integer",
                         "title": "Confidence"
@@ -21702,7 +22912,6 @@
                     "asset_uuid",
                     "entity_type",
                     "name",
-                    "sources",
                     "confidence"
                 ],
                 "title": "EntityData"
@@ -24220,6 +25429,44 @@
                 "type": "object",
                 "title": "ForwardInfo"
             },
+            "FreeTrialStatus": {
+                "type": "string",
+                "enum": [
+                    "no_trial",
+                    "active",
+                    "expired"
+                ],
+                "title": "FreeTrialStatus"
+            },
+            "FreeTrialStatusResponse": {
+                "properties": {
+                    "module": {
+                        "$ref": "#/components/schemas/HubspotModuleFreeTrialName"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/FreeTrialStatus"
+                    },
+                    "end_date": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "End Date"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "module",
+                    "status",
+                    "end_date"
+                ],
+                "title": "FreeTrialStatusResponse"
+            },
             "GeneralProfileSummaryOutput": {
                 "properties": {
                     "overview": {
@@ -24964,6 +26211,13 @@
                 ],
                 "title": "HubspotLifecycleStage"
             },
+            "HubspotModuleFreeTrialName": {
+                "type": "string",
+                "enum": [
+                    "cti"
+                ],
+                "title": "HubspotModuleFreeTrialName"
+            },
             "HubspotWebhookFlareSyncEvent": {
                 "properties": {
                     "hubspot_id": {
@@ -25463,6 +26717,11 @@
                             {
                                 "type": "null"
                             }
+                        ],
+                        "examples": [
+                            "authorized",
+                            "pending",
+                            "rejected"
                         ]
                     }
                 },
@@ -26184,7 +27443,8 @@
                     "SELF_ONBOARDING",
                     "ATTRIBUTE",
                     "AUTO_MONITOR",
-                    "IDP_SYNC"
+                    "IDP_SYNC",
+                    "VIP_PROTECTION"
                 ],
                 "title": "IdentifierSource"
             },
@@ -26740,6 +28000,9 @@
                             }
                         ],
                         "title": "Last Login At"
+                    },
+                    "tenant_integration_type": {
+                        "$ref": "#/components/schemas/TenantIntegrationType"
                     }
                 },
                 "type": "object",
@@ -26759,7 +28022,8 @@
                     "last_synced_at",
                     "password_policies",
                     "is_active",
-                    "last_login_at"
+                    "last_login_at",
+                    "tenant_integration_type"
                 ],
                 "title": "IdentityIdPUserPayload"
             },
@@ -26926,6 +28190,15 @@
                     "alert_level"
                 ],
                 "title": "IdentityProfileBanner"
+            },
+            "ImpersonationFilter": {
+                "type": "string",
+                "enum": [
+                    "include",
+                    "exclude",
+                    "only"
+                ],
+                "title": "ImpersonationFilter"
             },
             "ImportEventResult": {
                 "properties": {
@@ -28969,85 +30242,7 @@
                 ],
                 "title": "PaginatedResult[int, str]"
             },
-            "PaginatedResults_ASTPCookiePayload_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/ASTPCookiePayload"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[ASTPCookiePayload, str]"
-            },
-            "PaginatedResults_Alert_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/Alert"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[Alert, str]"
-            },
-            "PaginatedResults_AuditEventItemResponse_str_": {
+            "PaginatedResultsWithTotalCount_AuditEventItemResponse_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -29084,126 +30279,9 @@
                     "items",
                     "next"
                 ],
-                "title": "PaginatedResults[AuditEventItemResponse, str]"
+                "title": "PaginatedResultsWithTotalCount[AuditEventItemResponse, str]"
             },
-            "PaginatedResults_CTIEntityRelationshipResponse_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntityRelationshipResponse"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[CTIEntityRelationshipResponse, str]"
-            },
-            "PaginatedResults_CredentialValidationReponse_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/CredentialValidationReponse"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[CredentialValidationReponse, str]"
-            },
-            "PaginatedResults_Credential_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/Credential"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[Credential, str]"
-            },
-            "PaginatedResults_DomainBrowserItemResponse_str_": {
+            "PaginatedResultsWithTotalCount_DomainBrowserItemResponse_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -29240,243 +30318,9 @@
                     "items",
                     "next"
                 ],
-                "title": "PaginatedResults[DomainBrowserItemResponse, str]"
+                "title": "PaginatedResultsWithTotalCount[DomainBrowserItemResponse, str]"
             },
-            "PaginatedResults_EnrichedBulkAction_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/EnrichedBulkAction"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[EnrichedBulkAction, str]"
-            },
-            "PaginatedResults_EntityAPIResponseTypes_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/EntityAPIResponseTypes"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[EntityAPIResponseTypes, str]"
-            },
-            "PaginatedResults_FeedItem_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/FeedItem"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[FeedItem, str]"
-            },
-            "PaginatedResults_GlobalFeedItem_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/GlobalFeedItem"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[GlobalFeedItem, str]"
-            },
-            "PaginatedResults_IdentifierRelation_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/IdentifierRelation"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[IdentifierRelation, str]"
-            },
-            "PaginatedResults_Identifier_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/Identifier"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResults[Identifier, str]"
-            },
-            "PaginatedResults_IdentityBrowserItemResponse_str_": {
+            "PaginatedResultsWithTotalCount_IdentityBrowserItemResponse_str_": {
                 "properties": {
                     "items": {
                         "items": {
@@ -29513,7 +30357,315 @@
                     "items",
                     "next"
                 ],
-                "title": "PaginatedResults[IdentityBrowserItemResponse, str]"
+                "title": "PaginatedResultsWithTotalCount[IdentityBrowserItemResponse, str]"
+            },
+            "PaginatedResults_ASTPCookiePayload_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/ASTPCookiePayload"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[ASTPCookiePayload, str]"
+            },
+            "PaginatedResults_Alert_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Alert"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[Alert, str]"
+            },
+            "PaginatedResults_CTIEntityRelationshipResponse_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntityRelationshipResponse"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[CTIEntityRelationshipResponse, str]"
+            },
+            "PaginatedResults_CredentialValidationReponse_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/CredentialValidationReponse"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[CredentialValidationReponse, str]"
+            },
+            "PaginatedResults_Credential_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Credential"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[Credential, str]"
+            },
+            "PaginatedResults_EnrichedBulkAction_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/EnrichedBulkAction"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[EnrichedBulkAction, str]"
+            },
+            "PaginatedResults_EntityAPIResponseTypes_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/EntityAPIResponseTypes"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[EntityAPIResponseTypes, str]"
+            },
+            "PaginatedResults_FeedItem_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/FeedItem"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[FeedItem, str]"
+            },
+            "PaginatedResults_GlobalFeedItem_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/GlobalFeedItem"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[GlobalFeedItem, str]"
+            },
+            "PaginatedResults_IdentifierRelation_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/IdentifierRelation"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[IdentifierRelation, str]"
+            },
+            "PaginatedResults_Identifier_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Identifier"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[Identifier, str]"
             },
             "PaginatedResults_InviteLinkResponse_datetime_": {
                 "properties": {
@@ -29535,17 +30687,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29574,17 +30715,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29613,17 +30743,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29652,17 +30771,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29691,17 +30799,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29730,17 +30827,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29769,17 +30855,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29808,17 +30883,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29847,17 +30911,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29886,17 +30939,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29925,17 +30967,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -29964,17 +30995,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -30003,17 +31023,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -30042,17 +31051,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -30081,17 +31079,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -30120,17 +31107,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -30159,17 +31135,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -30198,17 +31163,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -30237,17 +31191,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -30283,17 +31226,6 @@
                             }
                         ],
                         "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -30960,10 +31892,6 @@
                                 "type": "integer"
                             },
                             {
-                                "type": "string",
-                                "const": "corporate_group"
-                            },
-                            {
                                 "type": "null"
                             }
                         ],
@@ -31002,9 +31930,6 @@
                                 "$ref": "#/components/schemas/IPData"
                             },
                             {
-                                "$ref": "#/components/schemas/BrandData"
-                            },
-                            {
                                 "$ref": "#/components/schemas/KeywordData"
                             },
                             {
@@ -31014,31 +31939,16 @@
                                 "$ref": "#/components/schemas/DomainData"
                             },
                             {
-                                "$ref": "#/components/schemas/NameData"
-                            },
-                            {
                                 "$ref": "#/components/schemas/SearchQueryData"
                             },
                             {
                                 "$ref": "#/components/schemas/GithubRepositoryData"
                             },
                             {
-                                "$ref": "#/components/schemas/UsernameData"
-                            },
-                            {
-                                "$ref": "#/components/schemas/EmailData"
-                            },
-                            {
                                 "$ref": "#/components/schemas/SecretData"
                             },
                             {
-                                "$ref": "#/components/schemas/CredentialsData"
-                            },
-                            {
-                                "$ref": "#/components/schemas/IdentityData"
-                            },
-                            {
-                                "$ref": "#/components/schemas/RansomLeakData"
+                                "$ref": "#/components/schemas/PublicIdentityData"
                             }
                         ],
                         "title": "Data",
@@ -31047,19 +31957,13 @@
                             "mapping": {
                                 "azure_tenant": "#/components/schemas/AzureTenantData",
                                 "bin": "#/components/schemas/CCBinData",
-                                "brand": "#/components/schemas/BrandData",
-                                "credentials": "#/components/schemas/CredentialsData",
                                 "domain": "#/components/schemas/DomainData",
-                                "email": "#/components/schemas/EmailData",
                                 "github_repository": "#/components/schemas/GithubRepositoryData",
-                                "identity": "#/components/schemas/IdentityData",
+                                "identity": "#/components/schemas/PublicIdentityData",
                                 "ip": "#/components/schemas/IPData",
                                 "keyword": "#/components/schemas/KeywordData",
-                                "name": "#/components/schemas/NameData",
-                                "ransomleak": "#/components/schemas/RansomLeakData",
                                 "search_query": "#/components/schemas/SearchQueryData",
-                                "secret": "#/components/schemas/SecretData",
-                                "username": "#/components/schemas/UsernameData"
+                                "secret": "#/components/schemas/SecretData"
                             }
                         }
                     },
@@ -31130,6 +32034,48 @@
                     "updated_at"
                 ],
                 "title": "PublicIdentifierResponse"
+            },
+            "PublicIdentityData": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "identity",
+                        "title": "Type",
+                        "default": "identity"
+                    },
+                    "attributes": {
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/EmailData"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/UsernameData"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/NameData"
+                                }
+                            ],
+                            "discriminator": {
+                                "propertyName": "type",
+                                "mapping": {
+                                    "email": "#/components/schemas/EmailData",
+                                    "name": "#/components/schemas/NameData",
+                                    "username": "#/components/schemas/UsernameData"
+                                }
+                            }
+                        },
+                        "type": "array",
+                        "maxItems": 10,
+                        "minItems": 1,
+                        "title": "Attributes"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "attributes"
+                ],
+                "title": "PublicIdentityData"
             },
             "PublishReportPayload": {
                 "properties": {
@@ -34075,6 +35021,17 @@
                 ],
                 "title": "SigningCertificateResponse"
             },
+            "SignupIntent": {
+                "type": "string",
+                "enum": [
+                    "identity_exposure_management",
+                    "brand_protection",
+                    "dark_web_monitoring",
+                    "attack_surface_management",
+                    "other"
+                ],
+                "title": "SignupIntent"
+            },
             "SocialMediaEvent": {
                 "properties": {
                     "event_type": {
@@ -34637,6 +35594,22 @@
                     "is_test": {
                         "type": "boolean",
                         "title": "Is Test"
+                    },
+                    "is_verified": {
+                        "type": "boolean",
+                        "title": "Is Verified"
+                    },
+                    "has_credentials": {
+                        "type": "boolean",
+                        "title": "Has Credentials"
+                    },
+                    "has_pii": {
+                        "type": "boolean",
+                        "title": "Has Pii"
+                    },
+                    "is_unparsed_breach": {
+                        "type": "boolean",
+                        "title": "Is Unparsed Breach"
                     }
                 },
                 "type": "object",
@@ -34649,7 +35622,11 @@
                     "breached_at",
                     "pii_tags",
                     "domain",
-                    "is_test"
+                    "is_test",
+                    "is_verified",
+                    "has_credentials",
+                    "has_pii",
+                    "is_unparsed_breach"
                 ],
                 "title": "SourceWithTenantCount"
             },
@@ -36252,19 +37229,6 @@
                 ],
                 "title": "ThreatFlowTenantConfigPayload"
             },
-            "TimeField": {
-                "type": "string",
-                "enum": [
-                    "metadata.first_crawled_at",
-                    "metadata.estimated_created_at",
-                    "metadata.last_crawled_at",
-                    "firework.materialized_at",
-                    "metadata.searchable_at",
-                    "firework.user_metadata.ignored_at",
-                    "firework.user_metadata.remediated_at"
-                ],
-                "title": "TimeField"
-            },
             "TimeRangeType": {
                 "type": "string",
                 "enum": [
@@ -36337,7 +37301,8 @@
             "Times": {
                 "properties": {
                     "field": {
-                        "$ref": "#/components/schemas/TimeField",
+                        "type": "string",
+                        "title": "Field",
                         "default": "metadata.estimated_created_at"
                     },
                     "gt": {
@@ -37051,6 +38016,22 @@
                 ],
                 "title": "UpdateReportParameters"
             },
+            "UpdateSignupIntentRequestBody": {
+                "properties": {
+                    "intents": {
+                        "items": {
+                            "$ref": "#/components/schemas/SignupIntent"
+                        },
+                        "type": "array",
+                        "title": "Intents"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "intents"
+                ],
+                "title": "UpdateSignupIntentRequestBody"
+            },
             "UpdateStrategyPayload": {
                 "properties": {
                     "strategy_type": {
@@ -37307,11 +38288,8 @@
                     "do-not-track",
                     "firework.api.can_use_apikeys",
                     "bypass-mfa",
-                    "industry.finance_canada",
-                    "footprint",
                     "audit_log",
-                    "discourse_moderator",
-                    "discourse_admin",
+                    "audit_log_reveal_impersonations",
                     "partner_portal",
                     "partner_portal_redirect",
                     "pendo",
@@ -37322,12 +38300,12 @@
                     "file_transfers",
                     "supply_chain_monitoring",
                     "threat_flow_custom_reports",
-                    "view_legacy_footprint",
                     "firework.identifiers.discovery_policy",
                     "integrations",
                     "alert_channels",
                     "ioc_feeds",
                     "query_identifier_count_legacy",
+                    "enable_identifier_count_deduplication",
                     "white_labeling",
                     "github_account_sync",
                     "illicit_political_content",
@@ -37350,7 +38328,8 @@
                     "iem.credentials_browser_bulk_validation",
                     "advanced_security_mode",
                     "llm_recommendations",
-                    "retain_audit_log_indefinitely"
+                    "retain_audit_log_indefinitely",
+                    "brand"
                 ],
                 "title": "UserPermissions"
             },
@@ -37503,6 +38482,102 @@
                     "type"
                 ],
                 "title": "ValidationError"
+            },
+            "VipIdentityDataRequestBody": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "identity",
+                        "title": "Type"
+                    },
+                    "attributes": {
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/EmailData"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/NameData"
+                                }
+                            ],
+                            "discriminator": {
+                                "propertyName": "type",
+                                "mapping": {
+                                    "email": "#/components/schemas/EmailData",
+                                    "name": "#/components/schemas/NameData"
+                                }
+                            }
+                        },
+                        "type": "array",
+                        "maxItems": 10,
+                        "minItems": 1,
+                        "title": "Attributes"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "attributes"
+                ],
+                "title": "VipIdentityDataRequestBody"
+            },
+            "VipProtectionCreateBody": {
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/VipIdentityDataRequestBody"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data"
+                ],
+                "title": "VipProtectionCreateBody"
+            },
+            "VipProtectionResponse": {
+                "properties": {
+                    "identifier": {
+                        "$ref": "#/components/schemas/Identifier"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "identifier"
+                ],
+                "title": "VipProtectionResponse"
+            },
+            "VipProtectionUpdateRequestBody": {
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/VipIdentityDataRequestBody"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data"
+                ],
+                "title": "VipProtectionUpdateRequestBody"
             },
             "VulnerabilityEntityAPIResponse": {
                 "properties": {
