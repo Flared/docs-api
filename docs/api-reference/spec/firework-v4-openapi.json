@@ -120,7 +120,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/AuditEventRequestBody"
+                                "$ref": "#/components/schemas/AdminAuditEventRequestBody"
                             }
                         }
                     }
@@ -5162,6 +5162,16 @@
                         "schema": {
                             "type": "string",
                             "title": "Asset Uuid"
+                        }
+                    },
+                    {
+                        "name": "force_refresh",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Force Refresh"
                         }
                     }
                 ],
@@ -15227,14 +15237,14 @@
                 "summary": "Create Vip Protection Identifier",
                 "operationId": "create_vip_protection_identifier_vip_protection__post",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/VipProtectionCreateBody"
                             }
                         }
-                    },
-                    "required": true
+                    }
                 },
                 "responses": {
                     "200": {
@@ -15243,6 +15253,66 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/VipProtectionResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "private",
+                    "team=growth"
+                ],
+                "summary": "List Vip Protection Identifiers",
+                "operationId": "list_vip_protection_identifiers_vip_protection__get",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "exclusiveMinimum": 0,
+                            "default": 20,
+                            "title": "Size"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResultsWithTotalCount_Identifier_str_"
                                 }
                             }
                         }
@@ -15297,6 +15367,87 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/VipProtectionResponse"
                                 }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "private",
+                    "team=growth"
+                ],
+                "summary": "Get Vip Protection Identifier",
+                "operationId": "get_vip_protection_identifier_vip_protection__identifier_id__get",
+                "parameters": [
+                    {
+                        "name": "identifier_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Identifier Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VipProtectionResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/vip_protection/bulk_delete": {
+            "post": {
+                "tags": [
+                    "private",
+                    "team=growth"
+                ],
+                "summary": "Bulk Delete Vip Protection Identifiers",
+                "operationId": "bulk_delete_vip_protection_identifiers_vip_protection_bulk_delete_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VipProtectionBulkDeleteBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     },
@@ -15464,6 +15615,7 @@
                     "score_event",
                     "sdo_attack_pattern",
                     "sdo_campaign",
+                    "sdo_identity",
                     "sdo_indicator",
                     "sdo_infrastructure",
                     "sdo_location",
@@ -16259,6 +16411,121 @@
                     "reason"
                 ],
                 "title": "AddAllowedRestrictedTermRequest"
+            },
+            "AdminAuditEventFiltersBody": {
+                "properties": {
+                    "tenant_ids": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "integer"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Tenant Ids"
+                    },
+                    "user_ids": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array",
+                        "title": "User Ids"
+                    },
+                    "include_system_audit_events": {
+                        "type": "boolean",
+                        "title": "Include System Audit Events",
+                        "default": false
+                    },
+                    "action": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/AuditEventAction"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Action"
+                    },
+                    "gte": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Gte"
+                    },
+                    "lte": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Lte"
+                    },
+                    "impersonation": {
+                        "$ref": "#/components/schemas/ImpersonationFilter",
+                        "default": "exclude"
+                    },
+                    "q": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Q"
+                    },
+                    "source": {
+                        "$ref": "#/components/schemas/AuditEventSource",
+                        "default": "all"
+                    },
+                    "type": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/AuditEventAffectedResourceType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Type"
+                    }
+                },
+                "type": "object",
+                "title": "AdminAuditEventFiltersBody"
+            },
+            "AdminAuditEventRequestBody": {
+                "properties": {
+                    "pagination": {
+                        "$ref": "#/components/schemas/AuditEventPagingBody"
+                    },
+                    "filters": {
+                        "$ref": "#/components/schemas/AdminAuditEventFiltersBody"
+                    }
+                },
+                "type": "object",
+                "title": "AdminAuditEventRequestBody"
             },
             "Alert": {
                 "properties": {
@@ -18075,15 +18342,10 @@
                     "tenant",
                     "tenant_membership",
                     "threat_flow",
-                    "cmi_allowed_restricted_term",
-                    "cmi_app_banner",
-                    "cmi_authorize_asset_request",
-                    "cmi_feature_flag",
-                    "cmi_hubspot",
-                    "cmi_impersonated_user",
-                    "cmi_organization",
-                    "cmi_tenant",
-                    "cmi_user"
+                    "allowed_restricted_term",
+                    "hubspot",
+                    "feature_flag",
+                    "app_banner"
                 ],
                 "title": "AuditEventAffectedResourceType"
             },
@@ -18114,20 +18376,6 @@
                         "type": "boolean",
                         "title": "Include System Audit Events",
                         "default": false
-                    },
-                    "type": {
-                        "anyOf": [
-                            {
-                                "items": {
-                                    "$ref": "#/components/schemas/AuditEventAffectedResourceType"
-                                },
-                                "type": "array"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Type"
                     },
                     "action": {
                         "anyOf": [
@@ -18185,6 +18433,20 @@
                     "source": {
                         "$ref": "#/components/schemas/AuditEventSource",
                         "default": "all"
+                    },
+                    "type": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/PublicAuditEventAffectedResourceType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Type"
                     }
                 },
                 "type": "object",
@@ -19107,7 +19369,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2026-06-03T17:05:22.967172Z"
+                        "default": "2026-06-04T16:00:47.813971Z"
                     },
                     "from": {
                         "anyOf": [
@@ -19812,6 +20074,16 @@
                             }
                         ],
                         "title": "Summarized At"
+                    },
+                    "profile": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ChatChannelSummaryOutput"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
@@ -19819,6 +20091,32 @@
                     "request_id"
                 ],
                 "title": "ChatChannelSummariesResponse"
+            },
+            "ChatChannelSummaryOutput": {
+                "properties": {
+                    "overview": {
+                        "type": "string",
+                        "title": "Overview",
+                        "description": "Single paragraph providing an overview of the chat channel."
+                    },
+                    "content_and_activity": {
+                        "type": "string",
+                        "title": "Content And Activity",
+                        "description": "Single paragraph summarizing the observed content and activity."
+                    },
+                    "nature_and_sophistication": {
+                        "type": "string",
+                        "title": "Nature And Sophistication",
+                        "description": "Single paragraph characterizing the channel's function and sophistication."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "overview",
+                    "content_and_activity",
+                    "nature_and_sophistication"
+                ],
+                "title": "ChatChannelSummaryOutput"
             },
             "ChatChannelTimeline": {
                 "properties": {
@@ -22224,6 +22522,64 @@
                 ],
                 "title": "DomainProfileCertificateResponse"
             },
+            "DomainProfileDnsRecordsResponse": {
+                "properties": {
+                    "a_records": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "A Records"
+                    },
+                    "aaaa_records": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Aaaa Records"
+                    },
+                    "mx_records": {
+                        "items": {
+                            "$ref": "#/components/schemas/DomainProfileMxRecordResponse"
+                        },
+                        "type": "array",
+                        "title": "Mx Records"
+                    },
+                    "ns_records": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Ns Records"
+                    },
+                    "txt_records": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Txt Records"
+                    },
+                    "has_spf": {
+                        "type": "boolean",
+                        "title": "Has Spf"
+                    },
+                    "has_dmarc": {
+                        "type": "boolean",
+                        "title": "Has Dmarc"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "a_records",
+                    "aaaa_records",
+                    "mx_records",
+                    "ns_records",
+                    "txt_records",
+                    "has_spf",
+                    "has_dmarc"
+                ],
+                "title": "DomainProfileDnsRecordsResponse"
+            },
             "DomainProfileEvent": {
                 "properties": {
                     "uid": {
@@ -22373,6 +22729,38 @@
                 ],
                 "title": "DomainProfileMetadataResponse"
             },
+            "DomainProfileMxRecordResponse": {
+                "properties": {
+                    "priority": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Priority"
+                    },
+                    "exchange": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exchange"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "priority",
+                    "exchange"
+                ],
+                "title": "DomainProfileMxRecordResponse"
+            },
             "DomainProfileResponse": {
                 "properties": {
                     "asset_uuid": {
@@ -22399,6 +22787,26 @@
                                 "type": "null"
                             }
                         ]
+                    },
+                    "dns_records": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DomainProfileDnsRecordsResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "whois_rdap": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DomainProfileWhoisRdapResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
@@ -22407,9 +22815,90 @@
                     "fqdn",
                     "risk",
                     "metadata",
-                    "certificate"
+                    "certificate",
+                    "dns_records",
+                    "whois_rdap"
                 ],
                 "title": "DomainProfileResponse"
+            },
+            "DomainProfileWhoisRdapResponse": {
+                "properties": {
+                    "registrar": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Registrar"
+                    },
+                    "contact_email": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Contact Email"
+                    },
+                    "epp_status": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Epp Status"
+                    },
+                    "registered_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Registered At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "expires_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Expires At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "registrar",
+                    "contact_email",
+                    "epp_status",
+                    "registered_at",
+                    "updated_at",
+                    "expires_at"
+                ],
+                "title": "DomainProfileWhoisRdapResponse"
             },
             "DomainQuery": {
                 "properties": {
@@ -25793,6 +26282,10 @@
             },
             "GlobalSearchUsageByMemberDataPoint": {
                 "properties": {
+                    "user_id": {
+                        "type": "integer",
+                        "title": "User Id"
+                    },
                     "member": {
                         "anyOf": [
                             {
@@ -25811,6 +26304,7 @@
                 },
                 "type": "object",
                 "required": [
+                    "user_id",
                     "member",
                     "count"
                 ],
@@ -25834,6 +26328,10 @@
             },
             "GlobalSearchUsageByTenantDataPoint": {
                 "properties": {
+                    "tenant_id": {
+                        "type": "integer",
+                        "title": "Tenant Id"
+                    },
                     "tenant_name": {
                         "anyOf": [
                             {
@@ -25856,6 +26354,7 @@
                 },
                 "type": "object",
                 "required": [
+                    "tenant_id",
                     "tenant_name",
                     "count",
                     "is_deleted"
@@ -30320,6 +30819,45 @@
                 ],
                 "title": "PaginatedResultsWithTotalCount[DomainBrowserItemResponse, str]"
             },
+            "PaginatedResultsWithTotalCount_Identifier_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Identifier"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResultsWithTotalCount[Identifier, str]"
+            },
             "PaginatedResultsWithTotalCount_IdentityBrowserItemResponse_str_": {
                 "properties": {
                     "items": {
@@ -31786,6 +32324,27 @@
                 ],
                 "title": "ProvisionUserItemRequest"
             },
+            "PublicAuditEventAffectedResourceType": {
+                "type": "string",
+                "enum": [
+                    "event",
+                    "alert",
+                    "alert_channel",
+                    "authorize_asset_request",
+                    "credential",
+                    "identifier",
+                    "identifier_recommendation",
+                    "integration",
+                    "user",
+                    "organization",
+                    "priority_action",
+                    "sandbox",
+                    "search",
+                    "tenant",
+                    "tenant_membership",
+                    "threat_flow"
+                ]
+            },
             "PublicIdentifierRequestBody": {
                 "properties": {
                     "data": {
@@ -31795,9 +32354,6 @@
                             },
                             {
                                 "$ref": "#/components/schemas/IPData"
-                            },
-                            {
-                                "$ref": "#/components/schemas/BrandData"
                             },
                             {
                                 "$ref": "#/components/schemas/KeywordData"
@@ -31815,22 +32371,10 @@
                                 "$ref": "#/components/schemas/GithubRepositoryData"
                             },
                             {
-                                "$ref": "#/components/schemas/CredentialsData"
-                            },
-                            {
-                                "$ref": "#/components/schemas/EmailData"
-                            },
-                            {
-                                "$ref": "#/components/schemas/UsernameData"
-                            },
-                            {
                                 "$ref": "#/components/schemas/SecretData"
                             },
                             {
-                                "$ref": "#/components/schemas/NameData"
-                            },
-                            {
-                                "$ref": "#/components/schemas/IdentityDataRequestBody"
+                                "$ref": "#/components/schemas/PublicIdentityData"
                             }
                         ],
                         "title": "Data",
@@ -31839,18 +32383,13 @@
                             "mapping": {
                                 "azure_tenant": "#/components/schemas/AzureTenantData",
                                 "bin": "#/components/schemas/CCBinData",
-                                "brand": "#/components/schemas/BrandData",
-                                "credentials": "#/components/schemas/CredentialsData",
                                 "domain": "#/components/schemas/DomainData",
-                                "email": "#/components/schemas/EmailData",
                                 "github_repository": "#/components/schemas/GithubRepositoryData",
-                                "identity": "#/components/schemas/IdentityDataRequestBody",
+                                "identity": "#/components/schemas/PublicIdentityData",
                                 "ip": "#/components/schemas/IPData",
                                 "keyword": "#/components/schemas/KeywordData",
-                                "name": "#/components/schemas/NameData",
                                 "search_query": "#/components/schemas/SearchQueryData",
-                                "secret": "#/components/schemas/SecretData",
-                                "username": "#/components/schemas/UsernameData"
+                                "secret": "#/components/schemas/SecretData"
                             }
                         }
                     },
@@ -32075,7 +32614,7 @@
                 "required": [
                     "attributes"
                 ],
-                "title": "PublicIdentityData"
+                "title": "IdentityData"
             },
             "PublishReportPayload": {
                 "properties": {
@@ -38520,6 +39059,23 @@
                     "attributes"
                 ],
                 "title": "VipIdentityDataRequestBody"
+            },
+            "VipProtectionBulkDeleteBody": {
+                "properties": {
+                    "identifier_ids": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array",
+                        "minItems": 1,
+                        "title": "Identifier Ids"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "identifier_ids"
+                ],
+                "title": "VipProtectionBulkDeleteBody"
             },
             "VipProtectionCreateBody": {
                 "properties": {

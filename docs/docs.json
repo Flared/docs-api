@@ -134,12 +134,11 @@
               {
                 "group": "Identifiers",
                 "pages": [
-                  "api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers",
-                  "api-reference/v2/endpoints/identifiers/post-fireworkv2assets",
-                  "api-reference/v2/endpoints/identifiers/put-fireworkv2assets",
-                  "api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers-1",
-                  "api-reference/v2/endpoints/identifiers/delete-fireworkv2assets",
-                  "api-reference/v2/endpoints/identifiers/post-fireworkv2assets-toggle"
+                  "api-reference/v4/endpoints/list-identifiers",
+                  "api-reference/v4/endpoints/create-identifier",
+                  "api-reference/v4/endpoints/update-identifier",
+                  "api-reference/v4/endpoints/retrieve-identifier",
+                  "api-reference/v4/endpoints/delete-identifier"
                 ]
               },
               {
@@ -276,6 +275,17 @@
                   "api-reference/v2/endpoints/me/get-fireworkv2mefeed",
                   "api-reference/v2/endpoints/identifiers/get-fireworkv2assets-feed",
                   "api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups-feed"
+                ]
+              },
+              {
+                "group": "Identifiers",
+                "pages": [
+                  "api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers",
+                  "api-reference/v2/endpoints/identifiers/post-fireworkv2assets",
+                  "api-reference/v2/endpoints/identifiers/put-fireworkv2assets",
+                  "api-reference/v3/endpoints/identifiers/get-fireworkv3identifiers-1",
+                  "api-reference/v2/endpoints/identifiers/delete-fireworkv2assets",
+                  "api-reference/v2/endpoints/identifiers/post-fireworkv2assets-toggle"
                 ]
               }
             ]
