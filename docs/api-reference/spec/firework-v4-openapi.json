@@ -7410,7 +7410,7 @@
                     "public",
                     "team=experience"
                 ],
-                "summary": "Create Public Identifier",
+                "summary": "Create Identifier",
                 "operationId": "create_public_identifier_identifiers__post",
                 "requestBody": {
                     "required": true,
@@ -7980,7 +7980,7 @@
                     "public",
                     "team=experience"
                 ],
-                "summary": "Update Identifier By Id Public",
+                "summary": "Update Identifier",
                 "operationId": "update_identifier_by_id_public_identifiers__identifier_id__put",
                 "parameters": [
                     {
@@ -7998,7 +7998,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/PublicIdentifierRequestBody"
+                                "$ref": "#/components/schemas/PublicIdentifierUpdateRequestBody"
                             }
                         }
                     }
@@ -8031,7 +8031,7 @@
                     "public",
                     "team=experience"
                 ],
-                "summary": "Get Identifier Public",
+                "summary": "Get Identifier",
                 "operationId": "get_identifier_public_identifiers__identifier_id__get",
                 "parameters": [
                     {
@@ -9419,6 +9419,133 @@
                         }
                     },
                     {
+                        "name": "role_external_ids",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Role External Ids"
+                        }
+                    },
+                    {
+                        "name": "role_tiers",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Role Tiers"
+                        }
+                    },
+                    {
+                        "name": "group_external_ids",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Group External Ids"
+                        }
+                    },
+                    {
+                        "name": "group_tiers",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Group Tiers"
+                        }
+                    },
+                    {
+                        "name": "application_external_ids",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Application External Ids"
+                        }
+                    },
+                    {
+                        "name": "is_on_premises_sync_enabled",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "boolean"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Is On Premises Sync Enabled"
+                        }
+                    },
+                    {
+                        "name": "is_guest",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "boolean"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Is Guest"
+                        }
+                    },
+                    {
                         "name": "next",
                         "in": "query",
                         "required": false,
@@ -10384,6 +10511,37 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/PaginatedResultsWithTotalCount_DomainBrowserItemResponse_str_"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/domains/registrars": {
+            "get": {
+                "tags": [
+                    "private"
+                ],
+                "summary": "List Domain Registrars",
+                "operationId": "list_domain_registrars_domains_registrars_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DomainRegistrarsResponse"
                                 }
                             }
                         }
@@ -15312,7 +15470,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResultsWithTotalCount_Identifier_str_"
+                                    "$ref": "#/components/schemas/PaginatedResultsWithTotalCount_VipProtectionListItem_str_"
                                 }
                             }
                         }
@@ -18337,7 +18495,7 @@
                     "page_view",
                     "priority_action",
                     "sandbox",
-                    "search",
+                    "global_search",
                     "sensitive_data",
                     "tenant",
                     "tenant_membership",
@@ -18515,6 +18673,11 @@
                                 "type": "null"
                             }
                         ]
+                    },
+                    "is_impersonated": {
+                        "type": "boolean",
+                        "title": "Is Impersonated",
+                        "default": false
                     }
                 },
                 "type": "object",
@@ -19369,7 +19532,7 @@
                             }
                         ],
                         "title": "Created After",
-                        "default": "2026-06-04T16:00:47.813971Z"
+                        "default": "2026-06-07T18:47:16.905035Z"
                     },
                     "from": {
                         "anyOf": [
@@ -22418,6 +22581,17 @@
                             }
                         ],
                         "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
                     }
                 },
                 "type": "object",
@@ -22918,6 +23092,22 @@
                     "fqdn"
                 ],
                 "title": "DomainQuery"
+            },
+            "DomainRegistrarsResponse": {
+                "properties": {
+                    "registrars": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Registrars"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "registrars"
+                ],
+                "title": "DomainRegistrarsResponse"
             },
             "DomainRestrictedTerm": {
                 "properties": {
@@ -28242,6 +28432,14 @@
                     },
                     "counts": {
                         "$ref": "#/components/schemas/IdentityBrowserCounts"
+                    },
+                    "role_external_ids": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Role External Ids",
+                        "default": []
                     }
                 },
                 "type": "object",
@@ -30819,45 +31017,6 @@
                 ],
                 "title": "PaginatedResultsWithTotalCount[DomainBrowserItemResponse, str]"
             },
-            "PaginatedResultsWithTotalCount_Identifier_str_": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/Identifier"
-                        },
-                        "type": "array",
-                        "title": "Items"
-                    },
-                    "next": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Next"
-                    },
-                    "total_count": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Total Count"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "items",
-                    "next"
-                ],
-                "title": "PaginatedResultsWithTotalCount[Identifier, str]"
-            },
             "PaginatedResultsWithTotalCount_IdentityBrowserItemResponse_str_": {
                 "properties": {
                     "items": {
@@ -30896,6 +31055,45 @@
                     "next"
                 ],
                 "title": "PaginatedResultsWithTotalCount[IdentityBrowserItemResponse, str]"
+            },
+            "PaginatedResultsWithTotalCount_VipProtectionListItem_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/VipProtectionListItem"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResultsWithTotalCount[VipProtectionListItem, str]"
             },
             "PaginatedResults_ASTPCookiePayload_str_": {
                 "properties": {
@@ -32339,7 +32537,7 @@
                     "organization",
                     "priority_action",
                     "sandbox",
-                    "search",
+                    "global_search",
                     "tenant",
                     "tenant_membership",
                     "threat_flow"
@@ -32572,7 +32770,119 @@
                     "is_disabled",
                     "updated_at"
                 ],
-                "title": "PublicIdentifierResponse"
+                "title": "IdentifierResponse"
+            },
+            "PublicIdentifierUpdateRequestBody": {
+                "properties": {
+                    "data": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/CCBinData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/IPData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/KeywordData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/AzureTenantData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/DomainData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/SearchQueryData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/GithubRepositoryData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/SecretData"
+                            },
+                            {
+                                "$ref": "#/components/schemas/PublicIdentityData"
+                            }
+                        ],
+                        "title": "Data",
+                        "discriminator": {
+                            "propertyName": "type",
+                            "mapping": {
+                                "azure_tenant": "#/components/schemas/AzureTenantData",
+                                "bin": "#/components/schemas/CCBinData",
+                                "domain": "#/components/schemas/DomainData",
+                                "github_repository": "#/components/schemas/GithubRepositoryData",
+                                "identity": "#/components/schemas/PublicIdentityData",
+                                "ip": "#/components/schemas/IPData",
+                                "keyword": "#/components/schemas/KeywordData",
+                                "search_query": "#/components/schemas/SearchQueryData",
+                                "secret": "#/components/schemas/SecretData"
+                            }
+                        }
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "categories": {
+                        "items": {
+                            "$ref": "#/components/schemas/SearchType"
+                        },
+                        "type": "array",
+                        "title": "Categories"
+                    },
+                    "emerging_categories": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Emerging Categories"
+                    },
+                    "severities": {
+                        "items": {
+                            "$ref": "#/components/schemas/Severity"
+                        },
+                        "type": "array",
+                        "title": "Severities"
+                    },
+                    "group_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Group Id"
+                    },
+                    "is_disabled": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Is Disabled"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "categories",
+                    "emerging_categories",
+                    "severities"
+                ],
+                "title": "PublicIdentifierUpdateRequestBody"
             },
             "PublicIdentityData": {
                 "properties": {
@@ -39099,6 +39409,32 @@
                     "data"
                 ],
                 "title": "VipProtectionCreateBody"
+            },
+            "VipProtectionListItem": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "email": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Email"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "email"
+                ],
+                "title": "VipProtectionListItem"
             },
             "VipProtectionResponse": {
                 "properties": {
