@@ -1,0 +1,149 @@
+---
+title: "API MCP (beta)"
+---
+
+<Note>
+    The Flare API MCP server is still in beta and is subject to change.
+    {/* TODO Specify beta quota adjustements */}
+</Note>
+
+Flare provides a
+[Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that
+exposes Flare's search and platform APIs to any MCP-capable client. It lets
+agents query Flare's threat-intel dataset, inspect a tenant's monitored
+events, look up event-type schemas, and read the current user's profile —
+without writing any code against the REST API directly.
+
+For a documentation-only companion server (search across the Flare API docs
+themselves), see the
+[Documentation MCP <Icon icon="book" size={16} />](/sdk/mcp).
+
+## Available Tools
+
+| Tool                    | Description                                                                                                                        |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `search_search`         | Global Search — execute a Lucene query against the entire Flare threat-intel dataset.                                              |
+| `search_tenant`         | Tenant Search — execute a Lucene query scoped to events matching the caller's monitored identifiers.                               |
+| `validate_search_query` | Validate that a Lucene query complies with Flare's search rules before running it. Useful when composing or debugging a query.     |
+| `get_event_type`        | Return the documentation and searchable field list for a given event type (e.g. `chat_message`, `forum_post`, `stealer_log`).      |
+| `profile_get`           | Return the current user's profile, including tenants, permissions, feature flags, and default tenant id.                           |
+
+### Search Parameters
+
+The `search_search` (Global) and `search_tenant` (Tenant) tools accept the
+same parameters:
+
+<ParamField body="query" type="string" required>
+  Lucene query string.
+</ParamField>
+
+<ParamField body="date_range" type="string | object">
+  Time window to restrict results to. Either a preset (`last_24h`, `last_7d`,
+  `last_1m`, …) or a `{ begin_at, end_at }` object with ISO-8601 datetimes.
+</ParamField>
+
+<ParamField body="search_types" type="array of string">
+  List of event types to scope the search.
+</ParamField>
+
+<ParamField body="size" type="integer" default="10">
+  Number of results to return. Between `1` and `10`.
+</ParamField>
+
+<ParamField body="cursor" type="string">
+  Opaque pagination cursor from a previous response.
+</ParamField>
+
+### Prompt Examples
+
+- `What has Flare picked up on our monitored domain scatterholt.com in the last 24 hours?`
+- `Search the whole Flare dataset for chat messages mentioning "acme-corp" in the last 7 days.`
+- `Validate this query for me: author_name:/some_username_\d+/`
+- `What fields can I search on the stealer_log event type?`
+- `Which tenants do I currently have access to?`
+
+## MCP Server Configuration
+
+The MCP server is available at the following URL:
+
+- `https://api.flare.io/mcp`
+
+For a copy-pasteable example that wires everything below into a client, see
+[Client Setup](#client-setup).
+
+#### Authentication
+
+Every MCP request must include a Flare API key in the `Authorization`
+header. Follow the
+[Authentication Guide <Icon icon="book" size={16} />](/concepts/authentication)
+to generate one.
+
+#### Targeting a specific tenant
+
+Requests default to your account's default tenant. To scope MCP tool calls
+to a specific tenant, set the `X-Flare-Tenant-Id` header on the MCP
+connection to the target tenant id. You can find your tenant ids on the
+[Profile page](https://app.flare.io/#/profile) under the "Tenants" section
+(also documented in the
+[Authentication Guide <Icon icon="book" size={16} />](/concepts/authentication#finding-tenant-ids)).
+
+## Client Setup
+
+### Claude Code
+
+[Claude Code](https://docs.claude.com/en/docs/claude-code/overview) reads
+MCP servers from an `.mcp.json` file at the root of your project. Create the
+file with the snippet below, replacing `<api-key>` with a Flare API key
+obtained from the
+[Authentication Guide <Icon icon="book" size={16} />](/concepts/authentication).
+
+```json .mcp.json
+{
+  "mcpServers": {
+    "flare": {
+      "type": "http",
+      "url": "https://api.flare.io/mcp",
+      "headers": {
+        "Authorization": "<api-key>",
+        "X-Flare-Tenant-Id": "<tenant-id>"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Code once the file is in place. The Flare tools will appear
+under the `flare` server in the `/mcp` command output, and Claude will call
+them automatically when your prompts match their descriptions.
+
+<Note>
+  Store the API key outside version control. Claude Code also supports
+  reading headers from environment variables — see the
+  [Claude Code MCP docs](https://code.claude.com/docs/en/mcp#environment-variable-expansion-in-mcp-json)
+  for details.
+</Note>
+
+### Claude Desktop
+
+Claude Desktop can connect to the Flare MCP server as a remote **Custom
+Connector**. Follow the official walkthrough:
+
+- [Getting started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp#h_3d1a65aded)
+
+When prompted for the server URL, use `https://api.flare.io/mcp`, and set
+the `Authorization` header to your Flare API key.
+
+### Other Clients
+
+- **Cursor** —
+  [Using `mcp.json`](https://cursor.com/docs/mcp).
+  The same JSON shape shown above for Claude Code applies.
+
+## Quotas & Rate Limits
+
+- Calls to `search` (Global Search) consume the tenant's monthly Global
+  Search quota. See
+  [Rate Limits and Quotas <Icon icon="book" size={16} />](/concepts/rate-limits-and-quotas).
+- `tenant`, `validate_search_query`, `get_event_type`, and `get` (profile) do
+  not consume the Global Search quota.
+- Standard API rate limits apply to all tools.
