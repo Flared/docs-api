@@ -8814,7 +8814,7 @@
                 }
             }
         },
-        "/firework/v4/matching_policies": {
+        "/firework/v4/matching-policies": {
             "post": {
                 "tags": [
                     "public",
@@ -8942,7 +8942,7 @@
                 }
             }
         },
-        "/firework/v4/matching_policies/{policy_uuid}": {
+        "/firework/v4/matching-policies/{policy_uuid}": {
             "put": {
                 "tags": [
                     "public",
@@ -9078,7 +9078,7 @@
                 }
             }
         },
-        "/firework/v4/matching_policies/by_identifier_id/{identifier_id}": {
+        "/firework/v4/matching-policies/by_identifier_id/{identifier_id}": {
             "get": {
                 "tags": [
                     "public",
@@ -9125,7 +9125,7 @@
                 }
             }
         },
-        "/firework/v4/matching_policies/{policy_uuid}/assignments": {
+        "/firework/v4/matching-policies/{policy_uuid}/assignments": {
             "get": {
                 "tags": [
                     "public",
@@ -9305,7 +9305,7 @@
                 }
             }
         },
-        "/firework/v4/matching_policies/{policy_uuid}/assignments/count": {
+        "/firework/v4/matching-policies/{policy_uuid}/assignments/count": {
             "get": {
                 "tags": [
                     "private",
