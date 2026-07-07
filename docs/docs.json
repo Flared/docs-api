@@ -34,8 +34,7 @@
               "sdk/python",
               "sdk/go",
               "sdk/cli",
-              "sdk/mcp",
-              "sdk/api-mcp"
+              "sdk/mcp"
             ]
           },
           {
