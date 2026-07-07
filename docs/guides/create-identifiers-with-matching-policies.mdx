@@ -66,7 +66,7 @@ limiter_default.tick()
 
 # 2. Create a Matching Policy
 matching_policy_resp = api_client.post(
-    "/firework/v4/matching_policies",
+    "/firework/v4/matching-policies",
     json={
         "name": "Terms to ignore",
         "type": "EXCLUDED_KEYWORDS",
@@ -82,7 +82,7 @@ limiter_default.tick()
 
 # 3. Assign the matching policy to the identifier
 api_client.post(
-    f"/firework/v4/matching_policies/{matching_policy_uuid}/assignments",
+    f"/firework/v4/matching-policies/{matching_policy_uuid}/assignments",
     json={"identifier_ids": [identifier_id], "clean_past_events": False},
 )
 
