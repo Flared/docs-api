@@ -291,6 +291,7 @@
                                 "account",
                                 "azure_tenant",
                                 "bin",
+                                "birth_year",
                                 "brand",
                                 "credentials",
                                 "cve",
@@ -302,8 +303,8 @@
                                 "file",
                                 "filename",
                                 "canonical_name",
-                                "country",
                                 "github_repository",
+                                "address_data",
                                 "ip",
                                 "ipv6_addr",
                                 "keyword",
@@ -311,7 +312,9 @@
                                 "mitre_technique",
                                 "mutex",
                                 "name",
+                                "phone_number",
                                 "ransomleak",
+                                "role",
                                 "screenshot",
                                 "search_query",
                                 "secret",
@@ -350,6 +353,7 @@
                                 "account",
                                 "azure_tenant",
                                 "bin",
+                                "birth_year",
                                 "brand",
                                 "credentials",
                                 "cve",
@@ -361,8 +365,8 @@
                                 "file",
                                 "filename",
                                 "canonical_name",
-                                "country",
                                 "github_repository",
+                                "address_data",
                                 "ip",
                                 "ipv6_addr",
                                 "keyword",
@@ -370,7 +374,9 @@
                                 "mitre_technique",
                                 "mutex",
                                 "name",
+                                "phone_number",
                                 "ransomleak",
+                                "role",
                                 "screenshot",
                                 "search_query",
                                 "secret",
@@ -563,7 +569,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_post, chat_message, listing, financial_data, forum_profile, stealer_log, bot, seller, blog_post, forum_topic, ransomleak\n- open_web: paste, service, social_media_account, bucket_object, bucket, source_code_files, source_code_secrets, stack_exchange, google, docker\n- leaks: mitigated_credential, leak, invalid_credential, valid_credential\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, seller, listing, forum_topic, financial_data, chat_message, forum_post, stealer_log, blog_post, ransomleak, bot\n- open_web: stack_exchange, google, bucket, service, paste, social_media_account, bucket_object, source_code_files, docker, source_code_secrets\n- leaks: invalid_credential, leak, mitigated_credential, valid_credential\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -887,7 +893,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_post, chat_message, listing, financial_data, forum_profile, stealer_log, bot, seller, blog_post, forum_topic, ransomleak\n- open_web: paste, service, social_media_account, bucket_object, bucket, source_code_files, source_code_secrets, stack_exchange, google, docker\n- leaks: mitigated_credential, leak, invalid_credential, valid_credential\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: forum_profile, seller, listing, forum_topic, financial_data, chat_message, forum_post, stealer_log, blog_post, ransomleak, bot\n- open_web: stack_exchange, google, bucket, service, paste, social_media_account, bucket_object, source_code_files, docker, source_code_secrets\n- leaks: invalid_credential, leak, mitigated_credential, valid_credential\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -1205,6 +1211,7 @@
                                 "account",
                                 "azure_tenant",
                                 "bin",
+                                "birth_year",
                                 "brand",
                                 "credentials",
                                 "cve",
@@ -1216,8 +1223,8 @@
                                 "file",
                                 "filename",
                                 "canonical_name",
-                                "country",
                                 "github_repository",
+                                "address_data",
                                 "ip",
                                 "ipv6_addr",
                                 "keyword",
@@ -1225,7 +1232,9 @@
                                 "mitre_technique",
                                 "mutex",
                                 "name",
+                                "phone_number",
                                 "ransomleak",
+                                "role",
                                 "screenshot",
                                 "search_query",
                                 "secret",
@@ -1412,7 +1421,12 @@
                                 "secret",
                                 "azure_tenant",
                                 "identity",
-                                "ransomleak"
+                                "ransomleak",
+                                "external_id",
+                                "address_data",
+                                "birth_year",
+                                "role",
+                                "phone_number"
                             ],
                             "items": {
                                 "type": "string"
@@ -1556,7 +1570,12 @@
                                 "secret",
                                 "azure_tenant",
                                 "identity",
-                                "ransomleak"
+                                "ransomleak",
+                                "external_id",
+                                "address_data",
+                                "birth_year",
+                                "role",
+                                "phone_number"
                             ],
                             "items": {
                                 "type": "string"
@@ -1819,7 +1838,12 @@
                                 "secret",
                                 "azure_tenant",
                                 "identity",
-                                "ransomleak"
+                                "ransomleak",
+                                "external_id",
+                                "address_data",
+                                "birth_year",
+                                "role",
+                                "phone_number"
                             ],
                             "items": {
                                 "type": "string"
@@ -1913,6 +1937,7 @@
                             "account",
                             "azure_tenant",
                             "bin",
+                            "birth_year",
                             "brand",
                             "credentials",
                             "cve",
@@ -1924,8 +1949,8 @@
                             "file",
                             "filename",
                             "canonical_name",
-                            "country",
                             "github_repository",
+                            "address_data",
                             "ip",
                             "ipv6_addr",
                             "keyword",
@@ -1933,7 +1958,9 @@
                             "mitre_technique",
                             "mutex",
                             "name",
+                            "phone_number",
                             "ransomleak",
+                            "role",
                             "screenshot",
                             "search_query",
                             "secret",
@@ -2263,7 +2290,12 @@
                             "secret",
                             "azure_tenant",
                             "identity",
-                            "ransomleak"
+                            "ransomleak",
+                            "external_id",
+                            "address_data",
+                            "birth_year",
+                            "role",
+                            "phone_number"
                         ],
                         "example": "domain",
                         "type": "string"
@@ -2380,8 +2412,7 @@
                             "SELF_ONBOARDING",
                             "ATTRIBUTE",
                             "AUTO_MONITOR",
-                            "IDP_SYNC",
-                            "VIP_PROTECTION"
+                            "IDP_SYNC"
                         ],
                         "example": "USER",
                         "type": "string"
@@ -2539,42 +2570,6 @@
                 },
                 "type": "object"
             },
-            "BulkActionFilters": {
-                "properties": {
-                    "recommendation_state": {
-                        "enum": [
-                            "recommended",
-                            "accepted",
-                            "rejected"
-                        ],
-                        "example": "recommended",
-                        "type": "string"
-                    },
-                    "types": {
-                        "enum": [
-                            "domain",
-                            "name",
-                            "keyword",
-                            "github_repository",
-                            "username",
-                            "email",
-                            "search_query",
-                            "bin",
-                            "ip",
-                            "secret",
-                            "azure_tenant",
-                            "identity",
-                            "ransomleak"
-                        ],
-                        "example": "domain",
-                        "type": "string"
-                    },
-                    "q": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "PaginatedCredentials": {
                 "properties": {
                     "next": {
@@ -2659,199 +2654,6 @@
                 "required": [
                     "id"
                 ],
-                "type": "object"
-            },
-            "IdentifierRecommendation": {
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "asset_id": {
-                        "type": "integer"
-                    },
-                    "asset": {
-                        "$ref": "#/components/schemas/Asset"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "reasons": {
-                        "items": {
-                            "$ref": "#/components/schemas/Reason"
-                        },
-                        "type": "array"
-                    },
-                    "state": {
-                        "enum": [
-                            "recommended",
-                            "accepted",
-                            "rejected"
-                        ],
-                        "example": "recommended",
-                        "type": "string"
-                    },
-                    "updated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "asset_name": {
-                        "type": "string"
-                    },
-                    "recommendation_group_id": {
-                        "type": "integer"
-                    },
-                    "relevancy_score_type": {
-                        "enum": [
-                            "HIGH",
-                            "MEDIUM",
-                            "LOW"
-                        ],
-                        "example": "HIGH",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "Reason": {
-                "properties": {
-                    "from_identifier_id": {
-                        "type": "integer"
-                    },
-                    "from_asset_name": {
-                        "type": "string"
-                    },
-                    "recommendation_pipeline_id": {
-                        "enum": [
-                            "email_from_domain",
-                            "username_from_email",
-                            "email_from_username",
-                            "activity_discovery",
-                            "subdomain_from_domain",
-                            "azure_tenant_from_domain",
-                            "domain_from_azure_tenant",
-                            "llm_based"
-                        ],
-                        "example": "email_from_domain",
-                        "type": "string"
-                    },
-                    "seen_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "reason": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierRecommendationGroupWithEnrichments": {
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "group_type": {
-                        "enum": [
-                            "identifiers",
-                            "llm"
-                        ],
-                        "example": "identifiers",
-                        "type": "string"
-                    },
-                    "filtered_recommendations_count": {
-                        "type": "integer"
-                    },
-                    "total_recommendations_count": {
-                        "type": "integer"
-                    },
-                    "available_asset_types": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "available_relevancy_score_types": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "last_updated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierRecommendationGroup": {
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "group_type": {
-                        "enum": [
-                            "identifiers",
-                            "llm"
-                        ],
-                        "example": "identifiers",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "CollectionUpdate": {
-                "properties": {
-                    "type": {
-                        "type": "string"
-                    },
-                    "date": {
-                        "type": "string"
-                    },
-                    "content": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "MonitoredChannel": {
-                "properties": {
-                    "conversation_id": {
-                        "type": "integer"
-                    },
-                    "conversation_uid": {
-                        "type": "string"
-                    },
-                    "source": {
-                        "type": "string"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "category": {
-                        "type": "string"
-                    },
-                    "subcategory": {
-                        "type": "string"
-                    },
-                    "last_crawled_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "message_count": {
-                        "type": "integer"
-                    },
-                    "member_count": {
-                        "type": "integer"
-                    }
-                },
                 "type": "object"
             },
             "PaginatedCursoredCredentials": {
