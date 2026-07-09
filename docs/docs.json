@@ -115,6 +115,7 @@
                 "group": "Credentials",
                 "pages": [
                   "api-reference/astp/endpoints/post-credentials-search",
+                  "api-reference/astp/endpoints/post-urls-by-credential-hash",
                   "api-reference/astp/endpoints/post-by-accounts",
                   "api-reference/astp/endpoints/get-sources",
                   "api-reference/astp/endpoints/get-source"
