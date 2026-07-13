@@ -2,9 +2,7 @@
 title: "API MCP (beta)"
 ---
 
-<Note>
-    The Flare API MCP server is still in beta and is subject to change.
-</Note>
+<Note>The Flare API MCP server is still in beta and is subject to change.</Note>
 
 Flare provides a
 [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that
@@ -19,18 +17,17 @@ themselves), see the
 
 ## Available Tools
 
-| Tool                    | Description                                                                                                                        |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `search_global`         | Global Search — execute a Lucene query against the entire Flare threat-intel dataset.                                              |
-| `search_tenant`         | Tenant Search — execute a Lucene query scoped to events matching the caller's monitored identifiers.                               |
-| `search_validate_search_query` | Validate that a Lucene query complies with Flare's search rules before running it. Useful when composing or debugging a query.     |
-| `events_get_event_type`        | Return the documentation and searchable field list for a given event type (e.g. `chat_message`, `forum_post`, `stealer_log`).      |
-| `profile_get`           | Return the current user's profile, including tenants, permissions, feature flags, and default tenant id.                           |
-
+| Tool                           | Description                                                                                                                    |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `search_global`                | Global Search — executes a Lucene query against the entire Flare threat-intel dataset.                                          |
+| `search_tenant`                | Tenant Search — executes a Lucene query scoped to events matching the caller's monitored identifiers.                           |
+| `search_validate_search_query` | Validates that a Lucene query complies with Flare's search rules before running it. Useful when composing or debugging a query. |
+| `events_get_event`             | Returns the complete event payload (metadata + data) for a single uid.                                                                 |
+| `events_get_event_type`        | Returns the documentation and searchable field list for a given event type (e.g. `chat_message`, `forum_post`, `stealer_log`).  |
+| `profile_get`                  | Returns the current user's profile, including tenants, permissions, feature flags, and default tenant id.                       |
 
 <Note>
-  `search_global` requires the Global Search permission on the target
-  tenant.
+  `search_global` requires the Global Search permission on the target tenant.
 </Note>
 
 ### Search Parameters
@@ -89,12 +86,13 @@ Requests default to your account's default tenant. To scope MCP tool calls
 to a specific tenant, set the `X-Flare-Tenant-Id` header on the MCP
 connection to the target tenant id. You can find your tenant ids via the `profile_get` MCP tool, or on the [Profile page](https://app.flare.io/#/profile) under the "Tenants" section
 (also documented in the
-[Authentication Guide <Icon icon="book" size={16} />](/concepts/authentication#finding-tenant-ids)). 
+[Authentication Guide <Icon icon="book" size={16} />](/concepts/authentication#finding-tenant-ids)).
 
 ## Client Setup
 
 <Note>
-The `X-Flare-Tenant-Id` header is optional: omitting it uses your default tenant.
+  The `X-Flare-Tenant-Id` header is optional: omitting it uses your default
+  tenant.
 </Note>
 
 ### Claude Code
@@ -108,6 +106,7 @@ claude mcp add flare --transport http https://api.flare.io/mcp \
   --header "Authorization: <api-key>" \
   --header "X-Flare-Tenant-Id: <tenant-id>"
 ```
+
 The Flare API key is obtained from the
 [Authentication Guide <Icon icon="book" size={16} />](/concepts/authentication).
 
@@ -134,9 +133,9 @@ under the `flare` server in the `/mcp` command output, and Claude will call
 them automatically when your prompts match their descriptions.
 
 <Note>
-  Store the API key outside version control. Claude Code also supports
-  reading headers from environment variables — see the
-  [Claude Code MCP docs](https://code.claude.com/docs/en/mcp#environment-variable-expansion-in-mcp-json)
+  Store the API key outside version control. Claude Code also supports reading
+  headers from environment variables — see the [Claude Code MCP
+  docs](https://code.claude.com/docs/en/mcp#environment-variable-expansion-in-mcp-json)
   for details.
 </Note>
 
@@ -168,26 +167,30 @@ The file is also reachable through **Settings → Developer → Edit Config**.
   }
 }
 ```
+
 Once the change is in place, you should fully quit and relaunch Claude Desktop.
 
 ### Cursor
-  The server can be added to the `.cursor/mcp.json` in your project (or
-  `~/.cursor/mcp.json` to make it available in all projects). 
-  ```json .cursor/mcp.json
-  {
-    "mcpServers": {
-      "flare": {
-        "url": "https://api.flare.io/mcp",
-        "headers": {
-          "Authorization": "<api-key>",
-          "X-Flare-Tenant-Id": "<tenant-id>"
-        }
+
+The server can be added to the `.cursor/mcp.json` in your project (or
+`~/.cursor/mcp.json` to make it available in all projects).
+
+```json .cursor/mcp.json
+{
+  "mcpServers": {
+    "flare": {
+      "url": "https://api.flare.io/mcp",
+      "headers": {
+        "Authorization": "<api-key>",
+        "X-Flare-Tenant-Id": "<tenant-id>"
       }
     }
   }
-  ```
-  Cursor picks up the change automatically: check **Settings → MCP** to confirm the MCP server is connected. 
-  See [Cursor's MCP docs](https://cursor.com/docs/mcp) for details.
+}
+```
+
+Cursor picks up the change automatically: check **Settings → MCP** to confirm the MCP server is connected.
+See [Cursor's MCP docs](https://cursor.com/docs/mcp) for details.
 
 ## Quotas & Rate Limits
 

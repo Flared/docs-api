@@ -5,6 +5,7 @@ import sys
 
 from typing import Any
 
+
 HTTP_METHODS = {"get", "put", "post", "delete", "options", "head", "patch", "trace"}
 
 
