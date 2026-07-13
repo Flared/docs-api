@@ -112,7 +112,7 @@ The Flare API key is obtained from the
 [Authentication Guide <Icon icon="book" size={16} />](/concepts/authentication).
 
 Alternatively, you may create an
-`.mcp.json` file at the root of your project and restart Claude Code once the file is in place: 
+`.mcp.json` file at the root of your project and restart Claude Code once the file is in place:
 
 ```json .mcp.json
 {
@@ -142,8 +142,8 @@ them automatically when your prompts match their descriptions.
 
 ### Claude Desktop
 
-Claude Desktop's configuration file only supports local (stdio) servers, so the connection goes through the mcp-remote bridge via `npx` (requires Node.js).
-The configuration file is located at: 
+Claude Desktop's configuration file only supports local (stdio) servers, so the connection goes through the `mcp-remote` bridge via `npx` (requires Node.js).
+The configuration file is located at:
 
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
@@ -186,7 +186,7 @@ Once the change is in place, you should fully quit and relaunch Claude Desktop.
     }
   }
   ```
-  Cursor picks up the change automatically: check Settings → MCP to confirm the MCP server is connected. 
+  Cursor picks up the change automatically: check **Settings → MCP** to confirm the MCP server is connected. 
   See [Cursor's MCP docs](https://cursor.com/docs/mcp) for details.
 
 ## Quotas & Rate Limits
