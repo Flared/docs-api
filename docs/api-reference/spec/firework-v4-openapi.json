@@ -418,10 +418,19 @@
                                                     "$ref": "#/components/schemas/ForumPostEvent"
                                                 },
                                                 {
+                                                    "$ref": "#/components/schemas/InvalidCredentialEvent"
+                                                },
+                                                {
+                                                    "$ref": "#/components/schemas/LeakedCredentialEvent"
+                                                },
+                                                {
                                                     "$ref": "#/components/schemas/ListingEvent"
                                                 },
                                                 {
                                                     "$ref": "#/components/schemas/LookalikeDomainEvent"
+                                                },
+                                                {
+                                                    "$ref": "#/components/schemas/MitigatedCredentialEvent"
                                                 },
                                                 {
                                                     "$ref": "#/components/schemas/PasteEvent"
@@ -434,6 +443,9 @@
                                                 },
                                                 {
                                                     "$ref": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent"
+                                                },
+                                                {
+                                                    "$ref": "#/components/schemas/ValidCredentialEvent"
                                                 }
                                             ],
                                             "discriminator": {
@@ -444,12 +456,16 @@
                                                     "chat_message": "#/components/schemas/ChatMessageEvent",
                                                     "cc": "#/components/schemas/FinancialEvent",
                                                     "forum_post": "#/components/schemas/ForumPostEvent",
+                                                    "invalid_credential": "#/components/schemas/InvalidCredentialEvent",
+                                                    "leaked_credential": "#/components/schemas/LeakedCredentialEvent",
                                                     "listing": "#/components/schemas/ListingEvent",
                                                     "lookalike": "#/components/schemas/LookalikeDomainEvent",
+                                                    "mitigated_credential": "#/components/schemas/MitigatedCredentialEvent",
                                                     "paste": "#/components/schemas/PasteEvent",
                                                     "ransomleak": "#/components/schemas/RansomLeakEvent",
                                                     "social_media_account": "#/components/schemas/SocialMediaEvent",
-                                                    "stealer_log": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent"
+                                                    "stealer_log": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent",
+                                                    "valid_credential": "#/components/schemas/ValidCredentialEvent"
                                                 }
                                             }
                                         },
@@ -2608,6 +2624,7 @@
                     "driller_profile",
                     "driller_source_code",
                     "entity_classification",
+                    "entity_summarization",
                     "event",
                     "experimental",
                     "forum_category",
@@ -4417,6 +4434,32 @@
                     "credential_hash"
                 ],
                 "title": "CredentialActionTarget"
+            },
+            "CredentialEventData": {
+                "properties": {
+                    "identity_name": {
+                        "type": "string",
+                        "title": "Identity Name",
+                        "description": "The email or username associated with the credential."
+                    },
+                    "credential_hash": {
+                        "type": "string",
+                        "title": "Credential Hash",
+                        "description": "A hash uniquely identifying the credential."
+                    },
+                    "tenant_integration_id": {
+                        "type": "string",
+                        "title": "Tenant Integration Id",
+                        "description": "The UUID of the tenant's IdP integration that validated the credential."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "identity_name",
+                    "credential_hash",
+                    "tenant_integration_id"
+                ],
+                "title": "CredentialEventData"
             },
             "CredentialsData": {
                 "properties": {
@@ -7192,6 +7235,28 @@
                 ],
                 "title": "IntelType"
             },
+            "InvalidCredentialEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "invalid_credential",
+                        "title": "Event Type",
+                        "default": "invalid_credential"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/CredentialEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Invalid Credential"
+            },
             "IpQuery": {
                 "properties": {
                     "type": {
@@ -7273,6 +7338,80 @@
                     "fr"
                 ],
                 "title": "Language"
+            },
+            "LeakedCredentialEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "leaked_credential",
+                        "title": "Event Type",
+                        "default": "leaked_credential"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/LeakedCredentialEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Leaked Credential"
+            },
+            "LeakedCredentialEventData": {
+                "properties": {
+                    "identity_name": {
+                        "type": "string",
+                        "title": "Identity Name",
+                        "description": "The email or username associated with the leaked credential."
+                    },
+                    "imported_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Imported At",
+                        "description": "When the credential was imported into Flare."
+                    },
+                    "password": {
+                        "type": "string",
+                        "title": "Password",
+                        "description": "The leaked password, or its hash if not available in cleartext."
+                    },
+                    "source": {
+                        "$ref": "#/components/schemas/LeakedCredentialEventSource",
+                        "description": "The source the credential was leaked from."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "identity_name",
+                    "imported_at",
+                    "password",
+                    "source"
+                ],
+                "title": "LeakedCredentialEventData"
+            },
+            "LeakedCredentialEventSource": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id",
+                        "description": "The identifier of the leak source category."
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "The name of the leak source category."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "title": "LeakedCredentialEventSource"
             },
             "LeakedCredentialsBulkActionType": {
                 "type": "string",
@@ -7700,6 +7839,60 @@
                     "ASTP_DOMAIN"
                 ],
                 "title": "MatchingPolicyType"
+            },
+            "MitigatedCredentialEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "mitigated_credential",
+                        "title": "Event Type",
+                        "default": "mitigated_credential"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/MitigatedCredentialEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Mitigated Credential"
+            },
+            "MitigatedCredentialEventData": {
+                "properties": {
+                    "identity_name": {
+                        "type": "string",
+                        "title": "Identity Name",
+                        "description": "The email or username associated with the credential."
+                    },
+                    "credential_hash": {
+                        "type": "string",
+                        "title": "Credential Hash",
+                        "description": "A hash uniquely identifying the credential."
+                    },
+                    "tenant_integration_id": {
+                        "type": "string",
+                        "title": "Tenant Integration Id",
+                        "description": "The UUID of the tenant's IdP integration that validated the credential."
+                    },
+                    "mitigation_action": {
+                        "type": "string",
+                        "title": "Mitigation Action",
+                        "description": "The action the tenant's IdP integration took to mitigate the credential"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "identity_name",
+                    "credential_hash",
+                    "tenant_integration_id",
+                    "mitigation_action"
+                ],
+                "title": "MitigatedCredentialEventData"
             },
             "NameData": {
                 "properties": {
@@ -9892,6 +10085,34 @@
                 ],
                 "title": "SubdomainTag"
             },
+            "Tag": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "repository_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Repository Name"
+                    }
+                },
+                "type": "object",
+                "title": "Tag"
+            },
             "TenantMetadataResponse": {
                 "properties": {
                     "uid": {
@@ -10133,6 +10354,28 @@
                     "username"
                 ],
                 "title": "UsernameQuery"
+            },
+            "ValidCredentialEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "valid_credential",
+                        "title": "Event Type",
+                        "default": "valid_credential"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/CredentialEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Valid Credential"
             },
             "ValidationError": {
                 "properties": {
