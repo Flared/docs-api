@@ -1,0 +1,14 @@
+---
+title: "Service"
+---
+
+import ServiceExample from '/snippets/event_model_examples/service.mdx'
+
+The `service` type represents an internet-exposed service, such as a web server listening on a public IP address.
+
+Each record corresponds to a single host and port combination and may include:
+- Network details (IP address, port, hostname, ASN, country, and the organization managing the IP).
+- Protocol and product (for example `https` served by Apache httpd), plus a URL and raw response content when available.
+- CVE identifiers of vulnerabilities the service may be affected by.
+
+<ServiceExample />

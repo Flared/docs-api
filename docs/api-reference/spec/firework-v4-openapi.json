@@ -439,6 +439,9 @@
                                                     "$ref": "#/components/schemas/RansomLeakEvent"
                                                 },
                                                 {
+                                                    "$ref": "#/components/schemas/ServiceEvent"
+                                                },
+                                                {
                                                     "$ref": "#/components/schemas/SocialMediaEvent"
                                                 },
                                                 {
@@ -463,6 +466,7 @@
                                                     "mitigated_credential": "#/components/schemas/MitigatedCredentialEvent",
                                                     "paste": "#/components/schemas/PasteEvent",
                                                     "ransomleak": "#/components/schemas/RansomLeakEvent",
+                                                    "service": "#/components/schemas/ServiceEvent",
                                                     "social_media_account": "#/components/schemas/SocialMediaEvent",
                                                     "stealer_log": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent",
                                                     "valid_credential": "#/components/schemas/ValidCredentialEvent"
@@ -9759,6 +9763,162 @@
                     "secret"
                 ],
                 "title": "SecretQuery"
+            },
+"ServiceEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "service",
+                        "title": "Event Type",
+                        "default": "service"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/ServiceEventData"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "metadata"
+                ],
+                "title": "Service"
+            },
+            "ServiceEventData": {
+                "properties": {
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url",
+                        "description": "The URL to the service. This may be an IP address and port combination."
+                    },
+                    "asn": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Asn",
+                        "description": "The Autonomous System Number."
+                    },
+                    "content": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Content",
+                        "description": "The raw content returned by the service."
+                    },
+                    "service": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Service",
+                        "description": "The protocol of the service e.g. https"
+                    },
+                    "product": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Product",
+                        "description": "The software product that powers the service e.g. Apache httpd"
+                    },
+                    "port": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Port",
+                        "description": "The port the service listens on."
+                    },
+                    "ip_address": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ip Address",
+                        "description": "The IP address of the service."
+                    },
+                    "organization": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Organization",
+                        "description": "The organization that manages the IP address, often a hosting provider."
+                    },
+                    "hostname": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Hostname",
+                        "description": "The hostname the service is served under."
+                    },
+                    "country_code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Country Code",
+                        "description": "The country code of the IP address."
+                    },
+                    "vulnerabilities": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Vulnerabilities",
+                        "description": "CVE identifiers of vulnerabilities the service is potentially affected by."
+                    }
+                },
+                "type": "object",
+                "title": "ServiceEventData"
             },
             "Severity": {
                 "type": "string",
