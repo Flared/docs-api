@@ -334,6 +334,7 @@
               "event-types-v2/mitigated-credential",
               "event-types-v2/paste",
               "event-types-v2/ransom-leak",
+              "event-types-v2/service",
               "event-types-v2/social-media-account",
               "event-types-v2/stealer-log",
               "event-types-v2/valid-credential"
