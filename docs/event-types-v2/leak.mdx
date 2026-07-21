@@ -1,0 +1,14 @@
+---
+title: "Leak"
+---
+
+import LeakExample from '/snippets/event_model_examples/leak.mdx'
+
+The `leak` type represents a discrete data leak, such as a batch of credentials or PII published on a leak site.
+
+Each record corresponds to a single leak and may include:
+- The search term that matched the leak and the site it originated from.
+- Timing details: when the leak occurred and when the breach was disclosed.
+- The number of leaked credentials and the categories of PII exposed.
+
+<LeakExample />

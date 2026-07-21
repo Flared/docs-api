@@ -1,0 +1,36 @@
+{/*
+    If you are in pyro:
+    - If this file changes, you should also modify the API docs.
+    - https://github.com/flared/docs-api/
+
+    If you are in mintlify:
+    - Don't edit this directly, edit the generator in pyro.
+    - pyro/pyro/mintlify/test_firework_event_models.py
+*/}
+
+```json Leak
+{
+    "event_type": "leak",
+    "metadata": {
+        "estimated_created_at": "2025-01-01T00:00:00",
+        "flare_url": "https://app.flare.io/#/uid",
+        "matched_at": null,
+        "severity": "info",
+        "uid": "index/source/id"
+    },
+    "data": {
+        "term": "leakforum",
+        "site_url": "leakforum.com",
+        "leaked_at": "2024-01-10T00:00:00",
+        "breached_at": "2024-01-10T00:00:00",
+        "leaked_credential_count": 2,
+        "pii_tags": [
+            "Emails"
+        ],
+        "source": {
+            "id": "leak_forum",
+            "name": "Leak Forum"
+        }
+    }
+}
+```
