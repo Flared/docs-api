@@ -421,6 +421,9 @@
                                                     "$ref": "#/components/schemas/ForumPostEvent"
                                                 },
                                                 {
+                                                    "$ref": "#/components/schemas/DockerImageEvent"
+                                                },
+                                                {
                                                     "$ref": "#/components/schemas/InvalidCredentialEvent"
                                                 },
                                                 {
@@ -461,6 +464,7 @@
                                                     "bucket": "#/components/schemas/BucketEvent",
                                                     "chat_message": "#/components/schemas/ChatMessageEvent",
                                                     "cc": "#/components/schemas/FinancialEvent",
+                                                    "docker_image": "#/components/schemas/DockerImageEvent",
                                                     "docker_repository": "#/components/schemas/DockerRepositoryEvent",
                                                     "forum_post": "#/components/schemas/ForumPostEvent",
                                                     "invalid_credential": "#/components/schemas/InvalidCredentialEvent",
@@ -4628,6 +4632,117 @@
                     "query"
                 ],
                 "title": "CredentialsQueryPayload"
+            },
+            "DockerImageEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "docker_image",
+                        "title": "Event Type",
+                        "default": "docker_image"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/DockerImageEventData"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "metadata"
+                ],
+                "title": "Docker Image"
+            },
+            "DockerImageEventData": {
+                "properties": {
+                    "content": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Content"
+                    },
+                    "digest": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Digest"
+                    },
+                    "architecture": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Architecture"
+                    },
+                    "os": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Os"
+                    },
+                    "last_pushed_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Pushed At"
+                    },
+                    "last_pulled_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Pulled At"
+                    },
+                    "tags": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/Tag"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Tags",
+                        "default": []
+                    }
+                },
+                "type": "object",
+                "title": "DockerImageEventData"
             },
             "DockerRepositoryEvent": {
                 "properties": {
