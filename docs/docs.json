@@ -330,6 +330,7 @@
               "event-types-v2/forum-post",
               "event-types-v2/invalid-credential",
               "event-types-v2/leaked-credential",
+              "event-types-v2/docker-image",
               "event-types-v2/docker-repository",
               "event-types-v2/listing",
               "event-types-v2/mitigated-credential",

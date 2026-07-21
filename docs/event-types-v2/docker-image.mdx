@@ -1,0 +1,16 @@
+---
+title: "Docker Image"
+---
+
+import DockerImageExample from '/snippets/event_model_examples/docker_image.mdx'
+
+The `docker_image` type represents a Docker image discovered on Docker Hub that has been recently created or updated. Image manifests are scanned for identifiers and secrets.
+
+Each record corresponds to a single image and may include:
+- The image digest and the tags it is published under, with their repository names.
+- Platform details (architecture and operating system).
+- When the image was last pushed and last pulled.
+- The raw image manifest content.
+
+
+<DockerImageExample />
