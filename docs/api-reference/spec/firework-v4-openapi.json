@@ -415,6 +415,9 @@
                                                     "$ref": "#/components/schemas/FinancialEvent"
                                                 },
                                                 {
+                                                    "$ref": "#/components/schemas/DockerRepositoryEvent"
+                                                },
+                                                {
                                                     "$ref": "#/components/schemas/ForumPostEvent"
                                                 },
                                                 {
@@ -458,6 +461,7 @@
                                                     "bucket": "#/components/schemas/BucketEvent",
                                                     "chat_message": "#/components/schemas/ChatMessageEvent",
                                                     "cc": "#/components/schemas/FinancialEvent",
+                                                    "docker_repository": "#/components/schemas/DockerRepositoryEvent",
                                                     "forum_post": "#/components/schemas/ForumPostEvent",
                                                     "invalid_credential": "#/components/schemas/InvalidCredentialEvent",
                                                     "leaked_credential": "#/components/schemas/LeakedCredentialEvent",
@@ -4624,6 +4628,121 @@
                     "query"
                 ],
                 "title": "CredentialsQueryPayload"
+            },
+            "DockerRepositoryEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "docker_repository",
+                        "title": "Event Type",
+                        "default": "docker_repository"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/DockerRepositoryEventData"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "metadata"
+                ],
+                "title": "Docker Repository"
+            },
+            "DockerRepositoryEventData": {
+                "properties": {
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url",
+                        "description": "The URL of the Docker repository."
+                    },
+                    "star_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Star Count",
+                        "description": "The number of stars the repository has received."
+                    },
+                    "pull_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Pull Count",
+                        "description": "The total number of pulls made against the repository."
+                    },
+                    "collaborator_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Collaborator Count",
+                        "description": "The number of collaborators associated with the repository."
+                    },
+                    "last_updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Updated At",
+                        "description": "The timestamp at which the repository was last updated."
+                    },
+                    "last_modified_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Modified At",
+                        "description": "The timestamp at which the repository's metadata was last modified."
+                    },
+                    "registered_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Registered At",
+                        "description": "The timestamp at which the repository was first registered."
+                    }
+                },
+                "type": "object",
+                "title": "DockerRepositoryEventData"
             },
             "DomainAssetEnrichment": {
                 "properties": {
@@ -9764,7 +9883,7 @@
                 ],
                 "title": "SecretQuery"
             },
-"ServiceEvent": {
+            "ServiceEvent": {
                 "properties": {
                     "event_type": {
                         "type": "string",
