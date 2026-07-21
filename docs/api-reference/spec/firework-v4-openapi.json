@@ -409,6 +409,9 @@
                                                     "$ref": "#/components/schemas/BucketEvent"
                                                 },
                                                 {
+                                                    "$ref": "#/components/schemas/BucketObjectEvent"
+                                                },
+                                                {
                                                     "$ref": "#/components/schemas/ChatMessageEvent"
                                                 },
                                                 {
@@ -425,6 +428,9 @@
                                                 },
                                                 {
                                                     "$ref": "#/components/schemas/InvalidCredentialEvent"
+                                                },
+                                                {
+                                                    "$ref": "#/components/schemas/LeakEvent"
                                                 },
                                                 {
                                                     "$ref": "#/components/schemas/LeakedCredentialEvent"
@@ -462,12 +468,14 @@
                                                 "mapping": {
                                                     "blog_post": "#/components/schemas/BlogPostEvent",
                                                     "bucket": "#/components/schemas/BucketEvent",
+                                                    "bucket_object": "#/components/schemas/BucketObjectEvent",
                                                     "chat_message": "#/components/schemas/ChatMessageEvent",
                                                     "cc": "#/components/schemas/FinancialEvent",
                                                     "docker_image": "#/components/schemas/DockerImageEvent",
                                                     "docker_repository": "#/components/schemas/DockerRepositoryEvent",
                                                     "forum_post": "#/components/schemas/ForumPostEvent",
                                                     "invalid_credential": "#/components/schemas/InvalidCredentialEvent",
+                                                    "leak": "#/components/schemas/LeakEvent",
                                                     "leaked_credential": "#/components/schemas/LeakedCredentialEvent",
                                                     "listing": "#/components/schemas/ListingEvent",
                                                     "lookalike": "#/components/schemas/LookalikeDomainEvent",
@@ -3771,6 +3779,53 @@
                     "bucket"
                 ],
                 "title": "BucketEventData"
+            },
+            "BucketObjectEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "bucket_object",
+                        "title": "Event Type",
+                        "default": "bucket_object"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/BucketObjectEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Bucket Object"
+            },
+            "BucketObjectEventData": {
+                "properties": {
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url",
+                        "description": "The URL to the bucket object."
+                    },
+                    "bucket": {
+                        "$ref": "#/components/schemas/BucketData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "url",
+                    "bucket"
+                ],
+                "title": "BucketObjectEventData"
             },
             "CCBinData": {
                 "properties": {
@@ -7576,6 +7631,119 @@
                     "fr"
                 ],
                 "title": "Language"
+            },
+            "LeakEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "leak",
+                        "title": "Event Type",
+                        "default": "leak"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/LeakEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Leak"
+            },
+            "LeakEventData": {
+                "properties": {
+                    "term": {
+                        "type": "string",
+                        "title": "Term",
+                        "description": "The search term that matched this leak."
+                    },
+                    "site_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Site Url",
+                        "description": "The URL of the site the leak originated from."
+                    },
+                    "leaked_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Leaked At",
+                        "description": "When the leak occurred."
+                    },
+                    "breached_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Breached At",
+                        "description": "When the breach was disclosed."
+                    },
+                    "leaked_credential_count": {
+                        "type": "integer",
+                        "title": "Leaked Credential Count",
+                        "description": "Number of credentials contained in this leak."
+                    },
+                    "pii_tags": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Pii Tags",
+                        "description": "PII categories present in this leak."
+                    },
+                    "source": {
+                        "$ref": "#/components/schemas/LeakEventSource",
+                        "description": "The source of the leak."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "term",
+                    "leaked_credential_count",
+                    "source"
+                ],
+                "title": "LeakEventData"
+            },
+            "LeakEventSource": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id",
+                        "description": "The identifier of the leak source category."
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "The name of the leak source category."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "title": "LeakEventSource"
             },
             "LeakedCredentialEvent": {
                 "properties": {
