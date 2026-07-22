@@ -27,7 +27,9 @@ themselves), see the
 | `profile_get`                  | Returns the current user's profile, including tenants, permissions, feature flags, and default tenant id.                       |
 
 <Note>
-  `search_global` requires the Global Search permission on the target tenant.
+  `search_global` requires the Global Search permission on the target tenant. Each call counts against the tenant's monthly Global Search quota.
+
+  For additional information, please refer to [Global Search Quota](https://docs.flare.io/global-search-quota).
 </Note>
 
 ### Search Parameters
