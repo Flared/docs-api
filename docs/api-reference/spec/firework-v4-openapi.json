@@ -406,6 +406,9 @@
                                                     "$ref": "#/components/schemas/BlogPostEvent"
                                                 },
                                                 {
+                                                    "$ref": "#/components/schemas/BotEvent"
+                                                },
+                                                {
                                                     "$ref": "#/components/schemas/BucketEvent"
                                                 },
                                                 {
@@ -418,13 +421,13 @@
                                                     "$ref": "#/components/schemas/FinancialEvent"
                                                 },
                                                 {
+                                                    "$ref": "#/components/schemas/DockerImageEvent"
+                                                },
+                                                {
                                                     "$ref": "#/components/schemas/DockerRepositoryEvent"
                                                 },
                                                 {
                                                     "$ref": "#/components/schemas/ForumPostEvent"
-                                                },
-                                                {
-                                                    "$ref": "#/components/schemas/DockerImageEvent"
                                                 },
                                                 {
                                                     "$ref": "#/components/schemas/InvalidCredentialEvent"
@@ -467,6 +470,7 @@
                                                 "propertyName": "event_type",
                                                 "mapping": {
                                                     "blog_post": "#/components/schemas/BlogPostEvent",
+                                                    "bot": "#/components/schemas/BotEvent",
                                                     "bucket": "#/components/schemas/BucketEvent",
                                                     "bucket_object": "#/components/schemas/BucketObjectEvent",
                                                     "chat_message": "#/components/schemas/ChatMessageEvent",
@@ -3659,6 +3663,175 @@
                     "data"
                 ],
                 "title": "Blog Post"
+            },
+            "BotEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "bot",
+                        "title": "Event Type",
+                        "default": "bot"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/BotEventData"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "metadata"
+                ],
+                "title": "Bot"
+            },
+            "BotEventActor": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id",
+                        "description": "The ID of the seller that put the bot up for sale."
+                    }
+                },
+                "type": "object",
+                "title": "BotEventActor"
+            },
+            "BotEventData": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "The name of the bot listing."
+                    },
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url",
+                        "description": "The URL of the bot listing on the marketplace."
+                    },
+                    "actor": {
+                        "$ref": "#/components/schemas/BotEventActor",
+                        "description": "Data about the seller of the bot listing."
+                    },
+                    "victim_information": {
+                        "$ref": "#/components/schemas/BotVictimInformation",
+                        "description": "Collection of data about the victim's infected device."
+                    },
+                    "price": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Price",
+                        "description": "The price of the bot listing."
+                    },
+                    "currency": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Currency",
+                        "description": "The currency for the bot listing price."
+                    }
+                },
+                "type": "object",
+                "title": "BotEventData"
+            },
+            "BotVictimInformation": {
+                "properties": {
+                    "country_code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Country Code",
+                        "description": "The country code tied to the infected device."
+                    },
+                    "location": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Location",
+                        "description": "The location of the infected device."
+                    },
+                    "isp": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Isp",
+                        "description": "The ISP of the infected device."
+                    },
+                    "installed_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Installed At",
+                        "description": "The date and time the malware was installed on the infected device."
+                    },
+                    "os": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Os",
+                        "description": "The operating system of the infected device."
+                    }
+                },
+                "type": "object",
+                "title": "BotVictimInformation"
             },
             "BrandData": {
                 "properties": {
@@ -10041,6 +10214,32 @@
                     "role"
                 ],
                 "title": "RoleData"
+            },
+            "SandboxUploadPutUrlResponse": {
+                "properties": {
+                    "upload_url": {
+                        "type": "string",
+                        "title": "Upload Url"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "upload_url"
+                ],
+                "title": "SandboxUploadPutUrlResponse"
+            },
+            "SandboxUploadUrlRequest": {
+                "properties": {
+                    "filename": {
+                        "type": "string",
+                        "title": "Filename"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "filename"
+                ],
+                "title": "SandboxUploadUrlRequest"
             },
             "SearchQueryData": {
                 "properties": {
