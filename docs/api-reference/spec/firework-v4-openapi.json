@@ -10215,32 +10215,6 @@
                 ],
                 "title": "RoleData"
             },
-            "SandboxUploadPutUrlResponse": {
-                "properties": {
-                    "upload_url": {
-                        "type": "string",
-                        "title": "Upload Url"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "upload_url"
-                ],
-                "title": "SandboxUploadPutUrlResponse"
-            },
-            "SandboxUploadUrlRequest": {
-                "properties": {
-                    "filename": {
-                        "type": "string",
-                        "title": "Filename"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "filename"
-                ],
-                "title": "SandboxUploadUrlRequest"
-            },
             "SearchQueryData": {
                 "properties": {
                     "type": {
