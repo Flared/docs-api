@@ -34,8 +34,8 @@ themselves), see the
 
 ### Search Parameters
 
-The `search_global` and `search_tenant` tools accept the
-same parameters:
+The `search_global` and `search_tenant` tools share the following
+parameters:
 
 <ParamField body="query" type="string" required>
   Lucene query.
@@ -50,12 +50,37 @@ same parameters:
   List of event types to scope the search. Defaults to all event types.
 </ParamField>
 
+<ParamField body="severity" type="array of string">
+  Filter results by event severity. Passing an array returns only events whose
+  severity exactly matches one of the listed values. Allowed values: `info`,
+  `low`, `medium`, `high`, `critical`.
+</ParamField>
+
 <ParamField body="size" type="integer" default="10">
   Number of results to return. Between `1` and `10`.
 </ParamField>
 
 <ParamField body="cursor" type="string">
   Opaque pagination cursor from a previous response.
+</ParamField>
+
+#### Tenant Search Parameters
+
+In addition to the shared parameters above, `search_tenant` accepts the
+following tenant-scoped filters:
+
+<ParamField body="tags" type="array of string">
+  Filter results to events that carry at least one of the given tenant tags.
+</ParamField>
+
+<ParamField body="is_ignored" type="boolean">
+  If `true`, only return events that have been marked as ignored. `false` has no
+  effect and behaves the same as omitting it.
+</ParamField>
+
+<ParamField body="is_remediated" type="boolean">
+  If `true`, only return events that have been marked as remediated. `false` has
+  no effect and behaves the same as omitting it.
 </ParamField>
 
 ### Prompt Examples
