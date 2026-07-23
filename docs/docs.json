@@ -324,6 +324,7 @@
             "pages": [
               "event-types-v2/overview",
               "event-types-v2/blog-post",
+              "event-types-v2/bot",
               "event-types-v2/bucket",
               "event-types-v2/bucket-object",
               "event-types-v2/chat-message",
