@@ -4,9 +4,9 @@ api: "POST https://api.flare.io/astp/identities/by_accounts"
 authMethod: "bearer"
 ---
 
-import GatedAccessFeatureAstp from '/snippets/gated-access-feature-astp.mdx';
+import GatedAccessFeature from '/snippets/gated-access-feature.mdx';
 
-<GatedAccessFeatureAstp />
+<GatedAccessFeature name="Account & Session Takeover Prevention (ASTP)" />
 
 Returns a list of identities with leaked passwords given a list of accounts.
 This endpoint only matches exact accounts and doesn’t allow wildcard or domain searches.
