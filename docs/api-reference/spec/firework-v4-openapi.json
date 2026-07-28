@@ -2530,6 +2530,90 @@
                 }
             }
         },
+        "/firework/v4/sandbox/submissions/{submission_uuid}/asset_sync": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=integration"
+                ],
+                "summary": "Trigger Submission Asset Sync",
+                "operationId": "trigger_submission_asset_sync_sandbox_submissions__submission_uuid__asset_sync_post",
+                "parameters": [
+                    {
+                        "name": "submission_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Submission Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/sandbox/uploads": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=integration"
+                ],
+                "summary": "Create Presigned Upload Url",
+                "operationId": "create_presigned_upload_url_sandbox_uploads_post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SandboxUploadUrlRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SandboxUploadPutUrlResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/hubspot/flare_sync_webhook": {
             "post": {
                 "tags": [
@@ -3634,12 +3718,6 @@
                     }
                 },
                 "type": "object",
-                "required": [
-                    "url",
-                    "content",
-                    "description",
-                    "posted_at"
-                ],
                 "title": "BlogPostData"
             },
             "BlogPostEvent": {
@@ -3900,10 +3978,6 @@
                     }
                 },
                 "type": "object",
-                "required": [
-                    "host",
-                    "provider"
-                ],
                 "title": "BucketData"
             },
             "BucketEvent": {
@@ -3948,7 +4022,6 @@
                 },
                 "type": "object",
                 "required": [
-                    "url",
                     "bucket"
                 ],
                 "title": "BucketEventData"
@@ -5363,9 +5436,7 @@
                 },
                 "type": "object",
                 "required": [
-                    "estimated_created_at",
                     "flare_url",
-                    "matched_at",
                     "severity",
                     "uid"
                 ],
@@ -6193,24 +6264,6 @@
                     }
                 },
                 "type": "object",
-                "required": [
-                    "bank",
-                    "bin",
-                    "brand",
-                    "country",
-                    "expiration",
-                    "owner",
-                    "state_code",
-                    "zip",
-                    "has_cvv",
-                    "has_date_of_birth",
-                    "has_mother_maiden_name",
-                    "has_phone",
-                    "has_pin",
-                    "has_ssn",
-                    "has_track_1",
-                    "has_vbv"
-                ],
                 "title": "FinancialEventData"
             },
             "ForumPostData": {
@@ -6264,10 +6317,7 @@
                 "type": "object",
                 "required": [
                     "actor",
-                    "context",
-                    "posted_at",
-                    "content",
-                    "url"
+                    "context"
                 ],
                 "title": "ForumPostData"
             },
@@ -8253,13 +8303,7 @@
                 },
                 "type": "object",
                 "required": [
-                    "domain",
-                    "registered_at",
-                    "identifier_domains",
-                    "feed",
-                    "cert_data",
-                    "subject",
-                    "issuer"
+                    "domain"
                 ],
                 "title": "LookalikeDomainEventData"
             },
@@ -8330,12 +8374,6 @@
                     }
                 },
                 "type": "object",
-                "required": [
-                    "malware_family",
-                    "build_id",
-                    "file_location",
-                    "infected_at"
-                ],
                 "title": "MalwareInformation"
             },
             "MatchingPolicyAssignmentPayload": {
@@ -9887,14 +9925,6 @@
                     }
                 },
                 "type": "object",
-                "required": [
-                    "url",
-                    "response_url",
-                    "title",
-                    "content",
-                    "body",
-                    "victim_information"
-                ],
                 "title": "RansomLeakEventData"
             },
             "Recommendation": {
@@ -10214,6 +10244,32 @@
                     "role"
                 ],
                 "title": "RoleData"
+            },
+            "SandboxUploadPutUrlResponse": {
+                "properties": {
+                    "upload_url": {
+                        "type": "string",
+                        "title": "Upload Url"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "upload_url"
+                ],
+                "title": "SandboxUploadPutUrlResponse"
+            },
+            "SandboxUploadUrlRequest": {
+                "properties": {
+                    "filename": {
+                        "type": "string",
+                        "title": "Filename"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "filename"
+                ],
+                "title": "SandboxUploadUrlRequest"
             },
             "SearchQueryData": {
                 "properties": {
@@ -10770,10 +10826,6 @@
                     }
                 },
                 "type": "object",
-                "required": [
-                    "victim_information",
-                    "malware_information"
-                ],
                 "title": "StealerLogEventData"
             },
             "SubdomainStatus": {
@@ -11258,10 +11310,6 @@
                     }
                 },
                 "type": "object",
-                "required": [
-                    "id",
-                    "name"
-                ],
                 "title": "Actor"
             },
             "pyro__findings__forum_posts__datamodels__ForumPostData__Context": {
@@ -11304,11 +11352,6 @@
                     }
                 },
                 "type": "object",
-                "required": [
-                    "category_name",
-                    "topic_id",
-                    "topic_title"
-                ],
                 "title": "Context"
             },
             "pyro__findings__listing__datamodels__ListingEventData__Actor": {
@@ -11526,19 +11569,6 @@
                     }
                 },
                 "type": "object",
-                "required": [
-                    "name",
-                    "display_name",
-                    "domain",
-                    "alternative_domains",
-                    "industry",
-                    "employee_count",
-                    "city",
-                    "state",
-                    "country",
-                    "latitude",
-                    "longitude"
-                ],
                 "title": "VictimInformation"
             },
             "pyro__findings__stealerlogs__datamodels__StealerLogEvent": {
@@ -11778,25 +11808,6 @@
                     }
                 },
                 "type": "object",
-                "required": [
-                    "ip_address",
-                    "ip_network",
-                    "username",
-                    "country_code",
-                    "zip_code",
-                    "location",
-                    "hwid",
-                    "current_language",
-                    "screensize_width",
-                    "screensize_height",
-                    "timezone",
-                    "os",
-                    "uac",
-                    "process_elevation",
-                    "available_keyboards",
-                    "hardware",
-                    "anti_viruses"
-                ],
                 "title": "VictimInformation"
             },
             "pyro__reports__report_store__SortType": {
