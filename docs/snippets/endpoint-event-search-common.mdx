@@ -242,11 +242,21 @@ This endpoint supports the
       If provided, results will be filtered on the tags.
     </ParamField>
 
-    <ParamField body="is_ignored" type="bool">
+    <ParamField body="status" type="string[]">
+      If provided, results will only contain events that match one of the specified statuses.
+
+      <Expandable title="valid status values">
+        `open`
+        `ignored`
+        `remediated`
+      </Expandable>
+    </ParamField>
+
+    <ParamField body="is_ignored" type="bool" deprecated>
       If set to true, results will be filtered to be events that have been ignored.
     </ParamField>
 
-    <ParamField body="is_remediated" type="bool">
+    <ParamField body="is_remediated" type="bool" deprecated>
       If set to true, results will be filtered to be events that have been remediated.
     </ParamField>
   </Expandable>
