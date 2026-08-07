@@ -5,6 +5,26 @@ title: "Lookalike Domain (domain)"
 The `domain` type represents lookalike or typosquatted domains identified by Flare’s detection engines, often leveraging tools such as dnstwist.  
 These records capture information about suspicious domains that closely resemble legitimate organizations’ domains and could be used in phishing, brand impersonation, or malware campaigns.
 
+The `domain` event is also referred to as the discovery event: it is emitted when a lookalike domain is first discovered.
+It is complemented by the `domain_*` enrichment events documented below, which each carry the results of one enrichment (page title, IP addresses, favicon, screenshot, DNS records, WHOIS/RDAP data, SSL certificates) and reference the discovered domain through their `domain` field.
+
+## domain
+
+| Field               | Type                                                    |
+| ------------------- | ------------------------------------------------------- |
+| `name`              | `str`                                                   |
+| `registered_at`     | `str`                                                   |
+| `feed`              | `str`                                                   |
+| `identifier_domain` | `list[str]`                                             |
+| `cert_data`         | `raw`                                                   |
+| `subject`           | `str`                                                   |
+| `issuer`            | `str`                                                   |
+| `features`          | `{domains, reversed_domains, ip_addresses, emails, ...}` |
+| `title`             | `str \| null`                                           |
+| `screenshot`        | `str \| null`                                           |
+| `sources`           | `list[str]`                                             |
+| `url`               | `str \| null`                                           |
+
 ```json Example Content
 {
   "id": "example-id-11223",
@@ -88,3 +108,86 @@ These records capture information about suspicious domains that closely resemble
   "similar_items": []
 }
 ```
+
+## domain_title
+
+The page title observed on the lookalike domain.
+
+| Field    | Type  |
+| -------- | ----- |
+| `title`  | `str` |
+| `domain` | `str` |
+
+## domain_ip_address
+
+The IP addresses the lookalike domain resolves to.
+
+| Field          | Type        |
+| -------------- | ----------- |
+| `ip_addresses` | `list[str]` |
+| `domain`       | `str`       |
+
+## domain_favicon
+
+The favicon observed on the lookalike domain.
+
+| Field     | Type  |
+| --------- | ----- |
+| `favicon` | `str` |
+| `domain`  | `str` |
+
+## domain_screenshot
+
+A screenshot of the lookalike domain's landing page.
+
+| Field        | Type  |
+| ------------ | ----- |
+| `screenshot` | `str` |
+| `domain`     | `str` |
+
+## domain_dns_records
+
+The DNS records observed for the lookalike domain.
+
+| Field          | Type                                  |
+| -------------- | ------------------------------------- |
+| `domain`       | `str`                                 |
+| `a_records`    | `list[str]`                           |
+| `aaaa_records` | `list[str]`                           |
+| `mx_records`   | `list[{priority: int, exchange: str}]` |
+| `ns_records`   | `list[str]`                           |
+| `txt_records`  | `list[str]`                           |
+| `has_spf`      | `bool`                                |
+| `has_dmarc`    | `bool`                                |
+
+## domain_whois_rdap
+
+Registration data for the lookalike domain, collected from both WHOIS and RDAP.
+
+| Field                    | Type        |
+| ------------------------ | ----------- |
+| `registrar`              | `str`       |
+| `contact_email`          | `str`       |
+| `epp_status`             | `list[str]` |
+| `registered_date`        | `datetime`  |
+| `updated_date`           | `datetime`  |
+| `expires_date`           | `datetime`  |
+| `registrant`             | `raw`       |
+| `administrative_contact` | `raw`       |
+| `technical_contact`      | `raw`       |
+| `domain`                 | `str`       |
+
+## domain_certificate
+
+An SSL certificate observed covering the lookalike domain.
+
+| Field                    | Type        |
+| ------------------------ | ----------- |
+| `domain`                 | `str`       |
+| `subject`                | `str`       |
+| `issuer`                 | `str`       |
+| `not_before`             | `datetime`  |
+| `not_after`              | `datetime`  |
+| `authority_info_access`  | `list[str]` |
+| `subject_alt_names`      | `list[str]` |
+| `is_extended_validation` | `bool`      |
