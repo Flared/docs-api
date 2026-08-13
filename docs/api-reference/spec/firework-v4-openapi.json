@@ -9023,6 +9023,18 @@
                     "source": {
                         "$ref": "#/components/schemas/IdentifierSource"
                     },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
                     "data_updated_at": {
                         "type": "string",
                         "format": "date-time",
@@ -9077,6 +9089,7 @@
                 "type": "object",
                 "required": [
                     "source",
+                    "created_at",
                     "data_updated_at",
                     "event_count",
                     "usage_count",
