@@ -5,33 +5,90 @@ title: "Lookalike Domain (domain)"
 The `domain` type represents lookalike or typosquatted domains identified by Flare’s detection engines, often leveraging tools such as dnstwist.  
 These records capture information about suspicious domains that closely resemble legitimate organizations’ domains and could be used in phishing, brand impersonation, or malware campaigns.
 
+The `domain` event is also referred to as the discovery event: it is emitted when a lookalike domain is first discovered.
+It is complemented by the `domain_*` enrichment events documented below, which each carry the results of one enrichment (page title, IP addresses, favicon, screenshot, DNS records, WHOIS/RDAP data, SSL certificates) and reference the discovered domain through their `domain` field.
+
+<Note>Some of the below field types will not be available until after August 26th.</Note>
+
+## domain
+
+| Field               | Type                                                    |
+| ------------------- | ------------------------------------------------------- |
+| `name`              | `str`                                                   |
+| `registered_at`     | `str`                                                   |
+| `feed`              | `str`                                                   |
+| `identifier_domain` | `list[str]`                                             |
+| `cert_data`         | `raw`                                                   |
+| `subject`           | `str`                                                   |
+| `issuer`            | `str`                                                   |
+| `features`          | `{domains, reversed_domains, ip_addresses, emails, ...}` |
+| `title`             | `str \| null`                                           |
+| `screenshot`        | `str \| null`                                           |
+| `sources`           | `list[str]`                                             |
+| `url`               | `str \| null`                                           |
+
 ```json Example Content
 {
-  "id": "example-id-11223",
-  "title": "exampledomain.co.uk",
-  "url": null,
-  "browser_url": null,
-  "name": "exampledomain.co.uk",
-  "registered_at": null,
-  "feed": null,
-  "identifier_domain": ["example.co.uk"],
-  "cert_data": null,
-  "subject": null,
-  "issuer": null,
-  "features": {
-    "domains": ["example.co.uk", "exampledomain.co.uk"],
-    "emails": null,
-    "ip_addresses": null,
-    "ip_addresses_cidr": null,
-    "reversed_domains": ["uk.co.example", "uk.co.exampledomain"],
-    "urls": null,
-    "usernames": null,
-    "vulnerabilities": null
+  "data": {
+    "es_id": "1234/domain/example_source/exampledomain.co.uk",
+    "es_score": 1.0,
+    "highlights": {},
+    "id": "exampledomain.co.uk",
+    "index": "domain",
+    "metadata": {
+      "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+      "event_id": null,
+      "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+      "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+      "payload_digest": null,
+      "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+      "source": "example_source",
+      "crawled_by": null,
+      "flare_url": "https://app.flare.io/#/domain/example_source/exampledomain.co.uk"
+    },
+    "uid": "domain/example_source/exampledomain.co.uk",
+    "url": "https://exampledomain.co.uk/",
+    "browser_url": null,
+    "name": "exampledomain.co.uk",
+    "registered_at": null,
+    "feed": null,
+    "identifier_domain": [
+      "example.co.uk"
+    ],
+    "cert_data": null,
+    "subject": null,
+    "issuer": null,
+    "features": {
+      "domains": [
+        "example.co.uk",
+        "exampledomain.co.uk"
+      ],
+      "emails": null,
+      "ip_addresses": null,
+      "ip_addresses_cidr": null,
+      "reversed_domains": [
+        "uk.co.example",
+        "uk.co.exampledomain"
+      ],
+      "urls": null,
+      "usernames": null,
+      "vulnerabilities": null
+    },
+    "title": "Parking Page",
+    "screenshot": "https://flared-domain-screenshots.s3.amazonaws.com/8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4?AWSAccessKeyId=ASIAEXAMPLEEXAMPLE&Signature=examplesignature%3D&Expires=1786379481",
+    "sources": [
+      "example_source"
+    ]
   },
   "duplicates": [],
   "header": {
     "actor": "",
     "actor_id": null,
+    "asset_uuid": null,
+    "bank": null,
+    "bin": null,
+    "brand": null,
+    "credential_count": null,
     "category_name": "domain",
     "content_hash": "domain/example_source/exampledomain.co.uk",
     "content_preview": "Domain exampledomain.co.uk",
@@ -47,8 +104,12 @@ These records capture information about suspicious domains that closely resemble
     "parent_title": null,
     "parent_title_en": null,
     "parent_uid": null,
-    "parent_uids": ["domain/example_source/exampledomain.co.uk"],
-    "risk": { "score": 1 },
+    "parent_uids": [
+      "domain/example_source/exampledomain.co.uk"
+    ],
+    "risk": {
+      "score": 1
+    },
     "similar_items_count": 0,
     "source": "example_source",
     "source_name": "Example DNS Monitor",
@@ -69,9 +130,12 @@ These records capture information about suspicious domains that closely resemble
     "external_netloc": null,
     "can_have_duplicates": true,
     "priority_action_uuid_related": false,
+    "analyzers_items_uids": [],
     "victim_name": null,
     "contains_secrets": null,
-    "secrets_metadata": null
+    "secrets_metadata": null,
+    "identity_name": null,
+    "password": null
   },
   "history_logs": null,
   "metadata": {
@@ -83,7 +147,824 @@ These records capture information about suspicious domains that closely resemble
     "scraped_at": "2025-10-26T00:29:04.264838+00:00",
     "source": "example_source",
     "crawled_by": null,
-    "flare_url": "https://app.flare.io/#/domain/flare/exampledomain.co.uk"
+    "flare_url": "https://app.flare.io/#/domain/example_source/exampledomain.co.uk"
+  },
+  "similar_items": []
+}
+```
+
+## domain_title
+
+The page title observed on the lookalike domain.
+
+| Field    | Type  |
+| -------- | ----- |
+| `title`  | `str` |
+| `domain` | `str` |
+
+```json Example Content
+{
+  "data": {
+    "es_id": "1234/domain_title/flare/exampledomain.co.uk/420311875",
+    "es_score": 1.0,
+    "highlights": {},
+    "id": "exampledomain.co.uk",
+    "index": "domain_title",
+    "metadata": {
+      "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+      "event_id": null,
+      "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+      "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+      "payload_digest": "dc069ed0cb03d131ff8b0f8fd142ae732d1d8d47",
+      "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+      "source": "flare",
+      "crawled_by": null,
+      "flare_url": "https://app.flare.io/#/domain_title/flare/exampledomain.co.uk%2F420311875"
+    },
+    "uid": "domain_title/flare/exampledomain.co.uk/420311875",
+    "url": null,
+    "browser_url": null,
+    "title": "Example Domain – Sign In",
+    "domain": "exampledomain.co.uk"
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "asset_uuid": null,
+    "bank": null,
+    "bin": null,
+    "brand": null,
+    "credential_count": null,
+    "category_name": "domain_title",
+    "content_hash": "dc069ed0cb03d131ff8b0f8fd142ae732d1d8d47",
+    "content_preview": "",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "exampledomain.co.uk",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": {
+      "score": 1
+    },
+    "similar_items_count": 0,
+    "source": "exampledomain.co.uk",
+    "source_name": "exampledomain.co.uk",
+    "target_name": "exampledomain.co.uk",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-10-20T23:15:59.521157+00:00",
+    "title": "Title",
+    "type": "domain_title",
+    "uid": "domain_title/flare/exampledomain.co.uk/420311875",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "analyzers_items_uids": [],
+    "victim_name": null,
+    "contains_secrets": null,
+    "secrets_metadata": null,
+    "identity_name": null,
+    "password": null
+  },
+  "history_logs": null,
+  "metadata": {
+    "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+    "event_id": null,
+    "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+    "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+    "payload_digest": "dc069ed0cb03d131ff8b0f8fd142ae732d1d8d47",
+    "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+    "source": "flare",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/domain_title/flare/exampledomain.co.uk%2F420311875"
+  },
+  "similar_items": []
+}
+```
+
+## domain_ip_address
+
+The IP addresses the lookalike domain resolves to.
+
+| Field          | Type        |
+| -------------- | ----------- |
+| `ip_addresses` | `list[str]` |
+| `domain`       | `str`       |
+
+```json Example Content
+{
+  "data": {
+    "es_id": "1234/domain_ip_address/flare/exampledomain.co.uk/438568022",
+    "es_score": 1.0,
+    "highlights": {},
+    "id": "exampledomain.co.uk",
+    "index": "domain_ip_address",
+    "metadata": {
+      "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+      "event_id": null,
+      "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+      "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+      "payload_digest": "3d525347cf9822ba9b94f4e6b020ca35cabb00e0",
+      "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+      "source": "flare",
+      "crawled_by": null,
+      "flare_url": "https://app.flare.io/#/domain_ip_address/flare/exampledomain.co.uk%2F438568022"
+    },
+    "uid": "domain_ip_address/flare/exampledomain.co.uk/438568022",
+    "url": null,
+    "browser_url": null,
+    "ip_addresses": [
+      "203.0.113.10",
+      "203.0.113.11"
+    ],
+    "domain": "exampledomain.co.uk"
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "asset_uuid": null,
+    "bank": null,
+    "bin": null,
+    "brand": null,
+    "credential_count": null,
+    "category_name": "domain_ip_address",
+    "content_hash": "3d525347cf9822ba9b94f4e6b020ca35cabb00e0",
+    "content_preview": "",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "exampledomain.co.uk",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": {
+      "score": 1
+    },
+    "similar_items_count": 0,
+    "source": "exampledomain.co.uk",
+    "source_name": "exampledomain.co.uk",
+    "target_name": "exampledomain.co.uk",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-10-20T23:15:59.521157+00:00",
+    "title": "IP Address",
+    "type": "domain_ip_address",
+    "uid": "domain_ip_address/flare/exampledomain.co.uk/438568022",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "analyzers_items_uids": [],
+    "victim_name": null,
+    "contains_secrets": null,
+    "secrets_metadata": null,
+    "identity_name": null,
+    "password": null
+  },
+  "history_logs": null,
+  "metadata": {
+    "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+    "event_id": null,
+    "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+    "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+    "payload_digest": "3d525347cf9822ba9b94f4e6b020ca35cabb00e0",
+    "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+    "source": "flare",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/domain_ip_address/flare/exampledomain.co.uk%2F438568022"
+  },
+  "similar_items": []
+}
+```
+
+## domain_favicon
+
+The favicon observed on the lookalike domain.
+
+| Field     | Type  |
+| --------- | ----- |
+| `favicon` | `str` |
+| `domain`  | `str` |
+
+```json Example Content
+{
+  "data": {
+    "es_id": "1234/domain_favicon/flare/exampledomain.co.uk/441871456",
+    "es_score": 1.0,
+    "highlights": {},
+    "id": "exampledomain.co.uk",
+    "index": "domain_favicon",
+    "metadata": {
+      "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+      "event_id": null,
+      "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+      "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+      "payload_digest": "c02031ede93ddf1d90e2590536deee3129a32390",
+      "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+      "source": "flare",
+      "crawled_by": null,
+      "flare_url": "https://app.flare.io/#/domain_favicon/flare/exampledomain.co.uk%2F441871456"
+    },
+    "uid": "domain_favicon/flare/exampledomain.co.uk/441871456",
+    "url": null,
+    "browser_url": null,
+    "favicon": "https://flared-domain-favicons.s3.amazonaws.com/2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae?AWSAccessKeyId=ASIAEXAMPLEEXAMPLE&Signature=examplesignature%3D&Expires=1786379481",
+    "domain": "exampledomain.co.uk"
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "asset_uuid": null,
+    "bank": null,
+    "bin": null,
+    "brand": null,
+    "credential_count": null,
+    "category_name": "domain_favicon",
+    "content_hash": "c02031ede93ddf1d90e2590536deee3129a32390",
+    "content_preview": "",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "exampledomain.co.uk",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": {
+      "score": 1
+    },
+    "similar_items_count": 0,
+    "source": "exampledomain.co.uk",
+    "source_name": "exampledomain.co.uk",
+    "target_name": "exampledomain.co.uk",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-10-20T23:15:59.521157+00:00",
+    "title": "Favicon",
+    "type": "domain_favicon",
+    "uid": "domain_favicon/flare/exampledomain.co.uk/441871456",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "analyzers_items_uids": [],
+    "victim_name": null,
+    "contains_secrets": null,
+    "secrets_metadata": null,
+    "identity_name": null,
+    "password": null
+  },
+  "history_logs": null,
+  "metadata": {
+    "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+    "event_id": null,
+    "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+    "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+    "payload_digest": "c02031ede93ddf1d90e2590536deee3129a32390",
+    "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+    "source": "flare",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/domain_favicon/flare/exampledomain.co.uk%2F441871456"
+  },
+  "similar_items": []
+}
+```
+
+## domain_screenshot
+
+A screenshot of the lookalike domain's landing page.
+
+| Field        | Type  |
+| ------------ | ----- |
+| `screenshot` | `str` |
+| `domain`     | `str` |
+
+```json Example Content
+{
+  "data": {
+    "es_id": "1234/domain_screenshot/flare/exampledomain.co.uk/431758338",
+    "es_score": 1.0,
+    "highlights": {},
+    "id": "exampledomain.co.uk",
+    "index": "domain_screenshot",
+    "metadata": {
+      "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+      "event_id": null,
+      "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+      "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+      "payload_digest": "9bb1e800edbd0226a9e9376aa41ac32d8ee9deb9",
+      "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+      "source": "flare",
+      "crawled_by": null,
+      "flare_url": "https://app.flare.io/#/domain_screenshot/flare/exampledomain.co.uk%2F431758338"
+    },
+    "uid": "domain_screenshot/flare/exampledomain.co.uk/431758338",
+    "url": null,
+    "browser_url": null,
+    "screenshot": "https://flared-domain-screenshots.s3.amazonaws.com/8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4?AWSAccessKeyId=ASIAEXAMPLEEXAMPLE&Signature=examplesignature%3D&Expires=1786379481",
+    "domain": "exampledomain.co.uk"
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "asset_uuid": null,
+    "bank": null,
+    "bin": null,
+    "brand": null,
+    "credential_count": null,
+    "category_name": "domain_screenshot",
+    "content_hash": "9bb1e800edbd0226a9e9376aa41ac32d8ee9deb9",
+    "content_preview": "",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "exampledomain.co.uk",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": {
+      "score": 1
+    },
+    "similar_items_count": 0,
+    "source": "exampledomain.co.uk",
+    "source_name": "exampledomain.co.uk",
+    "target_name": "exampledomain.co.uk",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-10-20T23:15:59.521157+00:00",
+    "title": "Screenshot",
+    "type": "domain_screenshot",
+    "uid": "domain_screenshot/flare/exampledomain.co.uk/431758338",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "analyzers_items_uids": [],
+    "victim_name": null,
+    "contains_secrets": null,
+    "secrets_metadata": null,
+    "identity_name": null,
+    "password": null
+  },
+  "history_logs": null,
+  "metadata": {
+    "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+    "event_id": null,
+    "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+    "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+    "payload_digest": "9bb1e800edbd0226a9e9376aa41ac32d8ee9deb9",
+    "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+    "source": "flare",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/domain_screenshot/flare/exampledomain.co.uk%2F431758338"
+  },
+  "similar_items": []
+}
+```
+
+## domain_dns_records
+
+The DNS records observed for the lookalike domain.
+
+| Field          | Type                                  |
+| -------------- | ------------------------------------- |
+| `domain`       | `str`                                 |
+| `a_records`    | `list[str]`                           |
+| `aaaa_records` | `list[str]`                           |
+| `mx_records`   | `list[{priority: int, exchange: str}]` |
+| `ns_records`   | `list[str]`                           |
+| `txt_records`  | `list[str]`                           |
+| `has_spf`      | `bool`                                |
+| `has_dmarc`    | `bool`                                |
+
+```json Example Content
+{
+  "data": {
+    "es_id": "1234/domain_dns_records/flare/exampledomain.co.uk/438568021",
+    "es_score": 1.0,
+    "highlights": {},
+    "id": "exampledomain.co.uk",
+    "index": "domain_dns_records",
+    "metadata": {
+      "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+      "event_id": null,
+      "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+      "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+      "payload_digest": "0d901f4405516690ae181459b8671eb7665a5fce",
+      "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+      "source": "flare",
+      "crawled_by": null,
+      "flare_url": "https://app.flare.io/#/domain_dns_records/flare/exampledomain.co.uk%2F438568021"
+    },
+    "uid": "domain_dns_records/flare/exampledomain.co.uk/438568021",
+    "url": null,
+    "browser_url": null,
+    "domain": "exampledomain.co.uk",
+    "a_records": [
+      "203.0.113.10",
+      "203.0.113.11"
+    ],
+    "aaaa_records": [
+      "2001:db8::1"
+    ],
+    "mx_records": [
+      {
+        "priority": 10,
+        "exchange": "mail1.exampledomain.co.uk"
+      },
+      {
+        "priority": 20,
+        "exchange": "mail2.exampledomain.co.uk"
+      }
+    ],
+    "ns_records": [
+      "ns1.exampledomain.co.uk",
+      "ns2.exampledomain.co.uk"
+    ],
+    "txt_records": [
+      "v=spf1 include:_spf.example.com ~all"
+    ],
+    "has_spf": true,
+    "has_dmarc": false
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "asset_uuid": null,
+    "bank": null,
+    "bin": null,
+    "brand": null,
+    "credential_count": null,
+    "category_name": "domain_dns_records",
+    "content_hash": "0d901f4405516690ae181459b8671eb7665a5fce",
+    "content_preview": "",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "exampledomain.co.uk",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": {
+      "score": 1
+    },
+    "similar_items_count": 0,
+    "source": "exampledomain.co.uk",
+    "source_name": "exampledomain.co.uk",
+    "target_name": "exampledomain.co.uk",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-10-20T23:15:59.521157+00:00",
+    "title": "DNS Records",
+    "type": "domain_dns_records",
+    "uid": "domain_dns_records/flare/exampledomain.co.uk/438568021",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "analyzers_items_uids": [],
+    "victim_name": null,
+    "contains_secrets": null,
+    "secrets_metadata": null,
+    "identity_name": null,
+    "password": null
+  },
+  "history_logs": null,
+  "metadata": {
+    "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+    "event_id": null,
+    "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+    "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+    "payload_digest": "0d901f4405516690ae181459b8671eb7665a5fce",
+    "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+    "source": "flare",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/domain_dns_records/flare/exampledomain.co.uk%2F438568021"
+  },
+  "similar_items": []
+}
+```
+
+## domain_whois_rdap
+
+Registration data for the lookalike domain, collected from both WHOIS and RDAP.
+
+| Field                    | Type        |
+| ------------------------ | ----------- |
+| `registrar`              | `str`       |
+| `contact_email`          | `str`       |
+| `epp_status`             | `list[str]` |
+| `registered_date`        | `datetime`  |
+| `updated_date`           | `datetime`  |
+| `expires_date`           | `datetime`  |
+| `registrant`             | `raw`       |
+| `administrative_contact` | `raw`       |
+| `technical_contact`      | `raw`       |
+| `domain`                 | `str`       |
+
+```json Example Content
+{
+  "data": {
+    "es_id": "1234/domain_whois_rdap/example_source/exampledomain.co.uk/1785563866",
+    "es_score": 1.0,
+    "highlights": {},
+    "id": "exampledomain.co.uk/1785563866",
+    "index": "domain_whois_rdap",
+    "metadata": {
+      "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+      "event_id": null,
+      "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+      "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+      "payload_digest": "8c0f28e2108ca6637b16f0fde9f61b74a37a6ec3",
+      "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+      "source": "example_source",
+      "crawled_by": null,
+      "flare_url": "https://app.flare.io/#/domain_whois_rdap/example_source/exampledomain.co.uk%2F1785563866"
+    },
+    "uid": "domain_whois_rdap/example_source/exampledomain.co.uk/1785563866",
+    "url": null,
+    "browser_url": null,
+    "registrar": "Example Registrar Ltd",
+    "contact_email": "abuse@example-registrar.com",
+    "epp_status": [
+      "clientTransferProhibited"
+    ],
+    "registered_date": "2025-10-18T00:00:00+00:00",
+    "updated_date": "2025-10-19T08:12:00+00:00",
+    "expires_date": "2026-10-18T00:00:00+00:00",
+    "registrant": {
+      "organization": "Privacy service provided by Example Privacy Ltd",
+      "street1": "1 Example Street",
+      "city": "Exampleville",
+      "state": "Example State",
+      "postalCode": "00000",
+      "country": "UNITED STATES",
+      "countryCode": "US",
+      "telephone": "15555550100"
+    },
+    "administrative_contact": null,
+    "technical_contact": {
+      "name": "Hostmaster",
+      "email": "hostmaster@example-hosting.net",
+      "fax": "15555550199"
+    },
+    "domain": "exampledomain.co.uk"
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "asset_uuid": null,
+    "bank": null,
+    "bin": null,
+    "brand": null,
+    "credential_count": null,
+    "category_name": "domain_whois_rdap",
+    "content_hash": "8c0f28e2108ca6637b16f0fde9f61b74a37a6ec3",
+    "content_preview": "",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "exampledomain.co.uk/1785563866",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": {
+      "score": 1
+    },
+    "similar_items_count": 0,
+    "source": "exampledomain.co.uk",
+    "source_name": "exampledomain.co.uk",
+    "target_name": "exampledomain.co.uk",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-10-20T23:15:59.521157+00:00",
+    "title": "WHOIS/RDAP",
+    "type": "domain_whois_rdap",
+    "uid": "domain_whois_rdap/example_source/exampledomain.co.uk/1785563866",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "analyzers_items_uids": [],
+    "victim_name": null,
+    "contains_secrets": null,
+    "secrets_metadata": null,
+    "identity_name": null,
+    "password": null
+  },
+  "history_logs": null,
+  "metadata": {
+    "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+    "event_id": null,
+    "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+    "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+    "payload_digest": "8c0f28e2108ca6637b16f0fde9f61b74a37a6ec3",
+    "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+    "source": "example_source",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/domain_whois_rdap/example_source/exampledomain.co.uk%2F1785563866"
+  },
+  "similar_items": []
+}
+```
+
+## domain_certificate
+
+An SSL certificate observed covering the lookalike domain.
+
+| Field                    | Type        |
+| ------------------------ | ----------- |
+| `domain`                 | `str`       |
+| `subject`                | `str`       |
+| `issuer`                 | `str`       |
+| `not_before`             | `datetime`  |
+| `not_after`              | `datetime`  |
+| `authority_info_access`  | `list[str]` |
+| `subject_alt_names`      | `list[str]` |
+| `is_extended_validation` | `bool`      |
+
+```json Example Content
+{
+  "data": {
+    "es_id": "1234/domain_certificate/example_source/exampledomain.co.uk/1785495379",
+    "es_score": 1.0,
+    "highlights": {},
+    "id": "exampledomain.co.uk/1785495379",
+    "index": "domain_certificate",
+    "metadata": {
+      "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+      "event_id": null,
+      "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+      "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+      "payload_digest": "4ac40d27373742c020015a735e39a7a6e7815452",
+      "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+      "source": "example_source",
+      "crawled_by": null,
+      "flare_url": "https://app.flare.io/#/domain_certificate/example_source/exampledomain.co.uk%2F1785495379"
+    },
+    "uid": "domain_certificate/example_source/exampledomain.co.uk/1785495379",
+    "url": null,
+    "browser_url": null,
+    "domain": "exampledomain.co.uk",
+    "subject": "/CN=exampledomain.co.uk",
+    "issuer": "/C=US/O=Example CA/CN=Example TLS Intermediate CA DV - R1",
+    "not_before": "2025-10-19T00:00:00+00:00",
+    "not_after": "2026-01-17T00:00:00+00:00",
+    "authority_info_access": [
+      "CA Issuers - URI:http://certificates.example-ca.com/repository/example_tls_issuing_dv-r1.crt"
+    ],
+    "subject_alt_names": [
+      "exampledomain.co.uk",
+      "www.exampledomain.co.uk"
+    ],
+    "is_extended_validation": false
+  },
+  "duplicates": [],
+  "header": {
+    "actor": "",
+    "actor_id": null,
+    "asset_uuid": null,
+    "bank": null,
+    "bin": null,
+    "brand": null,
+    "credential_count": null,
+    "category_name": "domain_certificate",
+    "content_hash": "4ac40d27373742c020015a735e39a7a6e7815452",
+    "content_preview": "",
+    "country": null,
+    "duplicates": [],
+    "es_score": 1.0,
+    "expiration": null,
+    "highlights": {},
+    "host": null,
+    "id": "exampledomain.co.uk/1785495379",
+    "infection_date": null,
+    "parent_id": null,
+    "parent_title": null,
+    "parent_title_en": null,
+    "parent_uid": null,
+    "parent_uids": [],
+    "risk": {
+      "score": 1
+    },
+    "similar_items_count": 0,
+    "source": "exampledomain.co.uk",
+    "source_name": "exampledomain.co.uk",
+    "target_name": "exampledomain.co.uk",
+    "tags": [],
+    "notes": null,
+    "state_code": null,
+    "timestamp": "2025-10-20T23:15:59.521157+00:00",
+    "title": "Certificate",
+    "type": "domain_certificate",
+    "uid": "domain_certificate/example_source/exampledomain.co.uk/1785495379",
+    "user_risk_score": null,
+    "user_notes": null,
+    "ignored_at": null,
+    "remediated_at": null,
+    "verb": "",
+    "external_url": null,
+    "external_netloc": null,
+    "can_have_duplicates": true,
+    "priority_action_uuid_related": false,
+    "analyzers_items_uids": [],
+    "victim_name": null,
+    "contains_secrets": null,
+    "secrets_metadata": null,
+    "identity_name": null,
+    "password": null
+  },
+  "history_logs": null,
+  "metadata": {
+    "estimated_created_at": "2025-10-20T23:15:59.521157+00:00",
+    "event_id": null,
+    "first_crawled_at": "2025-10-20T23:15:59.521157+00:00",
+    "last_crawled_at": "2025-10-26T00:29:04.263918+00:00",
+    "payload_digest": "4ac40d27373742c020015a735e39a7a6e7815452",
+    "scraped_at": "2025-10-26T00:29:04.264838+00:00",
+    "source": "example_source",
+    "crawled_by": null,
+    "flare_url": "https://app.flare.io/#/domain_certificate/example_source/exampledomain.co.uk%2F1785495379"
   },
   "similar_items": []
 }

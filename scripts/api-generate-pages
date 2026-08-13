@@ -5,6 +5,12 @@ shopt -s inherit_errexit
 
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")"/../ && pwd -P)
 SPEC_DIR="docs/api-reference/spec"
+# @mintlify/scraping 4.0.922+ pulls @mintlify/common 1.0.1057, which bumped
+# @mintlify/mdx to 4.0.1. That version declares peer deps on react, react-dom and
+# @base-ui/react; npm 7+ tries to satisfy the peer graph and hangs indefinitely
+# while resolving. openapi-file needs none of those peers, so skipping peer
+# resolution keeps us on @latest instead of pinning a version that goes stale.
+export NPM_CONFIG_LEGACY_PEER_DEPS=true
 
 cd "${ROOT}"
 

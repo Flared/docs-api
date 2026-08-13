@@ -462,31 +462,6 @@
           "type": "string"
         }
       ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ActivityUserMetadata"
-            }
-          }
-        },
-        "operationId": "get_activity_user_metadata_tags_/activities/<string:index>/<string:source>/<path:id_>/user_metadata/tags",
-        "tags": [
-          "activities"
-        ]
-      },
-      "delete": {
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "operationId": "delete_activity_user_metadata_tags_/activities/<string:index>/<string:source>/<path:id_>/user_metadata/tags",
-        "tags": [
-          "activities"
-        ]
-      },
       "put": {
         "responses": {
           "200": {
@@ -513,6 +488,31 @@
             }
           }
         ],
+        "tags": [
+          "activities"
+        ]
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "delete_activity_user_metadata_tags_/activities/<string:index>/<string:source>/<path:id_>/user_metadata/tags",
+        "tags": [
+          "activities"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ActivityUserMetadata"
+            }
+          }
+        },
+        "operationId": "get_activity_user_metadata_tags_/activities/<string:index>/<string:source>/<path:id_>/user_metadata/tags",
         "tags": [
           "activities"
         ]
@@ -1030,35 +1030,6 @@
           "type": "integer"
         }
       ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "properties": {
-                "assets_group": {
-                  "$ref": "#/definitions/IdentifierGroup"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get_assets_group_api_/assets/groups/<int:assets_group_id>",
-        "tags": [
-          "Identifiers"
-        ]
-      },
-      "delete": {
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "operationId": "delete_assets_group_api_/assets/groups/<int:assets_group_id>",
-        "tags": [
-          "Identifiers"
-        ]
-      },
       "put": {
         "responses": {
           "200": {
@@ -1089,6 +1060,35 @@
             }
           }
         ],
+        "tags": [
+          "Identifiers"
+        ]
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "delete_assets_group_api_/assets/groups/<int:assets_group_id>",
+        "tags": [
+          "Identifiers"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "properties": {
+                "assets_group": {
+                  "$ref": "#/definitions/IdentifierGroup"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get_assets_group_api_/assets/groups/<int:assets_group_id>",
         "tags": [
           "Identifiers"
         ]
@@ -1161,17 +1161,6 @@
           "type": "integer"
         }
       ],
-      "delete": {
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "operationId": "delete_assets_group_alert_/assets/groups/<int:assets_group_id>/alerts/<int:alert_id>",
-        "tags": [
-          "Identifiers"
-        ]
-      },
       "put": {
         "responses": {
           "200": {
@@ -1192,6 +1181,17 @@
             }
           }
         ],
+        "tags": [
+          "Identifiers"
+        ]
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "delete_assets_group_alert_/assets/groups/<int:assets_group_id>/alerts/<int:alert_id>",
         "tags": [
           "Identifiers"
         ]
@@ -1736,35 +1736,6 @@
           "type": "integer"
         }
       ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "properties": {
-                "asset": {
-                  "$ref": "#/definitions/Identifier"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get_asset_api_/assets/<int:asset_id>",
-        "tags": [
-          "Identifiers"
-        ]
-      },
-      "delete": {
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "operationId": "delete_asset_api_/assets/<int:asset_id>",
-        "tags": [
-          "Identifiers"
-        ]
-      },
       "put": {
         "responses": {
           "400": {
@@ -1795,6 +1766,35 @@
             }
           }
         ],
+        "tags": [
+          "Identifiers"
+        ]
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "delete_asset_api_/assets/<int:asset_id>",
+        "tags": [
+          "Identifiers"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "properties": {
+                "asset": {
+                  "$ref": "#/definitions/Identifier"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get_asset_api_/assets/<int:asset_id>",
         "tags": [
           "Identifiers"
         ]
@@ -1867,17 +1867,6 @@
           "type": "integer"
         }
       ],
-      "delete": {
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "operationId": "delete_asset_alert_/assets/<int:asset_id>/alerts/<int:alert_id>",
-        "tags": [
-          "Identifiers"
-        ]
-      },
       "put": {
         "responses": {
           "200": {
@@ -1898,6 +1887,17 @@
             }
           }
         ],
+        "tags": [
+          "Identifiers"
+        ]
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "delete_asset_alert_/assets/<int:asset_id>/alerts/<int:alert_id>",
         "tags": [
           "Identifiers"
         ]
@@ -3064,17 +3064,6 @@
       }
     },
     "/firework/v2/me/profile": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Returns the current user's profile"
-          }
-        },
-        "operationId": "get_current_user_profile_/me/profile",
-        "tags": [
-          "me"
-        ]
-      },
       "put": {
         "responses": {
           "400": {
@@ -3105,6 +3094,17 @@
             }
           }
         ],
+        "tags": [
+          "me"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Returns the current user's profile"
+          }
+        },
+        "operationId": "get_current_user_profile_/me/profile",
         "tags": [
           "me"
         ]
@@ -3250,24 +3250,6 @@
           "type": "integer"
         }
       ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "properties": {
-                "member": {
-                  "$ref": "#/definitions/OrganizationMemberWithMetadata"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get_organization_member_api_/organizations/<int:organization_id>/members/<int:user_id>",
-        "tags": [
-          "organizations"
-        ]
-      },
       "put": {
         "responses": {
           "200": {
@@ -3292,6 +3274,24 @@
             }
           }
         ],
+        "tags": [
+          "organizations"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "properties": {
+                "member": {
+                  "$ref": "#/definitions/OrganizationMemberWithMetadata"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get_organization_member_api_/organizations/<int:organization_id>/members/<int:user_id>",
         "tags": [
           "organizations"
         ]
@@ -3601,6 +3601,17 @@
           }
         },
         "operationId": "delete_report_endpoint_/reporting/reports/<int:report_id>",
+        "tags": [
+          "reporting"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Returns a report and its elements."
+          }
+        },
+        "operationId": "get_report_endpoint_/reporting/reports/<int:report_id>",
         "tags": [
           "reporting"
         ]
@@ -4163,20 +4174,6 @@
           "type": "integer"
         }
       ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/TenantWithCounts"
-            }
-          }
-        },
-        "operationId": "get_tenant_api_/tenants/<int:tenant_id>",
-        "tags": [
-          "tenants"
-        ]
-      },
       "put": {
         "responses": {
           "200": {
@@ -4197,6 +4194,20 @@
             }
           }
         ],
+        "tags": [
+          "tenants"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TenantWithCounts"
+            }
+          }
+        },
+        "operationId": "get_tenant_api_/tenants/<int:tenant_id>",
         "tags": [
           "tenants"
         ]
