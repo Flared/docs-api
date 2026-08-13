@@ -374,193 +374,23 @@
                 }
             }
         },
-        "/firework/v4/cti/entities": {
-            "get": {
+        "/firework/v4/entities/global/_search": {
+            "post": {
                 "tags": [
                     "public",
                     "team=data-intelligence"
                 ],
                 "summary": "List Entities",
-                "operationId": "list_entities_cti_entities_get",
-                "parameters": [
-                    {
-                        "name": "query",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "default": "",
-                            "title": "Query"
-                        }
-                    },
-                    {
-                        "name": "types",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/EntityType"
-                                    }
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Types"
-                        }
-                    },
-                    {
-                        "name": "time_field",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/components/schemas/CTITimeField",
-                            "default": "created_at"
-                        }
-                    },
-                    {
-                        "name": "time_range",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/components/schemas/TimeRangeType"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Time Range"
-                        }
-                    },
-                    {
-                        "name": "time_range_from",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string",
-                                    "format": "date-time"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Time Range From"
-                        }
-                    },
-                    {
-                        "name": "time_range_to",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string",
-                                    "format": "date-time"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Time Range To"
-                        }
-                    },
-                    {
-                        "name": "sources",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Sources"
-                        }
-                    },
-                    {
-                        "name": "topic_ids",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Topic Ids"
-                        }
-                    },
-                    {
-                        "name": "sort_by_key",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Sort By Key"
-                        }
-                    },
-                    {
-                        "name": "sort_by_direction",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/components/schemas/OrderType",
-                            "default": "desc"
-                        }
-                    },
-                    {
-                        "name": "search_after",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Search After"
-                        }
-                    },
-                    {
-                        "name": "size",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "default": 10,
-                            "title": "Size"
+                "operationId": "list_entities_entities_global__search_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EntitySearchParamsPayload"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -585,23 +415,23 @@
                 }
             }
         },
-        "/firework/v4/cti/entities/{asset_uuid}": {
+        "/firework/v4/entities/{id}": {
             "get": {
                 "tags": [
                     "public",
                     "team=data-intelligence"
                 ],
                 "summary": "Get Entity",
-                "operationId": "get_entity_cti_entities__asset_uuid__get",
+                "operationId": "get_entity_entities__id__get",
                 "parameters": [
                     {
-                        "name": "asset_uuid",
+                        "name": "id",
                         "in": "path",
                         "required": true,
                         "schema": {
                             "type": "string",
                             "format": "uuid",
-                            "title": "Asset Uuid"
+                            "title": "Id"
                         }
                     }
                 ],
@@ -612,6 +442,96 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/EntityAPIResponseTypes"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/entities/{id}/relations": {
+            "get": {
+                "tags": [
+                    "public",
+                    "team=data-intelligence"
+                ],
+                "summary": "List Entity Relations",
+                "operationId": "list_entity_relations_entities__id__relations_get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Id"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 1000,
+                            "default": 10,
+                            "title": "Size"
+                        }
+                    },
+                    {
+                        "name": "from_",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From "
+                        }
+                    },
+                    {
+                        "name": "entity_types",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/EntityType"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Entity Types"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResults_CTIEntityRelationshipResponse_str_"
                                 }
                             }
                         }
@@ -1175,6 +1095,9 @@
                                         },
                                         {
                                             "$ref": "#/components/schemas/PaginatedResults_StealerLogCookie_str_"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/PaginatedResults_FeedItem_str_"
                                         }
                                     ],
                                     "title": "Response Expand Event Field Events  Expand Get"
@@ -2958,6 +2881,91 @@
                     }
                 }
             }
+        },
+        "/firework/v4/vip_takedown_consent/{token}": {
+            "get": {
+                "tags": [
+                    "public",
+                    "team=growth"
+                ],
+                "summary": "Get Takedown Consent",
+                "operationId": "get_takedown_consent_vip_takedown_consent__token__get",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Token"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TakedownConsentResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/vip_takedown_consent/": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=growth"
+                ],
+                "summary": "Accept Takedown Consent",
+                "operationId": "accept_takedown_consent_vip_takedown_consent__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TakedownConsentBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TakedownConsentResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -2976,7 +2984,6 @@
                     "bucket_object",
                     "cc",
                     "cc_bases",
-                    "chat_channel_summary",
                     "chat_message",
                     "cookie",
                     "docker_image",
@@ -3046,194 +3053,53 @@
             },
             "ActorAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "actor",
+                        "title": "Entity Type",
+                        "default": "actor"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
-                    "name": {
-                        "type": "string",
-                        "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
-                    },
-                    "description": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Description"
+                    "data": {
+                        "$ref": "#/components/schemas/pyro__entities__cti__actors__actor_datamodels__ActorData"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
-                    "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
-                    "description"
+                    "metadata",
+                    "data"
                 ],
                 "title": "ActorAPIResponse"
             },
             "ActorLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "actor",
+                        "title": "Entity Type",
+                        "default": "actor"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ActorLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ActorLiteAPIResponse"
+            },
+            "ActorLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -3249,16 +3115,10 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description"
                 ],
-                "title": "ActorLiteAPIResponse"
+                "title": "ActorLiteData"
             },
             "AddressData": {
                 "properties": {
@@ -3286,16 +3146,15 @@
                     },
                     "state": {
                         "type": "string",
-                        "minLength": 1,
-                        "title": "State"
+                        "title": "State",
+                        "default": ""
                     }
                 },
                 "type": "object",
                 "required": [
                     "street",
                     "city",
-                    "country",
-                    "state"
+                    "country"
                 ],
                 "title": "AddressData"
             },
@@ -4014,6 +3873,53 @@
                 ],
                 "title": "AssetEnrichmentType"
             },
+            "AssetRelationType": {
+                "type": "string",
+                "enum": [
+                    "analysis_of",
+                    "attributed_to",
+                    "authored_by",
+                    "based_on",
+                    "beacons_to",
+                    "characterizes",
+                    "commits_with",
+                    "communicates_with",
+                    "compromises",
+                    "consists_of",
+                    "contributed_to",
+                    "controls",
+                    "delivers",
+                    "downloads",
+                    "drops",
+                    "dynamic_analysis_of",
+                    "exfiltrate_to",
+                    "exploits",
+                    "found_from",
+                    "has",
+                    "has_account_on",
+                    "has_favicon",
+                    "has_screenshot",
+                    "hosts",
+                    "impersonates",
+                    "indicates",
+                    "investigates",
+                    "links_to_azure_tenant",
+                    "located_at",
+                    "looks_like",
+                    "mentioned_in",
+                    "mitigates",
+                    "originates_from",
+                    "owns",
+                    "related_to",
+                    "resolves_to",
+                    "static_analysis_of",
+                    "subdomain_of",
+                    "targets",
+                    "uses",
+                    "variant_of"
+                ],
+                "title": "AssetRelationType"
+            },
             "AstpCookiesValue": {
                 "properties": {
                     "cookie_names": {
@@ -4050,86 +3956,31 @@
             },
             "AttackPatternEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "attack_pattern",
+                        "title": "Entity Type",
+                        "default": "attack_pattern"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/AttackPatternEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "AttackPatternEntityAPIResponse"
+            },
+            "AttackPatternEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -4159,101 +4010,40 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "kill_chain_phases",
                     "marking_definitions"
                 ],
-                "title": "AttackPatternEntityAPIResponse"
+                "title": "AttackPatternEntityData"
             },
             "AttackPatternEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "attack_pattern",
+                        "title": "Entity Type",
+                        "default": "attack_pattern"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/AttackPatternEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "AttackPatternEntityLiteAPIResponse"
+            },
+            "AttackPatternEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -4269,16 +4059,10 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description"
                 ],
-                "title": "AttackPatternEntityLiteAPIResponse"
+                "title": "AttackPatternEntityLiteData"
             },
             "AuthDomainQuery": {
                 "properties": {
@@ -4805,6 +4589,64 @@
                 ],
                 "title": "CCBinData"
             },
+            "CTIEntityRelationshipResponse": {
+                "properties": {
+                    "source_entity": {
+                        "$ref": "#/components/schemas/EntityData"
+                    },
+                    "target_entity": {
+                        "$ref": "#/components/schemas/EntityData"
+                    },
+                    "relation_type": {
+                        "$ref": "#/components/schemas/AssetRelationType"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "modified_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Modified At"
+                    },
+                    "valid_from": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Valid From"
+                    },
+                    "valid_until": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Valid Until"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "source_entity",
+                    "target_entity",
+                    "relation_type",
+                    "sources",
+                    "modified_at"
+                ],
+                "title": "CTIEntityRelationshipResponse"
+            },
             "CTIEntitySourceAPIResponse": {
                 "properties": {
                     "id": {
@@ -4840,99 +4682,52 @@
                 ],
                 "title": "CTIEntitySourceAPIResponse"
             },
-            "CTITimeField": {
+            "CTIEntityType": {
                 "type": "string",
                 "enum": [
-                    "created_at",
-                    "updated_at",
-                    "first_seen_at",
-                    "last_seen_at"
-                ],
-                "title": "CTITimeField",
-                "description": "A time-based field of a CTI entity.\n\nThe enum *value* is the API/wire token (e.g. ``\"created_at\"``); use\n:pyattr:`es_field` for the Elasticsearch field path (``metadata.created_at``)."
+                    "actor",
+                    "attack_pattern",
+                    "campaign",
+                    "chat_channel",
+                    "external_report",
+                    "forum_thread",
+                    "indicator",
+                    "infrastructure",
+                    "location",
+                    "malware",
+                    "threat_actor",
+                    "threat_actor_group",
+                    "tool",
+                    "vulnerability"
+                ]
             },
             "CampaignEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "campaign",
+                        "title": "Entity Type",
+                        "default": "campaign"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/CampaignEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "CampaignEntityAPIResponse"
+            },
+            "CampaignEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -4962,101 +4757,40 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "aliases",
                     "marking_definitions"
                 ],
-                "title": "CampaignEntityAPIResponse"
+                "title": "CampaignEntityData"
             },
             "CampaignEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "campaign",
+                        "title": "Entity Type",
+                        "default": "campaign"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/CampaignEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "CampaignEntityLiteAPIResponse"
+            },
+            "CampaignEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -5079,100 +4813,39 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "aliases"
                 ],
-                "title": "CampaignEntityLiteAPIResponse"
+                "title": "CampaignEntityLiteData"
             },
             "ChatChannelEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "chat_channel",
+                        "title": "Entity Type",
+                        "default": "chat_channel"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ChatChannelEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ChatChannelEntityAPIResponse"
+            },
+            "ChatChannelEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -5239,13 +4912,7 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "topics",
                     "conversation_link",
@@ -5253,90 +4920,35 @@
                     "chat_channel_profile_content_and_activity",
                     "chat_channel_profile_nature_and_sophistication"
                 ],
-                "title": "ChatChannelEntityAPIResponse"
+                "title": "ChatChannelEntityData"
             },
             "ChatChannelEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "chat_channel",
+                        "title": "Entity Type",
+                        "default": "chat_channel"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ChatChannelEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ChatChannelEntityLiteAPIResponse"
+            },
+            "ChatChannelEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -5359,17 +4971,11 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "topics"
                 ],
-                "title": "ChatChannelEntityLiteAPIResponse"
+                "title": "ChatChannelEntityLiteData"
             },
             "ChatMessageEvent": {
                 "properties": {
@@ -6212,6 +5818,60 @@
                 ],
                 "title": "CredentialsQueryPayload"
             },
+            "DateFilter": {
+                "properties": {
+                    "gt": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Gt"
+                    },
+                    "gte": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Gte"
+                    },
+                    "lt": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Lt"
+                    },
+                    "lte": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Lte"
+                    }
+                },
+                "type": "object",
+                "title": "DateFilter"
+            },
             "DockerImageEvent": {
                 "properties": {
                     "event_type": {
@@ -6665,6 +6325,33 @@
                     }
                 ]
             },
+            "EntityData": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "entity_type": {
+                        "$ref": "#/components/schemas/CTIEntityType"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "confidence": {
+                        "type": "integer",
+                        "title": "Confidence"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "entity_type",
+                    "name",
+                    "confidence"
+                ],
+                "title": "EntityData"
+            },
             "EntityLiteAPIResponseTypes": {
                 "anyOf": [
                     {
@@ -6710,6 +6397,198 @@
                         "$ref": "#/components/schemas/VulnerabilityEntityLiteAPIResponse"
                     }
                 ]
+            },
+            "EntityMetadataAPIResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "created_by": {
+                        "type": "string",
+                        "title": "Created By"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                        },
+                        "type": "array",
+                        "title": "Sources"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    },
+                    "first_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Seen At"
+                    },
+                    "last_seen_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Seen At"
+                    },
+                    "confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confidence"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "created_by",
+                    "sources",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "EntityMetadataAPIResponse"
+            },
+            "EntitySearchFilters": {
+                "properties": {
+                    "types": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/EntityType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Types"
+                    },
+                    "sources": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Sources"
+                    },
+                    "topic_ids": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Topic Ids"
+                    },
+                    "created_at": {
+                        "$ref": "#/components/schemas/DateFilter"
+                    },
+                    "updated_at": {
+                        "$ref": "#/components/schemas/DateFilter"
+                    },
+                    "first_seen_at": {
+                        "$ref": "#/components/schemas/DateFilter"
+                    },
+                    "last_seen_at": {
+                        "$ref": "#/components/schemas/DateFilter"
+                    }
+                },
+                "type": "object",
+                "title": "EntitySearchFilters"
+            },
+            "EntitySearchParamsPayload": {
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "title": "Query",
+                        "default": ""
+                    },
+                    "filters": {
+                        "$ref": "#/components/schemas/EntitySearchFilters"
+                    },
+                    "sort": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Sort"
+                    },
+                    "order": {
+                        "$ref": "#/components/schemas/OrderType",
+                        "default": "desc"
+                    },
+                    "from": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "From"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "title": "Size",
+                        "default": 10
+                    }
+                },
+                "type": "object",
+                "title": "EntitySearchParamsPayload"
             },
             "EntityType": {
                 "type": "string",
@@ -6846,11 +6725,21 @@
                 ],
                 "title": "EventSeverity"
             },
+            "EventStatus": {
+                "type": "string",
+                "enum": [
+                    "open",
+                    "ignored",
+                    "remediated"
+                ],
+                "title": "EventStatus"
+            },
             "ExpandableField": {
                 "type": "string",
                 "enum": [
                     "credentials",
-                    "cookies"
+                    "cookies",
+                    "associated_events"
                 ],
                 "title": "ExpandableField"
             },
@@ -6882,86 +6771,31 @@
             },
             "ExternalReportEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "external_report",
+                        "title": "Entity Type",
+                        "default": "external_report"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ExternalReportEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ExternalReportEntityAPIResponse"
+            },
+            "ExternalReportEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -7003,102 +6837,41 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "report_types",
                     "published",
                     "marking_definitions"
                 ],
-                "title": "ExternalReportEntityAPIResponse"
+                "title": "ExternalReportEntityData"
             },
             "ExternalReportEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "external_report",
+                        "title": "Entity Type",
+                        "default": "external_report"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ExternalReportEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ExternalReportEntityLiteAPIResponse"
+            },
+            "ExternalReportEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -7114,16 +6887,10 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description"
                 ],
-                "title": "ExternalReportEntityLiteAPIResponse"
+                "title": "ExternalReportEntityLiteData"
             },
             "FeedConfiguration": {
                 "properties": {
@@ -7172,60 +6939,6 @@
                 ],
                 "title": "FeedConfiguration"
             },
-            "FeedDateFilter": {
-                "properties": {
-                    "gt": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Gt"
-                    },
-                    "gte": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Gte"
-                    },
-                    "lt": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Lt"
-                    },
-                    "lte": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Lte"
-                    }
-                },
-                "type": "object",
-                "title": "FeedDateFilter"
-            },
             "FeedDefinition": {
                 "properties": {
                     "type": {
@@ -7273,10 +6986,10 @@
                         "title": "Type"
                     },
                     "estimated_created_at": {
-                        "$ref": "#/components/schemas/FeedDateFilter"
+                        "$ref": "#/components/schemas/DateFilter"
                     },
                     "materialized_at": {
-                        "$ref": "#/components/schemas/FeedDateFilter"
+                        "$ref": "#/components/schemas/DateFilter"
                     },
                     "tags": {
                         "items": {
@@ -7285,15 +6998,24 @@
                         "type": "array",
                         "title": "Tags"
                     },
+                    "status": {
+                        "items": {
+                            "$ref": "#/components/schemas/EventStatus"
+                        },
+                        "type": "array",
+                        "title": "Status"
+                    },
                     "is_ignored": {
                         "type": "boolean",
                         "title": "Is Ignored",
-                        "default": false
+                        "default": false,
+                        "deprecated": true
                     },
                     "is_remediated": {
                         "type": "boolean",
                         "title": "Is Remediated",
-                        "default": false
+                        "default": false,
+                        "deprecated": true
                     }
                 },
                 "type": "object",
@@ -7303,6 +7025,17 @@
                 "properties": {
                     "metadata": {
                         "$ref": "#/components/schemas/FeedItemMetadata"
+                    },
+                    "title": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Title"
                     },
                     "tenant_metadata": {
                         "$ref": "#/components/schemas/FeedItemTenantMetadata"
@@ -7983,202 +7716,146 @@
             },
             "ForumThreadAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "forum_thread",
+                        "title": "Entity Type",
+                        "default": "forum_thread"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
-                    "name": {
-                        "type": "string",
-                        "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
-                    },
-                    "description": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Description"
-                    },
-                    "topics": {
-                        "items": {
-                            "$ref": "#/components/schemas/ThreadTopic"
-                        },
-                        "type": "array",
-                        "title": "Topics"
+                    "data": {
+                        "$ref": "#/components/schemas/ForumThreadData"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
-                    "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
-                    "description",
-                    "topics"
+                    "metadata",
+                    "data"
                 ],
                 "title": "ForumThreadAPIResponse"
             },
-            "ForumThreadLiteAPIResponse": {
+            "ForumThreadData": {
                 "properties": {
-                    "uuid": {
-                        "type": "string",
-                        "title": "Uuid"
-                    },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
-                    },
                     "name": {
                         "type": "string",
                         "title": "Name"
                     },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
                     },
-                    "sources": {
+                    "topics": {
                         "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
+                            "$ref": "#/components/schemas/ThreadTopic"
                         },
                         "type": "array",
-                        "title": "Sources"
+                        "title": "Topics"
                     },
-                    "created_at": {
+                    "original_post_overview": {
                         "anyOf": [
                             {
-                                "type": "string",
-                                "format": "date-time"
+                                "type": "string"
                             },
                             {
                                 "type": "null"
                             }
                         ],
-                        "title": "Created At"
+                        "title": "Original Post Overview"
                     },
-                    "updated_at": {
+                    "original_post_actor_intent": {
                         "anyOf": [
                             {
-                                "type": "string",
-                                "format": "date-time"
+                                "type": "string"
                             },
                             {
                                 "type": "null"
                             }
                         ],
-                        "title": "Updated At"
+                        "title": "Original Post Actor Intent"
                     },
-                    "first_seen_at": {
+                    "replies_overview": {
                         "anyOf": [
                             {
-                                "type": "string",
-                                "format": "date-time"
+                                "type": "string"
                             },
                             {
                                 "type": "null"
                             }
                         ],
-                        "title": "First Seen At"
+                        "title": "Replies Overview"
                     },
-                    "last_seen_at": {
+                    "replies_sentiment_analysis": {
                         "anyOf": [
                             {
-                                "type": "string",
-                                "format": "date-time"
+                                "type": "string"
                             },
                             {
                                 "type": "null"
                             }
                         ],
-                        "title": "Last Seen At"
+                        "title": "Replies Sentiment Analysis"
                     },
-                    "confidence": {
+                    "top_actors_overview": {
                         "anyOf": [
                             {
-                                "type": "integer"
+                                "type": "string"
                             },
                             {
                                 "type": "null"
                             }
                         ],
-                        "title": "Confidence"
+                        "title": "Top Actors Overview"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "description",
+                    "topics",
+                    "original_post_overview",
+                    "original_post_actor_intent",
+                    "replies_overview",
+                    "replies_sentiment_analysis",
+                    "top_actors_overview"
+                ],
+                "title": "ForumThreadData"
+            },
+            "ForumThreadLiteAPIResponse": {
+                "properties": {
+                    "entity_type": {
+                        "type": "string",
+                        "const": "forum_thread",
+                        "title": "Entity Type",
+                        "default": "forum_thread"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/ForumThreadLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ForumThreadLiteAPIResponse"
+            },
+            "ForumThreadLiteData": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
                     },
                     "description": {
                         "anyOf": [
@@ -8201,17 +7878,11 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "topics"
                 ],
-                "title": "ForumThreadLiteAPIResponse"
+                "title": "ForumThreadLiteData"
             },
             "ForwardInfo": {
                 "properties": {
@@ -9615,86 +9286,31 @@
             },
             "IndicatorEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "indicator",
+                        "title": "Entity Type",
+                        "default": "indicator"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/IndicatorEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "IndicatorEntityAPIResponse"
+            },
+            "IndicatorEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "pattern": {
                         "type": "string",
@@ -9770,13 +9386,7 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "pattern",
                     "description",
                     "pattern_version",
@@ -9786,90 +9396,35 @@
                     "kill_chain_phases",
                     "marking_definitions"
                 ],
-                "title": "IndicatorEntityAPIResponse"
+                "title": "IndicatorEntityData"
             },
             "IndicatorEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "indicator",
+                        "title": "Entity Type",
+                        "default": "indicator"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/IndicatorEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "IndicatorEntityLiteAPIResponse"
+            },
+            "IndicatorEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "pattern": {
                         "type": "string",
@@ -9889,100 +9444,39 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "pattern",
                     "description"
                 ],
-                "title": "IndicatorEntityLiteAPIResponse"
+                "title": "IndicatorEntityLiteData"
             },
             "InfrastructureEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "infrastructure",
+                        "title": "Entity Type",
+                        "default": "infrastructure"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/InfrastructureEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "InfrastructureEntityAPIResponse"
+            },
+            "InfrastructureEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -10026,103 +9520,42 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "aliases",
                     "infrastructure_types",
                     "kill_chain_phases",
                     "marking_definitions"
                 ],
-                "title": "InfrastructureEntityAPIResponse"
+                "title": "InfrastructureEntityData"
             },
             "InfrastructureEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "infrastructure",
+                        "title": "Entity Type",
+                        "default": "infrastructure"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/InfrastructureEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "InfrastructureEntityLiteAPIResponse"
+            },
+            "InfrastructureEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -10145,17 +9578,11 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "aliases"
                 ],
-                "title": "InfrastructureEntityLiteAPIResponse"
+                "title": "InfrastructureEntityLiteData"
             },
             "IntelType": {
                 "type": "string",
@@ -10628,86 +10055,31 @@
             },
             "LocationEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "location",
+                        "title": "Entity Type",
+                        "default": "location"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/LocationEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "LocationEntityAPIResponse"
+            },
+            "LocationEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -10741,101 +10113,40 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "country_code",
                     "marking_definitions"
                 ],
-                "title": "LocationEntityAPIResponse"
+                "title": "LocationEntityData"
             },
             "LocationEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "location",
+                        "title": "Entity Type",
+                        "default": "location"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/LocationEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "LocationEntityLiteAPIResponse"
+            },
+            "LocationEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -10851,16 +10162,10 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description"
                 ],
-                "title": "LocationEntityLiteAPIResponse"
+                "title": "LocationEntityLiteData"
             },
             "LookalikeDomainEvent": {
                 "properties": {
@@ -10991,86 +10296,31 @@
             },
             "MalwareEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "malware",
+                        "title": "Entity Type",
+                        "default": "malware"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/MalwareEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "MalwareEntityAPIResponse"
+            },
+            "MalwareEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -11114,103 +10364,42 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "aliases",
                     "malware_types",
                     "kill_chain_phases",
                     "marking_definitions"
                 ],
-                "title": "MalwareEntityAPIResponse"
+                "title": "MalwareEntityData"
             },
             "MalwareEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "malware",
+                        "title": "Entity Type",
+                        "default": "malware"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/MalwareEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "MalwareEntityLiteAPIResponse"
+            },
+            "MalwareEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -11233,17 +10422,11 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "aliases"
                 ],
-                "title": "MalwareEntityLiteAPIResponse"
+                "title": "MalwareEntityLiteData"
             },
             "MalwareInformation": {
                 "properties": {
@@ -11557,6 +10740,34 @@
                     "next"
                 ],
                 "title": "PaginatedResults[Alert, str]"
+            },
+            "PaginatedResults_CTIEntityRelationshipResponse_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/CTIEntityRelationshipResponse"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[CTIEntityRelationshipResponse, str]"
             },
             "PaginatedResults_Credential_str_": {
                 "properties": {
@@ -13901,6 +13112,33 @@
                 "type": "object",
                 "title": "Tag"
             },
+            "TakedownConsentBody": {
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Token"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "token"
+                ],
+                "title": "TakedownConsentBody"
+            },
+            "TakedownConsentResponse": {
+                "properties": {
+                    "identifier_name": {
+                        "type": "string",
+                        "title": "Identifier Name"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "identifier_name"
+                ],
+                "title": "TakedownConsentResponse"
+            },
             "TenantMetadataResponse": {
                 "properties": {
                     "uid": {
@@ -13971,86 +13209,31 @@
             },
             "ThreatActorEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "threat_actor",
+                        "title": "Entity Type",
+                        "default": "threat_actor"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ThreatActorEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ThreatActorEntityAPIResponse"
+            },
+            "ThreatActorEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -14148,13 +13331,7 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "aliases",
                     "threat_actor_types",
@@ -14167,90 +13344,35 @@
                     "personal_motivations",
                     "marking_definitions"
                 ],
-                "title": "ThreatActorEntityAPIResponse"
+                "title": "ThreatActorEntityData"
             },
             "ThreatActorEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "threat_actor",
+                        "title": "Entity Type",
+                        "default": "threat_actor"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ThreatActorEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ThreatActorEntityLiteAPIResponse"
+            },
+            "ThreatActorEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -14273,100 +13395,39 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "aliases"
                 ],
-                "title": "ThreatActorEntityLiteAPIResponse"
+                "title": "ThreatActorEntityLiteData"
             },
             "ThreatActorGroupEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "threat_actor_group",
+                        "title": "Entity Type",
+                        "default": "threat_actor_group"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ThreatActorGroupEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ThreatActorGroupEntityAPIResponse"
+            },
+            "ThreatActorGroupEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -14428,13 +13489,7 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "aliases",
                     "goals",
@@ -14443,90 +13498,35 @@
                     "secondary_motivations",
                     "marking_definitions"
                 ],
-                "title": "ThreatActorGroupEntityAPIResponse"
+                "title": "ThreatActorGroupEntityData"
             },
             "ThreatActorGroupEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "threat_actor_group",
+                        "title": "Entity Type",
+                        "default": "threat_actor_group"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ThreatActorGroupEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ThreatActorGroupEntityLiteAPIResponse"
+            },
+            "ThreatActorGroupEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -14549,17 +13549,11 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "aliases"
                 ],
-                "title": "ThreatActorGroupEntityLiteAPIResponse"
+                "title": "ThreatActorGroupEntityLiteData"
             },
             "ThreatFlowReportDownloadFormat": {
                 "type": "string",
@@ -14594,86 +13588,31 @@
             },
             "ToolEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "tool",
+                        "title": "Entity Type",
+                        "default": "tool"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ToolEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ToolEntityAPIResponse"
+            },
+            "ToolEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -14721,103 +13660,42 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "tool_types",
                     "kill_chain_phases",
                     "tool_version",
                     "marking_definitions"
                 ],
-                "title": "ToolEntityAPIResponse"
+                "title": "ToolEntityData"
             },
             "ToolEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "tool",
+                        "title": "Entity Type",
+                        "default": "tool"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/ToolEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "ToolEntityLiteAPIResponse"
+            },
+            "ToolEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -14833,16 +13711,10 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description"
                 ],
-                "title": "ToolEntityLiteAPIResponse"
+                "title": "ToolEntityLiteData"
             },
             "Types": {
                 "properties": {
@@ -15074,86 +13946,31 @@
             },
             "VulnerabilityEntityAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "vulnerability",
+                        "title": "Entity Type",
+                        "default": "vulnerability"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/VulnerabilityEntityData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "VulnerabilityEntityAPIResponse"
+            },
+            "VulnerabilityEntityData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -15176,100 +13993,39 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description",
                     "marking_definitions"
                 ],
-                "title": "VulnerabilityEntityAPIResponse"
+                "title": "VulnerabilityEntityData"
             },
             "VulnerabilityEntityLiteAPIResponse": {
                 "properties": {
-                    "uuid": {
+                    "entity_type": {
                         "type": "string",
-                        "title": "Uuid"
+                        "const": "vulnerability",
+                        "title": "Entity Type",
+                        "default": "vulnerability"
                     },
-                    "type": {
-                        "$ref": "#/components/schemas/EntityType"
+                    "metadata": {
+                        "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
+                    "data": {
+                        "$ref": "#/components/schemas/VulnerabilityEntityLiteData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "VulnerabilityEntityLiteAPIResponse"
+            },
+            "VulnerabilityEntityLiteData": {
+                "properties": {
                     "name": {
                         "type": "string",
                         "title": "Name"
-                    },
-                    "created_by": {
-                        "type": "string",
-                        "title": "Created By"
-                    },
-                    "sources": {
-                        "items": {
-                            "$ref": "#/components/schemas/CTIEntitySourceAPIResponse"
-                        },
-                        "type": "array",
-                        "title": "Sources"
-                    },
-                    "created_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Created At"
-                    },
-                    "updated_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Updated At"
-                    },
-                    "first_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "First Seen At"
-                    },
-                    "last_seen_at": {
-                        "anyOf": [
-                            {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Last Seen At"
-                    },
-                    "confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Confidence"
                     },
                     "description": {
                         "anyOf": [
@@ -15285,16 +14041,10 @@
                 },
                 "type": "object",
                 "required": [
-                    "uuid",
-                    "type",
                     "name",
-                    "created_by",
-                    "sources",
-                    "created_at",
-                    "updated_at",
                     "description"
                 ],
-                "title": "VulnerabilityEntityLiteAPIResponse"
+                "title": "VulnerabilityEntityLiteData"
             },
             "WebhookBasicAuth": {
                 "properties": {
@@ -15313,6 +14063,31 @@
                     "password"
                 ],
                 "title": "WebhookBasicAuth"
+            },
+            "pyro__entities__cti__actors__actor_datamodels__ActorData": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "description"
+                ],
+                "title": "ActorData"
             },
             "pyro__findings__chat_messages__datamodels__ChatMessageEventData__Actor": {
                 "properties": {

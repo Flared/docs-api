@@ -237,13 +237,9 @@
           {
             "group": "Entities API",
             "pages": [
-              {
-                "group": "Entities",
-                "pages": [
-                  "api-reference/v4/endpoints/public/list-entities",
-                  "api-reference/v4/endpoints/public/get-entity"
-                ]
-              }
+              "api-reference/v4/endpoints/public/list-entities",
+              "api-reference/v4/endpoints/public/get-entity",
+              "api-reference/v4/endpoints/public/list-entity-relations"
             ]
           },
           {
