@@ -235,6 +235,14 @@
             ]
           },
           {
+            "group": "Entities API",
+            "pages": [
+              "api-reference/v4/endpoints/public/list-entities",
+              "api-reference/v4/endpoints/public/get-entity",
+              "api-reference/v4/endpoints/public/list-entity-relations"
+            ]
+          },
+          {
             "group": "Threat-Flow API",
             "pages": [
               {
@@ -630,6 +638,14 @@
     {
       "source": "/api-reference/v2/endpoints/identifiers/get-assetsgroups-feed",
       "destination": "/api-reference/v2/endpoints/identifiers/get-fireworkv2assetsgroups-feed"
+    },
+    {
+      "source": "/api-reference/v4/endpoints/list-entities",
+      "destination": "/api-reference/v4/endpoints/public/list-entities"
+    },
+    {
+      "source": "/api-reference/v4/endpoints/get-entity",
+      "destination": "/api-reference/v4/endpoints/public/get-entity"
     }
   ]
 }
