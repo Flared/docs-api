@@ -2,7 +2,11 @@
 openapi: firework-v4-openapi get /firework/v4/threat_flow/reports/requests/{request_info_id}
 ---
 
-## Guides
+<Warning>
+**DEPRECATED:** This endpoint should be replaced by
+[/firework/v4/threat_flow/intel/requests/\{id\} <Icon icon="code" size={16} />](/api-reference/v4/endpoints/get-intel-request)
+</Warning>
 
-See the guide for using this endpoint:
-[Generate a Threat Flow Report <Icon icon="book" size={16} />](/guides/threat-flow-report).
+import GatedAccessFeature from '/snippets/gated-access-feature.mdx';
+
+<GatedAccessFeature name="Flare CTI" />
