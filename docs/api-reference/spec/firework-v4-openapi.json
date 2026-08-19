@@ -293,6 +293,90 @@
                 }
             }
         },
+        "/firework/v4/threat_flow/intel/requests": {
+            "post": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Create Intel Request",
+                "operationId": "create_intel_request_threat_flow_intel_requests_post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateIntelRequestPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateIntelRequestResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/firework/v4/threat_flow/intel/requests/{id}": {
+            "get": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Get Intel Request",
+                "operationId": "get_intel_request_threat_flow_intel_requests__id__get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/IntelRequestResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/credentials/global/_search": {
             "post": {
                 "tags": [
@@ -460,13 +544,13 @@
             }
         },
         "/firework/v4/entities/{id}/relations": {
-            "get": {
+            "post": {
                 "tags": [
                     "public",
                     "team=data-intelligence"
                 ],
                 "summary": "List Entity Relations",
-                "operationId": "list_entity_relations_entities__id__relations_get",
+                "operationId": "list_entity_relations_entities__id__relations_post",
                 "parameters": [
                     {
                         "name": "id",
@@ -477,54 +561,17 @@
                             "format": "uuid",
                             "title": "Id"
                         }
-                    },
-                    {
-                        "name": "size",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "maximum": 1000,
-                            "default": 10,
-                            "title": "Size"
-                        }
-                    },
-                    {
-                        "name": "from_",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "From "
-                        }
-                    },
-                    {
-                        "name": "entity_types",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/EntityType"
-                                    }
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ],
-                            "title": "Entity Types"
-                        }
                     }
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EntityRelationsSearchParamsPayload"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -1098,6 +1145,12 @@
                                         },
                                         {
                                             "$ref": "#/components/schemas/PaginatedResults_FeedItem_str_"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/PaginatedResultsWithTotalCount_LeakedFile_str_"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/PaginatedResults_LeakedFileExtension_str_"
                                         }
                                     ],
                                     "title": "Response Expand Event Field Events  Expand Get"
@@ -2630,6 +2683,7 @@
                     "public"
                 ],
                 "summary": "Create Report Request",
+                "description": "Deprecated. Use `/firework/v4/threat_flow/intel/requests` instead, which generates the same Custom Intel as the Flare web application. The response shape differs because the underlying product differs. This endpoint will be removed; reports already generated through it stay available in the Flare application and through the Threat Flow reports endpoints.",
                 "operationId": "create_report_request_threat_flow_reports_requests_post",
                 "requestBody": {
                     "content": {
@@ -2662,7 +2716,8 @@
                             }
                         }
                     }
-                }
+                },
+                "deprecated": true
             }
         },
         "/firework/v4/threat_flow/reports/requests/{request_info_id}": {
@@ -2671,7 +2726,9 @@
                     "public"
                 ],
                 "summary": "Get Report Request",
+                "description": "Deprecated. Use `/firework/v4/threat_flow/intel/requests` instead, which generates the same Custom Intel as the Flare web application. The response shape differs because the underlying product differs. This endpoint will be removed; reports already generated through it stay available in the Flare application and through the Threat Flow reports endpoints.",
                 "operationId": "get_report_request_threat_flow_reports_requests__request_info_id__get",
+                "deprecated": true,
                 "parameters": [
                     {
                         "name": "request_info_id",
@@ -3010,7 +3067,6 @@
                     "forum_category",
                     "forum_post",
                     "forum_profile",
-                    "forum_thread_summary",
                     "forum_topic",
                     "host",
                     "intelligence_object",
@@ -3920,6 +3976,35 @@
                 ],
                 "title": "AssetRelationType"
             },
+            "AstpCookiesReadValue": {
+                "properties": {
+                    "cookie_names": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Cookie Names",
+                        "description": "The cookie names to monitor"
+                    },
+                    "match_subdomains": {
+                        "type": "boolean",
+                        "title": "Match Subdomains",
+                        "description": "Whether this policy will be applied to monitor subdomains of the assigned domain identifiers",
+                        "default": false
+                    },
+                    "match_prefix": {
+                        "type": "boolean",
+                        "title": "Match Prefix",
+                        "description": "Whether the cookie names are matched as prefixes rather than exactly. Read-only: it cannot be set through this API.",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "cookie_names"
+                ],
+                "title": "AstpCookiesReadValue"
+            },
             "AstpCookiesValue": {
                 "properties": {
                     "cookie_names": {
@@ -3953,6 +4038,16 @@
                 },
                 "type": "object",
                 "title": "AstpDomainValue"
+            },
+            "AsyncRequestStatus": {
+                "type": "string",
+                "enum": [
+                    "pending",
+                    "processing",
+                    "completed",
+                    "error"
+                ],
+                "title": "AsyncRequestStatus"
             },
             "AttackPatternEntityAPIResponse": {
                 "properties": {
@@ -5435,6 +5530,37 @@
                 ],
                 "title": "CreateIncludedKeywordsBody"
             },
+            "CreateIntelRequestPayload": {
+                "properties": {
+                    "question": {
+                        "type": "string",
+                        "title": "Question"
+                    },
+                    "tone": {
+                        "$ref": "#/components/schemas/IntelTone",
+                        "default": "analytical"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "question"
+                ],
+                "title": "CreateIntelRequestPayload"
+            },
+            "CreateIntelRequestResponse": {
+                "properties": {
+                    "request_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Request Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "request_id"
+                ],
+                "title": "CreateIntelRequestResponse"
+            },
             "CreateLuceneQueryBody": {
                 "properties": {
                     "name": {
@@ -6219,6 +6345,16 @@
                 ],
                 "title": "DomainStatus"
             },
+            "DownloadRequestStatus": {
+                "type": "string",
+                "enum": [
+                    "not_requested",
+                    "pending",
+                    "completed",
+                    "failed"
+                ],
+                "title": "DownloadRequestStatus"
+            },
             "EmailData": {
                 "properties": {
                     "type": {
@@ -6485,6 +6621,52 @@
                 ],
                 "title": "EntityMetadataAPIResponse"
             },
+            "EntityRelationsSearchFilters": {
+                "properties": {
+                    "types": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/EntityType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Types"
+                    }
+                },
+                "type": "object",
+                "title": "EntityRelationsSearchFilters"
+            },
+            "EntityRelationsSearchParamsPayload": {
+                "properties": {
+                    "filters": {
+                        "$ref": "#/components/schemas/EntityRelationsSearchFilters"
+                    },
+                    "from": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "From"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "maximum": 1000.0,
+                        "title": "Size",
+                        "default": 10
+                    }
+                },
+                "type": "object",
+                "title": "EntityRelationsSearchParamsPayload"
+            },
             "EntitySearchFilters": {
                 "properties": {
                     "types": {
@@ -6739,7 +6921,9 @@
                 "enum": [
                     "credentials",
                     "cookies",
-                    "associated_events"
+                    "associated_events",
+                    "leaked_files",
+                    "leaked_file_extensions"
                 ],
                 "title": "ExpandableField"
             },
@@ -9597,6 +9781,211 @@
                 ],
                 "title": "InfrastructureEntityLiteData"
             },
+            "IntelRequestPayloadResponse": {
+                "properties": {
+                    "question": {
+                        "type": "string",
+                        "title": "Question"
+                    },
+                    "tone": {
+                        "$ref": "#/components/schemas/IntelTone"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "question",
+                    "tone"
+                ],
+                "title": "IntelRequestPayloadResponse"
+            },
+            "IntelRequestProgress": {
+                "properties": {
+                    "report_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Report Id",
+                        "description": "The ID of the Custom Intel associated with the request"
+                    },
+                    "current_step": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/IntelRequestStep"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The current step of the request"
+                    },
+                    "iteration": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Iteration",
+                        "description": "The number of iterations of the data collection process"
+                    },
+                    "events_retrieved_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Events Retrieved Count",
+                        "description": "The number of events retrieved from the decomposed queries search"
+                    },
+                    "generated_queries": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Generated Queries",
+                        "description": "The queries generated from the topic for the data collection process"
+                    },
+                    "triage_events_analyzed_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Triage Events Analyzed Count",
+                        "description": "The number of events analyzed (used to track progress of the triage process)"
+                    },
+                    "triage_events_total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Triage Events Total Count",
+                        "description": "The total number of events in the triage process"
+                    },
+                    "avg_relevance_score": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Avg Relevance Score",
+                        "description": "The average relevance score of the triaged events"
+                    },
+                    "web_search_queries": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Web Search Queries",
+                        "description": "The queries used for web search"
+                    }
+                },
+                "type": "object",
+                "title": "IntelRequestProgress"
+            },
+            "IntelRequestResponse": {
+                "properties": {
+                    "request_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Request Id"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/AsyncRequestStatus"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    },
+                    "request_payload": {
+                        "$ref": "#/components/schemas/IntelRequestPayloadResponse"
+                    },
+                    "result": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/IntelRequestProgress"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "report": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PydanticThreatFlowReport"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "request_id",
+                    "status",
+                    "created_at",
+                    "request_payload",
+                    "result"
+                ],
+                "title": "IntelRequestResponse"
+            },
+            "IntelRequestStep": {
+                "type": "string",
+                "enum": [
+                    "dark_web_collection",
+                    "triage",
+                    "ai_analysis",
+                    "clear_web_enrichment",
+                    "report_generation",
+                    "output_delivery"
+                ],
+                "title": "IntelRequestStep"
+            },
+            "IntelTone": {
+                "type": "string",
+                "enum": [
+                    "executive",
+                    "analytical"
+                ],
+                "title": "IntelTone"
+            },
             "IntelType": {
                 "type": "string",
                 "enum": [
@@ -9923,6 +10312,139 @@
                     "unignore"
                 ],
                 "title": "LeakedCredentialsBulkActionType"
+            },
+            "LeakedFile": {
+                "properties": {
+                    "uid": {
+                        "type": "string",
+                        "title": "Uid"
+                    },
+                    "filepath": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Filepath"
+                    },
+                    "filename": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Filename"
+                    },
+                    "size": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Size"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    },
+                    "first_crawled_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Crawled At"
+                    },
+                    "archive_file": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Archive File"
+                    },
+                    "archive_type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Archive Type"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/DownloadRequestStatus"
+                    },
+                    "is_requesting_user": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Is Requesting User"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uid",
+                    "filepath",
+                    "filename",
+                    "size",
+                    "created_at",
+                    "first_crawled_at",
+                    "archive_file",
+                    "archive_type",
+                    "status",
+                    "is_requesting_user"
+                ],
+                "title": "LeakedFile"
+            },
+            "LeakedFileExtension": {
+                "properties": {
+                    "extension": {
+                        "type": "string",
+                        "title": "Extension"
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "Description"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "extension",
+                    "description"
+                ],
+                "title": "LeakedFileExtension"
             },
             "ListingEvent": {
                 "properties": {
@@ -10568,7 +11090,7 @@
                         "description": "The type of the matching policy"
                     },
                     "value": {
-                        "$ref": "#/components/schemas/PolicyValue",
+                        "$ref": "#/components/schemas/PolicyReadValue",
                         "description": "The value of the matching policy depending on its type"
                     },
                     "created_at": {
@@ -10725,6 +11247,45 @@
                     "desc"
                 ],
                 "title": "OrderType"
+            },
+            "PaginatedResultsWithTotalCount_LeakedFile_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/LeakedFile"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    },
+                    "total_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Count"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResultsWithTotalCount[LeakedFile, str]"
             },
             "PaginatedResults_Alert_str_": {
                 "properties": {
@@ -10893,6 +11454,34 @@
                     "next"
                 ],
                 "title": "PaginatedResults[GlobalFeedItem, str]"
+            },
+            "PaginatedResults_LeakedFileExtension_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/LeakedFileExtension"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[LeakedFileExtension, str]"
             },
             "PaginatedResults_MatchingPolicyPayload_str_": {
                 "properties": {
@@ -11374,6 +11963,22 @@
                     "identifier_ids"
                 ],
                 "title": "PolicyAssignmentsBody"
+            },
+            "PolicyReadValue": {
+                "anyOf": [
+                    {
+                        "$ref": "#/components/schemas/KeywordsValue"
+                    },
+                    {
+                        "$ref": "#/components/schemas/LuceneValue"
+                    },
+                    {
+                        "$ref": "#/components/schemas/AstpCookiesReadValue"
+                    },
+                    {
+                        "$ref": "#/components/schemas/AstpDomainValue"
+                    }
+                ]
             },
             "PolicyValue": {
                 "anyOf": [
