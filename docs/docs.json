@@ -15,9 +15,7 @@
         "groups": [
           {
             "group": "Introduction",
-            "pages": [
-              "introduction/getting-started"
-            ]
+            "pages": ["introduction/getting-started"]
           },
           {
             "group": "Base Concepts",
@@ -40,9 +38,7 @@
           },
           {
             "group": "Advanced",
-            "pages": [
-              "advanced/event-source-filters"
-            ]
+            "pages": ["advanced/event-source-filters"]
           },
           {
             "group": "Guides",
@@ -124,9 +120,7 @@
               },
               {
                 "group": "Cookies",
-                "pages": [
-                  "api-reference/astp/endpoints/post-cookies-search"
-                ]
+                "pages": ["api-reference/astp/endpoints/post-cookies-search"]
               }
             ]
           },
@@ -255,6 +249,10 @@
             ]
           },
           {
+            "group": "Sandbox API",
+            "pages": ["api-reference/v4/endpoints/create-presigned-upload-url"]
+          },
+          {
             "group": "Deprecated APIs",
             "pages": [
               {
@@ -367,9 +365,7 @@
         "groups": [
           {
             "group": "Changelog",
-            "pages": [
-              "changelog/overview"
-            ]
+            "pages": ["changelog/overview"]
           }
         ]
       }
@@ -398,9 +394,7 @@
       "display": "interactive"
     },
     "mdx": {
-      "server": [
-        "https://api.flare.io/"
-      ],
+      "server": ["https://api.flare.io/"],
       "auth": {
         "method": "bearer"
       }
