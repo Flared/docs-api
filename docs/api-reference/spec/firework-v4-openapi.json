@@ -1203,6 +1203,58 @@
                 }
             }
         },
+        "/firework/v4/events/identifiers/{identifier_id}/_explain": {
+            "get": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "Explain Identifier Event",
+                "operationId": "explain_identifier_event_events_identifiers__identifier_id___explain_get",
+                "parameters": [
+                    {
+                        "name": "identifier_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Identifier Id"
+                        }
+                    },
+                    {
+                        "name": "event_uid",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Event Uid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EventExplanation"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/firework/v4/identifier-recommendations/": {
             "get": {
                 "tags": [
@@ -4914,6 +4966,40 @@
                 ],
                 "title": "CampaignEntityLiteData"
             },
+            "CategoryVerdict": {
+                "properties": {
+                    "event_category": {
+                        "$ref": "#/components/schemas/ActivityModelName",
+                        "description": "The category of the event"
+                    },
+                    "allowed_categories": {
+                        "items": {
+                            "$ref": "#/components/schemas/SearchType"
+                        },
+                        "type": "array",
+                        "title": "Allowed Categories",
+                        "description": "The categories the identifier is configured to monitor"
+                    },
+                    "matched": {
+                        "type": "boolean",
+                        "title": "Matched",
+                        "description": "Whether the event's category is among the allowed categories"
+                    },
+                    "applicable": {
+                        "type": "boolean",
+                        "title": "Applicable",
+                        "description": "Whether the identifier has any allowed categories configured"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "event_category",
+                    "allowed_categories",
+                    "matched",
+                    "applicable"
+                ],
+                "title": "CategoryVerdict"
+            },
             "ChatChannelEntityAPIResponse": {
                 "properties": {
                     "entity_type": {
@@ -6711,6 +6797,31 @@
                         ],
                         "title": "Topic Ids"
                     },
+                    "intent_ids": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/Intent"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Intent Ids"
+                    },
+                    "min_confidence": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Min Confidence"
+                    },
                     "created_at": {
                         "$ref": "#/components/schemas/DateFilter"
                     },
@@ -6846,6 +6957,74 @@
                     "action"
                 ],
                 "title": "EventActionsBody"
+            },
+            "EventExplanation": {
+                "properties": {
+                    "event_uid": {
+                        "type": "string",
+                        "title": "Event Uid",
+                        "description": "The uid of the explained event"
+                    },
+                    "identifier_id": {
+                        "type": "integer",
+                        "title": "Identifier Id",
+                        "description": "The id of the identifier the event is being explained for"
+                    },
+                    "identifier_query": {
+                        "$ref": "#/components/schemas/IdentifierQueryVerdict",
+                        "description": "The verdict of the identifier's search query"
+                    },
+                    "categories": {
+                        "$ref": "#/components/schemas/CategoryVerdict",
+                        "description": "The verdict of the event category check"
+                    },
+                    "severity": {
+                        "$ref": "#/components/schemas/SeverityVerdict",
+                        "description": "The verdict of the event severity check"
+                    },
+                    "matching_policies": {
+                        "$ref": "#/components/schemas/MatchingPolicyVerdict",
+                        "description": "The verdict of the matching policies check"
+                    },
+                    "tenant_ignored_terms": {
+                        "$ref": "#/components/schemas/IgnoredTermsVerdict",
+                        "description": "The verdict of the tenant's ignored terms check"
+                    },
+                    "global_policies": {
+                        "$ref": "#/components/schemas/GlobalPolicyVerdict",
+                        "description": "The verdict of the global policies check"
+                    },
+                    "maybe_rate_limited": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Maybe Rate Limited",
+                        "description": "Whether the event may have been suppressed due to rate limiting"
+                    },
+                    "would_match": {
+                        "type": "boolean",
+                        "title": "Would Match",
+                        "description": "Whether the event would have matched the identifier overall"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "event_uid",
+                    "identifier_id",
+                    "identifier_query",
+                    "categories",
+                    "severity",
+                    "matching_policies",
+                    "tenant_ignored_terms",
+                    "global_policies",
+                    "would_match"
+                ],
+                "title": "EventExplanation"
             },
             "EventMetadata": {
                 "properties": {
@@ -7164,7 +7343,7 @@
                     },
                     "type": {
                         "items": {
-                            "$ref": "#/components/schemas/SearchType"
+                            "type": "string"
                         },
                         "type": "array",
                         "title": "Type"
@@ -7944,6 +8123,13 @@
                         "type": "array",
                         "title": "Topics"
                     },
+                    "intents": {
+                        "items": {
+                            "$ref": "#/components/schemas/ThreadIntent"
+                        },
+                        "type": "array",
+                        "title": "Intents"
+                    },
                     "original_post_overview": {
                         "anyOf": [
                             {
@@ -8005,6 +8191,7 @@
                     "name",
                     "description",
                     "topics",
+                    "intents",
                     "original_post_overview",
                     "original_post_actor_intent",
                     "replies_overview",
@@ -8058,13 +8245,21 @@
                         },
                         "type": "array",
                         "title": "Topics"
+                    },
+                    "intents": {
+                        "items": {
+                            "$ref": "#/components/schemas/ThreadIntent"
+                        },
+                        "type": "array",
+                        "title": "Intents"
                     }
                 },
                 "type": "object",
                 "required": [
                     "name",
                     "description",
-                    "topics"
+                    "topics",
+                    "intents"
                 ],
                 "title": "ForumThreadLiteData"
             },
@@ -8233,6 +8428,77 @@
                     "metadata"
                 ],
                 "title": "GlobalFeedItem"
+            },
+            "GlobalPolicyEnum": {
+                "type": "string",
+                "enum": [
+                    "identical_market_listings",
+                    "identical_forum_posts",
+                    "identical_chat_messages",
+                    "identical_pastes",
+                    "identical_stealer_logs",
+                    "identical_attachments",
+                    "similar_market_listings",
+                    "similar_forum_posts",
+                    "similar_chat_messages",
+                    "similar_pastes"
+                ],
+                "title": "GlobalPolicyEnum"
+            },
+            "GlobalPolicyMatch": {
+                "properties": {
+                    "policy": {
+                        "$ref": "#/components/schemas/GlobalPolicyEnum",
+                        "description": "The global policy considered for this event's category"
+                    },
+                    "duplicate_uid": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Duplicate Uid",
+                        "description": "The uid of the event this event was identified as a duplicate of, if matched"
+                    },
+                    "matched": {
+                        "type": "boolean",
+                        "title": "Matched",
+                        "description": "Whether this global policy matched the event"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "policy",
+                    "duplicate_uid",
+                    "matched"
+                ],
+                "title": "GlobalPolicyMatch"
+            },
+            "GlobalPolicyVerdict": {
+                "properties": {
+                    "policies": {
+                        "items": {
+                            "$ref": "#/components/schemas/GlobalPolicyMatch"
+                        },
+                        "type": "array",
+                        "title": "Policies",
+                        "description": "The global policies considered for this event's category"
+                    },
+                    "applicable": {
+                        "type": "boolean",
+                        "title": "Applicable",
+                        "description": "Whether a global policy applies to this event's category and is enabled for the tenant"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "policies",
+                    "applicable"
+                ],
+                "title": "GlobalPolicyVerdict"
             },
             "GlobalSearchRequestBody": {
                 "properties": {
@@ -8944,6 +9210,26 @@
                 ],
                 "title": "IdentifierOrderBy"
             },
+            "IdentifierQueryVerdict": {
+                "properties": {
+                    "matched": {
+                        "type": "boolean",
+                        "title": "Matched",
+                        "description": "Whether the identifier's own search query matched the event"
+                    },
+                    "applicable": {
+                        "type": "boolean",
+                        "title": "Applicable",
+                        "description": "Whether the identifier has its own search query to check"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "matched",
+                    "applicable"
+                ],
+                "title": "IdentifierQueryVerdict"
+            },
             "IdentifierRecommendationAction": {
                 "properties": {
                     "type": {
@@ -9472,6 +9758,56 @@
                 ],
                 "title": "IdentityIdentifierEntity"
             },
+            "IgnoredTermsPolicyMatch": {
+                "properties": {
+                    "ignored_terms_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Ignored Terms Id",
+                        "description": "The id of the tenant's ignored terms policy"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "The name of the ignored terms policy"
+                    },
+                    "matched": {
+                        "type": "boolean",
+                        "title": "Matched",
+                        "description": "Whether this ignored terms policy matched the event"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "ignored_terms_id",
+                    "name",
+                    "matched"
+                ],
+                "title": "IgnoredTermsPolicyMatch"
+            },
+            "IgnoredTermsVerdict": {
+                "properties": {
+                    "policies": {
+                        "items": {
+                            "$ref": "#/components/schemas/IgnoredTermsPolicyMatch"
+                        },
+                        "type": "array",
+                        "title": "Policies",
+                        "description": "The tenant's ignored terms policies"
+                    },
+                    "applicable": {
+                        "type": "boolean",
+                        "title": "Applicable",
+                        "description": "Whether the tenant has any ignored terms policies configured"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "policies",
+                    "applicable"
+                ],
+                "title": "IgnoredTermsVerdict"
+            },
             "IncludeOptions": {
                 "type": "string",
                 "enum": [
@@ -9993,6 +10329,22 @@
                     "custom_intel"
                 ],
                 "title": "IntelType"
+            },
+            "Intent": {
+                "type": "string",
+                "enum": [
+                    "sell",
+                    "buy",
+                    "free_release",
+                    "share",
+                    "trade",
+                    "service_for_hire",
+                    "request_help",
+                    "discussion",
+                    "recruitment",
+                    "unknown"
+                ],
+                "title": "Intent"
             },
             "InvalidCredentialEvent": {
                 "properties": {
@@ -11072,6 +11424,38 @@
                 ],
                 "title": "MatchingPolicyAssignmentPayload"
             },
+            "MatchingPolicyMatch": {
+                "properties": {
+                    "matching_policy_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Matching Policy Id",
+                        "description": "The id of the matching policy"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "The name of the matching policy"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/MatchingPolicyType",
+                        "description": "The type of the matching policy"
+                    },
+                    "matched": {
+                        "type": "boolean",
+                        "title": "Matched",
+                        "description": "Whether this matching policy matched the event"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "matching_policy_id",
+                    "name",
+                    "type",
+                    "matched"
+                ],
+                "title": "MatchingPolicyMatch"
+            },
             "MatchingPolicyPayload": {
                 "properties": {
                     "uuid": {
@@ -11127,6 +11511,29 @@
                     "ASTP_DOMAIN"
                 ],
                 "title": "MatchingPolicyType"
+            },
+            "MatchingPolicyVerdict": {
+                "properties": {
+                    "policies": {
+                        "items": {
+                            "$ref": "#/components/schemas/MatchingPolicyMatch"
+                        },
+                        "type": "array",
+                        "title": "Policies",
+                        "description": "The matching policies assigned to the identifier"
+                    },
+                    "applicable": {
+                        "type": "boolean",
+                        "title": "Applicable",
+                        "description": "Whether the identifier has any matching policies assigned"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "policies",
+                    "applicable"
+                ],
+                "title": "MatchingPolicyVerdict"
             },
             "MitigatedCredentialEvent": {
                 "properties": {
@@ -13055,6 +13462,14 @@
                 ],
                 "title": "RoleData"
             },
+            "RuleSource": {
+                "type": "string",
+                "enum": [
+                    "flare",
+                    "tenant"
+                ],
+                "title": "RuleSource"
+            },
             "SandboxSubmissionEventType": {
                 "type": "string",
                 "enum": [
@@ -13391,6 +13806,92 @@
                     "critical"
                 ],
                 "title": "Severity"
+            },
+            "SeverityRuleMatch": {
+                "properties": {
+                    "rule_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Rule Id",
+                        "description": "The id of the scoring rule"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "The name of the scoring rule"
+                    },
+                    "source": {
+                        "$ref": "#/components/schemas/RuleSource",
+                        "description": "Whether the rule is a Flare-provided or tenant-defined rule"
+                    },
+                    "severity": {
+                        "$ref": "#/components/schemas/RiskScore",
+                        "description": "The severity assigned to the event by this rule"
+                    },
+                    "is_beta": {
+                        "type": "boolean",
+                        "title": "Is Beta",
+                        "description": "Whether the rule is currently in beta"
+                    },
+                    "is_override": {
+                        "type": "boolean",
+                        "title": "Is Override",
+                        "description": "Whether the rule overrides the severity assigned by other rules"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "rule_id",
+                    "name",
+                    "source",
+                    "severity",
+                    "is_beta",
+                    "is_override"
+                ],
+                "title": "SeverityRuleMatch"
+            },
+            "SeverityVerdict": {
+                "properties": {
+                    "event_severity": {
+                        "$ref": "#/components/schemas/RiskScore",
+                        "description": "The severity computed for the event"
+                    },
+                    "allowed_severities": {
+                        "items": {
+                            "$ref": "#/components/schemas/RiskScore"
+                        },
+                        "type": "array",
+                        "title": "Allowed Severities",
+                        "description": "The severities the identifier is configured to alert on"
+                    },
+                    "matched": {
+                        "type": "boolean",
+                        "title": "Matched",
+                        "description": "Whether the event's severity is among the allowed severities"
+                    },
+                    "applicable": {
+                        "type": "boolean",
+                        "title": "Applicable",
+                        "description": "Whether the identifier has any allowed severities configured"
+                    },
+                    "matched_rules": {
+                        "items": {
+                            "$ref": "#/components/schemas/SeverityRuleMatch"
+                        },
+                        "type": "array",
+                        "title": "Matched Rules",
+                        "description": "The scoring rules that matched the event and contributed to its severity"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "event_severity",
+                    "allowed_severities",
+                    "matched",
+                    "applicable",
+                    "matched_rules"
+                ],
+                "title": "SeverityVerdict"
             },
             "SocialMediaEvent": {
                 "properties": {
@@ -13801,6 +14302,28 @@
                     "severity"
                 ],
                 "title": "TenantMetadataResponse"
+            },
+            "ThreadIntent": {
+                "properties": {
+                    "intent_id": {
+                        "$ref": "#/components/schemas/Intent"
+                    },
+                    "label": {
+                        "type": "string",
+                        "title": "Label"
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "Description"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "intent_id",
+                    "label",
+                    "description"
+                ],
+                "title": "ThreadIntent"
             },
             "ThreadTopic": {
                 "properties": {
