@@ -6811,16 +6811,8 @@
                         ],
                         "title": "Intent Ids"
                     },
-                    "min_confidence": {
-                        "anyOf": [
-                            {
-                                "type": "integer"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Min Confidence"
+                    "confidence": {
+                        "$ref": "#/components/schemas/IntRangeFilter"
                     },
                     "created_at": {
                         "$ref": "#/components/schemas/DateFilter"
@@ -10116,6 +10108,56 @@
                     "aliases"
                 ],
                 "title": "InfrastructureEntityLiteData"
+            },
+            "IntRangeFilter": {
+                "properties": {
+                    "gt": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Gt"
+                    },
+                    "gte": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Gte"
+                    },
+                    "lt": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Lt"
+                    },
+                    "lte": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Lte"
+                    }
+                },
+                "type": "object",
+                "title": "IntRangeFilter"
             },
             "IntelRequestPayloadResponse": {
                 "properties": {
