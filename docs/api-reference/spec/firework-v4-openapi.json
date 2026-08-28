@@ -3147,6 +3147,7 @@
                     "sdo_threat_actor_group",
                     "sdo_tool",
                     "sdo_vulnerability",
+                    "secret",
                     "seller",
                     "service",
                     "social_media_account",
@@ -3795,12 +3796,16 @@
                     "name": {
                         "type": "string",
                         "title": "Name"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/AlertType"
                     }
                 },
                 "type": "object",
                 "required": [
                     "id",
-                    "name"
+                    "name",
+                    "type"
                 ],
                 "title": "AlertChannelSummary"
             },
@@ -9213,12 +9218,33 @@
                         "type": "boolean",
                         "title": "Applicable",
                         "description": "Whether the identifier has its own search query to check"
+                    },
+                    "search_terms": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Search Terms",
+                        "description": "The terms from the identifier's own search query used to match the event"
+                    },
+                    "highlights": {
+                        "additionalProperties": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "type": "object",
+                        "title": "Highlights",
+                        "description": "Excerpts of the event fields the identifier's terms matched, with each match wrapped in <mark> tags"
                     }
                 },
                 "type": "object",
                 "required": [
                     "matched",
-                    "applicable"
+                    "applicable",
+                    "search_terms",
+                    "highlights"
                 ],
                 "title": "IdentifierQueryVerdict"
             },
@@ -13217,14 +13243,44 @@
                                 "username": "#/components/schemas/UsernameData"
                             }
                         }
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/IdentifierRecommendationState"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Updated At"
+                    },
+                    "relevancy_score_type": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/RecommendationRelevancyScoreType"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
                 "required": [
                     "id",
-                    "data"
+                    "data",
+                    "status",
+                    "updated_at",
+                    "relevancy_score_type"
                 ],
                 "title": "Recommendation"
+            },
+            "RecommendationRelevancyScoreType": {
+                "type": "string",
+                "enum": [
+                    "HIGH",
+                    "MEDIUM",
+                    "LOW"
+                ],
+                "title": "RecommendationRelevancyScoreType"
             },
             "RelatedConversationRequest": {
                 "properties": {
