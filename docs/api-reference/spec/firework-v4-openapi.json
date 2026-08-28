@@ -167,6 +167,46 @@
             }
         },
         "/firework/v4/alerts/channels": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=integration"
+                ],
+                "summary": "Create Channel",
+                "operationId": "create_channel_alerts_channels_post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAlertChannel"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertChannel"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "get": {
                 "tags": [
                     "public",
@@ -236,46 +276,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/PaginatedResults_PartialAlertChannel_str_"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "public",
-                    "team=integration"
-                ],
-                "summary": "Create Channel",
-                "operationId": "create_channel_alerts_channels_post",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateAlertChannel"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AlertChannel"
                                 }
                             }
                         }
@@ -1605,6 +1605,47 @@
             }
         },
         "/firework/v4/identifiers/{identifier_id}": {
+            "get": {
+                "tags": [
+                    "public",
+                    "team=experience"
+                ],
+                "summary": "Get Identifier",
+                "operationId": "get_identifier_public_identifiers__identifier_id__get",
+                "parameters": [
+                    {
+                        "name": "identifier_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Identifier Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublicIdentifierResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "public",
@@ -1633,47 +1674,6 @@
                         }
                     }
                 },
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PublicIdentifierResponse"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "get": {
-                "tags": [
-                    "public",
-                    "team=experience"
-                ],
-                "summary": "Get Identifier",
-                "operationId": "get_identifier_public_identifiers__identifier_id__get",
-                "parameters": [
-                    {
-                        "name": "identifier_id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "title": "Identifier Id"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -1866,6 +1866,48 @@
             }
         },
         "/firework/v4/matching-policies/{policy_uuid}": {
+            "get": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "Get Matching Policy",
+                "operationId": "get_matching_policy_matching_policies__policy_uuid__get",
+                "parameters": [
+                    {
+                        "name": "policy_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Policy Uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MatchingPolicyPayload"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "public",
@@ -1895,48 +1937,6 @@
                         }
                     }
                 },
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MatchingPolicyPayload"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "get": {
-                "tags": [
-                    "public",
-                    "team=data-engineering"
-                ],
-                "summary": "Get Matching Policy",
-                "operationId": "get_matching_policy_matching_policies__policy_uuid__get",
-                "parameters": [
-                    {
-                        "name": "policy_uuid",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid",
-                            "title": "Policy Uuid"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -2049,6 +2049,56 @@
             }
         },
         "/firework/v4/matching-policies/{policy_uuid}/assignments": {
+            "post": {
+                "tags": [
+                    "public",
+                    "team=data-engineering"
+                ],
+                "summary": "Assign Policy",
+                "operationId": "assign_policy_matching_policies__policy_uuid__assignments_post",
+                "parameters": [
+                    {
+                        "name": "policy_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Policy Uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PolicyAssignmentsBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "get": {
                 "tags": [
                     "public",
@@ -2112,56 +2162,6 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/PaginatedResults_PolicyAssignedIdentifierPayload_str_"
                                 }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "public",
-                    "team=data-engineering"
-                ],
-                "summary": "Assign Policy",
-                "operationId": "assign_policy_matching_policies__policy_uuid__assignments_post",
-                "parameters": [
-                    {
-                        "name": "policy_uuid",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid",
-                            "title": "Policy Uuid"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/PolicyAssignmentsBody"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
                             }
                         }
                     },
