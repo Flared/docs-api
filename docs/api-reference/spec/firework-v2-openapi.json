@@ -602,44 +602,6 @@
             }
         },
         "/firework/v2/activities/{index}/{source}/{id_}/user_metadata/tags": {
-            "delete": {
-                "operationId": "delete_activity_user_metadata_tags_/activities/<string:index>/<string:source>/<path:id_>/user_metadata/tags",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "index",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "path",
-                        "name": "source",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "path",
-                        "name": "id_",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {},
-                        "description": "Success"
-                    }
-                },
-                "tags": [
-                    "activities"
-                ]
-            },
             "get": {
                 "operationId": "get_activity_user_metadata_tags_/activities/<string:index>/<string:source>/<path:id_>/user_metadata/tags",
                 "parameters": [
@@ -748,6 +710,44 @@
                     "activities"
                 ],
                 "x-codegen-request-body-name": "payload"
+            },
+            "delete": {
+                "operationId": "delete_activity_user_metadata_tags_/activities/<string:index>/<string:source>/<path:id_>/user_metadata/tags",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "index",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "source",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id_",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {},
+                        "description": "Success"
+                    }
+                },
+                "tags": [
+                    "activities"
+                ]
             }
         },
         "/firework/v2/activities/{index}/{source}/{id}": {
@@ -1246,24 +1246,6 @@
             }
         },
         "/firework/v2/assets/": {
-            "get": {
-                "operationId": "get_assets_/assets/",
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/get_assets__assets__200_response"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    }
-                },
-                "tags": [
-                    "Identifiers"
-                ]
-            },
             "post": {
                 "operationId": "post_assets_/assets/",
                 "requestBody": {
@@ -1302,17 +1284,15 @@
                     "Identifiers"
                 ],
                 "x-codegen-request-body-name": "payload"
-            }
-        },
-        "/firework/v2/assets/groups/": {
+            },
             "get": {
-                "operationId": "get_assets_groups_/assets/groups/",
+                "operationId": "get_assets_/assets/",
                 "responses": {
                     "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/get_assets_groups__assets_groups__200_response"
+                                    "$ref": "#/components/schemas/get_assets__assets__200_response"
                                 }
                             }
                         },
@@ -1322,7 +1302,9 @@
                 "tags": [
                     "Identifiers"
                 ]
-            },
+            }
+        },
+        "/firework/v2/assets/groups/": {
             "post": {
                 "operationId": "post_assets_groups_/assets/groups/",
                 "requestBody": {
@@ -1361,31 +1343,27 @@
                     "Identifiers"
                 ],
                 "x-codegen-request-body-name": "payload"
-            }
-        },
-        "/firework/v2/assets/groups/{assets_group_id}": {
-            "delete": {
-                "operationId": "delete_assets_group_api_/assets/groups/<int:assets_group_id>",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "assets_group_id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
+            },
+            "get": {
+                "operationId": "get_assets_groups_/assets/groups/",
                 "responses": {
                     "200": {
-                        "content": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/get_assets_groups__assets_groups__200_response"
+                                }
+                            }
+                        },
                         "description": "Success"
                     }
                 },
                 "tags": [
                     "Identifiers"
                 ]
-            },
+            }
+        },
+        "/firework/v2/assets/groups/{assets_group_id}": {
             "get": {
                 "operationId": "get_assets_group_api_/assets/groups/<int:assets_group_id>",
                 "parameters": [
@@ -1462,11 +1440,9 @@
                     "Identifiers"
                 ],
                 "x-codegen-request-body-name": "payload"
-            }
-        },
-        "/firework/v2/assets/groups/{assets_group_id}/alerts": {
-            "get": {
-                "operationId": "get_assets_group_alerts_/assets/groups/<int:assets_group_id>/alerts",
+            },
+            "delete": {
+                "operationId": "delete_assets_group_api_/assets/groups/<int:assets_group_id>",
                 "parameters": [
                     {
                         "in": "path",
@@ -1479,20 +1455,16 @@
                 ],
                 "responses": {
                     "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/get_assets_group_alerts__assets_groups__int_assets_group_id__alerts_200_response"
-                                }
-                            }
-                        },
+                        "content": {},
                         "description": "Success"
                     }
                 },
                 "tags": [
                     "Identifiers"
                 ]
-            },
+            }
+        },
+        "/firework/v2/assets/groups/{assets_group_id}/alerts": {
             "post": {
                 "operationId": "post_assets_group_alerts_/assets/groups/<int:assets_group_id>/alerts",
                 "parameters": [
@@ -1531,11 +1503,9 @@
                     "Identifiers"
                 ],
                 "x-codegen-request-body-name": "payload"
-            }
-        },
-        "/firework/v2/assets/groups/{assets_group_id}/alerts/{alert_id}": {
-            "delete": {
-                "operationId": "delete_assets_group_alert_/assets/groups/<int:assets_group_id>/alerts/<int:alert_id>",
+            },
+            "get": {
+                "operationId": "get_assets_group_alerts_/assets/groups/<int:assets_group_id>/alerts",
                 "parameters": [
                     {
                         "in": "path",
@@ -1544,26 +1514,26 @@
                         "schema": {
                             "type": "integer"
                         }
-                    },
-                    {
-                        "in": "path",
-                        "name": "alert_id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "content": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/get_assets_group_alerts__assets_groups__int_assets_group_id__alerts_200_response"
+                                }
+                            }
+                        },
                         "description": "Success"
                     }
                 },
                 "tags": [
                     "Identifiers"
                 ]
-            },
+            }
+        },
+        "/firework/v2/assets/groups/{assets_group_id}/alerts/{alert_id}": {
             "put": {
                 "operationId": "put_assets_group_alert_/assets/groups/<int:assets_group_id>/alerts/<int:alert_id>",
                 "parameters": [
@@ -1610,11 +1580,41 @@
                     "Identifiers"
                 ],
                 "x-codegen-request-body-name": "payload"
+            },
+            "delete": {
+                "operationId": "delete_assets_group_alert_/assets/groups/<int:assets_group_id>/alerts/<int:alert_id>",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "assets_group_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "alert_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {},
+                        "description": "Success"
+                    }
+                },
+                "tags": [
+                    "Identifiers"
+                ]
             }
         },
         "/firework/v2/assets/groups/{assets_group_id}/feed": {
-            "get": {
-                "operationId": "get_assets_group_feed_/assets/groups/<int:assets_group_id>/feed",
+            "post": {
+                "operationId": "post_assets_group_feed_/assets/groups/<int:assets_group_id>/feed",
                 "parameters": [
                     {
                         "in": "path",
@@ -1692,7 +1692,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, ransomleak, stealer_log, chat_message, forum_profile, blog_post, listing, bot, seller, forum_post, forum_topic\n- open_web: service, stack_exchange, google, source_code_secrets, social_media_account, source_code_files, paste, docker, bucket_object, bucket\n- leaks: mitigated_credential, valid_credential, leak, invalid_credential\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, chat_message, financial_data, seller, forum_profile, listing, forum_topic, stealer_log, ransomleak, forum_post, bot\n- open_web: bucket_object, docker, bucket, stack_exchange, source_code_files, paste, social_media_account, service, source_code_secrets, google\n- leaks: leak, mitigated_credential, valid_credential, invalid_credential\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -1937,8 +1937,8 @@
                     "Identifiers"
                 ]
             },
-            "post": {
-                "operationId": "post_assets_group_feed_/assets/groups/<int:assets_group_id>/feed",
+            "get": {
+                "operationId": "get_assets_group_feed_/assets/groups/<int:assets_group_id>/feed",
                 "parameters": [
                     {
                         "in": "path",
@@ -2016,7 +2016,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, ransomleak, stealer_log, chat_message, forum_profile, blog_post, listing, bot, seller, forum_post, forum_topic\n- open_web: service, stack_exchange, google, source_code_secrets, social_media_account, source_code_files, paste, docker, bucket_object, bucket\n- leaks: mitigated_credential, valid_credential, leak, invalid_credential\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, chat_message, financial_data, seller, forum_profile, listing, forum_topic, stealer_log, ransomleak, forum_post, bot\n- open_web: bucket_object, docker, bucket, stack_exchange, source_code_files, paste, social_media_account, service, source_code_secrets, google\n- leaks: leak, mitigated_credential, valid_credential, invalid_credential\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -2263,28 +2263,6 @@
             }
         },
         "/firework/v2/assets/{asset_id}": {
-            "delete": {
-                "operationId": "delete_asset_api_/assets/<int:asset_id>",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "asset_id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {},
-                        "description": "Success"
-                    }
-                },
-                "tags": [
-                    "Identifiers"
-                ]
-            },
             "get": {
                 "operationId": "get_asset_api_/assets/<int:asset_id>",
                 "parameters": [
@@ -2361,11 +2339,9 @@
                     "Identifiers"
                 ],
                 "x-codegen-request-body-name": "payload"
-            }
-        },
-        "/firework/v2/assets/{asset_id}/alerts": {
-            "get": {
-                "operationId": "get_asset_alerts_/assets/<int:asset_id>/alerts",
+            },
+            "delete": {
+                "operationId": "delete_asset_api_/assets/<int:asset_id>",
                 "parameters": [
                     {
                         "in": "path",
@@ -2378,20 +2354,16 @@
                 ],
                 "responses": {
                     "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/get_assets_group_alerts__assets_groups__int_assets_group_id__alerts_200_response"
-                                }
-                            }
-                        },
+                        "content": {},
                         "description": "Success"
                     }
                 },
                 "tags": [
                     "Identifiers"
                 ]
-            },
+            }
+        },
+        "/firework/v2/assets/{asset_id}/alerts": {
             "post": {
                 "operationId": "post_asset_alerts_/assets/<int:asset_id>/alerts",
                 "parameters": [
@@ -2430,11 +2402,9 @@
                     "Identifiers"
                 ],
                 "x-codegen-request-body-name": "payload"
-            }
-        },
-        "/firework/v2/assets/{asset_id}/alerts/{alert_id}": {
-            "delete": {
-                "operationId": "delete_asset_alert_/assets/<int:asset_id>/alerts/<int:alert_id>",
+            },
+            "get": {
+                "operationId": "get_asset_alerts_/assets/<int:asset_id>/alerts",
                 "parameters": [
                     {
                         "in": "path",
@@ -2443,26 +2413,26 @@
                         "schema": {
                             "type": "integer"
                         }
-                    },
-                    {
-                        "in": "path",
-                        "name": "alert_id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "content": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/get_assets_group_alerts__assets_groups__int_assets_group_id__alerts_200_response"
+                                }
+                            }
+                        },
                         "description": "Success"
                     }
                 },
                 "tags": [
                     "Identifiers"
                 ]
-            },
+            }
+        },
+        "/firework/v2/assets/{asset_id}/alerts/{alert_id}": {
             "put": {
                 "operationId": "put_asset_alert_/assets/<int:asset_id>/alerts/<int:alert_id>",
                 "parameters": [
@@ -2509,11 +2479,41 @@
                     "Identifiers"
                 ],
                 "x-codegen-request-body-name": "payload"
+            },
+            "delete": {
+                "operationId": "delete_asset_alert_/assets/<int:asset_id>/alerts/<int:alert_id>",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "asset_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "alert_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {},
+                        "description": "Success"
+                    }
+                },
+                "tags": [
+                    "Identifiers"
+                ]
             }
         },
         "/firework/v2/assets/{asset_id}/feed": {
-            "get": {
-                "operationId": "get_asset_feed_/assets/<int:asset_id>/feed",
+            "post": {
+                "operationId": "post_asset_feed_/assets/<int:asset_id>/feed",
                 "parameters": [
                     {
                         "in": "path",
@@ -2591,7 +2591,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, ransomleak, stealer_log, chat_message, forum_profile, blog_post, listing, bot, seller, forum_post, forum_topic\n- open_web: service, stack_exchange, google, source_code_secrets, social_media_account, source_code_files, paste, docker, bucket_object, bucket\n- leaks: mitigated_credential, valid_credential, leak, invalid_credential\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, chat_message, financial_data, seller, forum_profile, listing, forum_topic, stealer_log, ransomleak, forum_post, bot\n- open_web: bucket_object, docker, bucket, stack_exchange, source_code_files, paste, social_media_account, service, source_code_secrets, google\n- leaks: leak, mitigated_credential, valid_credential, invalid_credential\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -2836,8 +2836,8 @@
                     "Identifiers"
                 ]
             },
-            "post": {
-                "operationId": "post_asset_feed_/assets/<int:asset_id>/feed",
+            "get": {
+                "operationId": "get_asset_feed_/assets/<int:asset_id>/feed",
                 "parameters": [
                     {
                         "in": "path",
@@ -2915,7 +2915,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, ransomleak, stealer_log, chat_message, forum_profile, blog_post, listing, bot, seller, forum_post, forum_topic\n- open_web: service, stack_exchange, google, source_code_secrets, social_media_account, source_code_files, paste, docker, bucket_object, bucket\n- leaks: mitigated_credential, valid_credential, leak, invalid_credential\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, chat_message, financial_data, seller, forum_profile, listing, forum_topic, stealer_log, ransomleak, forum_post, bot\n- open_web: bucket_object, docker, bucket, stack_exchange, source_code_files, paste, social_media_account, service, source_code_secrets, google\n- leaks: leak, mitigated_credential, valid_credential, invalid_credential\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -3271,8 +3271,8 @@
             }
         },
         "/firework/v2/me/feed": {
-            "get": {
-                "operationId": "get_current_user_home_feed_/me/feed",
+            "post": {
+                "operationId": "post_current_user_home_feed_/me/feed",
                 "parameters": [
                     {
                         "description": "  The `time` parameter is used to limit results to those found in the provided time span.  \n\n  *Expected format* : from@to  \n\n  *Example value* : 2019-09-03T04:00:00.000Z@2019-09-14T04:00:00.000Z",
@@ -3329,7 +3329,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, ransomleak, stealer_log, chat_message, forum_profile, blog_post, listing, bot, seller, forum_post, forum_topic\n- open_web: service, stack_exchange, google, source_code_secrets, social_media_account, source_code_files, paste, docker, bucket_object, bucket\n- leaks: mitigated_credential, valid_credential, leak, invalid_credential\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, chat_message, financial_data, seller, forum_profile, listing, forum_topic, stealer_log, ransomleak, forum_post, bot\n- open_web: bucket_object, docker, bucket, stack_exchange, source_code_files, paste, social_media_account, service, source_code_secrets, google\n- leaks: leak, mitigated_credential, valid_credential, invalid_credential\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -3554,8 +3554,8 @@
                     "me"
                 ]
             },
-            "post": {
-                "operationId": "post_current_user_home_feed_/me/feed",
+            "get": {
+                "operationId": "get_current_user_home_feed_/me/feed",
                 "parameters": [
                     {
                         "description": "  The `time` parameter is used to limit results to those found in the provided time span.  \n\n  *Expected format* : from@to  \n\n  *Example value* : 2019-09-03T04:00:00.000Z@2019-09-14T04:00:00.000Z",
@@ -3612,7 +3612,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, ransomleak, stealer_log, chat_message, forum_profile, blog_post, listing, bot, seller, forum_post, forum_topic\n- open_web: service, stack_exchange, google, source_code_secrets, social_media_account, source_code_files, paste, docker, bucket_object, bucket\n- leaks: mitigated_credential, valid_credential, leak, invalid_credential\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, chat_message, financial_data, seller, forum_profile, listing, forum_topic, stealer_log, ransomleak, forum_post, bot\n- open_web: bucket_object, docker, bucket, stack_exchange, source_code_files, paste, social_media_account, service, source_code_secrets, google\n- leaks: leak, mitigated_credential, valid_credential, invalid_credential\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -3839,6 +3839,35 @@
             }
         },
         "/firework/v2/me/feed/credentials": {
+            "post": {
+                "operationId": "post_leaked_credentials_feed_endpoint_/me/feed/credentials",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdate"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedCredentials"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "tags": [
+                    "me"
+                ],
+                "x-codegen-request-body-name": "payload"
+            },
             "get": {
                 "operationId": "get_leaked_credentials_feed_endpoint_/me/feed/credentials",
                 "parameters": [
@@ -3885,35 +3914,6 @@
                 "tags": [
                     "me"
                 ]
-            },
-            "post": {
-                "operationId": "post_leaked_credentials_feed_endpoint_/me/feed/credentials",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UserUpdate"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PaginatedCredentials"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    }
-                },
-                "tags": [
-                    "me"
-                ],
-                "x-codegen-request-body-name": "payload"
             }
         },
         "/firework/v2/me/profile": {
@@ -3984,6 +3984,55 @@
             }
         },
         "/firework/v2/organizations/{organization_id}/members": {
+            "post": {
+                "operationId": "post_organization_members_api_/organizations/<int:organization_id>/members",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "organization_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrganizationMemberData"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpError"
+                                }
+                            }
+                        },
+                        "description": "Organization not found"
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/post_organization_members_api__organizations__int_organization_id__members_200_response"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "tags": [
+                    "organizations"
+                ],
+                "x-codegen-request-body-name": "payload"
+            },
             "get": {
                 "operationId": "get_organization_members_api_/organizations/<int:organization_id>/members",
                 "parameters": [
@@ -4043,55 +4092,6 @@
                 "tags": [
                     "organizations"
                 ]
-            },
-            "post": {
-                "operationId": "post_organization_members_api_/organizations/<int:organization_id>/members",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "organization_id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/OrganizationMemberData"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpError"
-                                }
-                            }
-                        },
-                        "description": "Organization not found"
-                    },
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/post_organization_members_api__organizations__int_organization_id__members_200_response"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    }
-                },
-                "tags": [
-                    "organizations"
-                ],
-                "x-codegen-request-body-name": "payload"
             }
         },
         "/firework/v2/organizations/{organization_id}/members/count": {
@@ -4436,34 +4436,6 @@
             }
         },
         "/firework/v2/organizations/{organization_id}/tenants": {
-            "get": {
-                "operationId": "get_organization_tenants_api_/organizations/<int:organization_id>/tenants",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "organization_id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TenantWithCounts"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    }
-                },
-                "tags": [
-                    "organizations"
-                ]
-            },
             "post": {
                 "operationId": "post_organization_tenants_api_/organizations/<int:organization_id>/tenants",
                 "parameters": [
@@ -4502,21 +4474,37 @@
                     "organizations"
                 ],
                 "x-codegen-request-body-name": "payload"
-            }
-        },
-        "/firework/v2/reporting/reports": {
+            },
             "get": {
-                "operationId": "get_reports_endpoint_/reporting/reports",
+                "operationId": "get_organization_tenants_api_/organizations/<int:organization_id>/tenants",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "organization_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "content": {},
-                        "description": "Lists reports for the current tenant, ordered from newest to oldest."
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TenantWithCounts"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     }
                 },
                 "tags": [
-                    "reporting"
+                    "organizations"
                 ]
-            },
+            }
+        },
+        "/firework/v2/reporting/reports": {
             "post": {
                 "operationId": "post_reports_endpoint_/reporting/reports",
                 "requestBody": {
@@ -4539,31 +4527,21 @@
                     "reporting"
                 ],
                 "x-codegen-request-body-name": "payload"
-            }
-        },
-        "/firework/v2/reporting/reports/{report_id}": {
-            "delete": {
-                "operationId": "delete_report_endpoint_/reporting/reports/<int:report_id>",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "report_id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
+            },
+            "get": {
+                "operationId": "get_reports_endpoint_/reporting/reports",
                 "responses": {
                     "200": {
                         "content": {},
-                        "description": "Deletes a report."
+                        "description": "Lists reports for the current tenant, ordered from newest to oldest."
                     }
                 },
                 "tags": [
                     "reporting"
                 ]
-            },
+            }
+        },
+        "/firework/v2/reporting/reports/{report_id}": {
             "get": {
                 "operationId": "get_report_endpoint_/reporting/reports/<int:report_id>",
                 "parameters": [
@@ -4618,6 +4596,28 @@
                     "reporting"
                 ],
                 "x-codegen-request-body-name": "payload"
+            },
+            "delete": {
+                "operationId": "delete_report_endpoint_/reporting/reports/<int:report_id>",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "report_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {},
+                        "description": "Deletes a report."
+                    }
+                },
+                "tags": [
+                    "reporting"
+                ]
             }
         },
         "/firework/v2/reporting/reports/{report_id}/archive": {
@@ -4669,8 +4669,8 @@
             }
         },
         "/firework/v2/search/": {
-            "get": {
-                "operationId": "get_search_/search/",
+            "post": {
+                "operationId": "post_search_/search/",
                 "parameters": [
                     {
                         "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
@@ -4740,7 +4740,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, ransomleak, stealer_log, chat_message, forum_profile, blog_post, listing, bot, seller, forum_post, forum_topic\n- open_web: service, stack_exchange, google, source_code_secrets, social_media_account, source_code_files, paste, docker, bucket_object, bucket\n- leaks: mitigated_credential, valid_credential, leak, invalid_credential\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, chat_message, financial_data, seller, forum_profile, listing, forum_topic, stealer_log, ransomleak, forum_post, bot\n- open_web: bucket_object, docker, bucket, stack_exchange, source_code_files, paste, social_media_account, service, source_code_secrets, google\n- leaks: leak, mitigated_credential, valid_credential, invalid_credential\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -4973,8 +4973,8 @@
                     "search"
                 ]
             },
-            "post": {
-                "operationId": "post_search_/search/",
+            "get": {
+                "operationId": "get_search_/search/",
                 "parameters": [
                     {
                         "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
@@ -5044,7 +5044,7 @@
                         }
                     },
                     {
-                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: financial_data, ransomleak, stealer_log, chat_message, forum_profile, blog_post, listing, bot, seller, forum_post, forum_topic\n- open_web: service, stack_exchange, google, source_code_secrets, social_media_account, source_code_files, paste, docker, bucket_object, bucket\n- leaks: mitigated_credential, valid_credential, leak, invalid_credential\n- domains: domain\n",
+                        "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, chat_message, financial_data, seller, forum_profile, listing, forum_topic, stealer_log, ransomleak, forum_post, bot\n- open_web: bucket_object, docker, bucket, stack_exchange, source_code_files, paste, social_media_account, service, source_code_secrets, google\n- leaks: leak, mitigated_credential, valid_credential, invalid_credential\n- domains: domain\n",
                         "explode": true,
                         "in": "query",
                         "name": "types",
@@ -5372,34 +5372,6 @@
             }
         },
         "/firework/v2/tenants/{tenant_id}/users": {
-            "get": {
-                "operationId": "get_tenant_users_api_/tenants/<int:tenant_id>/users",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant_id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TenantUsers"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    }
-                },
-                "tags": [
-                    "tenants"
-                ]
-            },
             "post": {
                 "operationId": "post_tenant_users_api_/tenants/<int:tenant_id>/users",
                 "parameters": [
@@ -5432,6 +5404,34 @@
                     "tenants"
                 ],
                 "x-codegen-request-body-name": "payload"
+            },
+            "get": {
+                "operationId": "get_tenant_users_api_/tenants/<int:tenant_id>/users",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TenantUsers"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "tags": [
+                    "tenants"
+                ]
             }
         },
         "/firework/v2/tenants/{tenant_id}/users/{user_id}": {
@@ -5483,310 +5483,119 @@
             }
         },
         "schemas": {
-            "HttpError": {
+            "ActivityAiAssistance": {
                 "properties": {
-                    "message": {
+                    "uid": {
                         "type": "string"
                     },
-                    "code": {
+                    "prompt": {
+                        "type": "string"
+                    },
+                    "response": {
                         "type": "string"
                     }
                 },
                 "type": "object"
             },
-            "Search": {
+            "ActivityUserMetadata": {
                 "properties": {
-                    "items": {
-                        "items": {
-                            "properties": {},
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "nb_hits": {
-                        "type": "integer"
-                    },
-                    "links": {
-                        "$ref": "#/components/schemas/SearchLinks"
-                    },
-                    "search_after": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "SearchLinks": {
-                "properties": {
-                    "next": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "IdentifierCreate": {
-                "properties": {
-                    "name": {
-                        "minLength": 1,
+                    "uid": {
                         "type": "string"
                     },
-                    "type": {
-                        "enum": [
-                            "domain",
-                            "name",
-                            "keyword",
-                            "github_repository",
-                            "username",
-                            "email",
-                            "search_query",
-                            "bin",
-                            "ip",
-                            "secret",
-                            "azure_tenant",
-                            "identity",
-                            "ransomleak",
-                            "external_id",
-                            "address_data",
-                            "birth_year",
-                            "role",
-                            "phone_number"
-                        ],
-                        "example": "domain",
-                        "type": "string"
-                    },
-                    "search_types": {
-                        "items": {
-                            "enum": [
-                                "leak",
-                                "invalid_credential",
-                                "stealer_log",
-                                "domain",
-                                "mitigated_credential",
-                                "chat_message",
-                                "forum_profile",
-                                "stack_exchange",
-                                "forum_post",
-                                "paste",
-                                "docker",
-                                "valid_credential",
-                                "service",
-                                "social_media_account",
-                                "financial_data",
-                                "bucket",
-                                "ad",
-                                "ransomleak",
-                                "blog_post",
-                                "listing",
-                                "google",
-                                "bot",
-                                "seller",
-                                "source_code_secrets",
-                                "source_code_files",
-                                "forum_topic",
-                                "bucket_object",
-                                "illicit_networks",
-                                "open_web",
-                                "buckets",
-                                "source_code",
-                                "leaks",
-                                "domains",
-                                "forum_content",
-                                "blog_content",
-                                "profile",
-                                "ads",
-                                "infected_devices",
-                                "social_media"
-                            ],
-                            "example": "leak",
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "experimental_search_types": {
+                    "tags": {
                         "items": {
                             "type": "string"
                         },
                         "type": "array"
                     },
-                    "risks": {
-                        "items": {
-                            "type": "integer"
-                        },
-                        "type": "array"
-                    },
-                    "data": {
-                        "properties": {},
-                        "type": "object"
-                    }
-                },
-                "required": [
-                    "data",
-                    "name",
-                    "search_types",
-                    "type"
-                ],
-                "type": "object"
-            },
-            "Identifier": {
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "tenant_id": {
-                        "type": "integer"
-                    },
-                    "feed_id": {
-                        "type": "integer"
-                    },
-                    "type": {
-                        "enum": [
-                            "domain",
-                            "name",
-                            "keyword",
-                            "github_repository",
-                            "username",
-                            "email",
-                            "search_query",
-                            "bin",
-                            "ip",
-                            "secret",
-                            "azure_tenant",
-                            "identity",
-                            "ransomleak",
-                            "external_id",
-                            "address_data",
-                            "birth_year",
-                            "role",
-                            "phone_number"
-                        ],
-                        "example": "domain",
-                        "type": "string"
-                    },
-                    "search_types": {
-                        "items": {
-                            "enum": [
-                                "leak",
-                                "invalid_credential",
-                                "stealer_log",
-                                "domain",
-                                "mitigated_credential",
-                                "chat_message",
-                                "forum_profile",
-                                "stack_exchange",
-                                "forum_post",
-                                "paste",
-                                "docker",
-                                "valid_credential",
-                                "service",
-                                "social_media_account",
-                                "financial_data",
-                                "bucket",
-                                "ransomleak",
-                                "blog_post",
-                                "listing",
-                                "google",
-                                "bot",
-                                "seller",
-                                "source_code_secrets",
-                                "source_code_files",
-                                "forum_topic",
-                                "bucket_object",
-                                "illicit_networks",
-                                "open_web",
-                                "buckets",
-                                "source_code",
-                                "leaks",
-                                "domains",
-                                "forum_content",
-                                "blog_content",
-                                "profile",
-                                "infected_devices",
-                                "social_media"
-                            ],
-                            "example": "leak",
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "experimental_search_types": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "v3_refs": {
-                        "$ref": "#/components/schemas/V3_Refs"
-                    },
-                    "risks": {
-                        "items": {
-                            "type": "integer"
-                        },
-                        "type": "array"
-                    },
-                    "name": {
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "data": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "fetching_progress": {
-                        "type": "integer"
-                    },
-                    "count": {
-                        "type": "integer"
-                    },
-                    "urn": {
-                        "description": "The uniform resource name of the identifier.",
-                        "type": "string"
-                    },
-                    "is_disabled": {
-                        "type": "boolean"
-                    },
-                    "source": {
-                        "enum": [
-                            "USER",
-                            "SYSTEM_RELATION",
-                            "SELF_ONBOARDING",
-                            "ATTRIBUTE",
-                            "AUTO_MONITOR",
-                            "IDP_SYNC"
-                        ],
-                        "example": "USER",
-                        "type": "string"
-                    },
-                    "data_updated_at": {
+                    "risk_score_updated_at": {
                         "format": "date-time",
                         "type": "string"
-                    }
-                },
-                "required": [
-                    "data",
-                    "name",
-                    "search_types",
-                    "type"
-                ],
-                "type": "object"
-            },
-            "V3_Refs": {
-                "properties": {
-                    "asset_uuid": {
+                    },
+                    "remediated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "ignored_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "remediated_asset_uuid": {
                         "type": "string"
                     }
                 },
                 "type": "object"
             },
-            "IdentifierToggle": {
+            "ActivityUserMetadataIgnored": {
                 "properties": {
-                    "is_disabled": {
-                        "default": true,
-                        "description": "The `is_disabled` parameter is used to toggle the asset as either enabled or disabled.",
+                    "is_ignored": {
                         "type": "boolean"
+                    },
+                    "identifier_id": {
+                        "type": "integer"
                     }
                 },
                 "required": [
-                    "is_disabled"
+                    "is_ignored"
                 ],
+                "type": "object"
+            },
+            "ActivityUserMetadataRemediated": {
+                "properties": {
+                    "is_remediated": {
+                        "type": "boolean"
+                    },
+                    "identifier_id": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "is_remediated"
+                ],
+                "type": "object"
+            },
+            "ActivityUserNotes": {
+                "properties": {
+                    "notes": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "notes"
+                ],
+                "type": "object"
+            },
+            "ActivityUserRiskScore": {
+                "properties": {
+                    "risk_score": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "risk_score"
+                ],
+                "type": "object"
+            },
+            "ActivityUserTags": {
+                "properties": {
+                    "tags": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "tags"
+                ],
+                "type": "object"
+            },
+            "EnableState": {
+                "properties": {
+                    "is_disabled": {
+                        "type": "boolean"
+                    }
+                },
                 "type": "object"
             },
             "FeedAlert": {
@@ -5942,6 +5751,276 @@
                 ],
                 "type": "object"
             },
+            "HighlightPayload": {
+                "properties": {
+                    "query_string": {
+                        "type": "string"
+                    },
+                    "identifier_ids": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "HttpError": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Identifier": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "tenant_id": {
+                        "type": "integer"
+                    },
+                    "feed_id": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "enum": [
+                            "domain",
+                            "name",
+                            "keyword",
+                            "github_repository",
+                            "username",
+                            "email",
+                            "search_query",
+                            "bin",
+                            "ip",
+                            "secret",
+                            "azure_tenant",
+                            "identity",
+                            "ransomleak",
+                            "external_id",
+                            "address_data",
+                            "birth_year",
+                            "role",
+                            "phone_number"
+                        ],
+                        "example": "domain",
+                        "type": "string"
+                    },
+                    "search_types": {
+                        "items": {
+                            "enum": [
+                                "docker",
+                                "mitigated_credential",
+                                "forum_topic",
+                                "stack_exchange",
+                                "leak",
+                                "stealer_log",
+                                "valid_credential",
+                                "social_media_account",
+                                "ransomleak",
+                                "source_code_secrets",
+                                "google",
+                                "seller",
+                                "chat_message",
+                                "financial_data",
+                                "domain",
+                                "source_code_files",
+                                "service",
+                                "forum_post",
+                                "bot",
+                                "blog_post",
+                                "bucket_object",
+                                "forum_profile",
+                                "bucket",
+                                "listing",
+                                "invalid_credential",
+                                "paste",
+                                "illicit_networks",
+                                "open_web",
+                                "buckets",
+                                "source_code",
+                                "leaks",
+                                "domains",
+                                "forum_content",
+                                "blog_content",
+                                "profile",
+                                "infected_devices",
+                                "social_media"
+                            ],
+                            "example": "docker",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "experimental_search_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "v3_refs": {
+                        "$ref": "#/components/schemas/V3_Refs"
+                    },
+                    "risks": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "name": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "data": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "fetching_progress": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "urn": {
+                        "description": "The uniform resource name of the identifier.",
+                        "type": "string"
+                    },
+                    "is_disabled": {
+                        "type": "boolean"
+                    },
+                    "source": {
+                        "enum": [
+                            "USER",
+                            "SYSTEM_RELATION",
+                            "SELF_ONBOARDING",
+                            "ATTRIBUTE",
+                            "AUTO_MONITOR",
+                            "IDP_SYNC"
+                        ],
+                        "example": "USER",
+                        "type": "string"
+                    },
+                    "data_updated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "data",
+                    "name",
+                    "search_types",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "IdentifierCreate": {
+                "properties": {
+                    "name": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "type": {
+                        "enum": [
+                            "domain",
+                            "name",
+                            "keyword",
+                            "github_repository",
+                            "username",
+                            "email",
+                            "search_query",
+                            "bin",
+                            "ip",
+                            "secret",
+                            "azure_tenant",
+                            "identity",
+                            "ransomleak",
+                            "external_id",
+                            "address_data",
+                            "birth_year",
+                            "role",
+                            "phone_number"
+                        ],
+                        "example": "domain",
+                        "type": "string"
+                    },
+                    "search_types": {
+                        "items": {
+                            "enum": [
+                                "docker",
+                                "mitigated_credential",
+                                "forum_topic",
+                                "stack_exchange",
+                                "leak",
+                                "stealer_log",
+                                "valid_credential",
+                                "social_media_account",
+                                "ransomleak",
+                                "source_code_secrets",
+                                "google",
+                                "seller",
+                                "chat_message",
+                                "financial_data",
+                                "domain",
+                                "source_code_files",
+                                "service",
+                                "forum_post",
+                                "bot",
+                                "blog_post",
+                                "bucket_object",
+                                "forum_profile",
+                                "bucket",
+                                "listing",
+                                "invalid_credential",
+                                "ad",
+                                "paste",
+                                "illicit_networks",
+                                "open_web",
+                                "buckets",
+                                "source_code",
+                                "leaks",
+                                "domains",
+                                "forum_content",
+                                "blog_content",
+                                "profile",
+                                "ads",
+                                "infected_devices",
+                                "social_media"
+                            ],
+                            "example": "docker",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "experimental_search_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "risks": {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "data": {
+                        "properties": {},
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "data",
+                    "name",
+                    "search_types",
+                    "type"
+                ],
+                "type": "object"
+            },
             "IdentifierGroup": {
                 "properties": {
                     "id": {
@@ -5966,12 +6045,92 @@
                 },
                 "type": "object"
             },
-            "UpdateGroupData": {
+            "IdentifierToggle": {
                 "properties": {
-                    "name": {
+                    "is_disabled": {
+                        "default": true,
+                        "description": "The `is_disabled` parameter is used to toggle the asset as either enabled or disabled.",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "is_disabled"
+                ],
+                "type": "object"
+            },
+            "LeakActivityCredential": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "source_id": {
+                        "type": "string"
+                    },
+                    "imported_at": {
+                        "type": "string"
+                    },
+                    "identity_name": {
+                        "type": "string"
+                    },
+                    "hash": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "$ref": "#/components/schemas/source"
+                    },
+                    "remediated_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "ignored_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "known_password_id": {
+                        "type": "integer"
+                    },
+                    "credential_hash": {
                         "type": "string"
                     }
                 },
+                "required": [
+                    "id",
+                    "identity_name",
+                    "imported_at",
+                    "source_id"
+                ],
+                "type": "object"
+            },
+            "NewReport": {
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "elements": {
+                        "items": {
+                            "$ref": "#/components/schemas/ReportElementUpdate"
+                        },
+                        "type": "array"
+                    },
+                    "audience": {
+                        "enum": [
+                            "technical",
+                            "general"
+                        ],
+                        "example": "technical",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "author",
+                    "title"
+                ],
                 "type": "object"
             },
             "NewTenantInfo": {
@@ -5996,6 +6155,197 @@
                             "telecommunication"
                         ],
                         "example": "global",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationMember": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "organization_member_permissions": {
+                        "$ref": "#/components/schemas/OrganizationMemberPermission"
+                    },
+                    "is_disabled": {
+                        "type": "boolean"
+                    },
+                    "registered_at": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "urn": {
+                        "description": "The uniform resource name of the member.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationMemberData": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "organization_member_permissions": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "user_permissions": {
+                        "properties": {},
+                        "type": "object"
+                    },
+                    "memberships": {
+                        "items": {
+                            "$ref": "#/components/schemas/UserTenantMembership"
+                        },
+                        "type": "array"
+                    },
+                    "send_welcome_email": {
+                        "default": true,
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "email",
+                    "name",
+                    "organization_member_permissions",
+                    "surname"
+                ],
+                "type": "object"
+            },
+            "OrganizationMemberPage": {
+                "properties": {
+                    "members": {
+                        "items": {
+                            "$ref": "#/components/schemas/OrganizationMemberWithMetadata"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationMemberPermission": {
+                "properties": {
+                    "*": {
+                        "additionalProperties": {
+                            "type": "boolean"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationMemberWithMetadata": {
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/OrganizationMember"
+                    },
+                    "tenant_count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "OrganizationMembersCount": {
+                "properties": {
+                    "count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "PaginatedCredentials": {
+                "properties": {
+                    "next": {
+                        "type": "string"
+                    },
+                    "items": {
+                        "$ref": "#/components/schemas/LeakActivityCredential"
+                    }
+                },
+                "type": "object"
+            },
+            "PermissionData": {
+                "properties": {
+                    "permission": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "permission",
+                    "value"
+                ],
+                "type": "object"
+            },
+            "ReportElementUpdate": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "position": {
+                        "type": "integer"
+                    },
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "sort_by": {
+                        "enum": [
+                            "custom",
+                            "alphabetical",
+                            "date"
+                        ],
+                        "example": "custom",
+                        "type": "string"
+                    },
+                    "time_interval": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Search": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "nb_hits": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/SearchLinks"
+                    },
+                    "search_after": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchLinks": {
+                "properties": {
+                    "next": {
                         "type": "string"
                     }
                 },
@@ -6060,98 +6410,54 @@
                 },
                 "type": "object"
             },
-            "TenantWithCounts": {
-                "properties": {
-                    "next": {
-                        "type": "string"
-                    },
-                    "items": {
-                        "$ref": "#/components/schemas/TenantWithCounts"
-                    }
-                },
-                "type": "object"
-            },
-            "UpdatedPermission": {
-                "properties": {
-                    "updated_value": {
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
-            "OrganizationMemberData": {
+            "TenantData": {
                 "properties": {
                     "name": {
+                        "description": "The Tenant display name",
                         "type": "string"
                     },
-                    "surname": {
+                    "description": {
+                        "description": "The Tenant's purpose / description",
                         "type": "string"
                     },
-                    "email": {
-                        "type": "string"
-                    },
-                    "organization_member_permissions": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "user_permissions": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "memberships": {
-                        "items": {
-                            "$ref": "#/components/schemas/UserTenantMembership"
-                        },
-                        "type": "array"
-                    },
-                    "send_welcome_email": {
-                        "default": true,
-                        "type": "boolean"
-                    }
-                },
-                "required": [
-                    "email",
-                    "name",
-                    "organization_member_permissions",
-                    "surname"
-                ],
-                "type": "object"
-            },
-            "UserTenantMembership": {
-                "properties": {
-                    "tenant_id": {
+                    "number_of_employees": {
+                        "description": "The number of employees for the tenant",
                         "type": "integer"
                     },
-                    "is_readonly": {
-                        "type": "boolean"
-                    },
-                    "role": {
+                    "industry": {
+                        "description": "The Tenant's industry",
                         "enum": [
-                            "viewer",
-                            "editor",
-                            "admin"
+                            "global",
+                            "transport",
+                            "education",
+                            "energy",
+                            "finance",
+                            "healthcare",
+                            "manufacturing",
+                            "retail",
+                            "software",
+                            "telecommunication"
                         ],
-                        "example": "viewer",
+                        "example": "global",
                         "type": "string"
+                    },
+                    "global_search_calls_limit": {
+                        "description": "The number of API calls allowed for the tenant.",
+                        "type": "integer"
+                    },
+                    "prevent_global_search": {
+                        "type": "boolean"
                     }
                 },
                 "required": [
-                    "tenant_id"
+                    "description",
+                    "industry",
+                    "name",
+                    "number_of_employees"
                 ],
                 "type": "object"
             },
-            "OrganizationMemberWithMetadata": {
-                "properties": {
-                    "user": {
-                        "$ref": "#/components/schemas/OrganizationMember"
-                    },
-                    "tenant_count": {
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "OrganizationMember": {
+            "TenantUser": {
                 "properties": {
                     "id": {
                         "type": "integer"
@@ -6165,274 +6471,86 @@
                     "email": {
                         "type": "string"
                     },
-                    "organization_member_permissions": {
-                        "$ref": "#/components/schemas/OrganizationMemberPermission"
-                    },
-                    "is_disabled": {
+                    "is_readonly": {
                         "type": "boolean"
                     },
-                    "registered_at": {
-                        "format": "date-time",
+                    "role": {
+                        "enum": [
+                            "viewer",
+                            "editor",
+                            "admin"
+                        ],
+                        "example": "viewer",
                         "type": "string"
                     },
-                    "urn": {
-                        "description": "The uniform resource name of the member.",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "OrganizationMemberPermission": {
-                "properties": {
-                    "*": {
-                        "additionalProperties": {
-                            "type": "boolean"
-                        },
-                        "type": "object"
-                    }
-                },
-                "type": "object"
-            },
-            "OrganizationMemberPage": {
-                "properties": {
-                    "members": {
-                        "items": {
-                            "$ref": "#/components/schemas/OrganizationMemberWithMetadata"
-                        },
-                        "type": "array"
-                    }
-                },
-                "type": "object"
-            },
-            "OrganizationMembersCount": {
-                "properties": {
-                    "count": {
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "EnableState": {
-                "properties": {
                     "is_disabled": {
                         "type": "boolean"
                     }
                 },
                 "type": "object"
             },
-            "PermissionData": {
+            "TenantUsers": {
                 "properties": {
-                    "permission": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "boolean"
-                    }
-                },
-                "required": [
-                    "permission",
-                    "value"
-                ],
-                "type": "object"
-            },
-            "HighlightPayload": {
-                "properties": {
-                    "query_string": {
-                        "type": "string"
-                    },
-                    "identifier_ids": {
-                        "items": {
-                            "type": "integer"
-                        },
-                        "type": "array"
-                    }
-                },
-                "type": "object"
-            },
-            "ActivityUserNotes": {
-                "properties": {
-                    "notes": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "notes"
-                ],
-                "type": "object"
-            },
-            "ActivityUserMetadata": {
-                "properties": {
-                    "uid": {
-                        "type": "string"
-                    },
-                    "tags": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "risk_score_updated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "remediated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "ignored_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "remediated_asset_uuid": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "ActivityUserRiskScore": {
-                "properties": {
-                    "risk_score": {
+                    "next": {
                         "type": "integer"
-                    }
-                },
-                "required": [
-                    "risk_score"
-                ],
-                "type": "object"
-            },
-            "ActivityUserMetadataRemediated": {
-                "properties": {
-                    "is_remediated": {
-                        "type": "boolean"
                     },
-                    "identifier_id": {
-                        "type": "integer"
+                    "items": {
+                        "$ref": "#/components/schemas/TenantUser"
                     }
                 },
-                "required": [
-                    "is_remediated"
-                ],
                 "type": "object"
             },
-            "ActivityUserMetadataIgnored": {
+            "TenantWithCounts": {
                 "properties": {
-                    "is_ignored": {
-                        "type": "boolean"
-                    },
-                    "identifier_id": {
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "is_ignored"
-                ],
-                "type": "object"
-            },
-            "ActivityAiAssistance": {
-                "properties": {
-                    "uid": {
+                    "next": {
                         "type": "string"
                     },
-                    "prompt": {
-                        "type": "string"
-                    },
-                    "response": {
-                        "type": "string"
+                    "items": {
+                        "$ref": "#/components/schemas/TenantWithCounts"
                     }
                 },
                 "type": "object"
             },
-            "ActivityUserTags": {
-                "properties": {
-                    "tags": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    }
-                },
-                "required": [
-                    "tags"
-                ],
-                "type": "object"
-            },
-            "UserUpdate": {
+            "UpdateGroupData": {
                 "properties": {
                     "name": {
                         "type": "string"
-                    },
-                    "surname": {
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatedPermission": {
+                "properties": {
+                    "updated_value": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatedReport": {
+                "properties": {
+                    "title": {
                         "type": "string"
                     },
-                    "settings": {
-                        "properties": {},
-                        "type": "object"
-                    },
-                    "language": {
+                    "author": {
                         "type": "string"
                     },
-                    "color_scheme": {
+                    "elements": {
+                        "items": {
+                            "$ref": "#/components/schemas/ReportElementUpdate"
+                        },
+                        "type": "array"
+                    },
+                    "audience": {
                         "enum": [
-                            "auto",
-                            "light",
-                            "dark"
+                            "technical",
+                            "general"
                         ],
-                        "example": "auto",
+                        "example": "technical",
                         "type": "string"
                     }
                 },
-                "required": [
-                    "color_scheme",
-                    "name",
-                    "settings",
-                    "surname"
-                ],
                 "type": "object"
-            },
-            "UserProfile": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/User"
-                    },
-                    {
-                        "properties": {
-                            "settings": {
-                                "$ref": "#/components/schemas/UserSettings"
-                            },
-                            "feature_flags": {
-                                "$ref": "#/components/schemas/UserProfile_allOf_feature_flags"
-                            },
-                            "tenants": {
-                                "items": {
-                                    "$ref": "#/components/schemas/Tenant"
-                                },
-                                "type": "array"
-                            },
-                            "is_sso_mandatory": {
-                                "type": "boolean"
-                            },
-                            "has_password": {
-                                "type": "boolean"
-                            },
-                            "urn": {
-                                "type": "string"
-                            },
-                            "needs_eusa": {
-                                "type": "boolean"
-                            },
-                            "domain": {
-                                "type": "string"
-                            },
-                            "language": {
-                                "type": "string"
-                            },
-                            "should_provide_signup_intent": {
-                                "type": "boolean"
-                            }
-                        },
-                        "type": "object"
-                    }
-                ]
             },
             "User": {
                 "properties": {
@@ -6502,6 +6620,55 @@
                 ],
                 "type": "object"
             },
+            "UserProfile": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    {
+                        "properties": {
+                            "settings": {
+                                "$ref": "#/components/schemas/UserSettings"
+                            },
+                            "feature_flags": {
+                                "$ref": "#/components/schemas/UserProfile_allOf_feature_flags"
+                            },
+                            "tenants": {
+                                "items": {
+                                    "$ref": "#/components/schemas/Tenant"
+                                },
+                                "type": "array"
+                            },
+                            "is_sso_mandatory": {
+                                "type": "boolean"
+                            },
+                            "has_password": {
+                                "type": "boolean"
+                            },
+                            "urn": {
+                                "type": "string"
+                            },
+                            "needs_eusa": {
+                                "type": "boolean"
+                            },
+                            "domain": {
+                                "type": "string"
+                            },
+                            "language": {
+                                "type": "string"
+                            },
+                            "should_provide_signup_intent": {
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "UserProfile_allOf_feature_flags": {
+                "properties": {},
+                "type": "object"
+            },
             "UserSettings": {
                 "properties": {
                     "default_search": {
@@ -6516,159 +6683,6 @@
                     "organization_member_permissions": {
                         "items": {
                             "type": "string"
-                        },
-                        "type": "array"
-                    }
-                },
-                "type": "object"
-            },
-            "PaginatedCredentials": {
-                "properties": {
-                    "next": {
-                        "type": "string"
-                    },
-                    "items": {
-                        "$ref": "#/components/schemas/LeakActivityCredential"
-                    }
-                },
-                "type": "object"
-            },
-            "LeakActivityCredential": {
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "source_id": {
-                        "type": "string"
-                    },
-                    "imported_at": {
-                        "type": "string"
-                    },
-                    "identity_name": {
-                        "type": "string"
-                    },
-                    "hash": {
-                        "type": "string"
-                    },
-                    "domain": {
-                        "type": "string"
-                    },
-                    "source": {
-                        "$ref": "#/components/schemas/source"
-                    },
-                    "remediated_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "ignored_at": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "known_password_id": {
-                        "type": "integer"
-                    },
-                    "credential_hash": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "id",
-                    "identity_name",
-                    "imported_at",
-                    "source_id"
-                ],
-                "type": "object"
-            },
-            "source": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "description_en": {
-                        "type": "string"
-                    },
-                    "description_fr": {
-                        "type": "string"
-                    },
-                    "breached_at": {
-                        "type": "string"
-                    },
-                    "leaked_at": {
-                        "type": "string"
-                    },
-                    "pii_tags": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    }
-                },
-                "required": [
-                    "id"
-                ],
-                "type": "object"
-            },
-            "TenantData": {
-                "properties": {
-                    "name": {
-                        "description": "The Tenant display name",
-                        "type": "string"
-                    },
-                    "description": {
-                        "description": "The Tenant's purpose / description",
-                        "type": "string"
-                    },
-                    "number_of_employees": {
-                        "description": "The number of employees for the tenant",
-                        "type": "integer"
-                    },
-                    "industry": {
-                        "description": "The Tenant's industry",
-                        "enum": [
-                            "global",
-                            "transport",
-                            "education",
-                            "energy",
-                            "finance",
-                            "healthcare",
-                            "manufacturing",
-                            "retail",
-                            "software",
-                            "telecommunication"
-                        ],
-                        "example": "global",
-                        "type": "string"
-                    },
-                    "global_search_calls_limit": {
-                        "description": "The number of API calls allowed for the tenant.",
-                        "type": "integer"
-                    },
-                    "prevent_global_search": {
-                        "type": "boolean"
-                    }
-                },
-                "required": [
-                    "description",
-                    "industry",
-                    "name",
-                    "number_of_employees"
-                ],
-                "type": "object"
-            },
-            "UserTenantAccessRequest": {
-                "properties": {
-                    "users": {
-                        "items": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/components/schemas/UserTenantAccess"
-                                }
-                            ],
-                            "description": "User given access to a tenant.",
-                            "type": "object"
                         },
                         "type": "array"
                     }
@@ -6701,30 +6715,27 @@
                 ],
                 "type": "object"
             },
-            "TenantUsers": {
+            "UserTenantAccessRequest": {
                 "properties": {
-                    "next": {
-                        "type": "integer"
-                    },
-                    "items": {
-                        "$ref": "#/components/schemas/TenantUser"
+                    "users": {
+                        "items": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/UserTenantAccess"
+                                }
+                            ],
+                            "description": "User given access to a tenant.",
+                            "type": "object"
+                        },
+                        "type": "array"
                     }
                 },
                 "type": "object"
             },
-            "TenantUser": {
+            "UserTenantMembership": {
                 "properties": {
-                    "id": {
+                    "tenant_id": {
                         "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "surname": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
                     },
                     "is_readonly": {
                         "type": "boolean"
@@ -6737,88 +6748,49 @@
                         ],
                         "example": "viewer",
                         "type": "string"
-                    },
-                    "is_disabled": {
-                        "type": "boolean"
                     }
                 },
+                "required": [
+                    "tenant_id"
+                ],
                 "type": "object"
             },
-            "NewReport": {
+            "UserUpdate": {
                 "properties": {
-                    "title": {
+                    "name": {
                         "type": "string"
                     },
-                    "author": {
+                    "surname": {
                         "type": "string"
                     },
-                    "elements": {
-                        "items": {
-                            "$ref": "#/components/schemas/ReportElementUpdate"
-                        },
-                        "type": "array"
+                    "settings": {
+                        "properties": {},
+                        "type": "object"
                     },
-                    "audience": {
+                    "language": {
+                        "type": "string"
+                    },
+                    "color_scheme": {
                         "enum": [
-                            "technical",
-                            "general"
+                            "auto",
+                            "light",
+                            "dark"
                         ],
-                        "example": "technical",
+                        "example": "auto",
                         "type": "string"
                     }
                 },
                 "required": [
-                    "author",
-                    "title"
+                    "color_scheme",
+                    "name",
+                    "settings",
+                    "surname"
                 ],
                 "type": "object"
             },
-            "ReportElementUpdate": {
+            "V3_Refs": {
                 "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "position": {
-                        "type": "integer"
-                    },
-                    "enabled": {
-                        "type": "boolean"
-                    },
-                    "sort_by": {
-                        "enum": [
-                            "custom",
-                            "alphabetical",
-                            "date"
-                        ],
-                        "example": "custom",
-                        "type": "string"
-                    },
-                    "time_interval": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "UpdatedReport": {
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    },
-                    "author": {
-                        "type": "string"
-                    },
-                    "elements": {
-                        "items": {
-                            "$ref": "#/components/schemas/ReportElementUpdate"
-                        },
-                        "type": "array"
-                    },
-                    "audience": {
-                        "enum": [
-                            "technical",
-                            "general"
-                        ],
-                        "example": "technical",
+                    "asset_uuid": {
                         "type": "string"
                     }
                 },
@@ -6840,10 +6812,10 @@
                 },
                 "type": "object"
             },
-            "post_assets__assets__200_response": {
+            "get_assets_group_alerts__assets_groups__int_assets_group_id__alerts_200_response": {
                 "properties": {
-                    "asset": {
-                        "$ref": "#/components/schemas/Identifier"
+                    "alerts": {
+                        "$ref": "#/components/schemas/FeedAlert"
                     }
                 },
                 "type": "object"
@@ -6856,26 +6828,18 @@
                 },
                 "type": "object"
             },
+            "post_assets__assets__200_response": {
+                "properties": {
+                    "asset": {
+                        "$ref": "#/components/schemas/Identifier"
+                    }
+                },
+                "type": "object"
+            },
             "post_assets_groups__assets_groups__200_response": {
                 "properties": {
                     "assets_group": {
                         "$ref": "#/components/schemas/IdentifierGroup"
-                    }
-                },
-                "type": "object"
-            },
-            "get_assets_group_alerts__assets_groups__int_assets_group_id__alerts_200_response": {
-                "properties": {
-                    "alerts": {
-                        "$ref": "#/components/schemas/FeedAlert"
-                    }
-                },
-                "type": "object"
-            },
-            "put_current_user_profile__me_profile_200_response": {
-                "properties": {
-                    "profile": {
-                        "$ref": "#/components/schemas/UserProfile"
                     }
                 },
                 "type": "object"
@@ -6888,8 +6852,44 @@
                 },
                 "type": "object"
             },
-            "UserProfile_allOf_feature_flags": {
-                "properties": {},
+            "put_current_user_profile__me_profile_200_response": {
+                "properties": {
+                    "profile": {
+                        "$ref": "#/components/schemas/UserProfile"
+                    }
+                },
+                "type": "object"
+            },
+            "source": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description_en": {
+                        "type": "string"
+                    },
+                    "description_fr": {
+                        "type": "string"
+                    },
+                    "breached_at": {
+                        "type": "string"
+                    },
+                    "leaked_at": {
+                        "type": "string"
+                    },
+                    "pii_tags": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "id"
+                ],
                 "type": "object"
             }
         },

@@ -6,7 +6,15 @@ import sys
 from typing import Any
 
 
-HTTP_METHODS = {"get", "put", "post", "delete", "options", "head", "patch", "trace"}
+# CRUD order.
+HTTP_METHODS = ("post", "get", "put", "patch", "delete", "options", "head", "trace")
+
+
+def sort_path_item_methods(openapi_schema: dict) -> None:
+    for path_item in openapi_schema["paths"].values():
+        for method in HTTP_METHODS:
+            if method in path_item:
+                path_item[method] = path_item.pop(method)
 
 
 def remove_private_operations(openapi_schema: dict) -> None:
@@ -67,6 +75,17 @@ def remove_unused_schemas(openapi_schema: dict) -> None:
             del schemas[name]
 
 
+def sort_schemas(openapi_schema: dict) -> None:
+
+    schemas = openapi_schema.get("components", {}).get("schemas")
+    if schemas is None:
+        return
+
+    openapi_schema["components"]["schemas"] = {
+        name: schemas[name] for name in sorted(schemas)
+    }
+
+
 def main() -> None:
     if len(sys.argv) != 2:
         raise Exception("Please pass only one path as the argument")
@@ -78,6 +97,8 @@ def main() -> None:
 
     remove_private_operations(openapi_schema)
     remove_unused_schemas(openapi_schema)
+    sort_path_item_methods(openapi_schema)
+    sort_schemas(openapi_schema)
 
     openapi_schema["components"]["securitySchemes"] = {
         "BearerAuth": {
