@@ -13252,7 +13252,7 @@
                         "format": "date-time",
                         "title": "Updated At"
                     },
-                    "relevancy_score_type": {
+                    "relevancy": {
                         "anyOf": [
                             {
                                 "$ref": "#/components/schemas/RecommendationRelevancyScoreType"
@@ -13269,7 +13269,7 @@
                     "data",
                     "status",
                     "updated_at",
-                    "relevancy_score_type"
+                    "relevancy"
                 ],
                 "title": "Recommendation"
             },
