@@ -3151,6 +3151,7 @@
                     "seller",
                     "service",
                     "social_media_account",
+                    "source_code_observation",
                     "source_code_secret",
                     "stealer_log",
                     "attachment/telegram",
@@ -6816,6 +6817,20 @@
                         ],
                         "title": "Intent Ids"
                     },
+                    "observable_types": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/StixCyberObservableType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Observable Types"
+                    },
                     "confidence": {
                         "$ref": "#/components/schemas/IntRangeFilter"
                     },
@@ -9212,7 +9227,7 @@
                     "matched": {
                         "type": "boolean",
                         "title": "Matched",
-                        "description": "Whether the identifier's own search query matched the event"
+                        "description": "Whether the identifier's own search query matched the event. See 'matched_uid' for the document the terms were found in"
                     },
                     "applicable": {
                         "type": "boolean",
@@ -9236,7 +9251,19 @@
                         },
                         "type": "object",
                         "title": "Highlights",
-                        "description": "Excerpts of the event fields the identifier's terms matched, with each match wrapped in <mark> tags"
+                        "description": "Excerpts of the fields the identifier's terms matched, with each match wrapped in <mark> tags. The keys are field names on the document identified by 'matched_uid'"
+                    },
+                    "matched_uid": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Matched Uid",
+                        "description": "The uid of the document the identifier's terms were found in. Usually the event's own uid; for events that merge attached files into their content it can be the uid of one of those files. Null when 'matched' is false"
                     }
                 },
                 "type": "object",
@@ -9889,12 +9916,30 @@
                         ],
                         "title": "Pattern Version"
                     },
+                    "pattern_type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Pattern Type"
+                    },
                     "indicator_types": {
                         "items": {
                             "type": "string"
                         },
                         "type": "array",
                         "title": "Indicator Types"
+                    },
+                    "observable_types": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Observable Types"
                     },
                     "valid_from": {
                         "anyOf": [
@@ -9941,7 +9986,9 @@
                     "pattern",
                     "description",
                     "pattern_version",
+                    "pattern_type",
                     "indicator_types",
+                    "observable_types",
                     "valid_from",
                     "valid_until",
                     "kill_chain_phases",
@@ -10316,6 +10363,17 @@
                         ],
                         "title": "Web Search Queries",
                         "description": "The queries used for web search"
+                    },
+                    "time_range_type": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeRangeType"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The time range inferred from the question"
                     }
                 },
                 "type": "object",
@@ -13682,6 +13740,7 @@
                     "source_code_secrets_np",
                     "source_code_secrets",
                     "source_code_files",
+                    "secret",
                     "docker",
                     "stack_exchange",
                     "google",
@@ -13952,7 +14011,7 @@
                 "properties": {
                     "event_severity": {
                         "$ref": "#/components/schemas/RiskScore",
-                        "description": "The severity computed for the event"
+                        "description": "The severity computed for the event from the currently active scoring rules"
                     },
                     "allowed_severities": {
                         "items": {
@@ -14256,6 +14315,30 @@
                 },
                 "type": "object",
                 "title": "StealerLogEventData"
+            },
+            "StixCyberObservableType": {
+                "type": "string",
+                "enum": [
+                    "artifact",
+                    "autonomous-system",
+                    "directory",
+                    "domain-name",
+                    "email-addr",
+                    "email-message",
+                    "file",
+                    "ipv4-addr",
+                    "ipv6-addr",
+                    "mac-addr",
+                    "mutex",
+                    "network-traffic",
+                    "process",
+                    "software",
+                    "url",
+                    "user-account",
+                    "windows-registry-key",
+                    "x509-certificate"
+                ],
+                "title": "StixCyberObservableType"
             },
             "SubdomainStatus": {
                 "properties": {
