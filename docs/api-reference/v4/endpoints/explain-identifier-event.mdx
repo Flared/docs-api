@@ -2,4 +2,8 @@
 openapi: firework-v4-openapi get /firework/v4/events/identifiers/{identifier_id}/_explain
 ---
 
+import PermissionReadTenant from '/snippets/permission-read-tenant.mdx'
+
+<PermissionReadTenant />
+
 Provides evidence as to how an event matches to an identifier, clarifying why an event is or is not found within a feed.

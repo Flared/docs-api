@@ -2,6 +2,10 @@
 openapi: firework-v4-openapi delete /firework/v4/identifiers/{identifier_id}
 ---
 
+import PermissionWriteTenant from '/snippets/permission-write-tenant.mdx'
+
+<PermissionWriteTenant />
+
 <Note>
 The deletion process for an identifier and its related resources may require up to one hour to complete.
 </Note>
