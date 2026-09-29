@@ -10,7 +10,7 @@ Requests are authenticated with **API tokens** which can be obtained using an **
 <CardGroup cols={1}>
 
 <Card title="API Key" icon="key">
-    Used to generate API tokens. Does not expire.
+    Used to generate API tokens. Can be given an expiration date.
 </Card>
 
 <Card title="API Token" icon="file-shield">
@@ -52,18 +52,21 @@ Requests are authenticated with **API tokens** which can be obtained using an **
 
 ### 1 - Obtaining an API key
 
-Users can generate API keys by visiting the [Profile page](https://app.flare.io/#/profile) under the "API Keys" section.
+Users can generate API keys from the [Profile page](https://app.flare.io/#/profile), in the **API keys** section, by clicking **Generate key**.
 
-<Frame
-  caption="Sidebar -> Configure -> Profile -> API Keys (bottom)"
-  className="flex justify-center"
->
-  <img src="/images/introduction/authentication/api-key-create.png" />
-</Frame>
+When creating a key, you choose:
 
-API keys are associated to a user and will have the same permissions as the user that generated them:
-- If you can access a tenant, the API key will have access to that tenant.
-- If you are an organization administrator, the API key will have organization administrator access.
+- **Name**: a description that helps you recognize the key.
+- **Permissions**:
+  - **Default**: the key inherits your current role permissions. If you can access a tenant, the key can access that tenant. If you are an organization administrator, the key has organization administrator access. If your role changes, the key's access changes with it.
+  - **Restricted**: the key only has the permissions you select. You can only select permissions that your role allows.
+- **Expiration date** (optional): the key stops working at 00:00 (your local time) on that date. Setting an expiration date is recommended. Without one, the key never expires.
+
+Each endpoint in the API reference lists the API key permission it requires.
+
+<Warning>
+The key's secret is only shown once, when the key is created. Save it somewhere secure, such as a password manager or secret store.
+</Warning>
 
 
 ### 2 - Obtaining an API Token
