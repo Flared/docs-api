@@ -2,8 +2,10 @@
 openapi: firework-v4-openapi get /firework/v4/threat_flow/intel/requests/{id}
 ---
 
+import PermissionReadTenant from '/snippets/permission-read-tenant.mdx'
 import GatedAccessFeature from '/snippets/gated-access-feature.mdx';
 
+<PermissionReadTenant />
 <GatedAccessFeature name="Flare CTI" />
 
 ## Guides

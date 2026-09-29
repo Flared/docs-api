@@ -4,7 +4,10 @@ api: "POST https://api.flare.io/firework/v4/events/identifiers/{identifier_id}/_
 authMethod: "bearer"
 ---
 
+import PermissionReadTenant from '/snippets/permission-read-tenant.mdx'
 import EventSearchCommon from '/snippets/endpoint-event-search-common.mdx';
+
+<PermissionReadTenant />
 
 Returns a list of events matching an identifier.
 

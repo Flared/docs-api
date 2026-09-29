@@ -3,6 +3,10 @@ title: "Search"
 openapi: firework-v2-openapi get /firework/v2/search/
 ---
 
+import PermissionReadTenant from '/snippets/permission-read-tenant.mdx'
+
+<PermissionReadTenant />
+
 <Warning>
 **DEPRECATED:** This endpoint should be replaced by
 [/firework/v4/events/global/_search <Icon icon="code" size={16} />](/api-reference/v4/endpoints/global-search)

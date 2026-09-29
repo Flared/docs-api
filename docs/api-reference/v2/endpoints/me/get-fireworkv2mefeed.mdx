@@ -3,6 +3,10 @@ openapi: firework-v2-openapi get /firework/v2/me/feed
 title: List Tenant Events
 ---
 
+import PermissionReadOrganization from '/snippets/permission-read-organization.mdx'
+
+<PermissionReadOrganization />
+
 <Warning>
 **DEPRECATED:** This endpoint should be replaced by
 [/firework/v4/events/tenant/_search <Icon icon="code" size={16} />](/api-reference/v4/endpoints/current-tenant-feed)
