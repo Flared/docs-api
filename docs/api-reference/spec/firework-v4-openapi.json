@@ -649,7 +649,16 @@
                                                     "$ref": "#/components/schemas/DockerRepositoryEvent"
                                                 },
                                                 {
+                                                    "$ref": "#/components/schemas/ExperimentalEvent"
+                                                },
+                                                {
                                                     "$ref": "#/components/schemas/ForumPostEvent"
+                                                },
+                                                {
+                                                    "$ref": "#/components/schemas/ForumProfileEvent"
+                                                },
+                                                {
+                                                    "$ref": "#/components/schemas/GoogleEvent"
                                                 },
                                                 {
                                                     "$ref": "#/components/schemas/InvalidCredentialEvent"
@@ -676,10 +685,19 @@
                                                     "$ref": "#/components/schemas/RansomLeakEvent"
                                                 },
                                                 {
+                                                    "$ref": "#/components/schemas/SellerEvent"
+                                                },
+                                                {
                                                     "$ref": "#/components/schemas/ServiceEvent"
                                                 },
                                                 {
                                                     "$ref": "#/components/schemas/SocialMediaEvent"
+                                                },
+                                                {
+                                                    "$ref": "#/components/schemas/SourceCodeEvent"
+                                                },
+                                                {
+                                                    "$ref": "#/components/schemas/SourceCodeSecretEvent"
                                                 },
                                                 {
                                                     "$ref": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent"
@@ -699,7 +717,10 @@
                                                     "cc": "#/components/schemas/FinancialEvent",
                                                     "docker_image": "#/components/schemas/DockerImageEvent",
                                                     "docker_repository": "#/components/schemas/DockerRepositoryEvent",
+                                                    "experimental": "#/components/schemas/ExperimentalEvent",
                                                     "forum_post": "#/components/schemas/ForumPostEvent",
+                                                    "forum_profile": "#/components/schemas/ForumProfileEvent",
+                                                    "driller_google": "#/components/schemas/GoogleEvent",
                                                     "invalid_credential": "#/components/schemas/InvalidCredentialEvent",
                                                     "leak": "#/components/schemas/LeakEvent",
                                                     "leaked_credential": "#/components/schemas/LeakedCredentialEvent",
@@ -708,8 +729,11 @@
                                                     "mitigated_credential": "#/components/schemas/MitigatedCredentialEvent",
                                                     "paste": "#/components/schemas/PasteEvent",
                                                     "ransomleak": "#/components/schemas/RansomLeakEvent",
+                                                    "seller": "#/components/schemas/SellerEvent",
                                                     "service": "#/components/schemas/ServiceEvent",
                                                     "social_media_account": "#/components/schemas/SocialMediaEvent",
+                                                    "driller_source_code": "#/components/schemas/SourceCodeEvent",
+                                                    "source_code_secret": "#/components/schemas/SourceCodeSecretEvent",
                                                     "stealer_log": "#/components/schemas/pyro__findings__stealerlogs__datamodels__StealerLogEvent",
                                                     "valid_credential": "#/components/schemas/ValidCredentialEvent"
                                                 }
@@ -1151,6 +1175,12 @@
                                         },
                                         {
                                             "$ref": "#/components/schemas/PaginatedResults_LeakedFileExtension_str_"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/PaginatedResults_EventSecret_str_"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/PaginatedResults_EventSecretType_str_"
                                         }
                                     ],
                                     "title": "Response Expand Event Field Events  Expand Get"
@@ -1319,6 +1349,25 @@
                                 }
                             ],
                             "title": "Status"
+                        }
+                    },
+                    {
+                        "name": "relevancy_score_types",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RecommendationRelevancyScoreType"
+                                    }
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Relevancy Score Types"
                         }
                     },
                     {
@@ -3151,7 +3200,6 @@
                     "seller",
                     "service",
                     "social_media_account",
-                    "source_code_observation",
                     "source_code_secret",
                     "stealer_log",
                     "attachment/telegram",
@@ -3173,7 +3221,7 @@
                         "$ref": "#/components/schemas/EntityMetadataAPIResponse"
                     },
                     "data": {
-                        "$ref": "#/components/schemas/pyro__entities__cti__actors__actor_datamodels__ActorData"
+                        "$ref": "#/components/schemas/ActorData"
                     }
                 },
                 "type": "object",
@@ -3182,6 +3230,31 @@
                     "data"
                 ],
                 "title": "ActorAPIResponse"
+            },
+            "ActorData": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "description"
+                ],
+                "title": "ActorData"
             },
             "ActorLiteAPIResponse": {
                 "properties": {
@@ -7018,6 +7091,32 @@
                         "title": "Maybe Rate Limited",
                         "description": "Whether the event may have been suppressed due to rate limiting"
                     },
+                    "ignored_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ignored At",
+                        "description": "When the tenant ignored the event, hiding it from the default feed view"
+                    },
+                    "remediated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Remediated At",
+                        "description": "When the tenant remediated the event, hiding it from the default feed view"
+                    },
                     "would_match": {
                         "type": "boolean",
                         "title": "Would Match",
@@ -7087,6 +7186,54 @@
                 ],
                 "title": "EventMetadata"
             },
+            "EventSecret": {
+                "properties": {
+                    "uid": {
+                        "type": "string",
+                        "title": "Uid"
+                    },
+                    "secret_severity": {
+                        "$ref": "#/components/schemas/RiskScore"
+                    },
+                    "secret_type": {
+                        "$ref": "#/components/schemas/SecretDetectionRule"
+                    },
+                    "secret_hash": {
+                        "type": "string",
+                        "title": "Secret Hash"
+                    },
+                    "obfuscated_content": {
+                        "type": "string",
+                        "title": "Obfuscated Content"
+                    },
+                    "content_hash": {
+                        "type": "string",
+                        "title": "Content Hash"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "uid",
+                    "secret_severity",
+                    "secret_type",
+                    "secret_hash",
+                    "obfuscated_content",
+                    "content_hash"
+                ],
+                "title": "EventSecret"
+            },
+            "EventSecretType": {
+                "properties": {
+                    "type": {
+                        "$ref": "#/components/schemas/SecretDetectionRule"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type"
+                ],
+                "title": "EventSecretType"
+            },
             "EventSeverity": {
                 "type": "string",
                 "enum": [
@@ -7114,9 +7261,77 @@
                     "cookies",
                     "associated_events",
                     "leaked_files",
-                    "leaked_file_extensions"
+                    "leaked_file_extensions",
+                    "secrets",
+                    "secret_types"
                 ],
                 "title": "ExpandableField"
+            },
+            "ExperimentalEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "experimental",
+                        "title": "Event Type",
+                        "default": "experimental"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/ExperimentalEventData"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "metadata"
+                ],
+                "title": "Experimental"
+            },
+            "ExperimentalEventData": {
+                "properties": {
+                    "source": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Source"
+                    },
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url"
+                    },
+                    "content": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Content"
+                    },
+                    "attributes": {
+                        "additionalProperties": true,
+                        "type": "object",
+                        "title": "Attributes"
+                    }
+                },
+                "type": "object",
+                "title": "ExperimentalEventData"
             },
             "ExternalIdData": {
                 "properties": {
@@ -7363,7 +7578,7 @@
                     "estimated_created_at": {
                         "$ref": "#/components/schemas/DateFilter"
                     },
-                    "materialized_at": {
+                    "matched_at": {
                         "$ref": "#/components/schemas/DateFilter"
                     },
                     "tags": {
@@ -7666,6 +7881,7 @@
                     },
                     "order": {
                         "$ref": "#/components/schemas/FeedOrder",
+                        "description": "Sort order of the results by matched date (`matched_at`).",
                         "default": "desc"
                     },
                     "from": {
@@ -8012,6 +8228,16 @@
                 "type": "object",
                 "title": "FinancialEventData"
             },
+            "FlareRegionName": {
+                "type": "string",
+                "enum": [
+                    "US",
+                    "EU",
+                    "CA"
+                ],
+                "title": "FlareRegionName",
+                "description": "A region Flare runs in, and the data residency an organization carries."
+            },
             "ForumPostData": {
                 "properties": {
                     "actor": {
@@ -8088,6 +8314,115 @@
                     "metadata"
                 ],
                 "title": "Forum Post"
+            },
+            "ForumProfileEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "forum_profile",
+                        "title": "Event Type",
+                        "default": "forum_profile"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/ForumProfileEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Forum Profile"
+            },
+            "ForumProfileEventData": {
+                "properties": {
+                    "actor": {
+                        "$ref": "#/components/schemas/ProfileActor",
+                        "description": "Details about the actor owning the forum profile."
+                    },
+                    "username": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Username",
+                        "description": "Username of the forum profile."
+                    },
+                    "title": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Title",
+                        "description": "Title or rank of the profile on the forum."
+                    },
+                    "registered_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Registered At",
+                        "description": "Date and time the profile was registered on the forum."
+                    },
+                    "last_active_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Active At",
+                        "description": "Date and time the profile was last active on the forum."
+                    },
+                    "posts_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Posts Count",
+                        "description": "Number of posts made by the profile on the forum."
+                    },
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url",
+                        "description": "URL to the forum profile."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "actor"
+                ],
+                "title": "ForumProfileEventData"
             },
             "ForumThreadAPIResponse": {
                 "properties": {
@@ -8587,6 +8922,7 @@
                     },
                     "order": {
                         "$ref": "#/components/schemas/FeedOrder",
+                        "description": "Sort order of the results by estimated creation date (`estimated_created_at`).",
                         "default": "desc"
                     },
                     "from": {
@@ -8613,6 +8949,138 @@
                     "query"
                 ],
                 "title": "GlobalSearchRequestBody"
+            },
+            "GoogleEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "driller_google",
+                        "title": "Event Type",
+                        "default": "driller_google"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/GoogleEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Google"
+            },
+            "GoogleEventData": {
+                "properties": {
+                    "title": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Title",
+                        "description": "Title of the Google search result."
+                    },
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url",
+                        "description": "URL of the resource surfaced by the Google search."
+                    },
+                    "browser_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Browser Url",
+                        "description": "Browser-viewable URL of the resource."
+                    },
+                    "host": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Host",
+                        "description": "Host serving the resource."
+                    },
+                    "filename": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Filename",
+                        "description": "Name of the file, when the resource is a document."
+                    },
+                    "filetypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Filetypes",
+                        "description": "File types of the resource."
+                    },
+                    "search_query": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Search Query",
+                        "description": "Google search query that surfaced the resource."
+                    },
+                    "search_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Search Url",
+                        "description": "URL of the Google search that surfaced the resource."
+                    },
+                    "content": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Content",
+                        "description": "Content extracted from the resource."
+                    }
+                },
+                "type": "object",
+                "title": "GoogleEventData"
             },
             "HTTPValidationError": {
                 "properties": {
@@ -8690,6 +9158,16 @@
                         "type": "array",
                         "title": "Merged Object Ids",
                         "default": []
+                    },
+                    "flare_region": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/FlareRegionName"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
@@ -8741,6 +9219,16 @@
                             }
                         ],
                         "title": "Tenant Id"
+                    },
+                    "flare_region": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/FlareRegionName"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
@@ -10462,12 +10950,11 @@
                     "sell",
                     "buy",
                     "free_release",
-                    "share",
                     "trade",
-                    "service_for_hire",
+                    "seeking_work",
                     "request_help",
                     "discussion",
-                    "recruitment",
+                    "hiring",
                     "unknown"
                 ],
                 "title": "Intent"
@@ -11932,6 +12419,62 @@
                 ],
                 "title": "PaginatedResults[EntityLiteAPIResponseTypes, str]"
             },
+            "PaginatedResults_EventSecretType_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/EventSecretType"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[EventSecretType, str]"
+            },
+            "PaginatedResults_EventSecret_str_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/EventSecret"
+                        },
+                        "type": "array",
+                        "title": "Items"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "items",
+                    "next"
+                ],
+                "title": "PaginatedResults[EventSecret, str]"
+            },
             "PaginatedResults_FeedItem_str_": {
                 "properties": {
                     "items": {
@@ -12528,6 +13071,90 @@
                         "$ref": "#/components/schemas/AstpDomainValue"
                     }
                 ]
+            },
+            "Position": {
+                "properties": {
+                    "start_line": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Start Line",
+                        "description": "Line where the secret starts."
+                    },
+                    "start_column": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Start Column",
+                        "description": "Column where the secret starts."
+                    },
+                    "end_line": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "End Line",
+                        "description": "Line where the secret ends."
+                    },
+                    "end_column": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "End Column",
+                        "description": "Column where the secret ends."
+                    }
+                },
+                "type": "object",
+                "title": "Position"
+            },
+            "ProfileActor": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id",
+                        "description": "ID of the actor owning the profile. These IDs relate to the source platform."
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "Name of the actor owning the profile."
+                    }
+                },
+                "type": "object",
+                "title": "ProfileActor"
             },
             "PublicIdentifierRequestBody": {
                 "properties": {
@@ -13754,7 +14381,15 @@
                     "ads",
                     "cookie",
                     "pii",
-                    "experimental"
+                    "experimental",
+                    "lookalike_discovery",
+                    "lookalike_title",
+                    "lookalike_favicon",
+                    "lookalike_screenshot",
+                    "lookalike_ip_address",
+                    "lookalike_dns",
+                    "lookalike_whois_rdap",
+                    "lookalike_ssl_certificate"
                 ],
                 "title": "SearchType"
             },
@@ -13778,6 +14413,455 @@
                 ],
                 "title": "SecretData"
             },
+            "SecretDetectionRule": {
+                "type": "string",
+                "enum": [
+                    "adafruit_io_key",
+                    "adobe_oauth_client_secret",
+                    "age_identity_x22519_secret_key",
+                    "ai21_studio_api_key",
+                    "airbrake_user_key",
+                    "airtable_oauth_token",
+                    "airtable_personal_access_token",
+                    "aiven_api_key",
+                    "alchemy_api_key",
+                    "algolia_admin_api_key",
+                    "alibaba_access_key_secret",
+                    "amazon_mws_auth_token",
+                    "amplitude_api_key",
+                    "ansible_vault_encrypted_secret",
+                    "anthropic_api_key",
+                    "anypoint_api_key",
+                    "apify_api_token",
+                    "apollo_api_key",
+                    "artifactory_api_key",
+                    "asana_client_secret",
+                    "asana_oauth_personal_access_token",
+                    "asp_net_machinekey_decryption_key",
+                    "asp_net_machinekey_validation_key",
+                    "assemblyai_api_key",
+                    "auth0_application_credentials",
+                    "atlassian_cloud_api_token",
+                    "authress_service_client_access_key",
+                    "aws_api_credentials",
+                    "aws_appsync_api_key",
+                    "aws_secret_access_key",
+                    "aws_session_token",
+                    "azure_ad_client_secret",
+                    "azure_api_management_subscription_key",
+                    "azure_app_configuration_connection_string",
+                    "azure_connection_string",
+                    "azure_devops_personal_access_token",
+                    "azure_notification_hub_access_key",
+                    "azure_openai_api_key",
+                    "azure_openai_api_key_extended_format",
+                    "azure_personal_access_token",
+                    "azure_search_query_key",
+                    "azure_search_url",
+                    "azure_service_principal_credentials",
+                    "azure_storage_account_key",
+                    "baremetrics_api_key",
+                    "baseten_api_key",
+                    "beamer_api_token",
+                    "bitbucket_app_password",
+                    "bitly_access_token",
+                    "blynk_device_access_token",
+                    "blynk_organization_access_token",
+                    "blynk_organization_client_credentials",
+                    "branch_io_live_key",
+                    "branch_io_test_key",
+                    "browserstack_access_key",
+                    "buildkite_api_key",
+                    "calendly_personal_access_token",
+                    "cerebras_ai_api_key",
+                    "circleci_api_personal_access_token",
+                    "circleci_api_project_token",
+                    "cisco_enable_password",
+                    "cisco_meraki_api_key",
+                    "cisco_pac_key",
+                    "clarifai_api_key",
+                    "clay_api_key",
+                    "clearbit_api_key",
+                    "clickhouse_cloud_secret_key",
+                    "clojars_api_token",
+                    "cloudflare_api_token",
+                    "cloudflare_ca_key",
+                    "cloudinary_url_credential",
+                    "cloudsight_api_key",
+                    "codacy_api_key",
+                    "codeclimate_reporter_id",
+                    "codecov_access_token",
+                    "coderabbit_api_key",
+                    "cohere_api_key",
+                    "coinbase_access_token",
+                    "coinbase_cdp_api_key_ecdsa",
+                    "coinbase_cdp_api_key_ed25519",
+                    "confluent_api_secret",
+                    "confluent_api_secret_updated_format",
+                    "connection_string_in_net_configuration",
+                    "contentful_delivery_api_token",
+                    "contentful_personal_access_token",
+                    "coveralls_personal_api_token",
+                    "coze_personal_access_token",
+                    "crates_io_api_key",
+                    "credentials_in_a_url",
+                    "credentials_in_connect_viserver_invocation",
+                    "credentials_in_mongodb_connection_string",
+                    "credentials_in_net_system_directoryservices_directoryentry",
+                    "credentials_in_net_system_net_networkcredential",
+                    "credentials_in_odbc_connection_string",
+                    "credentials_in_postgresql_connection_uri",
+                    "credentials_in_psexec_invocation",
+                    "curl_basic_authentication_credentials",
+                    "curl_header_authentication",
+                    "cursor_integrations_user_api_key",
+                    "customer_io_app_api_key",
+                    "customer_io_tracking_api_key",
+                    "cypress_record_key",
+                    "databricks_personal_access_token",
+                    "datadog_api_key",
+                    "datadog_application_key",
+                    "datadog_rum_client_token",
+                    "data_gov_api_key",
+                    "deepgram_api_key",
+                    "deepseek_api_key",
+                    "defined_networking_api_token",
+                    "delighted_api_key",
+                    "dependency_track_api_key",
+                    "deviantart_access_token",
+                    "deviantart_oauth_client_secret",
+                    "diffbot_api_key",
+                    "digitalocean_application_access_token",
+                    "digitalocean_personal_access_token",
+                    "digitalocean_refresh_token",
+                    "discord_bot_token",
+                    "discord_webhook_url",
+                    "disqus_api_key",
+                    "django_secret_key",
+                    "docker_hub_personal_access_token",
+                    "docker_registry_credentials_auths_json",
+                    "doppler_audit_token",
+                    "doppler_cli_token",
+                    "doppler_personal_token",
+                    "doppler_scim_token",
+                    "doppler_service_account_token",
+                    "doppler_service_token",
+                    "droneci_access_token",
+                    "dropbox_access_token",
+                    "duffel_api_token",
+                    "dynatrace_token",
+                    "easypost_api_token",
+                    "elevenlabs_api_key",
+                    "endor_labs_api_secret",
+                    "eraser_api_key",
+                    "eventbrite_api_key",
+                    "exa_ai_api_key",
+                    "facebook_access_token",
+                    "facebook_app_credentials",
+                    "facebook_secret_key",
+                    "fastly_api_token",
+                    "figma_personal_access_token",
+                    "fileio_secret_key",
+                    "filezilla_base64_encoded_password",
+                    "filezilla_stored_password_pass_plaintext",
+                    "finicity_api_token",
+                    "finicity_client_secret",
+                    "finnhub_api_token",
+                    "firebase_cloud_messaging_device_token",
+                    "firebase_cloud_messaging_server_key",
+                    "firecrawl_api_key",
+                    "firefox_encrypted_password",
+                    "firefox_encrypted_username",
+                    "fireworks_ai_api_key",
+                    "flare_api_key",
+                    "fleetbase_api_key",
+                    "flickr_api_key",
+                    "flickr_oauth_token",
+                    "fly_io_api_token",
+                    "foursquare_client_secret",
+                    "frame_io_api_token",
+                    "freshbooks_access_token",
+                    "freshdesk_api_key",
+                    "friendli_ai_api_key",
+                    "gcp_api_token",
+                    "gcp_private_key_id",
+                    "generic_api_key",
+                    "generic_password",
+                    "generic_secret",
+                    "generic_username_and_password",
+                    "gitalk_oauth_credentials",
+                    "github_app_token",
+                    "github_oauth_access_token",
+                    "github_personal_access_token",
+                    "github_refresh_token",
+                    "github_secret_key",
+                    "gitlab_personal_access_token",
+                    "gitlab_pipeline_trigger_token",
+                    "gitlab_runner_registration_token",
+                    "gitter_access_token",
+                    "gocardless_api_token",
+                    "google_api_key",
+                    "google_oauth_access_token",
+                    "google_oauth_client_secret",
+                    "google_oauth_credentials",
+                    "grafana_api_token",
+                    "grafana_cloud_api_token",
+                    "grafana_service_account_token",
+                    "groq_api_key",
+                    "group_policy_preferences_cpassword",
+                    "guardian_api_key",
+                    "gumroad_access_token",
+                    "hardcoded_credential_in_json",
+                    "hardcoded_gradle_credentials",
+                    "harness_personal_access_token_pat",
+                    "hashicorp_vault_batch_token",
+                    "hashicorp_vault_recovery_token",
+                    "hashicorp_vault_service_token",
+                    "hashicorp_vault_unseal_key",
+                    "helpscout_oauth_client_secret",
+                    "here_api_key",
+                    "heroku_api_key",
+                    "honeycomb_api_key",
+                    "html_password_input_pre_populated_credential",
+                    "http_basic_authentication",
+                    "http_bearer_token",
+                    "hubspot_private_app_token",
+                    "huggingface_user_access_token",
+                    "ibm_cloud_user_api_key",
+                    "imagekit_private_api_key",
+                    "infracost_api_token",
+                    "infura_api_key",
+                    "instagram_graph_api_access_token",
+                    "instantly_api_key",
+                    "intercom_api_token",
+                    "intra42_client_secret_s_s4t2udaf",
+                    "ionic_api_token",
+                    "ipstack_api_key",
+                    "iterable_api_key",
+                    "jamf_pro_credential",
+                    "jdbc_connection_string_with_embedded_credentials",
+                    "jenkins_setup_admin_password",
+                    "jenkins_token_or_crumb",
+                    "jina_search_foundation_api_key",
+                    "jira_token",
+                    "jotform_api_key",
+                    "json_web_token",
+                    "json_web_token_secret",
+                    "jumpcloud_api_key",
+                    "kagi_api_key",
+                    "keen_io_api_key",
+                    "kickbox_api_key",
+                    "klaviyo_api_key",
+                    "kling_ai_secret_key",
+                    "kubernetes_bootstrap_token",
+                    "langsmith_personal_access_token",
+                    "langsmith_service_key",
+                    "larksuite_app_access_token",
+                    "larksuite_tenant_access_token",
+                    "larksuite_user_access_token",
+                    "launchdarkly_access_token",
+                    "launchdarkly_client_side_id",
+                    "linear_api_key",
+                    "line_messaging_api_token",
+                    "linkedin_access_token",
+                    "linkedin_secret_key",
+                    "lob_api_key",
+                    "lob_publishable_api_key",
+                    "lokalise_api_token",
+                    "looker_client_secret",
+                    "mailchimp_api_key",
+                    "mailgun_api_key",
+                    "mailjetsms_api_key",
+                    "mailjet_basic_auth",
+                    "mandrill_api_key",
+                    "mapbox_public_access_token",
+                    "mapbox_secret_access_token",
+                    "mapbox_temporary_access_token",
+                    "mattermost_access_token",
+                    "mattermost_incoming_webhook_url",
+                    "maven_settings_xml_credentials",
+                    "maxmind_license_key",
+                    "mergify_application_api_key",
+                    "messagebird_api_token",
+                    "microsoft_teams_webhook",
+                    "mistral_ai_api_key",
+                    "monday_com_api_key",
+                    "mongodb_api_private_key",
+                    "mongodb_atlas_service_account_token",
+                    "mysql_uri_with_credentials",
+                    "nasa_api_key",
+                    "netlify_api_key",
+                    "netrc_credentials",
+                    "new_relic_admin_api_key",
+                    "new_relic_api_service_key",
+                    "new_relic_insights_insert_key",
+                    "new_relic_insights_query_key",
+                    "new_relic_license_key",
+                    "new_relic_pixie_api_key",
+                    "new_relic_pixie_deploy_key",
+                    "new_relic_rest_api_key",
+                    "new_york_times_api_key",
+                    "ngrok_api_key",
+                    "notion_legacy_token",
+                    "notion_oauth_refresh_token",
+                    "notion_token",
+                    "npm_access_token",
+                    "nuget_api_key",
+                    "nvidia_nim_api_key",
+                    "nylas_api_key",
+                    "okta_api_token",
+                    "ollama_api_key",
+                    "one_password_account_secret_key",
+                    "one_password_service_account_token",
+                    "openai_api_key",
+                    "openrouter_api_key",
+                    "openweather_map_api_key",
+                    "opsgenie_api_key",
+                    "optimizely_personal_access_token",
+                    "owlbot_api_key",
+                    "packagecloud_api_key",
+                    "pagerduty_api_key",
+                    "particle_io_access_token",
+                    "password_hash_bcrypt",
+                    "password_hash_cisco_ios_pbkdf2_with_sha256",
+                    "password_hash_kerberos",
+                    "password_hash_md5crypt",
+                    "password_hash_sha256crypt",
+                    "password_hash_sha512crypt",
+                    "pastebin_api_key",
+                    "paypal_oauth_secret",
+                    "paystack_api_key",
+                    "pdflayer_api_key",
+                    "pem_encoded_private_key",
+                    "pendo_integration_key",
+                    "perl_dbi_connection_with_credentials",
+                    "perplexity_ai_api_key",
+                    "phpmailer_credentials",
+                    "php_database_connection_with_credentials",
+                    "php_postgresql_connection_with_credentials",
+                    "plaid_access_token_production",
+                    "plaid_access_token_sandbox",
+                    "plaid_secret_production",
+                    "plaid_secret_sandbox",
+                    "planetscale_api_token",
+                    "posthog_personal_api_key",
+                    "posthog_project_api_key",
+                    "postman_api_key",
+                    "postmark_api_token",
+                    "powershell_pscredential_constructor",
+                    "powershell_securestring_conversion",
+                    "prefect_api_token",
+                    "pubnub_publish_key",
+                    "pubnub_subscription_key",
+                    "pulumi_api_key",
+                    "pypi_upload_token",
+                    "python_database_connection_with_credentials",
+                    "python_database_connection_with_dsn_string",
+                    "rabbitmq_credential",
+                    "rapidapi_key",
+                    "razorpay_api_key",
+                    "razorpay_test_api_key",
+                    "rdp_file_saved_password",
+                    "react_app_password",
+                    "react_app_username",
+                    "readme_api_key",
+                    "recaptcha_api_key",
+                    "redis_client_debug_output",
+                    "redis_uri_connection_string",
+                    "replicate_api_token",
+                    "resend_api_key",
+                    "retell_ai_api_key",
+                    "retool_workflow_api_key",
+                    "riot_games_api_key",
+                    "rubygems_api_key",
+                    "ruby_dbi_connection_with_credentials",
+                    "runway_api_key",
+                    "salesforce_access_token",
+                    "sauce_token",
+                    "scale_api_key",
+                    "scale_callback_auth_key",
+                    "scalingo_api_token",
+                    "scraperapi_key",
+                    "segment_public_api_token",
+                    "sendbird_api_token",
+                    "sendgrid_api_key",
+                    "sendinblue_api_token",
+                    "sensitive_value_in_net_configuration",
+                    "sentry_access_token",
+                    "sentry_dsn",
+                    "sentry_organization_token",
+                    "sentry_user_token",
+                    "shippo_api_token",
+                    "shodan_api_key",
+                    "shopify_access_token",
+                    "shopify_app_secret",
+                    "slack_app_token",
+                    "slack_bot_token",
+                    "slack_legacy_bot_token",
+                    "slack_trigger_url",
+                    "slack_user_token",
+                    "slack_webhook",
+                    "slack_workflow_webhook",
+                    "snmp_read_write_community_string",
+                    "snyk_api_key",
+                    "sonarcloud_api_token",
+                    "sonarqube_token",
+                    "sourcegraph_access_token",
+                    "spotify_access_token",
+                    "sql_account_creation_with_password",
+                    "square_access_token",
+                    "square_oauth_secret",
+                    "sslmate_api_key",
+                    "stability_ai_api_key",
+                    "stackhawk_api_key",
+                    "statuspage_api_key",
+                    "stripe_api_key",
+                    "stripe_api_test_key",
+                    "stripe_publishable_api_key",
+                    "supabase_management_token",
+                    "supabase_project_api_key",
+                    "tailscale_api_key",
+                    "tavily_api_key",
+                    "teamcity_api_token",
+                    "telegram_bot_token",
+                    "thingsboard_access_token",
+                    "thingsboard_provision_device_key",
+                    "thingsboard_provision_device_secret",
+                    "together_ai_api_key",
+                    "travis_ci_encrypted_variable",
+                    "travis_ci_token",
+                    "truenas_api_key_rest_api",
+                    "truenas_api_key_websocket",
+                    "twilio_api_key",
+                    "twitch_stream_key",
+                    "twitter_access_token",
+                    "twitter_bearer_token",
+                    "twitter_secret_key",
+                    "typeform_api_token",
+                    "vast_ai_api_key",
+                    "vercel_api_token",
+                    "visual_studio_app_center_api_token",
+                    "voyage_ai_api_key",
+                    "wakatime_api_key",
+                    "weights_and_biases_api_key",
+                    "weights_and_biases_api_key_v1",
+                    "windows_unattend_xml_administrator_password",
+                    "windows_unattend_xml_autologon_password",
+                    "wireguard_preshared_key",
+                    "wireguard_private_key",
+                    "wpengine_api_key",
+                    "xai_grok_api_key",
+                    "yandex_api_key",
+                    "yelp_api_key",
+                    "youtube_api_key",
+                    "zapier_webhook_url",
+                    "zendesk_api_token",
+                    "zhipu_bigmodel_api_key",
+                    "zoho_crm_api_access_token",
+                    "zuplo_api_key"
+                ],
+                "title": "SecretDetectionRule"
+            },
             "SecretQuery": {
                 "properties": {
                     "type": {
@@ -13796,6 +14880,139 @@
                     "secret"
                 ],
                 "title": "SecretQuery"
+            },
+            "SellerEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "seller",
+                        "title": "Event Type",
+                        "default": "seller"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/SellerEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Seller"
+            },
+            "SellerEventData": {
+                "properties": {
+                    "actor": {
+                        "$ref": "#/components/schemas/ProfileActor",
+                        "description": "Details about the actor owning the seller profile."
+                    },
+                    "username": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Username",
+                        "description": "Username of the seller on the market."
+                    },
+                    "about": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "About",
+                        "description": "Description written by the seller."
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At",
+                        "description": "Date and time the seller profile was created on the market."
+                    },
+                    "last_active_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Active At",
+                        "description": "Date and time the seller was last active on the market."
+                    },
+                    "rating": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Rating",
+                        "description": "Rating of the seller on the market."
+                    },
+                    "ratings_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Ratings Count",
+                        "description": "Number of ratings received by the seller."
+                    },
+                    "transactions_count": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Transactions Count",
+                        "description": "Number of transactions completed by the seller."
+                    },
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url",
+                        "description": "URL to the seller profile."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "actor"
+                ],
+                "title": "SellerEventData"
             },
             "ServiceEvent": {
                 "properties": {
@@ -14113,6 +15330,201 @@
                 },
                 "type": "object",
                 "title": "SocialMediaEventData"
+            },
+            "SourceCodeEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "driller_source_code",
+                        "title": "Event Type",
+                        "default": "driller_source_code"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/SourceCodeEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Source Code"
+            },
+            "SourceCodeEventData": {
+                "properties": {
+                    "actor": {
+                        "$ref": "#/components/schemas/pyro__findings__source_code__datamodels__SourceCodeEventData__Actor",
+                        "description": "Details about the author of the source code."
+                    },
+                    "title": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Title",
+                        "description": "Title of the source code resource."
+                    },
+                    "repository": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Repository",
+                        "description": "Repository the source code belongs to."
+                    },
+                    "type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Type",
+                        "description": "Kind of source code resource, such as code or commit."
+                    },
+                    "sha": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Sha",
+                        "description": "Commit SHA of the source code resource."
+                    },
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url",
+                        "description": "URL to the source code resource."
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At",
+                        "description": "Date and time the source code resource was created."
+                    },
+                    "contains_secrets": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Contains Secrets",
+                        "description": "Whether secrets were detected in the source code."
+                    },
+                    "content": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Content",
+                        "description": "Content of the source code resource."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "actor"
+                ],
+                "title": "SourceCodeEventData"
+            },
+            "SourceCodeSecretEvent": {
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "const": "source_code_secret",
+                        "title": "Event Type",
+                        "default": "source_code_secret"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/EventMetadata"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/SourceCodeSecretEventData"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "metadata",
+                    "data"
+                ],
+                "title": "Source Code Secret"
+            },
+            "SourceCodeSecretEventData": {
+                "properties": {
+                    "type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Type",
+                        "description": "Kind of secret detected."
+                    },
+                    "position": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/Position"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Position of the secret in the source code."
+                    },
+                    "parent_uid": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Parent Uid",
+                        "description": "UID of the source code event containing the secret."
+                    }
+                },
+                "type": "object",
+                "title": "SourceCodeSecretEventData"
             },
             "SourceV2": {
                 "properties": {
@@ -15386,31 +16798,6 @@
                 ],
                 "title": "WebhookBasicAuth"
             },
-            "pyro__entities__cti__actors__actor_datamodels__ActorData": {
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "title": "Name"
-                    },
-                    "description": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Description"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "name",
-                    "description"
-                ],
-                "title": "ActorData"
-            },
             "pyro__findings__chat_messages__datamodels__ChatMessageEventData__Actor": {
                 "properties": {
                     "id": {
@@ -15514,6 +16901,18 @@
                         ],
                         "title": "Category Name",
                         "description": "Category of the forum, these vary between forum platforms."
+                    },
+                    "category_path_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Category Path Name",
+                        "description": "Full breadcrumb of the forum category the post sits in."
                     },
                     "topic_id": {
                         "anyOf": [
@@ -15759,6 +17158,36 @@
                 },
                 "type": "object",
                 "title": "VictimInformation"
+            },
+            "pyro__findings__source_code__datamodels__SourceCodeEventData__Actor": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id",
+                        "description": "ID of the author on the source code platform."
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "Name of the author on the source code platform."
+                    }
+                },
+                "type": "object",
+                "title": "Actor"
             },
             "pyro__findings__stealerlogs__datamodels__StealerLogEvent": {
                 "properties": {
