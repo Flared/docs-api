@@ -6,23 +6,6 @@ import sys
 from typing import Any
 
 
-HTTP_METHODS = {"get", "put", "post", "delete", "options", "head", "patch", "trace"}
-
-
-def remove_private_operations(openapi_schema: dict) -> None:
-    for path in list(openapi_schema["paths"].keys()):
-        path_item = openapi_schema["paths"][path]
-
-        for method in list(path_item.keys()):
-            if method not in HTTP_METHODS:
-                continue
-            if "private" in path_item[method].get("tags", []):
-                del path_item[method]
-
-        if not any(method in path_item for method in HTTP_METHODS):
-            del openapi_schema["paths"][path]
-
-
 def find_schema_refs(obj: Any) -> set[str]:
     refs: set[str] = set()
 
@@ -76,7 +59,6 @@ def main() -> None:
     with open(path, "r") as f:
         openapi_schema = json.loads(f.read())
 
-    remove_private_operations(openapi_schema)
     remove_unused_schemas(openapi_schema)
 
     openapi_schema["components"]["securitySchemes"] = {
