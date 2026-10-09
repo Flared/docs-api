@@ -244,7 +244,8 @@
                 "group": "Custom Intel",
                 "pages": [
                   "api-reference/v4/endpoints/create-intel-request",
-                  "api-reference/v4/endpoints/get-intel-request"
+                  "api-reference/v4/endpoints/get-intel-request",
+                  "api-reference/v4/endpoints/get-report"
                 ]
               }
             ]

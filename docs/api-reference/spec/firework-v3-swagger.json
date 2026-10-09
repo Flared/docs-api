@@ -2,1125 +2,6 @@
   "swagger": "2.0",
   "basePath": "/",
   "paths": {
-    "/firework/v3/activities/{index}/{source}/{id}": {
-      "parameters": [
-        {
-          "name": "index",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "source",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Returns the activity"
-          },
-          "404": {
-            "description": "Activity not found",
-            "schema": {
-              "$ref": "#/definitions/HttpError"
-            }
-          }
-        },
-        "operationId": "get_activity_endpoint_/activities/<string:index>/<string:source>/<path:id>",
-        "tags": [
-          "activities"
-        ]
-      }
-    },
-    "/firework/v3/activities/{index}/{source}/{id}/credentials": {
-      "parameters": [
-        {
-          "name": "index",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "source",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PaginatedCursoredCredentials"
-            }
-          }
-        },
-        "operationId": "get_activity_credentials_endpoint_/activities/<string:index>/<string:source>/<path:id>/credentials",
-        "tags": [
-          "activities"
-        ]
-      }
-    },
-    "/firework/v3/activities/{index}/{source}/{id}/icon": {
-      "parameters": [
-        {
-          "name": "index",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "source",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "responses": {
-          "404": {
-            "description": "Activity not found",
-            "schema": {
-              "$ref": "#/definitions/HttpError"
-            }
-          },
-          "200": {
-            "description": "Returns the activity"
-          }
-        },
-        "operationId": "get_activity_icon_endpoint_/activities/<string:index>/<string:source>/<path:id>/icon",
-        "tags": [
-          "activities"
-        ]
-      }
-    },
-    "/firework/v3/assets/_by_data": {
-      "post": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "properties": {
-                "asset": {
-                  "$ref": "#/definitions/Asset"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "post_asset_by_data_api_/assets/_by_data",
-        "parameters": [
-          {
-            "name": "payload",
-            "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Asset"
-            }
-          }
-        ],
-        "tags": [
-          "assets"
-        ]
-      }
-    },
-    "/firework/v3/assets/_relations": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AssetRelations"
-            }
-          }
-        },
-        "operationId": "get_assets_relations_api_/assets/_relations",
-        "parameters": [
-          {
-            "name": "target_uuid",
-            "in": "query",
-            "type": "string",
-            "description": "The `target_uuid` parameter is used to get source assets related to this asset uuid  \n\n"
-          },
-          {
-            "name": "source_uuid",
-            "in": "query",
-            "type": "string",
-            "description": "The `source_uuid` parameter is used to get target assets related to this asset uuid  \n\n"
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "type": "string",
-            "description": "The `type` parameter is used to filter which type of relation we want to list  \n\n",
-            "enum": [
-              "analysis_of",
-              "attributed_to",
-              "authored_by",
-              "based_on",
-              "beacons_to",
-              "characterizes",
-              "commits_with",
-              "communicates_with",
-              "compromises",
-              "consists_of",
-              "contributed_to",
-              "controls",
-              "delivers",
-              "downloads",
-              "drops",
-              "dynamic_analysis_of",
-              "exfiltrate_to",
-              "exploits",
-              "found_from",
-              "has",
-              "has_account_on",
-              "has_favicon",
-              "has_screenshot",
-              "hosts",
-              "impersonates",
-              "indicates",
-              "investigates",
-              "links_to_azure_tenant",
-              "located_at",
-              "looks_like",
-              "mentioned_in",
-              "mitigates",
-              "originates_from",
-              "owns",
-              "related_to",
-              "resolves_to",
-              "static_analysis_of",
-              "subdomain_of",
-              "targets",
-              "uses",
-              "variant_of"
-            ]
-          },
-          {
-            "name": "target_type",
-            "in": "query",
-            "type": "string",
-            "description": "The `target_type` parameter is used to filter which type of target assets related we want to list  \n\nUsed only with `source_uuid` \n\n",
-            "enum": [
-              "account",
-              "azure_tenant",
-              "bin",
-              "birth_year",
-              "brand",
-              "credentials",
-              "cve",
-              "directory",
-              "domain",
-              "email",
-              "external_id",
-              "favicon",
-              "file",
-              "filename",
-              "canonical_name",
-              "github_repository",
-              "address_data",
-              "ip",
-              "ipv6_addr",
-              "keyword",
-              "mac_addr",
-              "mitre_technique",
-              "mutex",
-              "name",
-              "phone_number",
-              "ransomleak",
-              "role",
-              "screenshot",
-              "search_query",
-              "secret",
-              "thread",
-              "url",
-              "user_id",
-              "username",
-              "windows_registry_key",
-              "x509_certificate",
-              "actor",
-              "attack_pattern",
-              "chat_channel",
-              "campaign",
-              "external_report",
-              "forum_thread",
-              "identity",
-              "indicator",
-              "infrastructure",
-              "location",
-              "malware",
-              "organization",
-              "threat_actor",
-              "threat_actor_group",
-              "tool",
-              "vulnerability"
-            ]
-          },
-          {
-            "name": "source_type",
-            "in": "query",
-            "type": "string",
-            "description": "The `source_type` parameter is used to filter which type of source assets related we want to list  \n\nUsed only with `target_uuid` \n\n",
-            "enum": [
-              "account",
-              "azure_tenant",
-              "bin",
-              "birth_year",
-              "brand",
-              "credentials",
-              "cve",
-              "directory",
-              "domain",
-              "email",
-              "external_id",
-              "favicon",
-              "file",
-              "filename",
-              "canonical_name",
-              "github_repository",
-              "address_data",
-              "ip",
-              "ipv6_addr",
-              "keyword",
-              "mac_addr",
-              "mitre_technique",
-              "mutex",
-              "name",
-              "phone_number",
-              "ransomleak",
-              "role",
-              "screenshot",
-              "search_query",
-              "secret",
-              "thread",
-              "url",
-              "user_id",
-              "username",
-              "windows_registry_key",
-              "x509_certificate",
-              "actor",
-              "attack_pattern",
-              "chat_channel",
-              "campaign",
-              "external_report",
-              "forum_thread",
-              "identity",
-              "indicator",
-              "infrastructure",
-              "location",
-              "malware",
-              "organization",
-              "threat_actor",
-              "threat_actor_group",
-              "tool",
-              "vulnerability"
-            ]
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "type": "integer",
-            "description": "The `size` parameter is the maximum results returned \n\n",
-            "default": 10
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "type": "string",
-            "description": "The `order` parameter is used to define the order of the results.  \n\nResults are ordered by the time the relation was first found. By default the results are ordered from the most recent to the oldest (desc)",
-            "default": "desc"
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "type": "string",
-            "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, use the latest response's `next` attribute for the next `from` value to use to get the next page of results."
-          },
-          {
-            "name": "include_data",
-            "in": "query",
-            "type": "boolean",
-            "description": "The `include_data` parameter is to include asset data in the response \n\n",
-            "default": true
-          }
-        ],
-        "tags": [
-          "assets"
-        ]
-      }
-    },
-    "/firework/v3/assets/{asset_uuid}": {
-      "parameters": [
-        {
-          "name": "asset_uuid",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "properties": {
-                "asset": {
-                  "$ref": "#/definitions/Asset"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get_asset_api_/assets/<uuid:asset_uuid>",
-        "tags": [
-          "assets"
-        ]
-      }
-    },
-    "/firework/v3/assets/{asset_uuid}/feed": {
-      "parameters": [
-        {
-          "name": "asset_uuid",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "responses": {
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/HttpError"
-            }
-          },
-          "400": {
-            "description": "Query is invalid.",
-            "schema": {
-              "$ref": "#/definitions/HttpError"
-            }
-          },
-          "200": {
-            "description": "Returns the search result(s).",
-            "schema": {
-              "$ref": "#/definitions/Search"
-            }
-          }
-        },
-        "operationId": "get_asset_feeds_api_/assets/<uuid:asset_uuid>/feed",
-        "parameters": [
-          {
-            "name": "fields",
-            "in": "query",
-            "type": "array",
-            "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "time",
-            "in": "query",
-            "type": "string",
-            "description": "  The `time` parameter is used to limit results to those found in the provided time span.  \n\n  *Expected format* : from@to  \n\n  *Example value* : 2019-09-03T04:00:00.000Z@2019-09-14T04:00:00.000Z"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "type": "integer",
-            "description": "The `size` parameter is used to limit the number of results returned for the search query.",
-            "default": 10
-          },
-          {
-            "name": "search_after",
-            "in": "query",
-            "type": "string",
-            "description": "The `search_after` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `search_after` parameter in your next request with the latest response's `search_after` value to get the next page of results."
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "type": "string",
-            "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results."
-          },
-          {
-            "name": "tags",
-            "in": "query",
-            "type": "array",
-            "description": "User defined tags used to filter search results",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "tags_query_operator",
-            "in": "query",
-            "type": "string",
-            "description": "User defined operator to apply to tags filter"
-          },
-          {
-            "name": "types",
-            "in": "query",
-            "type": "array",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, secret, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, financial_data, stealer_log, forum_post, seller, chat_message, ransomleak, forum_topic, listing, bot, forum_profile\n- open_web: google, source_code_secrets, source_code_files, stack_exchange, bucket_object, paste, social_media_account, service, docker, bucket\n- leaks: mitigated_credential, invalid_credential, leak, valid_credential\n- domains: domain\n",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "enum": [
-              "attachment",
-              "listing",
-              "ransomleak",
-              "forum_post",
-              "forum_topic",
-              "forum_profile",
-              "blog_post",
-              "seller",
-              "paste",
-              "leak",
-              "chat_message",
-              "domain",
-              "bot",
-              "stealer_log",
-              "infected_devices",
-              "driller",
-              "driller_forum_topic",
-              "driller_forum_post",
-              "driller_profile",
-              "cc",
-              "ccbin",
-              "financial_data",
-              "leaked_data",
-              "leaked_file",
-              "document",
-              "account",
-              "actor",
-              "forum_content",
-              "blog_content",
-              "profile",
-              "leaked_credential",
-              "valid_credential",
-              "invalid_credential",
-              "mitigated_credential",
-              "illicit_networks",
-              "open_web",
-              "domains",
-              "intelligence_object",
-              "leaks",
-              "social_media_account",
-              "social_media",
-              "source_code",
-              "source_code_secrets_np",
-              "source_code_secrets",
-              "source_code_files",
-              "secret",
-              "docker",
-              "stack_exchange",
-              "google",
-              "service",
-              "driller_host",
-              "buckets",
-              "bucket",
-              "bucket_object",
-              "whois",
-              "ad",
-              "ads",
-              "cookie",
-              "pii",
-              "experimental"
-            ]
-          },
-          {
-            "name": "experimental_types",
-            "in": "query",
-            "type": "array",
-            "description": "Type of experimental activities to search through.",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "event_action",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "default",
-              "ignored",
-              "remediated",
-              "risk_score_edited",
-              "exclude_ignored",
-              "ignored_or_remediated"
-            ]
-          },
-          {
-            "name": "event_actions",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "enum": [
-              "default",
-              "ignored",
-              "remediated",
-              "risk_score_edited",
-              "exclude_ignored",
-              "ignored_or_remediated"
-            ]
-          },
-          {
-            "name": "risks",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "integer"
-            },
-            "collectionFormat": "multi",
-            "enum": [
-              1,
-              2,
-              3,
-              4,
-              5
-            ]
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ]
-          },
-          {
-            "name": "sort_by",
-            "in": "query",
-            "type": "string",
-            "default": "created",
-            "enum": [
-              "created",
-              "indexed",
-              "updated",
-              "alertable-materialized",
-              "materialized",
-              "searchable"
-            ]
-          },
-          {
-            "name": "use_global_policies",
-            "in": "query",
-            "type": "boolean",
-            "default": true
-          },
-          {
-            "name": "time_zone",
-            "in": "query",
-            "type": "string",
-            "description": "The time zone used to compute the statistics."
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "type": "string",
-            "description": "Query used to filter results. Search query uses the [Lucene query](https://www.elastic.co/guide/en/elasticsearch/reference/6.x/query-dsl-query-string-query.html#query-string-syntax) syntax."
-          },
-          {
-            "name": "has_modified_risk_score",
-            "in": "query",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "name": "has_notes",
-            "in": "query",
-            "type": "boolean",
-            "default": false
-          }
-        ],
-        "tags": [
-          "assets"
-        ]
-      },
-      "post": {
-        "responses": {
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/HttpError"
-            }
-          },
-          "400": {
-            "description": "Query is invalid.",
-            "schema": {
-              "$ref": "#/definitions/HttpError"
-            }
-          },
-          "200": {
-            "description": "Returns the search result(s).",
-            "schema": {
-              "$ref": "#/definitions/Search"
-            }
-          }
-        },
-        "operationId": "post_asset_feeds_api_/assets/<uuid:asset_uuid>/feed",
-        "parameters": [
-          {
-            "name": "fields",
-            "in": "query",
-            "type": "array",
-            "description": "Fields to includes in the results in a dotted form. For example, \"data.actor_name\" will include items similar to:```json\n        \"items\": [{\n            \"data\": {\n                \"actor_name\": \"Seller123\"\n            }\n        }]\n        ```\n\n        By default, all fields are included in the response.\n        ",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "time",
-            "in": "query",
-            "type": "string",
-            "description": "  The `time` parameter is used to limit results to those found in the provided time span.  \n\n  *Expected format* : from@to  \n\n  *Example value* : 2019-09-03T04:00:00.000Z@2019-09-14T04:00:00.000Z"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "type": "integer",
-            "description": "The `size` parameter is used to limit the number of results returned for the search query.",
-            "default": 10
-          },
-          {
-            "name": "search_after",
-            "in": "query",
-            "type": "string",
-            "description": "The `search_after` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `search_after` parameter in your next request with the latest response's `search_after` value to get the next page of results."
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "type": "string",
-            "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, include the `from` parameter in your next request with the latest response's `next` value to get the next page of results."
-          },
-          {
-            "name": "tags",
-            "in": "query",
-            "type": "array",
-            "description": "User defined tags used to filter search results",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "tags_query_operator",
-            "in": "query",
-            "type": "string",
-            "description": "User defined operator to apply to tags filter"
-          },
-          {
-            "name": "types",
-            "in": "query",
-            "type": "array",
-            "description": "\nType of activities to search through.\n\n*Expected values* : attachment, listing, ransomleak, forum_post, forum_topic, forum_profile, blog_post, seller, paste, leak, chat_message, domain, bot, stealer_log, infected_devices, driller, driller_forum_topic, driller_forum_post, driller_profile, cc, ccbin, financial_data, leaked_data, leaked_file, document, account, actor, forum_content, blog_content, profile, leaked_credential, valid_credential, invalid_credential, mitigated_credential, illicit_networks, open_web, domains, intelligence_object, leaks, social_media_account, social_media, source_code, source_code_secrets_np, source_code_secrets, source_code_files, secret, docker, stack_exchange, google, service, driller_host, buckets, bucket, bucket_object, whois, cookie, pii, experimental\n\n*Some search types contain others*\n- illicit_networks: blog_post, financial_data, stealer_log, forum_post, seller, chat_message, ransomleak, forum_topic, listing, bot, forum_profile\n- open_web: google, source_code_secrets, source_code_files, stack_exchange, bucket_object, paste, social_media_account, service, docker, bucket\n- leaks: mitigated_credential, invalid_credential, leak, valid_credential\n- domains: domain\n",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "enum": [
-              "attachment",
-              "listing",
-              "ransomleak",
-              "forum_post",
-              "forum_topic",
-              "forum_profile",
-              "blog_post",
-              "seller",
-              "paste",
-              "leak",
-              "chat_message",
-              "domain",
-              "bot",
-              "stealer_log",
-              "infected_devices",
-              "driller",
-              "driller_forum_topic",
-              "driller_forum_post",
-              "driller_profile",
-              "cc",
-              "ccbin",
-              "financial_data",
-              "leaked_data",
-              "leaked_file",
-              "document",
-              "account",
-              "actor",
-              "forum_content",
-              "blog_content",
-              "profile",
-              "leaked_credential",
-              "valid_credential",
-              "invalid_credential",
-              "mitigated_credential",
-              "illicit_networks",
-              "open_web",
-              "domains",
-              "intelligence_object",
-              "leaks",
-              "social_media_account",
-              "social_media",
-              "source_code",
-              "source_code_secrets_np",
-              "source_code_secrets",
-              "source_code_files",
-              "secret",
-              "docker",
-              "stack_exchange",
-              "google",
-              "service",
-              "driller_host",
-              "buckets",
-              "bucket",
-              "bucket_object",
-              "whois",
-              "ad",
-              "ads",
-              "cookie",
-              "pii",
-              "experimental"
-            ]
-          },
-          {
-            "name": "experimental_types",
-            "in": "query",
-            "type": "array",
-            "description": "Type of experimental activities to search through.",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "event_action",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "default",
-              "ignored",
-              "remediated",
-              "risk_score_edited",
-              "exclude_ignored",
-              "ignored_or_remediated"
-            ]
-          },
-          {
-            "name": "event_actions",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "enum": [
-              "default",
-              "ignored",
-              "remediated",
-              "risk_score_edited",
-              "exclude_ignored",
-              "ignored_or_remediated"
-            ]
-          },
-          {
-            "name": "risks",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "integer"
-            },
-            "collectionFormat": "multi",
-            "enum": [
-              1,
-              2,
-              3,
-              4,
-              5
-            ]
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ]
-          },
-          {
-            "name": "sort_by",
-            "in": "query",
-            "type": "string",
-            "default": "created",
-            "enum": [
-              "created",
-              "indexed",
-              "updated",
-              "alertable-materialized",
-              "materialized",
-              "searchable"
-            ]
-          },
-          {
-            "name": "use_global_policies",
-            "in": "query",
-            "type": "boolean",
-            "default": true
-          },
-          {
-            "name": "time_zone",
-            "in": "query",
-            "type": "string",
-            "description": "The time zone used to compute the statistics."
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "type": "string",
-            "description": "Query used to filter results. Search query uses the [Lucene query](https://www.elastic.co/guide/en/elasticsearch/reference/6.x/query-dsl-query-string-query.html#query-string-syntax) syntax."
-          },
-          {
-            "name": "has_modified_risk_score",
-            "in": "query",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "name": "has_notes",
-            "in": "query",
-            "type": "boolean",
-            "default": false
-          }
-        ],
-        "tags": [
-          "assets"
-        ]
-      }
-    },
-    "/firework/v3/assets/{asset_uuid}/relations": {
-      "parameters": [
-        {
-          "name": "asset_uuid",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AssetRelations"
-            }
-          }
-        },
-        "operationId": "get_asset_relations_api_/assets/<uuid:asset_uuid>/relations",
-        "parameters": [
-          {
-            "name": "type",
-            "in": "query",
-            "type": "string",
-            "description": "The `type` parameter is used to filter which type of relation we want to list  \n\n",
-            "enum": [
-              "analysis_of",
-              "attributed_to",
-              "authored_by",
-              "based_on",
-              "beacons_to",
-              "characterizes",
-              "commits_with",
-              "communicates_with",
-              "compromises",
-              "consists_of",
-              "contributed_to",
-              "controls",
-              "delivers",
-              "downloads",
-              "drops",
-              "dynamic_analysis_of",
-              "exfiltrate_to",
-              "exploits",
-              "found_from",
-              "has",
-              "has_account_on",
-              "has_favicon",
-              "has_screenshot",
-              "hosts",
-              "impersonates",
-              "indicates",
-              "investigates",
-              "links_to_azure_tenant",
-              "located_at",
-              "looks_like",
-              "mentioned_in",
-              "mitigates",
-              "originates_from",
-              "owns",
-              "related_to",
-              "resolves_to",
-              "static_analysis_of",
-              "subdomain_of",
-              "targets",
-              "uses",
-              "variant_of"
-            ]
-          },
-          {
-            "name": "related_type",
-            "in": "query",
-            "type": "string",
-            "description": "The `related_type` parameter is used to filter which type of assets related we want to list  \n\n",
-            "enum": [
-              "account",
-              "azure_tenant",
-              "bin",
-              "birth_year",
-              "brand",
-              "credentials",
-              "cve",
-              "directory",
-              "domain",
-              "email",
-              "external_id",
-              "favicon",
-              "file",
-              "filename",
-              "canonical_name",
-              "github_repository",
-              "address_data",
-              "ip",
-              "ipv6_addr",
-              "keyword",
-              "mac_addr",
-              "mitre_technique",
-              "mutex",
-              "name",
-              "phone_number",
-              "ransomleak",
-              "role",
-              "screenshot",
-              "search_query",
-              "secret",
-              "thread",
-              "url",
-              "user_id",
-              "username",
-              "windows_registry_key",
-              "x509_certificate",
-              "actor",
-              "attack_pattern",
-              "chat_channel",
-              "campaign",
-              "external_report",
-              "forum_thread",
-              "identity",
-              "indicator",
-              "infrastructure",
-              "location",
-              "malware",
-              "organization",
-              "threat_actor",
-              "threat_actor_group",
-              "tool",
-              "vulnerability"
-            ]
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "type": "integer",
-            "description": "The `size` parameter is the maximum results returned \n\n",
-            "default": 10
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "type": "string",
-            "description": "The `order` parameter is used to define the order of the results.  \n\nResults are ordered by the time the relation was first found. By default the results are ordered from the most recent to the oldest (desc)",
-            "default": "desc"
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "type": "string",
-            "description": "The `from` parameter is used to paginate through results.  \n\nTo get the first page of results, omit this parameter. Afterward, use the latest response's `next` attribute for the next `from` value to use to get the next page of results."
-          },
-          {
-            "name": "include_data",
-            "in": "query",
-            "type": "boolean",
-            "description": "The `include_data` parameter is to include asset data in the response \n\n",
-            "default": true
-          }
-        ],
-        "tags": [
-          "assets"
-        ]
-      }
-    },
-    "/firework/v3/batch/chat_message/telegram/{conversation_id}/{batch_id}": {
-      "parameters": [
-        {
-          "name": "conversation_id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "batch_id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Returns a list of messages matching a conversation id and batch id"
-          }
-        },
-        "operationId": "get_chat_message_batch_endpoint_/batch/chat_message/telegram/<string:conversation_id>/<string:batch_id>",
-        "tags": [
-          "batch"
-        ]
-      }
-    },
     "/firework/v3/identifiers/": {
       "get": {
         "responses": {
@@ -1131,7 +12,7 @@
             }
           }
         },
-        "operationId": "get_identifiers_endpoint_/identifiers/",
+        "operationId": "get_identifiers_endpoint",
         "parameters": [
           {
             "name": "source_group",
@@ -1164,175 +45,46 @@
             "in": "query",
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "recent",
+                "interest",
+                "resolves",
+                "reachable",
+                "unresolvable",
+                "unreachable"
+              ]
             },
-            "collectionFormat": "multi",
-            "enum": [
-              "recent",
-              "interest",
-              "resolves",
-              "reachable",
-              "unresolvable",
-              "unreachable"
-            ]
+            "collectionFormat": "multi"
           },
           {
             "name": "types",
             "in": "query",
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "domain",
+                "name",
+                "keyword",
+                "github_repository",
+                "username",
+                "email",
+                "search_query",
+                "bin",
+                "ip",
+                "secret",
+                "azure_tenant",
+                "identity",
+                "ransomleak",
+                "external_id",
+                "address_data",
+                "birth_year",
+                "role",
+                "phone_number"
+              ]
             },
-            "collectionFormat": "multi",
-            "enum": [
-              "domain",
-              "name",
-              "keyword",
-              "github_repository",
-              "username",
-              "email",
-              "search_query",
-              "bin",
-              "ip",
-              "secret",
-              "azure_tenant",
-              "identity",
-              "ransomleak",
-              "external_id",
-              "address_data",
-              "birth_year",
-              "role",
-              "phone_number"
-            ]
-          },
-          {
-            "name": "is_disabled",
-            "in": "query",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "name": "q",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "exact_matches_only",
-            "in": "query",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "name": "parent_group_id",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "type": "integer",
-            "default": 20
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "identifiers"
-        ]
-      }
-    },
-    "/firework/v3/identifiers/groups": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PaginatedIdentifierGroupsWithCounts"
-            }
-          }
-        },
-        "operationId": "get_identifier_groups_endpoint_/identifiers/groups",
-        "parameters": [
-          {
-            "name": "source_group",
-            "in": "query",
-            "type": "string",
-            "default": "ALL",
-            "enum": [
-              "ALL",
-              "USER",
-              "COUNTED",
-              "SYSTEM",
-              "USER_AND_ATTRIBUTE",
-              "USER_AND_SYSTEM",
-              "AUTO_MONITOR"
-            ]
-          },
-          {
-            "name": "order_by",
-            "in": "query",
-            "type": "string",
-            "default": "id",
-            "enum": [
-              "id",
-              "name",
-              "type"
-            ]
-          },
-          {
-            "name": "properties",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "enum": [
-              "recent",
-              "interest",
-              "resolves",
-              "reachable",
-              "unresolvable",
-              "unreachable"
-            ]
-          },
-          {
-            "name": "types",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "enum": [
-              "domain",
-              "name",
-              "keyword",
-              "github_repository",
-              "username",
-              "email",
-              "search_query",
-              "bin",
-              "ip",
-              "secret",
-              "azure_tenant",
-              "identity",
-              "ransomleak",
-              "external_id",
-              "address_data",
-              "birth_year",
-              "role",
-              "phone_number"
-            ]
-          },
-          {
-            "name": "ignore_empty_groups",
-            "in": "query",
-            "type": "boolean",
-            "default": false
+            "collectionFormat": "multi"
           },
           {
             "name": "is_disabled",
@@ -1395,31 +147,7 @@
             }
           }
         },
-        "operationId": "get_identifier_endpoint_/identifiers/<int:identifier_id>",
-        "tags": [
-          "identifiers"
-        ]
-      }
-    },
-    "/firework/v3/identifiers/{identifier_id}/children": {
-      "parameters": [
-        {
-          "name": "identifier_id",
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        }
-      ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/IdentifierChildren"
-            }
-          }
-        },
-        "operationId": "get_identifier_children_api_/identifiers/<int:identifier_id>/children",
+        "operationId": "get_identifier_endpoint",
         "tags": [
           "identifiers"
         ]
@@ -1443,7 +171,7 @@
             }
           }
         },
-        "operationId": "get_leaked_credentials_feed_endpoint_/identifiers/<int:identifier_id>/feed/credentials",
+        "operationId": "get_leaked_credentials_feed_endpoint",
         "parameters": [
           {
             "name": "size",
@@ -1460,129 +188,13 @@
         "tags": [
           "identifiers"
         ]
-      },
-      "post": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PaginatedCredentials"
-            }
-          }
-        },
-        "operationId": "post_leaked_credentials_feed_endpoint_/identifiers/<int:identifier_id>/feed/credentials",
-        "tags": [
-          "identifiers"
-        ]
-      }
-    },
-    "/firework/v3/identifiers/{identifier_id}/relations": {
-      "parameters": [
-        {
-          "name": "identifier_id",
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        }
-      ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PaginatedIdentifierRelations"
-            }
-          }
-        },
-        "operationId": "get_identifier_relations_endpoint_/identifiers/<int:identifier_id>/relations",
-        "parameters": [
-          {
-            "name": "properties",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "enum": [
-              "recent",
-              "interest",
-              "resolves",
-              "reachable",
-              "unresolvable",
-              "unreachable"
-            ]
-          },
-          {
-            "name": "types",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "enum": [
-              "domain",
-              "name",
-              "keyword",
-              "github_repository",
-              "username",
-              "email",
-              "search_query",
-              "bin",
-              "ip",
-              "secret",
-              "azure_tenant",
-              "identity",
-              "ransomleak",
-              "external_id",
-              "address_data",
-              "birth_year",
-              "role",
-              "phone_number"
-            ]
-          },
-          {
-            "name": "is_disabled",
-            "in": "query",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "name": "q",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "exact_matches_only",
-            "in": "query",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "type": "integer",
-            "description": "How many children to fetch",
-            "default": 10
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "type": "string",
-            "description": "The reversed fqdn to start searching from"
-          }
-        ],
-        "tags": [
-          "identifiers"
-        ]
       }
     }
   },
   "info": {
     "title": "Firework API",
     "version": "v3",
-    "description": "\nManage and access Firework resources.\n\n### Steps to use the Api\n\n1. `Send` a POST request to `https://api.flare.systems/tokens/generate` with your **Firework** credentials using [Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication) to get a authentication token.\n---\n2. On the current page, click on the **Authorize** button and insert the token using the following format: `Bearer {token}`\n\n   Example value: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.Et9HFtf9R3GEMA0IICOfFMVXY7kkTX1wr4qCyhIf58U`\n---\n3. You should now be able to use SwaggerUI's built-in tools to query the documented endpoints.\n"
+    "description": "\nManage and access Firework resources.\n\nRequests are authenticated with API tokens, which are obtained using an API key:\n\n1. Generate an API key from the [Profile page](https://app.flare.io/#/profile).\n2. Send a `POST` request to `https://api.flare.io/tokens/generate` with the `Authorization: <api-key>` header to get an API token. API tokens expire after 1 hour.\n3. Call the API endpoints with the `Authorization: Bearer <api-token>` header.\n\nSee [Authentication](https://api.docs.flare.io/concepts/authentication) for details.\n"
   },
   "produces": [
     "application/json"
@@ -1606,18 +218,6 @@
     {
       "name": "identifiers",
       "description": "Read and manage a tenant's identifiers"
-    },
-    {
-      "name": "activities",
-      "description": "Perform actions on activities."
-    },
-    {
-      "name": "batch",
-      "description": "Get batches of activities."
-    },
-    {
-      "name": "assets",
-      "description": "Manage and query assets."
     }
   ],
   "definitions": {
@@ -1755,20 +355,6 @@
       },
       "type": "object"
     },
-    "AssetRelations": {
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AssetRelation"
-          }
-        },
-        "next": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "AssetRelation": {
       "required": [
         "type"
@@ -1890,17 +476,6 @@
       },
       "type": "object"
     },
-    "HttpError": {
-      "properties": {
-        "message": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "Search": {
       "properties": {
         "items": {
@@ -1923,20 +498,6 @@
     },
     "SearchLinks": {
       "properties": {
-        "next": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "IdentifierChildren": {
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IdentifierChild"
-          }
-        },
         "next": {
           "type": "string"
         }
@@ -2064,7 +625,15 @@
               "whois",
               "cookie",
               "pii",
-              "experimental"
+              "experimental",
+              "lookalike_discovery",
+              "lookalike_title",
+              "lookalike_favicon",
+              "lookalike_screenshot",
+              "lookalike_ip_address",
+              "lookalike_dns",
+              "lookalike_whois_rdap",
+              "lookalike_ssl_certificate"
             ]
           }
         },
@@ -2197,25 +766,10 @@
           "type": "string"
         },
         "items": {
-          "$ref": "#/definitions/Identifier"
-        },
-        "total_count": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "example": "nullable integer"
-        }
-      },
-      "type": "object"
-    },
-    "PaginatedIdentifierGroupsWithCounts": {
-      "properties": {
-        "next": {
-          "type": "string"
-        },
-        "items": {
-          "$ref": "#/definitions/IdentifierGroupWithCounts"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Identifier"
+          }
         },
         "total_count": {
           "type": [
@@ -2290,24 +844,6 @@
       },
       "type": "object"
     },
-    "PaginatedIdentifierRelations": {
-      "properties": {
-        "next": {
-          "type": "string"
-        },
-        "items": {
-          "$ref": "#/definitions/Identifier"
-        },
-        "total_count": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "example": "nullable integer"
-        }
-      },
-      "type": "object"
-    },
     "BulkActionFilters": {
       "properties": {
         "recommendation_state": {
@@ -2355,7 +891,10 @@
           "type": "string"
         },
         "items": {
-          "$ref": "#/definitions/LeakActivityCredential"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LeakActivityCredential"
+          }
         },
         "total_count": {
           "type": [
@@ -2511,8 +1050,7 @@
             "activity_discovery",
             "subdomain_from_domain",
             "azure_tenant_from_domain",
-            "domain_from_azure_tenant",
-            "llm_based"
+            "domain_from_azure_tenant"
           ]
         },
         "seen_at": {
@@ -2558,8 +1096,7 @@
           "type": "string",
           "example": "identifiers",
           "enum": [
-            "identifiers",
-            "llm"
+            "identifiers"
           ]
         },
         "filtered_recommendations_count": {
@@ -2613,8 +1150,7 @@
           "type": "string",
           "example": "identifiers",
           "enum": [
-            "identifiers",
-            "llm"
+            "identifiers"
           ]
         }
       },
@@ -2670,26 +1206,834 @@
       },
       "type": "object"
     },
-    "PaginatedCursoredCredentials": {
+    "Header": {
       "properties": {
-        "next": {
+        "actor": {
           "type": "string"
         },
-        "items": {
-          "$ref": "#/definitions/LeakActivityCredential"
+        "actor_id": {
+          "type": "string"
         },
-        "cursors": {
+        "asset_uuid": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        },
+        "bank": {
+          "type": "string"
+        },
+        "bin": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "credential_count": {
+          "type": "integer"
+        },
+        "category_name": {
+          "type": "string"
+        },
+        "content_hash": {
+          "type": "string"
+        },
+        "content_preview": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "duplicates": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "es_score": {
+          "type": "number"
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "highlights": {
+          "type": "object"
+        },
+        "host": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "infection_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "parent_id": {
+          "type": "string"
+        },
+        "parent_title": {
+          "type": "string"
+        },
+        "parent_title_en": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        },
+        "parent_uid": {
+          "type": "string"
+        },
+        "parent_uids": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "total_count": {
+        "applications": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "access_types": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/LabelDescription"
+          }
+        },
+        "analysis_labels": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/LabelDescription"
+          }
+        },
+        "pii_type": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/LabelDescription"
+          }
+        },
+        "fact_labels": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/LabelDescription"
+          }
+        },
+        "risk": {
+          "$ref": "#/definitions/Risk"
+        },
+        "similar_items_count": {
+          "type": "integer"
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_name": {
+          "type": "string"
+        },
+        "target_name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "state_code": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "user_risk_score": {
           "type": [
             "integer",
             "null"
           ],
           "example": "nullable integer"
+        },
+        "user_notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        },
+        "ignored_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "remediated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "verb": {
+          "type": "string"
+        },
+        "external_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        },
+        "external_netloc": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        },
+        "can_have_duplicates": {
+          "type": "boolean"
+        },
+        "priority_action_uuid_related": {
+          "type": "boolean"
+        },
+        "analyzers_items_uids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "victim_name": {
+          "type": "string"
+        },
+        "contains_secrets": {
+          "type": "boolean"
+        },
+        "secrets_metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretMetadata"
+          }
+        },
+        "identity_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        },
+        "password": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        }
+      },
+      "type": "object"
+    },
+    "LabelDescription": {
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "nullable string"
+        }
+      },
+      "type": "object"
+    },
+    "Risk": {
+      "properties": {
+        "score": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "info": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "example": "classification",
+          "enum": [
+            "classification",
+            "dork",
+            "user",
+            "rule",
+            "vulnerability-none",
+            "vulnerability-low",
+            "vulnerability-medium",
+            "vulnerability-high",
+            "vulnerability-critical"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "SecretMetadata": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "adafruit_io_key",
+          "enum": [
+            "adafruit_io_key",
+            "adobe_oauth_client_secret",
+            "age_identity_x22519_secret_key",
+            "ai21_studio_api_key",
+            "airbrake_user_key",
+            "airtable_oauth_token",
+            "airtable_personal_access_token",
+            "aiven_api_key",
+            "alchemy_api_key",
+            "algolia_admin_api_key",
+            "alibaba_access_key_secret",
+            "amazon_mws_auth_token",
+            "amplitude_api_key",
+            "ansible_vault_encrypted_secret",
+            "anthropic_api_key",
+            "anypoint_api_key",
+            "apify_api_token",
+            "apollo_api_key",
+            "artifactory_api_key",
+            "asana_client_secret",
+            "asana_oauth_personal_access_token",
+            "asp_net_machinekey_decryption_key",
+            "asp_net_machinekey_validation_key",
+            "assemblyai_api_key",
+            "auth0_application_credentials",
+            "atlassian_cloud_api_token",
+            "authress_service_client_access_key",
+            "aws_api_credentials",
+            "aws_appsync_api_key",
+            "aws_secret_access_key",
+            "aws_session_token",
+            "azure_ad_client_secret",
+            "azure_api_management_subscription_key",
+            "azure_app_configuration_connection_string",
+            "azure_connection_string",
+            "azure_devops_personal_access_token",
+            "azure_notification_hub_access_key",
+            "azure_openai_api_key",
+            "azure_openai_api_key_extended_format",
+            "azure_personal_access_token",
+            "azure_search_query_key",
+            "azure_search_url",
+            "azure_service_principal_credentials",
+            "azure_storage_account_key",
+            "baremetrics_api_key",
+            "baseten_api_key",
+            "beamer_api_token",
+            "bitbucket_app_password",
+            "bitly_access_token",
+            "blynk_device_access_token",
+            "blynk_organization_access_token",
+            "blynk_organization_client_credentials",
+            "branch_io_live_key",
+            "branch_io_test_key",
+            "browserstack_access_key",
+            "buildkite_api_key",
+            "calendly_personal_access_token",
+            "cerebras_ai_api_key",
+            "circleci_api_personal_access_token",
+            "circleci_api_project_token",
+            "cisco_enable_password",
+            "cisco_meraki_api_key",
+            "cisco_pac_key",
+            "clarifai_api_key",
+            "clay_api_key",
+            "clearbit_api_key",
+            "clickhouse_cloud_secret_key",
+            "clojars_api_token",
+            "cloudflare_api_token",
+            "cloudflare_ca_key",
+            "cloudinary_url_credential",
+            "cloudsight_api_key",
+            "codacy_api_key",
+            "codeclimate_reporter_id",
+            "codecov_access_token",
+            "coderabbit_api_key",
+            "cohere_api_key",
+            "coinbase_access_token",
+            "coinbase_cdp_api_key_ecdsa",
+            "coinbase_cdp_api_key_ed25519",
+            "confluent_api_secret",
+            "confluent_api_secret_updated_format",
+            "connection_string_in_net_configuration",
+            "contentful_delivery_api_token",
+            "contentful_personal_access_token",
+            "coveralls_personal_api_token",
+            "coze_personal_access_token",
+            "crates_io_api_key",
+            "credentials_in_a_url",
+            "credentials_in_connect_viserver_invocation",
+            "credentials_in_mongodb_connection_string",
+            "credentials_in_net_system_directoryservices_directoryentry",
+            "credentials_in_net_system_net_networkcredential",
+            "credentials_in_odbc_connection_string",
+            "credentials_in_postgresql_connection_uri",
+            "credentials_in_psexec_invocation",
+            "curl_basic_authentication_credentials",
+            "curl_header_authentication",
+            "cursor_integrations_user_api_key",
+            "customer_io_app_api_key",
+            "customer_io_tracking_api_key",
+            "cypress_record_key",
+            "databricks_personal_access_token",
+            "datadog_api_key",
+            "datadog_application_key",
+            "datadog_rum_client_token",
+            "data_gov_api_key",
+            "deepgram_api_key",
+            "deepseek_api_key",
+            "defined_networking_api_token",
+            "delighted_api_key",
+            "dependency_track_api_key",
+            "deviantart_access_token",
+            "deviantart_oauth_client_secret",
+            "diffbot_api_key",
+            "digitalocean_application_access_token",
+            "digitalocean_personal_access_token",
+            "digitalocean_refresh_token",
+            "discord_bot_token",
+            "discord_webhook_url",
+            "disqus_api_key",
+            "django_secret_key",
+            "docker_hub_personal_access_token",
+            "docker_registry_credentials_auths_json",
+            "doppler_audit_token",
+            "doppler_cli_token",
+            "doppler_personal_token",
+            "doppler_scim_token",
+            "doppler_service_account_token",
+            "doppler_service_token",
+            "droneci_access_token",
+            "dropbox_access_token",
+            "duffel_api_token",
+            "dynatrace_token",
+            "easypost_api_token",
+            "elevenlabs_api_key",
+            "endor_labs_api_secret",
+            "eraser_api_key",
+            "eventbrite_api_key",
+            "exa_ai_api_key",
+            "facebook_access_token",
+            "facebook_app_credentials",
+            "facebook_secret_key",
+            "fastly_api_token",
+            "figma_personal_access_token",
+            "fileio_secret_key",
+            "filezilla_base64_encoded_password",
+            "filezilla_stored_password_pass_plaintext",
+            "finicity_api_token",
+            "finicity_client_secret",
+            "finnhub_api_token",
+            "firebase_cloud_messaging_device_token",
+            "firebase_cloud_messaging_server_key",
+            "firecrawl_api_key",
+            "firefox_encrypted_password",
+            "firefox_encrypted_username",
+            "fireworks_ai_api_key",
+            "flare_api_key",
+            "fleetbase_api_key",
+            "flickr_api_key",
+            "flickr_oauth_token",
+            "fly_io_api_token",
+            "foursquare_client_secret",
+            "frame_io_api_token",
+            "freshbooks_access_token",
+            "freshdesk_api_key",
+            "friendli_ai_api_key",
+            "gcp_api_token",
+            "gcp_private_key_id",
+            "generic_api_key",
+            "generic_password",
+            "generic_secret",
+            "generic_username_and_password",
+            "gitalk_oauth_credentials",
+            "github_app_token",
+            "github_oauth_access_token",
+            "github_personal_access_token",
+            "github_refresh_token",
+            "github_secret_key",
+            "gitlab_personal_access_token",
+            "gitlab_pipeline_trigger_token",
+            "gitlab_runner_registration_token",
+            "gitter_access_token",
+            "gocardless_api_token",
+            "google_api_key",
+            "google_oauth_access_token",
+            "google_oauth_client_secret",
+            "google_oauth_credentials",
+            "grafana_api_token",
+            "grafana_cloud_api_token",
+            "grafana_service_account_token",
+            "groq_api_key",
+            "group_policy_preferences_cpassword",
+            "guardian_api_key",
+            "gumroad_access_token",
+            "hardcoded_credential_in_json",
+            "hardcoded_gradle_credentials",
+            "harness_personal_access_token_pat",
+            "hashicorp_vault_batch_token",
+            "hashicorp_vault_recovery_token",
+            "hashicorp_vault_service_token",
+            "hashicorp_vault_unseal_key",
+            "helpscout_oauth_client_secret",
+            "here_api_key",
+            "heroku_api_key",
+            "honeycomb_api_key",
+            "html_password_input_pre_populated_credential",
+            "http_basic_authentication",
+            "http_bearer_token",
+            "hubspot_private_app_token",
+            "huggingface_user_access_token",
+            "ibm_cloud_user_api_key",
+            "imagekit_private_api_key",
+            "infracost_api_token",
+            "infura_api_key",
+            "instagram_graph_api_access_token",
+            "instantly_api_key",
+            "intercom_api_token",
+            "intra42_client_secret_s_s4t2udaf",
+            "ionic_api_token",
+            "ipstack_api_key",
+            "iterable_api_key",
+            "jamf_pro_credential",
+            "jdbc_connection_string_with_embedded_credentials",
+            "jenkins_setup_admin_password",
+            "jenkins_token_or_crumb",
+            "jina_search_foundation_api_key",
+            "jira_token",
+            "jotform_api_key",
+            "json_web_token",
+            "json_web_token_secret",
+            "jumpcloud_api_key",
+            "kagi_api_key",
+            "keen_io_api_key",
+            "kickbox_api_key",
+            "klaviyo_api_key",
+            "kling_ai_secret_key",
+            "kubernetes_bootstrap_token",
+            "langsmith_personal_access_token",
+            "langsmith_service_key",
+            "larksuite_app_access_token",
+            "larksuite_tenant_access_token",
+            "larksuite_user_access_token",
+            "launchdarkly_access_token",
+            "launchdarkly_client_side_id",
+            "linear_api_key",
+            "line_messaging_api_token",
+            "linkedin_access_token",
+            "linkedin_secret_key",
+            "lob_api_key",
+            "lob_publishable_api_key",
+            "lokalise_api_token",
+            "looker_client_secret",
+            "mailchimp_api_key",
+            "mailgun_api_key",
+            "mailjetsms_api_key",
+            "mailjet_basic_auth",
+            "mandrill_api_key",
+            "mapbox_public_access_token",
+            "mapbox_secret_access_token",
+            "mapbox_temporary_access_token",
+            "mattermost_access_token",
+            "mattermost_incoming_webhook_url",
+            "maven_settings_xml_credentials",
+            "maxmind_license_key",
+            "mergify_application_api_key",
+            "messagebird_api_token",
+            "microsoft_teams_webhook",
+            "mistral_ai_api_key",
+            "monday_com_api_key",
+            "mongodb_api_private_key",
+            "mongodb_atlas_service_account_token",
+            "mysql_uri_with_credentials",
+            "nasa_api_key",
+            "netlify_api_key",
+            "netrc_credentials",
+            "new_relic_admin_api_key",
+            "new_relic_api_service_key",
+            "new_relic_insights_insert_key",
+            "new_relic_insights_query_key",
+            "new_relic_license_key",
+            "new_relic_pixie_api_key",
+            "new_relic_pixie_deploy_key",
+            "new_relic_rest_api_key",
+            "new_york_times_api_key",
+            "ngrok_api_key",
+            "notion_legacy_token",
+            "notion_oauth_refresh_token",
+            "notion_token",
+            "npm_access_token",
+            "nuget_api_key",
+            "nvidia_nim_api_key",
+            "nylas_api_key",
+            "okta_api_token",
+            "ollama_api_key",
+            "one_password_account_secret_key",
+            "one_password_service_account_token",
+            "openai_api_key",
+            "openrouter_api_key",
+            "openweather_map_api_key",
+            "opsgenie_api_key",
+            "optimizely_personal_access_token",
+            "owlbot_api_key",
+            "packagecloud_api_key",
+            "pagerduty_api_key",
+            "particle_io_access_token",
+            "password_hash_bcrypt",
+            "password_hash_cisco_ios_pbkdf2_with_sha256",
+            "password_hash_kerberos",
+            "password_hash_md5crypt",
+            "password_hash_sha256crypt",
+            "password_hash_sha512crypt",
+            "pastebin_api_key",
+            "paypal_oauth_secret",
+            "paystack_api_key",
+            "pdflayer_api_key",
+            "pem_encoded_private_key",
+            "pendo_integration_key",
+            "perl_dbi_connection_with_credentials",
+            "perplexity_ai_api_key",
+            "phpmailer_credentials",
+            "php_database_connection_with_credentials",
+            "php_postgresql_connection_with_credentials",
+            "plaid_access_token_production",
+            "plaid_access_token_sandbox",
+            "plaid_secret_production",
+            "plaid_secret_sandbox",
+            "planetscale_api_token",
+            "posthog_personal_api_key",
+            "posthog_project_api_key",
+            "postman_api_key",
+            "postmark_api_token",
+            "powershell_pscredential_constructor",
+            "powershell_securestring_conversion",
+            "prefect_api_token",
+            "pubnub_publish_key",
+            "pubnub_subscription_key",
+            "pulumi_api_key",
+            "pypi_upload_token",
+            "python_database_connection_with_credentials",
+            "python_database_connection_with_dsn_string",
+            "rabbitmq_credential",
+            "rapidapi_key",
+            "razorpay_api_key",
+            "razorpay_test_api_key",
+            "rdp_file_saved_password",
+            "react_app_password",
+            "react_app_username",
+            "readme_api_key",
+            "recaptcha_api_key",
+            "redis_client_debug_output",
+            "redis_uri_connection_string",
+            "replicate_api_token",
+            "resend_api_key",
+            "retell_ai_api_key",
+            "retool_workflow_api_key",
+            "riot_games_api_key",
+            "rubygems_api_key",
+            "ruby_dbi_connection_with_credentials",
+            "runway_api_key",
+            "salesforce_access_token",
+            "sauce_token",
+            "scale_api_key",
+            "scale_callback_auth_key",
+            "scalingo_api_token",
+            "scraperapi_key",
+            "segment_public_api_token",
+            "sendbird_api_token",
+            "sendgrid_api_key",
+            "sendinblue_api_token",
+            "sensitive_value_in_net_configuration",
+            "sentry_access_token",
+            "sentry_dsn",
+            "sentry_organization_token",
+            "sentry_user_token",
+            "shippo_api_token",
+            "shodan_api_key",
+            "shopify_access_token",
+            "shopify_app_secret",
+            "slack_app_token",
+            "slack_bot_token",
+            "slack_legacy_bot_token",
+            "slack_trigger_url",
+            "slack_user_token",
+            "slack_webhook",
+            "slack_workflow_webhook",
+            "snmp_read_write_community_string",
+            "snyk_api_key",
+            "sonarcloud_api_token",
+            "sonarqube_token",
+            "sourcegraph_access_token",
+            "spotify_access_token",
+            "sql_account_creation_with_password",
+            "square_access_token",
+            "square_oauth_secret",
+            "sslmate_api_key",
+            "stability_ai_api_key",
+            "stackhawk_api_key",
+            "statuspage_api_key",
+            "stripe_api_key",
+            "stripe_api_test_key",
+            "stripe_publishable_api_key",
+            "supabase_management_token",
+            "supabase_project_api_key",
+            "tailscale_api_key",
+            "tavily_api_key",
+            "teamcity_api_token",
+            "telegram_bot_token",
+            "thingsboard_access_token",
+            "thingsboard_provision_device_key",
+            "thingsboard_provision_device_secret",
+            "together_ai_api_key",
+            "travis_ci_encrypted_variable",
+            "travis_ci_token",
+            "truenas_api_key_rest_api",
+            "truenas_api_key_websocket",
+            "twilio_api_key",
+            "twitch_stream_key",
+            "twitter_access_token",
+            "twitter_bearer_token",
+            "twitter_secret_key",
+            "typeform_api_token",
+            "vast_ai_api_key",
+            "vercel_api_token",
+            "visual_studio_app_center_api_token",
+            "voyage_ai_api_key",
+            "wakatime_api_key",
+            "weights_and_biases_api_key",
+            "weights_and_biases_api_key_v1",
+            "windows_unattend_xml_administrator_password",
+            "windows_unattend_xml_autologon_password",
+            "wireguard_preshared_key",
+            "wireguard_private_key",
+            "wpengine_api_key",
+            "xai_grok_api_key",
+            "yandex_api_key",
+            "yelp_api_key",
+            "youtube_api_key",
+            "zapier_webhook_url",
+            "zendesk_api_token",
+            "zhipu_bigmodel_api_key",
+            "zoho_crm_api_access_token",
+            "zuplo_api_key"
+          ]
+        },
+        "occurrence": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Metadata": {
+      "properties": {
+        "estimated_created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "event_id": {
+          "type": "string"
+        },
+        "first_crawled_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_crawled_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "payload_digest": {
+          "type": "string"
+        },
+        "scraped_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string"
+        },
+        "crawled_by": {
+          "type": "string"
+        },
+        "flare_url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RansomLeakVersion": {
+      "required": [
+        "estimated_created_at",
+        "uid"
+      ],
+      "properties": {
+        "uid": {
+          "type": "string"
+        },
+        "estimated_created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "type": "object"
+    },
+    "ExperimentalSourceType": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "collection_type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "global_search_enabled": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ExperimentalSource": {
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ExperimentalSourceType"
         }
       },
       "type": "object"

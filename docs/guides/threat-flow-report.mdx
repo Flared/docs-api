@@ -28,7 +28,10 @@ import GatedAccessFeature from '/snippets/gated-access-feature.mdx';
     `pending` or `processing`. Once it is done, `status` will be `completed` and `result.report_id`
     will contain the id of the generated report, or `status` will be `error` if generation failed.
 
-    Once completed, the report identified by `result.report_id` can be retrieved for up to 30 days.
+    Once completed, the report identified by `result.report_id` can be retrieved for up to 30 days
+    with the
+    [threat_flow/reports/\{id\} <Icon icon="code" size={16} />](/api-reference/v4/endpoints/get-report)
+    endpoint.
   </Step>
 
 </Steps>
