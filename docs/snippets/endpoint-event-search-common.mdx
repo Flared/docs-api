@@ -146,8 +146,17 @@ This endpoint supports the
   The `next` value from the last response.
 </ParamField>
 
+<ParamField body="sort" type="string" default="matched_at">
+  Date field used to sort the results.
+
+  <Expandable title="valid sort values">
+    `matched_at`
+    `estimated_created_at`
+  </Expandable>
+</ParamField>
+
 <ParamField body="order" type="string" default="desc">
-  Sort order of the results by matched date (`matched_at`).
+  Sort order of the results by the `sort` field.
 
   <Expandable title="valid order values">
     `asc`
@@ -198,6 +207,54 @@ This endpoint supports the
     </ParamField>
 
     <ParamField body="estimated_created_at" type="object">
+      Filters on the estimated date the event was created on its source.
+
+      <Expandable>
+        <ParamField
+          body="gt"
+          type="string"
+          placeholder="Example: 2024-01-01T00:00:00+00:00"
+        >
+          Matches values greater than the specified timestamp.
+
+          Format: ISO-8601
+        </ParamField>
+
+        <ParamField
+          body="gte"
+          type="string"
+          placeholder="Example: 2024-01-01T00:00:00+00:00"
+        >
+          Matches values greater than or equal to the specified timestamp.
+
+          Format: ISO-8601
+        </ParamField>
+
+        <ParamField
+          body="lt"
+          type="string"
+          placeholder="Example: 2024-01-01T00:00:00+00:00"
+        >
+          Matches values lesser than the specified timestamp.
+
+          Format: ISO-8601
+        </ParamField>
+
+        <ParamField
+          body="lte"
+          type="string"
+          placeholder="Example: 2024-01-01T00:00:00+00:00"
+        >
+          Matches values lesser than or equal to the specified timestamp.
+
+          Format: ISO-8601
+        </ParamField>
+      </Expandable>
+    </ParamField>
+
+    <ParamField body="matched_at" type="object">
+      Filters on the date the event was matched to the tenant's identifiers.
+
       <Expandable>
         <ParamField
           body="gt"
