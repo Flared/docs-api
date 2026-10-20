@@ -1,0 +1,103 @@
+---
+title: "Search Audit Logs"
+api: "POST https://api.flare.io/firework/v4/audit-logs/_search"
+authMethod: "bearer"
+---
+
+import PermissionReadAll from '/snippets/permission-read-all.mdx'
+
+<PermissionReadAll />
+
+## Body Parameters
+
+<ParamField body="from" type="string">
+  The `next` value from the last response.
+</ParamField>
+
+<ParamField body="order" type="string" default="desc">
+  Available options: `asc`, `desc`
+</ParamField>
+
+<ParamField body="size" type="integer" default={50}>
+</ParamField>
+
+<ParamField body="filters" type="object">
+  <Expandable title="child attributes">
+    <ParamField body="affected_tenant_ids" type="integer[]">
+      Tenants affected by the audit log.
+    </ParamField>
+
+    <ParamField body="created_at" type="object">
+      <Expandable title="child attributes">
+        <ParamField
+          body="gte"
+          type="string"
+          placeholder="Example: 2024-01-01T00:00:00+00:00"
+        >
+          Matches values greater than or equal to the specified timestamp.
+
+          Format: ISO-8601
+        </ParamField>
+
+        <ParamField
+          body="lte"
+          type="string"
+          placeholder="Example: 2024-01-01T00:00:00+00:00"
+        >
+          Matches values lesser than or equal to the specified timestamp.
+
+          Format: ISO-8601
+        </ParamField>
+      </Expandable>
+    </ParamField>
+
+    <ParamField body="query" type="string">
+      Free text search on the audit log content.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ResponseExample>
+
+```json Response Example
+{
+  "items": [
+    {
+      "id": 123,
+      "created_at": "2023-11-07T05:31:56Z",
+      "type": "event",
+      "action": "created",
+      "source": "all",
+      "affected_tenant_id": 123,
+      "affected_tenant_name": "<string>",
+      "affected_user_id": 123,
+      "performed_by": {
+        "user_id": 123,
+        "user_email": "<string>",
+        "user_name": "<string>",
+        "tenant_id": 123,
+        "ip": "<string>",
+        "user_type": "user"
+      },
+      "data": {
+        "identifier_id": 123,
+        "identifier_name": "<string>",
+        "identifier_edit_data": {},
+        "name": "identifier.edit",
+        "version": 1
+      },
+      "previous_data": {
+        "identifier_id": 123,
+        "identifier_name": "<string>",
+        "identifier_edit_data": {},
+        "name": "identifier.edit",
+        "version": 1
+      }
+    }
+  ],
+  "next": "<string>",
+  "total_count": 123
+}
+```
+
+</ResponseExample>

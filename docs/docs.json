@@ -255,6 +255,10 @@
             "pages": ["api-reference/v4/endpoints/create-presigned-upload-url"]
           },
           {
+            "group": "Audit Logs",
+            "pages": ["api-reference/v4/endpoints/public/search-audit-logs"]
+          },
+          {
             "group": "Deprecated APIs",
             "pages": [
               {
