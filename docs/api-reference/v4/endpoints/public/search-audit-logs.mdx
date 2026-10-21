@@ -4,9 +4,9 @@ api: "POST https://api.flare.io/firework/v4/audit-logs/_search"
 authMethod: "bearer"
 ---
 
-import PermissionReadAll from '/snippets/permission-read-all.mdx'
+import PermissionReadOrganizationAdmin from '/snippets/permission-read-organization-admin.mdx'
 
-<PermissionReadAll />
+<PermissionReadOrganizationAdmin />
 
 Returns a list of audit logs for the current organization, which can be used to stream all audit logs to an external platform or to search for specific ones.
 
