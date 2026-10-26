@@ -27,3 +27,21 @@ Base Types are divided into categories that correspond to the categories in the 
 | forum_content | forum_post <br /> forum_topic |
 | profile | forum_profile <br /> seller |
 | infected_devices | bot <br /> stealer_log |
+
+## Lookalike domain types
+
+Each base type below selects one lookalike domain event type and belongs to no category.
+The `domain` base type returns all of them together.
+
+| Base Type | Event Type |
+| --------- | ---------- |
+| lookalike_discovery | domain |
+| lookalike_title | domain_title |
+| lookalike_ip_address | domain_ip_address |
+| lookalike_favicon | domain_favicon |
+| lookalike_screenshot | domain_screenshot |
+| lookalike_dns | domain_dns_records |
+| lookalike_whois_rdap | domain_whois_rdap |
+| lookalike_ssl_certificate | domain_certificate |
+
+Learn more about [Lookalike Domain events <Icon icon="book" size={16} />](/event-types/domain#querying-discovery-and-update-events).
