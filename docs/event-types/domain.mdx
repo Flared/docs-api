@@ -5,10 +5,30 @@ title: "Lookalike Domain (domain)"
 The `domain` type represents lookalike or typosquatted domains identified by Flare’s detection engines, often leveraging tools such as dnstwist.  
 These records capture information about suspicious domains that closely resemble legitimate organizations’ domains and could be used in phishing, brand impersonation, or malware campaigns.
 
-The `domain` event is also referred to as the discovery event: it is emitted when a lookalike domain is first discovered.
-It is complemented by the `domain_*` enrichment events documented below, which each carry the results of one enrichment (page title, IP addresses, favicon, screenshot, DNS records, WHOIS/RDAP data, SSL certificates) and reference the discovered domain through their `domain` field.
+The `domain` event is the **discovery event**, emitted when Flare first finds a lookalike domain.
+**Update events** follow it. Each one carries a single enrichment result and points back to the discovered domain through its `domain` field.
 
-<Note>Some of the below field types will not be available until after August 26th.</Note>
+## Querying discovery and update events
+
+Discovery and update events are distinct types. Request each one you need by its `type` filter value, for example `"type": ["lookalike_discovery", "lookalike_title"]`.
+
+| Event type           | `type` filter value         |
+| -------------------- | --------------------------- |
+| `domain`             | `lookalike_discovery`       |
+| `domain_title`       | `lookalike_title`           |
+| `domain_ip_address`  | `lookalike_ip_address`      |
+| `domain_favicon`     | `lookalike_favicon`         |
+| `domain_screenshot`  | `lookalike_screenshot`      |
+| `domain_dns_records` | `lookalike_dns`             |
+| `domain_whois_rdap`  | `lookalike_whois_rdap`      |
+| `domain_certificate` | `lookalike_ssl_certificate` |
+
+<Note>
+`lookalike_discovery` alone, or no `type` filter, returns discovery events only.
+`domain` and the `domains` category return discovery and update events together.
+</Note>
+
+DNS records, WHOIS/RDAP and SSL certificate events require Extended Lookalike Domain Monitoring.
 
 ## domain
 
