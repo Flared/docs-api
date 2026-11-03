@@ -5,6 +5,7 @@ authMethod: "bearer"
 ---
 
 import GatedAccessFeature from '/snippets/gated-access-feature.mdx';
+import { BetaTag } from '/snippets/beta-tag.mdx';
 
 <GatedAccessFeature name="Account & Session Takeover Prevention (ASTP)" />
 
@@ -80,4 +81,12 @@ See the guide for using this endpoint:
 <ParamField body="order" type="string">
   Order in which you want to browse the cookies. One of `asc` or `desc`.
   It defaults to `asc` which is the recommended way to use the API to obtain newly imported cookies.
+</ParamField>
+
+<ParamField body="with_subdomains" type="boolean" default={false} post={[<BetaTag />]}>
+  When `true`, `domain` is treated as the parent domain and the results also include cookies from its subdomains.
+
+  <Note>
+    This parameter only has an effect if a cookie matching policy is configured for the domain with **Match subdomains** enabled. Without one, only exact matches on `domain` are returned.
+  </Note>
 </ParamField>
