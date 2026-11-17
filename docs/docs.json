@@ -23,7 +23,8 @@
               "concepts/authentication",
               "concepts/rate-limits-and-quotas",
               "concepts/errors",
-              "concepts/paging"
+              "concepts/paging",
+              "concepts/regional-apis"
             ]
           },
           {
