@@ -84,6 +84,22 @@ curl --request POST \
 
 </CodeGroup>
 
+#### Basic authentication
+
+The `tokens/generate` endpoint also supports HTTP Basic authentication, with
+`api-key` as the username and your API key as the password. This is a useful
+workaround for third-party systems that only support username and password
+authentication.
+
+<CodeGroup>
+```bash cURL example
+curl --request POST \
+  --url https://api.flare.io/tokens/generate \
+  --user 'api-key:<api-key>'
+```
+
+</CodeGroup>
+
 ### 3 - Access an API endpoint
 
 API tokens may then be used by specifying the `Authorization: Bearer <api-token>` header.
