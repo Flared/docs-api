@@ -3824,6 +3824,14 @@
                         ],
                         "example": "global",
                         "type": "string"
+                    },
+                    "number_of_employees": {
+                        "description": "The number of employees for the tenant.",
+                        "type": "integer"
+                    },
+                    "identifier_limit": {
+                        "description": "The maximum number of identifiers allowed for the tenant. Set to `null` for no tenant-specific limit.",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -3886,6 +3894,10 @@
                     },
                     "feed_id": {
                         "description": "ID of the feed",
+                        "type": "integer"
+                    },
+                    "identifier_limit": {
+                        "description": "The number of identifiers allowed for the tenant.",
                         "type": "integer"
                     },
                     "permissions": {
