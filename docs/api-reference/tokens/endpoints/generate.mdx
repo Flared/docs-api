@@ -38,22 +38,10 @@ For more information about authentication, see the
   Your Flare API key.
 
   <Note>
-  HTTP Basic authentication is also supported, which is useful for third-party
-  systems that can only authenticate with a username and password. Use `api-key`
-  as the username and your Flare API key as the password:
-  `Authorization: Basic base64(api-key:<api-key>)`.
+  Basic auth is also supported, with `api-key` as the username and your API key
+  as the password. See [Basic authentication](/concepts/authentication#basic-authentication).
   </Note>
 </ParamField>
-
-<CodeGroup>
-
-```bash cURL with Basic auth
-curl --request POST \
-  --url https://api.flare.io/tokens/generate \
-  --user 'api-key:<api-key>'
-```
-
-</CodeGroup>
 
 ## Body Parameters 
 

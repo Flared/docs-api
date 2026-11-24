@@ -86,10 +86,10 @@ curl --request POST \
 
 #### Basic authentication
 
-The `tokens/generate` endpoint also supports HTTP Basic authentication, with
-`api-key` as the username and your API key as the password. This is a useful
-workaround for third-party systems that only support username and password
-authentication.
+The `tokens/generate` endpoint also accepts HTTP Basic authentication:
+
+- Username: `api-key`. Do not change it.
+- Password: your Flare API key.
 
 <CodeGroup>
 ```bash cURL example
